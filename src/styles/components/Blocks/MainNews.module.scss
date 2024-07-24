@@ -1,0 +1,322 @@
+
+.mainPageNewsContainer {
+    // Стили для основного контейнераконтейнера
+    display: flex;
+    flex-direction: column;
+    margin: calc(72px - (41 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+    padding: 0 calc(70 / 1440 * 100vw);
+    font-family: "Fira Sans";    
+}
+
+.mainPageNewsTitleWithButton {
+    // Стили для контейнера заголовка и кнопки
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mainPageNewsTitle {
+    // Стили для заголовка
+    font-weight: 600;
+    font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+}
+
+.mainPageNewsButtonWrapper {
+    // Стили для обертки кнопки
+}
+
+.desktopButtonWrapper {
+    // Дополнительные стили для обертки кнопки на десктопе
+}
+
+.mobileButtonWrapper {
+    // Дополнительные стили для обертки кнопки на мобильных устройствах
+    display: none;
+}
+
+.mainPageNewsButton {
+    // Стили для кнопки
+    width: calc(238px - (105 * ((1440px - 100vw) / (1440 - 375))));
+    height: calc(51px - (11 * ((1440px - 100vw) / (1440 - 375))));
+    min-width: 163px;
+    min-height: 40px;
+    max-width: 238px;
+    max-height: 51px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
+    border-radius: calc(34px - (4 * ((1440px - 100vw) / (1440 - 375))));
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.mainPageNewsButtonTitle {
+    // Стили для текста кнопки
+    margin: 0 calc(12px - (2 * ((1440px - 100vw) / (1440 - 375)))) 0 0;
+    font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 500;
+}
+
+.mainPageNewsButtonImg {
+    // Стили для изображения кнопки
+    width: 30px;
+    height: 30px;
+}
+
+.mainPageNewsCardsWrapper {
+    // Стили для обертки карточек новостей
+    margin: calc(37px - (15 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mainPageNewsCard {
+    // Стили для карточки новостей
+    width: 48.46%;
+}
+
+.firstCard {
+    // Дополнительные стили для первой карточки
+}
+
+.secondCard {
+    // Дополнительные стили для второй карточки
+}
+
+.thirdCard {
+    // Дополнительные стили для второй карточки
+}
+
+.thirdCard {
+    // Дополнительные стили для второй карточки
+    display: none;
+}
+
+.cardImgWrapper {
+    // Стили для обертки изображения карточки
+    aspect-ratio: 630 / 330; // например, соотношение сторон 21:11
+    overflow: hidden;
+}
+
+.cardImg {
+    // Стили для изображения карточки
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.firstCardImg {
+    // Дополнительные стили для изображения первой карточки
+}
+
+.secondCardImg {
+    // Дополнительные стили для изображения второй карточки
+}
+
+.thirdCardImg {
+    // Дополнительные стили для изображения второй карточки
+}
+
+.cardTextWrapper {
+    // Стили для обертки текста карточки
+    margin: calc(26px - (9 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardTitleWrapper {
+    // Стили для обертки заголовка карточки
+    font-weight: 500;
+    font-size: calc(22px - (6 * ((1440px - 100vw) / (1440 - 375))));
+
+}
+
+.cardTitle {
+    // Стили для заголовка карточки
+}
+
+.firstCardTitle {
+    // Дополнительные стили для заголовка первой карточки
+}
+
+.secondCardTitle {
+    // Дополнительные стили для заголовка второй карточки
+}
+
+.thirdCardTitle {
+    // Дополнительные стили для заголовка второй карточки
+}
+
+.cardDescriptioneWrapper {
+    // Стили для обертки описания карточки
+    margin: calc(18px - (9 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+    overflow: hidden;
+    max-height: calc(calc(16px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 3);
+}
+
+.cardDescription {
+    // Стили для описания карточки
+    font-weight: 400;
+    font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
+}
+
+.firstCardDescription {
+    // Дополнительные стили для описания первой карточки
+}
+
+.secondCardDescription {
+    // Дополнительные стили для описания второй карточки
+}
+
+.thirdCardDescription {
+    // Дополнительные стили для описания второй карточки
+}
+
+.cardClockAndDateWrapper {
+    // Стили для обертки даты и времени карточки
+    margin: calc(18px - (2 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cardClockAndDateInner {
+    display: flex;
+    align-items: center;
+}
+
+.cardClockImgWrapper {
+    // Стили для обертки изображения часов
+    display: flex;
+}
+
+.cardClockImg {
+    // Стили для изображения часов
+}
+
+.cardDateWrapper {
+    // Стили для обертки даты
+    margin: 0 0 0 calc(10px - (3 * ((1440px - 100vw) / (1440 - 375))));
+    display: flex;
+}
+
+.cardDateWrapper .cardClockImg {
+    // Стили для текста даты
+}
+
+.cardReadMoreWrapper {
+    // Стили для обертки ссылки "Читати далi"
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #d83934;
+}
+
+.cardReadMoreLink {
+    // Стили для ссылки "Читати далi"
+}
+
+@media (min-width: 1920px) {    
+    .mainPageNewsCard {
+        // Стили для карточки новостей
+        width: 32.81%;
+    }
+
+    .thirdCard {
+        // Дополнительные стили для второй карточки
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 1440px) {
+    .mainPageNewsContainer {
+        // Стили для основного контейнераконтейнера
+        margin: 72px 0 0 0;
+        padding: 0 70px;
+    }
+    
+    .mainPageNewsTitle {
+        // Стили для заголовка
+        font-size: 28px;
+    }
+    
+    .mainPageNewsButton {
+        // Стили для кнопки
+        border-radius: 34px;
+    }
+    
+    .mainPageNewsButtonTitle {
+        // Стили для текста кнопки
+        margin: 0 12px 0 0;
+        font-size: 16px;
+    }
+    
+    .mainPageNewsCardsWrapper {
+        // Стили для обертки карточек новостей
+        margin: 37px 0 0 0;
+    }
+    
+    .cardTextWrapper {
+        // Стили для обертки текста карточки
+        margin: 26px 0 0 0;
+    }
+    
+    .cardTitleWrapper {
+        // Стили для обертки заголовка карточки
+        font-size: 22px;    
+    }
+    
+    .cardDescriptioneWrapper {
+        // Стили для обертки описания карточки
+        margin: 18px 0 0 0;
+    }
+    
+    .cardDescription {
+        // Стили для описания карточки
+        font-size: 16px;    
+    }
+    
+    .cardClockAndDateWrapper {
+        // Стили для обертки даты и времени карточки
+        margin: 18px 0 0 0;
+    }
+    
+    .cardDateWrapper {
+        // Стили для обертки даты
+        margin: 0 0 0 10px;
+    }
+}
+
+@media (max-width: 800px) {
+    .mainPageNewsCardsWrapper {
+        // Стили для обертки карточек новостей
+        margin: 0;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mainPageNewsCard {
+        // Стили для карточки новостей
+        margin: 33px 0 0 0;
+        width: 100%;
+    }
+
+    .cardImg {
+        // Стили для изображения карточки
+        height: 100%;
+    }
+
+    .desktopButtonWrapper {
+        // Дополнительные стили для обертки кнопки на десктопе
+        display: none;
+    }
+    
+    .mobileButtonWrapper {
+        // Дополнительные стили для обертки кнопки на мобильных устройствах
+        margin: 33px 0 0 0;
+        display: flex;
+        justify-content: center;
+    }
+}

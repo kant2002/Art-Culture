@@ -1,0 +1,83 @@
+.mainPage {
+	display: flex;
+	flex-direction: column;
+	background: rgb(255, 255, 255);
+	padding: calc(177px - (107 * ((1440px - 100vw) / (1440 - 569)))) 0 0 0;
+	width: 100vw;
+	// height: 100dvh;
+}
+
+.mainPageWelcomeTitleWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: start;
+	margin: calc(60px - (24 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+	padding: 0 calc(70 / 1440 * 100vw);
+	font-family: "Fira Sans";
+}
+
+.welcomeTitle {
+	margin: 0;
+	font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+	font-weight: 600;
+}
+
+.welcomeParagraph {
+	padding: 0 15px 0 0;
+	overflow: hidden;
+	max-height: calc(calc(18px - (4 * ((1440px - 100vw) / (1440 - 375)))) * 6);
+	position: relative;
+	margin: calc(20px - (3 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+	color: #5a5a5a;
+	font-size: calc(18px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	text-overflow: ellipsis;
+}
+
+.mainPageWelcomeTitleParagraphLink {
+	color: #d83934;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.mainPageWelcomeTitleParagraphReadMoreLink {
+	position: absolute;
+	bottom: -3px;
+	right: 0;
+	color: #d83934;
+	font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+	cursor: pointer;
+}
+
+@media (min-width: 1441px) {
+	.mainPage {
+		padding: 177px 0 0 0;
+		width: 100vw;
+	}
+
+	.mainPageWelcomeTitleWrapper {
+		margin: 60px 0 0 0;
+		padding: 0 70px;
+	}
+
+	.welcomeTitle {
+		font-size: 28px;
+	}
+
+	.welcomeParagraph {
+		max-height: calc(18px * 6);
+		margin: 20px 0 0 0;
+		font-size: 18px;
+	}
+
+	.mainPageWelcomeTitleParagraphReadMoreLink {
+		font-size: 28px;
+	}
+}
+
+@media (max-width: 569px) {
+	.mainPage {
+		padding: 70px 0 0 0;
+		width: 100vw;
+	}
+}

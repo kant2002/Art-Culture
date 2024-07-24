@@ -1,0 +1,404 @@
+@font-face {
+    font-family: "firasans";
+    src: url("../font/FiraSans/FiraSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "centurygothic";
+    src: url("../font/CenturyGothic/centurygothic.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "cormorantSC";
+    src: url("../font/CormorantSC/CormorantSC-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "chiller";
+    src: url("../font/Chiller/chiller_regular.ttf") format("truetype");
+}
+
+body {
+    font-family: "firasans", "centurygothic", "cormorantSC", "chiller";
+}
+.mainHeader {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: calc(0px + 177 * (100vw / 1440));
+    min-height: 70px;
+    max-height: 177px;
+    background-color: #000000;
+}
+.mainHeaderWrapper {
+    margin: calc(0 / 1440 * 100vw) calc(70 / 1440 * 100vw);
+    padding: calc(39 / 1440 * 100vw) calc(0 / 1440 * 100vw) calc(29 / 1440 * 100vw) calc(0 / 1440 * 100vw);
+    height: 100%;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+.mainHeaderLogo {
+    margin: 0 calc(22.5 / 1440 * 100vw) 0 0;
+    display: flex;
+    width: auto;
+}
+.logo {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+
+    &__img {
+        width: calc(122.47 / 1440 * 100vw);
+        height: calc(68.43 / 1440 * 100vw);
+        min-width: 48.39px;
+        min-height: 27.03px;
+        max-width: 122.47px;
+        max-height: 68.43px;
+    }
+
+    &__titleWrapper {
+        position: relative;
+        margin: 0 0 calc(-3 / 1440 * 100vw) 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items: start;
+        width: auto;
+    }
+
+    &__firstWord {
+        margin: 0 0 0 calc(-12 / 1440 * 100vw);
+        font-family: "chiller";
+        font-size: calc(0px + 156 * (100vw / 1440));
+        line-height: 0.53; //Важная строка!!!
+        display: inline-block; /* Необходимо для применения transform */
+        transform: scaleX(1.1); /* Масштабирование по горизонтали */
+        user-select: none;
+    }
+
+    &__firstWord::before {
+        content: "";
+        position: absolute;
+        top: calc(38 / 1440 * 100vw);
+        left: calc(123 / 1440 * 100vw);
+        width: calc(9 / 1440 * 100vw);
+        height: calc(7 / 1440 * 100vw);
+        min-width: 3.9px;
+        min-height: 2.77px;
+        max-width: 9px;
+        max-height: 7px;
+        background: url(../pic/logoPoint.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: 100% 100%;
+    }
+
+    &__secondWord {
+        margin: 0 0 calc(-1 / 1440 * 100vw) calc(-13 / 1440 * 100vw);
+        display: flex;
+        font-family: "cormorantSC";
+        font-size: calc(0px + 15.25 * (100vw / 1440));
+        text-transform: uppercase;
+        letter-spacing: calc(0px + 3.3 * (100vw / 1440));
+        user-select: none;
+    }
+
+    &__thirdWord {
+        margin: 0 0 0 calc(-13 / 1440 * 100vw);
+        font-family: "cormorantSC";
+        font-size: calc(0px + 22 * (100vw / 1440));
+        text-transform: uppercase;
+        letter-spacing: calc(0px + 4 * (100vw / 1440));
+        user-select: none;
+    }
+}
+.white {
+    color: #ffffff;
+}
+.titleContainer {
+    margin: calc(17 / 1440 * 100vw) 22.5px 0 22.5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+.titleWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+.headerLanguageSwitchContainer {
+    margin: 0 10px 10px 0;
+    &__ukrainianButtonTitle {
+        white-space: nowrap;
+    }
+
+    &__englishButton {
+        display: none;
+    }
+
+    &__englishButtonTitle {
+        white-space: nowrap;
+    }
+}
+
+.headerLanguageSwitchButton {
+    border: none;
+    cursor: pointer;
+    background: #000000;
+
+    &__title {
+        font-size: calc(0px + 18 * (100vw / 1440));
+        color: #fff;
+    }
+}
+.circleButton {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: #000000;
+}
+h1 {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    font-size: calc(12px + 12 * (100vw / 1440));
+    text-transform: uppercase;
+    text-align: center;
+    user-select: none;
+}
+.mainMenu {
+    display: flex;
+
+    &__ul {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+        max-width: 1072px;
+    }
+
+    &__li {
+        font-size: calc(0px + 18 * (100vw / 1440));
+    }
+
+    &__link {
+        position: relative;
+        display: inline-block;
+        transition: box-shadow 0.3s ease;
+    }
+
+    &__link::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -5px;
+        width: 0;
+        height: 1px;
+        background: linear-gradient(to right, rgba(216, 57, 52, 0), rgb(255, 255, 255), rgba(216, 57, 52, 0));
+        transition:
+            width 0.4s ease,
+            left 0.4s ease;
+    }
+
+    &__link:hover::after {
+        width: 100%;
+        left: 0;
+    }
+
+    &__link:hover {
+        color: #ffffff;
+        transition: 0.4s;
+        cursor: pointer;
+    }
+
+    &__link:not(:hover) {
+        color: #fff;
+        transition: 1s;
+    }
+}
+.socialContainer {
+    margin: 0 0 -7px 22.5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.socialUpperWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.socialLikeAndShareInner {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    &__likeButton {
+        position: relative;
+        display: flex;
+    }
+
+    &__likeButton::after {
+        content: "Like";
+        position: absolute;
+        top: 6px;
+        left: 38px;
+        font-size: 18px;
+        user-select: none;
+        color: #fff;
+    }
+
+    &__shareButton {
+        position: relative;
+        display: flex;
+    }
+
+    &__shareButton::before {
+        content: "Share";
+        position: absolute;
+        top: 6px;
+        right: 38px;
+        font-size: 18px;
+        user-select: none;
+        color: #fff;
+    }
+}
+.burgerButtonWrapper {
+    margin: 0 0 0 28px;
+}
+.burgerButton {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: calc(151 / 1440 * 100vw);
+    height: calc(51 / 1440 * 100vw);
+    min-width: 94.75px;
+    min-height: 32px;
+    max-width: 151px;
+    max-height: 51px;
+    border-radius: 51px;
+    color: #fff;
+    border: none;
+    background-color: #3a8374;
+    cursor: pointer;
+
+    &__img {
+        margin: 0 calc(6 / 1440 * 100vw) 0 0;
+        width: calc(32 / 1440 * 100vw);
+        height: calc(32 / 1440 * 100vw);
+        min-width: 20px;
+        min-height: 20px;
+        max-width: 32px;
+        max-height: 32px;
+    }
+
+    &__title {
+        margin: 0 0 0 calc(6 / 1440 * 100vw);
+        font-size: calc(18px + 0 * (100vw / 1440));
+    }
+}
+.socialDownWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 -5px 0 0; //Важный параметр! Меняется вместе с параметром свойства .socialDownWrapperButton{margin:0:5px;}
+
+    &__followUsTitle {
+        margin: 0 20px -1px 0;
+        width: auto;
+        font-size: 16px;
+        text-transform: uppercase;
+        user-select: none;
+        white-space: nowrap;
+    }
+    &__separator {
+        margin: 0 25px 0 24px;
+    }
+    &__separatorImg {
+        display: flex;
+        width: 1px;
+        height: 32px;
+    }
+}
+.socialDownWrapperButton {
+    margin: 0 5px;
+}
+.staticHeader {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: calc(100 / 1440 * 100vw);
+    min-height: 50px;
+    max-height: 100px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+    z-index: 999;
+}
+.staticHeader.visible {
+    transform: translateY(0);
+}
+.staticHeaderWrapper {
+    margin: calc(0 / 1440 * 100vw) calc(70 / 1440 * 100vw);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.staticHeaderLogo {
+    margin: 0 calc(22.5 / 1440 * 100vw) 0 0;
+}
+.staticHeaderLogoTitle {
+    font-family: "chiller";
+    font-size: calc(0px + 135 * (100vw / 1440));
+    line-height: 0.53; //Важная строка!!!
+    display: inline-block; /* Необходимо для применения transform */
+    transform: scaleX(1.1); /* Масштабирование по горизонтали */
+    user-select: none;
+}
+.staticHeaderTitleContainer {
+    margin: 0 calc(22.5 / 1440 * 100vw);
+    display: flex;
+    align-items: center;
+
+    &__likeButton {
+        margin: 0 31px 0 0;
+        display: flex;
+    }
+
+    &__shareButton {
+        margin: 0 0 0 31px;
+        display: flex;
+    }
+}
+.staticHeaderTitle {
+    display: flex;
+    justify-content: center;
+    font-size: calc(12px + 12 * (100vw / 1440));
+    text-transform: uppercase;
+    text-align: center;
+    user-select: none;
+}
+.staticHeaderLoginContainer {
+    display: flex;
+    align-items: center;
+    margin: 0 0 0 calc(22.5 / 1440 * 100vw);
+
+    &__separator {
+        margin: 0 19px 0 17px;
+    }
+}
+.black {
+    color: #000000;
+}
