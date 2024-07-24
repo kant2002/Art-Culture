@@ -247,7 +247,7 @@ function MainNews() {
 						<p className={`${styles.mainPageNewsButtonTitle}`}>Усi новини</p>
 						<img
 							className={`${styles.mainPageNewsButtonImg}`}
-							src={'/img/buttonArrow.svg'}
+							src={'/src/img/halfNewsCard.jpg'}
 							alt='Свiтлина музею'
 							onError={e => {
 								e.target.onerror = null
