@@ -241,8 +241,7 @@ function MainNews() {
 			<div className={`${styles.mainPageNewsTitleWithButton}`}>
 				<h3 className={`${styles.mainPageNewsTitle}`}>новини</h3>
 				<div
-					className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}
-				>
+					className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}>
 					<button className={`${styles.mainPageNewsButton}`}>
 						<p className={`${styles.mainPageNewsButtonTitle}`}>Усi новини</p>
 						<img
@@ -323,7 +322,6 @@ function MainNews() {
 										</p>
 									</div>
 								</div>
-								
 							</div>
 						</div>
 					)
