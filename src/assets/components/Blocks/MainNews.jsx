@@ -211,7 +211,7 @@ function MainNews() {
 	useEffect(() => {
 		// Запит на отримання постів з медіа-даними
 		axios
-			.get('http://zimbabaluba.pp.ua/wp-json/wp/v2/posts?_embed')
+			.get('https://zimbabaluba.pp.ua/wp-json/wp/v2/posts?_embed')
 			.then(response => {
 				console.log('Отримані дані постів:', response.data)
 				setPosts(response.data)
@@ -222,7 +222,7 @@ function MainNews() {
 
 		// Запит на отримання медіа
 		axios
-			.get('http://zimbabaluba.pp.ua/wp-json/wp/v2/media')
+			.get('https://zimbabaluba.pp.ua/wp-json/wp/v2/media')
 			.then(response => {
 				const mediaMap = response.data.reduce((acc, mediaItem) => {
 					acc[mediaItem.id] = mediaItem.source_url
