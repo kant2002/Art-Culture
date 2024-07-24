@@ -334,11 +334,11 @@ function MainNews() {
 					<p className={`${styles.mainPageNewsButtonTitle}`}>Усi новини</p>
 					<img
 						className={`${styles.mainPageNewsButtonImg}`}
-						src={'/img/buttonArrow.svg'}
+						src={'/mainNewImg/buttonArrow.svg'}
 						alt='Свiтлина музею'
 						onError={e => {
 							e.target.onerror = null
-							e.target.src = '/img/buttonArrow.svg'
+							e.target.src = '/mainNewImg/buttonArrow.svg'
 						}}
 					></img>
 				</button>
