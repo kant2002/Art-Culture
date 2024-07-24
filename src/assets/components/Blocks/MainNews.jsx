@@ -264,7 +264,7 @@ function MainNews() {
 
 					const featuredMediaId = post.featured_media
 					const featuredMediaUrl =
-						media[featuredMediaId] || '/public/mainNewImg/halfNewsCard.jpg'
+						media[featuredMediaId] || '/mainNewImg/halfNewsCard.jpg'
 
 					console.log('Витягнуте медіа:', featuredMediaUrl)
 
@@ -280,7 +280,7 @@ function MainNews() {
 									alt='Свiтлина музею'
 									onError={e => {
 										e.target.onerror = null
-										e.target.src = '/public/mainNewImg/newsCardERROR.jpg'
+										e.target.src = '/mainNewImg/newsCardERROR.jpg'
 									}}
 								/>
 							</div>
@@ -303,11 +303,11 @@ function MainNews() {
 									<div className={`${styles.cardClockImgWrapper}`}>
 										<img
 											className={`${styles.cardClockImg}`}
-											src={'/public/mainNewImg/clock.svg'}
+											src={'/mainNewImg/clock.svg'}
 											alt='Свiтлина годинника'
 											onError={e => {
 												e.target.onerror = null
-												e.target.src = '/public/mainNewImg/clock.svg'
+												e.target.src = '/mainNewImg/clock.svg'
 											}}
 										/>
 									</div>
