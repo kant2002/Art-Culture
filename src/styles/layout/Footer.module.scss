@@ -1,812 +1,816 @@
 @import '/src/styles/utilities/variables';
 
+// .footer {
+// 	position: relative;
+// 	// width: 1440px;
+// 	height: 234px;
+// 	display: none;
+// 	.footerWrapper {
+// 		grid-template-columns: 1fr 2fr 1fr 1fr;
+// 		background-color: #000;
+// 		color: #fff;
+// 		padding: 20px;
+// 		align-items: center;
+// 		display: grid;
+// 		height: calc(234 / 1440 * 100vw);
+// 		.footerLeftSideWrapper {
+// 			grid-template-columns: repeat(2, 110px);
+// 			display: grid;
+// 			align-items: end;
+// 			justify-items: stretch;
+// 			margin: 0 0 3vw 3.4vw;
+// 			.leftSideLogo {
+// 				margin-left: calc(12 / 1440 * 100vw);
+// 				margin-bottom: 1.1vw;
+// 				img {
+// 					width: 110.5px;
+// 				}
+// 			}
+// 			.logoText {
+// 				font-family: $chiller-font;
+// 				font-size: 127px;
+// 			}
+// 			.leftSideLogoRedDot {
+// 				position: relative;
+// 				margin: 0 auto;
+// 				bottom: 89px;
+// 				left: 157px;
+// 			}
+// 			.leftSideLogoText {
+// 				display: grid;
+// 				grid-template-columns: repeat(1, 1fr);
+// 				grid-template-rows: repeat(1, 101px);
+// 				margin: 0 0 1vw 0;
+// 				.logoSubText_Culture {
+// 					font-size: 14px;
+// 				}
+// 				.logoSubText_Ukraine {
+// 					font-size: 16px;
+// 					letter-spacing: 3px;
+// 				}
+// 				.logoSubText_Culture,
+// 				.logoSubText_Ukraine {
+// 					margin-left: 6px;
+// 				}
+// 			}
+// 		}
+
+// 		.footerMenuWrapper {
+// 			display: grid;
+// 			grid-template-columns: repeat(2, 189px);
+// 			margin: 0 0 0 7vw;
+// 			position: relative;
+// 			width: 0;
+// 			li {
+// 				list-style: none;
+// 			}
+// 			a {
+// 				text-decoration: none;
+// 				color: $main;
+// 				font-size: 16px;
+// 				line-height: 35px;
+// 			}
+// 			.footerMenuBlockFirstColumn {
+// 			}
+// 			.footerMenuBlockSecondColumn {
+// 				margin-left: 2vw;
+// 			}
+// 		}
+
+// 		.footerSeparator {
+// 			border: 1px solid #4b4b4b;
+// 			width: 0;
+// 			height: 124px;
+// 			margin: 0px 0 0 9.5vw;
+// 		}
+
+// 		.footerRightSideWrapper {
+// 			display: grid;
+// 			grid-template-areas:
+// 				'social logo'
+// 				'social info';
+// 			gap: 20px; /* Встановіть проміжки між елементами */
+// 		}
+
+// 		.footerSocial {
+// 			grid-area: social;
+// 			display: grid;
+// 			grid-template-rows: repeat(2, 30px);
+// 			justify-items: center;
+// 			grid-auto-columns: minmax(240%, auto) minmax(max-content, 2fr)
+// 				minmax(20%, 80vmax);
+// 			margin-bottom: 6vw;
+// 			.socialTitle {
+// 				font-size: 22px;
+// 				font-family: $default-font;
+// 				font-weight: 500;
+// 			}
+// 		}
+
+// 		.rightSideLogoContact {
+// 			grid-area: logo;
+// 			display: grid;
+// 			grid-template-columns: repeat(1, 170px);
+// 			gap: 10px;
+// 			margin-left: 170px;
+// 			a {
+// 				text-decoration: none;
+// 				font-family: $default-font;
+// 				color: $main;
+// 				font-size: 16px;
+// 			}
+// 			a,
+// 			img {
+// 				margin-left: 10px;
+// 			}
+// 		}
+
+// 		.footerInfo {
+// 			grid-area: info;
+// 			display: grid;
+// 			grid-template-columns: repeat(3, 135px);
+// 			justify-items: start;
+// 			position: relative;
+// 			right: 55px;
+
+// 			a {
+// 				text-decoration: none;
+// 				font-family: $default-font;
+// 				color: $secondary-color;
+// 				font-size: 16px;
+// 			}
+// 		}
+
+// 		.footerSocialIcons {
+// 			display: grid;
+// 			grid-template-columns: repeat(3, 43px);
+// 			align-content: center;
+// 			margin-top: 30px;
+// 			justify-items: center;
+// 		}
+// 	}
+// 	@media (max-width: 1439px) and (min-width: 1280px) {
+// 		width: 100%;
+// 		.footerWrapper {
+// 			grid-template-columns: 1fr 2fr 1fr 1fr;
+// 			padding: 10px;
+// 			.footerLeftSideWrapper {
+// 				margin: 0 0 2vw 5vw;
+// 				.leftSideLogo {
+// 					margin-left: 23px;
+// 					margin-bottom: 27px;
+// 					img {
+// 						width: 95px;
+// 					}
+// 				}
+// 				.logoText {
+// 					font-size: 100px;
+// 				}
+// 				.leftSideLogoRedDot {
+// 					bottom: 93px;
+// 					left: 137px;
+// 				}
+// 				.leftSideLogoText {
+// 					display: grid;
+// 					grid-template-columns: repeat(1, 1fr);
+// 					grid-template-rows: repeat(1, 101px);
+// 					margin: 0 0 0.5vw 0;
+// 					width: 0;
+// 					.logoSubText_Culture {
+// 						font-size: 12px;
+// 					}
+// 					.logoSubText_Ukraine {
+// 						font-size: 14px;
+// 					}
+// 					.logoSubText_Culture,
+// 					.logoSubText_Ukraine {
+// 						margin-left: 4px;
+// 						position: relative;
+// 						bottom: 1.5vw;
+// 					}
+// 				}
+// 			}
+// 			.footerMenuWrapper {
+// 				margin: 0 0 0 9vw;
+// 				grid-template-columns: repeat(2, 150px);
+// 				a {
+// 					font-size: 14px;
+// 					line-height: 30px;
+// 				}
+// 				.footerMenuBlockSecondColumn {
+// 					margin-left: 4vw;
+// 				}
+// 			}
+// 			.footerSeparator {
+// 				height: 160px;
+// 				margin: 0 0 0 9vw;
+// 			}
+// 			.footerRightSideWrapper {
+// 				gap: 15px;
+// 				margin-right: 2vw;
+// 			}
+// 			.footerSocial {
+// 				display: grid;
+// 				grid-template-rows: repeat(2, 30px);
+// 				justify-items: center;
+// 				grid-auto-columns: minmax(240%, auto) minmax(max-content, 2fr)
+// 					minmax(20%, 80vmax);
+// 				margin-bottom: 6vw;
+// 				.socialTitle {
+// 					font-size: 18px;
+// 				}
+// 			}
+
+// 			.footerSocialIcons {
+// 				display: grid;
+// 				grid-template-columns: repeat(3, 35px);
+// 				align-content: center;
+// 				margin-top: 10px;
+// 				justify-items: center;
+// 				img {
+// 					width: 28px;
+// 				}
+// 				i {
+// 					margin-right: 0;
+// 				}
+// 			}
+// 			.rightSideLogoContact {
+// 				margin-left: 150px;
+// 				a {
+// 					font-size: 14px;
+// 				}
+// 				img {
+// 					margin-top: -13px;
+// 				}
+// 			}
+// 			.footerInfo {
+// 				grid-template-columns: repeat(3, 110px);
+// 				right: 45px;
+// 				a {
+// 					font-size: 14px;
+// 				}
+// 			}
+// 		}
+// 	}
+// 	@media (max-width: 1279px) and (min-width: 1024px) {
+// 		width: 100%;
+
+// 		.footerWrapper {
+// 			grid-template-columns: 1fr 2fr 1fr 1fr;
+// 			padding: 10px;
+
+// 			.footerLeftSideWrapper {
+// 				margin: calc(0 / 1440 * 100vw) calc(0 / 1440 * 100vw)
+// 					calc(2 / 1440 * 100vw) calc(3 / 1440 * 100vw);
+
+// 				.leftSideLogo {
+// 					margin-left: 23px;
+// 					margin-bottom: 27px;
+
+// 					img {
+// 						width: 95px;
+// 					}
+// 				}
+
+// 				.logoText {
+// 					font-size: 100px;
+// 				}
+
+// 				.leftSideLogoRedDot {
+// 					bottom: 91px;
+// 					left: 135px;
+// 				}
+
+// 				.leftSideLogoText {
+// 					display: grid;
+// 					grid-template-columns: repeat(1, 1fr);
+// 					grid-template-rows: repeat(1, 101px);
+// 					margin: 0 0 0.5vw 0;
+// 					width: 0;
+
+// 					.logoSubText_Culture {
+// 						font-size: 12px;
+// 					}
+
+// 					.logoSubText_Ukraine {
+// 						font-size: 14px;
+// 					}
+
+// 					.logoSubText_Culture,
+// 					.logoSubText_Ukraine {
+// 						margin-left: 4px;
+// 						position: relative;
+// 						bottom: 20px;
+// 					}
+// 				}
+// 			}
+
+// 			.footerMenuWrapper {
+// 				margin: 0 0 0 4vw;
+// 				grid-template-columns: repeat(2, 116px);
+
+// 				a {
+// 					font-size: 14px;
+// 					line-height: 30px;
+// 				}
+
+// 				.footerMenuBlockSecondColumn {
+// 					margin-left: 2vw;
+// 				}
+// 			}
+
+// 			.footerSeparator {
+// 				height: 130px;
+// 				margin: 0 0 0 9vw;
+// 			}
+
+// 			.footerRightSideWrapper {
+// 				gap: 15px;
+// 				margin-right: 2vw;
+// 			}
+
+// 			.footerSocial {
+// 				display: grid;
+// 				grid-template-rows: repeat(2, 30px);
+// 				justify-items: center;
+// 				grid-auto-columns: minmax(228%, auto) minmax(max-content, 2fr)
+// 					minmax(20%, 80vmax);
+// 				margin-bottom: 6vw;
+
+// 				.socialTitle {
+// 					font-size: 18px;
+// 				}
+// 			}
+
+// 			.footerSocialIcons {
+// 				display: grid;
+// 				grid-template-columns: repeat(3, 35px);
+// 				align-content: center;
+// 				margin-top: 10px;
+// 				justify-items: center;
+
+// 				img {
+// 					width: 28px;
+// 				}
+
+// 				i {
+// 					margin-right: 0;
+// 				}
+// 			}
+
+// 			.rightSideLogoContact {
+// 				margin-left: 140px;
+
+// 				a {
+// 					font-size: 14px;
+// 				}
+
+// 				img {
+// 					margin-top: -13px;
+// 				}
+// 			}
+
+// 			.footerInfo {
+// 				grid-template-columns: repeat(3, 110px);
+// 				right: 45px;
+
+// 				a {
+// 					font-size: 14px;
+// 				}
+// 			}
+// 		}
+// 	}
+// 	@media (max-width: 1023px) and (min-width: 768px) {
+// 		width: 100%;
+// 		height: 348px;
+
+// 		.footerWrapper {
+// 			grid-template-columns: 50% 20%;
+// 			padding: 10px;
+// 			grid-template-rows: 145px 200px;
+// 			display: grid;
+// 			align-items: center;
+// 			justify-items: center;
+// 			height: 348px;
+
+// 			.footerLeftSideWrapper {
+// 				margin: 0 0 2vw 2vw;
+
+// 				.leftSideLogo {
+// 					margin-left: 34px;
+// 					margin-bottom: 37px;
+
+// 					img {
+// 						width: 85px;
+// 					}
+// 				}
+
+// 				.logoText {
+// 					font-size: 90px;
+// 				}
+
+// 				.leftSideLogoRedDot {
+// 					bottom: 91px;
+// 					left: 127px;
+// 					img {
+// 						width: 9px;
+// 					}
+// 				}
+
+// 				.leftSideLogoText {
+// 					display: grid;
+// 					grid-template-columns: repeat(1, 1fr);
+// 					grid-template-rows: repeat(1, 101px);
+// 					margin: 0 0 0.5vw 0;
+// 					width: 0;
+
+// 					.logoSubText_Culture {
+// 						font-size: 10px;
+// 					}
+
+// 					.logoSubText_Ukraine {
+// 						font-size: 12px;
+// 					}
+
+// 					.logoSubText_Culture,
+// 					.logoSubText_Ukraine {
+// 						margin-left: 3px;
+// 						position: relative;
+// 						bottom: 30px;
+// 					}
+// 				}
+// 			}
+
+// 			.footerMenuWrapper {
+// 				margin: 0 0 0 3vw;
+// 				grid-template-columns: repeat(2, 100px);
+
+// 				a {
+// 					font-size: 13px;
+// 					line-height: 28px;
+// 				}
+
+// 				.footerMenuBlockSecondColumn {
+// 					margin-left: 1.5vw;
+// 				}
+// 			}
+
+// 			.footerSeparator {
+// 				height: 120px;
+// 				margin: 0 0 0 8vw;
+// 				display: none;
+// 			}
+
+// 			.footerRightSideWrapper {
+// 				gap: 12px;
+// 				/* margin-right: 1.5vw; */
+// 				grid-template-columns: 84% 0%;
+// 				display: grid;
+// 				justify-content: center;
+// 				justify-items: center;
+// 			}
+
+// 			.footerSocial {
+// 				display: grid;
+// 				grid-template-rows: repeat(2, 28px);
+// 				justify-items: center;
+// 				grid-auto-columns: minmax(210%, auto) minmax(max-content, 2fr)
+// 					minmax(20%, 80vmax);
+// 				margin-bottom: 5vw;
+
+// 				.socialTitle {
+// 					font-size: 16px;
+// 				}
+// 			}
+
+// 			.footerSocialIcons {
+// 				display: grid;
+// 				grid-template-columns: repeat(3, 30px);
+// 				align-content: center;
+// 				margin-top: 8px;
+// 				justify-items: center;
+
+// 				img {
+// 					width: 25px;
+// 				}
+
+// 				i {
+// 					margin-right: 0;
+// 				}
+// 			}
+
+// 			.rightSideLogoContact {
+// 				//margin-left: 120px;
+
+// 				a {
+// 					font-size: 13px;
+// 				}
+
+// 				img {
+// 					margin-top: -12px;
+// 				}
+// 			}
+
+// 			.footerInfo {
+// 				grid-template-columns: repeat(3, 100px);
+// 				right: 40px;
+
+// 				a {
+// 					font-size: 13px;
+// 				}
+// 			}
+// 		}
+// 	}
+// 	@media (max-width: 767px) and (min-width: 425px) {
+// 		width: 100%;
+// 		height: 348px;
+
+// 		.footerWrapper {
+// 			grid-template-columns: 45% 15%;
+// 			padding: 10px;
+// 			grid-template-rows: 143px 200px;
+// 			display: grid;
+// 			align-items: center;
+// 			justify-items: center;
+// 			height: 348px;
+
+// 			.footerLeftSideWrapper {
+// 				margin: 0 0 2vw 2vw;
+
+// 				.leftSideLogo {
+// 					margin-left: 35px;
+// 					margin-bottom: 35px;
+
+// 					img {
+// 						width: 85px;
+// 					}
+// 				}
+
+// 				.logoText {
+// 					font-size: 90px;
+// 				}
+
+// 				.leftSideLogoRedDot {
+// 					bottom: 93px;
+// 					left: 129px;
+// 				}
+
+// 				.leftSideLogoText {
+// 					display: grid;
+// 					grid-template-columns: repeat(1, 1fr);
+// 					grid-template-rows: repeat(1, 101px);
+// 					margin: 0 0 0.5vw 0;
+// 					width: 0;
+
+// 					.logoSubText_Culture {
+// 						font-size: 10px;
+// 					}
+
+// 					.logoSubText_Ukraine {
+// 						font-size: 12px;
+// 					}
+
+// 					.logoSubText_Culture,
+// 					.logoSubText_Ukraine {
+// 						margin-left: 4px;
+// 						position: relative;
+// 						bottom: 3%;
+// 					}
+// 				}
+// 			}
+
+// 			.footerMenuWrapper {
+// 				margin: 0 0 0 3vw;
+// 				grid-template-columns: repeat(2, 100px);
+
+// 				a {
+// 					font-size: 13px;
+// 					line-height: 28px;
+// 				}
+
+// 				.footerMenuBlockSecondColumn {
+// 					margin-left: 1.5vw;
+// 				}
+// 			}
+
+// 			.footerSeparator {
+// 				height: 120px;
+// 				margin: 0 0 0 8vw;
+// 				display: none;
+// 			}
+
+// 			.footerRightSideWrapper {
+// 				gap: 30px;
+// 				/* margin-right: 1.5vw; */
+// 				grid-template-columns: 43% 31%;
+// 				display: grid;
+// 				justify-content: center;
+// 				justify-items: center;
+// 			}
+
+// 			.footerSocial {
+// 				display: grid;
+// 				grid-template-rows: repeat(2, 28px);
+// 				justify-items: center;
+// 				grid-auto-columns: minmax(210%, auto) minmax(max-content, 2fr)
+// 					minmax(20%, 80vmax);
+// 				margin-bottom: 5vw;
+
+// 				.socialTitle {
+// 					font-size: 16px;
+// 				}
+// 			}
+
+// 			.footerSocialIcons {
+// 				display: grid;
+// 				grid-template-columns: repeat(3, 30px);
+// 				align-content: center;
+// 				margin-top: 8px;
+// 				justify-items: center;
+
+// 				img {
+// 					width: 25px;
+// 				}
+
+// 				i {
+// 					margin-right: 0;
+// 				}
+// 			}
+
+// 			.rightSideLogoContact {
+// 				//margin-left: 120px;
+// 				display: grid;
+// 				grid-template-columns: repeat(1, 170px);
+// 				gap: 10px;
+// 				margin-left: 170px;
+// 				a {
+// 					font-size: 13px;
+// 				}
+
+// 				img {
+// 					margin-top: -12px;
+// 				}
+// 			}
+
+// 			.footerInfo {
+// 				grid-template-columns: repeat(3, 102px);
+// 				right: 10px;
+
+// 				a {
+// 					font-size: 13px;
+// 				}
+// 			}
+// 		}
+// 	}
+// 	@media (max-width: 424px) and (min-width: 375px) {
+// 		width: 100%;
+// 		height: 348px;
+
+// 		.footerWrapper {
+// 			grid-template-columns: 45% 15%;
+// 			padding: 10px;
+// 			grid-template-rows: 143px 200px;
+// 			display: grid;
+// 			align-items: center;
+// 			justify-items: center;
+// 			height: 348px;
+
+// 			.footerLeftSideWrapper {
+// 				margin: 0 0 2vw 2vw;
+
+// 				.leftSideLogo {
+// 					margin-left: 42px;
+// 					margin-bottom: 48px;
+
+// 					img {
+// 						width: 62px;
+// 					}
+// 				}
+
+// 				.logoText {
+// 					font-size: 70px;
+// 				}
+
+// 				.leftSideLogoRedDot {
+// 					bottom: 96px;
+// 					left: 100px;
+// 					img {
+// 						width: 6px;
+// 					}
+// 				}
+
+// 				.leftSideLogoText {
+// 					display: grid;
+// 					grid-template-columns: repeat(1, 1fr);
+// 					grid-template-rows: repeat(1, 101px);
+// 					margin: 0 0 0.5vw -3vw;
+// 					width: 0;
+
+// 					.logoSubText_Culture {
+// 						font-size: 8px;
+// 					}
+
+// 					.logoSubText_Ukraine {
+// 						font-size: 10px;
+// 						letter-spacing: 0;
+// 					}
+
+// 					.logoSubText_Culture,
+// 					.logoSubText_Ukraine {
+// 						margin-left: 4px;
+// 						position: relative;
+// 						bottom: 12vw;
+// 					}
+// 				}
+// 			}
+
+// 			.footerMenuWrapper {
+// 				margin: 0 0 0 -16vw;
+// 				grid-template-columns: repeat(2, 100px);
+
+// 				a {
+// 					font-size: 12px;
+// 					line-height: 28px;
+// 				}
+
+// 				.footerMenuBlockSecondColumn {
+// 					margin-left: 0vw;
+// 				}
+// 			}
+
+// 			.footerSeparator {
+// 				height: 120px;
+// 				margin: 0 0 0 8vw;
+// 				display: none;
+// 			}
+
+// 			.footerRightSideWrapper {
+// 				gap: 30px;
+// 				/* margin-right: 1.5vw; */
+// 				grid-template-columns: 43% 31%;
+// 				display: grid;
+// 				justify-content: center;
+// 				justify-items: center;
+// 			}
+
+// 			.footerSocial {
+// 				display: grid;
+// 				grid-template-rows: repeat(2, 28px);
+// 				justify-items: center;
+// 				grid-auto-columns: minmax(230%, auto) minmax(max-content, 2fr)
+// 					minmax(20%, 80vmax);
+// 				margin-bottom: 5vw;
+
+// 				.socialTitle {
+// 					font-size: 18px;
+// 					margin-right: 22px;
+// 				}
+// 			}
+
+// 			.footerSocialIcons {
+// 				display: grid;
+// 				grid-template-columns: repeat(3, 40px);
+// 				align-content: center;
+// 				margin-top: 8px;
+// 				justify-items: center;
+
+// 				img {
+// 					width: 32px;
+// 				}
+
+// 				i {
+// 					margin-right: 0;
+// 				}
+// 			}
+
+// 			.rightSideLogoContact {
+// 				//margin-left: 120px;
+// 				display: grid;
+// 				grid-template-columns: repeat(1, 170px);
+// 				gap: 10px;
+// 				margin-left: 125px;
+// 				a {
+// 					font-size: 14px;
+// 				}
+
+// 				img {
+// 					margin-top: 2px;
+// 					width: 132px;
+// 				}
+// 			}
+
+// 			.footerInfo {
+// 				grid-template-columns: repeat(3, 102px);
+// 				right: 0px;
+
+// 				a {
+// 					font-size: 13px;
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
 .footer {
-	position: relative;
-	// width: 1440px;
-	height: 234px;
-	display: none;
-	.footerWrapper {
-		grid-template-columns: 1fr 2fr 1fr 1fr;
-		background-color: #000;
-		color: #fff;
-		padding: 20px;
-		align-items: center;
-		display: grid;
-		height: calc(234 / 1440 * 100vw);
-		.footerLeftSideWrapper {
-			grid-template-columns: repeat(2, 110px);
-			display: grid;
-			align-items: end;
-			justify-items: stretch;
-			margin: 0 0 3vw 3.4vw;
-			.leftSideLogo {
-				margin-left: calc(12 / 1440 * 100vw);
-				margin-bottom: 1.1vw;
-				img {
-					width: 110.5px;
-				}
-			}
-			.logoText {
-				font-family: $chiller-font;
-				font-size: 127px;
-			}
-			.leftSideLogoRedDot {
-				position: relative;
-				margin: 0 auto;
-				bottom: 89px;
-				left: 157px;
-			}
-			.leftSideLogoText {
-				display: grid;
-				grid-template-columns: repeat(1, 1fr);
-				grid-template-rows: repeat(1, 101px);
-				margin: 0 0 1vw 0;
-				.logoSubText_Culture {
-					font-size: 14px;
-				}
-				.logoSubText_Ukraine {
-					font-size: 16px;
-					letter-spacing: 3px;
-				}
-				.logoSubText_Culture,
-				.logoSubText_Ukraine {
-					margin-left: 6px;
-				}
-			}
-		}
-
-		.footerMenuWrapper {
-			display: grid;
-			grid-template-columns: repeat(2, 189px);
-			margin: 0 0 0 7vw;
-			position: relative;
-			width: 0;
-			li {
-				list-style: none;
-			}
-			a {
-				text-decoration: none;
-				color: $main;
-				font-size: 16px;
-				line-height: 35px;
-			}
-			.footerMenuBlockFirstColumn {
-			}
-			.footerMenuBlockSecondColumn {
-				margin-left: 2vw;
-			}
-		}
-
-		.footerSeparator {
-			border: 1px solid #4b4b4b;
-			width: 0;
-			height: 124px;
-			margin: 0px 0 0 9.5vw;
-		}
-
-		.footerRightSideWrapper {
-			display: grid;
-			grid-template-areas:
-				'social logo'
-				'social info';
-			gap: 20px; /* Встановіть проміжки між елементами */
-		}
-
-		.footerSocial {
-			grid-area: social;
-			display: grid;
-			grid-template-rows: repeat(2, 30px);
-			justify-items: center;
-			grid-auto-columns: minmax(240%, auto) minmax(max-content, 2fr)
-				minmax(20%, 80vmax);
-			margin-bottom: 6vw;
-			.socialTitle {
-				font-size: 22px;
-				font-family: $default-font;
-				font-weight: 500;
-			}
-		}
-
-		.rightSideLogoContact {
-			grid-area: logo;
-			display: grid;
-			grid-template-columns: repeat(1, 170px);
-			gap: 10px;
-			margin-left: 170px;
-			a {
-				text-decoration: none;
-				font-family: $default-font;
-				color: $main;
-				font-size: 16px;
-			}
-			a,
-			img {
-				margin-left: 10px;
-			}
-		}
-
-		.footerInfo {
-			grid-area: info;
-			display: grid;
-			grid-template-columns: repeat(3, 135px);
-			justify-items: start;
-			position: relative;
-			right: 55px;
-
-			a {
-				text-decoration: none;
-				font-family: $default-font;
-				color: $secondary-color;
-				font-size: 16px;
-			}
-		}
-
-		.footerSocialIcons {
-			display: grid;
-			grid-template-columns: repeat(3, 43px);
-			align-content: center;
-			margin-top: 30px;
-			justify-items: center;
-		}
-	}
-	@media (max-width: 1439px) and (min-width: 1280px) {
-		width: 100%;
-		.footerWrapper {
-			grid-template-columns: 1fr 2fr 1fr 1fr;
-			padding: 10px;
-			.footerLeftSideWrapper {
-				margin: 0 0 2vw 5vw;
-				.leftSideLogo {
-					margin-left: 23px;
-					margin-bottom: 27px;
-					img {
-						width: 95px;
-					}
-				}
-				.logoText {
-					font-size: 100px;
-				}
-				.leftSideLogoRedDot {
-					bottom: 93px;
-					left: 137px;
-				}
-				.leftSideLogoText {
-					display: grid;
-					grid-template-columns: repeat(1, 1fr);
-					grid-template-rows: repeat(1, 101px);
-					margin: 0 0 0.5vw 0;
-					width: 0;
-					.logoSubText_Culture {
-						font-size: 12px;
-					}
-					.logoSubText_Ukraine {
-						font-size: 14px;
-					}
-					.logoSubText_Culture,
-					.logoSubText_Ukraine {
-						margin-left: 4px;
-						position: relative;
-						bottom: 1.5vw;
-					}
-				}
-			}
-			.footerMenuWrapper {
-				margin: 0 0 0 9vw;
-				grid-template-columns: repeat(2, 150px);
-				a {
-					font-size: 14px;
-					line-height: 30px;
-				}
-				.footerMenuBlockSecondColumn {
-					margin-left: 4vw;
-				}
-			}
-			.footerSeparator {
-				height: 160px;
-				margin: 0 0 0 9vw;
-			}
-			.footerRightSideWrapper {
-				gap: 15px;
-				margin-right: 2vw;
-			}
-			.footerSocial {
-				display: grid;
-				grid-template-rows: repeat(2, 30px);
-				justify-items: center;
-				grid-auto-columns: minmax(240%, auto) minmax(max-content, 2fr)
-					minmax(20%, 80vmax);
-				margin-bottom: 6vw;
-				.socialTitle {
-					font-size: 18px;
-				}
-			}
-
-			.footerSocialIcons {
-				display: grid;
-				grid-template-columns: repeat(3, 35px);
-				align-content: center;
-				margin-top: 10px;
-				justify-items: center;
-				img {
-					width: 28px;
-				}
-				i {
-					margin-right: 0;
-				}
-			}
-			.rightSideLogoContact {
-				margin-left: 150px;
-				a {
-					font-size: 14px;
-				}
-				img {
-					margin-top: -13px;
-				}
-			}
-			.footerInfo {
-				grid-template-columns: repeat(3, 110px);
-				right: 45px;
-				a {
-					font-size: 14px;
-				}
-			}
-		}
-	}
-	@media (max-width: 1279px) and (min-width: 1024px) {
-		width: 100%;
-
-		.footerWrapper {
-			grid-template-columns: 1fr 2fr 1fr 1fr;
-			padding: 10px;
-
-			.footerLeftSideWrapper {
-				margin: calc(0 / 1440 * 100vw) calc(0 / 1440 * 100vw)
-					calc(2 / 1440 * 100vw) calc(3 / 1440 * 100vw);
-
-				.leftSideLogo {
-					margin-left: 23px;
-					margin-bottom: 27px;
-
-					img {
-						width: 95px;
-					}
-				}
-
-				.logoText {
-					font-size: 100px;
-				}
-
-				.leftSideLogoRedDot {
-					bottom: 91px;
-					left: 135px;
-				}
-
-				.leftSideLogoText {
-					display: grid;
-					grid-template-columns: repeat(1, 1fr);
-					grid-template-rows: repeat(1, 101px);
-					margin: 0 0 0.5vw 0;
-					width: 0;
-
-					.logoSubText_Culture {
-						font-size: 12px;
-					}
-
-					.logoSubText_Ukraine {
-						font-size: 14px;
-					}
-
-					.logoSubText_Culture,
-					.logoSubText_Ukraine {
-						margin-left: 4px;
-						position: relative;
-						bottom: 20px;
-					}
-				}
-			}
-
-			.footerMenuWrapper {
-				margin: 0 0 0 4vw;
-				grid-template-columns: repeat(2, 116px);
-
-				a {
-					font-size: 14px;
-					line-height: 30px;
-				}
-
-				.footerMenuBlockSecondColumn {
-					margin-left: 2vw;
-				}
-			}
-
-			.footerSeparator {
-				height: 130px;
-				margin: 0 0 0 9vw;
-			}
-
-			.footerRightSideWrapper {
-				gap: 15px;
-				margin-right: 2vw;
-			}
-
-			.footerSocial {
-				display: grid;
-				grid-template-rows: repeat(2, 30px);
-				justify-items: center;
-				grid-auto-columns: minmax(228%, auto) minmax(max-content, 2fr)
-					minmax(20%, 80vmax);
-				margin-bottom: 6vw;
-
-				.socialTitle {
-					font-size: 18px;
-				}
-			}
-
-			.footerSocialIcons {
-				display: grid;
-				grid-template-columns: repeat(3, 35px);
-				align-content: center;
-				margin-top: 10px;
-				justify-items: center;
-
-				img {
-					width: 28px;
-				}
-
-				i {
-					margin-right: 0;
-				}
-			}
-
-			.rightSideLogoContact {
-				margin-left: 140px;
-
-				a {
-					font-size: 14px;
-				}
-
-				img {
-					margin-top: -13px;
-				}
-			}
-
-			.footerInfo {
-				grid-template-columns: repeat(3, 110px);
-				right: 45px;
-
-				a {
-					font-size: 14px;
-				}
-			}
-		}
-	}
-	@media (max-width: 1023px) and (min-width: 768px) {
-		width: 100%;
-		height: 348px;
-
-		.footerWrapper {
-			grid-template-columns: 50% 20%;
-			padding: 10px;
-			grid-template-rows: 145px 200px;
-			display: grid;
-			align-items: center;
-			justify-items: center;
-			height: 348px;
-
-			.footerLeftSideWrapper {
-				margin: 0 0 2vw 2vw;
-
-				.leftSideLogo {
-					margin-left: 34px;
-					margin-bottom: 37px;
-
-					img {
-						width: 85px;
-					}
-				}
-
-				.logoText {
-					font-size: 90px;
-				}
-
-				.leftSideLogoRedDot {
-					bottom: 91px;
-					left: 127px;
-					img {
-						width: 9px;
-					}
-				}
-
-				.leftSideLogoText {
-					display: grid;
-					grid-template-columns: repeat(1, 1fr);
-					grid-template-rows: repeat(1, 101px);
-					margin: 0 0 0.5vw 0;
-					width: 0;
-
-					.logoSubText_Culture {
-						font-size: 10px;
-					}
-
-					.logoSubText_Ukraine {
-						font-size: 12px;
-					}
-
-					.logoSubText_Culture,
-					.logoSubText_Ukraine {
-						margin-left: 3px;
-						position: relative;
-						bottom: 30px;
-					}
-				}
-			}
-
-			.footerMenuWrapper {
-				margin: 0 0 0 3vw;
-				grid-template-columns: repeat(2, 100px);
-
-				a {
-					font-size: 13px;
-					line-height: 28px;
-				}
-
-				.footerMenuBlockSecondColumn {
-					margin-left: 1.5vw;
-				}
-			}
-
-			.footerSeparator {
-				height: 120px;
-				margin: 0 0 0 8vw;
-				display: none;
-			}
-
-			.footerRightSideWrapper {
-				gap: 12px;
-				/* margin-right: 1.5vw; */
-				grid-template-columns: 84% 0%;
-				display: grid;
-				justify-content: center;
-				justify-items: center;
-			}
-
-			.footerSocial {
-				display: grid;
-				grid-template-rows: repeat(2, 28px);
-				justify-items: center;
-				grid-auto-columns: minmax(210%, auto) minmax(max-content, 2fr)
-					minmax(20%, 80vmax);
-				margin-bottom: 5vw;
-
-				.socialTitle {
-					font-size: 16px;
-				}
-			}
-
-			.footerSocialIcons {
-				display: grid;
-				grid-template-columns: repeat(3, 30px);
-				align-content: center;
-				margin-top: 8px;
-				justify-items: center;
-
-				img {
-					width: 25px;
-				}
-
-				i {
-					margin-right: 0;
-				}
-			}
-
-			.rightSideLogoContact {
-				//margin-left: 120px;
-
-				a {
-					font-size: 13px;
-				}
-
-				img {
-					margin-top: -12px;
-				}
-			}
-
-			.footerInfo {
-				grid-template-columns: repeat(3, 100px);
-				right: 40px;
-
-				a {
-					font-size: 13px;
-				}
-			}
-		}
-	}
-	@media (max-width: 767px) and (min-width: 425px) {
-		width: 100%;
-		height: 348px;
-
-		.footerWrapper {
-			grid-template-columns: 45% 15%;
-			padding: 10px;
-			grid-template-rows: 143px 200px;
-			display: grid;
-			align-items: center;
-			justify-items: center;
-			height: 348px;
-
-			.footerLeftSideWrapper {
-				margin: 0 0 2vw 2vw;
-
-				.leftSideLogo {
-					margin-left: 35px;
-					margin-bottom: 35px;
-
-					img {
-						width: 85px;
-					}
-				}
-
-				.logoText {
-					font-size: 90px;
-				}
-
-				.leftSideLogoRedDot {
-					bottom: 93px;
-					left: 129px;
-				}
-
-				.leftSideLogoText {
-					display: grid;
-					grid-template-columns: repeat(1, 1fr);
-					grid-template-rows: repeat(1, 101px);
-					margin: 0 0 0.5vw 0;
-					width: 0;
-
-					.logoSubText_Culture {
-						font-size: 10px;
-					}
-
-					.logoSubText_Ukraine {
-						font-size: 12px;
-					}
-
-					.logoSubText_Culture,
-					.logoSubText_Ukraine {
-						margin-left: 4px;
-						position: relative;
-						bottom: 3%;
-					}
-				}
-			}
-
-			.footerMenuWrapper {
-				margin: 0 0 0 3vw;
-				grid-template-columns: repeat(2, 100px);
-
-				a {
-					font-size: 13px;
-					line-height: 28px;
-				}
-
-				.footerMenuBlockSecondColumn {
-					margin-left: 1.5vw;
-				}
-			}
-
-			.footerSeparator {
-				height: 120px;
-				margin: 0 0 0 8vw;
-				display: none;
-			}
-
-			.footerRightSideWrapper {
-				gap: 30px;
-				/* margin-right: 1.5vw; */
-				grid-template-columns: 43% 31%;
-				display: grid;
-				justify-content: center;
-				justify-items: center;
-			}
-
-			.footerSocial {
-				display: grid;
-				grid-template-rows: repeat(2, 28px);
-				justify-items: center;
-				grid-auto-columns: minmax(210%, auto) minmax(max-content, 2fr)
-					minmax(20%, 80vmax);
-				margin-bottom: 5vw;
-
-				.socialTitle {
-					font-size: 16px;
-				}
-			}
-
-			.footerSocialIcons {
-				display: grid;
-				grid-template-columns: repeat(3, 30px);
-				align-content: center;
-				margin-top: 8px;
-				justify-items: center;
-
-				img {
-					width: 25px;
-				}
-
-				i {
-					margin-right: 0;
-				}
-			}
-
-			.rightSideLogoContact {
-				//margin-left: 120px;
-				display: grid;
-				grid-template-columns: repeat(1, 170px);
-				gap: 10px;
-				margin-left: 170px;
-				a {
-					font-size: 13px;
-				}
-
-				img {
-					margin-top: -12px;
-				}
-			}
-
-			.footerInfo {
-				grid-template-columns: repeat(3, 102px);
-				right: 10px;
-
-				a {
-					font-size: 13px;
-				}
-			}
-		}
-	}
-	@media (max-width: 424px) and (min-width: 375px) {
-		width: 100%;
-		height: 348px;
-
-		.footerWrapper {
-			grid-template-columns: 45% 15%;
-			padding: 10px;
-			grid-template-rows: 143px 200px;
-			display: grid;
-			align-items: center;
-			justify-items: center;
-			height: 348px;
-
-			.footerLeftSideWrapper {
-				margin: 0 0 2vw 2vw;
-
-				.leftSideLogo {
-					margin-left: 42px;
-					margin-bottom: 48px;
-
-					img {
-						width: 62px;
-					}
-				}
-
-				.logoText {
-					font-size: 70px;
-				}
-
-				.leftSideLogoRedDot {
-					bottom: 96px;
-					left: 100px;
-					img {
-						width: 6px;
-					}
-				}
-
-				.leftSideLogoText {
-					display: grid;
-					grid-template-columns: repeat(1, 1fr);
-					grid-template-rows: repeat(1, 101px);
-					margin: 0 0 0.5vw -3vw;
-					width: 0;
-
-					.logoSubText_Culture {
-						font-size: 8px;
-					}
-
-					.logoSubText_Ukraine {
-						font-size: 10px;
-						letter-spacing: 0;
-					}
-
-					.logoSubText_Culture,
-					.logoSubText_Ukraine {
-						margin-left: 4px;
-						position: relative;
-						bottom: 12vw;
-					}
-				}
-			}
-
-			.footerMenuWrapper {
-				margin: 0 0 0 -16vw;
-				grid-template-columns: repeat(2, 100px);
-
-				a {
-					font-size: 12px;
-					line-height: 28px;
-				}
-
-				.footerMenuBlockSecondColumn {
-					margin-left: 0vw;
-				}
-			}
-
-			.footerSeparator {
-				height: 120px;
-				margin: 0 0 0 8vw;
-				display: none;
-			}
-
-			.footerRightSideWrapper {
-				gap: 30px;
-				/* margin-right: 1.5vw; */
-				grid-template-columns: 43% 31%;
-				display: grid;
-				justify-content: center;
-				justify-items: center;
-			}
-
-			.footerSocial {
-				display: grid;
-				grid-template-rows: repeat(2, 28px);
-				justify-items: center;
-				grid-auto-columns: minmax(230%, auto) minmax(max-content, 2fr)
-					minmax(20%, 80vmax);
-				margin-bottom: 5vw;
-
-				.socialTitle {
-					font-size: 18px;
-					margin-right: 22px;
-				}
-			}
-
-			.footerSocialIcons {
-				display: grid;
-				grid-template-columns: repeat(3, 40px);
-				align-content: center;
-				margin-top: 8px;
-				justify-items: center;
-
-				img {
-					width: 32px;
-				}
-
-				i {
-					margin-right: 0;
-				}
-			}
-
-			.rightSideLogoContact {
-				//margin-left: 120px;
-				display: grid;
-				grid-template-columns: repeat(1, 170px);
-				gap: 10px;
-				margin-left: 125px;
-				a {
-					font-size: 14px;
-				}
-
-				img {
-					margin-top: 2px;
-					width: 132px;
-				}
-			}
-
-			.footerInfo {
-				grid-template-columns: repeat(3, 102px);
-				right: 0px;
-
-				a {
-					font-size: 13px;
-				}
-			}
-		}
-	}
+	display: flex;
 }
