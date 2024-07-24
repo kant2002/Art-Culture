@@ -338,7 +338,7 @@ function MainNews() {
 						alt='Свiтлина музею'
 						onError={e => {
 							e.target.onerror = null
-							e.target.src = '/src/img/buttonArrow.svg'
+							e.target.src = '/img/buttonArrow.svg'
 						}}
 					></img>
 				</button>
