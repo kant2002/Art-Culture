@@ -200,31 +200,30 @@
 
 // export default MainNews
 
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import styles from '/src/styles/components/Blocks/MainNews.module.scss'
-// TODO: blabla
+
 function MainNews() {
 	const [posts, setPosts] = useState([])
 	const [media, setMedia] = useState({})
 
 	useEffect(() => {
 		// Запит на отримання постів з медіа-даними
-		axios
-			.get('https://zimbabaluba.pp.ua/wp-json/wp/v2/posts?_embed')
-			.then(response => {
-				console.log('Отримані дані постів:', response.data)
-				setPosts(response.data)
+		fetch('https://zimbabaluba.pp.ua/wp-json/wp/v2/posts?_embed')
+			.then(response => response.json())
+			.then(data => {
+				console.log('Отримані дані постів:', data)
+				setPosts(data)
 			})
 			.catch(error => {
 				console.error('Помилка при завантаженні постів', error)
 			})
 
 		// Запит на отримання медіа
-		axios
-			.get('https://zimbabaluba.pp.ua/wp-json/wp/v2/media')
-			.then(response => {
-				const mediaMap = response.data.reduce((acc, mediaItem) => {
+		fetch('https://zimbabaluba.pp.ua/wp-json/wp/v2/media')
+			.then(response => response.json())
+			.then(data => {
+				const mediaMap = data.reduce((acc, mediaItem) => {
 					acc[mediaItem.id] = mediaItem.source_url
 					return acc
 				}, {})
@@ -253,13 +252,12 @@ function MainNews() {
 								e.target.onerror = null
 								e.target.src = '/mainNewImg/buttonArrow.svg'
 							}}
-						></img>
+						/>
 					</button>
 				</div>
 			</div>
 			<div className={`${styles.mainPageNewsCardsWrapper}`}>
 				{posts.map((post, index) => {
-					// Логування даних для перевірки
 					console.log('Пост:', post)
 
 					const featuredMediaId = post.featured_media
@@ -316,11 +314,14 @@ function MainNews() {
 											{new Date(post.date).toLocaleDateString()}
 										</p>
 									</div>
-								</div>
-								<div className={`${styles.cardReadMoreWrapper}`}>
-									<a href={post.link} className={`${styles.cardReadMoreLink}`}>
-										Читати далi
-									</a>
+									<div className={`${styles.cardReadMoreWrapper}`}>
+										<a
+											href={post.link}
+											className={`${styles.cardReadMoreLink}`}
+										>
+											Читати далi
+										</a>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -340,7 +341,7 @@ function MainNews() {
 							e.target.onerror = null
 							e.target.src = '/mainNewImg/buttonArrow.svg'
 						}}
-					></img>
+					/>
 				</button>
 			</div>
 		</div>
