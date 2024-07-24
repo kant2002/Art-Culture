@@ -203,7 +203,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import styles from '/src/styles/components/Blocks/MainNews.module.scss'
-
+// TODO: blabla
 function MainNews() {
 	const [posts, setPosts] = useState([])
 	const [media, setMedia] = useState({})
