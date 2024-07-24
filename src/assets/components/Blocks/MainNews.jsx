@@ -271,31 +271,37 @@ function MainNews() {
 					return (
 						<div
 							key={post.id}
-							className={`${styles.mainPageNewsCard} ${index === 0 ? styles.firstCard : index === 1 ? styles.secondCard : styles.thirdCard}`}
-						>
-							<div className={`${styles.cardImgWrapper}`}>
-								<img
-									className={`${styles.cardImg} ${index === 0 ? styles.firstCardImg : index === 1 ? styles.secondCardImg : index === 2 ? styles.thirdCardImg : styles.fourthCardImg}`}
-									src={featuredMediaUrl}
-									alt='Свiтлина музею'
-									onError={e => {
-										e.target.onerror = null
-										e.target.src = '/public/mainNewImg/newsCardERROR.jpg'
-									}}
-								/>
-							</div>
-							<div className={`${styles.cardTextWrapper}`}>
-								<div className={`${styles.cardTitleWrapper}`}>
-									<h3
-										className={`${styles.cardTitle} ${index === 0 ? styles.firstCardTitle : index === 1 ? styles.secondCardTitle : index === 2 ? styles.thirdCardTitle : styles.fourthCardTitle}`}
-										dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+							className={`${styles.mainPageNewsCard} ${index === 0 ? styles.firstCard : index === 1 ? styles.secondCard : styles.thirdCard}`}>
+							<div className={`${styles.cardInner}`}>
+								<div className={`${styles.cardImgWrapper}`}>
+									<img
+										className={`${styles.cardImg} ${index === 0 ? styles.firstCardImg : index === 1 ? styles.secondCardImg : index === 2 ? styles.thirdCardImg : styles.fourthCardImg}`}
+										src={featuredMediaUrl}
+										alt='Свiтлина музею'
+										onError={e => {
+											e.target.onerror = null
+											e.target.src = '/public/mainNewImg/newsCardERROR.jpg'
+										}}
 									/>
 								</div>
-								<div className={`${styles.cardDescriptioneWrapper}`}>
-									<p
-										className={`${styles.cardDescription} ${index === 0 ? styles.firstCardDescription : index === 1 ? styles.secondCardDescription : styles.thirdCardDescription}`}
-										dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
-									/>
+								<div className={`${styles.cardTextWrapper}`}>
+									<div className={`${styles.cardTitleWrapper}`}>
+										<h3
+											className={`${styles.cardTitle} ${index === 0 ? styles.firstCardTitle : index === 1 ? styles.secondCardTitle : index === 2 ? styles.thirdCardTitle : styles.fourthCardTitle}`}
+											dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+										/>
+									</div>
+									<div className={`${styles.cardDescriptioneWrapper}`}>
+										<p
+											className={`${styles.cardDescription} ${index === 0 ? styles.firstCardDescription : index === 1 ? styles.secondCardDescription : styles.thirdCardDescription}`}
+											dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+										/>
+									</div>
+									<div className={`${styles.cardReadMoreWrapper}`}>
+										<a href={post.link} className={`${styles.cardReadMoreLink}`}>
+											Читати далi
+										</a>
+									</div>
 								</div>
 							</div>
 							<div className={`${styles.cardClockAndDateWrapper}`}>
@@ -316,11 +322,6 @@ function MainNews() {
 											{new Date(post.date).toLocaleDateString()}
 										</p>
 									</div>
-								</div>
-								<div className={`${styles.cardReadMoreWrapper}`}>
-									<a href={post.link} className={`${styles.cardReadMoreLink}`}>
-										Читати далi
-									</a>
 								</div>
 							</div>
 						</div>

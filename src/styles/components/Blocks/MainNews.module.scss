@@ -3,12 +3,13 @@
     display: flex;
     flex-direction: column;
     margin: calc(72px - (41 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
-    padding: 0 calc(70 / 1440 * 100vw);
+    padding: 0 calc(60 / 1440 * 100vw);
     font-family: "Fira Sans";
 }
 
 .mainPageNewsTitleWithButton {
     // Стили для контейнера заголовка и кнопки
+    padding: 0 calc(10 / 1440 * 100vw);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -35,6 +36,7 @@
 
 .mainPageNewsButton {
     // Стили для кнопки
+    padding: 0 calc(0 / 1440 * 100vw);
     width: calc(238px - (105 * ((1440px - 100vw) / (1440 - 375))));
     height: calc(51px - (11 * ((1440px - 100vw) / (1440 - 375))));
     min-width: 163px;
@@ -72,6 +74,7 @@
 
 .mainPageNewsCard {
     // Стили для карточки новостей
+    padding: 0 calc(10 / 1440 * 100vw);
     width: 48.46%;
     display: flex;
     flex-direction: column;
