@@ -82,13 +82,13 @@ const Footer = () => {
 						<h3 className={styles.socialTitle}>FOLLOW US</h3>
 						<div className={styles.footerSocialIcons}>
 							<i className='fab fa-facebook-f'>
-								<img src='/public/footerIcons/FacebookIcons.svg' />
+								<img src='/footerIcons/FacebookIcons.svg' />
 							</i>
 							<i className='fab fa-instagram'>
-								<img src='/public/footerIcons/InstagramIcon.svg' />
+								<img src='/footerIcons/InstagramIcon.svg' />
 							</i>
 							<i className='fab fa-xing'>
-								<img src='/public/footerIcons/XIcon.svg' />
+								<img src='/footerIcons/XIcon.svg' />
 							</i>
 						</div>
 					</div>
