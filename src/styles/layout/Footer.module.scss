@@ -1,4 +1,4 @@
-@import '/src/styles/utilities/variables';
+@import "/src/styles/utilities/variables";
 
 // .footer {
 // 	position: relative;
@@ -813,191 +813,223 @@
 
 .footer {
 	// стили для тега footer
+	padding: 37px 70px;
 	display: flex;
-	width: 10vw;
-  }
-  
-  .footerWrapper {
+	width: 100vw;
+	height: 234px;
+	background: #000;
+	color: white;
+}
+
+.footerWrapper {
 	// стили для обёртки всего footer
+	width: 100%;
 	display: flex;
-  }
-  
-  .leftWrapper {
+	justify-content: space-between;
+}
+
+.leftWrapper {
 	// стили для левой части footer
 	display: flex;
-  }
-  
-  .logoWrapper {
+	justify-content: space-between;
+}
+
+.logoWrapper {
 	// стили для обёртки логотипа
 	display: flex;
-  }
-  
-  .logoImg {
+}
+
+.logoImg {
 	// стили для изображения логотипа
-  }
-  
-  .logoTitleWrapper {
+}
+
+.logoTitleWrapper {
 	// стили для обёртки текста логотипа
 	display: flex;
-  }
-  
-  .logoFirstWord {
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.logoFirstWord {
 	// стили для первого слова в логотипе
-  }
-  
-  .logoSecondWord {
+}
+
+.logoSecondWord {
 	// стили для второго слова в логотипе
-  }
-  
-  .logoThirdWord {
+}
+
+.logoThirdWord {
 	// стили для третьего слова в логотипе
-  }
-  
-  .menuWrapper {
+}
+
+.menuWrapper {
 	// стили для обёртки меню
 	display: flex;
-  }
-  
-  .menuUl {
+}
+
+.menuUl {
 	// стили для списка меню
 	display: flex;
 	flex-direction: column;
-  }
-  
-  .menuLi {
+	justify-content: space-between;
+}
+
+.menuLi {
 	// стили для элемента списка меню
-  }
-  
-  .menuLink {
+}
+
+.menuLink {
 	// стили для ссылки в меню
-  }
-  
-  .rightWrapper {
+}
+
+.separatorWrapper {
+	// стили для обёртки разделителя
+	display: flex;
+	padding: 0 84px 0 0;
+}
+
+.separatorImg {
+	// стили для изображения разделителя
+	width: 1px;
+	height: 124px;
+    object-fit: cover;
+    object-position: center;
+	
+}
+
+.rightWrapper {
 	// стили для правой части footer
 	display: flex;
 	flex-direction: column;
-  }
-  
-  .topInner {
+	justify-content: space-between;
+}
+
+.topInner {
 	// стили для верхней части правого блока
 	display: flex;
-  }
-  
-  .socialWrapper {
+	justify-content: space-between;
+}
+
+.socialWrapper {
 	// стили для обёртки блока социальных сетей
 	display: flex;
 	flex-direction: column;
-  }
-  
-  .followUsWrapper {
+	justify-content: space-between;
+}
+
+.followUsWrapper {
 	// стили для обёртки текста "follow us"
 	display: flex;
-  }
-  
-  .followUsTitle {
+}
+
+.followUsTitle {
 	// стили для текста "follow us"
-  }
-  
-  .sociaButtonslWrapper {
+}
+
+.sociaButtonslWrapper {
 	// стили для обёртки кнопок социальных сетей
 	display: flex;
 	justify-content: space-between;
-  }
+}
 
-  .socialButton {
+.socialButton {
 	width: 32px;
 	height: 32px;
-  }
-  
-  .facebookButton {
+	background-color: black;
+	border-radius: 50%;
+}
+
+.facebookButton {
 	// стили для кнопки Facebook
-	
-  }
-  
-  .facebookButtonImg {
+}
+
+.facebookButtonImg {
 	// стили для изображения кнопки Facebook
-  }
-  
-  .instagramButton {
+}
+
+.instagramButton {
 	// стили для кнопки Instagram
-  }
-  
-  .instagramButtonImg {
+}
+
+.instagramButtonImg {
 	// стили для изображения кнопки Instagram
-  }
-  
-  .twitterButton {
+}
+
+.twitterButton {
 	// стили для кнопки Twitter
-  }
-  
-  .twitterButtonImg {
+}
+
+.twitterButtonImg {
 	// стили для изображения кнопки Twitter
-  }
-  
-  .kontactsWrapper {
+}
+
+.kontactsWrapper {
 	// стили для обёртки блока контактов
 	display: flex;
 	flex-direction: column;
-  }
-  
-  .kontactsTitleWrapper {
+	justify-content: space-between;
+}
+
+.kontactsTitleWrapper {
 	// стили для обёртки заголовка контактов
-  }
-  
-  .kontactsTitle {
+	display: flex;
+}
+
+.kontactsTitle {
 	// стили для заголовка "Контакти"
-  }
-  
-  .kontactsLinkWrapper {
+}
+
+.kontactsLinkWrapper {
 	// стили для обёртки ссылки на контакты
-  }
-  
-  .kontactsLink {
+	display: flex;
+}
+
+.kontactsLink {
 	// стили для ссылки на контакты
-  }
-  
-  .kontactsLinkImg {
+}
+
+.kontactsLinkImg {
 	// стили для изображения ссылки на контакты
-  }
-  
-  .bottomInner {
+}
+
+.bottomInner {
 	// стили для нижней части правого блока
 	display: flex;
-  }
-  
-  .legalWrapper {
+	justify-content: space-between;
+}
+
+.legalWrapper {
 	// стили для обёртки блока юридической информации
-  }
-  
-  .legalLink {
+}
+
+.legalLink {
 	// стили для ссылки на юридическую информацию
-  }
-  
-  .legalLinkText {
+}
+
+.legalLinkText {
 	// стили для текста ссылки на юридическую информацию
-  }
-  
-  .policyWrapper {
+}
+
+.policyWrapper {
 	// стили для обёртки блока политики конфиденциальности
-  }
-  
-  .policyLink {
+}
+
+.policyLink {
 	// стили для ссылки на политику конфиденциальности
-  }
-  
-  .policyLinkText {
+}
+
+.policyLinkText {
 	// стили для текста ссылки на политику конфиденциальности
-  }
-  
-  .CopyrightWrapper {
+}
+
+.CopyrightWrapper {
 	// стили для обёртки блока авторских прав
-  }
-  
-  .CopyrightLink {
+}
+
+.CopyrightLink {
 	// стили для ссылки на информацию об авторских правах
-  }
-  
-  .CopyrightLinkText {
+}
+
+.CopyrightLinkText {
 	// стили для текста ссылки на информацию об авторских правах
-  }
-  
+}
