@@ -31,7 +31,7 @@ function Header() {
 					<div className='mainHeaderLogo logo'>
 						<img
 							className='logo__img'
-							src='/public/logoHeader/logo.svg'
+							src='/logoHeader/logo.svg'
 							alt='Art & culture Ukraine'
 						/>
 						<div className='logo__titleWrapper'>
@@ -92,14 +92,14 @@ function Header() {
 								<button className='socialLikeAndShareInner__likeButton circleButton'>
 									<img
 										className='likeButtonImg'
-										src='/public/logoHeader/likeHeart.svg'
+										src='/logoHeader/likeHeart.svg'
 										alt='Like'
 									/>
 								</button>
 								<button className='socialLikeAndShareInner__shareButton circleButton'>
 									<img
 										className='shareButtonImg'
-										src='/public/logoHeader/shareArrow.svg'
+										src='/logoHeader/shareArrow.svg'
 										alt='Share'
 									/>
 								</button>
@@ -108,7 +108,7 @@ function Header() {
 								<button className='burgerButton'>
 									<img
 										className='burgerButton__img'
-										src='/public/logoHeader/burgerButtonIcon.svg'
+										src='/logoHeader/burgerButtonIcon.svg'
 										alt='Menu'
 									/>
 									<p className='burgerButton__title'>Меню</p>
@@ -118,25 +118,25 @@ function Header() {
 						<div className='socialDownWrapper'>
 							<p className='socialDownWrapper__followUsTitle'>follow us</p>
 							<button className='socialDownWrapper__facebookButton socialDownWrapperButton circleButton'>
-								<img src='/public/logoHeader/fasebook.svg' alt='Facebook' />
+								<img src='/logoHeader/fasebook.svg' alt='Facebook' />
 							</button>
 							<button className='socialDownWrapper__instagramButton socialDownWrapperButton circleButton'>
-								<img src='/public/logoHeader/instagram.svg' alt='Instagram' />
+								<img src='/logoHeader/instagram.svg' alt='Instagram' />
 							</button>
 							<button className='socialDownWrapper__twitterButton socialDownWrapperButton circleButton'>
-								<img src='/public/logoHeader/twitter.svg' alt='Twitter' />
+								<img src='/logoHeader/twitter.svg' alt='Twitter' />
 							</button>
 							<button className='socialDownWrapper__mailButton socialDownWrapperButton circleButton'>
-								<img src='/public/logoHeader/mail.svg' alt='Mail' />
+								<img src='/logoHeader/mail.svg' alt='Mail' />
 							</button>
 							<div className='socialDownWrapper__separator'>
 								<img
-									src='/public/logoHeader/verticalSeparator.svg'
+									src='/logoHeader/verticalSeparator.svg'
 									alt='button seperator'
 								/>
 							</div>
 							<button className='socialDownWrapper__loginButton socialDownWrapperButton circleButton'>
-								<img src='/public/logoHeader/login.svg' alt='Login' />
+								<img src='/logoHeader/login.svg' alt='Login' />
 							</button>
 						</div>
 					</div>
@@ -149,30 +149,30 @@ function Header() {
 					</div>
 					<div className='staticHeaderTitleContainer'>
 						<button className='staticHeaderTitleContainer__likeButton circleButton'>
-							<img src='/public/logoHeader/likeHeart.svg' alt='Like' />
+							<img src='/logoHeader/likeHeart.svg' alt='Like' />
 						</button>
 						<h2 className='staticHeaderTitle'>
 							Ukrainian art & culture online
 						</h2>
 						<button className='staticHeaderTitleContainer__shareButton circleButton'>
-							<img src='/public/logoHeader/shareArrow.svg' alt='Share' />
+							<img src='/logoHeader/shareArrow.svg' alt='Share' />
 						</button>
 					</div>
 					<div className='staticHeaderLoginContainer'>
 						<button className='staticHeaderLoginContainer__loginButton circleButton'>
-							<img src='/public/logoHeader/loginBlack.svg' alt='Login' />
+							<img src='/logoHeader/loginBlack.svg' alt='Login' />
 						</button>
 						<div className='staticHeaderLoginContainer__separator'>
 							<img
 								className='separatorImg'
-								src='/public/logoHeader/verticalSeparatorBlack.svg'
+								src='/logoHeader/verticalSeparatorBlack.svg'
 								alt='button seperator'
 							/>
 						</div>
 						<button className='burgerButton'>
 							<img
 								className='burgerButton__img'
-								src='/public/logoHeader/burgerButtonIcon.svg'
+								src='/logoHeader/burgerButtonIcon.svg'
 								alt='Menu'
 							/>
 							<p className='burgerButton__title'>Меню</p>
