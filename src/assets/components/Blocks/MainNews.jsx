@@ -247,7 +247,7 @@ function MainNews() {
 						<p className={`${styles.mainPageNewsButtonTitle}`}>Усi новини</p>
 						<img
 							className={`${styles.mainPageNewsButtonImg}`}
-							src={'/src/img/buttonArrow.svg'}
+							src={'/img/buttonArrow.svg'}
 							alt='Свiтлина музею'
 							onError={e => {
 								e.target.onerror = null
@@ -303,7 +303,7 @@ function MainNews() {
 									<div className={`${styles.cardClockImgWrapper}`}>
 										<img
 											className={`${styles.cardClockImg}`}
-											src={'/src/img/clock.svg'}
+											src={'/img/clock.svg'}
 											alt='Свiтлина годинника'
 											onError={e => {
 												e.target.onerror = null
@@ -334,7 +334,7 @@ function MainNews() {
 					<p className={`${styles.mainPageNewsButtonTitle}`}>Усi новини</p>
 					<img
 						className={`${styles.mainPageNewsButtonImg}`}
-						src={'/src/img/buttonArrow.svg'}
+						src={'/img/buttonArrow.svg'}
 						alt='Свiтлина музею'
 						onError={e => {
 							e.target.onerror = null
