@@ -1074,14 +1074,22 @@
 	// стили для нижней части правого блока
 	display: flex;
 	justify-content: space-between;
+	font-family: 'Fira Sans', sans-serif;
+	font-size: 16px;
+	color: white;
+	text-decoration: none;
 }
 
 .footerLegalWrapper {
 	// стили для обёртки блока юридической информации
 }
 
-.footerLegalLink {
+.footerLegalLink, .footerPolicyLink, .footerCopyrightLink {
 	// стили для ссылки на юридическую информацию
+	font-family: 'Fira Sans', sans-serif;
+	font-size: 16px;
+	color: white;
+	text-decoration: none;
 }
 
 .footerLegalLinkText {
