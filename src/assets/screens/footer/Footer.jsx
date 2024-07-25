@@ -135,27 +135,12 @@ const Footer = () => {
 							</li>
 							<li className={`${styles.footerMenuLi}`}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
+									Архiтектура
+								</a>
+							</li>
+							<li className={`${styles.footerMenuLi}`}>
+								<a className={`${styles.footerMenuLink}`} href='#'>
 									Новини
-								</a>
-							</li>
-							<li className={`${styles.footerMenuLi}`}>
-								<a className={`${styles.footerMenuLink}`} href='#'>
-									Митці
-								</a>
-							</li>
-							<li className={`${styles.footerMenuLi}`}>
-								<a className={`${styles.footerMenuLink}`} href='#'>
-									Виставки
-								</a>
-							</li>
-							<li className={`${styles.footerMenuLi}`}>
-								<a className={`${styles.footerMenuLink}`} href='#'>
-									Музеї
-								</a>
-							</li>
-							<li className={`${styles.footerMenuLi}`}>
-								<a className={`${styles.footerMenuLink}`} href='#'>
-									Архітектура
 								</a>
 							</li>
 							<li className={`${styles.footerMenuLi}`}>
@@ -165,12 +150,27 @@ const Footer = () => {
 							</li>
 							<li className={`${styles.footerMenuLi}`}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
+									Митцi
+								</a>
+							</li>
+							<li className={`${styles.footerMenuLi}`}>
+								<a className={`${styles.footerMenuLink}`} href='#'>
 									Що поруч
 								</a>
 							</li>
 							<li className={`${styles.footerMenuLi}`}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
+									Виставки
+								</a>
+							</li>
+							<li className={`${styles.footerMenuLi}`}>
+								<a className={`${styles.footerMenuLink}`} href='#'>
 									Контакти
+								</a>
+							</li>
+							<li className={`${styles.footerMenuLi}`}>
+								<a className={`${styles.footerMenuLink}`} href='#'>
+									Музеї
 								</a>
 							</li>
 						</ul>

@@ -833,11 +833,12 @@
 	// стили для левой части footer
 	display: flex;
 	justify-content: space-between;
+	align-items: start;
 }
 
 .footerLogoWrapper {
 	// стили для обёртки логотипа
-	margin: 0 calc(22.5 / 1440 * 100vw) 0 0;
+	margin: 0 calc(56 / 1440 * 100vw) 0 0;
 	position: relative;
 	display: flex;
 	align-items: end;
@@ -845,12 +846,12 @@
 
 .footerLogoImg {
 	// стили для изображения логотипа
-		width: calc(122.47 / 1440 * 100vw);
-		height: calc(68.43 / 1440 * 100vw);
-		min-width: 48.39px;
-		min-height: 27.03px;
-		max-width: 122.47px;
-		max-height: 68.43px;
+	width: calc(122.47 / 1440 * 100vw);
+	height: calc(68.43 / 1440 * 100vw);
+	min-width: 48.39px;
+	min-height: 27.03px;
+	max-width: 122.47px;
+	max-height: 68.43px;
 }
 
 .footerLogoTitleWrapper {
@@ -866,13 +867,13 @@
 
 .footerLogoFirstWord {
 	// стили для первого слова в логотипе
-		margin: 0 0 0 calc(-12 / 1440 * 100vw);
-		font-family: $chiller-font;
-		font-size: calc(0px + 156 * (100vw / 1440));
-		line-height: 0.53; //Важная строка!!!
-		display: inline-block; /* Необходимо для применения transform */
-		transform: scaleX(1.1); /* Масштабирование по горизонтали */
-		user-select: none;
+	margin: 0 0 0 calc(-12 / 1440 * 100vw);
+	font-family: $chiller-font;
+	font-size: calc(0px + 156 * (100vw / 1440));
+	line-height: 0.53; //Важная строка!!!
+	display: inline-block; /* Необходимо для применения transform */
+	transform: scaleX(1.1); /* Масштабирование по горизонтали */
+	user-select: none;
 }
 
 .footerLogoFirstWord::before {
@@ -892,46 +893,89 @@
 	background-position: 100% 100%;
 }
 
-
 .footerLogoSecondWord {
 	// стили для второго слова в логотипе
-		margin: 0 0 calc(-1 / 1440 * 100vw) calc(-13 / 1440 * 100vw);
-		display: flex;
-		font-family: $CormorantSCRegular;
-		font-size: calc(0px + 15.25 * (100vw / 1440));
-		text-transform: uppercase;
-		letter-spacing: calc(0px + 3.3 * (100vw / 1440));
-		user-select: none;
+	margin: 0 0 calc(-1 / 1440 * 100vw) calc(-13 / 1440 * 100vw);
+	display: flex;
+	font-family: $CormorantSCRegular;
+	font-size: calc(0px + 15.25 * (100vw / 1440));
+	text-transform: uppercase;
+	letter-spacing: calc(0px + 3.3 * (100vw / 1440));
+	user-select: none;
 }
 
 .footerLogoThirdWord {
 	// стили для третьего слова в логотипе
-		margin: 0 0 0 calc(-13 / 1440 * 100vw);
-		font-family: $CormorantSCRegular;
-		font-size: calc(0px + 22 * (100vw / 1440));
-		text-transform: uppercase;
-		letter-spacing: calc(0px + 4 * (100vw / 1440));
-		user-select: none;
+	margin: 0 0 0 calc(-13 / 1440 * 100vw);
+	font-family: $CormorantSCRegular;
+	font-size: calc(0px + 22 * (100vw / 1440));
+	text-transform: uppercase;
+	letter-spacing: calc(0px + 4 * (100vw / 1440));
+	user-select: none;
 }
+
+// .footerMenuWrapper {
+// 	// стили для обёртки меню
+// 	margin: 0 0 0 calc(56 / 1440 * 100vw);
+// 	display: flex;
+// 	width: calc(460 / 1440 * 100vw);
+// }
+
+// .footerMenuUl {
+// 	// стили для списка меню
+// 	display: flex;
+// 	flex-direction: column;
+// 	justify-content: space-between;
+// }
+
+// .footerMenuLi {
+// 	// стили для элемента списка меню
+// 	display: flex;
+// 	flex-wrap: wrap;
+// 	height: 27px;
+// }
+
+// .footerMenuLink {
+// 	// стили для ссылки в меню
+// 	font-family: "Fira Sans";
+// 	font-size: 16px;
+// 	color: white;
+// 	cursor: pointer;
+// }
 
 .footerMenuWrapper {
 	// стили для обёртки меню
+	margin: 0 0 0 calc(56 / 1440 * 100vw);
 	display: flex;
+	flex-wrap: wrap; // позволяет элементам переноситься на новую строку при нехватке места
+	width: calc(460 / 1440 * 100vw);
 }
 
 .footerMenuUl {
 	// стили для списка меню
 	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+	flex-wrap: wrap; // позволяет элементам переноситься на новую строку при нехватке места
+	width: 100%; // чтобы список занимал всю ширину обёртки
 }
 
 .footerMenuLi {
 	// стили для элемента списка меню
+	display: flex;
+	flex: 0 0 50%; // каждый элемент списка занимает 50% ширины контейнера, что даёт два элемента в строке
+	justify-content: start;
+	align-items: center;
+	height: 35px;
+	box-sizing: border-box; // для учета отступов и границ в общей ширине и высоте
 }
 
 .footerMenuLink {
 	// стили для ссылки в меню
+	font-family: "Fira Sans";
+	font-size: 16px;
+	color: white;
+	cursor: pointer;
+	display: block; // чтобы ссылки занимали всю ширину элемента спискаw
+	white-space: nowrap;
 }
 
 .footerSeparatorWrapper {
@@ -945,9 +989,8 @@
 	// стили для изображения разделителя
 	width: 1px;
 	height: 124px;
-    object-fit: cover;
-    object-position: center;
-	
+	object-fit: cover;
+	object-position: center;
 }
 
 .footerRightWrapper {
