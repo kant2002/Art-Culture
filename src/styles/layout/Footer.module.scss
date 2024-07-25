@@ -942,7 +942,7 @@
 .footerMenuLink {
 	// стили для ссылки в меню
 	font-family: 'Fira Sans';
-	font-size: 16px;
+	font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
 	color: white;
 	cursor: pointer;
 	display: block; // чтобы ссылки занимали всю ширину элемента спискаw
@@ -994,7 +994,7 @@
 .footerFollowUsTitle {
 	// стили для текста "follow us"
 	font-family: 'Fira Sans', sans-serif;
-	font-size: 22px;
+	font-size: calc(22px - (4 * ((1440px - 100vw) / (1440 - 375))));
 	text-transform: uppercase;
 }
 
@@ -1038,6 +1038,7 @@
 
 .footerContactsWrapper {
 	// стили для обёртки блока контактов
+	margin: 0 0 0 10px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -1045,19 +1046,17 @@
 
 .footerContactsTitleWrapper {
 	// стили для обёртки заголовка контактов
-	margin: 0 0 0 10px;
 	display: flex;
 }
 
 .footerContactsTitle {
 	// стили для заголовка "Контакти"
 	font-family: 'Fira Sans', sans-serif;
-	font-size: 16px;
+	font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
 }
 
 .footerContactsLinkWrapper {
 	// стили для обёртки ссылки на контакты
-	margin: 0 0 0 10px;
 	display: flex;
 }
 
@@ -1078,20 +1077,19 @@
 	margin: 0 0 20px 0;
 	display: flex;
 	justify-content: space-between;
-	font-family: 'Fira Sans', sans-serif;
-	font-size: 16px;
 	color: white;
 	text-decoration: none;
 }
 
 .footerLegalWrapper {
 	// стили для обёртки блока юридической информации
+	display: flex;
 }
 
 .footerLegalLink, .footerPolicyLink, .footerCopyrightLink {
 	// стили для ссылки на юридическую информацию
 	font-family: 'Fira Sans', sans-serif;
-	font-size: 16px;
+	font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
 	color: white;
 	text-decoration: none;
 }
@@ -1122,4 +1120,81 @@
 
 .footerCopyrightLinkText {
 	// стили для текста ссылки на информацию об авторских правах
+}
+
+@media (max-width: 799px) {
+	.footer {
+		// стили для тега footer
+		padding: 23px calc(70 / 1440 * 100vw) 30px calc(70 / 1440 * 100vw);
+		height: 348px;
+	}
+
+	.footerLogoWrapper {
+		// стили для обёртки логотипа
+		margin: 0 0 0 0;
+		width: 36.36%;
+	}
+
+	.footerSeparatorWrapper {
+		// стили для обёртки разделителя
+		display: none;
+	}
+
+	.footerWrapper {
+		// стили для обёртки всего footer
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.footerMenuWrapper {
+		// стили для обёртки меню
+		margin: 0 0 0 10px;
+		width: 60.89%;
+		min-width: 204px;
+	}
+
+	.footerRightWrapper {
+		// стили для правой части footer
+		width: 100%;
+	}
+
+	.footerBottomInner {
+		// стили для нижней части правого блока
+		margin: 42px 0 0 0;
+		justify-content: space-around;
+	}
+}
+
+@media (max-width: 569px) {	
+	.footerLogoTitleWrapper {
+		// стили для обёртки текста логотипа
+			margin: 0 0 -1.185px 0;
+	}
+	
+	.footerLogoFirstWord {
+		// стили для первого слова в логотипе
+			margin: 0 0 0 -4.742px;
+			font-size: 61.641px;
+	}
+	
+	.footerLogoFirstWord::before {
+		content: "";
+		top: 15px;
+		left: 48px;
+	}
+	
+	.footerLogoSecondWord {
+		// стили для второго слова в логотипе
+			margin: 0 0 -0.069px -5.137px;
+			font-size: 6.026px;
+			letter-spacing: 1.304px;
+	}
+	
+	.footerLogoThirdWord {
+		// стили для третьего слова в логотипе
+			margin: 0 0 0 -5.137px;
+			font-size: 8.693px;
+			letter-spacing: 1.581px;
+	}
 }
