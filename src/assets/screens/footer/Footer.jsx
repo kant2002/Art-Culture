@@ -210,7 +210,7 @@ const Footer = () => {
 							</div>
 							<div className={`${styles.footerContactsLinkWrapper}`}>
 								<a className={`${styles.footerContactsLink}`} href='#'>
-									<img className={`${styles.footerContactsLinkImg}`} src='/public/logoHeader/phoneIcon.svg' alt='Phone' />
+									<img className={`${styles.footerContactsLinkImg}`} src='/public/logoHeader/footerPlayUkraine.png' alt='PlayUkraine' />
 								</a>
 							</div>
 						</div>

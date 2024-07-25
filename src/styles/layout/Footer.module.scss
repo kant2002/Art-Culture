@@ -1,4 +1,4 @@
-@import "/src/styles/utilities/variables.scss";
+@import '/src/styles/utilities/variables.scss';
 
 // .footer {
 // 	position: relative;
@@ -940,7 +940,7 @@
 
 .footerMenuLink {
 	// стили для ссылки в меню
-	font-family: "Fira Sans";
+	font-family: 'Fira Sans';
 	font-size: 16px;
 	color: white;
 	cursor: pointer;
@@ -951,7 +951,7 @@
 .footerSeparatorWrapper {
 	// стили для обёртки разделителя
 	display: flex;
-	margin: 0 84px 0 auto;
+	margin: 0 84px 0 0;
 }
 
 .footerSeparatorImg {
@@ -964,6 +964,7 @@
 
 .footerRightWrapper {
 	// стили для правой части footer
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -1035,6 +1036,7 @@
 
 .footerContactsWrapper {
 	// стили для обёртки блока контактов
+	margin: 0 0 0 auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -1047,6 +1049,8 @@
 
 .footerContactsTitle {
 	// стили для заголовка "Контакти"
+	font-family: 'Fira Sans', sans-serif;
+	font-size: 16px;
 }
 
 .footerContactsLinkWrapper {
@@ -1060,6 +1064,10 @@
 
 .footerContactsLinkImg {
 	// стили для изображения ссылки на контакты
+    object-fit: cover;
+    object-position: center;
+    width: 185px;
+    height: 45px;
 }
 
 .footerBottomInner {
