@@ -1,5 +1,4 @@
-@import "/src/styles/utilities/variables";
-@import "/src/styles/base/reset.scss";
+@import "/src/styles/utilities/variables.scss";
 
 // .footer {
 // 	position: relative;
@@ -914,35 +913,6 @@
 	user-select: none;
 }
 
-// .footerMenuWrapper {
-// 	// стили для обёртки меню
-// 	margin: 0 0 0 calc(56 / 1440 * 100vw);
-// 	display: flex;
-// 	width: calc(460 / 1440 * 100vw);
-// }
-
-// .footerMenuUl {
-// 	// стили для списка меню
-// 	display: flex;
-// 	flex-direction: column;
-// 	justify-content: space-between;
-// }
-
-// .footerMenuLi {
-// 	// стили для элемента списка меню
-// 	display: flex;
-// 	flex-wrap: wrap;
-// 	height: 27px;
-// }
-
-// .footerMenuLink {
-// 	// стили для ссылки в меню
-// 	font-family: "Fira Sans";
-// 	font-size: 16px;
-// 	color: white;
-// 	cursor: pointer;
-// }
-
 .footerMenuWrapper {
 	// стили для обёртки меню
 	margin: 0 0 0 calc(56 / 1440 * 100vw);
@@ -981,8 +951,7 @@
 .footerSeparatorWrapper {
 	// стили для обёртки разделителя
 	display: flex;
-	margin: 0 0 0 auto;
-	padding: 0 84px 0 0;
+	margin: 0 84px 0 auto;
 }
 
 .footerSeparatorImg {
