@@ -1069,7 +1069,7 @@
 
 .footerContactsLinkImg {
 	// стили для изображения ссылки на контакты
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     width: 185px;
     height: 45px;
