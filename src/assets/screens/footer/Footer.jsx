@@ -1,7 +1,7 @@
-import React from 'react'
-import BullLogo from '/logoFooter/BullLogo.svg' // Замініть на реальний шлях до вашого лого
-import PlayUkraineLogo from '/logoFooter/PlayUkrainLogo.svg'
-import RedDot from '/logoFooter/RedDot.svg'
+// import React from 'react'
+// import BullLogo from '/logoFooter/BullLogo.svg' // Замініть на реальний шлях до вашого лого
+// import PlayUkraineLogo from '/logoFooter/PlayUkrainLogo.svg'
+// import RedDot from '/logoFooter/RedDot.svg'
 import styles from '/src/styles/layout/Footer.module.scss'
 
 const Footer = () => {
@@ -192,21 +192,21 @@ const Footer = () => {
 								<p className={`${styles.footerFollowUsTitle}`}>follow us</p>
 							</div>
 							<div className={`${styles.footerSociaButtonslWrapper}`}>
-								<button className={`${styles.footerFacebookButton} ${styles.socialButton}`}>
+								<button className={`${styles.footerFacebookButton} ${styles.footerSocialButton}`}>
 									<img className={`${styles.footerFacebookButtonImg}`} src='/public/logoHeader/fasebook.svg' alt='facebook' />
 								</button>
-								<button className={`${styles.footerInstagramButton} ${styles.socialButton}`}>
+								<button className={`${styles.footerInstagramButton} ${styles.footerSocialButton}`}>
 									<img className={`${styles.footerInstagramButtonImg}`} src='/public/logoHeader/instagram.svg' alt='instagram' />
 								</button>
-								<button className={`${styles.footerTwitterButton} ${styles.socialButton}`}>
+								<button className={`${styles.footerTwitterButton} ${styles.footerSocialButton}`}>
 									<img className={`${styles.footerTwitterButtonImg}`} src='/public/logoHeader/twitter.svg' alt='twitter' />
 								</button>
 							</div>
 						</div>
 
-						<div className={`${styles.footerKontactsWrapper}`}>
-							<div className={`${styles.footerKontactsTitleWrapper}`}>
-								<p className={`${styles.footerKontactsTitle}`}>Контакти</p>
+						<div className={`${styles.footerContactsWrapper}`}>
+							<div className={`${styles.footerContactsTitleWrapper}`}>
+								<p className={`${styles.footerContactsTitle}`}>Контакти</p>
 							</div>
 							<div className={`${styles.footerContactsLinkWrapper}`}>
 								<a className={`${styles.footerContactsLink}`} href='#'>
