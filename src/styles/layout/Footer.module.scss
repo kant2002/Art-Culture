@@ -1,4 +1,5 @@
 @import "/src/styles/utilities/variables";
+@import "/src/styles/base/reset.scss";
 
 // .footer {
 // 	position: relative;
@@ -836,30 +837,81 @@
 
 .footerLogoWrapper {
 	// стили для обёртки логотипа
+	margin: 0 calc(22.5 / 1440 * 100vw) 0 0;
+	position: relative;
 	display: flex;
+	align-items: end;
 }
 
 .footerLogoImg {
 	// стили для изображения логотипа
+		width: calc(122.47 / 1440 * 100vw);
+		height: calc(68.43 / 1440 * 100vw);
+		min-width: 48.39px;
+		min-height: 27.03px;
+		max-width: 122.47px;
+		max-height: 68.43px;
 }
 
 .footerLogoTitleWrapper {
 	// стили для обёртки текста логотипа
+	margin: 0 0 calc(-3 / 1440 * 100vw) 0;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: end;
+	align-items: start;
+	position: relative;
+	width: auto;
 }
 
 .footerLogoFirstWord {
 	// стили для первого слова в логотипе
+		margin: 0 0 0 calc(-12 / 1440 * 100vw);
+		font-family: $chiller-font;
+		font-size: calc(0px + 156 * (100vw / 1440));
+		line-height: 0.53; //Важная строка!!!
+		display: inline-block; /* Необходимо для применения transform */
+		transform: scaleX(1.1); /* Масштабирование по горизонтали */
+		user-select: none;
 }
+
+.footerLogoFirstWord::before {
+	content: "";
+	position: absolute;
+	top: calc(38 / 1440 * 100vw);
+	left: calc(123 / 1440 * 100vw);
+	width: calc(9 / 1440 * 100vw);
+	height: calc(7 / 1440 * 100vw);
+	min-width: 3.9px;
+	min-height: 2.77px;
+	max-width: 9px;
+	max-height: 7px;
+	background: url(/public/logoHeader/logoPoint.svg);
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: 100% 100%;
+}
+
 
 .footerLogoSecondWord {
 	// стили для второго слова в логотипе
+		margin: 0 0 calc(-1 / 1440 * 100vw) calc(-13 / 1440 * 100vw);
+		display: flex;
+		font-family: $CormorantSCRegular;
+		font-size: calc(0px + 15.25 * (100vw / 1440));
+		text-transform: uppercase;
+		letter-spacing: calc(0px + 3.3 * (100vw / 1440));
+		user-select: none;
 }
 
 .footerLogoThirdWord {
 	// стили для третьего слова в логотипе
+		margin: 0 0 0 calc(-13 / 1440 * 100vw);
+		font-family: $CormorantSCRegular;
+		font-size: calc(0px + 22 * (100vw / 1440));
+		text-transform: uppercase;
+		letter-spacing: calc(0px + 4 * (100vw / 1440));
+		user-select: none;
 }
 
 .footerMenuWrapper {
