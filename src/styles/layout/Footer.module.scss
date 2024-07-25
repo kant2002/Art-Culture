@@ -813,7 +813,7 @@
 
 .footer {
 	// стили для тега footer
-	padding: 37px 70px;
+	padding: 37px calc(70 / 1440 * 100vw);
 	display: flex;
 	width: 100vw;
 	height: 234px;
@@ -915,10 +915,11 @@
 
 .footerMenuWrapper {
 	// стили для обёртки меню
-	margin: 0 0 0 calc(56 / 1440 * 100vw);
+	margin: 0 0 0 calc(56px - (56 * ((1440px - 100vw) / (1440 - 800))));
 	display: flex;
 	flex-wrap: wrap; // позволяет элементам переноситься на новую строку при нехватке места
-	width: calc(460 / 1440 * 100vw);
+	width: calc(460px - (460 * ((1440px - 100vw) / (1440 - 800))));
+	min-width: 210px;
 }
 
 .footerMenuUl {
@@ -950,8 +951,8 @@
 
 .footerSeparatorWrapper {
 	// стили для обёртки разделителя
+	margin: 0 calc(85px - (65 * ((1440px - 100vw) / (1440 - 800)))) 0 0;
 	display: flex;
-	margin: 0 84px 0 0;
 }
 
 .footerSeparatorImg {
@@ -964,7 +965,7 @@
 
 .footerRightWrapper {
 	// стили для правой части footer
-	width: 100%;
+	width: calc(490px - (150 * ((1440px - 100vw) / (1440 - 800))));
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -978,6 +979,7 @@
 
 .footerSocialWrapper {
 	// стили для обёртки блока социальных сетей
+	margin: 0 10px 0 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -1036,7 +1038,6 @@
 
 .footerContactsWrapper {
 	// стили для обёртки блока контактов
-	margin: 0 0 0 auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -1044,6 +1045,7 @@
 
 .footerContactsTitleWrapper {
 	// стили для обёртки заголовка контактов
+	margin: 0 0 0 10px;
 	display: flex;
 }
 
@@ -1055,6 +1057,7 @@
 
 .footerContactsLinkWrapper {
 	// стили для обёртки ссылки на контакты
+	margin: 0 0 0 10px;
 	display: flex;
 }
 
