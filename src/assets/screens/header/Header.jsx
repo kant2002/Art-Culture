@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react'
 import '../../../styles/layout/Header.module.scss'
+import { useTranslation } from 'react-i18next';
 
 function Header() {
+	const { t } = useTranslation();
 	useEffect(() => {
 		const handleScroll = () => {
 			const mainHeader = document.querySelector('.mainHeader')
@@ -55,7 +57,7 @@ function Header() {
 							<ul className='mainMenu__ul'>
 								<li className='mainMenu__li'>
 									<a className='mainMenu__link' href='#'>
-										Головна
+										{t('Головна')}
 									</a>
 								</li>
 								<li className='mainMenu__li'>
