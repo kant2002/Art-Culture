@@ -995,7 +995,8 @@
 	// стили для текста "follow us"
 	font-family: 'Fira Sans', sans-serif;
 	font-size: calc(22px - (4 * ((1440px - 100vw) / (1440 - 375))));
-	text-transform: uppercase;
+	text-transform: uppercase;	
+	user-select: none;
 }
 
 .footerSociaButtonslWrapper {
@@ -1010,6 +1011,7 @@
 	height: 32px;
 	background-color: black;
 	border-radius: 50%;
+	cursor: pointer;
 }
 
 .footerFacebookButton {
@@ -1047,6 +1049,7 @@
 .footerContactsTitleWrapper {
 	// стили для обёртки заголовка контактов
 	display: flex;
+	user-select: none;
 }
 
 .footerContactsTitle {
