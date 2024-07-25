@@ -1131,7 +1131,7 @@
 
 	.footerLogoWrapper {
 		// стили для обёртки логотипа
-		margin: 0 0 0 0;
+		margin: 0;
 		width: 36.36%;
 	}
 
@@ -1152,6 +1152,11 @@
 		margin: 0 0 0 10px;
 		width: 60.89%;
 		min-width: 204px;
+	}
+	
+	.footerMenuLi {
+		// стили для элемента списка 
+		height: 26.6px;
 	}
 
 	.footerRightWrapper {
@@ -1196,5 +1201,31 @@
 			margin: 0 0 0 -5.137px;
 			font-size: 8.693px;
 			letter-spacing: 1.581px;
+	}
+}
+
+@media (max-width: 374px) {
+	.footerMenuWrapper {
+		// стили для обёртки меню
+		margin: 0 0 0 15px;
+		width: 60.89%;
+		min-width: 180px;
+	}
+
+	.footerRightWrapper {
+		// стили для правой части footer
+		width: 100%;
+	}
+
+	.footerContactsLinkImg {
+		// стили для изображения ссылки на контакты
+		object-fit: contain;
+		width: 150px;
+	}
+
+	.footerBottomInner {
+		// стили для нижней части правого блока
+		margin: 42px 0 0 0;
+		justify-content: space-around;
 	}
 }
