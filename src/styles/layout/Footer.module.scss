@@ -828,68 +828,68 @@
 	justify-content: space-between;
 }
 
-.leftWrapper {
+.footerLeftWrapper {
 	// стили для левой части footer
 	display: flex;
 	justify-content: space-between;
 }
 
-.logoWrapper {
+.footerLogoWrapper {
 	// стили для обёртки логотипа
 	display: flex;
 }
 
-.logoImg {
+.footerLogoImg {
 	// стили для изображения логотипа
 }
 
-.logoTitleWrapper {
+.footerLogoTitleWrapper {
 	// стили для обёртки текста логотипа
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 }
 
-.logoFirstWord {
+.footerLogoFirstWord {
 	// стили для первого слова в логотипе
 }
 
-.logoSecondWord {
+.footerLogoSecondWord {
 	// стили для второго слова в логотипе
 }
 
-.logoThirdWord {
+.footerLogoThirdWord {
 	// стили для третьего слова в логотипе
 }
 
-.menuWrapper {
+.footerMenuWrapper {
 	// стили для обёртки меню
 	display: flex;
 }
 
-.menuUl {
+.footerMenuUl {
 	// стили для списка меню
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 }
 
-.menuLi {
+.footerMenuLi {
 	// стили для элемента списка меню
 }
 
-.menuLink {
+.footerMenuLink {
 	// стили для ссылки в меню
 }
 
-.separatorWrapper {
+.footerSeparatorWrapper {
 	// стили для обёртки разделителя
 	display: flex;
 	margin: 0 0 0 auto;
 	padding: 0 84px 0 0;
 }
 
-.separatorImg {
+.footerSeparatorImg {
 	// стили для изображения разделителя
 	width: 1px;
 	height: 124px;
@@ -898,139 +898,139 @@
 	
 }
 
-.rightWrapper {
+.footerRightWrapper {
 	// стили для правой части footer
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 }
 
-.topInner {
+.footerTopInner {
 	// стили для верхней части правого блока
 	display: flex;
 	justify-content: space-between;
 }
 
-.socialWrapper {
+.footerSocialWrapper {
 	// стили для обёртки блока социальных сетей
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 }
 
-.followUsWrapper {
+.footerFollowUsWrapper {
 	// стили для обёртки текста "follow us"
 	display: flex;
 }
 
-.followUsTitle {
+.footerFollowUsTitle {
 	// стили для текста "follow us"
 }
 
-.sociaButtonslWrapper {
+.footerSociaButtonslWrapper {
 	// стили для обёртки кнопок социальных сетей
 	display: flex;
 	justify-content: space-between;
 }
 
-.socialButton {
+.footerSocialButton {
 	width: 32px;
 	height: 32px;
 	background-color: black;
 	border-radius: 50%;
 }
 
-.facebookButton {
+.footerFacebookButton {
 	// стили для кнопки Facebook
 }
 
-.facebookButtonImg {
+.footerFacebookButtonImg {
 	// стили для изображения кнопки Facebook
 }
 
-.instagramButton {
+.footerInstagramButton {
 	// стили для кнопки Instagram
 }
 
-.instagramButtonImg {
+.footerInstagramButtonImg {
 	// стили для изображения кнопки Instagram
 }
 
-.twitterButton {
+.footerTwitterButton {
 	// стили для кнопки Twitter
 }
 
-.twitterButtonImg {
+.footerTwitterButtonImg {
 	// стили для изображения кнопки Twitter
 }
 
-.kontactsWrapper {
+.footerContactsWrapper {
 	// стили для обёртки блока контактов
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 }
 
-.kontactsTitleWrapper {
+.footerContactsTitleWrapper {
 	// стили для обёртки заголовка контактов
 	display: flex;
 }
 
-.kontactsTitle {
+.footerContactsTitle {
 	// стили для заголовка "Контакти"
 }
 
-.kontactsLinkWrapper {
+.footerContactsLinkWrapper {
 	// стили для обёртки ссылки на контакты
 	display: flex;
 }
 
-.kontactsLink {
+.footerContactsLink {
 	// стили для ссылки на контакты
 }
 
-.kontactsLinkImg {
+.footerContactsLinkImg {
 	// стили для изображения ссылки на контакты
 }
 
-.bottomInner {
+.footerBottomInner {
 	// стили для нижней части правого блока
 	display: flex;
 	justify-content: space-between;
 }
 
-.legalWrapper {
+.footerLegalWrapper {
 	// стили для обёртки блока юридической информации
 }
 
-.legalLink {
+.footerLegalLink {
 	// стили для ссылки на юридическую информацию
 }
 
-.legalLinkText {
+.footerLegalLinkText {
 	// стили для текста ссылки на юридическую информацию
 }
 
-.policyWrapper {
+.footerPolicyWrapper {
 	// стили для обёртки блока политики конфиденциальности
 }
 
-.policyLink {
+.footerPolicyLink {
 	// стили для ссылки на политику конфиденциальности
 }
 
-.policyLinkText {
+.footerPolicyLinkText {
 	// стили для текста ссылки на политику конфиденциальности
 }
 
-.CopyrightWrapper {
+.footerCopyrightWrapper {
 	// стили для обёртки блока авторских прав
 }
 
-.CopyrightLink {
+.footerCopyrightLink {
 	// стили для ссылки на информацию об авторских правах
 }
 
-.CopyrightLinkText {
+.footerCopyrightLinkText {
 	// стили для текста ссылки на информацию об авторских правах
 }

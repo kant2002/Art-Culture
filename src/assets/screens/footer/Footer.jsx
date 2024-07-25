@@ -115,61 +115,61 @@ const Footer = () => {
 
 		<footer className={`${styles.footer}`}>
 			<div className={`${styles.footerWrapper}`}>
-				<div className={`${styles.leftWrapper}`}>
+				<div className={`${styles.footerLeftWrapper}`}>
 
-					<div className={`${styles.logoWrapper}`}>
-						<img className={`${styles.logoImg}`} src='/public/logoHeader/logo.svg' alt='Art & culture Ukraine' />
-						<div className={`${styles.logoTitleWrapper}`}>
-							<p className={`${styles.logoFirstWord}`}>art</p>
-							<p className={`${styles.logoSecondWord}`}>&culture</p>
-							<p className={`${styles.logoThirdWord}`}>Ukraine</p>
+					<div className={`${styles.footerLogoWrapper}`}>
+						<img className={`${styles.footerLogoImg}`} src='/public/logoHeader/logo.svg' alt='Art & culture Ukraine' />
+						<div className={`${styles.footerLogoTitleWrapper}`}>
+							<p className={`${styles.footerLogoFirstWord}`}>art</p>
+							<p className={`${styles.footerLogoSecondWord}`}>&culture</p>
+							<p className={`${styles.footerLogoThirdWord}`}>Ukraine</p>
 						</div>
 					</div>
 
-					<nav className={`${styles.menuWrapper}`}>
-						<ul className={`${styles.menuUl}`}>
-							<li className={`${styles.menuLi}`}>
-								<a className={`${styles.menuLink}`} href='#'>
+					<nav className={`${styles.footerMenuWrapper}`}>
+						<ul className={`${styles.footerMenuUl}`}>
+							<li className={`${styles.footerMenuLi}`}>
+								<a className={`${styles.footerMenuLink}`} href='#'>
 									Головна
 								</a>
 							</li>
-							<li className={`${styles.menuLi}`}>
-								<a className={`${styles.menuLink}`} href='#'>
+							<li className={`${styles.footerMenuLi}`}>
+								<a className={`${styles.footerMenuLink}`} href='#'>
 									Новини
 								</a>
 							</li>
-							<li className={`${styles.menuLi}`}>
-								<a className={`${styles.menuLink}`} href='#'>
+							<li className={`${styles.footerMenuLi}`}>
+								<a className={`${styles.footerMenuLink}`} href='#'>
 									Митці
 								</a>
 							</li>
-							<li className={`${styles.menuLi}`}>
-								<a className={`${styles.menuLink}`} href='#'>
+							<li className={`${styles.footerMenuLi}`}>
+								<a className={`${styles.footerMenuLink}`} href='#'>
 									Виставки
 								</a>
 							</li>
-							<li className={`${styles.menuLi}`}>
-								<a className={`${styles.menuLink}`} href='#'>
+							<li className={`${styles.footerMenuLi}`}>
+								<a className={`${styles.footerMenuLink}`} href='#'>
 									Музеї
 								</a>
 							</li>
-							<li className={`${styles.menuLi}`}>
-								<a className={`${styles.menuLink}`} href='#'>
+							<li className={`${styles.footerMenuLi}`}>
+								<a className={`${styles.footerMenuLink}`} href='#'>
 									Архітектура
 								</a>
 							</li>
-							<li className={`${styles.menuLi}`}>
-								<a className={`${styles.menuLink}`} href='#'>
+							<li className={`${styles.footerMenuLi}`}>
+								<a className={`${styles.footerMenuLink}`} href='#'>
 									Арт Терміни
 								</a>
 							</li>
-							<li className={`${styles.menuLi}`}>
-								<a className={`${styles.menuLink}`} href='#'>
+							<li className={`${styles.footerMenuLi}`}>
+								<a className={`${styles.footerMenuLink}`} href='#'>
 									Що поруч
 								</a>
 							</li>
-							<li className={`${styles.menuLi}`}>
-								<a className={`${styles.menuLink}`} href='#'>
+							<li className={`${styles.footerMenuLi}`}>
+								<a className={`${styles.footerMenuLink}`} href='#'>
 									Контакти
 								</a>
 							</li>
@@ -178,39 +178,39 @@ const Footer = () => {
 
 				</div>
 
-				<div className={`${styles.separatorWrapper}`}>
-					<img className={`${styles.separatorImg}`} src='/public/logoHeader/footerSeparator.svg' alt='separator' />
+				<div className={`${styles.footerSeparatorWrapper}`}>
+					<img className={`${styles.footerSeparatorImg}`} src='/public/logoHeader/footerSeparator.svg' alt='separator' />
 				</div>
 
-				<div className={`${styles.rightWrapper}`}>
+				<div className={`${styles.footerRightWrapper}`}>
 
 
-					<div className={`${styles.topInner}`}>
+					<div className={`${styles.footerTopInner}`}>
 
-						<div className={`${styles.socialWrapper}`}>
-							<div className={`${styles.followUsWrapper}`}>
-								<p className={`${styles.followUsTitle}`}>follow us</p>
+						<div className={`${styles.footerSocialWrapper}`}>
+							<div className={`${styles.footerFollowUsWrapper}`}>
+								<p className={`${styles.footerFollowUsTitle}`}>follow us</p>
 							</div>
-							<div className={`${styles.sociaButtonslWrapper}`}>
-								<button className={`${styles.facebookButton} ${styles.socialButton}`}>
-									<img className={`${styles.facebookButtonImg}`} src='/public/logoHeader/fasebook.svg' alt='facebook' />
+							<div className={`${styles.footerSociaButtonslWrapper}`}>
+								<button className={`${styles.footerFacebookButton} ${styles.socialButton}`}>
+									<img className={`${styles.footerFacebookButtonImg}`} src='/public/logoHeader/fasebook.svg' alt='facebook' />
 								</button>
-								<button className={`${styles.instagramButton} ${styles.socialButton}`}>
-									<img className={`${styles.instagramButtonImg}`} src='/public/logoHeader/instagram.svg' alt='instagram' />
+								<button className={`${styles.footerInstagramButton} ${styles.socialButton}`}>
+									<img className={`${styles.footerInstagramButtonImg}`} src='/public/logoHeader/instagram.svg' alt='instagram' />
 								</button>
-								<button className={`${styles.twitterButton} ${styles.socialButton}`}>
-									<img className={`${styles.twitterButtonImg}`} src='/public/logoHeader/twitter.svg' alt='twitter' />
+								<button className={`${styles.footerTwitterButton} ${styles.socialButton}`}>
+									<img className={`${styles.footerTwitterButtonImg}`} src='/public/logoHeader/twitter.svg' alt='twitter' />
 								</button>
 							</div>
 						</div>
 
-						<div className={`${styles.kontactsWrapper}`}>
-							<div className={`${styles.kontactsTitleWrapper}`}>
-								<p className={`${styles.kontactsTitle}`}>Контакти</p>
+						<div className={`${styles.footerKontactsWrapper}`}>
+							<div className={`${styles.footerKontactsTitleWrapper}`}>
+								<p className={`${styles.footerKontactsTitle}`}>Контакти</p>
 							</div>
-							<div className={`${styles.kontactsLinkWrapper}`}>
-								<a className={`${styles.kontactsLink}`} href='#'>
-									<img className={`${styles.kontactsLinkImg}`} src='/public/logoHeader/phoneIcon.svg' alt='Phone' />
+							<div className={`${styles.footerContactsLinkWrapper}`}>
+								<a className={`${styles.footerContactsLink}`} href='#'>
+									<img className={`${styles.footerContactsLinkImg}`} src='/public/logoHeader/phoneIcon.svg' alt='Phone' />
 								</a>
 							</div>
 						</div>
@@ -218,21 +218,21 @@ const Footer = () => {
 					</div>
 
 
-					<div className={`${styles.bottomInner}`}>
+					<div className={`${styles.footerBottomInner}`}>
 
-						<div className={`${styles.legalWrapper}`}>
-							<a className={`${styles.legalLink}`} href='#'>
-								<p className={`${styles.legalLinkText}`}>Legal Notice</p>
+						<div className={`${styles.footerLegalWrapper}`}>
+							<a className={`${styles.footerLegalLink}`} href='#'>
+								<p className={`${styles.footerLegalLinkText}`}>Legal Notice</p>
 							</a>
 						</div>
-						<div className={`${styles.policyWrapper}`}>
-							<a className={`${styles.policyLink}`} href='#'>
-								<p className={`${styles.policyLinkText}`}>Privacy Policy</p>
+						<div className={`${styles.footerPolicyWrapper}`}>
+							<a className={`${styles.footerPolicyLink}`} href='#'>
+								<p className={`${styles.footerPolicyLinkText}`}>Privacy Policy</p>
 							</a>
 						</div>
-						<div className={`${styles.CopyrightWrapper}`}>
-							<a className={`${styles.CopyrightLink}`} href='#'>
-								<p className={`${styles.CopyrightLinkText}`}>Copyrights</p>
+						<div className={`${styles.footerCopyrightWrapper}`}>
+							<a className={`${styles.footerCopyrightLink}`} href='#'>
+								<p className={`${styles.footerCopyrightLinkText}`}>Copyrights</p>
 							</a>
 						</div>
 

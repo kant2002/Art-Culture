@@ -165,7 +165,7 @@ function Header() {
 						<div className='staticHeaderLoginContainer__separator'>
 							<img
 								className='separatorImg'
-								src='/logoHeader/verticalSeparatorBlack.svg'
+								src='/public/logoHeader/verticalSeparatorBlack.svg'
 								alt='button seperator'
 							/>
 						</div>
