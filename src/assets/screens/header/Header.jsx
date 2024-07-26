@@ -207,3 +207,28 @@ function Header() {
 }
 
 export default Header
+
+
+{/* <div id="menu" class="menu">
+    <nav>
+        <ul>
+            <li><a class="link-active" href="#slide-1">Сейчас мы все настроим!</a></li>
+            <li><a class="link-sub-active" href="#slide-2">1. Включи огни</a></li>
+            <li><a class="show-make-a-mix" href="#make-a-mix">2. Сделай микс!</a></li>
+            <!-- <li><a class="show-cocktails" href="#cocktails">Рецепты коктейлей</a></li> -->
+            <li><a class="show-music" href="#music">3. Почувствуй ритм</a></li>
+        </ul>
+    </nav>
+  </div> */}
+
+
+//   document.addEventListener('DOMContentLoaded', function() {
+//     // ваш код JavaScript
+//     let menuBtn = document.querySelector('.menu-btn');
+//     let menu = document.querySelector('.menu');
+
+//     menuBtn.addEventListener('click', function(){
+//         menuBtn.classList.toggle('active');
+//         menu.classList.toggle('active');
+//     })
+// });
