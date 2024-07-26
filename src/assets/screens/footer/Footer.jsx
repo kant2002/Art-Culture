@@ -184,7 +184,6 @@ const Footer = () => {
 
 				<div className={`${styles.footerRightWrapper}`}>
 
-
 					<div className={`${styles.footerTopInner}`}>
 
 						<div className={`${styles.footerSocialWrapper}`}>
@@ -216,7 +215,6 @@ const Footer = () => {
 						</div>
 
 					</div>
-
 
 					<div className={`${styles.footerBottomInner}`}>
 
