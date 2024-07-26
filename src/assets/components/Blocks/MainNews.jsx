@@ -45,7 +45,7 @@ function MainNews() {
 						<p className={`${styles.mainPageNewsButtonTitle}`}>Усi новини</p>
 						<img
 							className={`${styles.mainPageNewsButtonImg}`}
-							src={'/public/Img/buttonArrow.svg'}
+							src={'/Img/buttonArrow.svg'}
 							alt='Свiтлина музею'
 							onError={e => {
 								e.target.onerror = null
@@ -62,7 +62,7 @@ function MainNews() {
 
 					const featuredMediaId = post.featured_media
 					const featuredMediaUrl =
-						media[featuredMediaId] || '/public/Img/halfNewsCard.jpg'
+						media[featuredMediaId] || '/Img/halfNewsCard.jpg'
 
 					console.log('Витягнуте медіа:', featuredMediaUrl)
 
@@ -78,7 +78,7 @@ function MainNews() {
 										alt='Свiтлина музею'
 										onError={e => {
 											e.target.onerror = null
-											e.target.src = '/public/Img/newsCardERROR.jpg'
+											e.target.src = '/Img/newsCardERROR.jpg'
 										}}
 									/>
 								</div>
@@ -107,11 +107,11 @@ function MainNews() {
 									<div className={`${styles.cardClockImgWrapper}`}>
 										<img
 											className={`${styles.cardClockImg}`}
-											src={'/public/Img/clock.svg'}
+											src={'/Img/clock.svg'}
 											alt='Свiтлина годинника'
 											onError={e => {
 												e.target.onerror = null
-												e.target.src = '/public/Img/clock.svg'
+												e.target.src = '/Img/clock.svg'
 											}}
 										/>
 									</div>
@@ -133,11 +133,11 @@ function MainNews() {
 					<p className={`${styles.mainPageNewsButtonTitle}`}>Усi новини</p>
 					<img
 						className={`${styles.mainPageNewsButtonImg}`}
-						src={'/public/Img/buttonArrow.svg'}
+						src={'/Img/buttonArrow.svg'}
 						alt='Свiтлина музею'
 						onError={e => {
 							e.target.onerror = null
-							e.target.src = '/public/Img/buttonArrow.svg'
+							e.target.src = '/Img/buttonArrow.svg'
 						}}
 					/>
 				</button>

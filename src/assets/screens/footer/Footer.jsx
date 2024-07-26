@@ -8,7 +8,7 @@ const Footer = () => {
 				<div className={`${styles.footerLeftWrapper}`}>
 
 					<div className={`${styles.footerLogoWrapper}`}>
-						<img className={`${styles.footerLogoImg}`} src='/public/Img/logo.svg' alt='Art & culture Ukraine' />
+						<img className={`${styles.footerLogoImg}`} src='/Img/logo.svg' alt='Art & culture Ukraine' />
 						<div className={`${styles.footerLogoTitleWrapper}`}>
 							<p className={`${styles.footerLogoFirstWord}`}>art</p>
 							<p className={`${styles.footerLogoSecondWord}`}>&culture</p>
@@ -69,7 +69,7 @@ const Footer = () => {
 				</div>
 
 				<div className={`${styles.footerSeparatorWrapper}`}>
-					<img className={`${styles.footerSeparatorImg}`} src='/public/Img/footerSeparator.svg' alt='separator' />
+					<img className={`${styles.footerSeparatorImg}`} src='/Img/footerSeparator.svg' alt='separator' />
 				</div>
 
 				<div className={`${styles.footerRightWrapper}`}>
@@ -82,13 +82,13 @@ const Footer = () => {
 							</div>
 							<div className={`${styles.footerSociaButtonslWrapper}`}>
 								<button className={`${styles.footerFacebookButton} ${styles.footerSocialButton}`}>
-									<img className={`${styles.footerFacebookButtonImg}`} src='/public/Img/fasebook.svg' alt='facebook' />
+									<img className={`${styles.footerFacebookButtonImg}`} src='/Img/fasebook.svg' alt='facebook' />
 								</button>
 								<button className={`${styles.footerInstagramButton} ${styles.footerSocialButton}`}>
-									<img className={`${styles.footerInstagramButtonImg}`} src='/public/Img/instagram.svg' alt='instagram' />
+									<img className={`${styles.footerInstagramButtonImg}`} src='/Img/instagram.svg' alt='instagram' />
 								</button>
 								<button className={`${styles.footerTwitterButton} ${styles.footerSocialButton}`}>
-									<img className={`${styles.footerTwitterButtonImg}`} src='/public/Img/twitter.svg' alt='twitter' />
+									<img className={`${styles.footerTwitterButtonImg}`} src='/Img/twitter.svg' alt='twitter' />
 								</button>
 							</div>
 						</div>
@@ -99,7 +99,7 @@ const Footer = () => {
 							</div>
 							<div className={`${styles.footerContactsLinkWrapper}`}>
 								<a className={`${styles.footerContactsLink}`} href='#'>
-									<img className={`${styles.footerContactsLinkImg}`} src='/public/Img/footerPlayUkraine.png' alt='PlayUkraine' />
+									<img className={`${styles.footerContactsLinkImg}`} src='/Img/footerPlayUkraine.png' alt='PlayUkraine' />
 								</a>
 							</div>
 						</div>
