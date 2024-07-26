@@ -1,28 +1,39 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../../styles/layout/Header.module.scss'
 
 function Header() {
+	const [dropdownVisible, setDropdownVisible] = useState(false);
+	const [selectedLanguage, setSelectedLanguage] = useState('Ukrainian');
+
 	useEffect(() => {
 		const handleScroll = () => {
-			const mainHeader = document.querySelector('.mainHeader')
-			const staticHeader = document.querySelector('.staticHeader')
+			const mainHeader = document.querySelector('.mainHeader');
+			const staticHeader = document.querySelector('.staticHeader');
 
 			if (window.scrollY > 177) {
-				mainHeader.style.transform = 'translateY(-100%)'
-				staticHeader.classList.add('visible')
+				mainHeader.style.transform = 'translateY(-100%)';
+				staticHeader.classList.add('visible');
 			} else {
-				mainHeader.style.transform = 'translateY(0)'
-				staticHeader.classList.remove('visible')
+				mainHeader.style.transform = 'translateY(0)';
+				staticHeader.classList.remove('visible');
 			}
-		}
+		};
 
-		window.addEventListener('scroll', handleScroll)
+		window.addEventListener('scroll', handleScroll);
 
-		// Cleanup the event listener on component unmount
 		return () => {
-			window.removeEventListener('scroll', handleScroll)
-		}
-	}, [])
+			window.removeEventListener('scroll', handleScroll);
+		};
+	}, []);
+
+	const toggleDropdown = () => {
+		setDropdownVisible(!dropdownVisible);
+	};
+
+	const handleLanguageSelect = (language) => {
+		setSelectedLanguage(language);
+		setDropdownVisible(false);
+	};
 
 	return (
 		<header>
@@ -43,11 +54,22 @@ function Header() {
 					<div className='titleContainer'>
 						<div className='titleWrapper'>
 							<div className='headerLanguageSwitchContainer'>
-								<button className='headerLanguageSwitchButton'>
+								<button
+									className='headerLanguageSwitchButton'
+									onClick={toggleDropdown}
+								>
 									<p className='headerLanguageSwitchButton__title'>
-										Ukrainian &#9660;
+										{selectedLanguage} &#9660;
 									</p>
 								</button>
+								{dropdownVisible && (
+									<div className='dropdownMenu'>
+										<ul>
+											<li onClick={() => handleLanguageSelect('Ukrainian')}>Ukrainian</li>
+											<li onClick={() => handleLanguageSelect('English')}>English</li>
+										</ul>
+									</div>
+								)}
 							</div>
 							<h1>Ukrainian art & culture online</h1>
 						</div>
@@ -132,7 +154,7 @@ function Header() {
 							<div className='socialDownWrapper__separator'>
 								<img
 									src='/Img/verticalSeparator.svg'
-									alt='button seperator'
+									alt='button separator'
 								/>
 							</div>
 							<button className='socialDownWrapper__loginButton socialDownWrapperButton circleButton'>
@@ -166,7 +188,7 @@ function Header() {
 							<img
 								className='separatorImg'
 								src='/Img/verticalSeparatorBlack.svg'
-								alt='button seperator'
+								alt='button separator'
 							/>
 						</div>
 						<button className='burgerButton'>

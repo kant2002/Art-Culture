@@ -117,6 +117,9 @@ body {
 
 .headerLanguageSwitchButton {
 	margin: 0 10px 10px 0;
+	display: flex;
+	justify-content: start;
+	width: calc(103px - (30 * ((1440px - 100vw) / (1440 - 1024))));
 	border: none;
 	cursor: pointer;
 	background: #000000;
@@ -127,6 +130,46 @@ body {
 		white-space: nowrap;
 	}
 }
+
+.headerLanguageSwitchContainer {
+	position: relative;
+	display: inline-block;
+}
+
+.headerLanguageSwitchButton {
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.dropdownMenu {
+	display: block;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	background-color: black;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+	width: 100%;
+}
+
+.dropdownMenu ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.dropdownMenu li {
+	padding: 8px 0;
+	font-size: calc(0px + 18 * (100vw / 1440));
+	cursor: pointer;
+}
+
+.dropdownMenu li:hover {
+	background-color: #000000;
+	color: #3a8374;
+}
+
 .circleButton {
 	width: 32px;
 	height: 32px;
@@ -421,25 +464,35 @@ h1 {
 	}
 
 	.headerLanguageSwitchButton {
+		width: 103px;
+
 		&__title {
 			font-size: 18px;
 		}
 	}
-	.mainMenu__li {
+
+	.dropdownMenu li {
 		font-size: 18px;
 	}
-	.burgerButton {
-		&__img {
-			margin: 0 6px 0 0;
-		}
 
-		&__title {
-			margin: 0 0 0 6px;
-		}
+	.dropdownMenu li {
+		font-size: 18px;
 	}
-	.staticHeaderLogoTitle {
-		font-size: 135px;
+}
+.mainMenu__li {
+	font-size: 18px;
+}
+.burgerButton {
+	&__img {
+		margin: 0 6px 0 0;
 	}
+
+	&__title {
+		margin: 0 0 0 6px;
+	}
+}
+.staticHeaderLogoTitle {
+	font-size: 135px;
 }
 
 @media (max-width: 1279px) {
