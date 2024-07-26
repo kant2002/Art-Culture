@@ -2,7 +2,7 @@
 @import "/src/styles/base/headerHover.scss";
 
 body {
-	font-family: $CenturyGothic, $CormorantSCRegular, $chiller-font;
+	font-family: $CenturyGothic, $CormorantSCRegular, $chiller-font, $default-font;
 }
 .mainHeader {
 	position: fixed;
@@ -75,7 +75,7 @@ body {
 		min-height: 2.77px;
 		max-width: 9px;
 		max-height: 7px;
-		background: url(/public/logoHeader/logoPoint.svg);
+		background: url(/public/Img/logoPoint.svg);
 		background-repeat: no-repeat;
 		background-size: contain;
 		background-position: 100% 100%;

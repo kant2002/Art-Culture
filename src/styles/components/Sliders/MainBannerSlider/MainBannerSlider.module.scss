@@ -1,3 +1,5 @@
+@import "/src/styles/utilities/variables.scss";
+
 .mainPageBannerContainer {
 	width: 1440px;
 	background: rgb(255, 255, 255);
@@ -16,7 +18,7 @@
 	height: calc(579px - (337 * ((1440px - 100vw) / (1440 - 375))));
 	max-height: 579px;
 	min-height: 458px;
-	background-image: url(/src/img/mainBanner.jpeg);
+	background-image: url(/public/Img/mainBanner.jpeg);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
@@ -42,7 +44,7 @@
 	margin: calc(202px - (166 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
 	display: flex;
 	flex-direction: column;
-	font-family: 'Fira Sans';
+	font-family: $default-font;
 	color: white;
 	z-index: 1;
 }
@@ -108,7 +110,7 @@
 .bannerPreviousArrowButton {
 	// Стиль для кнопки предыдущей стрелки
 	// padding: 0 5px 0 0;
-	background: url(/src/img/leftGreyArrow.svg);
+	background: url(/public/img/leftGreyArrow.svg);
 	background-repeat: no-repeat;
 	background-size: auto;
 	background-position: center;
@@ -117,7 +119,7 @@
 .bannerNextArrowButton {
 	// Стиль для кнопки следующей стрелки	
 	// padding: 0 0 0 5px;
-	background: url(/src/img/rightBlackArrow.svg);
+	background: url(/public/img/rightBlackArrow.svg);
 	background-repeat: no-repeat;
 	background-size: auto;
 	background-position: center;

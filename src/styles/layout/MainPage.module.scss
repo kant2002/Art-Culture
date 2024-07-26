@@ -1,3 +1,5 @@
+@import "/src/styles/utilities/variables.scss";
+
 .mainPage {
 	display: flex;
 	flex-direction: column;
@@ -13,7 +15,7 @@
 	align-items: start;
 	margin: calc(60px - (24 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
 	padding: 0 calc(70 / 1440 * 100vw);
-	font-family: "Fira Sans";
+	font-family: $default-font;
 }
 
 .welcomeTitle {
