@@ -1,10 +1,11 @@
+@import "/src/styles/utilities/variables.scss";
+
 .mainPage {
 	display: flex;
 	flex-direction: column;
 	background: rgb(255, 255, 255);
 	padding: calc(177px - (107 * ((1440px - 100vw) / (1440 - 569)))) 0 0 0;
 	width: 100vw;
-	// height: 100dvh;
 }
 
 .mainPageWelcomeTitleWrapper {
@@ -14,7 +15,7 @@
 	align-items: start;
 	margin: calc(60px - (24 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
 	padding: 0 calc(70 / 1440 * 100vw);
-	font-family: "Fira Sans";
+	font-family: $default-font;
 }
 
 .welcomeTitle {
@@ -53,11 +54,6 @@
 	.mainPage {
 		padding: 177px 0 0 0;
 		width: 100vw;
-	}
-
-	.mainPageWelcomeTitleWrapper {
-		margin: 60px 0 0 0;
-		padding: 0 70px;
 	}
 
 	.welcomeTitle {
