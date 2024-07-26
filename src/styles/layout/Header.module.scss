@@ -198,13 +198,14 @@ h1 {
 	}
 
 	&__li {
-		font-size: calc(0px + 18 * (100vw / 1440));
+		display: flex;
 	}
 
 	&__link {
 		position: relative;
 		display: inline-block;
 		transition: box-shadow 0.3s ease;
+		font-size: calc(0px + 18 * (100vw / 1440));
 	}
 
 	&__link::after {
@@ -475,24 +476,21 @@ h1 {
 		font-size: 18px;
 	}
 
-	.dropdownMenu li {
+	.mainMenu__link {
 		font-size: 18px;
 	}
-}
-.mainMenu__li {
-	font-size: 18px;
-}
-.burgerButton {
-	&__img {
-		margin: 0 6px 0 0;
-	}
+	.burgerButton {
+		&__img {
+			margin: 0 6px 0 0;
+		}
 
-	&__title {
-		margin: 0 0 0 6px;
+		&__title {
+			margin: 0 0 0 6px;
+		}
 	}
-}
-.staticHeaderLogoTitle {
-	font-size: 135px;
+	.staticHeaderLogoTitle {
+		font-size: 135px;
+	}
 }
 
 @media (max-width: 1279px) {
