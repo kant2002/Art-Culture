@@ -219,36 +219,36 @@ function Header() {
                 </div>
             </header>
             {burgerMenuVisible && (
-                <div id="burgerMenu" className="burgerMenu">
-                    <nav className="mainMenuContainer">
-                        <ul className="mainMenu__ul">
-                            <li className="mainMenu__li" onClick={closeBurgerMenu}>
-                                <a className="mainMenu__link" href="#">
+                <div className="burgerMenu">
+                    <nav className="mainMenuContainer burgerMenuContainer">
+                        <ul className="mainMenu__ul burgerMenuUl">
+                            <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
+                                <a className="mainMenu__link burgerMenuLink" href="#">
                                     Головна
                                 </a>
                             </li>
-                            <li className="mainMenu__li" onClick={closeBurgerMenu}>
-                                <a className="mainMenu__link" href="#">
+                            <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
+                                <a className="mainMenu__link burgerMenuLink" href="#">
                                     Новини
                                 </a>
                             </li>
-                            <li className="mainMenu__li" onClick={closeBurgerMenu}>
-                                <a className="mainMenu__link" href="#">
+                            <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
+                                <a className="mainMenu__link burgerMenuLink" href="#">
                                     Митці
                                 </a>
                             </li>
-                            <li className="mainMenu__li" onClick={closeBurgerMenu}>
-                                <a className="mainMenu__link" href="#">
+                            <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
+                                <a className="mainMenu__link burgerMenuLink" href="#">
                                     Виставки
                                 </a>
                             </li>
-                            <li className="mainMenu__li" onClick={closeBurgerMenu}>
-                                <a className="mainMenu__link" href="#">
+                            <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
+                                <a className="mainMenu__link burgerMenuLink" href="#">
                                     Музеї
                                 </a>
                             </li>
-                            <li className="mainMenu__li" onClick={closeBurgerMenu}>
-                                <a className="mainMenu__link" href="#">
+                            <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
+                                <a className="mainMenu__link burgerMenuLink" href="#">
                                     Арт Терміни
                                 </a>
                             </li>
