@@ -29,14 +29,17 @@ function Header() {
 
     useEffect(() => {
         const burgerButton = document.querySelector('.burgerButton');
+		const staticHeaderBurgerButton = document.querySelector('.staticHeaderBurgerButton');
         const handleBurgerClick = () => {
             setBurgerMenuVisible(!burgerMenuVisible);
         };
 
         burgerButton.addEventListener('click', handleBurgerClick);
+		staticHeaderBurgerButton.addEventListener('click', handleBurgerClick);
 
         return () => {
             burgerButton.removeEventListener('click', handleBurgerClick);
+			staticHeaderBurgerButton.removeEventListener('click', handleBurgerClick);
         };
     }, [burgerMenuVisible]);
 
@@ -204,7 +207,7 @@ function Header() {
                                     src='/Img/verticalSeparatorBlack.svg'
                                     alt='button separator' />
                             </div>
-                            <button className='burgerButton'>
+                            <button className='burgerButton staticHeaderBurgerButton'>
                                 <img
                                     className='burgerButton__img'
                                     src='/Img/burgerButtonIcon.svg'
