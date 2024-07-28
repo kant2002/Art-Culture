@@ -79,32 +79,32 @@ function Header() {
                     <ul className="mainMenu__ul burgerMenuUl">
                         <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
                             <a className="mainMenu__link burgerMenuLink" href="#">
-                            {t('Головна')}
+                                {t('Головна')}
                             </a>
                         </li>
                         <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
                             <a className="mainMenu__link burgerMenuLink" href="#">
-                                Новини
+                                {t('Новини')}
                             </a>
                         </li>
                         <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
                             <a className="mainMenu__link burgerMenuLink" href="#">
-                                Митці
+                                {t('Митці')}
                             </a>
                         </li>
                         <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
                             <a className="mainMenu__link burgerMenuLink" href="#">
-                                Виставки
+                                {t('Виставки')}
                             </a>
                         </li>
                         <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
                             <a className="mainMenu__link burgerMenuLink" href="#">
-                                Музеї
+                                {t('Музеї')}
                             </a>
                         </li>
                         <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
                             <a className="mainMenu__link burgerMenuLink" href="#">
-                                Арт Терміни
+                                {t('Арт терміни')}
                             </a>
                         </li>
                     </ul>
@@ -160,32 +160,32 @@ function Header() {
                                 <ul className='mainMenu__ul'>
                                     <li className='mainMenu__li'>
                                         <a className='mainMenu__link' href='#'>
-                                            Головна
+                                            {t('Головна')}
                                         </a>
                                     </li>
                                     <li className='mainMenu__li'>
                                         <a className='mainMenu__link' href='#'>
-                                            Новини
+                                            {t('Новини')}
                                         </a>
                                     </li>
                                     <li className='mainMenu__li'>
                                         <a className='mainMenu__link' href='#'>
-                                            Митці
+                                            {t('Митці')}
                                         </a>
                                     </li>
                                     <li className='mainMenu__li'>
                                         <a className='mainMenu__link' href='#'>
-                                            Виставки
+                                            {t('Виставки')}
                                         </a>
                                     </li>
                                     <li className='mainMenu__li'>
                                         <a className='mainMenu__link' href='#'>
-                                            Музеї
+                                            {t('Музеї')}
                                         </a>
                                     </li>
                                     <li className='mainMenu__li'>
                                         <a className='mainMenu__link' href='#'>
-                                            Арт Терміни
+                                            {t('Арт терміни')}
                                         </a>
                                     </li>
                                 </ul>
