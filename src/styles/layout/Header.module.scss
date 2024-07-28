@@ -641,125 +641,125 @@ h1 {
 /* ------------------ burger ------------------ */
 
 .burgerMenu {
-    // Основной класс для меню бургера
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: calc(560px - (185 * ((1440px - 100vw) / (1440 - 800))));
-    min-width: 375px;
-    max-width: 560px;
-    height: 100dvh;
-    background: black;
-    z-index: 1000;
+	// Основной класс для контейнера бургер-меню
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: calc(560px - (185 * ((1440px - 100vw) / (1440 - 800))));
+	min-width: 375px;
+	max-width: 560px;
+	height: 100dvh;
+	background: black;
+	z-index: 1000;
 }
 
 .burgerMenuWrapper {
-    // Основной контейнер для содержимого меню бургера
+	// Обертка для всего содержимого бургер-меню
 }
 
 .burgerMenuSearchWhithButtonsWrapper {
-    // Контейнер для секции с кнопками и полем поиска
+	// Обертка для секции с кнопками и поиском
 }
 
 .burgerMenuCloseButtonWrapper {
-    // Обертка для кнопки закрытия меню
+	// Обертка для кнопки закрытия бургер-меню
 }
 
 .burgerMenuCloseButtonImg {
-    // Изображение кнопки закрытия меню
+	// Изображение для кнопки закрытия бургер-меню
 }
 
 .burgerMenuLanguageSwitch {
-    // Модификатор для переключателя языка в меню бургера
+	// Класс для переключателя языка в бургер-меню (модификатор для headerLanguageSwitchContainer)
 }
 
 .burgerMenuLanguageSwitchButton {
-    // Модификатор для кнопки переключения языка в меню бургера
+	// Кнопка переключателя языка в бургер-меню (модификатор для headerLanguageSwitchButton)
 }
 
 .burgerMenuLanguageSwitchButton__title {
-    // Модификатор для текста кнопки переключения языка в меню бургера
+	// Текст переключателя языка в бургер-меню (модификатор для headerLanguageSwitchButton__title)
 }
 
 .burgerMenuDropdown {
-    // Модификатор для выпадающего меню переключения языка в меню бургера
+	// Выпадающее меню для переключателя языка в бургер-меню (модификатор для dropdownMenu)
 }
 
 .burgerMenuLoginButton {
-    // Модификатор для кнопки входа в меню бургера
+	// Кнопка для входа в систему в бургер-меню (модификатор для socialDownWrapper__loginButton)
 }
 
 .burgerMenuSearchWrapper {
-    // Обертка для поля поиска в меню бургера
+	// Обертка для секции поиска в бургер-меню
 }
 
 .burgerMenuSearchInput {
-    // Поле ввода для поиска в меню бургера
+	// Поле ввода для поиска в бургер-меню
 }
 
-.burgerMenuContainer {
-    // Модификатор для контейнера основного меню в меню бургера
+.burgerMenuFooter {
+	// Класс для футера в бургер-меню (модификатор для footerMenuWrapper)
 }
 
-.burgerMenuUl {
-    // Модификатор для списка основного меню в меню бургера
-    width: calc(346/1728*100vw);
-    height: calc(253/1728*100vw);
-    display: flex;
-    flex-direction: column;
-    margin: 0;
+.burgerMenuFooterUl {
+	// Список для футера в бургер-меню (модификатор для footerMenuUl)
+	width: calc(346/1728*100vw);
+	height: calc(253/1728*100vw);
+	display: flex;
+	flex-direction: column;
+	margin: 0;
 }
 
-.burgerMenuLi {
-    // Модификатор для элементов списка основного меню в меню бургера
-    color: rgba(255, 255, 255, 0.15);
-    font-family: YS Display;
-    font-size: calc(30/1728*100vw);
-    font-style: normal;
-    font-weight: 400;
-    line-height: calc(32.5/1728*100vw);
+.burgerMenuFooterLi {
+	// Элемент списка для футера в бургер-меню (модификатор для footerMenuLi)
+	color: rgba(255, 255, 255, 0.15);
+	font-family: YS Display;
+	font-size: calc(30/1728*100vw);
+	font-style: normal;
+	font-weight: 400;
+	line-height: calc(32.5/1728*100vw);
 }
 
-.burgerMenuLink {
-    // Модификатор для ссылок основного меню в меню бургера
+.burgerMenuFooterLink {
+	// Ссылка для футера в бургер-меню (модификатор для footerMenuLink)
 }
 
 .burgerMenuBottomWrapper {
-    // Контейнер для нижней части меню бургера
+	// Обертка для нижней части бургер-меню
 }
 
 .burgerMenuSocialTopWrapper {
-    // Контейнер для верхней части социальных кнопок в меню бургера
+	// Обертка для верхней части секции социальных сетей в бургер-меню
 }
 
 .burgerMenuFollowUsTitle {
-    // Текст "follow us" в меню бургера
+	// Заголовок "следите за нами" в бургер-меню (модификатор для socialDownWrapper__followUsTitle)
 }
 
 .burgerMenuSocialMiddleWrapper {
-    // Контейнер для центральной части социальных кнопок в меню бургера
+	// Обертка для средней части секции социальных сетей в бургер-меню
 }
 
 .burgerMenuFacebookButton {
-    // Модификатор для кнопки Facebook в меню бургера
+	// Кнопка Facebook в бургер-меню (модификатор для socialDownWrapper__facebookButton)
 }
 
 .burgerMenuInstagramButton {
-    // Модификатор для кнопки Instagram в меню бургера
+	// Кнопка Instagram в бургер-меню (модификатор для socialDownWrapper__instagramButton)
 }
 
 .burgerMenuTwitterButton {
-    // Модификатор для кнопки Twitter в меню бургера
+	// Кнопка Twitter в бургер-меню (модификатор для socialDownWrapper__twitterButton)
 }
 
 .burgerMenuMailButton {
-    // Модификатор для кнопки Mail в меню бургера
+	// Кнопка Mail в бургер-меню (модификатор для socialDownWrapper__mailButton)
 }
 
 .burgerMenuSocialBottomWrapper {
-    // Контейнер для нижней части социальных кнопок в меню бургера
+	// Обертка для нижней части секции социальных сетей в бургер-меню
 }
 
 .burgerMenuPlayUkraine {
-    // Модификатор для изображения PlayUkraine в меню бургера
+	// Картинка PlayUkraine в бургер-меню (модификатор для footerContactsLinkImgPlayUkraine)
 }

@@ -107,40 +107,55 @@ function Header() {
                     />
                 </div>
 
-                <nav className="mainMenuContainer burgerMenuContainer">
-                    <ul className="mainMenu__ul burgerMenuUl">
-                        <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
-                            <a className="mainMenu__link burgerMenuLink" href="#">
-                                {t('Головна')}
-                            </a>
-                        </li>
-                        <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
-                            <a className="mainMenu__link burgerMenuLink" href="#">
-                                {t('Новини')}
-                            </a>
-                        </li>
-                        <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
-                            <a className="mainMenu__link burgerMenuLink" href="#">
-                                {t('Митці')}
-                            </a>
-                        </li>
-                        <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
-                            <a className="mainMenu__link burgerMenuLink" href="#">
-                                {t('Виставки')}
-                            </a>
-                        </li>
-                        <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
-                            <a className="mainMenu__link burgerMenuLink" href="#">
-                                {t('Музеї')}
-                            </a>
-                        </li>
-                        <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
-                            <a className="mainMenu__link burgerMenuLink" href="#">
-                                {t('Арт терміни')}
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                <nav className="footerMenuWrapper burgerMenuFooter">
+						<ul className="footerMenuUl burgerMenuFooterUl">
+							<li className="footerMenuLi burgerMenuFooterLi">
+								<a className="footerMenuLink burgerMenuFooterLink" href='#'>
+									{t('Головна')}
+								</a>
+							</li>
+							<li className="footerMenuLi burgerMenuFooterLi">
+								<a className="footerMenuLink burgerMenuFooterLink" href='#'>
+                                    {t('Новини')}
+								</a>
+							</li>
+							<li className="footerMenuLi burgerMenuFooterLi">
+								<a className="footerMenuLink burgerMenuFooterLink" href='#'>
+                                    {t('Митці')}
+								</a>
+							</li>
+							<li className="footerMenuLi burgerMenuFooterLi">
+								<a className="footerMenuLink burgerMenuFooterLink" href='#'>
+                                    {t('Виставки')}
+								</a>
+							</li>
+							<li className="footerMenuLi burgerMenuFooterLi">
+								<a className="footerMenuLink burgerMenuFooterLink" href='#'>
+                                    {t('Музеї')}
+								</a>
+							</li>
+							<li className="footerMenuLi burgerMenuFooterLi">
+								<a className="footerMenuLink burgerMenuFooterLink" href='#'>
+                                    {t('Архітектура')}
+								</a>
+							</li>
+							<li className="footerMenuLi burgerMenuFooterLi">
+								<a className="footerMenuLink burgerMenuFooterLink" href='#'>
+                                    {t('Арт терміни')}
+								</a>
+							</li>
+							<li className="footerMenuLi burgerMenuFooterLi">
+								<a className="footerMenuLink burgerMenuFooterLink" href='#'>
+                                    {t('Що поруч')}
+								</a>
+							</li>
+							<li className="footerMenuLi burgerMenuFooterLi">
+								<a className="footerMenuLink burgerMenuFooterLink" href='#'>
+                                    {t('Контакти')}
+								</a>
+							</li>
+						</ul>
+					</nav>
                         
                 <div className="burgerMenuBottomWrapper">
                     <div className="burgerMenuSocialTopWrapper">
