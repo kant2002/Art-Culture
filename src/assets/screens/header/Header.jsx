@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import '../../../styles/layout/Header.module.scss';
+import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
+import Cookies from 'js-cookie';
 
 function Header() {
+    const { t } = useTranslation();
     const [dropdownVisible, setDropdownVisible] = useState(false);
-    const [selectedLanguage, setSelectedLanguage] = useState('Ukrainian');
+    const [selectedLanguage, setSelectedLanguage] = useState((Cookies.get('lang') || i18n.language) === 'en' ? 'English' : 'Ukrainian');
     const [burgerMenuVisible, setBurgerMenuVisible] = useState(false);
 
     useEffect(() => {
@@ -49,6 +53,14 @@ function Header() {
 
     const handleLanguageSelect = (language) => {
         setSelectedLanguage(language);
+        if (language === 'Ukrainian') {
+            i18n.changeLanguage('uk');
+            Cookies.set('lang', 'uk');
+        }else {
+            i18n.changeLanguage('en');
+            Cookies.set('lang', 'en');
+        }
+
         setDropdownVisible(false);
     };
 
@@ -67,7 +79,7 @@ function Header() {
                     <ul className="mainMenu__ul burgerMenuUl">
                         <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
                             <a className="mainMenu__link burgerMenuLink" href="#">
-                                Головна
+                            {t('Головна')}
                             </a>
                         </li>
                         <li className="mainMenu__li burgerMenuLi" onClick={closeBurgerMenu}>
