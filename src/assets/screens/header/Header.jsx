@@ -72,7 +72,39 @@ function Header() {
         <div className="burgerMenu">
             <div className="burgerMenuWrapper">
                 <div className="burgerMenuSearchWhithButtonsWrapper">
-                    <div className="burgerMenuCloseButtonWrapper"></div>
+                    <div className="burgerMenuCloseButtonWrapper">
+                        <img className="burgerMenuCloseButtonImg" src="/public/Img/burgerCloseCross.svg" alt="close button" onClick={closeBurgerMenu} />
+                    </div>
+                    <div className='headerLanguageSwitchContainer burgerMenuLanguageSwitch'>
+                        <button
+                            className='headerLanguageSwitchButton burgerMenuLanguageSwitchButton'
+                            onClick={toggleDropdown}
+                        >
+                            <p className='headerLanguageSwitchButton__title burgerMenuLanguageSwitchButton__title'>
+                                {selectedLanguage} &#9660;
+                            </p>
+                        </button>
+                            {dropdownVisible && (
+                        <div className='dropdownMenu burgerMenuDropdown'>
+                            <ul>
+                                <li onClick={() => handleLanguageSelect('Ukrainian')}>Ukrainian</li>
+                                <li onClick={() => handleLanguageSelect('English')}>English</li>
+                            </ul>
+                        </div>
+                        )}
+                    </div>
+                    <div className='burgerMenuLoginButtonWrapper'>
+                        <button className='socialDownWrapper__loginButton socialDownWrapperButton circleButton burgerMenuLoginButton'>
+                            <img src='/Img/login.svg' alt='Login' />
+                        </button>
+                    </div>
+                </div>
+                <div className="burgerMenuSearchWrapper">
+                    <input
+                        className="burgerMenuSearchInput"
+                        type="text"
+                        placeholder={t('Пошук')}
+                    />
                 </div>
 
                 <nav className="mainMenuContainer burgerMenuContainer">
@@ -109,10 +141,32 @@ function Header() {
                         </li>
                     </ul>
                 </nav>
-
                         
                 <div className="burgerMenuBottomWrapper">
-
+                    <div className="burgerMenuSocialTopWrapper">
+                        <p className='socialDownWrapper__followUsTitle burgerMenuFollowUsTitle'>follow us</p>
+                    </div>
+                    <div className="burgerMenuSocialMiddleWrapper">
+                        <button className='socialDownWrapper__facebookButton socialDownWrapperButton circleButton burgerMenuFacebookButton'>
+                            <img src='/Img/fasebook.svg' alt='Facebook' />
+                        </button>
+                        <button className='socialDownWrapper__instagramButton socialDownWrapperButton circleButton burgerMenuInstagramButton'>
+                            <img src='/Img/instagram.svg' alt='Instagram' />
+                        </button>
+                        <button className='socialDownWrapper__twitterButton socialDownWrapperButton circleButton burgerMenuTwitterButton'>
+                            <img src='/Img/twitter.svg' alt='Twitter' />
+                        </button>
+                        <button className='socialDownWrapper__mailButton socialDownWrapperButton circleButton burgerMenuMailButton'>
+                            <img src='/Img/mail.svg' alt='Mail' />
+                        </button>
+                    </div>
+                    <div className="burgerMenuSocialBottomWrapper">
+                        <div className="footerContactsLinkWrapper footerContactsLinkWrapperPlayUkraine footerContactsLinkWrapperPlayUkraine">
+							<a className="footerContactsLink footerContactsLinkPlayUkraine" href='#'>
+								<img className="footerContactsLinkImg footerContactsLinkImgPlayUkraine burgerMenuPlayUkraine" src='/Img/footerPlayUkraine.png' alt='PlayUkraine' />
+							</a>
+						</div>
+                    </div>
                 </div>
 
             </div>
