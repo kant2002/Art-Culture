@@ -97,7 +97,7 @@ const Footer = () => {
 
 						<div className={`${styles.footerContactsWrapper}`}>
 							<div className={`${styles.footerContactsTitleWrapper}`}>
-								<p className={`${styles.footerContactsTitle}`}>Контакти</p>
+								<p className={`${styles.footerContactsTitle}`}>{t('Контакти')}</p>
 							</div>
 							<div className={`${styles.footerContactsLinkWrapper}`}>
 								<a className={`${styles.footerContactsLink}`} href='#'>
@@ -112,17 +112,17 @@ const Footer = () => {
 
 						<div className={`${styles.footerLegalWrapper}`}>
 							<a className={`${styles.footerLegalLink}`} href='#'>
-								<p className={`${styles.footerLegalLinkText}`}>Legal Notice</p>
+								<p className={`${styles.footerLegalLinkText}`}>{t('Юридична інформація')}</p>
 							</a>
 						</div>
 						<div className={`${styles.footerPolicyWrapper}`}>
 							<a className={`${styles.footerPolicyLink}`} href='#'>
-								<p className={`${styles.footerPolicyLinkText}`}>Privacy Policy</p>
+								<p className={`${styles.footerPolicyLinkText}`}>{t('Політика конфіденційності')}</p>
 							</a>
 						</div>
 						<div className={`${styles.footerCopyrightWrapper}`}>
 							<a className={`${styles.footerCopyrightLink}`} href='#'>
-								<p className={`${styles.footerCopyrightLinkText}`}>Copyrights</p>
+								<p className={`${styles.footerCopyrightLinkText}`}>{t('Авторські права')}</p>
 							</a>
 						</div>
 
