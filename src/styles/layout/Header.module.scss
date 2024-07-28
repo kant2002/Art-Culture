@@ -641,6 +641,7 @@ h1 {
 /* ------------------ burger ------------------ */
 
 .burgerMenu {
+    // Основной класс для меню бургера
     position: fixed;
     top: 0;
     left: 0;
@@ -652,7 +653,56 @@ h1 {
     z-index: 1000;
 }
 
-.burgerMenu ul {
+.burgerMenuWrapper {
+    // Основной контейнер для содержимого меню бургера
+}
+
+.burgerMenuSearchWhithButtonsWrapper {
+    // Контейнер для секции с кнопками и полем поиска
+}
+
+.burgerMenuCloseButtonWrapper {
+    // Обертка для кнопки закрытия меню
+}
+
+.burgerMenuCloseButtonImg {
+    // Изображение кнопки закрытия меню
+}
+
+.burgerMenuLanguageSwitch {
+    // Модификатор для переключателя языка в меню бургера
+}
+
+.burgerMenuLanguageSwitchButton {
+    // Модификатор для кнопки переключения языка в меню бургера
+}
+
+.burgerMenuLanguageSwitchButton__title {
+    // Модификатор для текста кнопки переключения языка в меню бургера
+}
+
+.burgerMenuDropdown {
+    // Модификатор для выпадающего меню переключения языка в меню бургера
+}
+
+.burgerMenuLoginButton {
+    // Модификатор для кнопки входа в меню бургера
+}
+
+.burgerMenuSearchWrapper {
+    // Обертка для поля поиска в меню бургера
+}
+
+.burgerMenuSearchInput {
+    // Поле ввода для поиска в меню бургера
+}
+
+.burgerMenuContainer {
+    // Модификатор для контейнера основного меню в меню бургера
+}
+
+.burgerMenuUl {
+    // Модификатор для списка основного меню в меню бургера
     width: calc(346/1728*100vw);
     height: calc(253/1728*100vw);
     display: flex;
@@ -660,11 +710,56 @@ h1 {
     margin: 0;
 }
 
-.burgerMenu li {
+.burgerMenuLi {
+    // Модификатор для элементов списка основного меню в меню бургера
     color: rgba(255, 255, 255, 0.15);
     font-family: YS Display;
     font-size: calc(30/1728*100vw);
     font-style: normal;
     font-weight: 400;
     line-height: calc(32.5/1728*100vw);
+}
+
+.burgerMenuLink {
+    // Модификатор для ссылок основного меню в меню бургера
+}
+
+.burgerMenuBottomWrapper {
+    // Контейнер для нижней части меню бургера
+}
+
+.burgerMenuSocialTopWrapper {
+    // Контейнер для верхней части социальных кнопок в меню бургера
+}
+
+.burgerMenuFollowUsTitle {
+    // Текст "follow us" в меню бургера
+}
+
+.burgerMenuSocialMiddleWrapper {
+    // Контейнер для центральной части социальных кнопок в меню бургера
+}
+
+.burgerMenuFacebookButton {
+    // Модификатор для кнопки Facebook в меню бургера
+}
+
+.burgerMenuInstagramButton {
+    // Модификатор для кнопки Instagram в меню бургера
+}
+
+.burgerMenuTwitterButton {
+    // Модификатор для кнопки Twitter в меню бургера
+}
+
+.burgerMenuMailButton {
+    // Модификатор для кнопки Mail в меню бургера
+}
+
+.burgerMenuSocialBottomWrapper {
+    // Контейнер для нижней части социальных кнопок в меню бургера
+}
+
+.burgerMenuPlayUkraine {
+    // Модификатор для изображения PlayUkraine в меню бургера
 }
