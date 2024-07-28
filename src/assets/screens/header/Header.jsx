@@ -73,7 +73,7 @@ function Header() {
             <div className="burgerMenuWrapper">
                 <div className="burgerMenuSearchWhithButtonsWrapper">
                     <div className="burgerMenuCloseButtonWrapper">
-                        <img className="burgerMenuCloseButtonImg" src="/public/Img/burgerCloseCross.svg" alt="close button" onClick={closeBurgerMenu} />
+                        <img className="burgerMenuCloseButtonImg" src="/Img/burgerCloseCross.svg" alt="close button" onClick={closeBurgerMenu} />
                     </div>
                     <div className='headerLanguageSwitchContainer burgerMenuLanguageSwitch'>
                         <button
