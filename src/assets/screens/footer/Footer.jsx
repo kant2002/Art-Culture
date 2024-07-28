@@ -1,7 +1,9 @@
 import React from 'react'
 import styles from '/src/styles/layout/Footer.module.scss'
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+	const { t } = useTranslation();
 	return (
 		<footer className={`${styles.footer}`}>
 			<div className={`${styles.footerWrapper}`}>
@@ -20,47 +22,47 @@ const Footer = () => {
 						<ul className={`${styles.footerMenuUl}`}>
 							<li className={`${styles.footerMenuLi}`}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
-									Головна
+									{t('Головна')}
 								</a>
 							</li>
 							<li className={`${styles.footerMenuLi}`}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
-									Архiтектура
+									{t('Архітектура')}
 								</a>
 							</li>
 							<li className={`${styles.footerMenuLi}`}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
-									Новини
+									{t('Новини')}
 								</a>
 							</li>
 							<li className={`${styles.footerMenuLi}`}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
-									Арт Терміни
+									{t('Арт терміни')}
 								</a>
 							</li>
 							<li className={`${styles.footerMenuLi}`}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
-									Митцi
+									{t('Митці')}
 								</a>
 							</li>
 							<li className={`${styles.footerMenuLi}`}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
-									Що поруч
+									{t('Що поруч')}
 								</a>
 							</li>
 							<li className={`${styles.footerMenuLi}`}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
-									Виставки
+									{t('Виставки')}
 								</a>
 							</li>
 							<li className={`${styles.footerMenuLi}`}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
-									Контакти
+									{t('Контакти')}
 								</a>
 							</li>
 							<li className={`${styles.footerMenuLi}`}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
-									Музеї
+									{t('Музеї')}
 								</a>
 							</li>
 						</ul>
