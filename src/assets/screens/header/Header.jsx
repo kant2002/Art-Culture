@@ -213,7 +213,7 @@ function Header() {
                                             className='burgerButton__img'
                                             src='/Img/burgerButtonIcon.svg'
                                             alt='Menu' />
-                                        <p className='burgerButton__title'>Меню</p>
+                                        <p className='burgerButton__title'>{t('Меню')}</p>
                                     </button>
                                 </div>
                             </div>
@@ -274,7 +274,7 @@ function Header() {
                                     className='burgerButton__img'
                                     src='/Img/burgerButtonIcon.svg'
                                     alt='Menu' />
-                                <p className='burgerButton__title'>Меню</p>
+                                <p className='burgerButton__title'>{t('Меню')}</p>
                             </button>
                         </div>
                     </div>
