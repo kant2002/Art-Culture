@@ -75,17 +75,17 @@ function Header() {
                     <div className="burgerMenuCloseButtonWrapper">
                         <img className="burgerMenuCloseButtonImg" src="/Img/burgerCloseCross.svg" alt="close button" onClick={closeBurgerMenu} />
                     </div>
-                    <div className='headerLanguageSwitchContainer burgerMenuLanguageSwitch'>
+                    <div className='headerLanguageSwitchContainer'>
                         <button
-                            className='headerLanguageSwitchButton burgerMenuLanguageSwitchButton'
+                            className='headerLanguageSwitchButton'
                             onClick={toggleDropdown}
                         >
-                            <p className='headerLanguageSwitchButton__title burgerMenuLanguageSwitchButton__title'>
+                            <p className='headerLanguageSwitchButton__title'>
                                 {selectedLanguage} &#9660;
                             </p>
                         </button>
                             {dropdownVisible && (
-                        <div className='dropdownMenu burgerMenuDropdown'>
+                        <div className='dropdownMenu'>
                             <ul>
                                 <li onClick={() => handleLanguageSelect('Ukrainian')}>Ukrainian</li>
                                 <li onClick={() => handleLanguageSelect('English')}>English</li>
@@ -106,56 +106,66 @@ function Header() {
                         placeholder={t('Пошук')}
                     />
                 </div>
-
-                <nav className="footerMenuWrapper burgerMenuFooter">
-						<ul className="footerMenuUl burgerMenuFooterUl">
-							<li className="footerMenuLi burgerMenuFooterLi">
-								<a className="footerMenuLink burgerMenuFooterLink" href='#'>
-									{t('Головна')}
-								</a>
-							</li>
-							<li className="footerMenuLi burgerMenuFooterLi">
-								<a className="footerMenuLink burgerMenuFooterLink" href='#'>
-                                    {t('Новини')}
-								</a>
-							</li>
-							<li className="footerMenuLi burgerMenuFooterLi">
-								<a className="footerMenuLink burgerMenuFooterLink" href='#'>
-                                    {t('Митці')}
-								</a>
-							</li>
-							<li className="footerMenuLi burgerMenuFooterLi">
-								<a className="footerMenuLink burgerMenuFooterLink" href='#'>
-                                    {t('Виставки')}
-								</a>
-							</li>
-							<li className="footerMenuLi burgerMenuFooterLi">
-								<a className="footerMenuLink burgerMenuFooterLink" href='#'>
-                                    {t('Музеї')}
-								</a>
-							</li>
-							<li className="footerMenuLi burgerMenuFooterLi">
-								<a className="footerMenuLink burgerMenuFooterLink" href='#'>
-                                    {t('Архітектура')}
-								</a>
-							</li>
-							<li className="footerMenuLi burgerMenuFooterLi">
-								<a className="footerMenuLink burgerMenuFooterLink" href='#'>
-                                    {t('Арт терміни')}
-								</a>
-							</li>
-							<li className="footerMenuLi burgerMenuFooterLi">
-								<a className="footerMenuLink burgerMenuFooterLink" href='#'>
-                                    {t('Що поруч')}
-								</a>
-							</li>
-							<li className="footerMenuLi burgerMenuFooterLi">
-								<a className="footerMenuLink burgerMenuFooterLink" href='#'>
-                                    {t('Контакти')}
-								</a>
-							</li>
-						</ul>
-					</nav>
+                <div className="burgerMenuFooterWrapper">
+                    <nav className="footerMenuWrapper">
+                        <ul className="footerMenuUl">
+                            <li className="footerMenuLi">
+                                <a className="footerMenuLink" href='#'>
+                                    <p>{t('Головна')}</p>
+                                    <p>&#8250;</p>
+                                </a>
+                            </li>
+                            <li className="footerMenuLi">
+                                <a className="footerMenuLink" href='#'>
+                                    <p>{t('Новини')}</p>
+                                    <p>&#8250;</p>
+                                </a>
+                            </li>
+                            <li className="footerMenuLi">
+                                <a className="footerMenuLink" href='#'>
+                                    <p>{t('Митці')}</p>
+                                    <p>&#8250;</p>
+                                </a>
+                            </li>
+                            <li className="footerMenuLi">
+                                <a className="footerMenuLink" href='#'>
+                                    <p>{t('Виставки')}</p>
+                                    <p>&#8250;</p>
+                                </a>
+                            </li>
+                            <li className="footerMenuLi">
+                                <a className="footerMenuLink" href='#'>
+                                    <p>{t('Музеї')}</p>
+                                    <p>&#8250;</p>
+                                </a>
+                            </li>
+                            <li className="footerMenuLi">
+                                <a className="footerMenuLink" href='#'>
+                                    <p>{t('Архітектура')}</p>
+                                    <p>&#8250;</p>
+                                </a>
+                            </li>
+                            <li className="footerMenuLi">
+                                <a className="footerMenuLink" href='#'>
+                                    <p>{t('Арт терміни')}</p>
+                                    <p>&#8250;</p>
+                                </a>
+                            </li>
+                            <li className="footerMenuLi">
+                                <a className="footerMenuLink" href='#'>
+                                    <p>{t('Що поруч')}</p>
+                                    <p>&#8250;</p>
+                                </a>
+                            </li>
+                            <li className="footerMenuLi">
+                                <a className="footerMenuLink" href='#'>
+                                    <p>{t('Контакти')}</p>
+                                    <p>&#8250;</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
                         
                 <div className="burgerMenuBottomWrapper">
                     <div className="burgerMenuSocialTopWrapper">

@@ -163,6 +163,7 @@ body {
 	padding: 8px 0;
 	font-size: calc(0px + 18 * (100vw / 1440));
 	cursor: pointer;
+	color: #fff
 }
 
 .dropdownMenu li:hover {
@@ -642,6 +643,8 @@ h1 {
 
 .burgerMenu {
 	// Основной класс для контейнера бургер-меню
+	margin: 0;
+	padding: calc(55px - (26 * ((1440px - 100vw) / (1440 - 375)))) calc(70px - (49 * ((1440px - 100vw) / (1440 - 375)))) calc(31px - (14 * ((1440px - 100vw) / (1440 - 375)))) calc(70px - (49 * ((1440px - 100vw) / (1440 - 375))));
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -655,14 +658,84 @@ h1 {
 
 .burgerMenuWrapper {
 	// Обертка для всего содержимого бургер-меню
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+	height: 100%;
 }
 
 .burgerMenuSearchWhithButtonsWrapper {
 	// Обертка для секции с кнопками и поиском
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	.headerLanguageSwitchButton {
+		margin: 0;
+		display: flex;
+		justify-content: start;
+		width: calc(102px - (20 * ((1440px - 100vw) / (1440 - 375))));
+		border: none;
+		cursor: pointer;
+		background: #000000;
+	
+		&__title {
+			font-size: calc(18px - (4 * ((1440px - 100vw) / (1440 - 375))));
+			color: #fff;
+			white-space: nowrap;
+		}
+	}
+	
+	.headerLanguageSwitchContainer {
+		position: relative;
+		display: inline-block;
+		margin: 0 0 0 auto;
+	}
+	
+	.headerLanguageSwitchButton {
+		background: none;
+		border: none;
+		cursor: pointer;
+		width: calc(102px - (20 * ((1440px - 100vw) / (1440 - 375))));
+	}
+	
+	.dropdownMenu {
+		display: block;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		background-color: black;
+		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+		z-index: 1;
+		width: 100%;
+	}
+	
+	.dropdownMenu ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.dropdownMenu li {
+		padding: 8px 0;
+		font-size: calc(18px - (4 * ((1440px - 100vw) / (1440 - 375))));
+		cursor: pointer;
+		color: #fff
+	}
+	
+	.dropdownMenu li:hover {
+		background-color: #000000;
+		color: #3a8374;
+	}
 }
 
 .burgerMenuCloseButtonWrapper {
 	// Обертка для кнопки закрытия бургер-меню
+	display: flex;
+	align-items: center;
+	width: 24px;
+	height: 24px;
 }
 
 .burgerMenuCloseButtonImg {
@@ -671,14 +744,21 @@ h1 {
 
 .burgerMenuLanguageSwitch {
 	// Класс для переключателя языка в бургер-меню (модификатор для headerLanguageSwitchContainer)
+	display: flex;
 }
 
 .burgerMenuLanguageSwitchButton {
 	// Кнопка переключателя языка в бургер-меню (модификатор для headerLanguageSwitchButton)
+	display: flex;
+	align-items: center;
+	margin: 0 0 0 auto;
+	width: calc(102px - (20 * ((1440px - 100vw) / (1440 - 375))));
+	z-index: 1111;
 }
 
-.burgerMenuLanguageSwitchButton__title {
+.burgerMenuLanguageSwitchButtonTitle {
 	// Текст переключателя языка в бургер-меню (модификатор для headerLanguageSwitchButton__title)
+	font-size: calc(18px - (4 * ((1440px - 100vw) / (1440 - 375))));
 }
 
 .burgerMenuDropdown {
@@ -687,6 +767,10 @@ h1 {
 
 .burgerMenuLoginButton {
 	// Кнопка для входа в систему в бургер-меню (модификатор для socialDownWrapper__loginButton)
+	display: flex;
+	margin: 0 0 0 calc(24px - (8 * ((1440px - 100vw) / (1440 - 375))));
+	width: 32px;
+	height: 32px;
 }
 
 .burgerMenuSearchWrapper {
@@ -697,32 +781,51 @@ h1 {
 	// Поле ввода для поиска в бургер-меню
 }
 
-.burgerMenuFooter {
-	// Класс для футера в бургер-меню (модификатор для footerMenuWrapper)
-}
-
-.burgerMenuFooterUl {
-	// Список для футера в бургер-меню (модификатор для footerMenuUl)
-	width: calc(346/1728*100vw);
-	height: calc(253/1728*100vw);
+.burgerMenuFooterWrapper {
 	display: flex;
-	flex-direction: column;
-	margin: 0;
+
+	.footerMenuWrapper {
+		// стили для обёртки меню
+		margin: 0;
+		display: flex;
+		flex-wrap: nowrap;
+		width: 100%;
+		// min-width: 210px;
+	}
+	
+	.footerMenuUl {
+		// стили для списка меню
+		display: flex;
+		flex-direction: column;
+		flex-wrap: nowrap;
+		width: 100%;
+	}
+	
+	.footerMenuLi {
+		// стили для элемента списка меню
+		display: flex;
+		flex: none;
+		justify-content: start;
+		align-items: start;
+		width: 100%;
+		height: 32px;
+		box-sizing: border-box; // для учета отступов и границ в общей ширине и высоте
+	}
+	
+	.footerMenuLink {
+		// стили для ссылки в меню
+		display: flex;
+		justify-content: space-between;
+		font-family: $default-font;
+		font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
+		color: white;
+		// cursor: pointer;
+		// display: block; // чтобы ссылки занимали всю ширину элемента спискаw
+		white-space: nowrap;
+		width: 100%;
+	}
 }
 
-.burgerMenuFooterLi {
-	// Элемент списка для футера в бургер-меню (модификатор для footerMenuLi)
-	color: rgba(255, 255, 255, 0.15);
-	font-family: YS Display;
-	font-size: calc(30/1728*100vw);
-	font-style: normal;
-	font-weight: 400;
-	line-height: calc(32.5/1728*100vw);
-}
-
-.burgerMenuFooterLink {
-	// Ссылка для футера в бургер-меню (модификатор для footerMenuLink)
-}
 
 .burgerMenuBottomWrapper {
 	// Обертка для нижней части бургер-меню
