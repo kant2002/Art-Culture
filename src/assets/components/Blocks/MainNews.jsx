@@ -160,9 +160,9 @@ function MainNews() {
 	)
 
 	function getPostsCount(Width) {
-		if (Width > 1920) {
+		if (Width > 1919) {
 			return 3
-		} else if (Width > 1440 && Width <= 1919) {
+		} else if (Width > 1440 && Width <= 1918) {
 			return 2
 		} else {
 			return 2
