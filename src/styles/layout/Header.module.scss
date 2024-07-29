@@ -115,6 +115,11 @@ body {
 	justify-content: space-between;
 }
 
+.headerLanguageSwitchContainer {
+	position: relative;
+	display: inline-block;
+}
+
 .headerLanguageSwitchButton {
 	margin: 0 10px 10px 0;
 	display: flex;
@@ -131,22 +136,12 @@ body {
 	}
 }
 
-.headerLanguageSwitchContainer {
-	position: relative;
-	display: inline-block;
-}
-
-.headerLanguageSwitchButton {
-	background: none;
-	border: none;
-	cursor: pointer;
-}
-
 .headerLanguageSwitchButton:hover {
 	color: #3a8374;
 }
 
 .dropdownMenu {
+	margin: 0 0 0 -8px;
 	display: block;
 	position: absolute;
 	top: 100%;
@@ -168,7 +163,7 @@ body {
 }
 
 .dropdownMenu li {
-	padding: 8px 0;
+	padding: 8px 0 8px 8px;
 	font-size: calc(0px + 18 * (100vw / 1440));
 	cursor: pointer;
 	color: #fff;
@@ -715,6 +710,7 @@ h1 {
 	}
 	
 	.dropdownMenu {
+		margin: 8px 0 0 -8px;
 		display: block;
 		position: absolute;
 		top: 100%;
@@ -732,7 +728,7 @@ h1 {
 	}
 	
 	.dropdownMenu li {
-		padding: 8px 0;
+		padding: 8px 0 8px 8px;
 		font-size: calc(18px - (4 * ((1440px - 100vw) / (1440 - 375))));
 		cursor: pointer;
 		color: #fff
