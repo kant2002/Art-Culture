@@ -168,6 +168,7 @@ body {
 }
 
 .dropdownMenu li {
+	background-color: initial;
 	padding: 8px 0;
 	font-size: calc(0px + 18 * (100vw / 1440));
 	cursor: pointer;
@@ -176,12 +177,21 @@ body {
 }
 
 .dropdownMenu li:hover {
+    background-color: initial; // Убираем фон при наведении, если требуется
 	color: #3a8374;
 	transition: 0.4s ease;
 }
 
 .dropdownMenu li:not(:hover) {
 	transition: 0.4s ease;
+}
+
+.dropdownMenu li:focus {
+	outline: none; // Убираем обводку при фокусе
+}
+
+.dropdownMenu li:active {
+    background-color: initial; // Убираем фон при наведении, если требуется
 }
 
 .circleButton {
