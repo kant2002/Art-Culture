@@ -6,8 +6,6 @@
 	display: flex;
 	width: 100vw;
 	height: 234px;
-<<<<<<< HEAD
-=======
 	background: #000;
 	color: white;
 }
@@ -67,7 +65,7 @@
 }
 
 .footerLogoFirstWord::before {
-	content: "";
+	content: '';
 	position: absolute;
 	top: calc(38 / 1440 * 100vw);
 	left: calc(123 / 1440 * 100vw);
@@ -186,7 +184,7 @@
 	// стили для текста "follow us"
 	font-family: $default-font;
 	font-size: calc(22px - (4 * ((1440px - 100vw) / (1440 - 375))));
-	text-transform: uppercase;	
+	text-transform: uppercase;
 	user-select: none;
 }
 
@@ -260,10 +258,10 @@
 
 .footerContactsLinkImg {
 	// стили для изображения ссылки на контакты
-    object-fit: contain;
-    object-position: center;
-    width: 185px;
-    height: 45px;
+	object-fit: contain;
+	object-position: center;
+	width: 185px;
+	height: 45px;
 }
 
 .footerBottomInner {
@@ -280,7 +278,9 @@
 	display: flex;
 }
 
-.footerLegalLink, .footerPolicyLink, .footerCopyrightLink {
+.footerLegalLink,
+.footerPolicyLink,
+.footerCopyrightLink {
 	// стили для ссылки на юридическую информацию
 	font-family: $default-font;
 	font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
@@ -333,9 +333,7 @@
 		// стили для обёртки разделителя
 		display: none;
 	}
->>>>>>> 097731da29d6a79023040fa2ff77fdc2b99b220d
-
-	.footerWrapper {
+	>>>>>>>097731da29d6a79023040fa2ff77fdc2b99b220d .footerWrapper {
 		// стили для обёртки всего footer
 		display: flex;
 		flex-direction: column;
@@ -348,9 +346,9 @@
 		width: 60.89%;
 		min-width: 204px;
 	}
-	
+
 	.footerMenuLi {
-		// стили для элемента списка 
+		// стили для элемента списка
 		height: 26.6px;
 	}
 
@@ -366,36 +364,36 @@
 	}
 }
 
-@media (max-width: 569px) {	
+@media (max-width: 569px) {
 	.footerLogoTitleWrapper {
 		// стили для обёртки текста логотипа
-			margin: 0 0 -1.185px 0;
+		margin: 0 0 -1.185px 0;
 	}
-	
+
 	.footerLogoFirstWord {
 		// стили для первого слова в логотипе
-			margin: 0 0 0 -4.742px;
-			font-size: 61.641px;
+		margin: 0 0 0 -4.742px;
+		font-size: 61.641px;
 	}
-	
+
 	.footerLogoFirstWord::before {
-		content: "";
+		content: '';
 		top: 15px;
 		left: 48px;
 	}
-	
+
 	.footerLogoSecondWord {
 		// стили для второго слова в логотипе
-			margin: 0 0 -0.069px -5.137px;
-			font-size: 6.026px;
-			letter-spacing: 1.304px;
+		margin: 0 0 -0.069px -5.137px;
+		font-size: 6.026px;
+		letter-spacing: 1.304px;
 	}
-	
+
 	.footerLogoThirdWord {
 		// стили для третьего слова в логотипе
-			margin: 0 0 0 -5.137px;
-			font-size: 8.693px;
-			letter-spacing: 1.581px;
+		margin: 0 0 0 -5.137px;
+		font-size: 8.693px;
+		letter-spacing: 1.581px;
 	}
 }
 
