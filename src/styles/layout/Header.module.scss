@@ -137,13 +137,23 @@ body {
 }
 
 .headerLanguageSwitchButton {
+    background-color: initial; // Убираем фон при наведении, если требуется
 	background: none;
 	border: none;
 	cursor: pointer;
 }
 
 .headerLanguageSwitchButton:hover {
+    background-color: initial; // Убираем фон при наведении, если требуется
 	color: #3a8374;
+}
+
+.headerLanguageSwitchButton:focus {
+	outline: none; // Убираем обводку при фокусе
+}
+
+.headerLanguageSwitchButton:active {
+    background-color: initial; // Убираем фон при наведении, если требуется
 }
 
 .dropdownMenu {
