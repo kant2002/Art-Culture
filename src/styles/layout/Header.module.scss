@@ -142,6 +142,10 @@ body {
 	cursor: pointer;
 }
 
+.headerLanguageSwitchButton:hover {
+	color: #3a8374;
+}
+
 .dropdownMenu {
 	display: block;
 	position: absolute;
@@ -151,24 +155,33 @@ body {
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 	z-index: 1;
 	width: 100%;
+	border-radius: 10px;
 }
 
 .dropdownMenu ul {
 	list-style: none;
 	padding: 0;
 	margin: 0;
+	border-radius: 10px;
+	border: 1px solid #3a8374;
+	box-shadow:  #3a8374 0 0 10px;
 }
 
 .dropdownMenu li {
 	padding: 8px 0;
 	font-size: calc(0px + 18 * (100vw / 1440));
 	cursor: pointer;
-	color: #fff
+	color: #fff;
+	border-radius: 10px;
 }
 
 .dropdownMenu li:hover {
-	background-color: #000000;
 	color: #3a8374;
+	transition: 0.4s ease;
+}
+
+.dropdownMenu li:not(:hover) {
+	transition: 0.4s ease;
 }
 
 .circleButton {
@@ -654,6 +667,7 @@ h1 {
 	height: 100dvh;
 	background: black;
 	z-index: 1000;
+	overflow-y: auto; // Включаем вертикальную прокрутку для содержимого
 }
 
 .burgerMenuWrapper {
@@ -663,7 +677,6 @@ h1 {
 	justify-content: space-between;
 	width: 100%;
 	height: 100%;
-	overflow-y: auto; // Включаем вертикальную прокрутку для содержимого
 }
 
 .burgerMenuSearchWhithButtonsWrapper {
@@ -742,6 +755,7 @@ h1 {
 
 .burgerMenuCloseButtonImg {
 	// Изображение для кнопки закрытия бургер-меню
+	display: flex;
 }
 
 .burgerMenuLanguageSwitch {
@@ -816,9 +830,18 @@ h1 {
 		flex: none;
 		justify-content: start;
 		align-items: start;
-		width: 100%;
+		width: 95%;
 		height: 32px;
 		box-sizing: border-box; // для учета отступов и границ в общей ширине и высоте
+	}
+
+	.footerMenuLi:hover {
+		width: 100%;
+		transition: 0.4s ease;
+	}
+
+	.footerMenuLi:not(:hover) {
+		transition: 0.4s ease;
 	}
 	
 	.footerMenuLink {
