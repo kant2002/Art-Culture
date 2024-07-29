@@ -123,7 +123,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-	content: '';
+	content: "";
 	content: none;
 }
 table {
@@ -133,4 +133,29 @@ table {
 
 a {
 	text-decoration: none;
+}
+
+.button, a, li,
+.link {
+	background-color: initial; // Исходный фон
+	border: none; // Убираем границу
+	cursor: pointer; // Изменяем курсор на указатель
+	text-decoration: none; // Убираем подчеркивание у ссылок
+	color: inherit; // Наследуем цвет текста
+
+	&:hover {
+		background-color: initial; // Убираем фон при наведении
+	}
+
+	&:focus {
+		outline: none; // Убираем обводку при фокусе
+	}
+
+	&:active {
+		background-color: initial; // Убираем фон при нажатии
+	}
+
+	// Специальный стиль для мобильных устройств
+	-webkit-tap-highlight-color: transparent; // Убираем выделение при нажатии на мобильных устройствах
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0); // Убираем выделение при нажатии на мобильных устройствах
 }
