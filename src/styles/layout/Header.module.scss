@@ -648,8 +648,8 @@ h1 {
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: calc(560px - (185 * ((1440px - 100vw) / (1440 - 800))));
-	min-width: 375px;
+	width: calc(560px - (230 * ((1440px - 100vw) / (1440 - 375))));
+	min-width: 320px;
 	max-width: 560px;
 	height: 100dvh;
 	background: black;
@@ -736,6 +736,7 @@ h1 {
 	align-items: center;
 	width: 24px;
 	height: 24px;
+	cursor: pointer;
 }
 
 .burgerMenuCloseButtonImg {
@@ -775,13 +776,20 @@ h1 {
 
 .burgerMenuSearchWrapper {
 	// Обертка для секции поиска в бургер-меню
+	display: flex;
+	margin: calc(35px - (3 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+	height: 51px;
+	width: 100%;
 }
 
 .burgerMenuSearchInput {
 	// Поле ввода для поиска в бургер-меню
+	width: 100%;
+	height: 100%;
 }
 
 .burgerMenuFooterWrapper {
+	margin: calc(92px - (64 * ((1440px - 100vw) / (1440 - 375)))) 0 auto 0;
 	display: flex;
 
 	.footerMenuWrapper {
@@ -829,22 +837,34 @@ h1 {
 
 .burgerMenuBottomWrapper {
 	// Обертка для нижней части бургер-меню
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .burgerMenuSocialTopWrapper {
 	// Обертка для верхней части секции социальных сетей в бургер-меню
+	display: flex;
 }
 
 .burgerMenuFollowUsTitle {
 	// Заголовок "следите за нами" в бургер-меню (модификатор для socialDownWrapper__followUsTitle)
+	margin: calc(9px - (-17 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+	display: flex;
+	color: #fff;
+	font-size: calc(22px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	font-weight: medium;
 }
 
 .burgerMenuSocialMiddleWrapper {
 	// Обертка для средней части секции социальных сетей в бургер-меню
+	display: flex;
+	margin: calc(15px - (3 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
 }
 
 .burgerMenuFacebookButton {
 	// Кнопка Facebook в бургер-меню (модификатор для socialDownWrapper__facebookButton)
+	display: flex;
 }
 
 .burgerMenuInstagramButton {
@@ -861,6 +881,17 @@ h1 {
 
 .burgerMenuSocialBottomWrapper {
 	// Обертка для нижней части секции социальных сетей в бургер-меню
+	margin: calc(22px - (-2 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: calc(218px - (57 * ((1440px - 100vw) / (1440 - 375))));
+	min-width: 161px;
+	height: calc(53px - (14 * ((1440px - 100vw) / (1440 - 375))));
+	min-height: 39px;
+    object-fit: contain;
+    object-position: center;
+
 }
 
 .burgerMenuPlayUkraine {
