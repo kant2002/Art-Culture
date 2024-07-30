@@ -145,47 +145,21 @@
     display: block;
     font-weight: 500;
     font-size: calc(22px - (6 * ((1440px - 100vw) / (1440 - 375))));
-}
-
-.cardTitle {
-    // Стили для заголовка карточки
-}
-
-.firstCardTitle {
-    // Дополнительные стили для заголовка первой карточки
-}
-
-.secondCardTitle {
-    // Дополнительные стили для заголовка второй карточки
-}
-
-.thirdCardTitle {
-    // Дополнительные стили для заголовка второй карточки
+    height: calc(calc(22px - (6 * ((1440px - 100vw) / (1440 - 375)))) * 2); // Делаем ограничение вывода текста построчечно
+    overflow: hidden;
 }
 
 .cardDescriptioneWrapper {
     // Стили для обертки описания карточки
     margin: calc(18px - (9 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+    height: calc(calc(16px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 3); // Делаем ограничение вывода текста построчечно
     overflow: hidden;
-    max-height: calc(calc(16px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 3);
 }
 
 .cardDescription {
     // Стили для описания карточки
     font-weight: 400;
     font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
-}
-
-.firstCardDescription {
-    // Дополнительные стили для описания первой карточки
-}
-
-.secondCardDescription {
-    // Дополнительные стили для описания второй карточки
-}
-
-.thirdCardDescription {
-    // Дополнительные стили для описания второй карточки
 }
 
 .cardClockAndDateWrapper {
