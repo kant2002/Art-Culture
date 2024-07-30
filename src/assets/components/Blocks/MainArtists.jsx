@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import styles from '/src/styles/components/Blocks/MainNews.module.scss'
 import { useTranslation } from 'react-i18next';
 
-function MainNews() {
+function MainArtists() {
 	const { t } = useTranslation();
 	const [posts, setPosts] = useState([])
 	const [media, setMedia] = useState({})
@@ -66,12 +66,12 @@ function MainNews() {
 	return (
 		<div className={`${styles.mainPageNewsContainer}`}>
 			<div className={`${styles.mainPageNewsTitleWithButton}`}>
-				<h3 className={`${styles.mainPageNewsTitle}`}>{t('Новини')}</h3>
+				<h3 className={`${styles.mainPageNewsTitle}`}>{t('Митці')}</h3>
 				<div
 					className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}
 				>
 					<button className={`${styles.mainPageNewsButton}`}>
-						<p className={`${styles.mainPageNewsButtonTitle}`}>{t('Усі новини')}</p>
+						<p className={`${styles.mainPageNewsButtonTitle}`}>{t('Усі митці')}</p>
 						<img
 							className={`${styles.mainPageNewsButtonImg}`}
 							src={'/Img/buttonArrow.svg'}
@@ -105,7 +105,7 @@ function MainNews() {
 									<img
 										className={`${styles.cardImg} ${index === 0 ? styles.firstCardImg : index === 1 ? styles.secondCardImg : index === 2 ? styles.thirdCardImg : styles.fourthCardImg}`}
 										src={featuredMediaUrl}
-										alt={t('Світлина музею')}
+										alt={t('Світлина')}
 										onError={e => {
 											e.target.onerror = null
 											e.target.src = '/Img/newsCardERROR.jpg'
@@ -170,7 +170,7 @@ function MainNews() {
 				className={`${styles.mainPageNewsButtonWrapper} ${styles.mobileButtonWrapper}`}
 			>
 				<button className={`${styles.mainPageNewsButton}`}>
-					<p className={`${styles.mainPageNewsButtonTitle}`}>{t('Усі новини')}</p>
+					<p className={`${styles.mainPageNewsButtonTitle}`}>{t('Усі митці')}</p>
 					<img
 						className={`${styles.mainPageNewsButtonImg}`}
 						src={'/Img/buttonArrow.svg'}
@@ -186,4 +186,4 @@ function MainNews() {
 	)
 }
 
-export default MainNews
+export default MainArtists
