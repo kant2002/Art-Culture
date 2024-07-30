@@ -19,8 +19,10 @@
 
 .mainPageNewsTitle {
     // Стили для заголовка
+    font-family: $default-font;
     font-weight: 600;
     font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+	text-transform: uppercase;
 }
 
 .mainPageNewsButtonWrapper {
@@ -83,18 +85,6 @@
     justify-content: space-between;
 }
 
-.firstCard {
-    // Дополнительные стили для первой карточки
-}
-
-.secondCard {
-    // Дополнительные стили для второй карточки
-}
-
-.thirdCard {
-    // Дополнительные стили для второй карточки
-}
-
 .thirdCard {
     // Дополнительные стили для второй карточки
     display: none;
@@ -121,18 +111,6 @@
     height: 100%;
 }
 
-.firstCardImg {
-    // Дополнительные стили для изображения первой карточки
-}
-
-.secondCardImg {
-    // Дополнительные стили для изображения второй карточки
-}
-
-.thirdCardImg {
-    // Дополнительные стили для изображения второй карточки
-}
-
 .cardTextWrapper {
     // Стили для обертки текста карточки
     margin: calc(26px - (9 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
@@ -143,22 +121,26 @@
 .cardTitleWrapper {
     // Стили для обертки заголовка карточки
     display: block;
+    font-family: $default-font;
     font-weight: 500;
     font-size: calc(22px - (6 * ((1440px - 100vw) / (1440 - 375))));
     height: calc(calc(22px - (6 * ((1440px - 100vw) / (1440 - 375)))) * 2); // Делаем ограничение вывода текста построчечно
     overflow: hidden;
+	text-transform: uppercase;
 }
 
 .cardDescriptioneWrapper {
     // Стили для обертки описания карточки
     margin: calc(18px - (9 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
-    height: calc(calc(16px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 3); // Делаем ограничение вывода текста построчечно
+    height: calc(calc(20px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 3); // Делаем ограничение вывода текста построчечно
     overflow: hidden;
 }
 
 .cardDescription {
     // Стили для описания карточки
+    font-family: $default-font;
     font-weight: 400;
+    line-height: calc(20px - (2 * ((1440px - 100vw) / (1440 - 375))));
     font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
 }
 
@@ -208,6 +190,11 @@
 }
 
 @media (min-width: 1920px) {
+    .mainPageNewsContainer {
+        // Стили для основного контейнераконтейнера
+        margin: 72px 0 0 0;
+    }
+
     .mainPageNewsCard {
         // Стили для карточки новостей
         width: 32.81%;
@@ -217,6 +204,24 @@
         // Дополнительные стили для второй карточки
         display: flex;
         flex-direction: column;
+    }
+
+    .cardTitleWrapper {
+        // Стили для обертки заголовка карточки
+        font-size: 22px;
+        height: calc(22px * 2 - 1px); // Делаем ограничение вывода текста построчечно
+    }
+    
+    .cardDescriptioneWrapper {
+        // Стили для обертки описания карточки
+        margin: 18 0 0 0;
+        height: calc(20px * 3); // Делаем ограничение вывода текста построчечно
+    }
+
+    .cardDescription {
+        // Стили для описания карточки
+        line-height: 20px;
+        font-size: 16px;
     }
 }
 
