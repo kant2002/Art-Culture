@@ -1,6 +1,7 @@
 import styles from '../../../styles/layout/MainPage.module.scss'
 import MainNews from '../../components/Blocks/MainNews.jsx'
 import MainArtists from '../../components/Blocks/MainArtists.jsx'
+import MainExhibitions from '../../components/Blocks/MainExhibitions.jsx'
 import MainBannerSlider from '../../components/Sliders/MainBannerSlider/MainBannerSlider.jsx'
 function MainPage() {
 	return (
@@ -43,6 +44,7 @@ function MainPage() {
 			</div>
 			<MainNews />
 			<MainArtists />
+			<MainExhibitions />
 		</div>
 	)
 }
