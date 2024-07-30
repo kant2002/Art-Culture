@@ -155,6 +155,11 @@ function MainNews() {
 											{new Date(post.date).toLocaleDateString()}
 										</p>
 									</div>
+									<div className={`${styles.cardTimeWrapper}`}>
+										<p className={`${styles.cardTime}`}>
+											{new Date(post.date).toLocaleDateString()}
+										</p>
+									</div>
 								</div>
 							</div>
 						</div>

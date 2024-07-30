@@ -171,8 +171,11 @@
     display: flex;
 }
 
-.cardDateWrapper .cardClockImg {
-    // Стили для текста даты
+.cardTimeWrapper {
+    // Стили для обертки даты
+    // margin: 0 0 0 calc(10px - (3 * ((1440px - 100vw) / (1440 - 375))));
+    // display: flex;
+    display: none;
 }
 
 .cardReadMoreWrapper {
