@@ -17,23 +17,27 @@ function MainNews() {
 		} else if (Width >= 1440 && Width < 1600) {
 			return 2
 		} else {
-			return 2
+			return 1 // Assuming you meant to return 1 for widths below 1440px
 		}
 	}
 
 	useEffect(() => {
 		const handleResize = () => {
-			setVisiblePostsCount(getPostsCount(window.innerWidth))
+			const newPostCount = getPostsCount(window.innerWidth)
+			if (newPostCount !== visiblePostsCount) {
+				setVisiblePostsCount(newPostCount)
+			}
 		}
 
 		window.addEventListener('resize', handleResize)
 
+		// Initial check
 		handleResize()
 
 		return () => {
 			window.removeEventListener('resize', handleResize)
 		}
-	}, [])
+	}, [visiblePostsCount])
 
 	useEffect(() => {
 		// Запит на отримання постів з медіа-даними
