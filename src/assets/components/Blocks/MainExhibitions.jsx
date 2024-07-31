@@ -14,7 +14,7 @@ function MainExhibitions() {
 	function getPostsCount(Width) {
 		if (Width > 1598 && Width > 1919) {
 			return 3
-		} else if (Width > 1440 && Width <= 1598) {
+		} else if (Width > 1440 && Width < 1598) {
 			return 2
 		} else {
 			return 2
