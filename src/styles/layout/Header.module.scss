@@ -3,6 +3,7 @@
 
 body {
 	font-family: $CenturyGothic, $CormorantSCRegular, $chiller-font, $default-font;
+	overflow-x: hidden; // отключаем горизонтальный скролл
 }
 .mainHeader {
 	position: fixed;
@@ -221,9 +222,9 @@ h1 {
 		content: "";
 		position: absolute;
 		left: 50%;
-		bottom: -5px;
+		bottom: calc(-29 / 1440 * 100vw);
 		width: 0;
-		height: 1px;
+		height: 3px;
 		background: linear-gradient(to right, rgba(216, 57, 52, 0), rgb(255, 255, 255), rgba(216, 57, 52, 0));
 		transition:
 			width 0.4s ease,
@@ -486,7 +487,6 @@ h1 {
 	}
 
 	.mainMenu__link {
-		font-size: 18px;
 	}
 	.burgerButton {
 		&__img {
@@ -499,6 +499,25 @@ h1 {
 	}
 	.staticHeaderLogoTitle {
 		font-size: 135px;
+	}
+
+	.mainMenu {
+		&__link {
+			font-size: 18px;
+		}
+	
+		&__link::after {
+			content: "";
+			position: absolute;
+			left: 50%;
+			bottom: -29px;
+			width: 0;
+			height: 3px;
+			background: linear-gradient(to right, rgba(216, 57, 52, 0), rgb(255, 255, 255), rgba(216, 57, 52, 0));
+			transition:
+				width 0.4s ease,
+				left 0.4s ease;
+		}
 	}
 }
 
