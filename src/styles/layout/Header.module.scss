@@ -383,11 +383,11 @@ h1 {
 	align-items: center;
 }
 .staticHeaderLogo {
-	margin: 0 calc(22.5 / 1440 * 100vw) 0 0;
+	margin: 0 calc(22.5 / 1440 * 100vw) calc(15 / 1440 * 100vw) 0;
 }
 .staticHeaderLogoTitle {
 	font-family: $chiller-font;
-	font-size: calc(0px + 135 * (100vw / 1440));
+	font-size: calc(0px + 165 * (100vw / 1440));
 	line-height: 0.53; //Важная строка!!!
 	display: inline-block; /* Необходимо для применения transform */
 	transform: scaleX(1.1); /* Масштабирование по горизонтали */
@@ -496,9 +496,11 @@ h1 {
 		&__title {
 			margin: 0 0 0 6px;
 		}
+	}.staticHeaderLogo {
+		margin: 0 calc(22.5 / 1440 * 100vw) 15px 0;
 	}
 	.staticHeaderLogoTitle {
-		font-size: 135px;
+		font-size: 165px;
 	}
 
 	.mainMenu {
