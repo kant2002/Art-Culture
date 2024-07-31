@@ -97,6 +97,17 @@ function MainNews() {
 
 					console.log('Витягнуте медіа:', featuredMediaUrl)
 
+					const postDate = new Date(post.date)
+					const formattedDate = postDate.toLocaleDateString('uk-UA', {
+						year: 'numeric',
+						month: 'long',
+						day: 'numeric',
+					})
+					const formattedTime = postDate.toLocaleTimeString('uk-UA', {
+						hour: 'numeric',
+						minute: 'numeric',
+					})
+
 					return (
 						<div
 							key={post.id}
@@ -153,14 +164,10 @@ function MainNews() {
 										/>
 									</div>
 									<div className={`${styles.cardDateWrapper}`}>
-										<p className={`${styles.cardDate}`}>
-											{new Date(post.date).toLocaleDateString()}
-										</p>
+										<p className={`${styles.cardDate}`}>{formattedDate}</p>
 									</div>
 									<div className={`${styles.cardTimeWrapper}`}>
-										<p className={`${styles.cardTime}`}>
-											{new Date(post.date).toLocaleDateString()}
-										</p>
+										<p className={`${styles.cardTime}`}>{formattedTime}</p>
 									</div>
 								</div>
 							</div>

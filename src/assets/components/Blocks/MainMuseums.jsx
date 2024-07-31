@@ -1,10 +1,10 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import styles from '/src/styles/components/Blocks/MainNews.module.scss'
-import { useTranslation } from 'react-i18next';
 
 function MainMuseums() {
-	const { t } = useTranslation();
+	const { t } = useTranslation()
 	const [posts, setPosts] = useState([])
 	const [media, setMedia] = useState({})
 	const [visiblePostsCount, setVisiblePostsCount] = useState(
@@ -38,7 +38,7 @@ function MainMuseums() {
 	useEffect(() => {
 		// Запит на отримання постів з медіа-даними
 		axios
-			.get('https://zimbabaluba.pp.ua/wp-json/wp/v2/posts?_embed')
+			.get('https://zimbabaluba.pp.ua/wp-json/wp/v2/posts?categories=5&_embed')
 			.then(response => {
 				console.log('Отримані дані постів:', response.data)
 				setPosts(response.data)
@@ -71,7 +71,9 @@ function MainMuseums() {
 					className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}
 				>
 					<button className={`${styles.mainPageNewsButton}`}>
-						<p className={`${styles.mainPageNewsButtonTitle}`}>{t('Усі музеї')}</p>
+						<p className={`${styles.mainPageNewsButtonTitle}`}>
+							{t('Усі музеї')}
+						</p>
 						<img
 							className={`${styles.mainPageNewsButtonImg}`}
 							src={'/Img/buttonArrow.svg'}
@@ -94,6 +96,17 @@ function MainMuseums() {
 						media[featuredMediaId] || '/Img/halfNewsCard.jpg'
 
 					console.log('Витягнуте медіа:', featuredMediaUrl)
+
+					const postDate = new Date(post.date)
+					const formattedDate = postDate.toLocaleDateString('uk-UA', {
+						year: 'numeric',
+						month: 'long',
+						day: 'numeric',
+					})
+					const formattedTime = postDate.toLocaleTimeString('uk-UA', {
+						hour: 'numeric',
+						minute: 'numeric',
+					})
 
 					return (
 						<div
@@ -151,14 +164,10 @@ function MainMuseums() {
 										/>
 									</div>
 									<div className={`${styles.cardDateWrapper}`}>
-										<p className={`${styles.cardDate}`}>
-											{new Date(post.date).toLocaleDateString()}
-										</p>
+										<p className={`${styles.cardDate}`}>{formattedDate}</p>
 									</div>
 									<div className={`${styles.cardTimeWrapper}`}>
-										<p className={`${styles.cardTime}`}>
-											{new Date(post.date).toLocaleDateString()}
-										</p>
+										<p className={`${styles.cardTime}`}>{formattedTime}</p>
 									</div>
 								</div>
 							</div>
@@ -170,7 +179,9 @@ function MainMuseums() {
 				className={`${styles.mainPageNewsButtonWrapper} ${styles.mobileButtonWrapper}`}
 			>
 				<button className={`${styles.mainPageNewsButton}`}>
-					<p className={`${styles.mainPageNewsButtonTitle}`}>{t('Усі музеї')}</p>
+					<p className={`${styles.mainPageNewsButtonTitle}`}>
+						{t('Усі музеї')}
+					</p>
 					<img
 						className={`${styles.mainPageNewsButtonImg}`}
 						src={'/Img/buttonArrow.svg'}
