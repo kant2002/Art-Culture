@@ -1,10 +1,10 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import styles from '/src/styles/components/Blocks/MainNews.module.scss'
-import { useTranslation } from 'react-i18next';
 
 function MainNews() {
-	const { t } = useTranslation();
+	const { t } = useTranslation()
 	const [posts, setPosts] = useState([])
 	const [media, setMedia] = useState({})
 	const [visiblePostsCount, setVisiblePostsCount] = useState(
@@ -38,7 +38,7 @@ function MainNews() {
 	useEffect(() => {
 		// Запит на отримання постів з медіа-даними
 		axios
-			.get('https://zimbabaluba.pp.ua/wp-json/wp/v2/posts?_embed')
+			.get('https://zimbabaluba.pp.ua/wp-json/wp/v2/posts?categories=3&_embed')
 			.then(response => {
 				console.log('Отримані дані постів:', response.data)
 				setPosts(response.data)
@@ -71,7 +71,9 @@ function MainNews() {
 					className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}
 				>
 					<button className={`${styles.mainPageNewsButton}`}>
-						<p className={`${styles.mainPageNewsButtonTitle}`}>{t('Усі новини')}</p>
+						<p className={`${styles.mainPageNewsButtonTitle}`}>
+							{t('Усі новини')}
+						</p>
 						<img
 							className={`${styles.mainPageNewsButtonImg}`}
 							src={'/Img/buttonArrow.svg'}
@@ -170,7 +172,9 @@ function MainNews() {
 				className={`${styles.mainPageNewsButtonWrapper} ${styles.mobileButtonWrapper}`}
 			>
 				<button className={`${styles.mainPageNewsButton}`}>
-					<p className={`${styles.mainPageNewsButtonTitle}`}>{t('Усі новини')}</p>
+					<p className={`${styles.mainPageNewsButtonTitle}`}>
+						{t('Усі новини')}
+					</p>
 					<img
 						className={`${styles.mainPageNewsButtonImg}`}
 						src={'/Img/buttonArrow.svg'}
