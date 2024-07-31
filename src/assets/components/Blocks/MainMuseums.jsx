@@ -14,10 +14,10 @@ function MainMuseums() {
 	function getPostsCount(Width) {
 		if (Width >= 1600) {
 			return 3
-		} else if (Width >= 1440 && Width < 1600) {
+		} else if (Width >= 1440) {
 			return 2
 		} else {
-			return 1 // Assuming you meant to return 1 for widths below 1440px
+			return 2 // Assuming you meant to return 1 for widths below 1440px
 		}
 	}
 
@@ -26,6 +26,9 @@ function MainMuseums() {
 			const newPostCount = getPostsCount(window.innerWidth)
 			if (newPostCount !== visiblePostsCount) {
 				setVisiblePostsCount(newPostCount)
+				console.log(
+					`Window width: ${window.innerWidth}, Visible posts count: ${newPostCount}`
+				)
 			}
 		}
 
