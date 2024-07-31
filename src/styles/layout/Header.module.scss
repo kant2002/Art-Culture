@@ -392,6 +392,22 @@ h1 {
 	display: inline-block; /* Необходимо для применения transform */
 	transform: scaleX(1.1); /* Масштабирование по горизонтали */
 	user-select: none;
+}	
+.staticHeaderLogoTitle::before {
+	content: "";
+	position: absolute;
+	top: calc(41 / 1440 * 100vw);
+	left: calc(128 / 1440 * 100vw);
+	width: calc(9 / 1440 * 100vw);
+	height: calc(7 / 1440 * 100vw);
+	min-width: 3.9px;
+	min-height: 2.77px;
+	max-width: 9px;
+	max-height: 7px;
+	background: url(/public/Img/logoPoint.svg);
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: 100% 100%;
 }
 .staticHeaderTitleContainer {
 	margin: 0 calc(22.5 / 1440 * 100vw);
@@ -501,6 +517,13 @@ h1 {
 	}
 	.staticHeaderLogoTitle {
 		font-size: 165px;
+	}.staticHeaderLogoTitle::before {
+		content: "";
+		position: absolute;
+		top: 41px;
+		left: 128px;
+		width: 9px;
+		height: 7px;
 	}
 
 	.mainMenu {
@@ -579,6 +602,21 @@ h1 {
 @media (max-width: 720px) {
 	.staticHeaderLogoTitle {
 		font-size: 82.61px;
+	}.staticHeaderLogoTitle::before {
+		content: "";
+		position: absolute;
+		top: 21px;
+		left: 65px;
+		width: calc(9 / 1440 * 100vw);
+		height: calc(7 / 1440 * 100vw);
+		min-width: 3.9px;
+		min-height: 2.77px;
+		max-width: 9px;
+		max-height: 7px;
+		background: url(/public/Img/logoPoint.svg);
+		background-repeat: no-repeat;
+		background-size: contain;
+		background-position: 100% 100%;
 	}
 }
 
