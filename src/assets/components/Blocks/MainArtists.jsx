@@ -24,6 +24,9 @@ function MainArtists() {
 		if (width > 1440 && width < 1600) {
 			return 2
 		}
+		if (width <= 1440) {
+			return 2
+		}
 	}
 
 	useEffect(() => {
