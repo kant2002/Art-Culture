@@ -1,2 +1,6 @@
-import React from "react";
-import styles from "/src/styles/components/Sliders/MainInstagramSlider/MainInstagramSlider.module.scss";
+import React from 'react'
+
+function MainInstagramSlider() {
+	return <></>
+}
+export default MainInstagramSlider
