@@ -25,35 +25,184 @@ function MainInstagramSlider() {
                             <div className={`${styles.mainInstagramSliderCardUserPhotoWrapper}`}>
                                 <img
                                     className={`${styles.mainInstagramSliderCardUserPhoto}`}
-                                    src={'/Img/buttonArrow.svg'}
+                                    src={'/Img/mainInstagramSliderUserPhoto.png'}
                                     alt={t('Фотографія автора')}
                                     onError={e => {
                                         e.target.onerror = null
-                                        e.target.src = '/mainNewImg/buttonArrow.svg'
+                                        e.target.src = '/Img/mainInstagramSliderUserPhoto.png'
                                     }}
                                 />
                             </div>
-                            <div className={`${styles.mainInstagramSliderCardUserNameWrapper}`}></div>
-                            <p className={`${styles.mainInstagramSliderCardUserName}`}>@name</p>
+                            <div className={`${styles.mainInstagramSliderCardUserNameWrapper}`}>
+                                <p className={`${styles.mainInstagramSliderCardUserName}`}>ukr_art&culture</p>
+                            </div>
+                            <div className={`${styles.mainInstagramSliderCardDateWrapper}`}>
+                                <p className={`${styles.mainInstagramSliderCardDate}`}>3 days ago</p>
+                            </div>
                         </div>
-                        <div className={`${styles.mainInstagramSliderCardDateWrapper}`}>
-                            <p className={`${styles.mainInstagramSliderCardDate}`}>26.09.23</p>
+                        <div className={`${styles.mainInstagramSliderCardMiddleInnerWrapper}`}>
+                            <img
+                                className={`${styles.mainInstagramSliderCardImg}`}
+                                src={'/Img/mainInstagramSliderIMG.jpg'}
+                                alt={t('Світлина автора')}
+                                onError={e => {
+                                    e.target.onerror = null
+                                    e.target.src = '/Img/mainInstagramSliderIMG.jpg'
+                                }}
+                            />
+                        </div>
+                        <div className={`${styles.mainInstagramSliderCardBottomInnerWrapper}`}>
+                            <div className={`${styles.mainInstagramSliderCardDescriptionWrapper}`}>
+                                <p className={`${styles.mainInstagramSliderCardDescription}`}>{t('Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя, коли невідомий друкар взяв шрифтову гранку та склав на ній підбірку зразків шрифтів. ')}</p>
+                            </div>
                         </div>
                     </div>
-                    <div className={`${styles.mainInstagramSliderCardMiddleInnerWrapper}`}>
-                        <img
-                            className={`${styles.mainInstagramSliderCardImg}`}
-                            src={'/Img/buttonArrow.svg'}
-                            alt={t('Світлина автора')}
-                            onError={e => {
-                                e.target.onerror = null
-                                e.target.src = '/mainNewImg/buttonArrow.svg'
-                            }}
-                        />
+                    <div className={`${styles.mainInstagramSliderCardWrapper}`}>
+                        <div className={`${styles.mainInstagramSliderCardTopInnerWrapper}`}>
+                            <div className={`${styles.mainInstagramSliderCardUserPhotoWrapper}`}>
+                                <img
+                                    className={`${styles.mainInstagramSliderCardUserPhoto}`}
+                                    src={'/Img/mainInstagramSliderUserPhoto.png'}
+                                    alt={t('Фотографія автора')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/mainInstagramSliderUserPhoto.png'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.mainInstagramSliderCardUserNameWrapper}`}>
+                                <p className={`${styles.mainInstagramSliderCardUserName}`}>ukr_art&culture</p>
+                            </div>
+                            <div className={`${styles.mainInstagramSliderCardDateWrapper}`}>
+                                <p className={`${styles.mainInstagramSliderCardDate}`}>3 days ago</p>
+                            </div>
+                        </div>
+                        <div className={`${styles.mainInstagramSliderCardMiddleInnerWrapper}`}>
+                            <img
+                                className={`${styles.mainInstagramSliderCardImg}`}
+                                src={'/Img/mainInstagramSliderIMG.jpg'}
+                                alt={t('Світлина автора')}
+                                onError={e => {
+                                    e.target.onerror = null
+                                    e.target.src = '/Img/mainInstagramSliderIMG.jpg'
+                                }}
+                            />
+                        </div>
+                        <div className={`${styles.mainInstagramSliderCardBottomInnerWrapper}`}>
+                            <div className={`${styles.mainInstagramSliderCardDescriptionWrapper}`}>
+                                <p className={`${styles.mainInstagramSliderCardDescription}`}>{t('Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя, коли невідомий друкар взяв шрифтову гранку та склав на ній підбірку зразків шрифтів. ')}</p>
+                            </div>
+                        </div>
                     </div>
-                    <div className={`${styles.mainInstagramSliderCardBottomInnerWrapper}`}>
-                        <div className={`${styles.mainInstagramSliderCardDescriptionWrapper}`}>
-                            <p className={`${styles.mainInstagramSliderCardDescription}`}>{t('Lorem ipsum')}</p>
+                    <div className={`${styles.mainInstagramSliderCardWrapper}`}>
+                        <div className={`${styles.mainInstagramSliderCardTopInnerWrapper}`}>
+                            <div className={`${styles.mainInstagramSliderCardUserPhotoWrapper}`}>
+                                <img
+                                    className={`${styles.mainInstagramSliderCardUserPhoto}`}
+                                    src={'/Img/mainInstagramSliderUserPhoto.png'}
+                                    alt={t('Фотографія автора')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/mainInstagramSliderUserPhoto.png'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.mainInstagramSliderCardUserNameWrapper}`}>
+                                <p className={`${styles.mainInstagramSliderCardUserName}`}>ukr_art&culture</p>
+                            </div>
+                            <div className={`${styles.mainInstagramSliderCardDateWrapper}`}>
+                                <p className={`${styles.mainInstagramSliderCardDate}`}>3 days ago</p>
+                            </div>
+                        </div>
+                        <div className={`${styles.mainInstagramSliderCardMiddleInnerWrapper}`}>
+                            <img
+                                className={`${styles.mainInstagramSliderCardImg}`}
+                                src={'/Img/mainInstagramSliderIMG.jpg'}
+                                alt={t('Світлина автора')}
+                                onError={e => {
+                                    e.target.onerror = null
+                                    e.target.src = '/Img/mainInstagramSliderIMG.jpg'
+                                }}
+                            />
+                        </div>
+                        <div className={`${styles.mainInstagramSliderCardBottomInnerWrapper}`}>
+                            <div className={`${styles.mainInstagramSliderCardDescriptionWrapper}`}>
+                                <p className={`${styles.mainInstagramSliderCardDescription}`}>{t('Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя, коли невідомий друкар взяв шрифтову гранку та склав на ній підбірку зразків шрифтів. ')}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={`${styles.mainInstagramSliderCardWrapper}`}>
+                        <div className={`${styles.mainInstagramSliderCardTopInnerWrapper}`}>
+                            <div className={`${styles.mainInstagramSliderCardUserPhotoWrapper}`}>
+                                <img
+                                    className={`${styles.mainInstagramSliderCardUserPhoto}`}
+                                    src={'/Img/mainInstagramSliderUserPhoto.png'}
+                                    alt={t('Фотографія автора')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/mainInstagramSliderUserPhoto.png'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.mainInstagramSliderCardUserNameWrapper}`}>
+                                <p className={`${styles.mainInstagramSliderCardUserName}`}>ukr_art&culture</p>
+                            </div>
+                            <div className={`${styles.mainInstagramSliderCardDateWrapper}`}>
+                                <p className={`${styles.mainInstagramSliderCardDate}`}>3 days ago</p>
+                            </div>
+                        </div>
+                        <div className={`${styles.mainInstagramSliderCardMiddleInnerWrapper}`}>
+                            <img
+                                className={`${styles.mainInstagramSliderCardImg}`}
+                                src={'/Img/mainInstagramSliderIMG.jpg'}
+                                alt={t('Світлина автора')}
+                                onError={e => {
+                                    e.target.onerror = null
+                                    e.target.src = '/Img/mainInstagramSliderIMG.jpg'
+                                }}
+                            />
+                        </div>
+                        <div className={`${styles.mainInstagramSliderCardBottomInnerWrapper}`}>
+                            <div className={`${styles.mainInstagramSliderCardDescriptionWrapper}`}>
+                                <p className={`${styles.mainInstagramSliderCardDescription}`}>{t('Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя, коли невідомий друкар взяв шрифтову гранку та склав на ній підбірку зразків шрифтів. ')}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={`${styles.mainInstagramSliderCardWrapper}`}>
+                        <div className={`${styles.mainInstagramSliderCardTopInnerWrapper}`}>
+                            <div className={`${styles.mainInstagramSliderCardUserPhotoWrapper}`}>
+                                <img
+                                    className={`${styles.mainInstagramSliderCardUserPhoto}`}
+                                    src={'/Img/mainInstagramSliderUserPhoto.png'}
+                                    alt={t('Фотографія автора')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/mainInstagramSliderUserPhoto.png'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.mainInstagramSliderCardUserNameWrapper}`}>
+                                <p className={`${styles.mainInstagramSliderCardUserName}`}>ukr_art&culture</p>
+                            </div>
+                            <div className={`${styles.mainInstagramSliderCardDateWrapper}`}>
+                                <p className={`${styles.mainInstagramSliderCardDate}`}>3 days ago</p>
+                            </div>
+                        </div>
+                        <div className={`${styles.mainInstagramSliderCardMiddleInnerWrapper}`}>
+                            <img
+                                className={`${styles.mainInstagramSliderCardImg}`}
+                                src={'/Img/mainInstagramSliderIMG.jpg'}
+                                alt={t('Світлина автора')}
+                                onError={e => {
+                                    e.target.onerror = null
+                                    e.target.src = '/Img/mainInstagramSliderIMG.jpg'
+                                }}
+                            />
+                        </div>
+                        <div className={`${styles.mainInstagramSliderCardBottomInnerWrapper}`}>
+                            <div className={`${styles.mainInstagramSliderCardDescriptionWrapper}`}>
+                                <p className={`${styles.mainInstagramSliderCardDescription}`}>{t('Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя, коли невідомий друкар взяв шрифтову гранку та склав на ній підбірку зразків шрифтів. ')}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
