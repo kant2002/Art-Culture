@@ -6,7 +6,8 @@ import Cookies from 'js-cookie';
 
 function Header() {
     const { t } = useTranslation();
-    const [dropdownVisible, setDropdownVisible] = useState(false);
+    const [mainDropdownVisible, setMainDropdownVisible] = useState(false);
+    const [burgerDropdownVisible, setBurgerDropdownVisible] = useState(false);
     const [selectedLanguage, setSelectedLanguage] = useState((Cookies.get('lang') || i18n.language) === 'en' ? 'English' : 'Ukrainian');
     const [burgerMenuVisible, setBurgerMenuVisible] = useState(false);
 
@@ -33,22 +34,30 @@ function Header() {
 
     useEffect(() => {
         const burgerButton = document.querySelector('.burgerButton');
-		const staticHeaderBurgerButton = document.querySelector('.staticHeaderBurgerButton');
+        const staticHeaderBurgerButton = document.querySelector('.staticHeaderBurgerButton');
         const handleBurgerClick = () => {
             setBurgerMenuVisible(!burgerMenuVisible);
+            setMainDropdownVisible(false);
+            setBurgerDropdownVisible(false);
         };
 
         burgerButton.addEventListener('click', handleBurgerClick);
-		staticHeaderBurgerButton.addEventListener('click', handleBurgerClick);
+        staticHeaderBurgerButton.addEventListener('click', handleBurgerClick);
 
         return () => {
             burgerButton.removeEventListener('click', handleBurgerClick);
-			staticHeaderBurgerButton.removeEventListener('click', handleBurgerClick);
+            staticHeaderBurgerButton.removeEventListener('click', handleBurgerClick);
         };
     }, [burgerMenuVisible]);
 
-    const toggleDropdown = () => {
-        setDropdownVisible(!dropdownVisible);
+    const toggleMainDropdown = () => {
+        setMainDropdownVisible(!mainDropdownVisible);
+        setBurgerDropdownVisible(false);
+    };
+
+    const toggleBurgerDropdown = () => {
+        setBurgerDropdownVisible(!burgerDropdownVisible);
+        setMainDropdownVisible(false);
     };
 
     const handleLanguageSelect = (language) => {
@@ -56,19 +65,21 @@ function Header() {
         if (language === 'Ukrainian') {
             i18n.changeLanguage('uk');
             Cookies.set('lang', 'uk');
-        }else {
+        } else {
             i18n.changeLanguage('en');
             Cookies.set('lang', 'en');
         }
 
-        setDropdownVisible(false);
+        setMainDropdownVisible(false);
+        setBurgerDropdownVisible(false);
     };
 
     const closeBurgerMenu = () => {
         setBurgerMenuVisible(false);
+        setBurgerDropdownVisible(false);
     };
 
-    const burgerMenu = 
+    const burgerMenu =
         <div className="burgerMenu">
             <div className="burgerMenuWrapper">
                 <div className="burgerMenuSearchWhithButtonsWrapper">
@@ -78,19 +89,19 @@ function Header() {
                     <div className='headerLanguageSwitchContainer'>
                         <button
                             className='headerLanguageSwitchButton'
-                            onClick={toggleDropdown}
+                            onClick={toggleBurgerDropdown}
                         >
                             <p className='headerLanguageSwitchButton__title'>
                                 {selectedLanguage} &#9660;
                             </p>
                         </button>
-                            {dropdownVisible && (
-                        <div className='dropdownMenu'>
-                            <ul>
-                                <li onClick={() => handleLanguageSelect('Ukrainian')}>Ukrainian</li>
-                                <li onClick={() => handleLanguageSelect('English')}>English</li>
-                            </ul>
-                        </div>
+                        {burgerDropdownVisible && (
+                            <div className='dropdownMenu'>
+                                <ul>
+                                    <li onClick={() => handleLanguageSelect('Ukrainian')}>Ukrainian</li>
+                                    <li onClick={() => handleLanguageSelect('English')}>English</li>
+                                </ul>
+                            </div>
                         )}
                     </div>
                     <div className='burgerMenuLoginButtonWrapper'>
@@ -166,7 +177,7 @@ function Header() {
                         </ul>
                     </nav>
                 </div>
-                        
+
                 <div className="burgerMenuBottomWrapper">
                     <div className="burgerMenuSocialTopWrapper">
                         <p className='socialDownWrapper__followUsTitle burgerMenuFollowUsTitle'>follow us</p>
@@ -187,10 +198,10 @@ function Header() {
                     </div>
                     <div className="burgerMenuSocialBottomWrapper">
                         <div className="footerContactsLinkWrapper footerContactsLinkWrapperPlayUkraine footerContactsLinkWrapperPlayUkraine">
-							<a className="footerContactsLink footerContactsLinkPlayUkraine" href='#'>
-								<img className="footerContactsLinkImg footerContactsLinkImgPlayUkraine burgerMenuPlayUkraine" src='/Img/footerPlayUkraine.png' alt='PlayUkraine' />
-							</a>
-						</div>
+                            <a className="footerContactsLink footerContactsLinkPlayUkraine" href='#'>
+                                <img className="footerContactsLinkImg footerContactsLinkImgPlayUkraine burgerMenuPlayUkraine" src='/Img/footerPlayUkraine.png' alt='PlayUkraine' />
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -218,13 +229,13 @@ function Header() {
                                 <div className='headerLanguageSwitchContainer'>
                                     <button
                                         className='headerLanguageSwitchButton'
-                                        onClick={toggleDropdown}
+                                        onClick={toggleMainDropdown}
                                     >
                                         <p className='headerLanguageSwitchButton__title'>
                                             {selectedLanguage} &#9660;
                                         </p>
                                     </button>
-                                    {dropdownVisible && (
+                                    {mainDropdownVisible && (
                                         <div className='dropdownMenu'>
                                             <ul>
                                                 <li onClick={() => handleLanguageSelect('Ukrainian')}>Ukrainian</li>
