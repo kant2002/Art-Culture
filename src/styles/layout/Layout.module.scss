@@ -1,7 +1,21 @@
-@import "/src/styles/base/reset.scss";
+@import '/src/styles/base/reset.scss';
 @import '../utilities/variables';
 
 .container {
 	width: 100vw;
 	height: 100dvh;
+}
+
+.container {
+	overflow-y: scroll; /* For vertical scrolling */
+	overflow-x: hidden; /* For horizontal scrolling */
+}
+
+.container::-webkit-scrollbar {
+	display: none; /* Safari and Chrome */
+}
+
+.container {
+	-ms-overflow-style: none; /* Internet Explorer 10+ */
+	scrollbar-width: none; /* Firefox */
 }

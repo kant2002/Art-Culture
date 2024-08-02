@@ -1,11 +1,25 @@
+import { debounce } from 'lodash'
+import { useCallback, useEffect } from 'react'
 import styles from '../../../styles/layout/MainPage.module.scss'
-import MainNews from '../../components/Blocks/MainNews.jsx'
 import MainArtists from '../../components/Blocks/MainArtists.jsx'
 import MainExhibitions from '../../components/Blocks/MainExhibitions.jsx'
 import MainMuseums from '../../components/Blocks/MainMuseums.jsx'
+import MainNews from '../../components/Blocks/MainNews.jsx'
 import MainBannerSlider from '../../components/Sliders/MainBannerSlider/MainBannerSlider.jsx'
 import MainInstagramSlider from '../../components/Sliders/MainInstagramSlider/MainInstagramSlider.jsx'
 function MainPage() {
+	const handleScroll = useCallback(
+		debounce(() => {
+			console.log('Scrolling...')
+		}, 100),
+
+		[]
+	)
+
+	useEffect(() => {
+		window.addEventListener('scroll', handleScroll)
+		return () => window.removeEventListener('scroll', handleScroll)
+	}, [handleScroll])
 	return (
 		<div className={styles.mainPage}>
 			<MainBannerSlider />
@@ -47,7 +61,7 @@ function MainPage() {
 			<MainNews />
 			<MainArtists />
 			<MainInstagramSlider />
-			<MainExhibitions />			
+			<MainExhibitions />
 			<MainMuseums />
 		</div>
 	)
