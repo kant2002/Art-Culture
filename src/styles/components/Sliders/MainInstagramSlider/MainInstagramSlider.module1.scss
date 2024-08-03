@@ -1,0 +1,225 @@
+@import "/src/styles/utilities/variables.scss";
+
+.mainInstagramSliderContainer {
+    // Основной контейнер слайдера
+    // display: flex;
+    // padding: 0 0 calc(36px - (7 * ((1440px - 100vw) / (1440 - 375)))) 0;
+    // margin: calc(66px - (22 * ((1440px - 100vw) / (1440 - 375)))) 8px 0 8px;
+    background: #000;
+    // overflow: hidden;
+
+}
+
+.mainInstagramSliderWrapper {
+    // Оболочка слайдера
+    // display: flex;
+    // flex-direction: column;
+    // width: 100%;
+}
+
+.mainInstagramSliderTopInnerWrapper {
+    // Внутренний верхний контейнер слайдера
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: calc(51px - (26 * ((1440px - 100vw) / (1440 - 375)))) calc(72px - (52 * ((1440px - 100vw) / (1440 - 375)))) calc(38px - (6 * ((1440px - 100vw) / (1440 - 375))));
+    width: 100%;
+}
+
+.mainInstagramSliderTitleWrapper {
+    // Оболочка заголовка слайдера
+    display: flex;
+}
+
+.mainInstagramSliderTitle {
+    // Заголовок слайдера
+    font-family: $default-font;
+    font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+}
+
+.mainInstagramSliderFollowUsWrapper {
+    // Оболочка для кнопки "Follow us"
+    display: flex;
+}
+
+.mainInstagramSliderFollowUsButtonWrapper {
+    // Оболочка кнопки "Follow us"
+    display: flex;
+}
+
+.mainInstagramSliderFollowUsButton {
+    // Кнопка "Follow us"
+	padding: 0;
+	width: calc(186px - (20 * ((1440px - 100vw) / (1440 - 375))));
+	height: calc(51px - (7 * ((1440px - 100vw) / (1440 - 375))));
+	min-width: 163px;
+	min-height: 44px;
+	max-width: 166px;
+	max-height: 51px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #000;
+	border-radius: calc(34px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	background-color: #fff;
+	cursor: pointer;
+}
+
+.mainInstagramSliderFollowUsButtonText {
+    // Текст кнопки "Follow us"
+	margin: auto;
+    font-family: $default-font;
+	font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
+	font-weight: 500;
+}
+
+.mainInstagramSliderMiddleInnerWrapper {
+    // Внутренний средний контейнер слайдера
+    display: flex;
+    width: 2190px; //!!!
+    margin: 0 0 0 -385px; //!!!
+}
+
+.mainInstagramSliderCardWrapper {
+    // Оболочка карточки слайдера
+    width: calc(438px - (134 * ((1440px - 100vw) / (1440 - 375))));
+    height: calc(541px - (154 * ((1440px - 100vw) / (1440 - 375))));
+    padding: 0 calc(19px - (11 * ((1440px - 100vw) / (1440 - 375))));
+    display: flex;
+    flex-direction: column;
+}
+
+.mainInstagramSliderCardTopInnerWrapper {
+    // Внутренний верхний контейнер карточки
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: calc(21px - (7 * ((1440px - 100vw) / (1440 - 375)))) calc(21px - (5 * ((1440px - 100vw) / (1440 - 375)))) calc(18px - (8 * ((1440px - 100vw) / (1440 - 375))));
+    background: #1A1A1A;
+    border-radius: 6px 6px 0 0;
+}
+
+.mainInstagramSliderCardUserPhotoWrapper {
+    // Оболочка для фото пользователя
+    display: flex;
+    width: calc(50px - (18 * ((1440px - 100vw) / (1440 - 375))));
+    height: calc(50px - (18 * ((1440px - 100vw) / (1440 - 375))));
+}
+
+.mainInstagramSliderCardUserPhoto {
+    // Фото пользователя    
+	// aspect-ratio: 630 / 330; // например, соотношение сторон 21:11
+	object-fit: cover;
+	object-position: center;
+	width: 100%;
+	height: 100%;
+}
+
+.mainInstagramSliderCardUserNameWrapper {
+    // Оболочка для имени пользователя
+    display: flex;
+    padding: 0 0 0 calc(12px - (5 * ((1440px - 100vw) / (1440 - 375))));
+    margin: 0 auto 0 0;
+}
+
+.mainInstagramSliderCardUserName {
+    // Имя пользователя
+    font-family: $default-font;
+    font-weight: normal;
+    font-size: calc(18px - (6 * ((1440px - 100vw) / (1440 - 375))));
+    color: #fff;
+}
+
+.mainInstagramSliderCardDateWrapper {
+    // Оболочка для даты
+    display: flex;
+}
+
+.mainInstagramSliderCardDate {
+    // Дата
+    font-family: $default-font;
+    font-weight: normal;
+    font-size: calc(18px - (6 * ((1440px - 100vw) / (1440 - 375))));
+    color: #A5A5A5;
+}
+
+.mainInstagramSliderCardMiddleInnerWrapper {
+    // Внутренний средний контейнер карточки
+    display: flex;
+    background: #1A1A1A;
+    
+}
+
+.mainInstagramSliderCardImg {
+    // Изображение карточки    
+	// aspect-ratio: 630 / 330; // например, соотношение сторон 21:11
+	object-fit: contain;
+	object-position: center;
+	width: 100%;
+	height: 100%;
+}
+
+.mainInstagramSliderCardBottomInnerWrapper {
+    // Внутренний нижний контейнер карточки
+    background: #1A1A1A;
+    border-radius: 0 0 6px 6px;
+    padding: calc(17px - (7 * ((1440px - 100vw) / (1440 - 375)))) calc(21px - (5 * ((1440px - 100vw) / (1440 - 375)))) calc(21px - (5 * ((1440px - 100vw) / (1440 - 375))));
+}
+
+.mainInstagramSliderCardDescriptionWrapper {
+    // Оболочка для описания
+    display: flex;
+}
+
+.mainInstagramSliderCardDescription {
+    // Описание
+    font-family: $default-font;
+    font-weight: 300;
+    font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
+    color: #fff;
+}
+
+.mainInstagramSliderBottomInnerWrapper {
+    // Внутренний нижний контейнер слайдера
+    display: flex;
+    justify-content: center;
+}
+
+.mainInstagramSliderButtonsWrapper {
+    // Оболочка для кнопок слайдера
+    display: flex;
+    flex-direction: row;
+}
+
+.mainInstagramSliderPreviousButton {
+    // Кнопка "предыдущий" слайдера
+    display: flex;
+}
+
+.mainInstagramSliderNextArrowButton {
+    // Кнопка "следующий" слайдера
+}
+
+.bannerCircleButton {
+    // Общий стиль для круговых кнопок
+}
+
+.mainInstagramSliderPaginationsWrapper {
+    // Оболочка для пагинации
+}
+
+.mainInstagramSliderPaginationsCurrentItem {
+    // Текущий элемент пагинации
+}
+
+.mainInstagramSliderPaginationsSeparator {
+    // Разделитель пагинации
+}
+
+.mainInstagramSliderPaginationsTotalItems {
+    // Общее количество элементов пагинации
+}
