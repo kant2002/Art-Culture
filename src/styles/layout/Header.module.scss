@@ -704,7 +704,7 @@ h1 {
 	padding: calc(55px - (26 * ((1440px - 100vw) / (1440 - 375)))) calc(70px - (49 * ((1440px - 100vw) / (1440 - 375)))) calc(31px - (14 * ((1440px - 100vw) / (1440 - 375)))) calc(70px - (49 * ((1440px - 100vw) / (1440 - 375))));
 	position: fixed;
 	top: 0;
-	left: 0;
+	right: 0;
 	width: calc(560px - (230 * ((1440px - 100vw) / (1440 - 375))));
 	min-width: 320px;
 	max-width: 560px;
