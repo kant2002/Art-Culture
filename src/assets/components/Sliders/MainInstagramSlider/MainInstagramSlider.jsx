@@ -90,12 +90,13 @@ const MainInstagramSlider = () => {
 				<div className={`${styles.mainInstagramSliderMiddleInnerWrapper}`}>
 					<Swiper
 						modules={[Navigation, Pagination]}
-						spaceBetween={-100}
-						slidesPerView={'3.1'}
+						spaceBetween={0}
+						slidesPerView={'auto'}
 						navigation
-						pagination={{ clickable: true }}
+						pagination={{clickable: false, type: 'fraction'}}
 						onSlideChange={() => console.log('slide change')}
 						onSwiper={swiper => console.log(swiper)}
+						centeredSlides={'true'}
 					>
 						<SwiperSlide>
 							<Slide />
