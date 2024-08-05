@@ -96,7 +96,7 @@ const MainInstagramSlider = () => {
 						pagination={{clickable: false, type: 'fraction'}}
 						onSlideChange={() => console.log('slide change')}
 						onSwiper={swiper => console.log(swiper)}
-						centeredSlides={'true'}
+						// centeredSlides={'true'}
 					>
 						<SwiperSlide>
 							<Slide />
