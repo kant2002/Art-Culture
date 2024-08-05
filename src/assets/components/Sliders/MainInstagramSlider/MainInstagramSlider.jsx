@@ -3,15 +3,14 @@ import { useTranslation } from 'react-i18next'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 // Import Swiper styles
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
+import '/src/styles/components/Sliders/MainInstagramSlider/MainInstagramSliderSwiper.scss';
+import '/src/styles/components/Sliders/MainInstagramSlider/MainInstagramSliderNavigation.scss';
+import '/src/styles/components/Sliders/MainInstagramSlider/MainInstagramSliderPagination.scss';
 
 // Import Swiper modules
 import { Navigation, Pagination } from 'swiper/modules'
 
 import styles from '/src/styles/components/Sliders/MainInstagramSlider/MainInstagramSlider.module.scss'
-import '/src/styles/swiper/swiper.scss'
 
 const Slide = () => {
 	const { t } = useTranslation()
@@ -92,7 +91,7 @@ const MainInstagramSlider = () => {
 					<Swiper
 						modules={[Navigation, Pagination]}
 						spaceBetween={-100}
-						slidesPerView={3.1}
+						slidesPerView={'3.1'}
 						navigation
 						pagination={{ clickable: true }}
 						onSlideChange={() => console.log('slide change')}
@@ -120,8 +119,11 @@ const MainInstagramSlider = () => {
 							<Slide />
 						</SwiperSlide>
 					</Swiper>
+					<div className={'${swiper-button-prev}'}></div>
+					<div className={'${swiper-pagination}'}></div>
+					<div className={'${swiper-button-next}'}></div>
 				</div>
-				<div className={`${styles.mainInstagramSliderBottomInnerWrapper}`}>
+				{/* <div className={`${styles.mainInstagramSliderBottomInnerWrapper}`}>
 					<div className={`${styles.mainInstagramSliderButtonsWrapper}`}>
 						<button
 							className={`${styles.mainInstagramSliderPreviousButton} ${styles.bannerCircleButton}`}
@@ -147,7 +149,7 @@ const MainInstagramSlider = () => {
 							className={`${styles.mainInstagramSliderNextArrowButton} ${styles.bannerCircleButton}`}
 						></button>
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	)
