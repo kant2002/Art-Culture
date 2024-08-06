@@ -7,6 +7,7 @@ import MainMuseums from '../../components/Blocks/MainMuseums.jsx'
 import MainNews from '../../components/Blocks/MainNews.jsx'
 import MainBannerSlider from '../../components/Sliders/MainBannerSlider/MainBannerSlider.jsx'
 import MainInstagramSlider from '../../components/Sliders/MainInstagramSlider/MainInstagramSlider.jsx'
+import MainPopularArtistsSlider from '../../components/Sliders/MainPopularArtistsSlider/MainPopularArtistsSlider.jsx'
 function MainPage() {
 	const handleScroll = useCallback(
 		debounce(() => {
@@ -63,6 +64,7 @@ function MainPage() {
 			<MainInstagramSlider />
 			<MainExhibitions />
 			<MainMuseums />
+			<MainPopularArtistsSlider />
 		</div>
 	)
 }
