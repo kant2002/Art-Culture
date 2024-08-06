@@ -55,11 +55,11 @@ const Footer = () => {
 									{t('Виставки')}
 								</a>
 							</li>
-							<li className={`${styles.footerMenuLi}`}>
+							{/* <li className={`${styles.footerMenuLi}`}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
 									{t('Контакти')}
 								</a>
-							</li>
+							</li> */}
 							<li className={`${styles.footerMenuLi}`}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
 									{t('Музеї')}
