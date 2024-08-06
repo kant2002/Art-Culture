@@ -57,11 +57,6 @@ const Footer = () => {
 							</li>
 							<li className={`${styles.footerMenuLi}`}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
-									{t('Контакти')}
-								</a>
-							</li>
-							<li className={`${styles.footerMenuLi}`}>
-								<a className={`${styles.footerMenuLink}`} href='#'>
 									{t('Музеї')}
 								</a>
 							</li>
