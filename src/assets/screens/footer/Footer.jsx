@@ -57,6 +57,11 @@ const Footer = () => {
 							</li>
 							<li className={`${styles.footerMenuLi}`}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
+									{t('Контакти')}
+								</a>
+							</li>
+							<li className={`${styles.footerMenuLi}`}>
+								<a className={`${styles.footerMenuLink}`} href='#'>
 									{t('Музеї')}
 								</a>
 							</li>
@@ -91,9 +96,9 @@ const Footer = () => {
 						</div>
 
 						<div className={`${styles.footerContactsWrapper}`}>
-							<div className={`${styles.footerContactsTitleWrapper}`}>
+							{/* <div className={`${styles.footerContactsTitleWrapper}`}>
 								<p className={`${styles.footerContactsTitle}`}>{t('Контакти')}</p>
-							</div>
+							</div> */}
 							<div className={`${styles.footerContactsLinkWrapper}`}>
 								<a className={`${styles.footerContactsLink}`} href='#'>
 									<img className={`${styles.footerContactsLinkImg}`} src='/Img/footerPlayUkraine.png' alt='PlayUkraine' />
