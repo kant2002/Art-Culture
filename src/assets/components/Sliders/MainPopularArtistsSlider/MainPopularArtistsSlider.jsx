@@ -20,27 +20,36 @@ const Slide = () => {
 			<div className={'${styles.mainPopularArtistsSliderWrapper}'}>
 				<div className={'${styles.mainPopularArtistsSliderTopInnerWrapper}'}>
 					<div className={'${styles.mainPopularArtistsSliderTitleWrapper}'}>
-						<p className={'${styles.mainPopularArtistsSliderTitle}'}>{t('Популярне. "Мистецтво"')}</p>
+						<p className={'${styles.mainPopularArtistsSliderTitle}'}>{t('Популярне. "Мистецтво"')}
+
+						</p>
 					</div>
-					<div className={'${styles.mainPopularArtistsSliderLikeAndShareWrapper>
-						< button className='socialLikeAndShareInner__likeButton circleButton'>
-						<img
-							className='likeButtonImg'
-							src='/Img/likeHeart.svg'
-							alt='Like' />
-					</>
-					<button className='socialLikeAndShareInner__shareButton circleButton'>
-						<img
-							className='shareButtonImg'
-							src='/Img/shareArrow.svg'
-							alt='Share' />
-					</button>
+					<div className={'${styles.mainPopularArtistsSliderLikeAndShareWrapper}'}>
+						<div className={'${styles.mainPopularArtistsSliderLikeInnerWrapper}'}>
+							<button className='socialLikeAndShareInner__likeButton circleButton'>
+								<img
+									className='likeButtonImg'
+									src='/Img/likeHeart.svg'
+									alt='Like' />
+							</button>
+						</div>
+						<div className={'${styles.mainPopularArtistsSliderShareInnerWrapper}'}>
+							<button className='socialLikeAndShareInner__shareButton circleButton'>
+								<img
+									className='shareButtonImg'
+									src='/Img/shareArrow.svg'
+									alt='Share' />
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div className={'${styles.mainPopularArtistsSliderBottomInnerWrapper}'}>
+
 				</div>
 			</div>
 
-			<div className={'${styles.mainPopularArtistsSliderBottomInnerWrapper}'}>
-
-			</div>
+		</div>
 	)
 }
 
