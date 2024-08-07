@@ -23,7 +23,18 @@ const Slide = () => {
             <p className={'${styles.mainPopularArtistsSliderTitle}'}>{t('Популярне. "Мистецтво"')}</p>
           </div>
           <div className={'${styles.mainPopularArtistsSliderLikeAndShareWrapper>
-          
+            <button className='socialLikeAndShareInner__likeButton circleButton'>
+              <img
+                                            className='likeButtonImg'
+                                            src='/Img/likeHeart.svg'
+                                            alt='Like' />
+            </button>
+            <button className='socialLikeAndShareInner__shareButton circleButton'>
+              <img
+                                            className='shareButtonImg'
+                                            src='/Img/shareArrow.svg'
+                                            alt='Share' />
+              </button>
           </div>
         </div>
 
