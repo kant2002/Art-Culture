@@ -16,9 +16,23 @@ const Slide = () => {
 	const { t } = useTranslation()
 
 	return (
-		<div className={`${styles.mainPopularArtistsSliderCardWrapper}`}>
-			
-		</div>
+		<div className={'${styles.mainPopularArtistsSliderContainer}'}>
+      <div className={'${styles.mainPopularArtistsSliderWrapper}'}>
+        <div className={'${styles.mainPopularArtistsSliderTopInnerWrapper}'}>
+          <div className={'${styles.mainPopularArtistsSliderTitleWrapper}'}>
+            <p className={'${styles.mainPopularArtistsSliderTitle}'}>{t('Популярне. "Мистецтво"')}</p>
+          </div>
+          <div className={'${styles.mainPopularArtistsSliderLikeAndShareWrapper>
+          
+          </div>
+        </div>
+
+        <div className={'${styles.mainPopularArtistsSliderBottomInnerWrapper}'}>
+
+        </div>
+
+    </div>
+</div>
 	)
 }
 
