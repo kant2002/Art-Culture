@@ -201,9 +201,7 @@ const MainInstagramSlider = () => {
 	useEffect(() => {
 		const fetchInstagramPosts = async () => {
 			try {
-				const response = await axios.get(
-					`https://graph.instagram.com/64890273425/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username&access_token=IGQWRPcGpzZAk9BZAUhCM2Fqc0FjLV9MdDI2azBTVFpxaGpGZAmtRX1FMNk9vM1ZAmVXFleDRLWFd4WWl4em1qRmp1VDdIYlNxNDZA5ZAWIwTm0yX19yR2wyd0EtX2pwWlJYVW5iMlVnNDR2ZAHNyN3NsQU1DYVZAoTGZA6THcZD`
-				)
+				const response = await axios.get(``)
 				setPosts(response.data.data)
 			} catch (error) {
 				console.error('Error fetching Instagram post data', error)
