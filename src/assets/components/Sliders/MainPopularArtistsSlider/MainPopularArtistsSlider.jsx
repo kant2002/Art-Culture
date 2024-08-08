@@ -22,7 +22,7 @@ const Slide = () => {
 				<img
 					className={"${styles.mainPopularArtistsSliderCardImg}"}
 					src="/public/Img/mainPopularArtistsSlide.jpg"
-					alt="Slide photo"
+					alt={t("Світлина мистецтва")}
 				/>
 			</div>
 			<div className={`${styles.mainPopularArtistsSliderCardAbsoluteWrapper}`}>
@@ -33,12 +33,12 @@ const Slide = () => {
 				</div>
 				<div className={`${styles.mainPopularArtistsSliderCardTitleWrapper}`}>
 					<h3 className={`${styles.mainPopularArtistsSliderCardTitle}`}>
-						{t("Огляд")}
+						Lorem Ipsum
 					</h3>
 				</div>	
 				<div className={`${styles.mainPopularArtistsSliderCardDescriptionWrapper}`}>
 					<p className={`${styles.mainPopularArtistsSliderCardDescription}`}>
-						{t("Огляд")}
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero vero numquam cum excepturi enim iste quis doloribus cupiditate? Temporibus, laboriosam quis? Reprehenderit velit sequi, inventore nostrum odit illum? Doloremque, veniam.
 					</p>
 				</div>							
 			</div>
