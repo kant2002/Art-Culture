@@ -17,19 +17,30 @@ const Slide = () => {
 
 	return (
 		<div className={`${styles.mainPopularArtistsSliderCardWrapper}`}>
+
 			<div className={`${styles.mainPopularArtistsSliderCardInnerWrapper}`}>
 				<img
 					className={"${styles.mainPopularArtistsSliderCardImg}"}
 					src="/public/Img/mainPopularArtistsSlide.jpg"
 					alt="Slide photo"
 				/>
-			< className={`${styles.mainPopularArtistsSliderCardInnerWrapper}`}>
+			</div>
+			<div className={`${styles.mainPopularArtistsSliderCardAbsoluteWrapper}`}>
 				<div className={`${styles.mainPopularArtistsSliderCardButtonWrapper}`}>
 					<button className={`${styles.mainPopularArtistsSliderCardButton}`}>
 						{t("Огляд")}
 					</button>
 				</div>
-				
+				<div className={`${styles.mainPopularArtistsSliderCardTitleWrapper}`}>
+					<h3 className={`${styles.mainPopularArtistsSliderCardTitle}`}>
+						{t("Огляд")}
+					</h3>
+				</div>	
+				<div className={`${styles.mainPopularArtistsSliderCardDescriptionWrapper}`}>
+					<p className={`${styles.mainPopularArtistsSliderCardDescription}`}>
+						{t("Огляд")}
+					</p>
+				</div>							
 			</div>
 		</div>
 	);
