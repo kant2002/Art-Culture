@@ -14,7 +14,6 @@ import styles from '/src/styles/components/Sliders/MainInstagramSlider/MainInsta
 
 const Slide = () => {
 	const { t } = useTranslation()
-
 	return (
 		<div className={`${styles.mainInstagramSliderCardWrapper}`}>
 			<div className={`${styles.mainInstagramSliderCardTopInnerWrapper}`}>
@@ -93,10 +92,9 @@ const MainInstagramSlider = () => {
 						spaceBetween={0}
 						slidesPerView={'auto'}
 						navigation
-						pagination={{clickable: false, type: 'fraction'}}
+						pagination={{ clickable: false, type: 'fraction' }}
 						onSlideChange={() => console.log('slide change')}
 						onSwiper={swiper => console.log(swiper)}
-						// centeredSlides={'true'}
 					>
 						<SwiperSlide>
 							<Slide />
@@ -124,33 +122,6 @@ const MainInstagramSlider = () => {
 					<div className={'${swiper-pagination}'}></div>
 					<div className={'${swiper-button-next}'}></div>
 				</div>
-				{/* <div className={`${styles.mainInstagramSliderBottomInnerWrapper}`}>
-					<div className={`${styles.mainInstagramSliderButtonsWrapper}`}>
-						<button
-							className={`${styles.mainInstagramSliderPreviousButton} ${styles.bannerCircleButton}`}
-						></button>
-						<div className={`${styles.mainInstagramSliderPaginationsWrapper}`}>
-							<p
-								className={`${styles.mainInstagramSliderPaginationsCurrentItem}`}
-							>
-								1
-							</p>
-							<p
-								className={`${styles.mainInstagramSliderPaginationsSeparator}`}
-							>
-								&#47;
-							</p>
-							<p
-								className={`${styles.mainInstagramSliderPaginationsTotalItems}`}
-							>
-								997
-							</p>
-						</div>
-						<button
-							className={`${styles.mainInstagramSliderNextArrowButton} ${styles.bannerCircleButton}`}
-						></button>
-					</div>
-				</div> */}
 			</div>
 		</div>
 	)

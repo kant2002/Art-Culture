@@ -1,33 +1,47 @@
-@import "/src/styles/utilities/variables.scss";
-@import "/src/styles/components/Sliders/MainPopularArtistsSlider/MainPopularArtistsSliderSwiper-vars.scss";
+@import '/src/styles/utilities/variables.scss';
+@import '/src/styles/components/Sliders/MainPopularArtistsSlider/MainPopularArtistsSliderSwiper-vars.scss';
 
 .mainPopularArtistsSliderContainer {
     // Контейнер слайдера
     display: flex;
-    width: 100vw;
-    margin: calc(79px - (12 * ((1440px - 100vw) / (1440 - 375)))) calc(70px - (48 * ((1440px - 100vw) / (1440 - 375)))) 0;
+    margin: calc(28px - (-5 * ((1440px - 100vw) / (1440 - 375)))) calc(70px - (48 * ((1440px - 100vw) / (1440 - 375)))) 0;
 }
 
 .mainPopularArtistsSliderWrapper {
     // Обёртка слайдера
     display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .mainPopularArtistsSliderTopInnerWrapper {
     // Верхняя часть слайдера
     display: flex;
+    justify-content: space-between;
+    padding: calc(51px - (17 * ((1440px - 100vw) / (1440 - 375)))) 0;
 }
 
 .mainPopularArtistsSliderTitleWrapper {
     // Обёртка заголовка
+    display: flex;
+    align-items: center;
 }
 
 .mainPopularArtistsSliderTitle {
-    // Заголовок
+    // Заголовок    
+    font-family: $default-font;
+    font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
 }
 
 .mainPopularArtistsSliderLikeAndShareWrapper {
     // Обёртка кнопок Like и Share
+    display: flex;
+	justify-content: space-between;
+    margin: 0 0 0 auto;
+    width: 177px;
 }
 
 .mainPopularArtistsSliderLikeInnerWrapper {
@@ -36,6 +50,18 @@
 
 .mainPopularArtistsSliderLikeButton {
     // Кнопка Like
+	position: relative;
+	display: flex;    
+}
+
+.mainPopularArtistsSliderLikeButton::after {
+    content: "Like";
+    position: absolute;
+    top: 6px;
+    left: 38px;
+    font-size: 18px;
+    user-select: none;
+    color: #000000;
 }
 
 .mainPopularArtistsSliderLikeButtonImg {
@@ -48,6 +74,18 @@
 
 .mainPopularArtistsSliderShareButtonButton {
     // Кнопка Share
+	position: relative;
+	display: flex;
+}
+
+.mainPopularArtistsSliderShareButtonButton::before {
+    content: "Share";
+    position: absolute;
+    top: 6px;
+    right: 38px;
+    font-size: 18px;
+    user-select: none;
+    color: #000000;
 }
 
 .mainPopularArtistsSliderShareButtonImg {
@@ -56,6 +94,9 @@
 
 .mainPopularArtistsSliderBottomInnerWrapper {
     // Нижняя часть слайдера
+    display: flex;
+    width:100%;
+    height: calc(514px - (75 * ((1440px - 100vw) / (1440 - 375))));;
 }
 
 .mainPopularArtistsSliderCardWrapper {
