@@ -73,7 +73,7 @@ const MainPopularArtistsSlider = () => {
 					</div>
 				</div>
 				<div className={`${styles.mainPopularArtistsSliderBottomInnerWrapper}`}>
-					<Swiper
+					<Swiper className={`${styles.mainPopularArtistsSliderSwiper}`}
 						modules={[Navigation, Pagination]}
 						spaceBetween={0}
 						slidesPerView={'auto'}
