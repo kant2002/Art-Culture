@@ -56,7 +56,7 @@ const MainPopularArtistsSlider = () => {
 				<div className="mainPopularArtistsSliderTopInnerWrapper">
 					<div className="mainPopularArtistsSliderTitleWrapper">
 						<p className="mainPopularArtistsSliderTitle">
-							{t('Популярне. "Мистецтво"')}
+							{t('Популярне.')} &#8243;{t('Мистецтво')}&#8243;
 						</p>
 					</div>
 					<div className="mainPopularArtistsSliderLikeAndShareWrapper">

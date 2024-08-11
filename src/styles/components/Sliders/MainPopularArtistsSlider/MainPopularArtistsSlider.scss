@@ -40,6 +40,7 @@
     // Обёртка кнопок Like и Share
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 0 0 0 auto;
     width: 177px;
 }
@@ -52,6 +53,7 @@
     // Кнопка Like
     position: relative;
     display: flex;
+    border-radius: 50%;
 }
 
 .mainPopularArtistsSliderLikeButton::after {
@@ -76,6 +78,7 @@
     // Кнопка Share
     position: relative;
     display: flex;
+    border-radius: 50%;
 }
 
 .mainPopularArtistsSliderShareButtonButton::before {
@@ -505,4 +508,17 @@
 
 .mainPopularArtistsSliderCardDescription {
     // Описание карточки
+}
+
+@media screen and (max-width: 600px) {
+    .mainPopularArtistsSliderLikeAndShareWrapper {
+        // Обёртка кнопок Like и Share
+        width: 80px;
+    }
+    .mainPopularArtistsSliderLikeButton::after {
+        display: none;
+    }
+    .mainPopularArtistsSliderShareButtonButton::before {
+        display: none;
+    }
 }
