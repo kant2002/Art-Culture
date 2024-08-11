@@ -1,0 +1,547 @@
+@import '/src/styles/utilities/variables.scss';
+@import '/node_modules/swiper/swiper-vars.scss';
+
+@at-root {
+    :root {
+        --swiper-navigation-size: calc(42px - (7 * ((1440px - 100vw) / (1440 - 375))));
+        --swiper-navigation-top-offset: 50%;
+        --swiper-navigation-sides-offset: 10px;
+        --swiper-navigation-color: var(--swiper-theme-color);  
+        --swiper-pagination-color: #fff;
+        --swiper-pagination-left: auto;
+        --swiper-pagination-right: 8px;
+        --swiper-pagination-bottom: calc(calc(6px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 2.5);
+        --swiper-pagination-top: auto;
+        --swiper-pagination-fraction-color: #fff;
+        --swiper-pagination-progressbar-bg-color: rgba(0, 0, 0, 0.25);
+        --swiper-pagination-progressbar-size: 4px;
+        --swiper-pagination-bullet-size: calc(6px - (2 * ((1440px - 100vw) / (1440 - 375))));
+        --swiper-pagination-bullet-width: calc(6px - (2 * ((1440px - 100vw) / (1440 - 375))));
+        --swiper-pagination-bullet-height: calc(6px - (2 * ((1440px - 100vw) / (1440 - 375))));
+        --swiper-pagination-bullet-border-radius: 50%;
+        --swiper-pagination-bullet-inactive-color: #A5A5A5;
+        --swiper-pagination-bullet-inactive-opacity: 0.2;
+        --swiper-pagination-bullet-opacity: 1;
+        --swiper-pagination-bullet-horizontal-gap: 2px;
+        --swiper-pagination-bullet-vertical-gap: 6px;
+    }
+}
+
+.mainInstagramSliderContainer {
+    // Основной контейнер слайдера
+    display: flex;
+    padding: 0 0 calc(36px - (7 * ((1440px - 100vw) / (1440 - 375)))) 0;
+    margin: calc(66px - (22 * ((1440px - 100vw) / (1440 - 375)))) 8px 0 8px;
+    background: #000;
+    overflow: hidden;
+
+}
+
+.mainInstagramSliderWrapper {
+    // Оболочка слайдера
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.mainInstagramSliderTopInnerWrapper {
+    // Внутренний верхний контейнер слайдера
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: calc(51px - (26 * ((1440px - 100vw) / (1440 - 375)))) calc(72px - (52 * ((1440px - 100vw) / (1440 - 375)))) calc(38px - (6 * ((1440px - 100vw) / (1440 - 375))));
+    width: 100%;
+}
+
+.mainInstagramSliderTitleWrapper {
+    // Оболочка заголовка слайдера
+    display: flex;
+}
+
+.mainInstagramSliderTitle {
+    // Заголовок слайдера
+    font-family: $default-font;
+    font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+}
+
+.mainInstagramSliderFollowUsWrapper {
+    // Оболочка для кнопки "Follow us"
+    display: flex;
+}
+
+.mainInstagramSliderFollowUsButtonWrapper {
+    // Оболочка кнопки "Follow us"
+    display: flex;
+}
+
+.mainInstagramSliderFollowUsButton {
+    // Кнопка "Follow us"
+    padding: 0;
+    width: calc(186px - (20 * ((1440px - 100vw) / (1440 - 375))));
+    height: calc(51px - (7 * ((1440px - 100vw) / (1440 - 375))));
+    min-width: 163px;
+    min-height: 44px;
+    max-width: 166px;
+    max-height: 51px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
+    border-radius: calc(34px - (4 * ((1440px - 100vw) / (1440 - 375))));
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.mainInstagramSliderFollowUsButtonText {
+    // Текст кнопки "Follow us"
+    margin: auto;
+    font-family: $default-font;
+    font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 500;
+}
+
+.mainInstagramSliderMiddleInnerWrapper {
+    // Внутренний средний контейнер слайдера
+    display: flex;
+    width: 100%;
+    height: calc(620px - (171 * ((1440px - 100vw) / (1440 - 375))));
+
+    .swiper-slide {
+        flex-shrink: 0;
+        width: auto;
+        height: 100%;
+        position: relative;
+        transition-property: transform;
+        display: block;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        position: absolute;
+        top: calc(578px - (164 * ((1440px - 100vw) / (1440 - 375))));
+        width: calc(42px - (7 * ((1440px - 100vw) / (1440 - 375))));
+        height: calc(42px - (7 * ((1440px - 100vw) / (1440 - 375))));
+        // margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
+        z-index: 11;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        border-radius: 50%;
+        color: var(--swiper-navigation-color, var(--swiper-theme-color));
+
+        &.swiper-button-disabled {
+            opacity: 0.35;
+            cursor: auto;
+            pointer-events: none;
+        }
+
+        &.swiper-button-hidden {
+            opacity: 0;
+            cursor: auto;
+            pointer-events: none;
+        }
+
+        .swiper-navigation-disabled & {
+            display: none !important;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transform-origin: center;
+        }
+
+        .swiper-rtl & svg {
+            transform: rotate(180deg);
+        }
+    }
+
+    .swiper-button-prev,
+    .swiper-rtl .swiper-button-next {
+        // left: calc(638px - (505 * ((1440px - 100vw) / (1440 - 375))));
+        left: calc(50vw - calc(calc(42px - (7 * ((1440px - 100vw) / (1440 - 375)))) * 1.14) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
+        right: auto;
+    }
+
+    .swiper-button-next,
+    .swiper-rtl .swiper-button-prev {
+        right: calc(50vw - calc(calc(42px - (7 * ((1440px - 100vw) / (1440 - 375)))) * 1.14) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
+        left: auto;
+    }
+
+    .swiper-button-lock {
+        display: none;
+    }
+
+    /* Navigation font start */
+    .swiper-button-prev,
+    .swiper-button-next {
+        &:after {
+            font-family: swiper-icons;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: none !important;
+            letter-spacing: 0;
+            font-variant: initial;
+            line-height: 1;
+        }
+    }
+
+    .swiper-button-prev,
+    .swiper-rtl .swiper-button-next {
+        &:after {
+            content: 'prev';
+        }
+    }
+
+    .swiper-button-next,
+    .swiper-rtl .swiper-button-prev {
+        right: calc(50vw - calc(calc(42px - (7 * ((1440px - 100vw) / (1440 - 375)))) * 1.24) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
+        left: auto;
+
+        &:after {
+            content: 'next';
+        }
+    }
+
+    .swiper-pagination {
+        position: absolute;
+        text-align: center;
+        transition: 300ms opacity;
+        transform: translate3d(0, 0, 0);
+        z-index: 10;
+
+        &.swiper-pagination-hidden {
+            opacity: 0;
+        }
+
+        .swiper-pagination-disabled>&,
+        &.swiper-pagination-disabled {
+            display: none !important;
+        }
+    }
+
+    /* Common Styles */
+    .swiper-pagination-fraction,
+    .swiper-pagination-custom,
+    .swiper-horizontal>.swiper-pagination-bullets,
+    .swiper-pagination-bullets.swiper-pagination-horizontal {
+        bottom: var(--swiper-pagination-bottom, 8px);
+        top: var(--swiper-pagination-top, auto);
+        left: 0;
+        width: 100%;
+    }
+
+    /* Bullets */
+    .swiper-pagination-bullets-dynamic {
+        overflow: hidden;
+        font-size: 0;
+
+        .swiper-pagination-bullet {
+            transform: scale(0.33);
+            position: relative;
+        }
+
+        .swiper-pagination-bullet-active {
+            transform: scale(1);
+        }
+
+        .swiper-pagination-bullet-active-main {
+            transform: scale(1);
+        }
+
+        .swiper-pagination-bullet-active-prev {
+            transform: scale(0.66);
+        }
+
+        .swiper-pagination-bullet-active-prev-prev {
+            transform: scale(0.33);
+        }
+
+        .swiper-pagination-bullet-active-next {
+            transform: scale(0.66);
+        }
+
+        .swiper-pagination-bullet-active-next-next {
+            transform: scale(0.33);
+        }
+    }
+
+    .swiper-pagination-bullet {
+        width: var(--swiper-pagination-bullet-width, var(--swiper-pagination-bullet-size, 8px));
+        height: var(--swiper-pagination-bullet-height, var(--swiper-pagination-bullet-size, 8px));
+        display: inline-block;
+        border-radius: var(--swiper-pagination-bullet-border-radius, 50%);
+        background: var(--swiper-pagination-bullet-inactive-color, #000);
+        opacity: var(--swiper-pagination-bullet-inactive-opacity, 0.2);
+
+        @at-root button#{&} {
+            border: none;
+            margin: 0;
+            padding: 0;
+            box-shadow: none;
+            appearance: none;
+        }
+
+        .swiper-pagination-clickable & {
+            cursor: pointer;
+        }
+
+        &:only-child {
+            display: none !important;
+        }
+    }
+
+    .swiper-pagination-bullet-active {
+        opacity: var(--swiper-pagination-bullet-opacity, 1);
+        background: var(--swiper-pagination-color, var(--swiper-theme-color));
+    }
+
+    .swiper-vertical>.swiper-pagination-bullets,
+    .swiper-pagination-vertical.swiper-pagination-bullets {
+        right: var(--swiper-pagination-right, 8px);
+        left: var(--swiper-pagination-left, auto);
+        top: 50%;
+        transform: translate3d(0px, -50%, 0);
+
+        .swiper-pagination-bullet {
+            margin: var(--swiper-pagination-bullet-vertical-gap, 6px) 0;
+            display: block;
+        }
+
+        &.swiper-pagination-bullets-dynamic {
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+
+            .swiper-pagination-bullet {
+                display: inline-block;
+                transition:
+                    200ms transform,
+                    200ms top;
+            }
+        }
+    }
+
+    .swiper-horizontal>.swiper-pagination-bullets,
+    .swiper-pagination-horizontal.swiper-pagination-bullets {
+        .swiper-pagination-bullet {
+            margin: 0 var(--swiper-pagination-bullet-horizontal-gap, 4px);
+        }
+
+        &.swiper-pagination-bullets-dynamic {
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+
+            .swiper-pagination-bullet {
+                transition:
+                    200ms transform,
+                    200ms left;
+            }
+        }
+    }
+
+    .swiper-horizontal.swiper-rtl>.swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
+        transition:
+            200ms transform,
+            200ms right;
+    }
+
+    /* Fraction */
+    .swiper-pagination-fraction {
+        color: var(--swiper-pagination-fraction-color, inherit);
+    }
+
+    /* Progress */
+    .swiper-pagination-progressbar {
+        background: var(--swiper-pagination-progressbar-bg-color, rgba(0, 0, 0, 0.25));
+        position: absolute;
+
+        .swiper-pagination-progressbar-fill {
+            background: var(--swiper-pagination-color, var(--swiper-theme-color));
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            transform: scale(0);
+            transform-origin: left top;
+        }
+
+        .swiper-rtl & .swiper-pagination-progressbar-fill {
+            transform-origin: right top;
+        }
+
+        .swiper-horizontal>&,
+        &.swiper-pagination-horizontal,
+        .swiper-vertical>&.swiper-pagination-progressbar-opposite,
+        &.swiper-pagination-vertical.swiper-pagination-progressbar-opposite {
+            width: 100%;
+            height: var(--swiper-pagination-progressbar-size, 4px);
+            left: 0;
+            top: 0;
+        }
+
+        .swiper-vertical>&,
+        &.swiper-pagination-vertical,
+        .swiper-horizontal>&.swiper-pagination-progressbar-opposite,
+        &.swiper-pagination-horizontal.swiper-pagination-progressbar-opposite {
+            width: var(--swiper-pagination-progressbar-size, 4px);
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+    }
+
+    .swiper-pagination-lock {
+        display: none;
+    }
+}
+
+.mainInstagramSliderCardWrapper {
+    // Оболочка карточки слайдера
+    width: calc(438px - (134 * ((1440px - 100vw) / (1440 - 375))));
+    height: calc(541px - (154 * ((1440px - 100vw) / (1440 - 375))));
+    padding: 0 calc(19px - (11 * ((1440px - 100vw) / (1440 - 375))));
+    display: flex;
+    flex-direction: column;
+}
+
+.mainInstagramSliderCardTopInnerWrapper {
+    // Внутренний верхний контейнер карточки
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: calc(21px - (7 * ((1440px - 100vw) / (1440 - 375)))) calc(21px - (5 * ((1440px - 100vw) / (1440 - 375)))) calc(18px - (8 * ((1440px - 100vw) / (1440 - 375))));
+    background: #1A1A1A;
+    border-radius: 6px 6px 0 0;
+}
+
+.mainInstagramSliderCardUserPhotoWrapper {
+    // Оболочка для фото пользователя
+    display: flex;
+    width: calc(50px - (18 * ((1440px - 100vw) / (1440 - 375))));
+    height: calc(50px - (18 * ((1440px - 100vw) / (1440 - 375))));
+}
+
+.mainInstagramSliderCardUserPhoto {
+    // Фото пользователя    
+    // aspect-ratio: 630 / 330; // например, соотношение сторон 21:11
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.mainInstagramSliderCardUserNameWrapper {
+    // Оболочка для имени пользователя
+    display: flex;
+    padding: 0 0 0 calc(12px - (5 * ((1440px - 100vw) / (1440 - 375))));
+    margin: 0 auto 0 0;
+}
+
+.mainInstagramSliderCardUserName {
+    // Имя пользователя
+    font-family: $default-font;
+    font-weight: normal;
+    font-size: calc(18px - (6 * ((1440px - 100vw) / (1440 - 375))));
+    color: #fff;
+}
+
+.mainInstagramSliderCardDateWrapper {
+    // Оболочка для даты
+    display: flex;
+}
+
+.mainInstagramSliderCardDate {
+    // Дата
+    font-family: $default-font;
+    font-weight: normal;
+    font-size: calc(18px - (6 * ((1440px - 100vw) / (1440 - 375))));
+    color: #A5A5A5;
+}
+
+.mainInstagramSliderCardMiddleInnerWrapper {
+    // Внутренний средний контейнер карточки
+    display: flex;
+    background: #1A1A1A;
+
+}
+
+.mainInstagramSliderCardImg {
+    // Изображение карточки    
+    // aspect-ratio: 630 / 330; // например, соотношение сторон 21:11
+    object-fit: contain;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.mainInstagramSliderCardBottomInnerWrapper {
+    // Внутренний нижний контейнер карточки
+    background: #1A1A1A;
+    border-radius: 0 0 6px 6px;
+    padding: calc(17px - (7 * ((1440px - 100vw) / (1440 - 375)))) calc(21px - (5 * ((1440px - 100vw) / (1440 - 375)))) calc(21px - (5 * ((1440px - 100vw) / (1440 - 375))));
+}
+
+.mainInstagramSliderCardDescriptionWrapper {
+    // Оболочка для описания
+    display: flex;
+}
+
+.mainInstagramSliderCardDescription {
+    // Описание
+    font-family: $default-font;
+    font-weight: 300;
+    font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
+    color: #fff;
+}
+
+.mainInstagramSliderBottomInnerWrapper {
+    // Внутренний нижний контейнер слайдера
+    display: flex;
+    justify-content: center;
+}
+
+.mainInstagramSliderButtonsWrapper {
+    // Оболочка для кнопок слайдера
+    display: flex;
+    flex-direction: row;
+}
+
+.mainInstagramSliderPreviousButton {
+    // Кнопка "предыдущий" слайдера
+    display: flex;
+}
+
+.mainInstagramSliderNextArrowButton {
+    // Кнопка "следующий" слайдера
+}
+
+.bannerCircleButton {
+    // Общий стиль для круговых кнопок
+}
+
+.mainInstagramSliderPaginationsWrapper {
+    // Оболочка для пагинации
+}
+
+.mainInstagramSliderPaginationsCurrentItem {
+    // Текущий элемент пагинации
+}
+
+.mainInstagramSliderPaginationsSeparator {
+    // Разделитель пагинации
+}
+
+.mainInstagramSliderPaginationsTotalItems {
+    // Общее количество элементов пагинации
+}
