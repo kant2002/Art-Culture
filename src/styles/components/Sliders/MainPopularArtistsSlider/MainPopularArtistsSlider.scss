@@ -98,6 +98,33 @@
     width: 100%;
     height: calc(514px - (75 * ((1440px - 100vw) / (1440 - 375))));
 
+    @at-root {
+        :root {
+            --swiper-navigation-size: calc(42px - (7 * ((1440px - 100vw) / (1440 - 375))));
+            // --swiper-navigation-top-offset: 50%;
+            // --swiper-navigation-sides-offset: 10px;
+            // --swiper-navigation-color: #fff;
+            // --swiper-pagination-color: #000000;
+            // --swiper-pagination-left: auto;
+            // --swiper-pagination-right: 8px;
+            // --swiper-pagination-bottom: calc(calc(6px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 2.5);
+            // --swiper-pagination-top: auto;
+            // --swiper-pagination-fraction-color: #000000;
+            // --swiper-pagination-progressbar-bg-color: rgba(0, 0, 0, 0.25);
+            // --swiper-pagination-progressbar-size: 4px;
+            // --swiper-pagination-bullet-size: calc(6px - (2 * ((1440px - 100vw) / (1440 - 375))));
+            // --swiper-pagination-bullet-width: calc(6px - (2 * ((1440px - 100vw) / (1440 - 375))));
+            // --swiper-pagination-bullet-height: calc(6px - (2 * ((1440px - 100vw) / (1440 - 375))));
+            // --swiper-pagination-bullet-border-radius: 50%;
+            // --swiper-pagination-bullet-inactive-color: #A5A5A5;
+            // --swiper-pagination-bullet-inactive-opacity: 0.2;
+            // --swiper-pagination-bullet-opacity: 1;
+            // --swiper-pagination-bullet-horizontal-gap: 2px;
+            // --swiper-pagination-bullet-vertical-gap: 6px;
+        }
+    }
+
+
     .swiper-wrapper {
         position: relative;
         margin: 0 0 0 -20px;
@@ -122,18 +149,18 @@
     .swiper-button-prev,
     .swiper-button-next {
         position: absolute;
-        top: calc(578px - (164 * ((1440px - 100vw) / (1440 - 375))));
-        width: calc(42px - (7 * ((1440px - 100vw) / (1440 - 375))));
-        height: calc(42px - (7 * ((1440px - 100vw) / (1440 - 375))));
+        top: calc(470px - (67 * ((1440px - 100vw) / (1440 - 375))));
+        width: var(--swiper-navigation-size);
+        height: var(--swiper-navigation-size);
         // margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
         z-index: 11;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #fff;
+        background: #000000;
         border-radius: 50%;
-        color: var(--swiper-navigation-color, var(--swiper-theme-color));
+        color: white;
 
         &.swiper-button-disabled {
             opacity: 0.35;
@@ -166,13 +193,13 @@
     .swiper-button-prev,
     .swiper-rtl .swiper-button-next {
         // left: calc(638px - (505 * ((1440px - 100vw) / (1440 - 375))));
-        left: calc(50vw - calc(calc(42px - (7 * ((1440px - 100vw) / (1440 - 375)))) * 1.14) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
+        left: calc(50% - calc(var(--swiper-navigation-size) * 1.14) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
         right: auto;
     }
 
     .swiper-button-next,
     .swiper-rtl .swiper-button-prev {
-        right: calc(50vw - calc(calc(42px - (7 * ((1440px - 100vw) / (1440 - 375)))) * 1.14) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
+        right: calc(50% - calc(var(--swiper-navigation-size) * 1.14) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
         left: auto;
     }
 
@@ -203,35 +230,11 @@
 
     .swiper-button-next,
     .swiper-rtl .swiper-button-prev {
-        right: calc(50vw - calc(calc(42px - (7 * ((1440px - 100vw) / (1440 - 375)))) * 1.24) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
+        right: calc(50% - calc(var(--swiper-navigation-size) * 1.24) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
         left: auto;
 
         &:after {
             content: 'next';
-        }
-    }
-
-    @at-root {
-        :root {
-
-            --swiper-pagination-color: #fff;
-            --swiper-pagination-left: auto;
-            --swiper-pagination-right: 8px;
-            --swiper-pagination-bottom: calc(calc(6px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 2.5);
-            --swiper-pagination-top: auto;
-            --swiper-pagination-fraction-color: #fff;
-            --swiper-pagination-progressbar-bg-color: rgba(0, 0, 0, 0.25);
-            --swiper-pagination-progressbar-size: 4px;
-            --swiper-pagination-bullet-size: calc(6px - (2 * ((1440px - 100vw) / (1440 - 375))));
-            --swiper-pagination-bullet-width: calc(6px - (2 * ((1440px - 100vw) / (1440 - 375))));
-            --swiper-pagination-bullet-height: calc(6px - (2 * ((1440px - 100vw) / (1440 - 375))));
-            --swiper-pagination-bullet-border-radius: 50%;
-            --swiper-pagination-bullet-inactive-color: #A5A5A5;
-            --swiper-pagination-bullet-inactive-opacity: 0.2;
-            --swiper-pagination-bullet-opacity: 1;
-            --swiper-pagination-bullet-horizontal-gap: 2px;
-            --swiper-pagination-bullet-vertical-gap: 6px;
-
         }
     }
 
@@ -257,7 +260,7 @@
     .swiper-pagination-custom,
     .swiper-horizontal>.swiper-pagination-bullets,
     .swiper-pagination-bullets.swiper-pagination-horizontal {
-        bottom: var(--swiper-pagination-bottom, 8px);
+        bottom: calc(calc(14px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 2.5);
         top: var(--swiper-pagination-top, auto);
         left: 0;
         width: 100%;
@@ -381,7 +384,7 @@
 
     /* Fraction */
     .swiper-pagination-fraction {
-        color: var(--swiper-pagination-fraction-color, inherit);
+        color: black;
     }
 
     /* Progress */
