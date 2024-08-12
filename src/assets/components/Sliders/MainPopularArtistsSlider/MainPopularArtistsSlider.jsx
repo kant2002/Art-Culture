@@ -19,8 +19,12 @@ const Slide = () => {
 			<div className="mainPopularArtistsSliderCardInnerWrapper">
 				<img
 					className="mainPopularArtistsSliderCardImg"
-					src='/public/Img/mainPopularArtistsSlide.jpg'
+					src={'/Img/mainPopularArtistsSliderIMG.jpg'}
 					alt={t('Світлина мистецтва')}
+					onError={e => {
+						e.target.onerror = null
+						e.target.src = '/Img/mainPopularArtistsSlide.jpg'
+					}}
 				/>
 			</div>
 			<div className="mainPopularArtistsSliderCardAbsoluteWrapper">
@@ -62,23 +66,37 @@ const MainPopularArtistsSlider = () => {
 					<div className="mainPopularArtistsSliderLikeAndShareWrapper">
 						<div className="mainPopularArtistsSliderLikeInnerWrapper">
 							<button className="mainPopularArtistsSliderLikeButton">
-								<img className="mainPopularArtistsSliderLikeButtonImg" src='/Img/likeHeart.svg' alt='Like' />
+								<img className="mainPopularArtistsSliderLikeButtonImg"
+									src={'/Img/likeHeart.svg'}
+									alt={t('Світлина вподобайки')}
+									onError={e => {
+										e.target.onerror = null
+										e.target.src = '/Img/likeHeart.svg'
+									}}
+								/>
 							</button>
 						</div>
 						<div className="mainPopularArtistsSliderShareInnerWrapper">
 							<button className="mainPopularArtistsSliderShareButtonButton">
-								<img className="mainPopularArtistsSliderShareButtonImg" src='/Img/shareArrow.svg' alt='Share' />
+								<img className="mainPopularArtistsSliderShareButtonImg"
+									src={'/Img/shareArrow.svg'}
+									alt={t('Світлина поширити')}
+									onError={e => {
+										e.target.onerror = null
+										e.target.src = '/Img/shareArrow.svg'
+									}}
+								/>
 							</button>
 						</div>
 					</div>
 				</div>
 				<div className="mainPopularArtistsSliderBottomInnerWrapper">
-					<Swiper 
+					<Swiper
 						modules={[Navigation, Pagination]}
 						spaceBetween={0}
 						slidesPerView={'auto'}
 						navigation
-						pagination={{clickable: false, type: 'fraction'}}
+						pagination={{ clickable: false, type: 'fraction' }}
 						onSlideChange={() => console.log('slide change')}
 						onSwiper={(swiper) => console.log(swiper)}
 					>
