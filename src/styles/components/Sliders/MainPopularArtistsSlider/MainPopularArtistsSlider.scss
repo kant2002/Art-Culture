@@ -1,0 +1,303 @@
+@import '/src/styles/utilities/variables.scss';
+// @import '/src/styles/components/Sliders/MainPopularArtistsSlider/MainPopularArtistsSliderSwiper-vars.scss';
+
+.mainPopularArtistsSliderContainer {
+    // Контейнер слайдера
+    display: flex;
+    margin: calc(28px - (-5 * ((1440px - 100vw) / (1440 - 375)))) calc(70px - (48 * ((1440px - 100vw) / (1440 - 375)))) calc(40px - (17 * ((1440px - 100vw) / (1440 - 375))));
+}
+
+.mainPopularArtistsSliderWrapper {
+    // Обёртка слайдера
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.mainPopularArtistsSliderTopInnerWrapper {
+    // Верхняя часть слайдера
+    display: flex;
+    justify-content: space-between;
+    padding: calc(51px - (17 * ((1440px - 100vw) / (1440 - 375)))) 0;
+}
+
+.mainPopularArtistsSliderTitleWrapper {
+    // Обёртка заголовка
+    display: flex;
+    align-items: center;
+}
+
+.mainPopularArtistsSliderTitle {
+    // Заголовок    
+    font-family: $default-font;
+    font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+}
+
+.mainPopularArtistsSliderLikeAndShareWrapper {
+    // Обёртка кнопок Like и Share
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 0 auto;
+    width: 177px;
+}
+
+.mainPopularArtistsSliderLikeInnerWrapper {
+    // Обёртка кнопки Like
+}
+
+.mainPopularArtistsSliderLikeButton {
+    // Кнопка Like
+    position: relative;
+    display: flex;
+    border-radius: 50%;
+}
+
+.mainPopularArtistsSliderLikeButton::after {
+    content: "Like";
+    position: absolute;
+    top: 6px;
+    left: 38px;
+    font-size: 18px;
+    user-select: none;
+    color: #000000;
+}
+
+.mainPopularArtistsSliderLikeButtonImg {
+    // Изображение кнопки Like
+}
+
+.mainPopularArtistsSliderShareInnerWrapper {
+    // Обёртка кнопки Share
+}
+
+.mainPopularArtistsSliderShareButtonButton {
+    // Кнопка Share
+    position: relative;
+    display: flex;
+    border-radius: 50%;
+}
+
+.mainPopularArtistsSliderShareButtonButton::before {
+    content: "Share";
+    position: absolute;
+    top: 6px;
+    right: 38px;
+    font-size: 18px;
+    user-select: none;
+    color: #000000;
+}
+
+.mainPopularArtistsSliderShareButtonImg {
+    // Изображение кнопки Share
+}
+
+.mainPopularArtistsSliderBottomInnerWrapper {
+    // Нижняя часть слайдера
+    display: flex;
+    width: 100%;
+    height: calc(514px - (75 * ((1440px - 100vw) / (1440 - 375))));
+
+    @at-root {
+        :root {
+            --swiper-navigation-size: calc(42px - (7 * ((1440px - 100vw) / (1440 - 375))));
+        }
+    }
+
+    .swiper-wrapper {
+        position: relative;
+        margin: 0 0 0 calc(-20px - (-1 * ((1440px - 100vw) / (1440 - 375))));
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        display: flex;
+        transition-property: transform;
+        transition-timing-function: var(--swiper-wrapper-transition-timing-function, initial);
+        box-sizing: content-box;
+    }
+
+    .swiper-slide {
+        flex-shrink: 0;
+        width: auto;
+        height: 100%;
+        position: relative;
+        transition-property: transform;
+        display: block;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        position: absolute;
+        top: calc(calc(514px - (75 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 2));
+        width: var(--swiper-navigation-size);
+        height: var(--swiper-navigation-size);
+        // margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
+        z-index: 11;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #000000;
+        border-radius: 50%;
+        color: white;
+    }
+
+    .swiper-button-prev,
+    .swiper-rtl .swiper-button-next {
+        // left: calc(638px - (505 * ((1440px - 100vw) / (1440 - 375))));
+        left: calc(50% - calc(var(--swiper-navigation-size) * 1.14) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
+        right: auto;
+    }
+
+    .swiper-button-next,
+    .swiper-rtl .swiper-button-prev {
+        right: calc(50% - calc(var(--swiper-navigation-size) * 1.14) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
+        left: auto;
+    }
+
+    /* Navigation font start */
+    .swiper-button-prev,
+    .swiper-button-next {
+        &:after {
+            font-family: swiper-icons;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: none !important;
+            letter-spacing: 0;
+            font-variant: initial;
+            line-height: 1;
+        }
+    }
+
+    .swiper-button-next,
+    .swiper-rtl .swiper-button-prev {
+        right: calc(50% - calc(var(--swiper-navigation-size) * 1.24) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
+        left: auto;
+    }
+
+    /* Common Styles */
+    .swiper-pagination-fraction,
+    .swiper-pagination-custom,
+    .swiper-horizontal>.swiper-pagination-bullets,
+    .swiper-pagination-bullets.swiper-pagination-horizontal {
+        // bottom: calc(calc(14px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 2.5);
+        top: calc(calc(514px - (75 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 1.4));
+        left: 0;
+        width: 100%;
+    }
+
+    /* Fraction */
+    .swiper-pagination-fraction {
+        color: black;
+    }
+}
+
+.mainPopularArtistsSliderCardWrapper {
+    // Обёртка карточки слайдера
+    width: calc(295px - (21 * ((1440px - 100vw) / (1440 - 375))));
+    height: calc(430px - (50 * ((1440px - 100vw) / (1440 - 375))));
+    margin: 0 calc(20px - (2 * ((1440px - 100vw) / (1440 - 375))));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.mainPopularArtistsSliderCardInnerWrapper {
+    // Внутренняя обёртка карточки
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.mainPopularArtistsSliderCardImg {
+    // Изображение карточки
+    // aspect-ratio: 630 / 330; // например, соотношение сторон 21:11
+    position: absolute;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+}
+
+.mainPopularArtistsSliderCardAbsoluteWrapper {
+    // Абсолютная обёртка карточки
+    position: absolute;
+    padding: 27px calc(21px - (3 * ((1440px - 100vw) / (1440 - 375)))) 28px 21px;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+.mainPopularArtistsSliderCardButtonWrapper {
+    // Обёртка кнопки карточки
+    display: flex;
+    justify-content: end;
+    margin: 0 0 auto 0;
+}
+
+.mainPopularArtistsSliderCardButton {
+    // Кнопка карточки
+    width: calc(129px - (18 * ((1440px - 100vw) / (1440 - 375))));    
+    height: calc(51px - (7 * ((1440px - 100vw) / (1440 - 375))));
+    min-width: 111px;
+    min-height: 44px;
+    max-width: 129px;
+    max-height: 51px;
+    border-radius: 34px;
+    font-family: $default-font;
+    font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: normal;
+}
+
+.mainPopularArtistsSliderCardTitleWrapper {
+    // Обёртка заголовка карточки
+    display: flex;
+    margin: auto 0 0 0;
+}
+
+.mainPopularArtistsSliderCardTitle {
+    // Заголовок карточки
+    color: #fff;
+    font-family: $default-font;
+    font-weight: normal;    
+    font-size: calc(22px - (4 * ((1440px - 100vw) / (1440 - 375))));
+    text-transform: uppercase;
+}
+
+.mainPopularArtistsSliderCardDescriptionWrapper {
+    // Обёртка описания карточки
+    margin: calc(15px - (5 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+	height: calc(calc(16px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 2); // Делаем ограничение вывода текста построчечно
+	overflow: hidden;
+}
+
+.mainPopularArtistsSliderCardDescription {
+    // Описание карточки
+    color: #fff;
+    font-family: $default-font;
+    font-weight: 300;    
+    font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
+}
+
+@media screen and (max-width: 600px) {
+    .mainPopularArtistsSliderLikeAndShareWrapper {
+        // Обёртка кнопок Like и Share
+        width: 80px;
+    }
+    .mainPopularArtistsSliderLikeButton::after {
+        display: none;
+    }
+    .mainPopularArtistsSliderShareButtonButton::before {
+        display: none;
+    }
+}

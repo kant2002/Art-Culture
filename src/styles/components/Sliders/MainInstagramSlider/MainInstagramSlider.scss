@@ -1,14 +1,5 @@
-@import "/src/styles/utilities/variables.scss";
-@import '/node_modules/swiper/swiper-vars.scss';
-
-@at-root {
-    :root {
-        --swiper-navigation-size: calc(42px - (7 * ((1440px - 100vw) / (1440 - 375))));
-        --swiper-navigation-top-offset: 50%;
-        --swiper-navigation-sides-offset: 10px;
-        --swiper-navigation-color: var(--swiper-theme-color);
-    }
-}
+@import '/src/styles/utilities/variables.scss';
+// @import '/node_modules/swiper/swiper-vars.scss';
 
 .mainInstagramSliderContainer {
     // Основной контейнер слайдера
@@ -17,7 +8,6 @@
     margin: calc(66px - (22 * ((1440px - 100vw) / (1440 - 375)))) 8px 0 8px;
     background: #000;
     overflow: hidden;
-
 }
 
 .mainInstagramSliderWrapper {
@@ -91,6 +81,81 @@
     display: flex;
     width: 100%;
     height: calc(620px - (171 * ((1440px - 100vw) / (1440 - 375))));
+
+    @at-root {
+        :root {
+            --swiper-navigation-size: calc(42px - (7 * ((1440px - 100vw) / (1440 - 375))));
+        }
+    }    
+
+    .swiper-slide {
+        width: auto;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        position: absolute;
+        top: calc(599px - (168 * ((1440px - 100vw) / (1440 - 375))));
+        width: var(--swiper-navigation-size);
+        height: var(--swiper-navigation-size);
+        // margin-top: calc((var(--swiper-navigation-size) / 2));
+        z-index: 11;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        border-radius: 50%;
+        color: rgb(0, 0, 0);
+    }
+
+    .swiper-button-prev,
+    .swiper-rtl .swiper-button-next {
+        // left: calc(638px - (505 * ((1440px - 100vw) / (1440 - 375))));
+        left: calc(50% - calc(var(--swiper-navigation-size) * 1.14) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
+        right: auto;
+    }
+
+    .swiper-button-next,
+    .swiper-rtl .swiper-button-prev {
+        right: calc(50% - calc(var(--swiper-navigation-size) * 1.14) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
+        left: auto;
+    }
+
+    /* Navigation font start */
+    .swiper-button-prev,
+    .swiper-button-next {
+        &:after {
+            font-family: swiper-icons;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: none !important;
+            letter-spacing: 0;
+            font-variant: initial;
+            line-height: 1;
+        }
+    }
+
+    .swiper-button-next,
+    .swiper-rtl .swiper-button-prev {
+        right: calc(50% - calc(var(--swiper-navigation-size) * 1.24) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
+        left: auto;
+    }
+
+    /* Common Styles */
+    .swiper-pagination-fraction,
+    .swiper-pagination-custom,
+    .swiper-horizontal>.swiper-pagination-bullets,
+    .swiper-pagination-bullets.swiper-pagination-horizontal {
+        bottom: calc(calc(6px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 2.5);
+        top: var(--swiper-pagination-top, auto);
+        left: 0;
+        width: 100%;
+    }
+    /* Fraction */
+    .swiper-pagination-fraction {
+        color: white;
+    }
 }
 
 .mainInstagramSliderCardWrapper {
@@ -161,7 +226,6 @@
     // Внутренний средний контейнер карточки
     display: flex;
     background: #1A1A1A;
-
 }
 
 .mainInstagramSliderCardImg {
@@ -183,6 +247,8 @@
 .mainInstagramSliderCardDescriptionWrapper {
     // Оболочка для описания
     display: flex;
+	height: calc(calc(16px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 4); // Делаем ограничение вывода текста построчечно
+	overflow: hidden;
 }
 
 .mainInstagramSliderCardDescription {
