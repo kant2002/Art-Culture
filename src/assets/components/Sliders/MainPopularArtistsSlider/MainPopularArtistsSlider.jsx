@@ -3,39 +3,39 @@ import { useTranslation } from 'react-i18next'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 // Import Swiper styles
-import '/src/styles/components/Sliders/MainPopularArtistsSlider/MainPopularArtistsSliderSwiper.scss'
-import '/src/styles/components/Sliders/MainPopularArtistsSlider/MainPopularArtistsSliderNavigation.scss'
-import '/src/styles/components/Sliders/MainPopularArtistsSlider/MainPopularArtistsSliderPagination.scss'
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 // Import Swiper modules
 import { Navigation, Pagination } from 'swiper/modules'
 
-import styles from '/src/styles/components/Sliders/MainPopularArtistsSlider/MainPopularArtistsSlider.module.scss'
+import '/src/styles/components/Sliders/MainPopularArtistsSlider/MainPopularArtistsSlider.scss';
 
 const Slide = () => {
 	const { t } = useTranslation();
 	return (
-		<div className={`${styles.mainPopularArtistsSliderCardWrapper}`}>
-			<div className={`${styles.mainPopularArtistsSliderCardInnerWrapper}`}>
+		<div className="mainPopularArtistsSliderCardWrapper">
+			<div className="mainPopularArtistsSliderCardInnerWrapper">
 				<img
-					className={`${styles.mainPopularArtistsSliderCardImg}`}
+					className="mainPopularArtistsSliderCardImg"
 					src='/public/Img/mainPopularArtistsSlide.jpg'
 					alt={t('Світлина мистецтва')}
 				/>
 			</div>
-			<div className={`${styles.mainPopularArtistsSliderCardAbsoluteWrapper}`}>
-				<div className={`${styles.mainPopularArtistsSliderCardButtonWrapper}`}>
-					<button className={`${styles.mainPopularArtistsSliderCardButton}`}>
+			<div className="mainPopularArtistsSliderCardAbsoluteWrapper">
+				<div className="mainPopularArtistsSliderCardButtonWrapper">
+					<button className="mainPopularArtistsSliderCardButton">
 						{t('Огляд')}
 					</button>
 				</div>
-				<div className={`${styles.mainPopularArtistsSliderCardTitleWrapper}`}>
-					<h3 className={`${styles.mainPopularArtistsSliderCardTitle}`}>
+				<div className="mainPopularArtistsSliderCardTitleWrapper">
+					<h3 className="mainPopularArtistsSliderCardTitle">
 						Lorem Ipsum
 					</h3>
 				</div>
-				<div className={`${styles.mainPopularArtistsSliderCardDescriptionWrapper}`}>
-					<p className={`${styles.mainPopularArtistsSliderCardDescription}`}>
+				<div className="mainPopularArtistsSliderCardDescriptionWrapper">
+					<p className="mainPopularArtistsSliderCardDescription">
 						Lorem ipsum dolor sit amet consectetur adipisicing elit.
 						Libero vero numquam cum excepturi enim iste quis
 						doloribus cupiditate? Temporibus, laboriosam quis?
@@ -51,29 +51,29 @@ const Slide = () => {
 const MainPopularArtistsSlider = () => {
 	const { t } = useTranslation();
 	return (
-		<div className={`${styles.mainPopularArtistsSliderContainer}`}>
-			<div className={`${styles.mainPopularArtistsSliderWrapper}`}>
-				<div className={`${styles.mainPopularArtistsSliderTopInnerWrapper}`}>
-					<div className={`${styles.mainPopularArtistsSliderTitleWrapper}`}>
-						<p className={`${styles.mainPopularArtistsSliderTitle}`}>
-							{t('Популярне. "Мистецтво"')}
+		<div className="mainPopularArtistsSliderContainer">
+			<div className="mainPopularArtistsSliderWrapper">
+				<div className="mainPopularArtistsSliderTopInnerWrapper">
+					<div className="mainPopularArtistsSliderTitleWrapper">
+						<p className="mainPopularArtistsSliderTitle">
+							{t('Популярне.')} &#8243;{t('Мистецтво')}&#8243;
 						</p>
 					</div>
-					<div className={`${styles.mainPopularArtistsSliderLikeAndShareWrapper}`}>
-						<div className={`${styles.mainPopularArtistsSliderLikeInnerWrapper}`}>
-							<button className={`${styles.mainPopularArtistsSliderLikeButton}`}>
-								<img className={`${styles.mainPopularArtistsSliderLikeButtonImg}`} src='/public/Img/likeHeart.svg' alt='Like' />
+					<div className="mainPopularArtistsSliderLikeAndShareWrapper">
+						<div className="mainPopularArtistsSliderLikeInnerWrapper">
+							<button className="mainPopularArtistsSliderLikeButton">
+								<img className="mainPopularArtistsSliderLikeButtonImg" src='/public/Img/likeHeart.svg' alt='Like' />
 							</button>
 						</div>
-						<div className={`${styles.mainPopularArtistsSliderShareInnerWrapper}`}>
-							<button className={`${styles.mainPopularArtistsSliderShareButtonButton}`}>
-								<img className={`${styles.mainPopularArtistsSliderShareButtonImg}`} src='/public/Img/shareArrow.svg' alt='Share' />
+						<div className="mainPopularArtistsSliderShareInnerWrapper">
+							<button className="mainPopularArtistsSliderShareButtonButton">
+								<img className="mainPopularArtistsSliderShareButtonImg" src='/public/Img/shareArrow.svg' alt='Share' />
 							</button>
 						</div>
 					</div>
 				</div>
-				<div className={`${styles.mainPopularArtistsSliderBottomInnerWrapper}`}>
-					<Swiper className={`${styles.mainPopularArtistsSliderSwiper}`}
+				<div className="mainPopularArtistsSliderBottomInnerWrapper">
+					<Swiper 
 						modules={[Navigation, Pagination]}
 						spaceBetween={0}
 						slidesPerView={'auto'}
