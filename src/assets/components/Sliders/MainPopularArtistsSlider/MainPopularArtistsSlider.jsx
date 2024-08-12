@@ -62,12 +62,12 @@ const MainPopularArtistsSlider = () => {
 					<div className="mainPopularArtistsSliderLikeAndShareWrapper">
 						<div className="mainPopularArtistsSliderLikeInnerWrapper">
 							<button className="mainPopularArtistsSliderLikeButton">
-								<img className="mainPopularArtistsSliderLikeButtonImg" src='/public/Img/likeHeart.svg' alt='Like' />
+								<img className="mainPopularArtistsSliderLikeButtonImg" src='/Img/likeHeart.svg' alt='Like' />
 							</button>
 						</div>
 						<div className="mainPopularArtistsSliderShareInnerWrapper">
 							<button className="mainPopularArtistsSliderShareButtonButton">
-								<img className="mainPopularArtistsSliderShareButtonImg" src='/public/Img/shareArrow.svg' alt='Share' />
+								<img className="mainPopularArtistsSliderShareButtonImg" src='/Img/shareArrow.svg' alt='Share' />
 							</button>
 						</div>
 					</div>
