@@ -187,7 +187,7 @@ function MainExhibitions() {
 			>
 				<button className={`${styles.mainPageNewsButton}`}>
 					<p className={`${styles.mainPageNewsButtonTitle}`}>
-						{t('Усі dbcnfdrb')}
+						{t('Усі виставки')}
 					</p>
 					<img
 						className={`${styles.mainPageNewsButtonImg}`}
