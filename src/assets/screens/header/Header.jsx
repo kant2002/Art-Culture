@@ -1,378 +1,424 @@
-import React, { useEffect, useState } from 'react';
-import '../../../styles/layout/Header.module.scss';
-import { useTranslation } from 'react-i18next';
-import i18n from 'i18next';
-import Cookies from 'js-cookie';
+import i18n from 'i18next'
+import Cookies from 'js-cookie'
+import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
+import '../../../styles/layout/Header.module.scss'
 
 function Header() {
-    const { t } = useTranslation();
-    const [mainDropdownVisible, setMainDropdownVisible] = useState(false);
-    const [burgerDropdownVisible, setBurgerDropdownVisible] = useState(false);
-    const [selectedLanguage, setSelectedLanguage] = useState((Cookies.get('lang') || i18n.language) === 'en' ? 'English' : 'Ukrainian');
-    const [burgerMenuVisible, setBurgerMenuVisible] = useState(false);
+	const { t } = useTranslation()
+	const [mainDropdownVisible, setMainDropdownVisible] = useState(false)
+	const [burgerDropdownVisible, setBurgerDropdownVisible] = useState(false)
+	const [selectedLanguage, setSelectedLanguage] = useState(
+		(Cookies.get('lang') || i18n.language) === 'en' ? 'English' : 'Ukrainian'
+	)
+	const [burgerMenuVisible, setBurgerMenuVisible] = useState(false)
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const mainHeader = document.querySelector('.mainHeader');
-            const staticHeader = document.querySelector('.staticHeader');
+	useEffect(() => {
+		const handleScroll = () => {
+			const mainHeader = document.querySelector('.mainHeader')
+			const staticHeader = document.querySelector('.staticHeader')
 
-            if (window.scrollY > 177) {
-                mainHeader.style.transform = 'translateY(-100%)';
-                staticHeader.classList.add('visible');
-            } else {
-                mainHeader.style.transform = 'translateY(0)';
-                staticHeader.classList.remove('visible');
-            }
-        };
+			if (window.scrollY > 177) {
+				mainHeader.style.transform = 'translateY(-100%)'
+				staticHeader.classList.add('visible')
+			} else {
+				mainHeader.style.transform = 'translateY(0)'
+				staticHeader.classList.remove('visible')
+			}
+		}
 
-        window.addEventListener('scroll', handleScroll);
+		window.addEventListener('scroll', handleScroll)
 
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
+		return () => {
+			window.removeEventListener('scroll', handleScroll)
+		}
+	}, [])
 
-    useEffect(() => {
-        const burgerButton = document.querySelector('.burgerButton');
-        const staticHeaderBurgerButton = document.querySelector('.staticHeaderBurgerButton');
-        const handleBurgerClick = () => {
-            setBurgerMenuVisible(!burgerMenuVisible);
-            setMainDropdownVisible(false);
-            setBurgerDropdownVisible(false);
-        };
+	useEffect(() => {
+		const burgerButton = document.querySelector('.burgerButton')
+		const staticHeaderBurgerButton = document.querySelector(
+			'.staticHeaderBurgerButton'
+		)
+		const handleBurgerClick = () => {
+			setBurgerMenuVisible(!burgerMenuVisible)
+			setMainDropdownVisible(false)
+			setBurgerDropdownVisible(false)
+		}
 
-        burgerButton.addEventListener('click', handleBurgerClick);
-        staticHeaderBurgerButton.addEventListener('click', handleBurgerClick);
+		burgerButton.addEventListener('click', handleBurgerClick)
+		staticHeaderBurgerButton.addEventListener('click', handleBurgerClick)
 
-        return () => {
-            burgerButton.removeEventListener('click', handleBurgerClick);
-            staticHeaderBurgerButton.removeEventListener('click', handleBurgerClick);
-        };
-    }, [burgerMenuVisible]);
+		return () => {
+			burgerButton.removeEventListener('click', handleBurgerClick)
+			staticHeaderBurgerButton.removeEventListener('click', handleBurgerClick)
+		}
+	}, [burgerMenuVisible])
 
-    const toggleMainDropdown = () => {
-        setMainDropdownVisible(!mainDropdownVisible);
-        setBurgerDropdownVisible(false);
-    };
+	const toggleMainDropdown = () => {
+		setMainDropdownVisible(!mainDropdownVisible)
+		setBurgerDropdownVisible(false)
+	}
 
-    const toggleBurgerDropdown = () => {
-        setBurgerDropdownVisible(!burgerDropdownVisible);
-        setMainDropdownVisible(false);
-    };
+	const toggleBurgerDropdown = () => {
+		setBurgerDropdownVisible(!burgerDropdownVisible)
+		setMainDropdownVisible(false)
+	}
 
-    const handleLanguageSelect = (language) => {
-        setSelectedLanguage(language);
-        if (language === 'Ukrainian') {
-            i18n.changeLanguage('uk');
-            Cookies.set('lang', 'uk');
-        } else {
-            i18n.changeLanguage('en');
-            Cookies.set('lang', 'en');
-        }
+	const handleLanguageSelect = language => {
+		setSelectedLanguage(language)
+		if (language === 'Ukrainian') {
+			i18n.changeLanguage('uk')
+			Cookies.set('lang', 'uk')
+		} else {
+			i18n.changeLanguage('en')
+			Cookies.set('lang', 'en')
+		}
 
-        setMainDropdownVisible(false);
-        setBurgerDropdownVisible(false);
-    };
+		setMainDropdownVisible(false)
+		setBurgerDropdownVisible(false)
+	}
 
-    const closeBurgerMenu = () => {
-        setBurgerMenuVisible(false);
-        setBurgerDropdownVisible(false);
-    };
+	const closeBurgerMenu = () => {
+		setBurgerMenuVisible(false)
+		setBurgerDropdownVisible(false)
+	}
 
-    const burgerMenu =
-        <div className="burgerMenu">
-            <div className="burgerMenuWrapper">
-                <div className="burgerMenuSearchWhithButtonsWrapper">
-                    <div className="burgerMenuCloseButtonWrapper">
-                        <img className="burgerMenuCloseButtonImg" src="/Img/burgerCloseCross.svg" alt="close button" onClick={closeBurgerMenu} />
-                    </div>
-                    <div className='headerLanguageSwitchContainer'>
-                        <button
-                            className='headerLanguageSwitchButton'
-                            onClick={toggleBurgerDropdown}
-                        >
-                            <p className='headerLanguageSwitchButton__title'>
-                                {selectedLanguage} &#9660;
-                            </p>
-                        </button>
-                        {burgerDropdownVisible && (
-                            <div className='dropdownMenu'>
-                                <ul>
-                                    <li onClick={() => handleLanguageSelect('Ukrainian')}>Ukrainian</li>
-                                    <li onClick={() => handleLanguageSelect('English')}>English</li>
-                                </ul>
-                            </div>
-                        )}
-                    </div>
-                    <div className='burgerMenuLoginButtonWrapper'>
-                        <button className='socialDownWrapper__loginButton socialDownWrapperButton circleButton burgerMenuLoginButton'>
-                            <img src='/Img/login.svg' alt='Login' />
-                        </button>
-                    </div>
-                </div>
-                <div className="burgerMenuSearchWrapper">
-                    <input
-                        className="burgerMenuSearchInput"
-                        type="text"
-                        placeholder={t('Пошук')}
-                    />
-                </div>
-                <div className="burgerMenuFooterWrapper">
-                    <nav className="footerMenuWrapper">
-                        <ul className="footerMenuUl">
-                            <li className="footerMenuLi">
-                                <a className="footerMenuLink" href='#'>
-                                    <p>{t('Головна')}</p>
-                                    <p>&#8250;</p>
-                                </a>
-                            </li>
-                            <li className="footerMenuLi">
-                                <a className="footerMenuLink" href='#'>
-                                    <p>{t('Новини')}</p>
-                                    <p>&#8250;</p>
-                                </a>
-                            </li>
-                            <li className="footerMenuLi">
-                                <a className="footerMenuLink" href='#'>
-                                    <p>{t('Митці')}</p>
-                                    <p>&#8250;</p>
-                                </a>
-                            </li>
-                            <li className="footerMenuLi">
-                                <a className="footerMenuLink" href='#'>
-                                    <p>{t('Виставки')}</p>
-                                    <p>&#8250;</p>
-                                </a>
-                            </li>
-                            <li className="footerMenuLi">
-                                <a className="footerMenuLink" href='#'>
-                                    <p>{t('Музеї')}</p>
-                                    <p>&#8250;</p>
-                                </a>
-                            </li>
-                            <li className="footerMenuLi">
-                                <a className="footerMenuLink" href='#'>
-                                    <p>{t('Архітектура')}</p>
-                                    <p>&#8250;</p>
-                                </a>
-                            </li>
-                            <li className="footerMenuLi">
-                                <a className="footerMenuLink" href='#'>
-                                    <p>{t('Арт терміни')}</p>
-                                    <p>&#8250;</p>
-                                </a>
-                            </li>
-                            <li className="footerMenuLi">
-                                <a className="footerMenuLink" href='#'>
-                                    <p>{t('Що поруч')}</p>
-                                    <p>&#8250;</p>
-                                </a>
-                            </li>
-                            <li className="footerMenuLi">
-                                <a className="footerMenuLink" href='#'>
-                                    <p>{t('Контакти')}</p>
-                                    <p>&#8250;</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+	const navigate = useNavigate()
 
-                <div className="burgerMenuBottomWrapper">
-                    <div className="burgerMenuSocialTopWrapper">
-                        <p className='socialDownWrapper__followUsTitle burgerMenuFollowUsTitle'>follow us</p>
-                    </div>
-                    <div className="burgerMenuSocialMiddleWrapper">
-                        <button className='socialDownWrapper__facebookButton socialDownWrapperButton circleButton burgerMenuFacebookButton'>
-                            <img src='/Img/fasebook.svg' alt='Facebook' />
-                        </button>
-                        <button className='socialDownWrapper__instagramButton socialDownWrapperButton circleButton burgerMenuInstagramButton'>
-                            <img src='/Img/instagram.svg' alt='Instagram' />
-                        </button>
-                        <button className='socialDownWrapper__twitterButton socialDownWrapperButton circleButton burgerMenuTwitterButton'>
-                            <img src='/Img/twitter.svg' alt='Twitter' />
-                        </button>
-                        <button className='socialDownWrapper__mailButton socialDownWrapperButton circleButton burgerMenuMailButton'>
-                            <img src='/Img/mail.svg' alt='Mail' />
-                        </button>
-                    </div>
-                    <div className="burgerMenuSocialBottomWrapper">
-                        <div className="footerContactsLinkWrapper footerContactsLinkWrapperPlayUkraine footerContactsLinkWrapperPlayUkraine">
-                            <a className="footerContactsLink footerContactsLinkPlayUkraine" href='#'>
-                                <img className="footerContactsLinkImg footerContactsLinkImgPlayUkraine burgerMenuPlayUkraine" src='/Img/footerPlayUkraine.png' alt='PlayUkraine' />
-                            </a>
-                        </div>
-                    </div>
-                </div>
+	const handleLoginClick = () => {
+		navigate('/userProfile')
+	}
 
-            </div>
-        </div>;
+	const burgerMenu = (
+		<div className='burgerMenu'>
+			<div className='burgerMenuWrapper'>
+				<div className='burgerMenuSearchWhithButtonsWrapper'>
+					<div className='burgerMenuCloseButtonWrapper'>
+						<img
+							className='burgerMenuCloseButtonImg'
+							src='/Img/burgerCloseCross.svg'
+							alt='close button'
+							onClick={closeBurgerMenu}
+						/>
+					</div>
+					<div className='headerLanguageSwitchContainer'>
+						<button
+							className='headerLanguageSwitchButton'
+							onClick={toggleBurgerDropdown}
+						>
+							<p className='headerLanguageSwitchButton__title'>
+								{selectedLanguage} &#9660;
+							</p>
+						</button>
+						{burgerDropdownVisible && (
+							<div className='dropdownMenu'>
+								<ul>
+									<li onClick={() => handleLanguageSelect('Ukrainian')}>
+										Ukrainian
+									</li>
+									<li onClick={() => handleLanguageSelect('English')}>
+										English
+									</li>
+								</ul>
+							</div>
+						)}
+					</div>
+					<div className='burgerMenuLoginButtonWrapper'>
+						<button
+							className='socialDownWrapper__loginButton socialDownWrapperButton circleButton burgerMenuLoginButton'
+							onClick={handleLoginClick}
+						>
+							<img src='/Img/login.svg' alt='Login' />
+						</button>
+					</div>
+				</div>
+				<div className='burgerMenuSearchWrapper'>
+					<input
+						className='burgerMenuSearchInput'
+						type='text'
+						placeholder={t('Пошук')}
+					/>
+				</div>
+				<div className='burgerMenuFooterWrapper'>
+					<nav className='footerMenuWrapper'>
+						<ul className='footerMenuUl'>
+							<li className='footerMenuLi'>
+								<a className='footerMenuLink' href='#'>
+									<p>{t('Головна')}</p>
+									<p>&#8250;</p>
+								</a>
+							</li>
+							<li className='footerMenuLi'>
+								<a className='footerMenuLink' href='#'>
+									<p>{t('Новини')}</p>
+									<p>&#8250;</p>
+								</a>
+							</li>
+							<li className='footerMenuLi'>
+								<a className='footerMenuLink' href='#'>
+									<p>{t('Митці')}</p>
+									<p>&#8250;</p>
+								</a>
+							</li>
+							<li className='footerMenuLi'>
+								<a className='footerMenuLink' href='#'>
+									<p>{t('Виставки')}</p>
+									<p>&#8250;</p>
+								</a>
+							</li>
+							<li className='footerMenuLi'>
+								<a className='footerMenuLink' href='#'>
+									<p>{t('Музеї')}</p>
+									<p>&#8250;</p>
+								</a>
+							</li>
+							<li className='footerMenuLi'>
+								<a className='footerMenuLink' href='#'>
+									<p>{t('Архітектура')}</p>
+									<p>&#8250;</p>
+								</a>
+							</li>
+							<li className='footerMenuLi'>
+								<a className='footerMenuLink' href='#'>
+									<p>{t('Арт терміни')}</p>
+									<p>&#8250;</p>
+								</a>
+							</li>
+							<li className='footerMenuLi'>
+								<a className='footerMenuLink' href='#'>
+									<p>{t('Що поруч')}</p>
+									<p>&#8250;</p>
+								</a>
+							</li>
+							<li className='footerMenuLi'>
+								<a className='footerMenuLink' href='#'>
+									<p>{t('Контакти')}</p>
+									<p>&#8250;</p>
+								</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
 
-    return (
-        <>
-            <header>
-                <div className='mainHeader'>
-                    <div className='mainHeaderWrapper'>
-                        <div className='mainHeaderLogo logo'>
-                            <img
-                                className='logo__img'
-                                src='/Img/logo.svg'
-                                alt='Art & culture Ukraine' />
-                            <div className='logo__titleWrapper'>
-                                <p className='logo__firstWord white'>art</p>
-                                <p className='logo__secondWord white'>&culture</p>
-                                <p className='logo__thirdWord white'>Ukraine</p>
-                            </div>
-                        </div>
-                        <div className='titleContainer'>
-                            <div className='titleWrapper'>
-                                <div className='headerLanguageSwitchContainer'>
-                                    <button
-                                        className='headerLanguageSwitchButton'
-                                        onClick={toggleMainDropdown}
-                                    >
-                                        <p className='headerLanguageSwitchButton__title'>
-                                            {selectedLanguage} &#9660;
-                                        </p>
-                                    </button>
-                                    {mainDropdownVisible && (
-                                        <div className='dropdownMenu'>
-                                            <ul>
-                                                <li onClick={() => handleLanguageSelect('Ukrainian')}>Ukrainian</li>
-                                                <li onClick={() => handleLanguageSelect('English')}>English</li>
-                                            </ul>
-                                        </div>
-                                    )}
-                                </div>
-                                <h1>Ukrainian art & culture online</h1>
-                            </div>
-                            <nav className='mainMenuContainer'>
-                                <ul className='mainMenu__ul'>
-                                    <li className='mainMenu__li'>
-                                        <a className='mainMenu__link' href='#'>
-                                            {t('Головна')}
-                                        </a>
-                                    </li>
-                                    <li className='mainMenu__li'>
-                                        <a className='mainMenu__link' href='#'>
-                                            {t('Новини')}
-                                        </a>
-                                    </li>
-                                    <li className='mainMenu__li'>
-                                        <a className='mainMenu__link' href='#'>
-                                            {t('Митці')}
-                                        </a>
-                                    </li>
-                                    <li className='mainMenu__li'>
-                                        <a className='mainMenu__link' href='#'>
-                                            {t('Виставки')}
-                                        </a>
-                                    </li>
-                                    <li className='mainMenu__li'>
-                                        <a className='mainMenu__link' href='#'>
-                                            {t('Музеї')}
-                                        </a>
-                                    </li>
-                                    <li className='mainMenu__li'>
-                                        <a className='mainMenu__link' href='#'>
-                                            {t('Арт терміни')}
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <div className='socialContainer'>
-                            <div className='socialUpperWrapper'>
-                                <div className='socialLikeAndShareInner'>
-                                    <button className='socialLikeAndShareInner__likeButton circleButton'>
-                                        <img
-                                            className='likeButtonImg'
-                                            src='/Img/likeHeart.svg'
-                                            alt='Like' />
-                                    </button>
-                                    <button className='socialLikeAndShareInner__shareButton circleButton'>
-                                        <img
-                                            className='shareButtonImg'
-                                            src='/Img/shareArrow.svg'
-                                            alt='Share' />
-                                    </button>
-                                </div>
-                                <div className='burgerButtonWrapper'>
-                                    <button className='burgerButton'>
-                                        <img
-                                            className='burgerButton__img'
-                                            src='/Img/burgerButtonIcon.svg'
-                                            alt='Menu' />
-                                        <p className='burgerButton__title'>{t('Меню')}</p>
-                                    </button>
-                                </div>
-                            </div>
-                            <div className='socialDownWrapper'>
-                                <p className='socialDownWrapper__followUsTitle'>follow us</p>
-                                <button className='socialDownWrapper__facebookButton socialDownWrapperButton circleButton'>
-                                    <img src='/Img/fasebook.svg' alt='Facebook' />
-                                </button>
-                                <button className='socialDownWrapper__instagramButton socialDownWrapperButton circleButton'>
-                                    <img src='/Img/instagram.svg' alt='Instagram' />
-                                </button>
-                                <button className='socialDownWrapper__twitterButton socialDownWrapperButton circleButton'>
-                                    <img src='/Img/twitter.svg' alt='Twitter' />
-                                </button>
-                                <button className='socialDownWrapper__mailButton socialDownWrapperButton circleButton'>
-                                    <img src='/Img/mail.svg' alt='Mail' />
-                                </button>
-                                <div className='socialDownWrapper__separator'>
-                                    <img
-                                        src='/Img/verticalSeparator.svg'
-                                        alt='button separator' />
-                                </div>
-                                <button className='socialDownWrapper__loginButton socialDownWrapperButton circleButton'>
-                                    <img src='/Img/login.svg' alt='Login' />
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className='staticHeader'>
-                    <div className='staticHeaderWrapper'>
-                        <div className='staticHeaderLogo'>
-                            <p className='staticHeaderLogoTitle'>art</p>
-                        </div>
-                        <div className='staticHeaderTitleContainer'>
-                            <button className='staticHeaderTitleContainer__likeButton circleButton'>
-                                <img src='/Img/likeHeart.svg' alt='Like' />
-                            </button>
-                            <h2 className='staticHeaderTitle'>
-                                Ukrainian art & culture online
-                            </h2>
-                            <button className='staticHeaderTitleContainer__shareButton circleButton'>
-                                <img src='/Img/shareArrow.svg' alt='Share' />
-                            </button>
-                        </div>
-                        <div className='staticHeaderLoginContainer'>
-                            <button className='staticHeaderLoginContainer__loginButton circleButton'>
-                                <img src='/Img/loginBlack.svg' alt='Login' />
-                            </button>
-                            <div className='staticHeaderLoginContainer__separator'>
-                                <img
-                                    className='separatorImg'
-                                    src='/Img/verticalSeparatorBlack.svg'
-                                    alt='button separator' />
-                            </div>
-                            <button className='burgerButton staticHeaderBurgerButton'>
-                                <img
-                                    className='burgerButton__img'
-                                    src='/Img/burgerButtonIcon.svg'
-                                    alt='Menu' />
-                                <p className='burgerButton__title'>{t('Меню')}</p>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </header>
-            {burgerMenuVisible && burgerMenu}
-        </>
-    );
+				<div className='burgerMenuBottomWrapper'>
+					<div className='burgerMenuSocialTopWrapper'>
+						<p className='socialDownWrapper__followUsTitle burgerMenuFollowUsTitle'>
+							follow us
+						</p>
+					</div>
+					<div className='burgerMenuSocialMiddleWrapper'>
+						<button className='socialDownWrapper__facebookButton socialDownWrapperButton circleButton burgerMenuFacebookButton'>
+							<img src='/Img/fasebook.svg' alt='Facebook' />
+						</button>
+						<button className='socialDownWrapper__instagramButton socialDownWrapperButton circleButton burgerMenuInstagramButton'>
+							<img src='/Img/instagram.svg' alt='Instagram' />
+						</button>
+						<button className='socialDownWrapper__twitterButton socialDownWrapperButton circleButton burgerMenuTwitterButton'>
+							<img src='/Img/twitter.svg' alt='Twitter' />
+						</button>
+						<button className='socialDownWrapper__mailButton socialDownWrapperButton circleButton burgerMenuMailButton'>
+							<img src='/Img/mail.svg' alt='Mail' />
+						</button>
+					</div>
+					<div className='burgerMenuSocialBottomWrapper'>
+						<div className='footerContactsLinkWrapper footerContactsLinkWrapperPlayUkraine footerContactsLinkWrapperPlayUkraine'>
+							<a
+								className='footerContactsLink footerContactsLinkPlayUkraine'
+								href='#'
+							>
+								<img
+									className='footerContactsLinkImg footerContactsLinkImgPlayUkraine burgerMenuPlayUkraine'
+									src='/Img/footerPlayUkraine.png'
+									alt='PlayUkraine'
+								/>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	)
+
+	return (
+		<>
+			<header>
+				<div className='mainHeader'>
+					<div className='mainHeaderWrapper'>
+						<div className='mainHeaderLogo logo'>
+							<img
+								className='logo__img'
+								src='/Img/logo.svg'
+								alt='Art & culture Ukraine'
+							/>
+							<div className='logo__titleWrapper'>
+								<p className='logo__firstWord white'>art</p>
+								<p className='logo__secondWord white'>&culture</p>
+								<p className='logo__thirdWord white'>Ukraine</p>
+							</div>
+						</div>
+						<div className='titleContainer'>
+							<div className='titleWrapper'>
+								<div className='headerLanguageSwitchContainer'>
+									<button
+										className='headerLanguageSwitchButton'
+										onClick={toggleMainDropdown}
+									>
+										<p className='headerLanguageSwitchButton__title'>
+											{selectedLanguage} &#9660;
+										</p>
+									</button>
+									{mainDropdownVisible && (
+										<div className='dropdownMenu'>
+											<ul>
+												<li onClick={() => handleLanguageSelect('Ukrainian')}>
+													Ukrainian
+												</li>
+												<li onClick={() => handleLanguageSelect('English')}>
+													English
+												</li>
+											</ul>
+										</div>
+									)}
+								</div>
+								<h1>Ukrainian art & culture online</h1>
+							</div>
+							<nav className='mainMenuContainer'>
+								<ul className='mainMenu__ul'>
+									<li className='mainMenu__li'>
+										<a className='mainMenu__link' href='#'>
+											{t('Головна')}
+										</a>
+									</li>
+									<li className='mainMenu__li'>
+										<a className='mainMenu__link' href='#'>
+											{t('Новини')}
+										</a>
+									</li>
+									<li className='mainMenu__li'>
+										<a className='mainMenu__link' href='#'>
+											{t('Митці')}
+										</a>
+									</li>
+									<li className='mainMenu__li'>
+										<a className='mainMenu__link' href='#'>
+											{t('Виставки')}
+										</a>
+									</li>
+									<li className='mainMenu__li'>
+										<a className='mainMenu__link' href='#'>
+											{t('Музеї')}
+										</a>
+									</li>
+									<li className='mainMenu__li'>
+										<a className='mainMenu__link' href='#'>
+											{t('Арт терміни')}
+										</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+						<div className='socialContainer'>
+							<div className='socialUpperWrapper'>
+								<div className='socialLikeAndShareInner'>
+									<button className='socialLikeAndShareInner__likeButton circleButton'>
+										<img
+											className='likeButtonImg'
+											src='/Img/likeHeart.svg'
+											alt='Like'
+										/>
+									</button>
+									<button className='socialLikeAndShareInner__shareButton circleButton'>
+										<img
+											className='shareButtonImg'
+											src='/Img/shareArrow.svg'
+											alt='Share'
+										/>
+									</button>
+								</div>
+								<div className='burgerButtonWrapper'>
+									<button className='burgerButton'>
+										<img
+											className='burgerButton__img'
+											src='/Img/burgerButtonIcon.svg'
+											alt='Menu'
+										/>
+										<p className='burgerButton__title'>{t('Меню')}</p>
+									</button>
+								</div>
+							</div>
+							<div className='socialDownWrapper'>
+								<p className='socialDownWrapper__followUsTitle'>follow us</p>
+								<button className='socialDownWrapper__facebookButton socialDownWrapperButton circleButton'>
+									<img src='/Img/fasebook.svg' alt='Facebook' />
+								</button>
+								<button className='socialDownWrapper__instagramButton socialDownWrapperButton circleButton'>
+									<img src='/Img/instagram.svg' alt='Instagram' />
+								</button>
+								<button className='socialDownWrapper__twitterButton socialDownWrapperButton circleButton'>
+									<img src='/Img/twitter.svg' alt='Twitter' />
+								</button>
+								<button className='socialDownWrapper__mailButton socialDownWrapperButton circleButton'>
+									<img src='/Img/mail.svg' alt='Mail' />
+								</button>
+								<div className='socialDownWrapper__separator'>
+									<img
+										src='/Img/verticalSeparator.svg'
+										alt='button separator'
+									/>
+								</div>
+								<button
+									className='socialDownWrapper__loginButton socialDownWrapperButton circleButton'
+									onClick={handleLoginClick}
+								>
+									<img src='/Img/login.svg' alt='Login' />
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div className='staticHeader'>
+					<div className='staticHeaderWrapper'>
+						<div className='staticHeaderLogo'>
+							<p className='staticHeaderLogoTitle'>art</p>
+						</div>
+						<div className='staticHeaderTitleContainer'>
+							<button className='staticHeaderTitleContainer__likeButton circleButton'>
+								<img src='/Img/likeHeart.svg' alt='Like' />
+							</button>
+							<h2 className='staticHeaderTitle'>
+								Ukrainian art & culture online
+							</h2>
+							<button className='staticHeaderTitleContainer__shareButton circleButton'>
+								<img src='/Img/shareArrow.svg' alt='Share' />
+							</button>
+						</div>
+						<div className='staticHeaderLoginContainer'>
+							<button className='staticHeaderLoginContainer__loginButton circleButton'>
+								<img src='/Img/loginBlack.svg' alt='Login' />
+							</button>
+							<div className='staticHeaderLoginContainer__separator'>
+								<img
+									className='separatorImg'
+									src='/Img/verticalSeparatorBlack.svg'
+									alt='button separator'
+								/>
+							</div>
+							<button className='burgerButton staticHeaderBurgerButton'>
+								<img
+									className='burgerButton__img'
+									src='/Img/burgerButtonIcon.svg'
+									alt='Menu'
+								/>
+								<p className='burgerButton__title'>{t('Меню')}</p>
+							</button>
+						</div>
+					</div>
+				</div>
+			</header>
+			{burgerMenuVisible && burgerMenu}
+		</>
+	)
 }
 
-export default Header;
+export default Header
