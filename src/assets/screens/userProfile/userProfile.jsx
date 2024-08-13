@@ -1,52 +1,53 @@
 import React from "react";
+import styles from "../../../styles/layout/userProfile.module.scss";
 
 const UserProfile = () => {
     return (
-        <div className="profile">
+        <div className={`${styles.profile}`}>
             {/* Верхние кнопки */}
-            <div className="profile__actions">
-                <button className="profile__action">Кнопка 1</button>
-                <button className="profile__action">Кнопка 2</button>
-                <button className="profile__action">Кнопка 3</button>
+            <div className={`${styles.profileActions}`}>
+                <button className={`${styles.profileAction}`}>Информация о пользователе</button>
+                <button className={`${styles.profileAction}`}>Посты пользователя</button>
+                <button className={`${styles.profileAction}`}>Добавить пост</button>
             </div>
 
             {/* Аватар и информация о пользователе */}
-            <div className="profile__info">
-                <div className="profile__avatar">
+            <div className={`${styles.profile__info}`}>
+                <div className={`${styles.profile__avatar}`}>
                     <img src="ссылка_на_аватар" alt="Аватар пользователя" />
                 </div>
-                <div className="profile__details">
-                    <div className="profile__field">
-                        <span className="profile__label">ФИО:</span>
-                        <span className="profile__value">Иван Иванов</span>
-                        <button className="profile__edit">Редактировать</button>
+                <div className={`${styles.profile__details}`}>
+                    <div className={`${styles.profile__field}`}>
+                        <span className={`${styles.profile__label}`}>ФИО:</span>
+                        <span className={`${styles.profile__value}`}>Иван Иванов</span>
+                        <button className={`${styles.profile__edit}`}>Редактировать</button>
                     </div>
-                    <div className="profile__field">
-                        <span className="profile__label">Дата рождения:</span>
-                        <span className="profile__value">01.01.1990</span>
-                        <button className="profile__edit">Редактировать</button>
+                    <div className={`${styles.profile__field}`}>
+                        <span className={`${styles.profile__label}`}>Дата рождения:</span>
+                        <span className={`${styles.profile__value}`}>01.01.1990</span>
+                        <button className={`${styles.profile__edit}`}>Редактировать</button>
                     </div>
-                    <div className="profile__field">
-                        <span className="profile__label">Почта:</span>
-                        <span className="profile__value">example@mail.com</span>
-                        <button className="profile__edit">Редактировать</button>
+                    <div className={`${styles.profile__field}`}>
+                        <span className={`${styles.profile__label}`}>Почта:</span>
+                        <span className={`${styles.profile__value}`}>example@mail.com</span>
+                        <button className={`${styles.profile__edit}`}>Редактировать</button>
                     </div>
-                    <div className="profile__field">
-                        <span className="profile__label">Телефон:</span>
-                        <span className="profile__value">+7 123 456 7890</span>
-                        <button className="profile__edit">Редактировать</button>
+                    <div className={`${styles.profile__field}`}>
+                        <span className={`${styles.profile__label}`}>Телефон:</span>
+                        <span className={`${styles.profile__value}`}>+7 123 456 7890</span>
+                        <button className={`${styles.profile__edit}`}>Редактировать</button>
                     </div>
-                    <div className="profile__field">
-                        <span className="profile__label">Соцсети:</span>
-                        <span className="profile__value">Instagram, VK</span>
-                        <button className="profile__edit">Редактировать</button>
+                    <div className={`${styles.profile__field}`}>
+                        <span className={`${styles.profile__label}`}>Соцсети:</span>
+                        <span className={`${styles.profile__value}`}>Instagram, VK</span>
+                        <button className={`${styles.profile__edit}`}>Редактировать</button>
                     </div>
-                    <div className="profile__field">
-                        <span className="profile__label">О себе:</span>
-                        <span className="profile__value">
+                    <div className={`${styles.profile__field}`}>
+                        <span className={`${styles.profile__label}`}>О себе:</span>
+                        <span className={`${styles.profile__value}`}>
                             Краткое описание...
                         </span>
-                        <button className="profile__edit">Редактировать</button>
+                        <button className={`${styles.profile__edit}`}>Редактировать</button>
                     </div>
                 </div>
             </div>

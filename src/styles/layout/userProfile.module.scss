@@ -1,0 +1,57 @@
+.profile { 
+    /* Основной контейнер профиля */
+    display: flex;
+    flex-direction: column;   
+	padding: calc(177px - (107 * ((1440px - 100vw) / (1440 - 569)))) calc(70 / 1440 * 100vw) 0;
+	width: 100%;
+    height: 100dvh;
+}
+
+.profileActions {
+    /* Контейнер для верхних кнопок */
+}
+
+.profileAction {
+    /* Стиль для каждой кнопки действия */
+}
+
+.profile__info {
+    /* Контейнер для информации о пользователе */
+}
+
+.profile__avatar {
+    /* Контейнер для аватара */
+}
+
+.profile__details {
+    /* Контейнер для деталей пользователя */
+}
+
+.profile__field {
+    /* Общий контейнер для полей информации */
+}
+
+.profile__label {
+    /* Стиль для меток информации */
+}
+
+.profile__value {
+    /* Стиль для значений информации */
+}
+
+.profile__edit {
+    /* Стиль для кнопки редактирования */
+}
+
+
+@media (min-width: 1441px) {
+	.profile {
+		padding: 177px 0 0 0;
+	}
+}
+
+@media (max-width: 569px) {
+	.profile {
+		padding: 70px 0 0 0;
+	}
+}
