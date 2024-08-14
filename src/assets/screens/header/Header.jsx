@@ -87,7 +87,7 @@ function Header() {
 	const navigate = useNavigate()
 
 	const handleLoginClick = () => {
-		navigate('/userProfile')
+		navigate('/Login')
 	}
 
 	const burgerMenu = (
