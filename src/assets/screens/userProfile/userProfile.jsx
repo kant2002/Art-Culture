@@ -6,7 +6,7 @@ const UserProfile = () => {
         <div className={`${styles.profile}`}>
             {/* Верхние кнопки */}
             <div className={`${styles.profileActions}`}>
-                <button className={`${styles.profileAction}`}>Інформація</button>
+                <button className={`${styles.profileAction} ${styles.profileActionActive}`}>Інформація</button>
                 <button className={`${styles.profileAction}`}>Публікації</button>
                 <button className={`${styles.profileAction}`}>Додати публікацію</button>
             </div>

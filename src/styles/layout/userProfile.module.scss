@@ -30,12 +30,27 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border: 1px solid #000;
 	border-radius: calc(34px - (4 * ((1440px - 100vw) / (1440 - 375))));
-	background-color: #fff;
+	background-color: rgb(207, 207, 207);
 	cursor: pointer;
     font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
-	font-weight: 500;
+	font-weight: 700;
+}
+
+.profileAction:hover {
+    background: #3A8374;
+    color: #fff;
+    transition: 0.4s ease;
+}
+
+.profileAction:not(:hover) {
+    transition: 0.4s ease;
+}
+
+.profileActionActive {
+    background: #3A8374;
+    color: #fff;
+    border: none;
 }
 
 .profileInfo {
@@ -78,11 +93,20 @@
     /* Стиль для кнопки редактирования */
     background: rgb(207, 207, 207);
     color: #000;
-    border: 1px solid #000;
     border-radius: calc(34px - (4 * ((1440px - 100vw) / (1440 - 375))));
     font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
     padding: 0 10px;
     cursor: pointer;
+}
+
+.profileEdit:hover {
+    background: #3A8374;
+    color: #fff;
+    border: none;
+}
+
+.profileEdit:not(:hover) {
+    transition: 0.4s ease;
 }
 
 
