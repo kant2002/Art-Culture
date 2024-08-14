@@ -6,15 +6,15 @@ const UserProfile = () => {
         <div className={`${styles.profile}`}>
             {/* Верхние кнопки */}
             <div className={`${styles.profileActions}`}>
-                <button className={`${styles.profileAction}`}>Информация о пользователе</button>
-                <button className={`${styles.profileAction}`}>Посты пользователя</button>
-                <button className={`${styles.profileAction}`}>Добавить пост</button>
+                <button className={`${styles.profileAction}`}>Інформація</button>
+                <button className={`${styles.profileAction}`}>Публікації</button>
+                <button className={`${styles.profileAction}`}>Додати публікацію</button>
             </div>
 
             {/* Аватар и информация о пользователе */}
             <div className={`${styles.profileInfo}`}>
                 <div className={`${styles.profileAvatar}`}>
-                    <img src="ссылка_на_аватар" alt="Аватар пользователя" />
+                    <img src="ссылка_на_аватар" alt="Фото користувача" />
                 </div>
                 <div className={`${styles.profileDetails}`}>
                     <div className={`${styles.profileField}`}>
