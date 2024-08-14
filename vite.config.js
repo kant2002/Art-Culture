@@ -12,5 +12,12 @@ export default defineConfig({
 			key: fs.readFileSync(path.resolve(__dirname, 'server.key')),
 			cert: fs.readFileSync(path.resolve(__dirname, 'server.cert')),
 		},
+		proxy: {
+			'/api': {
+				target: 'https://zimbabaluba.pp.ua',
+				changeOrigin: true,
+				rewrite: path => path.replace(/^\/api/, ''),
+			},
+		},
 	},
 })

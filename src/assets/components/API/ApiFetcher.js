@@ -1,16 +1,16 @@
 import axios from 'axios'
 
-const API_URL = 'https://zimbabaluba.pp.ua/wp-json/simple-jwt-login/v1'
+const API_URL = 'https://zimbabaluba.pp.ua/?rest_route=/simple-jwt-login/v1'
 
-export const loginUser = async (username, password) => {
-	const formData = new FormData()
-	formData.append('username', username)
-	formData.append('password', password)
+// Login User
+export const loginUser = async (email, password) => {
+	const url = `${API_URL}/auth&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
 
-	const response = await axios.post(`${API_URL}/auth`, formData)
+	const response = await axios.post(url)
 	return response.data
 }
 
+// Register User
 export const registerUser = async userData => {
 	const formData = new FormData()
 	formData.append('username', userData.username)
@@ -21,6 +21,7 @@ export const registerUser = async userData => {
 	return response.data
 }
 
+// Auto Login User
 export const autoLoginUser = async jwt => {
 	const response = await axios.get(`${API_URL}/autologin`, {
 		params: { JWT: jwt },

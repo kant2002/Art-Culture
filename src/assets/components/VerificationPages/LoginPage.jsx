@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
+import styles from '../../../styles/components/VerificationPage/LoginPage.module.scss'
 import { autoLoginUser, loginUser } from '../API/ApiFetcher.js'
-import '/src/styles/components/VerificationPage/LoginPage.module.scss'
 
 const Login = ({ setUsername, setIsLoggedIn, setServerMessage }) => {
 	const [loginDetails, setLoginDetails] = useState({
@@ -36,11 +36,11 @@ const Login = ({ setUsername, setIsLoggedIn, setServerMessage }) => {
 	}
 
 	return (
-		<div className='App'>
-			<header className='App-header'>
+		<div className={styles.LoginContainer}>
+			<header className={styles.LoginWrapper}>
 				<h2>Login</h2>
 				<p>{setServerMessage}</p>
-				<div className='login'>
+				<div className={styles.LoginForm}>
 					<input
 						type='text'
 						placeholder='User Name'
