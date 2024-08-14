@@ -12,42 +12,42 @@ const UserProfile = () => {
             </div>
 
             {/* Аватар и информация о пользователе */}
-            <div className={`${styles.profile__info}`}>
-                <div className={`${styles.profile__avatar}`}>
+            <div className={`${styles.profileInfo}`}>
+                <div className={`${styles.profileAvatar}`}>
                     <img src="ссылка_на_аватар" alt="Аватар пользователя" />
                 </div>
-                <div className={`${styles.profile__details}`}>
-                    <div className={`${styles.profile__field}`}>
-                        <span className={`${styles.profile__label}`}>ФИО:</span>
-                        <span className={`${styles.profile__value}`}>Иван Иванов</span>
-                        <button className={`${styles.profile__edit}`}>Редактировать</button>
+                <div className={`${styles.profileDetails}`}>
+                    <div className={`${styles.profileField}`}>
+                        <span className={`${styles.profileLabel}`}>ПІБ:</span>
+                        <span className={`${styles.profileValue}`}>Ведмедчук Микола Іванович</span>
+                        <button className={`${styles.profileEdit}`}>Редагувати</button>
                     </div>
-                    <div className={`${styles.profile__field}`}>
-                        <span className={`${styles.profile__label}`}>Дата рождения:</span>
-                        <span className={`${styles.profile__value}`}>01.01.1990</span>
-                        <button className={`${styles.profile__edit}`}>Редактировать</button>
+                    <div className={`${styles.profileField}`}>
+                        <span className={`${styles.profileLabel}`}>Дата народження:</span>
+                        <span className={`${styles.profileValue}`}>01.01.1990</span>
+                        <button className={`${styles.profileEdit}`}>Редагувати</button>
                     </div>
-                    <div className={`${styles.profile__field}`}>
-                        <span className={`${styles.profile__label}`}>Почта:</span>
-                        <span className={`${styles.profile__value}`}>example@mail.com</span>
-                        <button className={`${styles.profile__edit}`}>Редактировать</button>
+                    <div className={`${styles.profileField}`}>
+                        <span className={`${styles.profileLabel}`}>Електронна скринька:</span>
+                        <span className={`${styles.profileValue}`}>example@mail.com</span>
+                        <button className={`${styles.profileEdit}`}>Редагувати</button>
                     </div>
-                    <div className={`${styles.profile__field}`}>
-                        <span className={`${styles.profile__label}`}>Телефон:</span>
-                        <span className={`${styles.profile__value}`}>+7 123 456 7890</span>
-                        <button className={`${styles.profile__edit}`}>Редактировать</button>
+                    <div className={`${styles.profileField}`}>
+                        <span className={`${styles.profileLabel}`}>Телефон:</span>
+                        <span className={`${styles.profileValue}`}>+38 123 456 7890</span>
+                        <button className={`${styles.profileEdit}`}>Редагувати</button>
                     </div>
-                    <div className={`${styles.profile__field}`}>
-                        <span className={`${styles.profile__label}`}>Соцсети:</span>
-                        <span className={`${styles.profile__value}`}>Instagram, VK</span>
-                        <button className={`${styles.profile__edit}`}>Редактировать</button>
+                    <div className={`${styles.profileField}`}>
+                        <span className={`${styles.profileLabel}`}>Соцмережі:</span>
+                        <span className={`${styles.profileValue}`}>Instagram, Facebook</span>
+                        <button className={`${styles.profileEdit}`}>Редагувати</button>
                     </div>
-                    <div className={`${styles.profile__field}`}>
-                        <span className={`${styles.profile__label}`}>О себе:</span>
-                        <span className={`${styles.profile__value}`}>
-                            Краткое описание...
+                    <div className={`${styles.profileField}`}>
+                        <span className={`${styles.profileLabel}`}>О собі:</span>
+                        <span className={`${styles.profileValue}`}>
+                            Коротко про себе...
                         </span>
-                        <button className={`${styles.profile__edit}`}>Редактировать</button>
+                        <button className={`${styles.profileEdit}`}>Редагувати</button>
                     </div>
                 </div>
             </div>
