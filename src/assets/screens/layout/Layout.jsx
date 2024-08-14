@@ -1,6 +1,8 @@
 import cn from 'clsx'
 import React from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import Login from '../../components/VerificationPages/LoginPage'
+import SignUp from '../../components/VerificationPages/SignUpPage'
 import Footer from '../footer/Footer'
 import Header from '../header/Header'
 import MainPage from '../mainPage/MainPage'
@@ -20,6 +22,8 @@ const Layout = ({ children, heading = '', backLink = '/' }) => {
 					<Route path='/' element={<Navigate to='/MainPage' />} />
 					<Route path='/MainPage' element={<MainPage />} />
 					<Route path='/userProfile' element={<UserProfile />} />
+					<Route path='/login' element={<Login />} />
+					<Route path='/signup' element={<SignUp />} />
 				</Routes>
 				<Footer />
 			</section>
