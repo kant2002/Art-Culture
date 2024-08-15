@@ -25,7 +25,7 @@ const Login = ({ setUsername, setIsLoggedIn, setServerMessage }) => {
 				if (autoLoginData.success) {
 					setIsLoggedIn(true)
 					setUsername(loginDetails.user)
-					window.location.replace('https://zimbabaluba.pp.ua/mysite/#/')
+					window.location.replace('https://zimbabaluba.pp.ua/')
 				}
 			} else {
 				setServerMessage(data.data.message)
