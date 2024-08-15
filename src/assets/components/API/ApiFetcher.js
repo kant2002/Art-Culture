@@ -1,28 +1,30 @@
-// src/APIFetcher.js
 import axios from 'axios'
 
-const apiURL = 'https://zimbabaluba.pp.ua/wp-json'
+const API_URL = 'https://zimbabaluba.pp.ua/?rest_route=/simple-jwt-login/v1'
 
-export const login = async (username, password) => {
-	try {
-		const response = await axios.post(`${apiURL}/jwt-auth/v1/token`, {
-			username,
-			password,
-		})
-		return response.data.token
-	} catch (error) {
-		throw new Error('Login failed')
-	}
+// Login User
+export const loginUser = async (email, password) => {
+	const url = `${API_URL}/auth&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+
+	const response = await axios.post(url)
+	return response.data
 }
 
-export const register = async (username, password, email) => {
-	try {
-		await axios.post(`${apiURL}/wp/v2/users/register`, {
-			username,
-			password,
-			email,
-		})
-	} catch (error) {
-		throw new Error('Registration failed')
-	}
+// Register User
+export const registerUser = async userData => {
+	const formData = new FormData()
+	formData.append('username', userData.username)
+	formData.append('email', userData.email)
+	formData.append('password', userData.password)
+
+	const response = await axios.post(`${API_URL}/users`, formData)
+	return response.data
+}
+
+// Auto Login User
+export const autoLoginUser = async jwt => {
+	const response = await axios.get(`${API_URL}/autologin`, {
+		params: { JWT: jwt },
+	})
+	return response.data
 }

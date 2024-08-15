@@ -4,6 +4,8 @@ import {
 	BrowserRouter as Router,
 	Routes,
 } from 'react-router-dom'
+import Login from '../assets/components/VerificationPages/LoginPage.jsx'
+import SignUp from '../assets/components/VerificationPages/SignUpPage.jsx'
 import Footer from '../assets/screens/footer/Footer.jsx'
 import Home from '../assets/screens/home/Home.jsx'
 import MainPage from '../assets/screens/mainPage/MainPage.jsx'
@@ -25,6 +27,8 @@ const Router = () => {
 				<Home />
 				<MainPage />
 				<UserProfile />
+				<Login />
+				<SignUp />
 			</Routes>
 			<Footer />
 		</BrowserRouter>
