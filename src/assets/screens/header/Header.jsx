@@ -86,8 +86,12 @@ function Header() {
 
 	const navigate = useNavigate()
 
-	const handleLoginClick = () => {
+	const handleProfileClick = () => {
 		navigate('/userProfile')
+	}
+
+	const handleMainPageClick = () => {
+		navigate('/MainPage')
 	}
 
 	const burgerMenu = (
@@ -127,7 +131,7 @@ function Header() {
 					<div className='burgerMenuLoginButtonWrapper'>
 						<button
 							className='socialDownWrapper__loginButton socialDownWrapperButton circleButton burgerMenuLoginButton'
-							onClick={handleLoginClick}
+							onClick={handleProfileClick}
 						>
 							<img src='/Img/login.svg' alt='Login' />
 						</button>
@@ -143,7 +147,7 @@ function Header() {
 				<div className='burgerMenuFooterWrapper'>
 					<nav className='footerMenuWrapper'>
 						<ul className='footerMenuUl'>
-							<li className='footerMenuLi'>
+							<li className='footerMenuLi' onClick={handleMainPageClick}>
 								<a className='footerMenuLink' href='#'>
 									<p>{t('Головна')}</p>
 									<p>&#8250;</p>
@@ -285,7 +289,7 @@ function Header() {
 							</div>
 							<nav className='mainMenuContainer'>
 								<ul className='mainMenu__ul'>
-									<li className='mainMenu__li'>
+									<li className='mainMenu__li' onClick={handleMainPageClick}>
 										<a className='mainMenu__link' href='#'>
 											{t('Головна')}
 										</a>
@@ -369,7 +373,7 @@ function Header() {
 								</div>
 								<button
 									className='socialDownWrapper__loginButton socialDownWrapperButton circleButton'
-									onClick={handleLoginClick}
+									onClick={handleProfileClick}
 								>
 									<img src='/Img/login.svg' alt='Login' />
 								</button>
