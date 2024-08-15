@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../../styles/components/UserProfile/userProfile.module.scss";
+import styles from "../../../styles/components/UserProfile/userProfileAddPost.module.scss";
 
 const UserProfile = () => {
     return (
