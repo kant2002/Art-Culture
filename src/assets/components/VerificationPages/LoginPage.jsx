@@ -50,7 +50,7 @@ const Login = ({ setUsername, setIsLoggedIn, setServerMessage }) => {
 					setIsLoggedIn(true)
 					setUsername(loginDetails.user)
 					console.log(`User ${loginDetails.user} logged in successfully`)
-					window.location.replace('https://localhost:5173/userProfile/')
+					window.location.replace('https://zimbabaluba.pp.ua/user/')
 				}
 			} else {
 				console.warn('Login failed:', data.data.message)
