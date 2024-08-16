@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
 import styles from '../../../styles/components/VerificationPage/LoginPage.module.scss'
-import { autoLoginUser, loginUser } from '../API/ApiFetcher.js'
+import { loginUser } from '../API/ApiFetcher.js'
 
-const Login = ({ setUsername, setIsLoggedIn, setServerMessage }) => {
+const Login = ({
+	setUsername,
+	setIsLoggedIn,
+	serverMessage,
+	setServerMessage,
+}) => {
 	const [loginDetails, setLoginDetails] = useState({
 		user: '',
 		pass: '',
@@ -20,44 +25,63 @@ const Login = ({ setUsername, setIsLoggedIn, setServerMessage }) => {
 
 	// Debugging and logging the API interaction
 	const handleSubmit = async e => {
-		e.preventDefault() // Prevent form submission from refreshing the page
+		e.preventDefault()
 		console.log('Form submitted with login details:', loginDetails)
 
 		try {
-			// Logging the request details
 			console.log('Sending login request:', {
 				user: loginDetails.user,
 				pass: loginDetails.pass,
 			})
-
 			const data = await loginUser(loginDetails.user, loginDetails.pass)
 
-			// Logging the response from the loginUser request
 			console.log('Login response received:', data)
 
 			if (data.success) {
 				localStorage.setItem('jwt', data.data.jwt)
 				console.log('JWT saved to localStorage:', data.data.jwt)
 
-				// Attempting auto-login
 				console.log('Sending auto-login request with JWT:', data.data.jwt)
-				const autoLoginData = await autoLoginUser(data.data.jwt)
+				const response = await fetch(
+					`https://zimbabaluba.pp.ua/?rest_route=/simple-jwt-login/v1/autologin&JWT=${data.data.jwt}`
+				)
 
-				// Logging the response from the auto-login request
-				console.log('Auto-login response received:', autoLoginData)
+				// Detect if the response was redirected or if we received HTML
+				if (response.redirected) {
+					console.warn(
+						'Request was redirected. This is likely an issue with the endpoint.'
+					)
+				}
 
-				if (autoLoginData.success) {
-					setIsLoggedIn(true)
-					setUsername(loginDetails.user)
-					console.log(`User ${loginDetails.user} logged in successfully`)
-					window.location.replace('https://zimbabaluba.pp.ua/user/')
+				const contentType = response.headers.get('content-type')
+				if (
+					response.ok &&
+					contentType &&
+					contentType.includes('application/json')
+				) {
+					const autoLoginData = await response.json()
+					console.log('Auto-login response data:', autoLoginData)
+
+					if (autoLoginData.success) {
+						setIsLoggedIn(true)
+						setUsername(loginDetails.user)
+						console.log(`User ${loginDetails.user} logged in successfully`)
+						window.location.replace('https://zimbabaluba.pp.ua/mysite/#/')
+					} else {
+						console.warn('Auto-login failed:', autoLoginData.message)
+						setServerMessage(autoLoginData.message)
+					}
+				} else {
+					console.warn('Unexpected response format. Status:', response.status)
+					const responseText = await response.text()
+					console.log('Received HTML instead of JSON:', responseText)
+					setServerMessage('Unexpected response from server. Please try again.')
 				}
 			} else {
 				console.warn('Login failed:', data.data.message)
 				setServerMessage(data.data.message)
 			}
 		} catch (error) {
-			// Logging any errors during the request
 			console.error('Login Error:', error)
 			setServerMessage('An error occurred during login.')
 		}
@@ -67,7 +91,8 @@ const Login = ({ setUsername, setIsLoggedIn, setServerMessage }) => {
 		<div className={styles.LoginContainer}>
 			<header className={styles.LoginWrapper}>
 				<h2>Login</h2>
-				<p>{setServerMessage}</p>
+				{/* Render serverMessage here */}
+				<p>{serverMessage}</p>
 				<form className={styles.LoginForm} onSubmit={handleSubmit}>
 					<input
 						type='text'

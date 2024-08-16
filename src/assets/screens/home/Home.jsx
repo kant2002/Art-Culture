@@ -1,3 +1,4 @@
+import React from 'react'
 import Login from '../../components/VerificationPages/LoginPage'
 import SignUp from '../../components/VerificationPages/SignUpPage'
 import Layout from '../layout/Layout'
