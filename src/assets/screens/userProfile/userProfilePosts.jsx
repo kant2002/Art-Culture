@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import styles from '../../../styles/components/UserProfile/userProfilePosts.module.scss'
+import styles from '/src/styles/components/UserProfile/userProfilePosts.module.scss'
+import '/src/styles/components/UserProfile/userProfile.module.scss'
 
 const UserProfile = () => {
 	const navigate = useNavigate()
@@ -20,13 +21,13 @@ const UserProfile = () => {
 			{/* Верхние кнопки */}
 			<div className={`${styles.profileActions}`}>
 				<button
-					className={`${styles.profileAction} ${styles.profileActionActive}`}
+					className={`${styles.profileAction}`}
 					onClick={handleProfilePageClick}
 				>
 					Інформація
 				</button>
 				<button
-					className={`${styles.profileAction}`}
+					className={`${styles.profileAction} ${styles.profileActionActive}`}
 					onClick={handlePostsClick}
 				>
 					Публікації

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from '/src/styles/components/UserProfile/userProfileAddPost.module.scss'
+import '/src/styles/components/UserProfile/userProfile.module.scss'
 
 function UserProfile() {
 	const navigate = useNavigate()
@@ -20,7 +21,7 @@ function UserProfile() {
 			{/* Верхние кнопки */}
 			<div className={`${styles.profileActions}`}>
 				<button
-					className={`${styles.profileAction} ${styles.profileActionActive}`}
+					className={`${styles.profileAction}`}
 					onClick={handleProfilePageClick}
 				>
 					Інформація
@@ -32,7 +33,7 @@ function UserProfile() {
 					Публікації
 				</button>
 				<button
-					className={`${styles.profileAction}`}
+					className={`${styles.profileAction} ${styles.profileActionActive}`}
 					onClick={handleAddPostClick}
 				>
 					Додати публікацію

@@ -19,13 +19,14 @@
 
 .profileAction {
     /* Стиль для каждой кнопки действия */
-    margin: 10px 20px 0 0;
-	padding: 0 calc(0 / 1440 * 100vw);
-	width: calc(238px - (105 * ((1440px - 100vw) / (1440 - 375))));
+    margin: 10px calc(20px - (10 * ((1440px - 100vw) / (1440 - 375)))) 0 0;
+	padding: 0 calc(20px - (10 * ((1440px - 100vw) / (1440 - 375))));
+	// width: calc(238px - (105 * ((1440px - 100vw) / (1440 - 375))));
 	height: calc(51px - (11 * ((1440px - 100vw) / (1440 - 375))));
-	min-width: 163px;
+	// min-width: 163px;
+    min-width: fit-content;
 	min-height: 40px;
-	max-width: 238px;
+	// max-width: 238px;
 	max-height: 51px;
 	display: flex;
 	align-items: center;
