@@ -398,7 +398,10 @@ function Header() {
 							</button>
 						</div>
 						<div className='staticHeaderLoginContainer'>
-							<button className='staticHeaderLoginContainer__loginButton circleButton'>
+							<button
+								className='staticHeaderLoginContainer__loginButton circleButton'
+								onClick={handleProfileClick}
+							>
 								<img src='/Img/loginBlack.svg' alt='Login' />
 							</button>
 							<div className='staticHeaderLoginContainer__separator'>

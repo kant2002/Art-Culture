@@ -4,6 +4,8 @@ import Home from '../assets/screens/home/Home'
 import Layout from '../assets/screens/layout/Layout'
 import MainPage from '../assets/screens/mainPage/MainPage'
 import userProfile from '../assets/screens/userProfile/userProfile'
+import userProfileAddPost from '../assets/screens/userProfile/userProfileAddPost'
+import userProfilePosts from '../assets/screens/userProfile/userProfilePosts'
 
 export const routes = [
 	{
@@ -39,5 +41,17 @@ export const routes = [
 		path: '/signup',
 		element: SignUp,
 		isAuth: false,
+	},
+
+	{
+		path: '/userProfileAddPost',
+		element: userProfileAddPost,
+		isAuth: true,
+	},
+
+	{
+		path: '/userProfilePosts',
+		element: userProfilePosts,
+		isAuth: true,
 	},
 ]

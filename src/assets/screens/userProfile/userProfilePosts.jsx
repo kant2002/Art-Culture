@@ -1,13 +1,14 @@
-import React from "react";
-import styles from "../../../styles/components/UserProfile/userProfilePosts.module.scss";
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import styles from '../../../styles/components/UserProfile/userProfilePosts.module.scss'
 
 const UserProfile = () => {
     return (
         <div className={`${styles.profile}`}>
             {/* Верхние кнопки */}
             <div className={`${styles.profileActions}`}>
-                <button className={`${styles.profileAction}`}>Інформація</button>
-                <button className={`${styles.profileAction} ${styles.profileActionActive}`}>Публікації</button>
+                <button className={`${styles.profileAction} ${styles.profileActionActive}`}>Інформація</button>
+                <button className={`${styles.profileAction}`}>Публікації</button>
                 <button className={`${styles.profileAction}`}>Додати публікацію</button>
             </div>
 
@@ -55,4 +56,4 @@ const UserProfile = () => {
     );
 };
 
-export default UserProfile;
+export default UserProfile
