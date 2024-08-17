@@ -1,9 +1,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import styles from '/src/styles/components/UserProfile/userProfileAddPost.module.scss'
 import '/src/styles/components/UserProfile/userProfile.module.scss'
 
 function UserProfile() {
+	const { t } = useTranslation()
+
 	const navigate = useNavigate()
 
 	const handleProfilePageClick = () => {
@@ -40,8 +43,9 @@ function UserProfile() {
 				</button>
 			</div>
 
-			{/* Аватар и информация о пользователе */}
-			<p>userProfileAddPost</p>
+			{/* Добавить публикацию */}
+			<div className={`${styles.profileAddPostContainer}`}>
+			</div>
 		</div>
 	)
 }

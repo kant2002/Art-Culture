@@ -1,1 +1,73 @@
-@import '/src/styles/components/UserProfile/userProfile.module.scss';
+@import '/src/styles/components/UserProfile/userProfile.module.scss'
+
+.profile {
+    /* Контейнер для профиля */
+}
+
+.profileActions {
+    /* Контейнер для кнопок действий */
+}
+
+.profileAction {
+    /* Стили для каждой кнопки действия */
+}
+
+.profileActionActive {
+    /* Стили для активной кнопки */
+}
+
+.UserProfilePostsContainer {
+    /* Контейнер для карточек публикаций */
+}
+
+.UserProfilePostsPicAndTextWrapper {
+    /* Обертка для изображения и текста публикации */
+}
+
+.UserProfilePostsPicWrapper {
+    /* Обертка для изображения публикации */
+}
+
+.UserProfilePostsPic {
+    /* Стили для изображения публикации */
+}
+
+.UserProfilePostsTextWrapper {
+    /* Обертка для текста публикации */
+}
+
+.UserProfilePostsTitleWrapper {
+    /* Обертка для заголовка публикации */
+}
+
+.UserProfilePostsTitle {
+    /* Стили для заголовка публикации */
+}
+
+.UserProfilePostsDescriptionWrapper {
+    /* Обертка для описания публикации */
+}
+
+.UserProfilePostsDescription {
+    /* Стили для описания публикации */
+}
+
+.UserProfilePostsClockDateAndButtonWrapper {
+    /* Обертка для часов, даты и кнопки */
+}
+
+.UserProfilePostsClockAndDateWrapper {
+    /* Обертка для часов и даты */
+}
+
+.UserProfilePostsClock {
+    /* Стили для изображения часов */
+}
+
+.UserProfilePostsDate {
+    /* Стили для даты публикации */
+}
+
+.UserProfilePostsButton {
+    /* Стили для кнопки публикации */
+}
