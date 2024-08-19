@@ -1,134 +1,166 @@
-.profile { 
-    /* Основной контейнер профиля */
-    display: flex;
-    flex-direction: column;   
-	padding: calc(177px - (107 * ((1440px - 100vw) / (1440 - 569)))) calc(70 / 1440 * 100vw) 0;
-	width: 100%;
-    min-height: calc(100dvh - 234px);
-    background: white;
-    color: black;
+@import '/src/styles/components/UserProfile/userProfile.module.scss';
+@import '/src/styles/utilities/variables.scss';
+
+.profile {
+    /* Контейнер для профиля */
 }
 
 .profileActions {
-    /* Контейнер для верхних кнопок */
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    flex-wrap: wrap;
+    /* Контейнер для кнопок действий */
 }
 
 .profileAction {
-    /* Стиль для каждой кнопки действия */
-    margin: 10px 20px 0 0;
-	padding: 0 calc(0 / 1440 * 100vw);
-	width: calc(238px - (105 * ((1440px - 100vw) / (1440 - 375))));
-	height: calc(51px - (11 * ((1440px - 100vw) / (1440 - 375))));
-	min-width: 163px;
-	min-height: 40px;
-	max-width: 238px;
-	max-height: 51px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: calc(34px - (4 * ((1440px - 100vw) / (1440 - 375))));
-	background-color: rgb(207, 207, 207);
-	cursor: pointer;
-    font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
-	font-weight: 700;
-}
-
-.profileAction:hover {
-    background: #3A8374;
-    color: #fff;
-    transition: 0.4s ease;
-}
-
-.profileAction:not(:hover) {
-    transition: 0.4s ease;
+    /* Стили для каждой кнопки действия */
 }
 
 .profileActionActive {
-    background: #3A8374;
-    color: #fff;
+    /* Стили для активной кнопки */
+}
+
+.userProfilePostsContainer {
+    /* Контейнер для карточек публикаций */
+    font-family: $default-font;
+    margin: 15px 0;
+}
+
+.userProfilePostsWrapper {
+    /* Контейнер для карточек публикаций */
+    margin: 15px 0 0 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.userProfilePostsPicAndTextWrapper {
+    /* Обертка для изображения и текста публикации */
+    display: flex;
+    // flex-wrap: wrap;
+}
+
+.userProfilePostsPicWrapper {
+    /* Обертка для изображения публикации */
+    // padding: 20px 0 0 10px;
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+    max-width: max-content;
+    max-height: max-content;
+}
+
+.userProfilePostsPic {
+    /* Стили для изображения публикации */
+    display: block;
+	object-fit: contain;
+	object-position: center top;
+    border-radius: 3px;
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.userProfilePostsTextWrapper {
+    /* Обертка для текста публикации */
+    // margin: -10px 0 0 -10px;
+    margin: 0 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.userProfilePostsTitleWrapper {
+    /* Обертка для заголовка публикации */
+    // padding: 20px 0 0 20px;
+    display: flex;
+    justify-content: start;
+	// max-height: calc(
+	// 	28px * 2
+	// ); // Делаем ограничение вывода текста построчечно
+	// overflow: hidden;
+}
+
+.userProfilePostsTitle {
+    /* Стили для заголовка публикации */
+    font-weight: 600;
+    font-size: 28px;
+    text-transform: uppercase;
+}
+
+.userProfilePostsDescriptionWrapper {
+    /* Обертка для описания публикации */
+    // padding: 20px 0 0 20px;
+    margin: 10px 0 0 0;
+    display: flex;
+    justify-content: start;
+	max-height: calc(
+		18px * 11
+	); // Делаем ограничение вывода текста построчечно
+	overflow: hidden;
+}
+
+.userProfilePostsDescription {
+    /* Стили для описания публикации */
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.userProfilePostsClockDateAndButtonWrapper {
+    /* Обертка для часов, даты и кнопки */
+    margin: 10px 0 auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userProfilePostsClockAndDateWrapper {
+    /* Обертка для часов и даты */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userProfilePostsClock {
+    /* Стили для изображения часов */
+    display: flex;
+	width: 20px;
+	height: 20px;
+}
+
+.userProfilePostsDate {
+    /* Стили для даты публикации */
+    margin: 0 0 0 10px;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.userProfilePostsButton {
+    /* Стили для кнопки публикации */
+    font-weight: 400;
+    font-size: 18px;
+    // text-transform: uppercase;
+    background: none;
     border: none;
-}
-
-.profileInfo {
-    // /* Контейнер для информации о пользователе */
-    margin: 20px 0 0 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: start;
-}
-
-.profileAvatar {
-    /* Контейнер для аватара */
-}
-
-.profileDetails {
-    /* Контейнер для деталей пользователя */
-}
-
-.profileField {
-    /* Общий контейнер для полей информации */
-    margin: 20px 0 ;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: start;
-    line-height: 150%;
-}
-
-.profileLabel {
-    /* Стиль для меток информации */
-    font-weight: 900;
-}
-
-.profileValue {
-    /* Стиль для значений информации */
-}
-
-.profileEdit {
-    /* Стиль для кнопки редактирования */
-    background: rgb(207, 207, 207);
-    color: #000;
-    border-radius: calc(34px - (4 * ((1440px - 100vw) / (1440 - 375))));
-    font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
-    padding: 0 10px;
     cursor: pointer;
+	color: #d83934;
 }
 
-.profileEdit:hover {
-    background: #3A8374;
-    color: #fff;
-    border: none;
-}
-
-.profileEdit:not(:hover) {
-    transition: 0.4s ease;
-}
-
-
-@media (min-width: 1441px) {
-	.profile {
-		padding: 177px calc(70 / 1440 * 100vw) 0;
-	}
-
-    .profileAction {
-        /* Стиль для каждой кнопки действия */
-        font-size: 16px;
+@media (max-width: 679px) {
+    .userProfilePostsPicAndTextWrapper {
+        /* Обертка для изображения и текста публикации */
+        flex-wrap: wrap;
     }
-}
 
-@media (max-width: 799px) {
-	.profile {
-        min-height: calc(100dvh - 348px);
-	}
-}
+    .userProfilePostsPicWrapper {
+        /* Обертка для изображения публикации */
+        // padding: 20px 0 0 10px;
+        width: 100%;
+        margin: 0 auto;
+    }
 
-@media (max-width: 569px) {
-	.profile {
-		padding: 70px calc(70 / 1440 * 100vw) 0;
-	}
+    .userProfilePostsPic {
+        /* Стили для изображения публикации */
+        width: 100%;
+    }
+
+    .userProfilePostsTextWrapper {
+        /* Обертка для текста публикации */
+        margin: 10px 0 0 0;
+    }
 }

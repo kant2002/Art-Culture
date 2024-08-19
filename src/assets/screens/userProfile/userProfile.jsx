@@ -1,8 +1,11 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import styles from '/src/styles/components/UserProfile/userProfile.module.scss'
 
 function UserProfile() {
+	const { t } = useTranslation()
+	
 	const navigate = useNavigate()
 
 	const handleProfilePageClick = () => {
