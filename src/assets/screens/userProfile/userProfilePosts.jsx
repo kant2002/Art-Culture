@@ -5,6 +5,7 @@ import styles from '/src/styles/components/UserProfile/userProfilePosts.module.s
 import '/src/styles/components/UserProfile/userProfile.module.scss'
 
 const UserProfile = () => {
+
 	const { t } = useTranslation()
 
 	const navigate = useNavigate()

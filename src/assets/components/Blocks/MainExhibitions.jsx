@@ -45,7 +45,9 @@ function MainExhibitions() {
 	useEffect(() => {
 		// Запит на отримання постів з медіа-даними
 		axios
-			.get('https://zimbabaluba.pp.ua/wp-json/wp/v2/posts?categories=6&_embed')
+			.get(
+				'https://art.playukraine.com/wp-json/wp/v2/posts?categories=6&_embed'
+			)
 			.then(response => {
 				console.log('Отримані дані постів:', response.data)
 				setPosts(response.data)
@@ -56,7 +58,7 @@ function MainExhibitions() {
 
 		// Запит на отримання медіа
 		axios
-			.get('https://zimbabaluba.pp.ua/wp-json/wp/v2/media')
+			.get('https://art.playukraine.com/wp-json/wp/v2/media')
 			.then(response => {
 				const mediaMap = response.data.reduce((acc, mediaItem) => {
 					acc[mediaItem.id] = mediaItem.source_url
