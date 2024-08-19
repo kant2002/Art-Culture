@@ -26,7 +26,19 @@ const Layout = ({ children, heading = '', backLink = '/' }) => {
 				<Routes>
 					<Route path='/' element={<Navigate to='/MainPage' />} />
 					<Route path='/MainPage' element={<MainPage />} />
-					<Route path='/userProfile' element={<UserProfile />} />
+					<Route
+						path='/userProfile'
+						element={
+							<UserProfile
+								isLoggedIn={isLoggedIn}
+								setIsLoggedIn={setIsLoggedIn}
+								setUsername={setUsername}
+								username={username}
+								serverMessage={serverMessage}
+								setServerMessage={setServerMessage}
+							/>
+						}
+					/>
 					<Route path='/userProfileAddPost' element={<UserProfileAddPost />} />
 					<Route path='/userProfilePosts' element={<UserProfilePosts />} />
 					<Route
@@ -40,7 +52,17 @@ const Layout = ({ children, heading = '', backLink = '/' }) => {
 							/>
 						}
 					/>
-					<Route path='/signup' element={<SignUp />} />
+					<Route
+						path='/signup'
+						element={
+							<SignUp
+								setUsername={setUsername}
+								setIsLoggedIn={setIsLoggedIn}
+								serverMessage={serverMessage}
+								setServerMessage={setServerMessage}
+							/>
+						}
+					/>
 				</Routes>
 				<Footer />
 			</section>

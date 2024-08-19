@@ -108,7 +108,7 @@ const Login = ({
 						value={loginDetails.pass}
 						onChange={handleChange}
 					/>
-					<input type='submit' value='Go' />
+					<input type='submit' value='Go' onClick={handleSubmit} />
 				</form>
 			</header>
 		</div>
