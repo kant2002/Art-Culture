@@ -19,7 +19,13 @@
 
 .UserProfilePostsContainer {
     /* Контейнер для карточек публикаций */
-    margin: -10px 0 0 -10px;
+    font-family: $default-font;
+    margin: 15px 0;
+}
+
+.UserProfilePostsWrapper {
+    /* Контейнер для карточек публикаций */
+    margin: 5px 0;
     display: flex;
     flex-direction: column;
 }
@@ -27,17 +33,13 @@
 .UserProfilePostsPicAndTextWrapper {
     /* Обертка для изображения и текста публикации */
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
+    // flex-wrap: wrap;
 }
 
 .UserProfilePostsPicWrapper {
     /* Обертка для изображения публикации */
-    padding: 20px 0 0 10px;
+    // padding: 20px 0 0 10px;
     display: flex;
-    flex-shrink: 0;
-    flex-grow: 1;
-    flex-basis: 300px;
 }
 
 .UserProfilePostsPic {
@@ -45,61 +47,59 @@
     display: flex;
 	object-fit: cover;
 	object-position: center;
-    width: 100%;
-    height: 100%;
+    border-radius: 10px;
+    width: 300px;
+    height: 300px;
 }
 
 .UserProfilePostsTextWrapper {
     /* Обертка для текста публикации */
-    margin: -10px 0 0 -10px;
+    // margin: -10px 0 0 -10px;
+    margin: 0 0 0 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    flex-shrink: 1;
-    flex-grow: 4;
 }
 
 .UserProfilePostsTitleWrapper {
     /* Обертка для заголовка публикации */
-    padding: 20px 0 0 20px;
+    // padding: 20px 0 0 20px;
     display: flex;
     justify-content: start;
-    align-items: center;
-	height: calc(
-		calc(28px - (10 * ((1440px - 100vw) / (1440 - 375)))) * 2
+	max-height: calc(
+		28px * 2
 	); // Делаем ограничение вывода текста построчечно
 	overflow: hidden;
 }
 
 .UserProfilePostsTitle {
     /* Стили для заголовка публикации */
-    font-family: $default-font;
     font-weight: 600;
-    font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    font-size: 28px;
     text-transform: uppercase;
 }
 
 .UserProfilePostsDescriptionWrapper {
     /* Обертка для описания публикации */
-    padding: 20px 0 0 20px;
+    // padding: 20px 0 0 20px;
+    margin: 10px 0 0 0;
     display: flex;
     justify-content: start;
-    align-items: center;
-	height: calc(
-		calc(18px - (10 * ((1440px - 100vw) / (1440 - 375)))) * 3
+	max-height: calc(
+		18px * 11
 	); // Делаем ограничение вывода текста построчечно
 	overflow: hidden;
 }
 
 .UserProfilePostsDescription {
     /* Стили для описания публикации */
-    font-family: $default-font;
     font-weight: 400;
-    font-size: calc(18px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    font-size: 18px;
 }
 
 .UserProfilePostsClockDateAndButtonWrapper {
     /* Обертка для часов, даты и кнопки */
+    margin: 10px 0 auto 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -115,22 +115,21 @@
 .UserProfilePostsClock {
     /* Стили для изображения часов */
     display: flex;
-    width: 100%;
-    height: 100%;
+	width: 20px;
+	height: 20px;
 }
 
 .UserProfilePostsDate {
     /* Стили для даты публикации */
-    font-family: $default-font;
+    margin: 0 0 0 10px;
     font-weight: 400;
-    font-size: calc(18px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    font-size: 18px;
 }
 
 .UserProfilePostsButton {
     /* Стили для кнопки публикации */
-    font-family: $default-font;
     font-weight: 400;
-    font-size: calc(18px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    font-size: 18px;
     // text-transform: uppercase;
     background: none;
     border: none;
