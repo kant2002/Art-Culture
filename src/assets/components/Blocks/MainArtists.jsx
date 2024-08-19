@@ -53,7 +53,9 @@ function MainArtists() {
 
 	useEffect(() => {
 		axios
-			.get('https://zimbabaluba.pp.ua/wp-json/wp/v2/posts?categories=4&_embed')
+			.get(
+				'https://art.playukraine.com/wp-json/wp/v2/posts?categories=4&_embed'
+			)
 			.then(response => {
 				console.log('Received post data:', response.data)
 				setPosts(response.data)
@@ -63,7 +65,7 @@ function MainArtists() {
 			})
 
 		axios
-			.get('https://zimbabaluba.pp.ua/wp-json/wp/v2/media')
+			.get('hhttps://art.playukraine.com/wp-json/wp/v2/media')
 			.then(response => {
 				const mediaMap = response.data.reduce((acc, mediaItem) => {
 					acc[mediaItem.id] = mediaItem.source_url
