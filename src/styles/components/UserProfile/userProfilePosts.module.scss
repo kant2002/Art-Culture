@@ -1,22 +1,6 @@
 @import '/src/styles/components/UserProfile/userProfile.module.scss';
 @import '/src/styles/utilities/variables.scss';
 
-.profile {
-    /* Контейнер для профиля */
-}
-
-.profileActions {
-    /* Контейнер для кнопок действий */
-}
-
-.profileAction {
-    /* Стили для каждой кнопки действия */
-}
-
-.profileActionActive {
-    /* Стили для активной кнопки */
-}
-
 .userProfilePostsContainer {
     /* Контейнер для карточек публикаций */
     font-family: $default-font;
@@ -25,7 +9,7 @@
 
 .userProfilePostsWrapper {
     /* Контейнер для карточек публикаций */
-    margin: 15px 0 0 0;
+    margin: 30px 0 0 0;
     display: flex;
     flex-direction: column;
 }
@@ -33,12 +17,10 @@
 .userProfilePostsPicAndTextWrapper {
     /* Обертка для изображения и текста публикации */
     display: flex;
-    // flex-wrap: wrap;
 }
 
 .userProfilePostsPicWrapper {
     /* Обертка для изображения публикации */
-    // padding: 20px 0 0 10px;
     display: inline-block;
     width: fit-content;
     height: fit-content;
@@ -58,7 +40,6 @@
 
 .userProfilePostsTextWrapper {
     /* Обертка для текста публикации */
-    // margin: -10px 0 0 -10px;
     margin: 0 0 0 20px;
     display: flex;
     flex-direction: column;
@@ -67,7 +48,6 @@
 
 .userProfilePostsTitleWrapper {
     /* Обертка для заголовка публикации */
-    // padding: 20px 0 0 20px;
     display: flex;
     justify-content: start;
 	// max-height: calc(
@@ -85,7 +65,6 @@
 
 .userProfilePostsDescriptionWrapper {
     /* Обертка для описания публикации */
-    // padding: 20px 0 0 20px;
     margin: 10px 0 0 0;
     display: flex;
     justify-content: start;
@@ -134,7 +113,6 @@
     /* Стили для кнопки публикации */
     font-weight: 400;
     font-size: 18px;
-    // text-transform: uppercase;
     background: none;
     border: none;
     cursor: pointer;
@@ -149,7 +127,6 @@
 
     .userProfilePostsPicWrapper {
         /* Обертка для изображения публикации */
-        // padding: 20px 0 0 10px;
         width: 100%;
         margin: 0 auto;
     }
