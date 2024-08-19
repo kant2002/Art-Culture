@@ -141,7 +141,7 @@ const UserProfile = () => {
 						<div className={`${styles.userProfilePostsTextWrapper}`}>
 							<div className={`${styles.userProfilePostsTitleWrapper}`}>
 								<h3 className={`${styles.userProfilePostsTitle}`}>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur omnis aperiam harum tempore voluptas reiciendis.
+									Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur omnis aperiam harum tempore voluptas reiciendis..
 								</h3>
 							</div>
 							<div className={`${styles.userProfilePostsDescriptionWrapper}`}>
