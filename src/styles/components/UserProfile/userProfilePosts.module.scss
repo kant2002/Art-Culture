@@ -17,42 +17,46 @@
     /* Стили для активной кнопки */
 }
 
-.UserProfilePostsContainer {
+.userProfilePostsContainer {
     /* Контейнер для карточек публикаций */
     font-family: $default-font;
     margin: 15px 0;
 }
 
-.UserProfilePostsWrapper {
+.userProfilePostsWrapper {
     /* Контейнер для карточек публикаций */
-    margin: 5px 0;
+    margin: 15px 0 0 0;
     display: flex;
     flex-direction: column;
 }
 
-.UserProfilePostsPicAndTextWrapper {
+.userProfilePostsPicAndTextWrapper {
     /* Обертка для изображения и текста публикации */
     display: flex;
     // flex-wrap: wrap;
 }
 
-.UserProfilePostsPicWrapper {
+.userProfilePostsPicWrapper {
     /* Обертка для изображения публикации */
     // padding: 20px 0 0 10px;
-    display: flex;
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+    max-width: max-content;
+    max-height: max-content;
 }
 
-.UserProfilePostsPic {
+.userProfilePostsPic {
     /* Стили для изображения публикации */
-    display: flex;
-	object-fit: cover;
-	object-position: center;
-    border-radius: 10px;
-    width: 300px;
-    height: 300px;
+    display: block;
+	object-fit: contain;
+	object-position: center top;
+    border-radius: 3px;
+    max-width: 300px;
+    max-height: 300px;
 }
 
-.UserProfilePostsTextWrapper {
+.userProfilePostsTextWrapper {
     /* Обертка для текста публикации */
     // margin: -10px 0 0 -10px;
     margin: 0 0 0 20px;
@@ -61,25 +65,25 @@
     justify-content: space-between;
 }
 
-.UserProfilePostsTitleWrapper {
+.userProfilePostsTitleWrapper {
     /* Обертка для заголовка публикации */
     // padding: 20px 0 0 20px;
     display: flex;
     justify-content: start;
-	max-height: calc(
-		28px * 2
-	); // Делаем ограничение вывода текста построчечно
-	overflow: hidden;
+	// max-height: calc(
+	// 	28px * 2
+	// ); // Делаем ограничение вывода текста построчечно
+	// overflow: hidden;
 }
 
-.UserProfilePostsTitle {
+.userProfilePostsTitle {
     /* Стили для заголовка публикации */
     font-weight: 600;
     font-size: 28px;
     text-transform: uppercase;
 }
 
-.UserProfilePostsDescriptionWrapper {
+.userProfilePostsDescriptionWrapper {
     /* Обертка для описания публикации */
     // padding: 20px 0 0 20px;
     margin: 10px 0 0 0;
@@ -91,13 +95,13 @@
 	overflow: hidden;
 }
 
-.UserProfilePostsDescription {
+.userProfilePostsDescription {
     /* Стили для описания публикации */
     font-weight: 400;
     font-size: 18px;
 }
 
-.UserProfilePostsClockDateAndButtonWrapper {
+.userProfilePostsClockDateAndButtonWrapper {
     /* Обертка для часов, даты и кнопки */
     margin: 10px 0 auto 0;
     display: flex;
@@ -105,28 +109,28 @@
     align-items: center;
 }
 
-.UserProfilePostsClockAndDateWrapper {
+.userProfilePostsClockAndDateWrapper {
     /* Обертка для часов и даты */
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.UserProfilePostsClock {
+.userProfilePostsClock {
     /* Стили для изображения часов */
     display: flex;
 	width: 20px;
 	height: 20px;
 }
 
-.UserProfilePostsDate {
+.userProfilePostsDate {
     /* Стили для даты публикации */
     margin: 0 0 0 10px;
     font-weight: 400;
     font-size: 18px;
 }
 
-.UserProfilePostsButton {
+.userProfilePostsButton {
     /* Стили для кнопки публикации */
     font-weight: 400;
     font-size: 18px;
@@ -134,4 +138,29 @@
     background: none;
     border: none;
     cursor: pointer;
+	color: #d83934;
+}
+
+@media (max-width: 679px) {
+    .userProfilePostsPicAndTextWrapper {
+        /* Обертка для изображения и текста публикации */
+        flex-wrap: wrap;
+    }
+
+    .userProfilePostsPicWrapper {
+        /* Обертка для изображения публикации */
+        // padding: 20px 0 0 10px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .userProfilePostsPic {
+        /* Стили для изображения публикации */
+        width: 100%;
+    }
+
+    .userProfilePostsTextWrapper {
+        /* Обертка для текста публикации */
+        margin: 10px 0 0 0;
+    }
 }
