@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'https://zimbabaluba.pp.ua/?rest_route=/simple-jwt-login/v1'
+const API_URL = 'https://admin.playukraine.com/?rest_route=/simple-jwt-login/v1'
 
 // Login User
 export const loginUser = async (email, password) => {

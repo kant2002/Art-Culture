@@ -46,7 +46,7 @@ function MainNews() {
 		// Запит на отримання постів з медіа-даними
 		axios
 			.get(
-				'https://art.playukraine.com/wp-json/wp/v2/posts?categories=3&_embed'
+				'https://admin.playukraine.com/wp-json/wp/v2/posts?categories=3&_embed'
 			)
 			.then(response => {
 				console.log('Отримані дані постів:', response.data)
@@ -58,7 +58,7 @@ function MainNews() {
 
 		// Запит на отримання медіа
 		axios
-			.get('hhttps://art.playukraine.com/wp-json/wp/v2/media')
+			.get('https://admin.playukraine.com/wp-json/wp/v2/media')
 			.then(response => {
 				const mediaMap = response.data.reduce((acc, mediaItem) => {
 					acc[mediaItem.id] = mediaItem.source_url
