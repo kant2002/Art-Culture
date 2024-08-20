@@ -1,1 +1,57 @@
 @import '/src/styles/components/UserProfile/userProfile.module.scss';
+@import '/src/styles/utilities/variables.scss';
+
+.profile {
+    /* Общий контейнер профиля */
+}
+
+.profileActions {
+    /* Контейнер для верхних кнопок */
+}
+
+.profileAction {
+    /* Общий стиль для кнопок навигации */
+}
+
+.profileActionActive {
+    /* Стиль активной кнопки навигации */
+}
+
+.profileAddPostContainer {
+    /* Контейнер для формы добавления публикации */
+    display: flex;
+    width: 100%;
+    height: 1000px;
+}
+
+.profileAddPostTitle {
+    /* Стиль заголовка формы */
+}
+
+.profileAddPostForm {
+    /* Стиль формы добавления публикации */
+}
+
+.profileAddPostField {
+    /* Контейнер для каждого поля ввода формы */
+}
+
+.profileAddPostLabel {
+    /* Стиль для меток полей ввода */
+}
+
+.profileAddPostInput {
+    /* Стиль текстовых полей ввода */
+}
+
+.profileAddPostTextarea {
+    /* Стиль для текстовых областей */
+}
+
+.profileAddPostFileInput {
+    /* Стиль для поля загрузки файла */
+}
+
+.profileAddPostButton {
+    /* Стиль для кнопки сохранения */
+}
