@@ -3,9 +3,9 @@ import SignUp from '../assets/components/VerificationPages/SignUpPage'
 import Home from '../assets/screens/home/Home'
 import Layout from '../assets/screens/layout/Layout'
 import MainPage from '../assets/screens/mainPage/MainPage'
-import userProfile from '../assets/screens/userProfile/userProfile'
-import userProfileAddPost from '../assets/screens/userProfile/userProfileAddPost'
-import userProfilePosts from '../assets/screens/userProfile/userProfilePosts'
+import UserProfile from '../assets/screens/userProfile/userProfile'
+import UserProfileAddPost from '../assets/screens/userProfile/userProfileAddPost'
+import UserProfilePosts from '../assets/screens/userProfile/userProfilePosts'
 
 export const routes = [
 	{
@@ -27,7 +27,7 @@ export const routes = [
 
 	{
 		path: '/userProfile',
-		element: userProfile,
+		element: UserProfile,
 		isAuth: true,
 	},
 
@@ -45,13 +45,13 @@ export const routes = [
 
 	{
 		path: '/userProfileAddPost',
-		element: userProfileAddPost,
+		element: UserProfileAddPost,
 		isAuth: true,
 	},
 
 	{
 		path: '/userProfilePosts',
-		element: userProfilePosts,
+		element: UserProfilePosts,
 		isAuth: true,
 	},
 ]

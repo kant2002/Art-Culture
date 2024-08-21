@@ -26,12 +26,12 @@ function UserProfileAddPost() {
 		navigate('/userProfile');
 	};
 
-	const handleAddPostClick = () => {
-		navigate('/userProfileAddPost');
-	};
-
 	const handlePostsClick = () => {
 		navigate('/userProfilePosts');
+	};
+
+	const handleAddPostClick = () => {
+		navigate('/userProfileAddPost');
 	};
 
 	const handleChange = (e) => {

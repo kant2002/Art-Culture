@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import styles from '/src/styles/components/UserProfile/userProfile.module.scss'
 
 function UserProfile() {
-	
+
 	const { t } = useTranslation()
 	
 	const navigate = useNavigate()
@@ -13,11 +13,11 @@ function UserProfile() {
 		navigate('/userProfile')
 	}
 
-	const handleAddPostClick = () => {
-		navigate('/userProfileAddPost')
-	}
 	const handlePostsClick = () => {
 		navigate('/userProfilePosts')
+	}
+	const handleAddPostClick = () => {
+		navigate('/userProfileAddPost')
 	}
 	return (
 		<div className={`${styles.profile}`}>
