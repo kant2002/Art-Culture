@@ -43,7 +43,7 @@ const Login = ({
 
 				console.log('Sending auto-login request with JWT:', data.data.jwt)
 				const response = await fetch(
-					`https://zimbabaluba.pp.ua/?rest_route=/simple-jwt-login/v1/autologin&JWT=${data.data.jwt}`
+					`https://admin.playukraine.com/?rest_route=/simple-jwt-login/v1/autologin&JWT=${data.data.jwt}`
 				)
 
 				// Detect if the response was redirected or if we received HTML
@@ -66,7 +66,7 @@ const Login = ({
 						setIsLoggedIn(true)
 						setUsername(loginDetails.user)
 						console.log(`User ${loginDetails.user} logged in successfully`)
-						window.location.replace('https://zimbabaluba.pp.ua/mysite/#/')
+						window.location.replace('https://admin.playukraine.com/mysite/#/')
 					} else {
 						console.warn('Auto-login failed:', autoLoginData.message)
 						setServerMessage(autoLoginData.message)
