@@ -3,6 +3,12 @@
 	height: 100dvh;
 
 	display: flex;
+
+	h2 {
+		margin: 0 0 20px 0;
+		font-size: 2rem;
+		color: #61dafb;
+	}
 }
 
 .App-header {
@@ -13,12 +19,6 @@
 	color: white;
 	height: 100vw;
 	height: 100%;
-}
-
-h2 {
-	margin: 0 0 20px 0;
-	font-size: 2rem;
-	color: #61dafb;
 }
 
 // Form Styles
