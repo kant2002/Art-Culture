@@ -26,7 +26,7 @@ const SignUp = ({ setUsername, setIsLoggedIn, setServerMessage }) => {
 				if (autoLoginData.success) {
 					setIsLoggedIn(true)
 					setUsername(signUpDetails.user)
-					window.location.replace('https://zimbabaluba.pp.ua/mysite/#/')
+					window.location.replace('https://admin.playukraine.com/mysite/#/')
 				}
 			} else {
 				setServerMessage(data.data.message)

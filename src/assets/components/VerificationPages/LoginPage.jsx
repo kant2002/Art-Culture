@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 import styles from '../../../styles/components/VerificationPage/LoginPage.module.scss'
-import { loginUser } from '../API/ApiFetcher.js'
+import {
+	autoLoginUser,
+	loginUser,
+	refreshJWT,
+	validateJWT,
+} from '../API/ApiFetcher.js'
 
 const Login = ({
 	setUsername,
@@ -33,56 +38,73 @@ const Login = ({
 				user: loginDetails.user,
 				pass: loginDetails.pass,
 			})
-			const data = await loginUser(loginDetails.user, loginDetails.pass)
+			const loginData = await loginUser(loginDetails.user, loginDetails.pass)
+			console.log('Login response received:', loginData)
 
-			console.log('Login response received:', data)
+			if (loginData.success) {
+				localStorage.setItem('jwt', loginData.data.jwt)
+				console.log('JWT saved to localStorage:', loginData.data.jwt)
+				console.log('Sending auto-login request with JWT:', loginData.data.jwt)
+				// const response = await fetch(
+				// 	`https://admin.playukraine.com/?rest_route=/simple-jwt-login/v1/autologin&JWT=${loginData.data.jwt}`
+				// )
 
-			if (data.success) {
-				localStorage.setItem('jwt', data.data.jwt)
-				console.log('JWT saved to localStorage:', data.data.jwt)
+				// Validate JWT
+				const validationResponse = await validateJWT(loginData.data.jwt)
+				if (validationResponse.success) {
+					console.log('JWT validated proceeding with auto-login')
 
-				console.log('Sending auto-login request with JWT:', data.data.jwt)
-				const response = await fetch(
-					`https://admin.playukraine.com/?rest_route=/simple-jwt-login/v1/autologin&JWT=${data.data.jwt}`
-				)
-
-				// Detect if the response was redirected or if we received HTML
-				if (response.redirected) {
-					console.warn(
-						'Request was redirected. This is likely an issue with the endpoint.'
-					)
-				}
-
-				const contentType = response.headers.get('content-type')
-				if (
-					response.ok &&
-					contentType &&
-					contentType.includes('application/json')
-				) {
-					const autoLoginData = await response.json()
-					console.log('Auto-login response data:', autoLoginData)
-
+					// Perform auto-login
+					const autoLoginData = await autoLoginUser(loginData.data.jwt)
 					if (autoLoginData.success) {
 						setIsLoggedIn(true)
 						setUsername(loginDetails.user)
 						console.log(`User ${loginDetails.user} logged in successfully`)
-						window.location.replace('https://admin.playukraine.com/mysite/#/')
+						window.location.replace('https://art.playukraine.com/userProfile/')
 					} else {
 						console.warn('Auto-login failed:', autoLoginData.message)
+						console.log('Auto-login responce:', autoLoginData)
 						setServerMessage(autoLoginData.message)
 					}
-				} else {
-					console.warn('Unexpected response format. Status:', response.status)
-					const responseText = await response.text()
-					console.log('Received HTML instead of JSON:', responseText)
-					setServerMessage('Unexpected response from server. Please try again.')
+				} else if (validationResponse.expired) {
+					const refreshData = await refreshJWT(loginData.data.jwt)
+					if (refreshData.success) {
+						localStorage.setItem('jwt', refreshData.data.new_jwt)
+						console.log(
+							'JWT refreshed and saved to localStorage:',
+							refreshData.data.new_jwt
+						)
+
+						// Perform auto-login with refreshed JWT
+						const autoLoginData = await autoLoginUser(refreshData.data.new_jwt)
+						if (autoLoginData.success) {
+							setIsLoggedIn(true)
+							setUsername(loginDetails.user)
+							console.log(`User ${loginDetails.user} logged in successfully`)
+							window.location.replace(
+								'https://art.playukraine.com/userProfile/'
+							)
+						} else {
+							console.warn(
+								'Auto-login failed after refresh:',
+								autoLoginData.message || 'No error message provided'
+							)
+							setServerMessage(
+								autoLoginData.message ||
+									'Unknown error occurred during auto-login'
+							)
+						}
+					} else {
+						console.warn('failed to refresh JWT:', refreshData.message)
+						setServerMessage('Session expired. Log again.')
+					}
 				}
 			} else {
-				console.warn('Login failed:', data.data.message)
-				setServerMessage(data.data.message)
+				condole.warn('login failed :', loginData.data.message)
+				setServerMessage(loginData.data.message)
 			}
 		} catch (error) {
-			console.error('Login Error:', error)
+			console.error('Login error:', error)
 			setServerMessage('An error occurred during login.')
 		}
 	}
@@ -96,7 +118,7 @@ const Login = ({
 				<form className={styles.LoginForm} onSubmit={handleSubmit}>
 					<input
 						type='text'
-						placeholder='User Name'
+						placeholder='Email'
 						name='user'
 						value={loginDetails.user}
 						onChange={handleChange}
@@ -108,7 +130,7 @@ const Login = ({
 						value={loginDetails.pass}
 						onChange={handleChange}
 					/>
-					<input type='submit' value='Go' onClick={handleSubmit} />
+					<input type='submit' value='Go' />
 				</form>
 			</header>
 		</div>
