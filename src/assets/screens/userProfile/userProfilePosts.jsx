@@ -14,11 +14,11 @@ function UserProfilePosts () {
 		navigate('/userProfile')
 	}
 
-	const handleAddPostClick = () => {
+	const handlePostsClick = () => {
 		navigate('/use.userProfilePosts')
 	}
-	const handlePostsClick = () => {
-		navigate('/userProfilePosts')
+	const handleAddPostClick = () => {
+		navigate('/userProfileAddPost')
 	}
 	return (
 		<div className={`${styles.profile}`}>
