@@ -3,13 +3,6 @@
 
 .profile {
     /* Общий контейнер профиля */
-    display: flex;
-    flex-direction: column;   
-	padding: calc(177px - (107 * ((1440px - 100vw) / (1440 - 569)))) calc(70 / 1440 * 100vw) 0;
-	width: 100%;
-    min-height: calc(100dvh - 234px);
-    background: white;
-    color: black;
 }
 
 .profileActions {
