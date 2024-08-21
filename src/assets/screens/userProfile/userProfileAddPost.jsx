@@ -18,6 +18,10 @@ function UserProfileAddPost() {
 		photo: null,
 	});
 
+	// Состояния для отслеживания оставшихся символов
+	const [remainingTitleUa, setRemainingTitleUa] = useState(50);
+	const [remainingTitleEn, setRemainingTitleEn] = useState(50);
+
 	const handleProfilePageClick = () => {
 		navigate('/userProfile');
 	};
@@ -36,6 +40,13 @@ function UserProfileAddPost() {
 			setFormData({ ...formData, photo: files[0] });
 		} else {
 			setFormData({ ...formData, [name]: value });
+
+			// Обновление оставшихся символов
+			if (name === 'titleUa') {
+				setRemainingTitleUa(50 - value.length);
+			} else if (name === 'titleEn') {
+				setRemainingTitleEn(50 - value.length);
+			}
 		}
 	};
 
@@ -85,8 +96,10 @@ function UserProfileAddPost() {
 								maxLength="50"
 								required
 								className={`${styles.profileAddPostInput}`}
+								placeholder="Например: Моя перша публікація"
 							/>
 						</label>
+						<small className={styles.remainingChars}>{remainingTitleUa} символів залишилось</small>
 					</div>
 					<div className={`${styles.profileAddPostField}`}>
 						<label className={`${styles.profileAddPostLabel}`}>
@@ -97,6 +110,7 @@ function UserProfileAddPost() {
 								onChange={handleChange}
 								required
 								className={`${styles.profileAddPostTextarea}`}
+								placeholder="Введіть детальний опис публікації"
 							/>
 						</label>
 					</div>
@@ -111,8 +125,10 @@ function UserProfileAddPost() {
 								maxLength="50"
 								required
 								className={`${styles.profileAddPostInput}`}
+								placeholder="For example: My first post"
 							/>
 						</label>
+						<small className={styles.remainingChars}>{remainingTitleEn} characters remaining</small>
 					</div>
 					<div className={`${styles.profileAddPostField}`}>
 						<label className={`${styles.profileAddPostLabel}`}>
@@ -123,6 +139,7 @@ function UserProfileAddPost() {
 								onChange={handleChange}
 								required
 								className={`${styles.profileAddPostTextarea}`}
+								placeholder="Enter a detailed description of the post"
 							/>
 						</label>
 					</div>
