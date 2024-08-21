@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import styles from "/src/styles/components/UserProfile/userProfileAddPost.module.scss";
-import "/src/styles/components/UserProfile/userProfile.module.scss";
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import styles from '/src/styles/components/UserProfile/userProfileAddPost.module.scss'
+import '/src/styles/components/UserProfile/userProfile.module.scss'
 
-function UserProfileAddPost () {
+function UserProfileAddPost() {
+
 	const { t } = useTranslation();
+
 	const navigate = useNavigate();
 
 	const [formData, setFormData] = useState({
@@ -44,17 +46,17 @@ function UserProfileAddPost () {
 	};
 
 	return (
-		<div className={`${styles.profile}`}>
+		<div className={styles.profile}>
 			{/* Верхние кнопки */}
-			<div className={`${styles.profileActions}`}>
+			<div className={styles.profileActions}>
 				<button
-					className={`${styles.profileAction}`}
+					className={styles.profileAction}
 					onClick={handleProfilePageClick}
 				>
 					Інформація
 				</button>
 				<button
-					className={`${styles.profileAction}`}
+					className={styles.profileAction}
 					onClick={handlePostsClick}
 				>
 					Публікації
@@ -68,8 +70,9 @@ function UserProfileAddPost () {
 			</div>
 
 			{/* Добавить публикацию */}
+
 			<div className={`${styles.profileAddPostContainer}`}>
-				<h3 className={`${styles.profileAddPostTitle}`}>Додати нову публікацію</h3>
+				<h2 className={`${styles.profileAddPostTitle}`}>Додати нову публікацію</h2>
 				<form onSubmit={handleSubmit} className={`${styles.profileAddPostForm}`}>
 					<div className={`${styles.profileAddPostField}`}>
 						<label className={`${styles.profileAddPostLabel}`}>
@@ -142,7 +145,7 @@ function UserProfileAddPost () {
 				</form>
 			</div>
 		</div>
-	);
+	)
 }
 
-export default UserProfileAddPost;
+export default UserProfileAddPost

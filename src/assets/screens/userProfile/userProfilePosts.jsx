@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import styles from '/src/styles/components/UserProfile/userProfilePosts.module.scss'
 import '/src/styles/components/UserProfile/userProfile.module.scss'
 
-const UserProfilePosts = () => {
+function UserProfilePosts () {
 
 	const { t } = useTranslation()
 
