@@ -100,7 +100,7 @@ const Login = ({
 					}
 				}
 			} else {
-				condole.warn('login failed :', loginData.data.message)
+				console.warn('login failed :', loginData.data.message)
 				setServerMessage(loginData.data.message)
 			}
 		} catch (error) {

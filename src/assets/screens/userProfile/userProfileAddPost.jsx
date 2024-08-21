@@ -57,26 +57,25 @@ function UserProfileAddPost() {
 	};
 
 	return (
-		<div className={styles.profile}>
-			{/* Верхние кнопки */}
-			<div className={styles.profileActions}>
+		<div className={`${styles.profile}`}>
+			<div className={`${styles.profileActions}`}>
 				<button
-					className={styles.profileAction}
+					className={`${styles.profileAction}`}
 					onClick={handleProfilePageClick}
 				>
-					Інформація
+					{t('Профіль')}
 				</button>
 				<button
-					className={styles.profileAction}
+					className={`${styles.profileAction}`}
 					onClick={handlePostsClick}
 				>
-					Публікації
+					{t('Публікації')}
 				</button>
 				<button
 					className={`${styles.profileAction} ${styles.profileActionActive}`}
 					onClick={handleAddPostClick}
 				>
-					Додати публікацію
+					{t('Додати публікацію')}
 				</button>
 			</div>
 

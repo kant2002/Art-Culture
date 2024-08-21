@@ -139,19 +139,19 @@ function UserProfile({
 					className={`${styles.profileAction} ${styles.profileActionActive}`}
 					onClick={handleProfilePageClick}
 				>
-					{t('Profile')}
+					{t('Профіль')}
 				</button>
 				<button
 					className={`${styles.profileAction}`}
 					onClick={handlePostsClick}
 				>
-					{t('Posts')}
+					{t('Публікації')}
 				</button>
 				<button
 					className={`${styles.profileAction}`}
 					onClick={handleAddPostClick}
 				>
-					{t('Add Post')}
+					{t('Додати публікацію')}
 				</button>
 			</div>
 
