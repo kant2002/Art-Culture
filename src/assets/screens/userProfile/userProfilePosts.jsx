@@ -22,25 +22,24 @@ function UserProfilePosts () {
 	}
 	return (
 		<div className={`${styles.profile}`}>
-			{/* Верхние кнопки */}
 			<div className={`${styles.profileActions}`}>
 				<button
 					className={`${styles.profileAction}`}
 					onClick={handleProfilePageClick}
 				>
-					Інформація
+					{t('Профіль')}
 				</button>
 				<button
 					className={`${styles.profileAction} ${styles.profileActionActive}`}
 					onClick={handlePostsClick}
 				>
-					Публікації
+					{t('Публікації')}
 				</button>
 				<button
 					className={`${styles.profileAction}`}
 					onClick={handleAddPostClick}
 				>
-					Додати публікацію
+					{t('Додати публікацію')}
 				</button>
 			</div>
 			{/* Карточка публикации */}

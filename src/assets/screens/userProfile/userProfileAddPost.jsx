@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import styles from '/src/styles/components/UserProfile/userProfileAddPost.module.scss'
-import '/src/styles/components/UserProfile/userProfile.module.scss'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import styles from '/src/styles/components/UserProfile/userProfileAddPost.module.scss';
+import '/src/styles/components/UserProfile/userProfile.module.scss';
 
 function UserProfileAddPost() {
 
 	const { t } = useTranslation();
-
 	const navigate = useNavigate();
 
 	const [formData, setFormData] = useState({
@@ -18,7 +17,6 @@ function UserProfileAddPost() {
 		photo: null,
 	});
 
-	// Состояния для отслеживания оставшихся символов
 	const [remainingTitleUa, setRemainingTitleUa] = useState(50);
 	const [remainingTitleEn, setRemainingTitleEn] = useState(50);
 
@@ -36,51 +34,52 @@ function UserProfileAddPost() {
 
 	const handleChange = (e) => {
 		const { name, value, files } = e.target;
+
+		const latinRegex = /^[a-zA-Z\s]*$/;
+		const cyrillicRegex = /^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ\s]*$/;
+
+		if ((name === 'titleUa' || name === 'descriptionUa') && !cyrillicRegex.test(value)) {
+			return;
+		} else if ((name === 'titleEn' || name === 'descriptionEn') && !latinRegex.test(value)) {
+			return;
+		}
+
 		if (name === 'photo') {
 			setFormData({ ...formData, photo: files[0] });
 		} else {
 			setFormData({ ...formData, [name]: value });
 
-			// Обновление оставшихся символов
 			if (name === 'titleUa') {
 				setRemainingTitleUa(50 - value.length);
 			} else if (name === 'titleEn') {
 				setRemainingTitleEn(50 - value.length);
+			}
+
+			if (e.target.tagName.toLowerCase() === 'textarea') {
+				e.target.style.height = 'auto';
+				e.target.style.height = e.target.scrollHeight + 'px';
 			}
 		}
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// Логика для обработки и сохранения данных формы
 		console.log('Form data submitted:', formData);
 	};
 
 	return (
-		<div className={styles.profile}>
-			{/* Верхние кнопки */}
-			<div className={styles.profileActions}>
-				<button
-					className={styles.profileAction}
-					onClick={handleProfilePageClick}
-				>
-					Інформація
+		<div className={`${styles.profile}`}>
+			<div className={`${styles.profileActions}`}>
+				<button className={`${styles.profileAction}`} onClick={handleProfilePageClick}>
+					{t('Профіль')}
 				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handlePostsClick}
-				>
-					Публікації
+				<button className={`${styles.profileAction}`} onClick={handlePostsClick}>
+					{t('Публікації')}
 				</button>
-				<button
-					className={`${styles.profileAction} ${styles.profileActionActive}`}
-					onClick={handleAddPostClick}
-				>
-					Додати публікацію
+				<button className={`${styles.profileAction} ${styles.profileActionActive}`} onClick={handleAddPostClick}>
+					{t('Додати публікацію')}
 				</button>
 			</div>
-
-			{/* Добавить публикацию */}
 
 			<div className={`${styles.profileAddPostContainer}`}>
 				<h2 className={`${styles.profileAddPostTitle}`}>Додати нову публікацію</h2>
@@ -96,7 +95,7 @@ function UserProfileAddPost() {
 								maxLength="50"
 								required
 								className={`${styles.profileAddPostInput}`}
-								placeholder="Например: Моя перша публікація"
+								placeholder="Наприклад: Моя перша публікація"
 							/>
 						</label>
 						<small className={styles.remainingChars}>{remainingTitleUa} символів залишилось</small>
@@ -162,7 +161,7 @@ function UserProfileAddPost() {
 				</form>
 			</div>
 		</div>
-	)
+	);
 }
 
-export default UserProfileAddPost
+export default UserProfileAddPost;

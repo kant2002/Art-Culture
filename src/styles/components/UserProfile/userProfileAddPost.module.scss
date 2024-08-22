@@ -1,51 +1,73 @@
 @import '/src/styles/components/UserProfile/userProfile.module.scss';
 @import '/src/styles/utilities/variables.scss';
 
-.profile {
-    /* Общий контейнер профиля */
-}
-
-.profileActions {
-    /* Контейнер для верхних кнопок */
-}
-
-.profileAction {
-    /* Общий стиль для кнопок навигации */
-}
-
-.profileActionActive {
-    /* Стиль активной кнопки навигации */
-}
-
 .profileAddPostContainer {
     /* Контейнер для формы добавления публикации */
     display: flex;
+    flex-direction: column;
+    align-items: start;
     width: 100%;
-    height: 1000px;
+    font-family: $default-font;
+    color: black;
+    margin: 15px 0;
 }
 
 .profileAddPostTitle {
     /* Стиль заголовка формы */
+    width: 100%;
+    display: flex;
+    font-weight: 600;
+    font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    text-transform: uppercase;
 }
 
 .profileAddPostForm {
     /* Стиль формы добавления публикации */
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
 }
 
 .profileAddPostField {
     /* Контейнер для каждого поля ввода формы */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .profileAddPostLabel {
     /* Стиль для меток полей ввода */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 15px 0;
 }
 
 .profileAddPostInput {
     /* Стиль текстовых полей ввода */
+    display: flex;
+    width: 100%;
+}
+
+.remainingChars {
+    /* Стиль для оставшихся символов */
+    width: 100%;
 }
 
 .profileAddPostTextarea {
     /* Стиль для текстовых областей */
+    width: 100%;
+    /* или любая нужная ширина */
+    min-height: 50px;
+    /* Минимальная высота */
+    resize: none;
+    /* Отключаем возможность ручного изменения размера */
+    overflow-y: hidden;
+    /* Скрываем вертикальный скролл */
+    padding: 5px;
+    font-size: calc(18px - (6 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: normal;
 }
 
 .profileAddPostFileInput {
@@ -54,4 +76,16 @@
 
 .profileAddPostButton {
     /* Стиль для кнопки сохранения */
+}
+
+@media (min-width: 1441px) {
+
+    .profileAddPostTitle {
+        /* Стиль заголовка формы */
+        font-size: 28px;
+    }
+
+    .profileAddPostTextarea {
+        font-size: 18px;
+    }
 }
