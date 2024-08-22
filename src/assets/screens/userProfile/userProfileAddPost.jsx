@@ -18,7 +18,6 @@ function UserProfileAddPost() {
 		photo: null,
 	});
 
-	// Состояния для отслеживания оставшихся символов
 	const [remainingTitleUa, setRemainingTitleUa] = useState(50);
 	const [remainingTitleEn, setRemainingTitleEn] = useState(50);
 
@@ -41,45 +40,37 @@ function UserProfileAddPost() {
 		} else {
 			setFormData({ ...formData, [name]: value });
 
-			// Обновление оставшихся символов
 			if (name === 'titleUa') {
 				setRemainingTitleUa(50 - value.length);
 			} else if (name === 'titleEn') {
 				setRemainingTitleEn(50 - value.length);
+			}
+
+			if (e.target.tagName.toLowerCase() === 'textarea') {
+				e.target.style.height = 'auto';
+				e.target.style.height = e.target.scrollHeight + 'px';
 			}
 		}
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// Логика для обработки и сохранения данных формы
 		console.log('Form data submitted:', formData);
 	};
 
 	return (
 		<div className={`${styles.profile}`}>
 			<div className={`${styles.profileActions}`}>
-				<button
-					className={`${styles.profileAction}`}
-					onClick={handleProfilePageClick}
-				>
+				<button className={`${styles.profileAction}`} onClick={handleProfilePageClick}>
 					{t('Профіль')}
 				</button>
-				<button
-					className={`${styles.profileAction}`}
-					onClick={handlePostsClick}
-				>
+				<button className={`${styles.profileAction}`} onClick={handlePostsClick}>
 					{t('Публікації')}
 				</button>
-				<button
-					className={`${styles.profileAction} ${styles.profileActionActive}`}
-					onClick={handleAddPostClick}
-				>
+				<button className={`${styles.profileAction} ${styles.profileActionActive}`} onClick={handleAddPostClick}>
 					{t('Додати публікацію')}
 				</button>
 			</div>
-
-			{/* Добавить публикацию */}
 
 			<div className={`${styles.profileAddPostContainer}`}>
 				<h2 className={`${styles.profileAddPostTitle}`}>Додати нову публікацію</h2>
@@ -164,4 +155,4 @@ function UserProfileAddPost() {
 	)
 }
 
-export default UserProfileAddPost
+export default UserProfileAddPost;
