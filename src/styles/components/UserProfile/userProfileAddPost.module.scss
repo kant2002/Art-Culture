@@ -9,7 +9,7 @@
     width: 100%;
     font-family: $default-font;
     color: black;
-    margin: 15px 0;
+    margin: 33px 0;
 }
 
 .profileAddPostTitle {
@@ -34,7 +34,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin: 25px 0;
+    margin:30px 0 0 0;
 }
 
 .profileAddPostLabel {
@@ -42,19 +42,29 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    font-size: calc(22px - (6 * ((1440px - 100vw) / (1440 - 375))));
+    line-height: 150%;
+    font-weight: 500;
+    font-family: $default-font;
+    
+    .profileAddPostInput {
+        /* Стиль текстовых полей ввода */
+        display: flex;
+        width: 100%;
+        font-size: calc(20px - (6 * ((1440px - 100vw) / (1440 - 375))));
+        font-weight: normal;
+        font-family: $default-font;
+    }
 }
 
-.profileAddPostInput {
-    /* Стиль текстовых полей ввода */
-    display: flex;
-    width: 100%;
-    font-size: calc(18px - (6 * ((1440px - 100vw) / (1440 - 375))));
-    font-weight: normal;
-}
+
 
 .remainingChars {
     /* Стиль для оставшихся символов */
     width: 100%;
+    font-size: calc(12px - (2 * ((1440px - 100vw) / (1440 - 375))));
+	color: #d83934;
+    font-family: $default-font;
 }
 
 .profileAddPostTextarea {
@@ -68,8 +78,11 @@
     overflow-y: hidden;
     /* Скрываем вертикальный скролл */
     padding: 5px;
+    font-family: $default-font;
     font-size: calc(18px - (6 * ((1440px - 100vw) / (1440 - 375))));
     font-weight: normal;
+    min-height: 300px;
+    border-radius: 5px;
 }
 
 .profileAddPostFileInput {
@@ -77,7 +90,33 @@
 }
 
 .profileAddPostButton {
-    /* Стиль для кнопки сохранения */
+    /* Стиль для кнопки редактирования */
+    margin: 20px calc(20px - (10 * ((1440px - 100vw) / (1440 - 375)))) 0 0;
+	padding: 0 calc(20px - (10 * ((1440px - 100vw) / (1440 - 375))));
+	height: calc(51px - (11 * ((1440px - 100vw) / (1440 - 375))));
+    min-width: fit-content;
+	min-height: 40px;
+	max-height: 51px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: calc(34px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	background-color: #3A8374;
+    color: #fff;
+	cursor: pointer;
+    font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	font-weight: 500;
+}
+
+.profileAddPostButton:hover {
+    background: #d83934;
+    // color:black;
+    border: none;
+    transition: 0.4s ease;
+}
+
+.profileAddPostButton:not(:hover) {
+    transition: 0.4s ease;
 }
 
 @media (min-width: 1441px) {
