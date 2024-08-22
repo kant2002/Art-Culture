@@ -34,6 +34,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin: 25px 0;
 }
 
 .profileAddPostLabel {
@@ -41,13 +42,14 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin: 15px 0;
 }
 
 .profileAddPostInput {
     /* Стиль текстовых полей ввода */
     display: flex;
     width: 100%;
+    font-size: calc(18px - (6 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: normal;
 }
 
 .remainingChars {
