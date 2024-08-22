@@ -54,7 +54,7 @@ function MainArtists() {
 	useEffect(() => {
 		axios
 			.get(
-				'https://admin.playukraine.com/wp-json/wp/v2/posts?categories=4&_embed'
+				'https://admin.playukraine.com/wp-json/wp/v2/posts?categories=3&_embed'
 			)
 			.then(response => {
 				console.log('Received post data:', response.data)

@@ -46,7 +46,7 @@ function MainNews() {
 		// Запит на отримання постів з медіа-даними
 		axios
 			.get(
-				'https://admin.playukraine.com/wp-json/wp/v2/posts?categories=3&_embed'
+				'https://admin.playukraine.com/wp-json/wp/v2/posts?categories=2&_embed'
 			)
 			.then(response => {
 				console.log('Отримані дані постів:', response.data)
