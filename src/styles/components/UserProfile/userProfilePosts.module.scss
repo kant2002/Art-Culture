@@ -59,7 +59,7 @@
 .userProfilePostsTitle {
     /* Стили для заголовка публикации */
     font-weight: 600;
-    font-size: 28px;
+	font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
     text-transform: uppercase;
 }
 
@@ -117,6 +117,13 @@
     border: none;
     cursor: pointer;
 	color: #d83934;
+}
+
+@media (min-width: 1440px) {
+    .userProfilePostsTitle {
+        /* Стили для заголовка публикации */
+        font-size: 28px;
+    }
 }
 
 @media (max-width: 679px) {

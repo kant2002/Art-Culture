@@ -95,7 +95,7 @@ function UserProfileAddPost() {
 								maxLength="50"
 								required
 								className={`${styles.profileAddPostInput}`}
-								placeholder="Например: Моя перша публікація"
+								placeholder="Наприклад: Моя перша публікація"
 							/>
 						</label>
 						<small className={styles.remainingChars}>{remainingTitleUa} символів залишилось</small>
