@@ -98,11 +98,11 @@ function UserProfileAddPost() {
 								placeholder="Наприклад: Моя перша публікація"
 							/>
 						</label>
-						<small className={styles.remainingChars}>{remainingTitleUa} символів залишилось</small>
+						<small className={styles.remainingChars}>{remainingTitleUa} {t('символів залишилось')}</small>
 					</div>
 					<div className={`${styles.profileAddPostField}`}>
 						<label className={`${styles.profileAddPostLabel}`}>
-							Введіть опис публікації українською мовою:
+							{t('Введіть опис публікації українською мовою:')}
 							<textarea
 								name="descriptionUa"
 								value={formData.descriptionUa}
@@ -127,7 +127,7 @@ function UserProfileAddPost() {
 								placeholder="For example: My first post"
 							/>
 						</label>
-						<small className={styles.remainingChars}>{remainingTitleEn} characters remaining</small>
+						<small className={styles.remainingChars}>{remainingTitleEn} {t('символів залишилось')}</small>
 					</div>
 					<div className={`${styles.profileAddPostField}`}>
 						<label className={`${styles.profileAddPostLabel}`}>

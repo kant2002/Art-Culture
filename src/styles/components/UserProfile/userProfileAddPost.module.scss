@@ -41,23 +41,26 @@
     /* Стиль для меток полей ввода */
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     width: 100%;
     font-size: calc(22px - (6 * ((1440px - 100vw) / (1440 - 375))));
     line-height: 150%;
     font-weight: 500;
     font-family: $default-font;
-    
-    .profileAddPostInput {
-        /* Стиль текстовых полей ввода */
-        display: flex;
-        width: 100%;
-        font-size: calc(20px - (6 * ((1440px - 100vw) / (1440 - 375))));
-        font-weight: normal;
-        font-family: $default-font;
+
+    b {
+        font-weight: 700;
     }
 }
 
-
+.profileAddPostInput {
+    /* Стиль текстовых полей ввода */
+    display: flex;
+    width: 100%;
+    font-size: calc(20px - (6 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: normal;
+    font-family: $default-font;
+}
 
 .remainingChars {
     /* Стиль для оставшихся символов */
