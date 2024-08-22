@@ -14,6 +14,7 @@
 
 .profileAddPostTitle {
     /* Стиль заголовка формы */
+    width: 100%;
     display: flex;
     font-weight: 600;
     font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
@@ -45,11 +46,13 @@
 
 .profileAddPostInput {
     /* Стиль текстовых полей ввода */
-    display: inline-block;
-    width: fit-content;
-    height: fit-content;
-    max-width: max-content;
-    max-height: max-content;
+    display: flex;
+    width: 100%;
+}
+
+.remainingChars {
+    /* Стиль для оставшихся символов */
+    width: 100%;
 }
 
 .profileAddPostTextarea {
@@ -63,7 +66,8 @@
     overflow-y: hidden;
     /* Скрываем вертикальный скролл */
     padding: 5px;
-    font-size: 16px;
+    font-size: calc(18px - (6 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: normal;
 }
 
 .profileAddPostFileInput {
@@ -74,10 +78,14 @@
     /* Стиль для кнопки сохранения */
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1441px) {
 
     .profileAddPostTitle {
         /* Стиль заголовка формы */
         font-size: 28px;
+    }
+
+    .profileAddPostTextarea {
+        font-size: 18px;
     }
 }
