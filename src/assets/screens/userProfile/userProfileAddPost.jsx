@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import styles from '/src/styles/components/UserProfile/userProfileAddPost.module.scss'
-import '/src/styles/components/UserProfile/userProfile.module.scss'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import styles from '/src/styles/components/UserProfile/userProfileAddPost.module.scss';
+import '/src/styles/components/UserProfile/userProfile.module.scss';
 
 function UserProfileAddPost() {
 
 	const { t } = useTranslation();
-
 	const navigate = useNavigate();
 
 	const [formData, setFormData] = useState({
@@ -35,6 +34,16 @@ function UserProfileAddPost() {
 
 	const handleChange = (e) => {
 		const { name, value, files } = e.target;
+
+		const latinRegex = /^[a-zA-Z\s]*$/;
+		const cyrillicRegex = /^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ\s]*$/;
+
+		if ((name === 'titleUa' || name === 'descriptionUa') && !cyrillicRegex.test(value)) {
+			return;
+		} else if ((name === 'titleEn' || name === 'descriptionEn') && !latinRegex.test(value)) {
+			return;
+		}
+
 		if (name === 'photo') {
 			setFormData({ ...formData, photo: files[0] });
 		} else {
@@ -152,7 +161,7 @@ function UserProfileAddPost() {
 				</form>
 			</div>
 		</div>
-	)
+	);
 }
 
 export default UserProfileAddPost;
