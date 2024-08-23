@@ -1,9 +1,20 @@
 import React from 'react'
 import styles from '/src/styles/layout/Footer.module.scss'
+import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
-	const { t } = useTranslation();
+	const { t } = useTranslation();	
+
+	const navigate = useNavigate()
+	
+	const handleMainPageClick = () => {
+		navigate('/MainPage')
+	}
+
+	const handleNewsPageClick = () => {
+		navigate('/NewsPage')
+	}
 	return (
 		<footer className={`${styles.footer}`}>
 			<div className={`${styles.footerWrapper}`}>
@@ -20,7 +31,7 @@ const Footer = () => {
 
 					<nav className={`${styles.footerMenuWrapper}`}>
 						<ul className={`${styles.footerMenuUl}`}>
-							<li className={`${styles.footerMenuLi}`}>
+							<li className={`${styles.footerMenuLi}`} onClick={handleMainPageClick}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
 									{t('Головна')}
 								</a>
@@ -30,7 +41,7 @@ const Footer = () => {
 									{t('Архітектура')}
 								</a>
 							</li>
-							<li className={`${styles.footerMenuLi}`}>
+							<li className={`${styles.footerMenuLi}`} onClick={handleNewsPageClick}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
 									{t('Новини')}
 								</a>
