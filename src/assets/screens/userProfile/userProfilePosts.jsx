@@ -140,10 +140,10 @@ function UserProfilePosts() {
 											<p className={styles.userProfilePostsDate}>
 												{new Date(post.date).toLocaleDateString()}
 											</p>
+											<button className={styles.userProfilePostsButton}>
+												{t('До публікації')}
+											</button>
 										</div>
-										<button className={styles.userProfilePostsButton}>
-											{t('До публікації')}
-										</button>
 									</div>
 								</div>
 							</div>
