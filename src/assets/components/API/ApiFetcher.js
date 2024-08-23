@@ -48,3 +48,25 @@ export const registerUser = async userData => {
 }
 
 // Auto Login User
+export const fetchUserPosts = async userId => {
+	const jwt = localStorage.getItem('jwt') // Retrieve JWT from local storage
+
+	if (!jwt) {
+		throw new Error('User is not authenticated.')
+	}
+
+	try {
+		const response = await axios.get(
+			`https://admin.playukraine.com/wp-json/wp/v2/posts?author=${userId}&_embed`,
+			{
+				headers: {
+					Authorization: `Bearer ${jwt}`,
+				},
+			}
+		)
+		return response.data
+	} catch (error) {
+		console.error('Error fetching user posts:', error)
+		throw error
+	}
+}
