@@ -39,7 +39,7 @@ function UserProfile({
 					} else {
 						// If validation fails, set an error message
 						setServerMessage('Session expired. Please log in again.')
-						navigate('/LoginPage')
+						navigate('/login')
 					}
 				})
 				.catch(error => {
