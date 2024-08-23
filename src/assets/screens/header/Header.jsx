@@ -94,6 +94,10 @@ function Header() {
 		navigate('/MainPage')
 	}
 
+	const handleNewsPageClick = () => {
+		navigate('/NewsPage')
+	}
+
 	const burgerMenu = (
 		<div className='burgerMenu'>
 			<div className='burgerMenuWrapper'>
@@ -153,7 +157,7 @@ function Header() {
 									<p>&#8250;</p>
 								</a>
 							</li>
-							<li className='footerMenuLi'>
+							<li className='footerMenuLi' onClick={handleNewsPageClick}>
 								<a className='footerMenuLink' href='#'>
 									<p>{t('Новини')}</p>
 									<p>&#8250;</p>
@@ -294,7 +298,7 @@ function Header() {
 											{t('Головна')}
 										</a>
 									</li>
-									<li className='mainMenu__li'>
+									<li className='mainMenu__li' onClick={handleNewsPageClick}>
 										<a className='mainMenu__link' href='#'>
 											{t('Новини')}
 										</a>
