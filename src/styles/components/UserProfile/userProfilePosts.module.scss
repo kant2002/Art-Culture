@@ -9,7 +9,7 @@
 
 .userProfilePostsWrapper {
     /* Контейнер для карточек публикаций */
-    margin: 33px 0;
+    margin: 0 0 30px 0;
     display: flex;
     flex-direction: column;
 }
@@ -43,7 +43,8 @@
     margin: 0 0 0 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: start;
+    width: 100%;
 }
 
 .userProfilePostsTitleWrapper {
@@ -76,8 +77,13 @@
 
 .userProfilePostsDescription {
     /* Стили для описания публикации */
+    margin: 10px 0 0 0;
     font-weight: 400;
     font-size: 18px;
+	max-height: calc(
+		18px * 3
+	); // Делаем ограничение вывода текста построчечно
+	overflow: hidden;
 }
 
 .userProfilePostsClockDateAndButtonWrapper {
@@ -90,6 +96,7 @@
 
 .userProfilePostsClockAndDateWrapper {
     /* Обертка для часов и даты */
+    margin: 10px 0 auto 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -111,6 +118,7 @@
 
 .userProfilePostsButton {
     /* Стили для кнопки публикации */
+    margin: 0 0 0 auto;
     font-weight: 400;
     font-size: 18px;
     background: none;
