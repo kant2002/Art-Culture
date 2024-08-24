@@ -6,6 +6,7 @@ import MainPage from '../assets/screens/mainPage/MainPage'
 import UserProfile from '../assets/screens/userProfile/userProfile'
 import UserProfileAddPost from '../assets/screens/userProfile/userProfileAddPost'
 import UserProfilePosts from '../assets/screens/userProfile/userProfilePosts'
+import NewsPage from '../assets/screens/newsPage/NewsPage'
 
 export const routes = [
 	{
@@ -53,5 +54,11 @@ export const routes = [
 		path: '/userProfilePosts',
 		element: UserProfilePosts,
 		isAuth: true,
+	},
+
+	{
+		path: '/NewsPage',
+		element: NewsPage,
+		isAuth: false,
 	},
 ]

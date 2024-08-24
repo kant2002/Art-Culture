@@ -118,12 +118,12 @@ function UserProfileAddPost() {
 							/>
 						</label>
 						<small className={styles.remainingChars}>
-							{remainingTitleUa} символів залишилось
+							{remainingTitleUa} {t('символів залишилось')}
 						</small>
 					</div>
 					<div className={`${styles.profileAddPostField}`}>
 						<label className={`${styles.profileAddPostLabel}`}>
-							Введіть опис публікації українською мовою:
+							{t('Введіть опис публікації українською мовою:')}
 							<textarea
 								name='descriptionUa'
 								value={formData.descriptionUa}
@@ -149,7 +149,7 @@ function UserProfileAddPost() {
 							/>
 						</label>
 						<small className={styles.remainingChars}>
-							{remainingTitleEn} characters remaining
+							{remainingTitleEn} {t('символів залишилось')}
 						</small>
 					</div>
 					<div className={`${styles.profileAddPostField}`}>

@@ -9,6 +9,7 @@ import MainPage from '../mainPage/MainPage'
 import UserProfile from '../userProfile/userProfile'
 import UserProfileAddPost from '../userProfile/userProfileAddPost'
 import UserProfilePosts from '../userProfile/userProfilePosts'
+import NewsPage from '../newsPage/NewsPage'
 import styles from '/src/styles/layout/Layout.module.scss'
 
 const Layout = ({ children, heading = '', backLink = '/' }) => {
@@ -41,6 +42,7 @@ const Layout = ({ children, heading = '', backLink = '/' }) => {
 					/>
 					<Route path='/userProfileAddPost' element={<UserProfileAddPost />} />
 					<Route path='/userProfilePosts' element={<UserProfilePosts />} />
+					<Route path='/NewsPage' element={<NewsPage />} />
 					<Route
 						path='/login'
 						element={
