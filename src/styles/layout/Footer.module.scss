@@ -2,9 +2,8 @@
 
 .footer {
 	// стили для тега footer
-	padding: 37px calc(70 / 1440 * 100vw);
+	padding: 37px $responsiveLeftAndRightPadding;
 	display: flex;
-	width: 100vw;
 	height: 234px;
 	background: #000;
 	color: white;
@@ -399,7 +398,7 @@
 @media (max-width: 799px) {
 	.footer {
 		// стили для тега footer
-		padding: 23px calc(70 / 1440 * 100vw) 30px calc(70 / 1440 * 100vw);
+		padding: 23px $responsiveLeftAndRightPadding 30px;
 		height: 348px;
 	}
 
