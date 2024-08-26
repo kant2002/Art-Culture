@@ -9,12 +9,12 @@
 
 .mainPageBanner {
 	// Основной стиль для блока баннера
-	padding: 0 calc(70 / 1440 * 100vw);
+	padding: 0 $responsiveLeftAndRightPadding;
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	width: 100vw;
+	width: 100%;
 	height: calc(579px - (337 * ((1440px - 100vw) / (1440 - 375))));
 	max-height: 579px;
 	min-height: 458px;
