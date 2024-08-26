@@ -4,7 +4,7 @@
 	display: flex;
 	flex-direction: column;
 	background: rgb(255, 255, 255);
-	padding: calc(177px - (107 * ((1440px - 100vw) / (1440 - 569)))) 0 0 0;
+	padding: $responsiveTopPadding 0 0 0;
 	width: 100%;
 }
 
@@ -14,7 +14,7 @@
 	justify-content: start;
 	align-items: start;
 	margin: calc(60px - (24 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
-	padding: 0 calc(70 / 1440 * 100vw);
+	padding: 0 $responsiveLeftAndRightPadding;
 	font-family: $default-font;
 }
 
@@ -52,7 +52,7 @@
 
 @media (min-width: 1441px) {
 	.mainPage {
-		padding: 177px 0 0 0;
+		padding: $staticPcTopPadding 0 0 0;
 		width: 100vw;
 	}
 
@@ -73,7 +73,7 @@
 
 @media (max-width: 569px) {
 	.mainPage {
-		padding: 70px 0 0 0;
+		padding: $staticMobileTopPadding 0 0 0;
 		width: 100vw;
 	}
 }

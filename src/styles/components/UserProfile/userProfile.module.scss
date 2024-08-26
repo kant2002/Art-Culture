@@ -1,8 +1,10 @@
+@import '/src/styles/utilities/variables.scss';
+
 .profile { 
     /* Основной контейнер профиля */
     display: flex;
     flex-direction: column;   
-	padding: calc(177px - (107 * ((1440px - 100vw) / (1440 - 569)))) calc(70 / 1440 * 100vw) 0;
+	padding: $responsiveTopPadding $responsiveLeftAndRightPadding 0;
 	width: 100%;
     min-height: calc(100dvh - 234px);
     background: white;
@@ -113,7 +115,7 @@
 
 @media (min-width: 1441px) {
 	.profile {
-		padding: 177px calc(70 / 1440 * 100vw) 0;
+		padding: $staticPcTopPadding $responsiveLeftAndRightPadding 0;
 	}
 
     .profileAction {
@@ -130,6 +132,6 @@
 
 @media (max-width: 569px) {
 	.profile {
-		padding: 70px calc(70 / 1440 * 100vw) 0;
+		padding: $staticMobileTopPadding $responsiveLeftAndRightPadding 0;
 	}
 }

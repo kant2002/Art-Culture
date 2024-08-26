@@ -58,3 +58,14 @@ $CormorantSCLight: 'CormorantSCLight', sans-serif;
 $CormorantSCMedium: 'CormorantSCMedium', sans-serif;
 $CormorantSCRegular: 'CormorantSCRegular', sans-serif;
 $CormorantSCSemiBold: 'CormorantSCBold', sans-serif;
+
+// Отступы главного контейнера каждой страницы
+// static mobile
+$staticMobileTopPadding: 70px;
+
+// responsive
+$responsiveTopPadding: calc(177px - (107 * ((1440px - 100vw) / (1440 - 569))));
+$responsiveLeftAndRightPadding: calc(70 / 1440 * 100vw);
+
+// static pc
+$staticPcTopPadding: 177px;
