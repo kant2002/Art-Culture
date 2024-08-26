@@ -1,4 +1,5 @@
 import express from 'express'
+import helmet from 'helmet'
 import { createProxyMiddleware } from 'http-proxy-middleware'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -9,6 +10,32 @@ const __dirname = path.dirname(__filename)
 
 const PORT = process.env.PORT || 5173
 const WP_BACKEND_URL = 'https://admin.playukraine.com/'
+
+const addHeadersMiddleware = (req, res, next) => {
+	const jwt = req.headers['authorization'] // Retrieve JWT from request authorization
+	const wpNonce = req.headers['x-wp-nonce'] // Retrieve WordPress nonce from request headers
+
+	if (jwt) {
+		req.headers['authorization'] = jwt
+	}
+
+	if (wpNonce) {
+		req.headers['x-wp-nonce'] = wpNonce
+	}
+
+	next()
+}
+
+app.use(helmet())
+
+app.use(
+	addHeadersMiddleware,
+	createProxyMiddleware({
+		target: WP_BACKEND_URL,
+		changeOrigin: true,
+		logLevel: 'debug',
+	})
+)
 
 app.use(
 	'/wp-admin',
@@ -26,6 +53,7 @@ app.use(
 	'/wp-includes',
 	createProxyMiddleware({ target: WP_BACKEND_URL, changeOrigin: true })
 )
+
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, './dist')))
 

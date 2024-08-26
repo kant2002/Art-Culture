@@ -1,5 +1,5 @@
+import apiFetch from '@wordpress/api-fetch'
 import axios from 'axios'
-
 const API_URL = 'https://admin.playukraine.com/?rest_route=/simple-jwt-login/v1'
 
 // Login User
@@ -73,20 +73,26 @@ export const fetchUserPosts = async userId => {
 
 export const addNewPost = async postData => {
 	const jwt = localStorage.getItem('jwt') // Retrieve JWT from local storage
+	const nonce = window.my_ajax_object?.nonce || 'wp_rest' // Nonce from 'wp_rest'
 
 	if (!jwt) {
 		throw new Error('User is not authenticated.')
 	}
 	try {
-		const response = await axios.post(
-			'https://admin.playukraine.com/wp-json/wp/v2/posts',
-			postData,
-			{
-				headers: {
-					Authorization: `Bearer ${jwt}`,
-				},
-			}
-		)
+		console.log('JWT', jwt)
+		console.log('POST DATA', postData)
+		//console.log('Nonce', 'nonce')
+
+		const response = await apiFetch({
+			path: '/wp/v2/posts',
+			method: 'POST',
+			headers: {
+				'X-WP-Nonce': nonce,
+				Authorization: `Bearer ${jwt}`,
+			},
+			data: postData,
+		})
+
 		return response.data
 	} catch (error) {
 		console.error('Error adding new post:', error)
