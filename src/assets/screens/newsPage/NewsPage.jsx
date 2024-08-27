@@ -86,9 +86,18 @@ function NewsPage() {
                 </div>
             </div>
             <div className={`${styles.newsPageBottomCardContainer}`}>
-                
+
             </div>
-        </div>)
+            <div className={`${styles.newsPageMoreNewsButtonAndLikeAndShareWrapper}`}>
+                <div className={`${styles.newsPageMoreNewsButtonWrapper}`}>
+                    <button className={`${styles.newsPageMoreNewsButton}`}>{t('Усi новини')}</button>
+                </div>
+                <div className={`${styles.newsPageLikeAndShareWrapper}`}>
+                    
+                </div>
+            </div>
+        </div>
+    )
 }
 
             export default NewsPage
