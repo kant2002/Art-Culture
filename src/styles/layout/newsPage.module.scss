@@ -1,11 +1,172 @@
+@import 'src/styles/utilities/variables.scss';
+
+
+
 .newsPageContainer {
-    width: 100%;
-    height: 1000px;
+    /* Основной контейнер страницы новостей */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    font-weight: bold;
-    background: #3A8374;
-    color: #fff;
+    flex-direction: column;
+    margin: $responsiveTopPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+    width: 100%;
+    height: auto;
+
+    * {
+        background: #fff;
+    }
+}
+
+.newsPageTitleContainer {
+    /* Контейнер для заголовка страницы новостей */
+}
+
+.newsPageTitle {
+    /* Заголовок страницы новостей */
+}
+
+.newsPageHorizontalSeparatorContainer {
+    /* Контейнер для горизонтального разделителя */
+}
+
+.newsPageHorizontalSeparator {
+    /* Горизонтальный разделитель */
+}
+
+.newsPageSearchContainer {
+    /* Контейнер для поиска авторов */
+}
+
+.newsPageSearchInput {
+    /* Поле ввода для поиска авторов */
+}
+
+.newsPageLikeAndShareContainer {
+    /* Контейнер для кнопок лайка и шаринга */
+}
+
+.newsPageLikeWrapper {
+    /* Обертка для кнопки лайка */
+}
+
+.newsPageLikeButton {
+    /* Кнопка лайка */
+}
+
+.newsPageLikeButtonImg {
+    /* Изображение на кнопке лайка */
+}
+
+.newsPageShareWrapper {
+    /* Обертка для кнопки шаринга */
+}
+
+.newsPageShareButton {
+    /* Кнопка шаринга */
+}
+
+.newsPageShareButtonImg {
+    /* Изображение на кнопке шаринга */
+}
+
+.newsPageTopCardContainer {
+    /* Контейнер для верхней карточки */
+}
+
+.newsPageCardContainer {
+    /* Контейнер для карточки новостей */
+}
+
+.newsPageCardWrapper {
+    /* Обертка для карточки новостей */
+}
+
+.newsPageCardImageWrapper {
+    /* Обертка для изображения карточки */
+}
+
+.newsPageCardImage {
+    /* Изображение карточки новостей */
+}
+
+.newsPageCardTitleWrapper {
+    /* Обертка для заголовка карточки */
+}
+
+.newsPageCardTitle {
+    /* Заголовок карточки новостей */
+}
+
+.newsPageCardDescriptionWrapper {
+    /* Обертка для описания карточки */
+}
+
+.newsPageCardDescription {
+    /* Описание карточки новостей */
+}
+
+.newsPageCardClockDateAndReadMoreButtonWrapper {
+    /* Обертка для часов, даты и кнопки "Читать далее" */
+}
+
+.newsPageCardClockWrapper {
+    /* Обертка для изображения часов */
+}
+
+.newsPageCardClockImg {
+    /* Изображение часов */
+}
+
+.newsPageCardDateWrapper {
+    /* Обертка для даты */
+}
+
+.newsPageCardDate {
+    /* Дата карточки новостей */
+}
+
+.newsPageCardReadMoreButtonWrapper {
+    /* Обертка для кнопки "Читать далее" */
+}
+
+.newsPageCardReadMoreButton {
+    /* Кнопка "Читать далее" */
+}
+
+.newsPageSlider {
+    /* Слайдер новостей */
+}
+
+.newsPageBottomCardContainer {
+    /* Контейнер для нижних карточек */
+}
+
+.newsPageMoreNewsButtonAndLikeAndShareWrapper {
+    /* Обертка для кнопки "Все новости" и лайка/шаринга */
+}
+
+.newsPageMoreNewsButtonWrapper {
+    /* Обертка для кнопки "Все новости" */
+}
+
+.newsPageMoreNewsButton {
+    /* Кнопка "Все новости" */
+}
+
+.newsPageInputMailContainer {
+    /* Контейнер для поля ввода email */
+}
+
+.newsPageInputMail {
+    /* Поле ввода email */
+}
+
+.newsPageInputMailButton {
+    /* Кнопка подписки на новости */
+}
+
+.newsPageSignUpButtonContainer {
+    /* Контейнер для кнопки регистрации */
+}
+
+.newsPageSignUpButton {
+    /* Кнопка регистрации */
 }
