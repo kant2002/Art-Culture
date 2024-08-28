@@ -21,6 +21,7 @@ function NewsPage() {
                     placeholder={t('Пошук авторів')}
                 />
             </div>
+
             <div className={`${styles.newsPageLikeAndShareContainer}`}>
                 <div className={`${styles.newsPageLikeWrapper}`}>
                     <button className={`${styles.newsPageLikeButton}`}>
@@ -32,10 +33,12 @@ function NewsPage() {
                                 e.target.src = '/Img/likeHeart.svg'
                             }}
                         />
+                        <p className={`${styles.newsPageLikeButtonText}`}>Like</p>
                     </button>
                 </div>
                 <div className={`${styles.newsPageShareWrapper}`}>
                     <button className={`${styles.newsPageShareButton}`}>
+                        <p className={`${styles.newsPageShareButtonText}`}>Share</p>
                         <img className={`${styles.newsPageShareButtonImg}`}
                             src={'/Img/shareArrow.svg'}
                             alt={t('Світлина поширити')}
@@ -112,10 +115,12 @@ function NewsPage() {
                                     e.target.src = '/Img/likeHeart.svg'
                                 }}
                             />
+                            <p className={`${styles.newsPageLikeButtonText}`}>Like</p>
                         </button>
                     </div>
                     <div className={`${styles.newsPageShareWrapper}`}>
                         <button className={`${styles.newsPageShareButton}`}>
+                            <p className={`${styles.newsPageShareButtonText}`}>Share</p>
                             <img className={`${styles.newsPageShareButtonImg}`}
                                 src={'/Img/shareArrow.svg'}
                                 alt={t('Світлина поширити')}

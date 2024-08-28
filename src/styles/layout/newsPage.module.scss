@@ -69,30 +69,73 @@
 
 .newsPageLikeAndShareContainer {
     /* Контейнер для кнопок лайка и шаринга */
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    margin: calc(31px - (-15 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+    font-size: 18px;
 }
 
 .newsPageLikeWrapper {
     /* Обертка для кнопки лайка */
+    display: flex;
+    align-items: center;
 }
 
 .newsPageLikeButton {
     /* Кнопка лайка */
+    display: flex;
+    align-self: center;
+    cursor: pointer;
 }
 
 .newsPageLikeButtonImg {
     /* Изображение на кнопке лайка */
+    display: flex;
+    align-self: center;
+    object-fit: contain;
+    object-position: center;
+    width: 32px;
+    height: 32px;
+
+}
+
+.newsPageLikeButtonText {
+    /* Текст на кнопке лайка */
+    display: flex;
+    align-self: center;
+    padding: 0 11.5px 0 5px;
 }
 
 .newsPageShareWrapper {
     /* Обертка для кнопки шаринга */
+    display: flex;
+    align-items: center;
 }
 
 .newsPageShareButton {
     /* Кнопка шаринга */
+    display: flex;
+    align-self: center;
+    cursor: pointer;
+}
+
+.newsPageShareButtonText {
+    /* Текст на кнопке шаринга */
+    display: flex;
+    align-self: center;
+    padding: 0 5px 0 11.5px;
 }
 
 .newsPageShareButtonImg {
     /* Изображение на кнопке шаринга */
+    display: flex;
+    align-self: center;
+    object-fit: contain;
+    object-position: center;
+    width: 32px;
+    height: 32px;
 }
 
 .newsPageTopCardContainer {
@@ -169,6 +212,15 @@
 
 .newsPageMoreNewsButtonAndLikeAndShareWrapper {
     /* Обертка для кнопки "Все новости" и лайка/шаринга */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+    .newsPageLikeAndShareContainer {
+        /* Контейнер для кнопок лайка и шаринга */
+        margin: 0;
+    }
 }
 
 .newsPageMoreNewsButtonWrapper {
@@ -200,6 +252,10 @@
 }
 
 @media (min-width: 1441px) {
+	.newsPageContainer {
+		margin: $staticPcTopPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+	}
+
     .newsPageTitleContainer {
         /* Контейнер для заголовка страницы новостей */
         margin: 51px 0 0 0;
@@ -210,10 +266,19 @@
         margin: 23px 0 0 0;
     }
     
+    .newsPageSearchInput {
+        /* Поле ввода для поиска авторов */
+        font-size: 18px;
+    }
+
+    .newsPageLikeAndShareContainer {
+        /* Контейнер для кнопок лайка и шаринга */
+        margin: 31px 0 0 0;
+    }
 }
 
 @media (max-width: 569px) {
 	.newsPageContainer {
-		margin: $staticMobileTopPadding 0 0 0;
+		margin: $staticMobileTopPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
 	}
 }
