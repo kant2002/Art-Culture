@@ -52,22 +52,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: calc(275px - (-13 * ((1440px - 100vw) / (1440 - 375))));
-    min-width: 275px;
-    max-width: 288px;
-    height: 51px;
+    margin: 23px 0 0 0;
 }
 
 .newsPageSearchInput {
     /* Поле ввода для поиска авторов */
     display: flex;
-    width: 100%;
-    height: 100%;
+    width: calc(275px - (-13 * ((1440px - 100vw) / (1440 - 375))));
+    min-width: 275px;
+    max-width: 288px;
+    height: 51px;
     border: 1px solid #000;
     border-radius: 5px;
-    font-size: 18px;
-    font-weight: 600;
-    padding: 0 0 0 15px;
+    font-size: calc(18px - (2 * ((1440px - 100vw) / (1440 - 375))));
 }
 
 .newsPageLikeAndShareContainer {
@@ -216,7 +213,7 @@
 }
 
 @media (max-width: 569px) {
-	.newsPageTitleContainer {
+	.newsPageContainer {
 		margin: $staticMobileTopPadding 0 0 0;
 	}
 }
