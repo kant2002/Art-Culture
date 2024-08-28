@@ -21,6 +21,7 @@ function NewsPage() {
                     placeholder={t('Пошук авторів')}
                 />
             </div>
+
             <div className={`${styles.newsPageLikeAndShareContainer}`}>
                 <div className={`${styles.newsPageLikeWrapper}`}>
                     <button className={`${styles.newsPageLikeButton}`}>
@@ -32,10 +33,12 @@ function NewsPage() {
                                 e.target.src = '/Img/likeHeart.svg'
                             }}
                         />
+                        <p className={`${styles.newsPageLikeButtonText}`}>Like</p>
                     </button>
                 </div>
                 <div className={`${styles.newsPageShareWrapper}`}>
                     <button className={`${styles.newsPageShareButton}`}>
+                        <p className={`${styles.newsPageShareButtonText}`}>Share</p>
                         <img className={`${styles.newsPageShareButtonImg}`}
                             src={'/Img/shareArrow.svg'}
                             alt={t('Світлина поширити')}
@@ -47,6 +50,7 @@ function NewsPage() {
                     </button>
                 </div>
             </div>
+
             <div className={`${styles.newsPageTopCardContainer}`}>
                 <div className={`${styles.newsPageCardContainer}`}>
                     <div className={`${styles.newsPageCardWrapper}`}>
@@ -88,6 +92,10 @@ function NewsPage() {
                 </div>
             </div>
 
+            <div className={`${styles.newsPageSlider}`}>
+
+            </div>
+
             <div className={`${styles.newsPageBottomCardContainer}`}>
 
             </div>
@@ -95,7 +103,8 @@ function NewsPage() {
             <div className={`${styles.newsPageMoreNewsButtonAndLikeAndShareWrapper}`}>
                 <div className={`${styles.newsPageMoreNewsButtonWrapper}`}>
                     <button className={`${styles.newsPageMoreNewsButton}`}>{t('Усi новини')}</button>
-                </div><div className={`${styles.newsPageLikeAndShareContainer}`}>
+                </div>
+                <div className={`${styles.newsPageLikeAndShareContainer}`}>
                     <div className={`${styles.newsPageLikeWrapper}`}>
                         <button className={`${styles.newsPageLikeButton}`}>
                             <img className={`${styles.newsPageLikeButtonImg}`}
@@ -106,10 +115,12 @@ function NewsPage() {
                                     e.target.src = '/Img/likeHeart.svg'
                                 }}
                             />
+                            <p className={`${styles.newsPageLikeButtonText}`}>Like</p>
                         </button>
                     </div>
                     <div className={`${styles.newsPageShareWrapper}`}>
                         <button className={`${styles.newsPageShareButton}`}>
+                            <p className={`${styles.newsPageShareButtonText}`}>Share</p>
                             <img className={`${styles.newsPageShareButtonImg}`}
                                 src={'/Img/shareArrow.svg'}
                                 alt={t('Світлина поширити')}
@@ -122,6 +133,20 @@ function NewsPage() {
                     </div>
                 </div>
             </div>
+
+            <div className={`${styles.newsPageInputMailContainer}`}>
+                <input
+                    className={`${styles.newsPageInputMail}`}
+                    type="text"
+                    placeholder={t('Введіть ваш email')}
+                />
+                <button className={`${styles.newsPageInputMailButton}`}>{t('Підписатися')}</button>
+            </div>
+
+            <div className={`${styles.newsPageSignUpButtonContainer}`}>
+                <button className={`${styles.newsPageSignUpButton}`}>{t('Зареєструватися')}</button>
+            </div>
+
         </div>
     )
 }
