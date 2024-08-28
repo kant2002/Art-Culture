@@ -141,7 +141,7 @@ function NewsPage() {
             <div className={`${styles.newsPageSignUpButtonContainer}`}>
                 <button className={`${styles.newsPageSignUpButton}`}>{t('Зареєструватися')}</button>
             </div>
-            
+
         </div>
     )
 }

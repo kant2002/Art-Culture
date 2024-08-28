@@ -10,31 +10,64 @@
 
     * {
         background: #fff;
+        font-family: $default-font;
     }
 }
 
 .newsPageTitleContainer {
     /* Контейнер для заголовка страницы новостей */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: calc(51px - (28 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
 }
 
 .newsPageTitle {
     /* Заголовок страницы новостей */
+	font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+	font-weight: 600;
+    text-transform: uppercase;
 }
 
 .newsPageHorizontalSeparatorContainer {
     /* Контейнер для горизонтального разделителя */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: calc(23px - (2 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
 }
 
 .newsPageHorizontalSeparator {
     /* Горизонтальный разделитель */
+    display: flex;
+    width: calc(60px - (20 * ((1440px - 100vw) / (1440 - 375))));
+    min-width: 40px;
+    max-width: 60px;
+    height: 1px;
+    background: #000;
 }
 
 .newsPageSearchContainer {
     /* Контейнер для поиска авторов */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(275px - (-13 * ((1440px - 100vw) / (1440 - 375))));
+    min-width: 275px;
+    max-width: 288px;
+    height: 51px;
 }
 
 .newsPageSearchInput {
     /* Поле ввода для поиска авторов */
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #000;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 0 0 0 15px;
 }
 
 .newsPageLikeAndShareContainer {
@@ -167,4 +200,23 @@
 
 .newsPageSignUpButton {
     /* Кнопка регистрации */
+}
+
+@media (min-width: 1441px) {
+    .newsPageTitleContainer {
+        /* Контейнер для заголовка страницы новостей */
+        margin: 51px 0 0 0;
+    }
+
+    .newsPageHorizontalSeparatorContainer {
+        /* Контейнер для горизонтального разделителя */
+        margin: 23px 0 0 0;
+    }
+    
+}
+
+@media (max-width: 569px) {
+	.newsPageTitleContainer {
+		margin: $staticMobileTopPadding 0 0 0;
+	}
 }
