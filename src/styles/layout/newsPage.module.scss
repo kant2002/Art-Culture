@@ -140,42 +140,83 @@
 
 .newsPageTopCardContainer {
     /* Контейнер для верхней карточки */
+    display: flex;
 }
 
 .newsPageCardContainer {
     /* Контейнер для карточки новостей */
+	padding: 0 calc(10 / 1440 * 100vw);
+	width: 48.46%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .newsPageCardWrapper {
     /* Обертка для карточки новостей */
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .newsPageCardImageWrapper {
     /* Обертка для изображения карточки */
+	aspect-ratio: 630 / 330; // например, соотношение сторон 21:11
+	overflow: hidden;
 }
 
 .newsPageCardImage {
     /* Изображение карточки новостей */
+	aspect-ratio: 630 / 330; // например, соотношение сторон 21:11
+	object-fit: cover;
+	object-position: center;
+	width: 100%;
+	height: 100%;
 }
 
 .newsPageCardTitleWrapper {
     /* Обертка для заголовка карточки */
+	margin: calc(26px - (9 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+	display: flex;
+	flex-direction: column;
 }
 
 .newsPageCardTitle {
     /* Заголовок карточки новостей */
+	display: block;
+	font-family: $default-font;
+	font-weight: 500;
+	font-size: calc(22px - (6 * ((1440px - 100vw) / (1440 - 375))));
+	height: calc(
+		calc(22px - (6 * ((1440px - 100vw) / (1440 - 375)))) * 2
+	); // Делаем ограничение вывода текста построчечно
+	overflow: hidden;
+	text-transform: uppercase;
 }
 
 .newsPageCardDescriptionWrapper {
     /* Обертка для описания карточки */
+	margin: calc(18px - (9 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+	height: calc(
+		calc(20px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 3
+	); // Делаем ограничение вывода текста построчечно
+	overflow: hidden;
 }
 
 .newsPageCardDescription {
     /* Описание карточки новостей */
+	font-family: $default-font;
+	font-weight: 400;
+	line-height: calc(20px - (2 * ((1440px - 100vw) / (1440 - 375))));
+	font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
 }
 
 .newsPageCardClockDateAndReadMoreButtonWrapper {
     /* Обертка для часов, даты и кнопки "Читать далее" */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .newsPageCardClockWrapper {
@@ -184,10 +225,15 @@
 
 .newsPageCardClockImg {
     /* Изображение часов */
+	display: flex;
+	width: 20px;
+	height: 20px;
 }
 
 .newsPageCardDateWrapper {
     /* Обертка для даты */
+	margin: 0 0 0 calc(10px - (3 * ((1440px - 100vw) / (1440 - 375))));
+	display: flex;
 }
 
 .newsPageCardDate {
@@ -196,10 +242,16 @@
 
 .newsPageCardReadMoreButtonWrapper {
     /* Обертка для кнопки "Читать далее" */
+	margin: calc(10px - (5 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+	display: flex;
+	justify-content: end;
+	align-items: center;
 }
 
 .newsPageCardReadMoreButton {
     /* Кнопка "Читать далее" */
+	cursor: pointer;
+	color: #d83934;
 }
 
 .newsPageSlider {

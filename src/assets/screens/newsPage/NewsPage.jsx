@@ -52,11 +52,12 @@ function NewsPage() {
             </div>
 
             <div className={`${styles.newsPageTopCardContainer}`}>
+
                 <div className={`${styles.newsPageCardContainer}`}>
                     <div className={`${styles.newsPageCardWrapper}`}>
                         <div className={`${styles.newsPageCardImageWrapper}`}>
                             <img className={`${styles.newsPageCardImage}`}
-                                src={'/Img/newsPageImg.jpeg'}
+                                src={'/public/Img/newsCard1.jpg'}
                                 alt={t('Зображення')}
                                 onError={e => {
                                     e.target.onerror = null
@@ -90,6 +91,203 @@ function NewsPage() {
                         </div>
                     </div>
                 </div>
+
+                <div className={`${styles.newsPageCardContainer}`}>
+                    <div className={`${styles.newsPageCardWrapper}`}>
+                        <div className={`${styles.newsPageCardImageWrapper}`}>
+                            <img className={`${styles.newsPageCardImage}`}
+                                src={'/public/Img/newsCard1.jpg'}
+                                alt={t('Зображення')}
+                                onError={e => {
+                                    e.target.onerror = null
+                                    e.target.src = '/Img/newsPageImg.jpeg'
+                                }}
+                            />
+                        </div>
+                        <div className={`${styles.newsPageCardTitleWrapper}`}>
+                            <p className={`${styles.newsPageCardTitle}`}>{t('Новина')}</p>
+                        </div>
+                        <div className={`${styles.newsPageCardDescriptionWrapper}`}>
+                            <p className={`${styles.newsPageCardDescription}`}>{t('Опис новини')}</p>
+                        </div>
+                        <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
+                            <div className={`${styles.newsPageCardClockWrapper}`}>
+                                <img className={`${styles.newsPageCardClockImg}`}
+                                    src={'/Img/clock.svg'}
+                                    alt={t('Час')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/clock.svg'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.newsPageCardDateWrapper}`}>
+                                <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                            </div>
+                            <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
+                                <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={`${styles.newsPageCardContainer}`}>
+                    <div className={`${styles.newsPageCardWrapper}`}>
+                        <div className={`${styles.newsPageCardImageWrapper}`}>
+                            <img className={`${styles.newsPageCardImage}`}
+                                src={'/public/Img/newsCard1.jpg'}
+                                alt={t('Зображення')}
+                                onError={e => {
+                                    e.target.onerror = null
+                                    e.target.src = '/Img/newsPageImg.jpeg'
+                                }}
+                            />
+                        </div>
+                        <div className={`${styles.newsPageCardTitleWrapper}`}>
+                            <p className={`${styles.newsPageCardTitle}`}>{t('Новина')}</p>
+                        </div>
+                        <div className={`${styles.newsPageCardDescriptionWrapper}`}>
+                            <p className={`${styles.newsPageCardDescription}`}>{t('Опис новини')}</p>
+                        </div>
+                        <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
+                            <div className={`${styles.newsPageCardClockWrapper}`}>
+                                <img className={`${styles.newsPageCardClockImg}`}
+                                    src={'/Img/clock.svg'}
+                                    alt={t('Час')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/clock.svg'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.newsPageCardDateWrapper}`}>
+                                <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                            </div>
+                            <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
+                                <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={`${styles.newsPageCardContainer}`}>
+                    <div className={`${styles.newsPageCardWrapper}`}>
+                        <div className={`${styles.newsPageCardImageWrapper}`}>
+                            <img className={`${styles.newsPageCardImage}`}
+                                src={'/public/Img/newsCard1.jpg'}
+                                alt={t('Зображення')}
+                                onError={e => {
+                                    e.target.onerror = null
+                                    e.target.src = '/Img/newsPageImg.jpeg'
+                                }}
+                            />
+                        </div>
+                        <div className={`${styles.newsPageCardTitleWrapper}`}>
+                            <p className={`${styles.newsPageCardTitle}`}>{t('Новина')}</p>
+                        </div>
+                        <div className={`${styles.newsPageCardDescriptionWrapper}`}>
+                            <p className={`${styles.newsPageCardDescription}`}>{t('Опис новини')}</p>
+                        </div>
+                        <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
+                            <div className={`${styles.newsPageCardClockWrapper}`}>
+                                <img className={`${styles.newsPageCardClockImg}`}
+                                    src={'/Img/clock.svg'}
+                                    alt={t('Час')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/clock.svg'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.newsPageCardDateWrapper}`}>
+                                <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                            </div>
+                            <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
+                                <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={`${styles.newsPageCardContainer}`}>
+                    <div className={`${styles.newsPageCardWrapper}`}>
+                        <div className={`${styles.newsPageCardImageWrapper}`}>
+                            <img className={`${styles.newsPageCardImage}`}
+                                src={'/public/Img/newsCard1.jpg'}
+                                alt={t('Зображення')}
+                                onError={e => {
+                                    e.target.onerror = null
+                                    e.target.src = '/Img/newsPageImg.jpeg'
+                                }}
+                            />
+                        </div>
+                        <div className={`${styles.newsPageCardTitleWrapper}`}>
+                            <p className={`${styles.newsPageCardTitle}`}>{t('Новина')}</p>
+                        </div>
+                        <div className={`${styles.newsPageCardDescriptionWrapper}`}>
+                            <p className={`${styles.newsPageCardDescription}`}>{t('Опис новини')}</p>
+                        </div>
+                        <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
+                            <div className={`${styles.newsPageCardClockWrapper}`}>
+                                <img className={`${styles.newsPageCardClockImg}`}
+                                    src={'/Img/clock.svg'}
+                                    alt={t('Час')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/clock.svg'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.newsPageCardDateWrapper}`}>
+                                <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                            </div>
+                            <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
+                                <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={`${styles.newsPageCardContainer}`}>
+                    <div className={`${styles.newsPageCardWrapper}`}>
+                        <div className={`${styles.newsPageCardImageWrapper}`}>
+                            <img className={`${styles.newsPageCardImage}`}
+                                src={'/public/Img/newsCard1.jpg'}
+                                alt={t('Зображення')}
+                                onError={e => {
+                                    e.target.onerror = null
+                                    e.target.src = '/Img/newsPageImg.jpeg'
+                                }}
+                            />
+                        </div>
+                        <div className={`${styles.newsPageCardTitleWrapper}`}>
+                            <p className={`${styles.newsPageCardTitle}`}>{t('Новина')}</p>
+                        </div>
+                        <div className={`${styles.newsPageCardDescriptionWrapper}`}>
+                            <p className={`${styles.newsPageCardDescription}`}>{t('Опис новини')}</p>
+                        </div>
+                        <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
+                            <div className={`${styles.newsPageCardClockWrapper}`}>
+                                <img className={`${styles.newsPageCardClockImg}`}
+                                    src={'/Img/clock.svg'}
+                                    alt={t('Час')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/clock.svg'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.newsPageCardDateWrapper}`}>
+                                <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                            </div>
+                            <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
+                                <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
             <div className={`${styles.newsPageSlider}`}>
