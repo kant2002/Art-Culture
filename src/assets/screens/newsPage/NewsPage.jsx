@@ -209,7 +209,7 @@ function NewsPage() {
                     </div>
                 </div>
 
-                <div className={`${styles.newsPageCardContainer}`}>
+                {/* <div className={`${styles.newsPageCardContainer}`}>
                     <div className={`${styles.newsPageCardWrapper}`}>
                         <div className={`${styles.newsPageCardImageWrapper}`}>
                             <img className={`${styles.newsPageCardImage}`}
@@ -285,7 +285,7 @@ function NewsPage() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
 
             </div>

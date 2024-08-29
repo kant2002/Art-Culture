@@ -53,6 +53,11 @@
     justify-content: center;
     align-items: center;
     margin: 23px 0 0 0;
+
+    * {        
+    margin: 0;
+    padding: 0;
+    }
 }
 
 .newsPageSearchInput {
@@ -141,6 +146,7 @@
 .newsPageTopCardContainer {
     /* Контейнер для верхней карточки */
     display: flex;
+    margin: 23px;
 }
 
 .newsPageCardContainer {
@@ -238,13 +244,15 @@
 
 .newsPageCardDate {
     /* Дата карточки новостей */
+    font-size: calc(18px - (4 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 400;
 }
 
 .newsPageCardReadMoreButtonWrapper {
     /* Обертка для кнопки "Читать далее" */
-	margin: calc(10px - (5 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+	margin: calc(10px - (5 * ((1440px - 100vw) / (1440 - 375)))) 0 0 auto;
 	display: flex;
-	justify-content: end;
+	justify-content: center;
 	align-items: center;
 }
 
