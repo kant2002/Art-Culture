@@ -53,11 +53,6 @@
     justify-content: center;
     align-items: center;
     margin: 23px 0 0 0;
-
-    * {        
-    margin: 0;
-    padding: 0;
-    }
 }
 
 .newsPageSearchInput {
@@ -70,6 +65,8 @@
     border: 1px solid #000;
     border-radius: 5px;
     font-size: calc(18px - (2 * ((1440px - 100vw) / (1440 - 375))));
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .newsPageLikeAndShareContainer {
@@ -103,7 +100,6 @@
     object-position: center;
     width: 32px;
     height: 32px;
-
 }
 
 .newsPageLikeButtonText {
@@ -146,7 +142,7 @@
 .newsPageTopCardContainer {
     /* Контейнер для верхней карточки */
     display: flex;
-    margin: 23px;
+    margin: 23px calc(-10 / 1440 * 100vw) 0;
 }
 
 .newsPageCardContainer {

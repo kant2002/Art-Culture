@@ -66,10 +66,12 @@ function NewsPage() {
                             />
                         </div>
                         <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>{t('Новина')}</p>
+                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
                         </div>
                         <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>{t('Опис новини')}</p>
+                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                            Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                            Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
                         </div>
                         <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
                             <div className={`${styles.newsPageCardClockWrapper}`}>
@@ -105,10 +107,12 @@ function NewsPage() {
                             />
                         </div>
                         <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>{t('Новина')}</p>
+                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
                         </div>
                         <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>{t('Опис новини')}</p>
+                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                            Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                            Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
                         </div>
                         <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
                             <div className={`${styles.newsPageCardClockWrapper}`}>
@@ -144,10 +148,12 @@ function NewsPage() {
                             />
                         </div>
                         <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>{t('Новина')}</p>
+                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
                         </div>
                         <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>{t('Опис новини')}</p>
+                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                            Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                            Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
                         </div>
                         <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
                             <div className={`${styles.newsPageCardClockWrapper}`}>
@@ -183,10 +189,12 @@ function NewsPage() {
                             />
                         </div>
                         <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>{t('Новина')}</p>
+                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
                         </div>
                         <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>{t('Опис новини')}</p>
+                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                            Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                            Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
                         </div>
                         <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
                             <div className={`${styles.newsPageCardClockWrapper}`}>
@@ -222,10 +230,12 @@ function NewsPage() {
                             />
                         </div>
                         <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>{t('Новина')}</p>
+                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
                         </div>
                         <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>{t('Опис новини')}</p>
+                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                            Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                            Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
                         </div>
                         <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
                             <div className={`${styles.newsPageCardClockWrapper}`}>
@@ -261,10 +271,12 @@ function NewsPage() {
                             />
                         </div>
                         <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>{t('Новина')}</p>
+                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
                         </div>
                         <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>{t('Опис новини')}</p>
+                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                            Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                            Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
                         </div>
                         <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
                             <div className={`${styles.newsPageCardClockWrapper}`}>
