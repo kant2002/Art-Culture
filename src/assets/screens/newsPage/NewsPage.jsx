@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 // import { useNavigate } from 'react-router-dom'
+import NewsPageAuthorsSlider from '../../components/Sliders/NewsPageAuthorsSlider/NewsPageAuthorsSlider.jsx'
 import styles from '../../../styles/layout/newsPage.module.scss'
 
 function NewsPage() {
@@ -299,12 +300,9 @@ function NewsPage() {
                     </div>
                 </div>
 
-
             </div>
 
-            <div className={`${styles.newsPageSlider}`}>
-
-            </div>
+            <NewsPageAuthorsSlider />
 
             <div className={`${styles.newsPageBottomCardContainer}`}>
 
