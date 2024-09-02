@@ -140,7 +140,7 @@
 }
 
 .newsPageTopCardContainer {
-    /* Контейнер для верхней карточки */
+    /* Контейнер для верхних карточек */
     display: flex;
     margin: 23px calc(-10 / 1440 * 100vw) 0;
 }
@@ -315,6 +315,11 @@
     .newsPageTitleContainer {
         /* Контейнер для заголовка страницы новостей */
         margin: 51px 0 0 0;
+    }
+
+    .newsPageTitle {
+        /* Заголовок страницы новостей */
+        font-size: 28px; 
     }
 
     .newsPageHorizontalSeparatorContainer {
