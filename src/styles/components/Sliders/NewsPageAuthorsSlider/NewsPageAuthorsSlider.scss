@@ -1,23 +1,6 @@
 @import '/src/styles/utilities/variables.scss';
 @import '/node_modules/swiper/swiper-vars.scss';
 
-.swiper-wrapper {
-    /* Оболочка для слайдера */
-    display: flex;
-    width: 100vw;
-    height: calc(304px - (76 * ((1440px - 100vw) / (1440 - 375)))); 
-}
-
-.swiper-slide {
-    /* Слайд */
-    width: calc(153px - (34 * ((1440px - 100vw) / (1440 - 375))));
-    height: calc(165px - (41 * ((1440px - 100vw) / (1440 - 375))));
-    min-width: 119px;
-    max-width: 153px;
-    min-height: 124px;
-    max-height: 165px;
-}
-
 .newsPageAuthorsSliderCardContainer {
     /* Контейнер для карточки слайдера авторов */
     display: flex;
@@ -26,6 +9,23 @@
     align-items: center;
     width: 100%;
     height: 100%;
+
+    .swiper-wrapper {
+        /* Оболочка для слайдера */
+        display: flex;
+        width: 100vw;
+        height: calc(304px - (76 * ((1440px - 100vw) / (1440 - 375)))); 
+    }
+    
+    .swiper-slide {
+        /* Слайд */
+        width: calc(153px - (34 * ((1440px - 100vw) / (1440 - 375))));
+        height: calc(165px - (41 * ((1440px - 100vw) / (1440 - 375))));
+        min-width: 119px;
+        max-width: 153px;
+        min-height: 124px;
+        max-height: 165px;
+    }
 }
 
 .newsPageAuthorsSliderCardWrapper {
