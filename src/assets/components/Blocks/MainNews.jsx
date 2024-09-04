@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import styles from '/src/styles/components/Blocks/MainNews.module.scss'
 
 function MainNews() {
@@ -10,6 +11,10 @@ function MainNews() {
 	const [visiblePostsCount, setVisiblePostsCount] = useState(
 		getPostsCount(window.innerWidth)
 	)
+	const navigate = useNavigate()
+	const handleNewsPageClick = () => {
+		navigate('/NewsPage')
+	}
 
 	function getPostsCount(Width) {
 		if (Width >= 1600) {
@@ -79,7 +84,7 @@ function MainNews() {
 				<div
 					className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}
 				>
-					<button className={`${styles.mainPageNewsButton}`}>
+					<button className={`${styles.mainPageNewsButton}`} onClick={handleNewsPageClick}>
 						<p className={`${styles.mainPageNewsButtonTitle}`}>
 							{t('Усі новини')}
 						</p>
@@ -187,7 +192,7 @@ function MainNews() {
 			<div
 				className={`${styles.mainPageNewsButtonWrapper} ${styles.mobileButtonWrapper}`}
 			>
-				<button className={`${styles.mainPageNewsButton}`}>
+				<button className={`${styles.mainPageNewsButton}`} onClick={handleNewsPageClick}>
 					<p className={`${styles.mainPageNewsButtonTitle}`}>
 						{t('Усі новини')}
 					</p>
