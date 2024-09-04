@@ -1,15 +1,17 @@
 @import 'src/styles/utilities/variables.scss';
 
-
 .newsPageContainer {
     /* Основной контейнер страницы новостей */
     display: flex;
     flex-direction: column;
-    margin: $responsiveTopPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+    margin: $responsiveTopPadding 0 0 0;
 
     * {
-        background: #fff;
         font-family: $default-font;
+    }
+
+    button {
+        background: white;
     }
 }
 
@@ -74,7 +76,7 @@
     flex-direction: row;
     justify-content: end;
     align-items: center;
-    margin: calc(31px - (-15 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+    margin: calc(31px - (-15 * ((1440px - 100vw) / (1440 - 375)))) $responsiveLeftAndRightPadding 0;
     font-size: 18px;
 }
 
@@ -138,11 +140,17 @@
     height: 32px;
 }
 
-.newsPageTopCardContainer, .newsPageBottomCardContainer{
+.newsPageTopCardsContainer, .newsPageBottomCardsContainer{
+    /* Контейнер для верхних карточек */
+    display: flex;
+    margin: 23px $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+}
+
+.newsPageTopCardsWrapper, .newsPageBottomCardsWrapper{
     /* Контейнер для верхних карточек */
     display: flex;
     flex-wrap: wrap;
-    margin: 23px calc(-10 / 1440 * 100vw) 0;
+    margin: 0 calc(-10 / 1440 * 100vw);
 }
 
 .newsPageCardContainer {
@@ -265,11 +273,12 @@
 
 .newsPageMoreNewsButtonAndLikeAndShareWrapper {
     /* Обертка для кнопки "Все новости" и лайка/шаринга */
+    margin: 0 $responsiveLeftAndRightPadding;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-
+    
     .newsPageLikeAndShareContainer {
         /* Контейнер для кнопок лайка и шаринга */
         margin: 0;
@@ -305,14 +314,15 @@
 }
 
 @media (min-width: 1600px) {
-    .newsPageTopCardContainer {
+    .newsPageTopCardsContainer {
         /* Контейнер для верхних карточек */
         .newsPageCard5, .newsPageCard6 {
             display: flex;
+            margin: 0 ;
         }
     }
     
-    .newsPageBottomCardContainer {
+    .newsPageBottomCardsContainer {
         /* Контейнер для нижних карточек */
         .newsPageCard5, .newsPageCard6 {
             display: none;
@@ -330,14 +340,14 @@
 }
 
 @media (max-width: 1599px) {
-    .newsPageTopCardContainer {
+    .newsPageTopCardsContainer {
         /* Контейнер для верхних карточек */
         .newsPageCard5, .newsPageCard6 {
             display: none;
         }
     }
     
-    .newsPageBottomCardContainer {
+    .newsPageBottomCardsContainer {
         /* Контейнер для нижних карточек */
         .newsPageCard5, .newsPageCard6 {
             display: flex;
@@ -351,7 +361,7 @@
 
 @media (min-width: 1441px) {
     .newsPageContainer {
-        margin: $staticPcTopPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+        margin: $staticPcTopPadding 0 0 0;
     }
 
     .newsPageTitleContainer {
@@ -376,7 +386,7 @@
 
     .newsPageLikeAndShareContainer {
         /* Контейнер для кнопок лайка и шаринга */
-        margin: 31px 0 0 0;
+        margin: 31px $responsiveLeftAndRightPadding 0;
     }
 }
 
@@ -393,6 +403,6 @@
 
 @media (max-width: 569px) {
     .newsPageContainer {
-        margin: $staticMobileTopPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+        margin: $staticMobileTopPadding 0 0 0;
     }
 }
