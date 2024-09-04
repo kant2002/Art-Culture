@@ -39,22 +39,22 @@ const Slide = ({ post }) => {
 
 const NewsPageAuthorsSlider = () => {
     const { t } = useTranslation()
-    // const [posts, setPosts] = useState([])
-    // const [error, setError] = useState(null)
+    const [posts, setPosts] = useState([])
+    const [error, setError] = useState(null)
 
-    // useEffect(() => {
-    // 	const fetchInstagramPosts = async () => {
-    // 		try {
-    // 			const response = await axios.get(``)
-    // 			setPosts(response.data.data)
-    // 		} catch (error) {
-    // 			console.error('Error fetching Instagram post data', error)
-    // 			setError(error)
-    // 		}
-    // 	}
+    useEffect(() => {
+        const fetchInstagramPosts = async () => {
+            try {
+                const response = await axios.get(``)
+                setPosts(response.data.data)
+            } catch (error) {
+                console.error('Error fetching Instagram post data', error)
+                setError(error)
+            }
+        }
 
-    // 	fetchInstagramPosts()
-    // }, [])
+        fetchInstagramPosts()
+    }, [])
 
     return (
         <div className='newsPageAuthorsSliderContainer'>
@@ -63,7 +63,7 @@ const NewsPageAuthorsSlider = () => {
                     <p className='newsPageAuthorsSliderTitle'>{t('Автори')}</p>
                 </div>
 
-                <div className='newsPageAuthorsSliderMiddleInnerWrapper'>
+                <div className='newsPageAuthorsSliderInnerWrapper'>
                     <Swiper
                         modules={[Navigation, Pagination]}
                         spaceBetween={0}
