@@ -94,6 +94,21 @@ const NewsPageAuthorsSlider = () => {
                         <SwiperSlide>
                             <Slide />
                         </SwiperSlide>
+                        <SwiperSlide>
+                            <Slide />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <Slide />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <Slide />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <Slide />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <Slide />
+                        </SwiperSlide>
                     </Swiper>
                     <div className={'${swiper-button-prev}'}></div>
                     <div className={'${swiper-pagination}'}></div>

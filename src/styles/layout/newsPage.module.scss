@@ -67,7 +67,6 @@
     border-radius: 5px;
     font-size: calc(18px - (2 * ((1440px - 100vw) / (1440 - 375))));
     margin: 0 !important;
-    padding: 0 !important;
 }
 
 .newsPageLikeAndShareContainer {
@@ -220,6 +219,7 @@
 
 .newsPageCardClockDateAndReadMoreButtonWrapper {
     /* Обертка для часов, даты и кнопки "Читать далее" */
+    margin: calc(18px - (2 * ((1440px - 100vw) / (1440 - 375)))) 0; 
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -228,6 +228,7 @@
 
 .newsPageCardClockWrapper {
     /* Обертка для изображения часов */
+    display: flex;
 }
 
 .newsPageCardClockImg {
@@ -251,7 +252,7 @@
 
 .newsPageCardReadMoreButtonWrapper {
     /* Обертка для кнопки "Читать далее" */
-    margin: calc(10px - (5 * ((1440px - 100vw) / (1440 - 375)))) 0 0 auto;
+    margin: 0 0 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -387,6 +388,11 @@
     .newsPageLikeAndShareContainer {
         /* Контейнер для кнопок лайка и шаринга */
         margin: 31px $responsiveLeftAndRightPadding 0;
+    }
+
+    .newsPageCardClockDateAndReadMoreButtonWrapper {
+        /* Обертка для часов, даты и кнопки "Читать далее" */
+        margin: 18px 0 0 0; 
     }
 }
 

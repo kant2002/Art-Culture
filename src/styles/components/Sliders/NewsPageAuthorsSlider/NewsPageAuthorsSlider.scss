@@ -68,6 +68,8 @@
         display: flex;
         width: 100vw;
         height: calc(304px - (76 * ((1440px - 100vw) / (1440 - 375))));
+        min-height: 228px;
+        max-height: 304px;
     }
 
     .swiper-slide {
@@ -92,10 +94,10 @@
 
 .newsPageAuthorsSliderTitleWrapper {
     /* Контейнер для заголовка слайдера */
+    margin: 0 auto 0 0;
     display: flex;
     justify-content: start;
     align-items: center;
-    width: 100%;
     height: 120px;
 }
 
@@ -187,4 +189,46 @@
     .swiper-pagination-fraction {
         color: white;
     }
+}
+
+@media (min-width: 1441px) {
+    .newsPageAuthorsSliderCardUserPhotoWrapper {
+        /* Контейнер для фотографии автора */
+        width: 125px;
+        height: 125px;
+    }
+    
+    .newsPageAuthorsSliderCardUserName {
+        /* Имя автора */
+        font-size: 18px;
+    }
+    
+    .newsPageAuthorsSliderTitle {
+        /* Заголовок слайдера */
+        font-size: 28px;
+    }
+
+    .newsPageAuthorsSliderInnerWrapper {
+        /* Внутренний верхний контейнер слайдера */
+    
+        @at-root {
+            :root {
+                --swiper-navigation-size: 42px;
+            }
+        }
+    
+        .swiper-button-prev,
+        .swiper-button-next {
+            top: 230px;
+        }
+    
+        /* Common Styles */
+        .swiper-pagination-fraction,
+        .swiper-pagination-custom,
+        .swiper-horizontal>.swiper-pagination-bullets,
+        .swiper-pagination-bullets.swiper-pagination-horizontal {
+            top: 225px;
+        }
+    }
+    
 }
