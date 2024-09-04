@@ -643,7 +643,7 @@ function NewsPage() {
                 <div className={`${styles.newsPageMoreNewsButtonWrapper}`}>
                     <button className={`${styles.newsPageMoreNewsButton}`}>
                         <p className={`${styles.newsPageNewsButtonTitle}`}>
-                            {t('Більше    новин')}
+                            {t('Більше новин')}
                         </p>
                         <img
                             className={`${styles.newsPageNewsButtonImg}`}
@@ -687,12 +687,12 @@ function NewsPage() {
             </div>
 
             <div className={`${styles.newsPageInputMailContainer}`}>
+                <p className={`${styles.newsPageInputMailTitle}`}>{t('Підписатися на розсилку')}</p>
                 <input
                     className={`${styles.newsPageInputMail}`}
                     type="text"
                     placeholder={t('Введіть ваш email')}
                 />
-                <button className={`${styles.newsPageInputMailButton}`}>{t('Підписатися')}</button>
             </div>
 
             <div className={`${styles.newsPageSignUpButtonContainer}`}>
