@@ -59,7 +59,7 @@ function NewsPage() {
                         <div className={`${styles.newsPageCardWrapper}`}>
                             <div className={`${styles.newsPageCardImageWrapper}`}>
                                 <img className={`${styles.newsPageCardImage}`}
-                                    src={'/public/Img/newsCard1.jpg'}
+                                    src={'/Img/newsCard1.jpg'}
                                     alt={t('Зображення')}
                                     onError={e => {
                                         e.target.onerror = null
@@ -100,7 +100,7 @@ function NewsPage() {
                         <div className={`${styles.newsPageCardWrapper}`}>
                             <div className={`${styles.newsPageCardImageWrapper}`}>
                                 <img className={`${styles.newsPageCardImage}`}
-                                    src={'/public/Img/newsCard1.jpg'}
+                                    src={'/Img/newsCard1.jpg'}
                                     alt={t('Зображення')}
                                     onError={e => {
                                         e.target.onerror = null
@@ -141,7 +141,7 @@ function NewsPage() {
                         <div className={`${styles.newsPageCardWrapper}`}>
                             <div className={`${styles.newsPageCardImageWrapper}`}>
                                 <img className={`${styles.newsPageCardImage}`}
-                                    src={'/public/Img/newsCard1.jpg'}
+                                    src={'/Img/newsCard1.jpg'}
                                     alt={t('Зображення')}
                                     onError={e => {
                                         e.target.onerror = null
@@ -182,7 +182,7 @@ function NewsPage() {
                         <div className={`${styles.newsPageCardWrapper}`}>
                             <div className={`${styles.newsPageCardImageWrapper}`}>
                                 <img className={`${styles.newsPageCardImage}`}
-                                    src={'/public/Img/newsCard1.jpg'}
+                                    src={'/Img/newsCard1.jpg'}
                                     alt={t('Зображення')}
                                     onError={e => {
                                         e.target.onerror = null
@@ -223,7 +223,7 @@ function NewsPage() {
                         <div className={`${styles.newsPageCardWrapper}`}>
                             <div className={`${styles.newsPageCardImageWrapper}`}>
                                 <img className={`${styles.newsPageCardImage}`}
-                                    src={'/public/Img/newsCard1.jpg'}
+                                    src={'/Img/newsCard1.jpg'}
                                     alt={t('Зображення')}
                                     onError={e => {
                                         e.target.onerror = null
@@ -264,7 +264,7 @@ function NewsPage() {
                         <div className={`${styles.newsPageCardsWrapper}`}>
                             <div className={`${styles.newsPageCardImageWrapper}`}>
                                 <img className={`${styles.newsPageCardImage}`}
-                                    src={'/public/Img/newsCard1.jpg'}
+                                    src={'/Img/newsCard1.jpg'}
                                     alt={t('Зображення')}
                                     onError={e => {
                                         e.target.onerror = null
@@ -312,7 +312,7 @@ function NewsPage() {
                         <div className={`${styles.newsPageCardWrapper}`}>
                             <div className={`${styles.newsPageCardImageWrapper}`}>
                                 <img className={`${styles.newsPageCardImage}`}
-                                    src={'/public/Img/newsCard1.jpg'}
+                                    src={'/Img/newsCard1.jpg'}
                                     alt={t('Зображення')}
                                     onError={e => {
                                         e.target.onerror = null
@@ -354,7 +354,7 @@ function NewsPage() {
                         <div className={`${styles.newsPageCardWrapper}`}>
                             <div className={`${styles.newsPageCardImageWrapper}`}>
                                 <img className={`${styles.newsPageCardImage}`}
-                                    src={'/public/Img/newsCard1.jpg'}
+                                    src={'/Img/newsCard1.jpg'}
                                     alt={t('Зображення')}
                                     onError={e => {
                                         e.target.onerror = null
@@ -395,7 +395,7 @@ function NewsPage() {
                         <div className={`${styles.newsPageCardWrapper}`}>
                             <div className={`${styles.newsPageCardImageWrapper}`}>
                                 <img className={`${styles.newsPageCardImage}`}
-                                    src={'/public/Img/newsCard1.jpg'}
+                                    src={'/Img/newsCard1.jpg'}
                                     alt={t('Зображення')}
                                     onError={e => {
                                         e.target.onerror = null
@@ -436,7 +436,7 @@ function NewsPage() {
                         <div className={`${styles.newsPageCardWrapper}`}>
                             <div className={`${styles.newsPageCardImageWrapper}`}>
                                 <img className={`${styles.newsPageCardImage}`}
-                                    src={'/public/Img/newsCard1.jpg'}
+                                    src={'/Img/newsCard1.jpg'}
                                     alt={t('Зображення')}
                                     onError={e => {
                                         e.target.onerror = null
@@ -477,7 +477,7 @@ function NewsPage() {
                         <div className={`${styles.newsPageCardWrapper}`}>
                             <div className={`${styles.newsPageCardImageWrapper}`}>
                                 <img className={`${styles.newsPageCardImage}`}
-                                    src={'/public/Img/newsCard1.jpg'}
+                                    src={'/Img/newsCard1.jpg'}
                                     alt={t('Зображення')}
                                     onError={e => {
                                         e.target.onerror = null
@@ -518,7 +518,7 @@ function NewsPage() {
                         <div className={`${styles.newsPageCardWrapper}`}>
                             <div className={`${styles.newsPageCardImageWrapper}`}>
                                 <img className={`${styles.newsPageCardImage}`}
-                                    src={'/public/Img/newsCard1.jpg'}
+                                    src={'/Img/newsCard1.jpg'}
                                     alt={t('Зображення')}
                                     onError={e => {
                                         e.target.onerror = null
@@ -559,7 +559,7 @@ function NewsPage() {
                         <div className={`${styles.newsPageCardWrapper}`}>
                             <div className={`${styles.newsPageCardImageWrapper}`}>
                                 <img className={`${styles.newsPageCardImage}`}
-                                    src={'/public/Img/newsCard1.jpg'}
+                                    src={'/Img/newsCard1.jpg'}
                                     alt={t('Зображення')}
                                     onError={e => {
                                         e.target.onerror = null
@@ -600,7 +600,7 @@ function NewsPage() {
                         <div className={`${styles.newsPageCardWrapper}`}>
                             <div className={`${styles.newsPageCardImageWrapper}`}>
                                 <img className={`${styles.newsPageCardImage}`}
-                                    src={'/public/Img/newsCard1.jpg'}
+                                    src={'/Img/newsCard1.jpg'}
                                     alt={t('Зображення')}
                                     onError={e => {
                                         e.target.onerror = null
