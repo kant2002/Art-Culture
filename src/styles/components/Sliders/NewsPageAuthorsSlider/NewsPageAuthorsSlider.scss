@@ -1,3 +1,17 @@
 @import '/src/styles/utilities/variables.scss';
 // @import '/node_modules/swiper/swiper-vars.scss';
 
+.newsPageAuthorsSliderContainer {
+    /* Основной контейнер слайдера */
+    display: flex;  
+    background: #000;
+    width: 100%;
+    height: calc(430px - (102 * ((1440px - 100vw) / (1440 - 375))));
+    min-width: 328px;
+    max-height: 430px;
+}
+
+.newsPageAuthorsSliderWrapper {
+    /* Внутренний контейнер слайдера */
+    width: 100%;
+}

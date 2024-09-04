@@ -52,588 +52,591 @@ function NewsPage() {
                 </div>
             </div>
 
-            <div className={`${styles.newsPageTopCardContainer}`}>
+            <div className={`${styles.newsPageTopCardsContainer}`}>
+                <div className={`${styles.newsPageTopCardsWrapper}`}>
 
-                <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard1}`}>
-                    <div className={`${styles.newsPageCardWrapper}`}>
-                        <div className={`${styles.newsPageCardImageWrapper}`}>
-                            <img className={`${styles.newsPageCardImage}`}
-                                src={'/public/Img/newsCard1.jpg'}
-                                alt={t('Зображення')}
-                                onError={e => {
-                                    e.target.onerror = null
-                                    e.target.src = '/Img/newsPageImg.jpeg'
-                                }}
-                            />
-                        </div>
-                        <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
-                        </div>
-                        <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
-                                Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
-                                Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
-                        </div>
-                        <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
-                            <div className={`${styles.newsPageCardClockWrapper}`}>
-                                <img className={`${styles.newsPageCardClockImg}`}
-                                    src={'/Img/clock.svg'}
-                                    alt={t('Час')}
+                    <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard1}`}>
+                        <div className={`${styles.newsPageCardWrapper}`}>
+                            <div className={`${styles.newsPageCardImageWrapper}`}>
+                                <img className={`${styles.newsPageCardImage}`}
+                                    src={'/public/Img/newsCard1.jpg'}
+                                    alt={t('Зображення')}
                                     onError={e => {
                                         e.target.onerror = null
-                                        e.target.src = '/Img/clock.svg'
+                                        e.target.src = '/Img/newsPageImg.jpeg'
                                     }}
                                 />
                             </div>
-                            <div className={`${styles.newsPageCardDateWrapper}`}>
-                                <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                            <div className={`${styles.newsPageCardTitleWrapper}`}>
+                                <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
                             </div>
-                            <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
-                                <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                            <div className={`${styles.newsPageCardDescriptionWrapper}`}>
+                                <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                                    Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                                    Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
+                            </div>
+                            <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
+                                <div className={`${styles.newsPageCardClockWrapper}`}>
+                                    <img className={`${styles.newsPageCardClockImg}`}
+                                        src={'/Img/clock.svg'}
+                                        alt={t('Час')}
+                                        onError={e => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/clock.svg'
+                                        }}
+                                    />
+                                </div>
+                                <div className={`${styles.newsPageCardDateWrapper}`}>
+                                    <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                                </div>
+                                <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
+                                    <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard2}`}>
+                        <div className={`${styles.newsPageCardWrapper}`}>
+                            <div className={`${styles.newsPageCardImageWrapper}`}>
+                                <img className={`${styles.newsPageCardImage}`}
+                                    src={'/public/Img/newsCard1.jpg'}
+                                    alt={t('Зображення')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsPageImg.jpeg'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.newsPageCardTitleWrapper}`}>
+                                <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
+                            </div>
+                            <div className={`${styles.newsPageCardDescriptionWrapper}`}>
+                                <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                                    Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                                    Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
+                            </div>
+                            <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
+                                <div className={`${styles.newsPageCardClockWrapper}`}>
+                                    <img className={`${styles.newsPageCardClockImg}`}
+                                        src={'/Img/clock.svg'}
+                                        alt={t('Час')}
+                                        onError={e => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/clock.svg'
+                                        }}
+                                    />
+                                </div>
+                                <div className={`${styles.newsPageCardDateWrapper}`}>
+                                    <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                                </div>
+                                <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
+                                    <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard3}`}>
+                        <div className={`${styles.newsPageCardWrapper}`}>
+                            <div className={`${styles.newsPageCardImageWrapper}`}>
+                                <img className={`${styles.newsPageCardImage}`}
+                                    src={'/public/Img/newsCard1.jpg'}
+                                    alt={t('Зображення')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsPageImg.jpeg'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.newsPageCardTitleWrapper}`}>
+                                <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
+                            </div>
+                            <div className={`${styles.newsPageCardDescriptionWrapper}`}>
+                                <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                                    Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                                    Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
+                            </div>
+                            <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
+                                <div className={`${styles.newsPageCardClockWrapper}`}>
+                                    <img className={`${styles.newsPageCardClockImg}`}
+                                        src={'/Img/clock.svg'}
+                                        alt={t('Час')}
+                                        onError={e => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/clock.svg'
+                                        }}
+                                    />
+                                </div>
+                                <div className={`${styles.newsPageCardDateWrapper}`}>
+                                    <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                                </div>
+                                <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
+                                    <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard4}`}>
+                        <div className={`${styles.newsPageCardWrapper}`}>
+                            <div className={`${styles.newsPageCardImageWrapper}`}>
+                                <img className={`${styles.newsPageCardImage}`}
+                                    src={'/public/Img/newsCard1.jpg'}
+                                    alt={t('Зображення')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsPageImg.jpeg'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.newsPageCardTitleWrapper}`}>
+                                <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
+                            </div>
+                            <div className={`${styles.newsPageCardDescriptionWrapper}`}>
+                                <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                                    Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                                    Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
+                            </div>
+                            <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
+                                <div className={`${styles.newsPageCardClockWrapper}`}>
+                                    <img className={`${styles.newsPageCardClockImg}`}
+                                        src={'/Img/clock.svg'}
+                                        alt={t('Час')}
+                                        onError={e => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/clock.svg'
+                                        }}
+                                    />
+                                </div>
+                                <div className={`${styles.newsPageCardDateWrapper}`}>
+                                    <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                                </div>
+                                <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
+                                    <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard5}`}>
+                        <div className={`${styles.newsPageCardWrapper}`}>
+                            <div className={`${styles.newsPageCardImageWrapper}`}>
+                                <img className={`${styles.newsPageCardImage}`}
+                                    src={'/public/Img/newsCard1.jpg'}
+                                    alt={t('Зображення')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsPageImg.jpeg'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.newsPageCardTitleWrapper}`}>
+                                <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
+                            </div>
+                            <div className={`${styles.newsPageCardDescriptionWrapper}`}>
+                                <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                                    Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                                    Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
+                            </div>
+                            <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
+                                <div className={`${styles.newsPageCardClockWrapper}`}>
+                                    <img className={`${styles.newsPageCardClockImg}`}
+                                        src={'/Img/clock.svg'}
+                                        alt={t('Час')}
+                                        onError={e => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/clock.svg'
+                                        }}
+                                    />
+                                </div>
+                                <div className={`${styles.newsPageCardDateWrapper}`}>
+                                    <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                                </div>
+                                <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
+                                    <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard6}`}>
+                        <div className={`${styles.newsPageCardsWrapper}`}>
+                            <div className={`${styles.newsPageCardImageWrapper}`}>
+                                <img className={`${styles.newsPageCardImage}`}
+                                    src={'/public/Img/newsCard1.jpg'}
+                                    alt={t('Зображення')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsPageImg.jpeg'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.newsPageCardTitleWrapper}`}>
+                                <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
+                            </div>
+                            <div className={`${styles.newsPageCardDescriptionWrapper}`}>
+                                <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                                    Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                                    Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
+                            </div>
+                            <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
+                                <div className={`${styles.newsPageCardClockWrapper}`}>
+                                    <img className={`${styles.newsPageCardClockImg}`}
+                                        src={'/Img/clock.svg'}
+                                        alt={t('Час')}
+                                        onError={e => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/clock.svg'
+                                        }}
+                                    />
+                                </div>
+                                <div className={`${styles.newsPageCardDateWrapper}`}>
+                                    <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                                </div>
+                                <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
+                                    <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard2}`}>
-                    <div className={`${styles.newsPageCardWrapper}`}>
-                        <div className={`${styles.newsPageCardImageWrapper}`}>
-                            <img className={`${styles.newsPageCardImage}`}
-                                src={'/public/Img/newsCard1.jpg'}
-                                alt={t('Зображення')}
-                                onError={e => {
-                                    e.target.onerror = null
-                                    e.target.src = '/Img/newsPageImg.jpeg'
-                                }}
-                            />
-                        </div>
-                        <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
-                        </div>
-                        <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
-                                Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
-                                Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
-                        </div>
-                        <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
-                            <div className={`${styles.newsPageCardClockWrapper}`}>
-                                <img className={`${styles.newsPageCardClockImg}`}
-                                    src={'/Img/clock.svg'}
-                                    alt={t('Час')}
-                                    onError={e => {
-                                        e.target.onerror = null
-                                        e.target.src = '/Img/clock.svg'
-                                    }}
-                                />
-                            </div>
-                            <div className={`${styles.newsPageCardDateWrapper}`}>
-                                <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
-                            </div>
-                            <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
-                                <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard3}`}>
-                    <div className={`${styles.newsPageCardWrapper}`}>
-                        <div className={`${styles.newsPageCardImageWrapper}`}>
-                            <img className={`${styles.newsPageCardImage}`}
-                                src={'/public/Img/newsCard1.jpg'}
-                                alt={t('Зображення')}
-                                onError={e => {
-                                    e.target.onerror = null
-                                    e.target.src = '/Img/newsPageImg.jpeg'
-                                }}
-                            />
-                        </div>
-                        <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
-                        </div>
-                        <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
-                                Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
-                                Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
-                        </div>
-                        <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
-                            <div className={`${styles.newsPageCardClockWrapper}`}>
-                                <img className={`${styles.newsPageCardClockImg}`}
-                                    src={'/Img/clock.svg'}
-                                    alt={t('Час')}
-                                    onError={e => {
-                                        e.target.onerror = null
-                                        e.target.src = '/Img/clock.svg'
-                                    }}
-                                />
-                            </div>
-                            <div className={`${styles.newsPageCardDateWrapper}`}>
-                                <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
-                            </div>
-                            <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
-                                <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard4}`}>
-                    <div className={`${styles.newsPageCardWrapper}`}>
-                        <div className={`${styles.newsPageCardImageWrapper}`}>
-                            <img className={`${styles.newsPageCardImage}`}
-                                src={'/public/Img/newsCard1.jpg'}
-                                alt={t('Зображення')}
-                                onError={e => {
-                                    e.target.onerror = null
-                                    e.target.src = '/Img/newsPageImg.jpeg'
-                                }}
-                            />
-                        </div>
-                        <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
-                        </div>
-                        <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
-                                Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
-                                Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
-                        </div>
-                        <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
-                            <div className={`${styles.newsPageCardClockWrapper}`}>
-                                <img className={`${styles.newsPageCardClockImg}`}
-                                    src={'/Img/clock.svg'}
-                                    alt={t('Час')}
-                                    onError={e => {
-                                        e.target.onerror = null
-                                        e.target.src = '/Img/clock.svg'
-                                    }}
-                                />
-                            </div>
-                            <div className={`${styles.newsPageCardDateWrapper}`}>
-                                <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
-                            </div>
-                            <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
-                                <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard5}`}>
-                    <div className={`${styles.newsPageCardWrapper}`}>
-                        <div className={`${styles.newsPageCardImageWrapper}`}>
-                            <img className={`${styles.newsPageCardImage}`}
-                                src={'/public/Img/newsCard1.jpg'}
-                                alt={t('Зображення')}
-                                onError={e => {
-                                    e.target.onerror = null
-                                    e.target.src = '/Img/newsPageImg.jpeg'
-                                }}
-                            />
-                        </div>
-                        <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
-                        </div>
-                        <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
-                                Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
-                                Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
-                        </div>
-                        <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
-                            <div className={`${styles.newsPageCardClockWrapper}`}>
-                                <img className={`${styles.newsPageCardClockImg}`}
-                                    src={'/Img/clock.svg'}
-                                    alt={t('Час')}
-                                    onError={e => {
-                                        e.target.onerror = null
-                                        e.target.src = '/Img/clock.svg'
-                                    }}
-                                />
-                            </div>
-                            <div className={`${styles.newsPageCardDateWrapper}`}>
-                                <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
-                            </div>
-                            <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
-                                <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard6}`}>
-                    <div className={`${styles.newsPageCardWrapper}`}>
-                        <div className={`${styles.newsPageCardImageWrapper}`}>
-                            <img className={`${styles.newsPageCardImage}`}
-                                src={'/public/Img/newsCard1.jpg'}
-                                alt={t('Зображення')}
-                                onError={e => {
-                                    e.target.onerror = null
-                                    e.target.src = '/Img/newsPageImg.jpeg'
-                                }}
-                            />
-                        </div>
-                        <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
-                        </div>
-                        <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
-                                Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
-                                Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
-                        </div>
-                        <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
-                            <div className={`${styles.newsPageCardClockWrapper}`}>
-                                <img className={`${styles.newsPageCardClockImg}`}
-                                    src={'/Img/clock.svg'}
-                                    alt={t('Час')}
-                                    onError={e => {
-                                        e.target.onerror = null
-                                        e.target.src = '/Img/clock.svg'
-                                    }}
-                                />
-                            </div>
-                            <div className={`${styles.newsPageCardDateWrapper}`}>
-                                <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
-                            </div>
-                            <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
-                                <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
             <NewsPageAuthorsSlider />
 
-            <div className={`${styles.newsPageBottomCardContainer}`}>
+            <div className={`${styles.newsPageBottomCardsContainer}`}>
+                <div className={`${styles.newsPageBottomCardsWrapper}`}>
 
-                <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard5}`}>
-                    <div className={`${styles.newsPageCardWrapper}`}>
-                        <div className={`${styles.newsPageCardImageWrapper}`}>
-                            <img className={`${styles.newsPageCardImage}`}
-                                src={'/public/Img/newsCard1.jpg'}
-                                alt={t('Зображення')}
-                                onError={e => {
-                                    e.target.onerror = null
-                                    e.target.src = '/Img/newsPageImg.jpeg'
-                                }}
-                            />
-                        </div>
-                        <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
-                        </div>
-                        <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
-                                Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
-                                Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
-                        </div>
-                        <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
-                            <div className={`${styles.newsPageCardClockWrapper}`}>
-                                <img className={`${styles.newsPageCardClockImg}`}
-                                    src={'/Img/clock.svg'}
-                                    alt={t('Час')}
+                    <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard5}`}>
+                        <div className={`${styles.newsPageCardWrapper}`}>
+                            <div className={`${styles.newsPageCardImageWrapper}`}>
+                                <img className={`${styles.newsPageCardImage}`}
+                                    src={'/public/Img/newsCard1.jpg'}
+                                    alt={t('Зображення')}
                                     onError={e => {
                                         e.target.onerror = null
-                                        e.target.src = '/Img/clock.svg'
+                                        e.target.src = '/Img/newsPageImg.jpeg'
                                     }}
                                 />
                             </div>
-                            <div className={`${styles.newsPageCardDateWrapper}`}>
-                                <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                            <div className={`${styles.newsPageCardTitleWrapper}`}>
+                                <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
                             </div>
-                            <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
-                                <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                            <div className={`${styles.newsPageCardDescriptionWrapper}`}>
+                                <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                                    Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                                    Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
+                            </div>
+                            <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
+                                <div className={`${styles.newsPageCardClockWrapper}`}>
+                                    <img className={`${styles.newsPageCardClockImg}`}
+                                        src={'/Img/clock.svg'}
+                                        alt={t('Час')}
+                                        onError={e => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/clock.svg'
+                                        }}
+                                    />
+                                </div>
+                                <div className={`${styles.newsPageCardDateWrapper}`}>
+                                    <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                                </div>
+                                <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
+                                    <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard6}`}>
+                        <div className={`${styles.newsPageCardWrapper}`}>
+                            <div className={`${styles.newsPageCardImageWrapper}`}>
+                                <img className={`${styles.newsPageCardImage}`}
+                                    src={'/public/Img/newsCard1.jpg'}
+                                    alt={t('Зображення')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsPageImg.jpeg'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.newsPageCardTitleWrapper}`}>
+                                <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
+                            </div>
+                            <div className={`${styles.newsPageCardDescriptionWrapper}`}>
+                                <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                                    Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                                    Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
+                            </div>
+                            <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
+                                <div className={`${styles.newsPageCardClockWrapper}`}>
+                                    <img className={`${styles.newsPageCardClockImg}`}
+                                        src={'/Img/clock.svg'}
+                                        alt={t('Час')}
+                                        onError={e => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/clock.svg'
+                                        }}
+                                    />
+                                </div>
+                                <div className={`${styles.newsPageCardDateWrapper}`}>
+                                    <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                                </div>
+                                <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
+                                    <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard7}`}>
+                        <div className={`${styles.newsPageCardWrapper}`}>
+                            <div className={`${styles.newsPageCardImageWrapper}`}>
+                                <img className={`${styles.newsPageCardImage}`}
+                                    src={'/public/Img/newsCard1.jpg'}
+                                    alt={t('Зображення')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsPageImg.jpeg'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.newsPageCardTitleWrapper}`}>
+                                <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
+                            </div>
+                            <div className={`${styles.newsPageCardDescriptionWrapper}`}>
+                                <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                                    Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                                    Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
+                            </div>
+                            <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
+                                <div className={`${styles.newsPageCardClockWrapper}`}>
+                                    <img className={`${styles.newsPageCardClockImg}`}
+                                        src={'/Img/clock.svg'}
+                                        alt={t('Час')}
+                                        onError={e => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/clock.svg'
+                                        }}
+                                    />
+                                </div>
+                                <div className={`${styles.newsPageCardDateWrapper}`}>
+                                    <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                                </div>
+                                <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
+                                    <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard8}`}>
+                        <div className={`${styles.newsPageCardWrapper}`}>
+                            <div className={`${styles.newsPageCardImageWrapper}`}>
+                                <img className={`${styles.newsPageCardImage}`}
+                                    src={'/public/Img/newsCard1.jpg'}
+                                    alt={t('Зображення')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsPageImg.jpeg'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.newsPageCardTitleWrapper}`}>
+                                <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
+                            </div>
+                            <div className={`${styles.newsPageCardDescriptionWrapper}`}>
+                                <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                                    Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                                    Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
+                            </div>
+                            <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
+                                <div className={`${styles.newsPageCardClockWrapper}`}>
+                                    <img className={`${styles.newsPageCardClockImg}`}
+                                        src={'/Img/clock.svg'}
+                                        alt={t('Час')}
+                                        onError={e => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/clock.svg'
+                                        }}
+                                    />
+                                </div>
+                                <div className={`${styles.newsPageCardDateWrapper}`}>
+                                    <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                                </div>
+                                <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
+                                    <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard9}`}>
+                        <div className={`${styles.newsPageCardWrapper}`}>
+                            <div className={`${styles.newsPageCardImageWrapper}`}>
+                                <img className={`${styles.newsPageCardImage}`}
+                                    src={'/public/Img/newsCard1.jpg'}
+                                    alt={t('Зображення')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsPageImg.jpeg'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.newsPageCardTitleWrapper}`}>
+                                <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
+                            </div>
+                            <div className={`${styles.newsPageCardDescriptionWrapper}`}>
+                                <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                                    Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                                    Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
+                            </div>
+                            <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
+                                <div className={`${styles.newsPageCardClockWrapper}`}>
+                                    <img className={`${styles.newsPageCardClockImg}`}
+                                        src={'/Img/clock.svg'}
+                                        alt={t('Час')}
+                                        onError={e => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/clock.svg'
+                                        }}
+                                    />
+                                </div>
+                                <div className={`${styles.newsPageCardDateWrapper}`}>
+                                    <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                                </div>
+                                <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
+                                    <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard10}`}>
+                        <div className={`${styles.newsPageCardWrapper}`}>
+                            <div className={`${styles.newsPageCardImageWrapper}`}>
+                                <img className={`${styles.newsPageCardImage}`}
+                                    src={'/public/Img/newsCard1.jpg'}
+                                    alt={t('Зображення')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsPageImg.jpeg'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.newsPageCardTitleWrapper}`}>
+                                <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
+                            </div>
+                            <div className={`${styles.newsPageCardDescriptionWrapper}`}>
+                                <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                                    Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                                    Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
+                            </div>
+                            <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
+                                <div className={`${styles.newsPageCardClockWrapper}`}>
+                                    <img className={`${styles.newsPageCardClockImg}`}
+                                        src={'/Img/clock.svg'}
+                                        alt={t('Час')}
+                                        onError={e => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/clock.svg'
+                                        }}
+                                    />
+                                </div>
+                                <div className={`${styles.newsPageCardDateWrapper}`}>
+                                    <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                                </div>
+                                <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
+                                    <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard11}`}>
+                        <div className={`${styles.newsPageCardWrapper}`}>
+                            <div className={`${styles.newsPageCardImageWrapper}`}>
+                                <img className={`${styles.newsPageCardImage}`}
+                                    src={'/public/Img/newsCard1.jpg'}
+                                    alt={t('Зображення')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsPageImg.jpeg'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.newsPageCardTitleWrapper}`}>
+                                <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
+                            </div>
+                            <div className={`${styles.newsPageCardDescriptionWrapper}`}>
+                                <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                                    Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                                    Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
+                            </div>
+                            <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
+                                <div className={`${styles.newsPageCardClockWrapper}`}>
+                                    <img className={`${styles.newsPageCardClockImg}`}
+                                        src={'/Img/clock.svg'}
+                                        alt={t('Час')}
+                                        onError={e => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/clock.svg'
+                                        }}
+                                    />
+                                </div>
+                                <div className={`${styles.newsPageCardDateWrapper}`}>
+                                    <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                                </div>
+                                <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
+                                    <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard12}`}>
+                        <div className={`${styles.newsPageCardWrapper}`}>
+                            <div className={`${styles.newsPageCardImageWrapper}`}>
+                                <img className={`${styles.newsPageCardImage}`}
+                                    src={'/public/Img/newsCard1.jpg'}
+                                    alt={t('Зображення')}
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsPageImg.jpeg'
+                                    }}
+                                />
+                            </div>
+                            <div className={`${styles.newsPageCardTitleWrapper}`}>
+                                <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
+                            </div>
+                            <div className={`${styles.newsPageCardDescriptionWrapper}`}>
+                                <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
+                                    Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
+                                    Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
+                            </div>
+                            <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
+                                <div className={`${styles.newsPageCardClockWrapper}`}>
+                                    <img className={`${styles.newsPageCardClockImg}`}
+                                        src={'/Img/clock.svg'}
+                                        alt={t('Час')}
+                                        onError={e => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/clock.svg'
+                                        }}
+                                    />
+                                </div>
+                                <div className={`${styles.newsPageCardDateWrapper}`}>
+                                    <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
+                                </div>
+                                <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
+                                    <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard6}`}>
-                    <div className={`${styles.newsPageCardWrapper}`}>
-                        <div className={`${styles.newsPageCardImageWrapper}`}>
-                            <img className={`${styles.newsPageCardImage}`}
-                                src={'/public/Img/newsCard1.jpg'}
-                                alt={t('Зображення')}
-                                onError={e => {
-                                    e.target.onerror = null
-                                    e.target.src = '/Img/newsPageImg.jpeg'
-                                }}
-                            />
-                        </div>
-                        <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
-                        </div>
-                        <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
-                                Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
-                                Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
-                        </div>
-                        <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
-                            <div className={`${styles.newsPageCardClockWrapper}`}>
-                                <img className={`${styles.newsPageCardClockImg}`}
-                                    src={'/Img/clock.svg'}
-                                    alt={t('Час')}
-                                    onError={e => {
-                                        e.target.onerror = null
-                                        e.target.src = '/Img/clock.svg'
-                                    }}
-                                />
-                            </div>
-                            <div className={`${styles.newsPageCardDateWrapper}`}>
-                                <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
-                            </div>
-                            <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
-                                <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard7}`}>
-                    <div className={`${styles.newsPageCardWrapper}`}>
-                        <div className={`${styles.newsPageCardImageWrapper}`}>
-                            <img className={`${styles.newsPageCardImage}`}
-                                src={'/public/Img/newsCard1.jpg'}
-                                alt={t('Зображення')}
-                                onError={e => {
-                                    e.target.onerror = null
-                                    e.target.src = '/Img/newsPageImg.jpeg'
-                                }}
-                            />
-                        </div>
-                        <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
-                        </div>
-                        <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
-                                Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
-                                Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
-                        </div>
-                        <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
-                            <div className={`${styles.newsPageCardClockWrapper}`}>
-                                <img className={`${styles.newsPageCardClockImg}`}
-                                    src={'/Img/clock.svg'}
-                                    alt={t('Час')}
-                                    onError={e => {
-                                        e.target.onerror = null
-                                        e.target.src = '/Img/clock.svg'
-                                    }}
-                                />
-                            </div>
-                            <div className={`${styles.newsPageCardDateWrapper}`}>
-                                <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
-                            </div>
-                            <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
-                                <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard8}`}>
-                    <div className={`${styles.newsPageCardWrapper}`}>
-                        <div className={`${styles.newsPageCardImageWrapper}`}>
-                            <img className={`${styles.newsPageCardImage}`}
-                                src={'/public/Img/newsCard1.jpg'}
-                                alt={t('Зображення')}
-                                onError={e => {
-                                    e.target.onerror = null
-                                    e.target.src = '/Img/newsPageImg.jpeg'
-                                }}
-                            />
-                        </div>
-                        <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
-                        </div>
-                        <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
-                                Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
-                                Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
-                        </div>
-                        <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
-                            <div className={`${styles.newsPageCardClockWrapper}`}>
-                                <img className={`${styles.newsPageCardClockImg}`}
-                                    src={'/Img/clock.svg'}
-                                    alt={t('Час')}
-                                    onError={e => {
-                                        e.target.onerror = null
-                                        e.target.src = '/Img/clock.svg'
-                                    }}
-                                />
-                            </div>
-                            <div className={`${styles.newsPageCardDateWrapper}`}>
-                                <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
-                            </div>
-                            <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
-                                <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard9}`}>
-                    <div className={`${styles.newsPageCardWrapper}`}>
-                        <div className={`${styles.newsPageCardImageWrapper}`}>
-                            <img className={`${styles.newsPageCardImage}`}
-                                src={'/public/Img/newsCard1.jpg'}
-                                alt={t('Зображення')}
-                                onError={e => {
-                                    e.target.onerror = null
-                                    e.target.src = '/Img/newsPageImg.jpeg'
-                                }}
-                            />
-                        </div>
-                        <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
-                        </div>
-                        <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
-                                Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
-                                Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
-                        </div>
-                        <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
-                            <div className={`${styles.newsPageCardClockWrapper}`}>
-                                <img className={`${styles.newsPageCardClockImg}`}
-                                    src={'/Img/clock.svg'}
-                                    alt={t('Час')}
-                                    onError={e => {
-                                        e.target.onerror = null
-                                        e.target.src = '/Img/clock.svg'
-                                    }}
-                                />
-                            </div>
-                            <div className={`${styles.newsPageCardDateWrapper}`}>
-                                <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
-                            </div>
-                            <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
-                                <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard10}`}>
-                    <div className={`${styles.newsPageCardWrapper}`}>
-                        <div className={`${styles.newsPageCardImageWrapper}`}>
-                            <img className={`${styles.newsPageCardImage}`}
-                                src={'/public/Img/newsCard1.jpg'}
-                                alt={t('Зображення')}
-                                onError={e => {
-                                    e.target.onerror = null
-                                    e.target.src = '/Img/newsPageImg.jpeg'
-                                }}
-                            />
-                        </div>
-                        <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
-                        </div>
-                        <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
-                                Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
-                                Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
-                        </div>
-                        <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
-                            <div className={`${styles.newsPageCardClockWrapper}`}>
-                                <img className={`${styles.newsPageCardClockImg}`}
-                                    src={'/Img/clock.svg'}
-                                    alt={t('Час')}
-                                    onError={e => {
-                                        e.target.onerror = null
-                                        e.target.src = '/Img/clock.svg'
-                                    }}
-                                />
-                            </div>
-                            <div className={`${styles.newsPageCardDateWrapper}`}>
-                                <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
-                            </div>
-                            <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
-                                <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard11}`}>
-                    <div className={`${styles.newsPageCardWrapper}`}>
-                        <div className={`${styles.newsPageCardImageWrapper}`}>
-                            <img className={`${styles.newsPageCardImage}`}
-                                src={'/public/Img/newsCard1.jpg'}
-                                alt={t('Зображення')}
-                                onError={e => {
-                                    e.target.onerror = null
-                                    e.target.src = '/Img/newsPageImg.jpeg'
-                                }}
-                            />
-                        </div>
-                        <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
-                        </div>
-                        <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
-                                Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
-                                Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
-                        </div>
-                        <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
-                            <div className={`${styles.newsPageCardClockWrapper}`}>
-                                <img className={`${styles.newsPageCardClockImg}`}
-                                    src={'/Img/clock.svg'}
-                                    alt={t('Час')}
-                                    onError={e => {
-                                        e.target.onerror = null
-                                        e.target.src = '/Img/clock.svg'
-                                    }}
-                                />
-                            </div>
-                            <div className={`${styles.newsPageCardDateWrapper}`}>
-                                <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
-                            </div>
-                            <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
-                                <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={`${styles.newsPageCardContainer} ${styles.newsPageCard12}`}>
-                    <div className={`${styles.newsPageCardWrapper}`}>
-                        <div className={`${styles.newsPageCardImageWrapper}`}>
-                            <img className={`${styles.newsPageCardImage}`}
-                                src={'/public/Img/newsCard1.jpg'}
-                                alt={t('Зображення')}
-                                onError={e => {
-                                    e.target.onerror = null
-                                    e.target.src = '/Img/newsPageImg.jpeg'
-                                }}
-                            />
-                        </div>
-                        <div className={`${styles.newsPageCardTitleWrapper}`}>
-                            <p className={`${styles.newsPageCardTitle}`}>Заголовок состоящий из пятидесяти символов! (тест)</p>
-                        </div>
-                        <div className={`${styles.newsPageCardDescriptionWrapper}`}>
-                            <p className={`${styles.newsPageCardDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facilis perferendis, distinctio nobis, ab ullam dolorem, laborum non accusantium totam porro eveniet omnis? Qui doloremque deleniti harum, tenetur expedita atque!
-                                Nihil veritatis eum quod delectus in beatae dolore qui voluptatem, pariatur voluptatum aperiam, nemo accusantium repellat non quibusdam ullam. Laudantium debitis nihil amet enim dolorem placeat sed quas dolores temporibus!
-                                Consectetur fugiat recusandae nisi pariatur itaque asperiores quos doloremque optio laborum ipsa, vero nam! Illo veritatis ut ipsa ullam iste corporis ducimus, distinctio fugiat in ex similique amet odit est.</p>
-                        </div>
-                        <div className={`${styles.newsPageCardClockDateAndReadMoreButtonWrapper}`}>
-                            <div className={`${styles.newsPageCardClockWrapper}`}>
-                                <img className={`${styles.newsPageCardClockImg}`}
-                                    src={'/Img/clock.svg'}
-                                    alt={t('Час')}
-                                    onError={e => {
-                                        e.target.onerror = null
-                                        e.target.src = '/Img/clock.svg'
-                                    }}
-                                />
-                            </div>
-                            <div className={`${styles.newsPageCardDateWrapper}`}>
-                                <p className={`${styles.newsPageCardDate}`}>01.01.2022</p>
-                            </div>
-                            <div className={`${styles.newsPageCardReadMoreButtonWrapper}`}>
-                                <button className={`${styles.newsPageCardReadMoreButton}`}>{t('Читати далі')}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
-
             </div>
 
             <div className={`${styles.newsPageMoreNewsButtonAndLikeAndShareWrapper}`}>

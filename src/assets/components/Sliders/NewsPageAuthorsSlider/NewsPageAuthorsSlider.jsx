@@ -30,30 +30,7 @@ const Slide = ({ post }) => {
                     />
                 </div>
                 <div className='newsPageAuthorsSliderCardUserNameWrapper'>
-                    <p className='newsPageAuthorsSliderCardUserName'>ukr_art&culture</p>
-                </div>
-                <div className='newsPageAuthorsSliderCardDateWrapper'>
-                    <p className='newsPageAuthorsSliderCardDate'>3 days ago</p>
-                </div>
-            </div>
-            <div className='newsPageAuthorsSliderCardMiddleInnerWrapper'>
-                <img
-                    className='newsPageAuthorsSliderCardImg'
-                    src={'/Img/mainInstagramSliderIMG.jpg'}
-                    alt={t('Світлина автора')}
-                    onError={e => {
-                        e.target.onerror = null
-                        e.target.src = '/Img/mainInstagramSliderIMG.jpg'
-                    }}
-                />
-            </div>
-            <div className='newsPageAuthorsSliderCardBottomInnerWrapper'>
-                <div className='newsPageAuthorsSliderCardDescriptionWrapper'>
-                    <p className='newsPageAuthorsSliderCardDescription'>
-                        {t(
-                            'Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя, коли невідомий друкар взяв шрифтову гранку та склав на ній підбірку зразків шрифтів.'
-                        )}
-                    </p>
+                    <p className='newsPageAuthorsSliderCardUserName'>Дмитро Рудченко</p>
                 </div>
             </div>
         </div>
