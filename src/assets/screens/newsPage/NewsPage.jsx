@@ -641,7 +641,20 @@ function NewsPage() {
 
             <div className={`${styles.newsPageMoreNewsButtonAndLikeAndShareWrapper}`}>
                 <div className={`${styles.newsPageMoreNewsButtonWrapper}`}>
-                    <button className={`${styles.newsPageMoreNewsButton}`}>{t('Усi новини')}</button>
+                    <button className={`${styles.newsPageMoreNewsButton}`}>
+                        <p className={`${styles.newsPageNewsButtonTitle}`}>
+                            {t('Більше новин')}
+                        </p>
+                        <img
+                            className={`${styles.newsPageNewsButtonImg}`}
+                            src={'/Img/buttonArrow.svg'}
+                            alt={t('Стрілка')}
+                            onError={e => {
+                                e.target.onerror = null
+                                e.target.src = '/mainNewImg/buttonArrow.svg'
+                            }}
+                        />
+                    </button>
                 </div>
                 <div className={`${styles.newsPageLikeAndShareContainer}`}>
                     <div className={`${styles.newsPageLikeWrapper}`}>
@@ -674,12 +687,12 @@ function NewsPage() {
             </div>
 
             <div className={`${styles.newsPageInputMailContainer}`}>
+                <p className={`${styles.newsPageInputMailTitle}`}>{t('Підписатися на розсилку')}</p>
                 <input
                     className={`${styles.newsPageInputMail}`}
                     type="text"
                     placeholder={t('Введіть ваш email')}
                 />
-                <button className={`${styles.newsPageInputMailButton}`}>{t('Підписатися')}</button>
             </div>
 
             <div className={`${styles.newsPageSignUpButtonContainer}`}>

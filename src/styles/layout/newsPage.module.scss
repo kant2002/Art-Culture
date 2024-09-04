@@ -219,7 +219,7 @@
 
 .newsPageCardClockDateAndReadMoreButtonWrapper {
     /* Обертка для часов, даты и кнопки "Читать далее" */
-    margin: calc(18px - (2 * ((1440px - 100vw) / (1440 - 375)))) 0; 
+    margin: calc(18px - (2 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0; 
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -288,30 +288,93 @@
 
 .newsPageMoreNewsButtonWrapper {
     /* Обертка для кнопки "Все новости" */
+    margin: 0 0 0 calc(100%/2 - calc((238px - (105 * ((1440px - 100vw) / (1440 - 375))))/2));
 }
 
 .newsPageMoreNewsButton {
     /* Кнопка "Все новости" */
+	padding: 0 calc(0 / 1440 * 100vw);
+	width: calc(238px - (105 * ((1440px - 100vw) / (1440 - 375))));
+	height: calc(51px - (11 * ((1440px - 100vw) / (1440 - 375))));
+	min-width: 163px;
+	min-height: 40px;
+	max-width: 238px;
+	max-height: 51px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #000;
+	border-radius: calc(34px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	background-color: #fff;
+	cursor: pointer;
+}
+
+.newsPageNewsButtonTitle {
+    /* Стили для текста кнопки */
+	margin: 0 calc(12px - (2 * ((1440px - 100vw) / (1440 - 375)))) 0 0;
+	font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	font-weight: 500;
+}
+
+.newsPageNewsButtonImg {
+    /* Стили для изображения кнопки */
+	width: 30px;
+	height: 30px;
 }
 
 .newsPageInputMailContainer {
     /* Контейнер для поля ввода email */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 63px $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+}
+
+.newsPageInputMailTitle {
+    /* Заголовок поля ввода email */
+    font-size: calc(18px - (4 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 500;
+    text-align: center;
+    color: #000;
+    text-align: center;
+    text-transform: uppercase;
+
 }
 
 .newsPageInputMail {
     /* Поле ввода email */
-}
-
-.newsPageInputMailButton {
-    /* Кнопка подписки на новости */
+    display: flex;
+    margin: 25px 0 0 0 !important;
+    border-radius: 34px !important;
 }
 
 .newsPageSignUpButtonContainer {
     /* Контейнер для кнопки регистрации */
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 !important;
+    padding: 0 $responsiveLeftAndRightPadding;
+
 }
 
 .newsPageSignUpButton {
     /* Кнопка регистрации */
+    padding: 0 calc(0 / 1440 * 100vw);
+    width: auto;
+    height: calc(51px - (11 * ((1440px - 100vw) / (1440 - 375))));
+    min-width: 163px;
+    min-height: 40px;
+    max-width: 238px;
+    max-height: 51px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
+    background: #000 !important;
+    border-radius: 34px;
+    cursor: pointer;
 }
 
 @media (min-width: 1600px) {
@@ -394,6 +457,11 @@
         /* Обертка для часов, даты и кнопки "Читать далее" */
         margin: 18px 0 0 0; 
     }
+
+    .newsPageMoreNewsButtonWrapper {
+        /* Обертка для кнопки "Все новости" */
+        margin: 0 0 0 calc(100%/2 - 119px);
+    }
 }
 
 @media (max-width: 799px) {
@@ -404,6 +472,25 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+    }
+
+    .newsPageMoreNewsButtonAndLikeAndShareWrapper {
+        /* Обертка для кнопки "Все новости" и лайка/шаринга */
+        margin: 0 $responsiveLeftAndRightPadding;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        
+        .newsPageLikeAndShareContainer {
+            /* Контейнер для кнопок лайка и шаринга */
+            margin: 32px auto 0 auto;
+        }
+    }
+    
+    .newsPageMoreNewsButtonWrapper {
+        /* Обертка для кнопки "Все новости" */
+        margin: 0 auto;
     }
 }
 
