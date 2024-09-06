@@ -7,6 +7,7 @@ import UserProfile from '../assets/screens/userProfile/userProfile'
 import UserProfileAddPost from '../assets/screens/userProfile/userProfileAddPost'
 import UserProfilePosts from '../assets/screens/userProfile/userProfilePosts'
 import NewsPage from '../assets/screens/newsPage/NewsPage'
+import ArtistPage from '../assets/screens/ArtistPage/ArtistPage'
 
 export const routes = [
 	{
@@ -59,6 +60,12 @@ export const routes = [
 	{
 		path: '/NewsPage',
 		element: NewsPage,
+		isAuth: false,
+	},
+
+	{
+		path: '/ArtistPage',
+		element: ArtistPage,
 		isAuth: false,
 	},
 ]
