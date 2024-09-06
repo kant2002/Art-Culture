@@ -27,7 +27,8 @@ const Layout = ({ children, heading = '', backLink = '/' }) => {
 				<Header />
 				<Routes>
 					<Route path='/' element={<Navigate to='/MainPage' />} />
-					<Route path='/MainPage' element={<MainPage />} />
+					<Route path='/MainPage' element={<MainPage />} />					
+					<Route path='/ArtistPage' element={<ArtistPage />} />
 					<Route
 						path='/userProfile'
 						element={
