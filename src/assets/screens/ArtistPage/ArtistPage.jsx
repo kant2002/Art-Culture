@@ -9,7 +9,32 @@ function ArtistPage() {
 
     return (
         <div className={`${styles.artistPage}`}>
-            <p className={`${styles.artistPageTitle}`}>The page is under construction</p>
+
+            <div className={`${styles.artistPageNavigationContainer}`}>
+                <nav className={`${styles.artistPageNavigation}`}>
+                    <ul className={`${styles.artistPageNavigationList}`}>
+                        <li className={`${styles.artistPageNavigationItem}`}>{t('Митці')}</li>
+                        <p className={`${styles.artistPageNavigationItemSeparator}`}>&#8250;</p>
+                        <li className={`${styles.artistPageNavigationItem}`}>{t('Митець')}</li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div className={`${styles.artistPageAboutArtistContainer}`}>
+                <div className={`${styles.artistPageArtistPhotoWrapper}`}>
+                    <img
+							className={`${styles.artistPageArtistPhoto}`}
+							src={'/public/Img/newsCard1.jpg'}
+							alt={t('Фото митця')}
+							onError={e => {
+								e.target.onerror = null
+								e.target.src = '/public/Img/newsCardERROR.jpg'
+							}}
+					/>
+                </div>
+            </div>
+
+                
 
             {/* <NewsArtistsSlider /> */}
 
