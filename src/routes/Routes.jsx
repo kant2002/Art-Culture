@@ -13,7 +13,7 @@ import UserProfile from '../assets/screens/userProfile/userProfile.jsx'
 import UserProfileAddPost from '../assets/screens/userProfile/userProfileAddPost.jsx'
 import UserProfilePosts from '../assets/screens/userProfile/userProfilePosts.jsx'
 import NewsPage from '../assets/screens/newsPage/NewsPage.jsx'
-import ArtistPage from '../assets/screens/artistPage/artistPage.jsx'
+import ArtistPage from '../assets/screens/ArtistPage/ArtistPage.jsx'
 import { routes } from './routes.data.js'
 
 const Router = () => {

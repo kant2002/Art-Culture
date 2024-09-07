@@ -1,15 +1,134 @@
-// @import '../../../styles/utilities/variables.scss';
+@import '../../../src/styles/utilities/variables.scss';
 
 .artistPage {
-    margin: 300px;
-    width: 100%;
-    height: 1000px;
-    background: red;
-    color: white;
+    // главный контейнер
+    margin: $responsiveTopPadding 0 0 0;
+    display: flex;
+    flex-direction: column;
+
+    * {
+        font-family: $default-font;
+    }
 }
 
-.artistPageTitle {
-    margin: 0 0 20px 0;
-    font-size: 2rem;
-    color: #61dafb;
+.artistPageNavigation {
+    // навигационный блок
+    margin: calc(51px - (15 * ((1440px - 100vw) / (1440 - 375)))) $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+    // width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}
+
+.artistPageNavigationList {
+    // список навигации
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.artistPageNavigationItem {
+    // элемент списка навигации
+    display: flex;
+    font-size: calc(18px - (4 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.artistPageNavigationItemSeparator {
+    // разделитель между элементами списка навигации
+    margin: 0 18px;
+    font-size: calc(18px - (4 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 500;
+    color: $red;
+    user-select: none;
+}
+
+.artistPageAboutArtistContainer {
+    // блок с описанием митца
+    margin: 0 $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.artistPageArtistPhotoWrapper {
+    // обертка для фото митца
+    margin: calc(69px - (41 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+    max-width: max-content;
+    max-height: max-content;
+    border-radius: 3px;
+}
+
+.artistPageArtistPhoto {
+    // фото митца
+    margin: 0 auto;
+    display: block;
+	object-fit: contain;
+	object-position: center center;
+    border-radius: 3px;
+    max-width: calc(828px - (478 * ((1440px - 100vw) / (1440 - 375))));
+    max-height: calc(828px - (478 * ((1440px - 100vw) / (1440 - 375))));
+}
+
+@media (min-width: 1441px) {
+    .artistPage {
+        // главный контейнер
+        margin: $staticPcTopPadding 0 0 0;
+    }
+
+    .artistPageNavigation {
+        // навигационный блок
+        margin: 51px 0 0 $responsiveLeftAndRightPadding;
+    }
+
+    .artistPageNavigationItem {
+        // элемент списка навигации
+        font-size: 18px;
+    }
+    
+    .artistPageNavigationItemSeparator {
+        // разделитель между элементами списка навигации
+        font-size: 18px;
+    }
+    
+    .artistPageArtistPhotoWrapper {
+        // обертка для фото митця
+        margin: 69px 0 0 0;
+    }
+    
+    .artistPageArtistPhoto {
+        // фото митця
+        max-width: 828px;
+        max-height: 828px;
+    }
+}
+
+@media (max-width: 569px) {
+    .artistPage {
+        // главный контейнер
+        margin: $staticMobileTopPadding 0 0 0;
+    }
+    
+    .artistPageArtistPhoto {
+        // фото митца
+        max-width: calc(828px - (478 * ((1440px - 100vw) / (1440 - 375))));
+        max-height: calc(828px - (478 * ((1440px - 100vw) / (1440 - 375))));
+    }
+
+}
+
+@media (max-width: 374px) {    
+    .artistPageArtistPhoto {
+        // фото митца
+        max-width: 100%;
+        max-height: calc(828px - (490 * ((1440px - 100vw) / (1440 - 375))));
+    }
+
 }
