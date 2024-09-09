@@ -21,17 +21,46 @@ function ArtistPage() {
             </div>
 
             <div className={`${styles.artistPageAboutArtistContainer}`}>
-                <div className={`${styles.artistPageArtistPhotoWrapper}`}>
-                    <img
-							className={`${styles.artistPageArtistPhoto}`}
-							src={'/public/Img/newsCard1.jpg'}
-							alt={t('Фото митця')}
-							onError={e => {
-								e.target.onerror = null
-								e.target.src = '/public/Img/newsCardERROR.jpg'
-							}}
-					/>
+                <div className={`${styles.artistPageArtisPhotoWhithDescriptionWrapper}`}>
+                    <div className={`${styles.artistPageArtistPhotoWrapper}`}>
+                        <img
+                                className={`${styles.artistPageArtistPhoto}`}
+                                src={'/public/Img/mainPopularArtistsSlide.jpg'}
+                                alt={t('Фото митця')}
+                                onError={e => {
+                                    e.target.onerror = null
+                                    e.target.src = '/public/Img/newsCardERROR.jpg'
+                                }}
+                        />
+                    </div>
+                    <div className={`${styles.artistPageArtisPhotoDescriptionWrapper}`}>
+                        <p className={`${styles.artistPageArtisPhotoDescription}`}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur, tenetur debitis enim totam neque, laboriosam harum minima illo ducimus distinctio consequatur asperiores quaerat earum reiciendis. Quisquam impedit ut numquam vel.</p>
+                    </div>
                 </div>
+
+                <div className={`${styles.artistPageArtisNameWrapper}`}>
+                    <p className={`${styles.artistPageArtisName}`}>{t('Митець')} 1</p>
+                </div>
+
+                <div className={`${styles.artistPageArtisSeparatorWrapper}`}>
+                    <div className={`${styles.artistPageArtisSeparator}`}></div>
+                </div>
+
+                <div className={`${styles.artistPageArtisDescriptionWrapper}`}>
+                    <p className={`${styles.artistPageArtisDescription}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, vero necessitatibus. Iste laboriosam, nisi neque labore molestiae beatae ea doloremque alias incidunt a eveniet ad odio voluptas nesciunt? Cupiditate, ipsam.
+                    Sed, maiores! Ipsa nulla quasi est incidunt quo laboriosam cum facere! Iusto beatae modi et iste soluta blanditiis laboriosam neque, expedita dolore doloribus animi quisquam quod veniam cupiditate perferendis ipsum.
+                    At quia, est perspiciatis sint consequuntur placeat fuga porro ducimus molestias incidunt ea minus, accusantium et, facere ipsa libero iusto ipsum. Distinctio placeat itaque doloribus ut. Odit in aspernatur doloremque!
+                    Autem, nostrum veniam illum minima vel aliquam sapiente cum reprehenderit molestias, eaque error recusandae, optio in provident modi ratione quidem. Eius dignissimos pariatur ullam quis minus, corporis expedita nisi totam.
+                    Quae, quos eligendi repellendus eius beatae mollitia dolores tempore aliquid corrupti recusandae aspernatur quisquam porro? Voluptate esse suscipit exercitationem nobis obcaecati repudiandae earum non id accusantium, expedita quo reprehenderit quasi.</p>
+                </div>
+
+                <div className={`${styles.artistPageArtisReadMoreButtonWrapper}`}>
+                    <button className={`${styles.artistPageArtisReadMoreButton}`}>
+                        <p className={`${styles.artistPageArtisReadMoreButtonText}`}>{t('Детальніше')}</p>
+                        <p className={`${styles.artistPageArtisReadMoreButtonArrow}`}>&#160;&#10230;</p>
+                    </button>
+                </div>
+
             </div>
 
                 
