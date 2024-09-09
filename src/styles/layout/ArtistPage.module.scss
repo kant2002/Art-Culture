@@ -14,7 +14,6 @@
 .artistPageNavigation {
     // навигационный блок
     margin: calc(51px - (15 * ((1440px - 100vw) / (1440 - 375)))) $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
-    // width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -47,17 +46,25 @@
 }
 
 .artistPageAboutArtistContainer {
-    // блок с описанием митца
-    margin: 0 $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+    // блок с описанием митця
+    margin: calc(69px - (41 * ((1440px - 100vw) / (1440 - 375)))) $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+.artistPageArtisPhotoWhithDescriptionWrapper {
+    // обертка для фото митця с описанием
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: calc(828px - (478 * ((1440px - 100vw) / (1440 - 375))));;
+}
+
 .artistPageArtistPhotoWrapper {
-    // обертка для фото митца
-    margin: calc(69px - (41 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+    // обертка для фото митця
     display: inline-block;
     width: fit-content;
     height: fit-content;
@@ -67,14 +74,116 @@
 }
 
 .artistPageArtistPhoto {
-    // фото митца
-    margin: 0 auto;
+    // фото митця
+    // margin: 0 auto;
     display: block;
 	object-fit: contain;
 	object-position: center center;
     border-radius: 3px;
+    max-height: calc(415px - (228 * ((1440px - 100vw) / (1440 - 375))));
+}
+
+.artistPageArtisPhotoDescriptionWrapper {
+    // обертка для описания фото митця
+    margin: 9px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
     max-width: calc(828px - (478 * ((1440px - 100vw) / (1440 - 375))));
-    max-height: calc(828px - (478 * ((1440px - 100vw) / (1440 - 375))));
+    
+}
+
+.artistPageArtisPhotoDescription {
+    // описание фото митця
+    font-size: 12px;
+    font-weight: 400;
+    display: flex;
+	object-fit: contain;
+	object-position: start top;
+}
+
+.artistPageArtisNameWrapper {
+    // обертка для названия митця
+    margin: calc(52px - (27 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.artistPageArtisName {
+    // название митця
+    font-size: calc(30px - (12 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.artistPageArtisSeparatorWrapper {
+    // обертка для разделителя митця
+    margin: calc(24px - (3 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+}
+
+.artistPageArtisSeparator {
+    // разделитель митця
+    width: calc(60px - (20 * ((1440px - 100vw) / (1440 - 375))));
+    min-width: 40px;
+    max-width: 60px;
+    height: 1px;
+    background: black;
+}
+
+.artistPageArtisDescriptionWrapper {
+    // обертка для описания митця
+    margin: calc(22px - (-3 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.artistPageArtisDescription {
+    // описание митця
+    font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 400;
+    text-align: center;
+}
+
+.artistPageArtisReadMoreButtonWrapper {
+    // обертка для кнопки "читать больше"
+    margin: 25px 0 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.artistPageArtisReadMoreButton {
+    // кнопка "читать больше"
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 500;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.artistPageArtisReadMoreButtonText {
+    // текст кнопки "читать больше"
+    font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 500;
+}
+
+.artistPageArtisReadMoreButtonArrow {
+    // стрелка кнопки "читать больше"
+    font-size: calc(25px - (4 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 500;
 }
 
 @media (min-width: 1441px) {
@@ -106,7 +215,47 @@
     .artistPageArtistPhoto {
         // фото митця
         max-width: 828px;
-        max-height: 828px;
+        max-height: 415px;
+    }
+
+    .artistPageArtisNameWrapper {
+        // обертка для названия митця
+        margin: 52px 0 0 0;
+    }
+    
+    .artistPageArtisName {
+        // название митця
+        font-size: 30px;
+    }
+
+    .artistPageArtisSeparatorWrapper {
+        // обертка для разделителя митця
+        margin: 24px 0 0 0;
+    }
+
+    .artistPageArtisDescriptionWrapper {
+        // обертка для описания митця
+        margin: 22px 0 0 0;
+    }
+    
+    .artistPageArtisDescription {
+        // описание митця
+        font-size: 16px;
+    }
+    
+    .artistPageArtisReadMoreButton {
+        // кнопка "читать больше"
+        font-size: 16px;
+    }
+    
+    .artistPageArtisReadMoreButtonText {
+        // текст кнопки "читать больше"
+        font-size: 16px;
+    }
+    
+    .artistPageArtisReadMoreButtonArrow {
+        // стрелка кнопки "читать больше"
+        font-size: 25px;
     }
 }
 
@@ -115,20 +264,12 @@
         // главный контейнер
         margin: $staticMobileTopPadding 0 0 0;
     }
-    
-    .artistPageArtistPhoto {
-        // фото митца
-        max-width: calc(828px - (478 * ((1440px - 100vw) / (1440 - 375))));
-        max-height: calc(828px - (478 * ((1440px - 100vw) / (1440 - 375))));
-    }
-
 }
 
 @media (max-width: 374px) {    
     .artistPageArtistPhoto {
-        // фото митца
+        // фото митця
         max-width: 100%;
-        max-height: calc(828px - (490 * ((1440px - 100vw) / (1440 - 375))));
     }
 
 }
