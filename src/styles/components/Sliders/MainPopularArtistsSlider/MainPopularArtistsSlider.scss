@@ -256,6 +256,7 @@
     font-family: $default-font;
     font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
     font-weight: normal;
+    cursor: pointer;
 }
 
 .mainPopularArtistsSliderCardTitleWrapper {
