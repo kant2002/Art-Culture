@@ -17,7 +17,7 @@
     // Верхняя часть слайдера
     display: flex;
     justify-content: space-between;
-    padding: calc(51px - (17 * ((1440px - 100vw) / (1440 - 375)))) 0;
+    padding: 0 0 calc(51px - (17 * ((1440px - 100vw) / (1440 - 375)))) 0;
 }
 
 .artistPageNewsArtistsSliderTitleWrapper {
