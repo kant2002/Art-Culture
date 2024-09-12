@@ -17,7 +17,7 @@
     // Верхняя часть слайдера
     display: flex;
     justify-content: space-between;
-    padding: calc(51px - (17 * ((1440px - 100vw) / (1440 - 375)))) 0;
+    padding: 0 0 calc(51px - (17 * ((1440px - 100vw) / (1440 - 375)))) 0;
 }
 
 .popularOfThisArtistSliderTitleWrapper {
@@ -100,7 +100,7 @@
     // Нижняя часть слайдера
     display: flex;
     width: 100%;
-    height: calc(514px - (75 * ((1440px - 100vw) / (1440 - 375))));
+    height: calc(382px - (94 * ((1440px - 100vw) / (1440 - 375))));
 
     @at-root {
         :root {
@@ -110,7 +110,7 @@
 
     .swiper-wrapper {
         position: relative;
-        margin: 0 0 0 calc(-20px - (-1 * ((1440px - 100vw) / (1440 - 375))));
+        margin: 0 0 0 calc(-29px - (-20 * ((1440px - 100vw) / (1440 - 375))));
         width: 100%;
         height: 100%;
         z-index: 1;
@@ -132,10 +132,9 @@
     .swiper-button-prev,
     .swiper-button-next {
         position: absolute;
-        top: calc(calc(514px - (75 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 2));
+        top: calc(calc(360px - (72 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 2));
         width: var(--swiper-navigation-size);
         height: var(--swiper-navigation-size);
-        // margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
         z-index: 11;
         cursor: pointer;
         display: flex;
@@ -148,7 +147,6 @@
 
     .swiper-button-prev,
     .swiper-rtl .swiper-button-next {
-        // left: calc(638px - (505 * ((1440px - 100vw) / (1440 - 375))));
         left: calc(50% - calc(var(--swiper-navigation-size) * 1.14) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
         right: auto;
     }
@@ -184,8 +182,7 @@
     .swiper-pagination-custom,
     .swiper-horizontal>.swiper-pagination-bullets,
     .swiper-pagination-bullets.swiper-pagination-horizontal {
-        // bottom: calc(calc(14px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 2.5);
-        top: calc(calc(514px - (75 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 1.4));
+        top: calc(calc(360px - (72 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 1.4));
         left: 0;
         width: 100%;
     }
@@ -198,11 +195,11 @@
 
 .popularOfThisArtistSliderCardContainer {
     // Обёртка карточки слайдера
-    width: calc(282px - (32 * ((1440px - 100vw) / (1440 - 375))));
-    min-width: 250px;
+    width: calc(282px - (52 * ((1440px - 100vw) / (1440 - 375))));
+    min-width: 230px;
     max-width: 282px;
     height: auto;
-    margin: 0 calc(20px - (2 * ((1440px - 100vw) / (1440 - 375))));
+    margin: 0 calc(29px - (20 * ((1440px - 100vw) / (1440 - 375))));
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -213,11 +210,11 @@
     // Внутренняя обёртка карточки
     position: relative;
     display: flex;
-    width: calc(282px - (32 * ((1440px - 100vw) / (1440 - 375))));
-    min-width: 250px;
+    width: calc(282px - (52 * ((1440px - 100vw) / (1440 - 375))));
+    min-width: 230px;
     max-width: 282px;
-    height: calc(282px - (32 * ((1440px - 100vw) / (1440 - 375))));
-    min-height: 250px;
+    height: calc(282px - (52 * ((1440px - 100vw) / (1440 - 375))));
+    min-height: 230px;
     max-height: 282px;    
 }
 
@@ -288,9 +285,41 @@
 }
 
 @media screen and (min-width: 1441px) {
+    .swiper-wrapper {
+        margin: 0 0 0 -29px;
+    }
+
+    .popularOfThisArtistSliderTopInnerWrapper {
+        // Верхняя часть слайдера
+        padding: 0 0 51px 0;
+    }
+
+    .popularOfThisArtistSliderBottomInnerWrapper {
+        // Нижняя часть слайдера
+        height: 382px;
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            top: calc(360px - calc(var(--swiper-navigation-size) / 2));
+        }
+
+        /* Common Styles */
+        .swiper-pagination-fraction,
+        .swiper-pagination-custom,
+        .swiper-horizontal>.swiper-pagination-bullets,
+        .swiper-pagination-bullets.swiper-pagination-horizontal {
+            top: calc(360px - calc(var(--swiper-navigation-size) / 1.4));
+        }
+    }
+
     .popularOfThisArtistSliderContainer {
         // Контейнер слайдера
         margin: 87px $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+    }
+    
+    .popularOfThisArtistSliderCardContainer {
+        // Обёртка карточки слайдера
+        margin: 0 29px;
     }
 
     .popularOfThisArtistSliderSoldSellIconWrapper {
