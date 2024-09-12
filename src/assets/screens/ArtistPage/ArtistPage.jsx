@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 // import { useNavigate } from 'react-router-dom'
 import ArtistPageNewsArtistsSlider from '../../components/Sliders/ArtistPageSliders/ArtistPageNewsArtistsSlider.jsx'
+import PopularOfThisArtistSlider from '../../components/Sliders/ArtistPageSliders/PopularOfThisArtistSlider.jsx'
 import styles from '../../../styles/layout/ArtistPage.module.scss' 
 
 function ArtistPage() {
@@ -67,7 +68,7 @@ function ArtistPage() {
 
             <ArtistPageNewsArtistsSlider />
 
-            {/* <PopularOfThisArtistSlider /> */}
+            <PopularOfThisArtistSlider />
 
             {/* <ArtsOfThisArtistSlider /> */}
 
