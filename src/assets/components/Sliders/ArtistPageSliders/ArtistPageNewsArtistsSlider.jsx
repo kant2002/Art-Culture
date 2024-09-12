@@ -131,7 +131,7 @@ const Slide3 = () => {
 			<div className="artistPageNewsArtistsSliderCardImgWrapper">
 				<img
 					className="artistPageNewsArtistsSliderCardImg"
-					src={'../../../../../public/Img/newsCard1.jpg'}
+					src={'/Img/newsCard1.jpg'}
 					alt={t('Світлина мистецтва')}
 					onError={e => {
 						e.target.onerror = null

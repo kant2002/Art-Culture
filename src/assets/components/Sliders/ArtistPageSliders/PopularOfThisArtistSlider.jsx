@@ -12,7 +12,7 @@ import { Navigation, Pagination } from 'swiper/modules'
 
 import '/src/styles/components/Sliders/ArtistPageSliders/PopularOfThisArtistSlider.scss';
 
-const Slide1 = () => {
+const Slide = () => {
 	const { t } = useTranslation();
 	return (
 		<div className="popularOfThisArtistSliderCardContainer">
@@ -21,6 +21,43 @@ const Slide1 = () => {
 				<img
 					className="popularOfThisArtistSliderCardImg"
 					src={'/Img/fullSizeRaven.jpg'}
+					alt={t('Світлина мистецтва')}
+					onError={e => {
+						e.target.onerror = null
+						e.target.src = '/public/Img/newsCardERROR.jpg'
+					}}
+				/>
+			</div>
+
+            <div className="popularOfThisArtistSliderSoldSellIconWrapper">
+
+                {/* <div className="popularOfThisArtistSliderSoldIcon">
+                    <p className="popularOfThisArtistSliderSoldIconText">
+                        {t('Продано')}
+                    </p>
+                </div> */}
+
+                {/* <div className="popularOfThisArtistSliderSellIcon">
+                    <p className="popularOfThisArtistSliderSellIconText">
+                        {t('Продається')}
+                    </p>
+                </div> */}
+
+            </div>
+
+		</div>
+	)
+}
+
+const Slide1 = () => {
+	const { t } = useTranslation();
+	return (
+		<div className="popularOfThisArtistSliderCardContainer">
+
+			<div className="popularOfThisArtistSliderCardImgWrapper">
+				<img
+					className="popularOfThisArtistSliderCardImg"
+					src={'/Img/mainInstagramSliderIMG.jpg'}
 					alt={t('Світлина мистецтва')}
 					onError={e => {
 						e.target.onerror = null
@@ -57,7 +94,7 @@ const Slide2 = () => {
 			<div className="popularOfThisArtistSliderCardImgWrapper">
 				<img
 					className="popularOfThisArtistSliderCardImg"
-					src={'/Img/fullSizeRaven.jpg'}
+					src={'/Img/newsCard1.jpg'}
 					alt={t('Світлина мистецтва')}
 					onError={e => {
 						e.target.onerror = null
@@ -79,6 +116,43 @@ const Slide2 = () => {
                         {t('Продається')}
                     </p>
                 </div> */}
+
+            </div>
+
+		</div>
+	)
+}
+
+const Slide3 = () => {
+	const { t } = useTranslation();
+	return (
+		<div className="popularOfThisArtistSliderCardContainer">
+
+			<div className="popularOfThisArtistSliderCardImgWrapper">
+				<img
+					className="popularOfThisArtistSliderCardImg"
+					src={'/Img/mainPopularArtistsSlide.jpg'}
+					alt={t('Світлина мистецтва')}
+					onError={e => {
+						e.target.onerror = null
+						e.target.src = '/public/Img/newsCardERROR.jpg'
+					}}
+				/>
+			</div>
+
+            <div className="popularOfThisArtistSliderSoldSellIconWrapper">
+
+                {/* <div className="popularOfThisArtistSliderSoldIcon">
+                    <p className="popularOfThisArtistSliderSoldIconText">
+                        {t('Продано')}
+                    </p>
+                </div> */}
+
+                <div className="popularOfThisArtistSliderSellIcon">
+                    <p className="popularOfThisArtistSliderSellIconText">
+                        {t('Продається')}
+                    </p>
+                </div>
 
             </div>
 
@@ -135,10 +209,7 @@ const PopularOfThisArtistSlider = () => {
 						onSwiper={(swiper) => console.log(swiper)}
 					>
 						<SwiperSlide>
-							<Slide1 />
-						</SwiperSlide>
-						<SwiperSlide>
-							<Slide2 />
+							<Slide />
 						</SwiperSlide>
 						<SwiperSlide>
 							<Slide1 />
@@ -147,13 +218,16 @@ const PopularOfThisArtistSlider = () => {
 							<Slide2 />
 						</SwiperSlide>
 						<SwiperSlide>
-							<Slide1 />
+							<Slide3 />
 						</SwiperSlide>
 						<SwiperSlide>
-							<Slide2 />
+							<Slide />
 						</SwiperSlide>
 						<SwiperSlide>
-							<Slide1 />
+							<Slide />
+						</SwiperSlide>
+						<SwiperSlide>
+							<Slide />
 						</SwiperSlide>
 					</Swiper>
 					<div className={'${swiper-button-prev}'}></div>
