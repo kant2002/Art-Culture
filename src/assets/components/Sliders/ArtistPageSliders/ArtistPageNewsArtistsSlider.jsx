@@ -29,6 +29,42 @@ const Slide = () => {
 				/>
 			</div>
 
+			<div className="artistPageNewsArtistsSliderCardTitleWrapper">
+				<h3 className="artistPageNewsArtistsSliderCardTitle">
+					Lorem Ipsum
+				</h3>
+			</div>
+
+			<div className="artistPageNewsArtistsSliderCardDescriptionWrapper">
+				<p className="artistPageNewsArtistsSliderCardDescription">
+					Lorem ipsum dolor sit amet consectetur adipisicing elit.
+					Libero vero numquam cum excepturi enim iste quis
+					doloribus cupiditate? Temporibus, laboriosam quis?
+					Reprehenderit velit sequi, inventore nostrum odit illum?
+					Doloremque, veniam.
+				</p>
+			</div>
+
+		</div>
+	)
+}
+
+const Slide1 = () => {
+	const { t } = useTranslation();
+	return (
+		<div className="artistPageNewsArtistsSliderCardContainer">
+
+			<div className="artistPageNewsArtistsSliderCardImgWrapper">
+				<img
+					className="artistPageNewsArtistsSliderCardImg"
+					src={'/Img/mainInstagramSliderIMG.jpg'}
+					alt={t('Світлина мистецтва')}
+					onError={e => {
+						e.target.onerror = null
+						e.target.src = '/public/Img/newsCardERROR.jpg'
+					}}
+				/>
+			</div>
 
 			<div className="artistPageNewsArtistsSliderCardTitleWrapper">
 				<h3 className="artistPageNewsArtistsSliderCardTitle">
@@ -46,6 +82,79 @@ const Slide = () => {
 				</p>
 			</div>
 
+		</div>
+	)
+}
+
+const Slide2 = () => {
+	const { t } = useTranslation();
+	return (
+		<div className="artistPageNewsArtistsSliderCardContainer">
+
+			<div className="artistPageNewsArtistsSliderCardImgWrapper">
+				<img
+					className="artistPageNewsArtistsSliderCardImg"
+					src={'/Img/mainPopularArtistsSlide.jpg'}
+					alt={t('Світлина мистецтва')}
+					onError={e => {
+						e.target.onerror = null
+						e.target.src = '/public/Img/newsCardERROR.jpg'
+					}}
+				/>
+			</div>
+
+			<div className="artistPageNewsArtistsSliderCardTitleWrapper">
+				<h3 className="artistPageNewsArtistsSliderCardTitle">
+					Lorem Ipsum
+				</h3>
+			</div>
+
+			<div className="artistPageNewsArtistsSliderCardDescriptionWrapper">
+				<p className="artistPageNewsArtistsSliderCardDescription">
+					Lorem ipsum dolor sit amet consectetur adipisicing elit.
+					Libero vero numquam cum excepturi enim iste quis
+					doloribus cupiditate? Temporibus, laboriosam quis?
+					Reprehenderit velit sequi, inventore nostrum odit illum?
+					Doloremque, veniam.
+				</p>
+			</div>
+
+		</div>
+	)
+}
+
+const Slide3 = () => {
+	const { t } = useTranslation();
+	return (
+		<div className="artistPageNewsArtistsSliderCardContainer">
+
+			<div className="artistPageNewsArtistsSliderCardImgWrapper">
+				<img
+					className="artistPageNewsArtistsSliderCardImg"
+					src={'../../../../../public/Img/newsCard1.jpg'}
+					alt={t('Світлина мистецтва')}
+					onError={e => {
+						e.target.onerror = null
+						e.target.src = '/public/Img/newsCardERROR.jpg'
+					}}
+				/>
+			</div>
+
+			<div className="artistPageNewsArtistsSliderCardTitleWrapper">
+				<h3 className="artistPageNewsArtistsSliderCardTitle">
+					Lorem Ipsum
+				</h3>
+			</div>
+
+			<div className="artistPageNewsArtistsSliderCardDescriptionWrapper">
+				<p className="artistPageNewsArtistsSliderCardDescription">
+					Lorem ipsum dolor sit amet consectetur adipisicing elit.
+					Libero vero numquam cum excepturi enim iste quis
+					doloribus cupiditate? Temporibus, laboriosam quis?
+					Reprehenderit velit sequi, inventore nostrum odit illum?
+					Doloremque, veniam.
+				</p>
+			</div>
 
 		</div>
 	)
@@ -103,13 +212,13 @@ const ArtistPageNewsArtistsSlider = () => {
 							<Slide />
 						</SwiperSlide>
 						<SwiperSlide>
-							<Slide />
+							<Slide1 />
 						</SwiperSlide>
 						<SwiperSlide>
-							<Slide />
+							<Slide2 />
 						</SwiperSlide>
 						<SwiperSlide>
-							<Slide />
+							<Slide3 />
 						</SwiperSlide>
 						<SwiperSlide>
 							<Slide />
