@@ -98,7 +98,7 @@
     // Нижняя часть слайдера
     display: flex;
     width: 100%;
-    height: calc(514px - (75 * ((1440px - 100vw) / (1440 - 375))));
+    height: calc(561px - (90 * ((1440px - 100vw) / (1440 - 375))));
 
     @at-root {
         :root {
@@ -108,7 +108,7 @@
 
     .swiper-wrapper {
         position: relative;
-        margin: 0 0 0 calc(-20px - (-1 * ((1440px - 100vw) / (1440 - 375))));
+        margin: 0 0 0 calc(-29px - (-20 * ((1440px - 100vw) / (1440 - 375))));
         width: 100%;
         height: 100%;
         z-index: 1;
@@ -130,7 +130,7 @@
     .swiper-button-prev,
     .swiper-button-next {
         position: absolute;
-        top: calc(calc(514px - (75 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 2));
+        top: calc(calc(539px - (75 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 2));
         width: var(--swiper-navigation-size);
         height: var(--swiper-navigation-size);
         // margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
@@ -183,7 +183,7 @@
     .swiper-horizontal>.swiper-pagination-bullets,
     .swiper-pagination-bullets.swiper-pagination-horizontal {
         // bottom: calc(calc(14px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 2.5);
-        top: calc(calc(514px - (75 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 1.4));
+        top: calc(calc(539px - (75 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 1.4));
         left: 0;
         width: 100%;
     }
@@ -200,7 +200,7 @@
     min-width: 250px;
     max-width: 282px;
     height: auto;
-    margin: 0 calc(20px - (2 * ((1440px - 100vw) / (1440 - 375))));
+    margin: 0 calc(29px - (20 * ((1440px - 100vw) / (1440 - 375))));
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -216,7 +216,7 @@
     max-width: 282px;
     height: calc(282px - (32 * ((1440px - 100vw) / (1440 - 375))));
     min-height: 250px;
-    max-height: 282px;    
+    max-height: 282px;
 }
 
 .artistPageNewsArtistsSliderCardImg {
@@ -239,7 +239,7 @@
     // Заголовок карточки
     color: #000000;
     font-family: $default-font;
-    font-weight: 500;    
+    font-weight: 500;
     font-size: calc(22px - (4 * ((1440px - 100vw) / (1440 - 375))));
     text-transform: uppercase;
 }
@@ -248,24 +248,52 @@
     // Обёртка описания карточки
     color: #000000;
     margin: 12px 0 0 0;
-	height: calc(calc(16px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 5); // Делаем ограничение вывода текста построчечно
-	overflow: hidden;
+    height: calc(calc(16px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 5); // Делаем ограничение вывода текста построчечно
+    overflow: hidden;
 }
 
 .artistPageNewsArtistsSliderCardDescription {
     // Описание карточки
     color: #000000;
     font-family: $default-font;
-    font-weight: 400;    
+    font-weight: 400;
     font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
 }
 
 @media screen and (min-width: 1441px) {
+    .artistPageNewsArtistsSliderBottomInnerWrapper {
+        // Нижняя часть слайдера
+        height: 561px;
+
+        .swiper-wrapper {
+            margin: 0 0 0 -29px;
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            top: calc(539px - calc(var(--swiper-navigation-size) / 2));
+        }
+
+        .swiper-pagination-fraction,
+        .swiper-pagination-custom,
+        .swiper-horizontal>.swiper-pagination-bullets,
+        .swiper-pagination-bullets.swiper-pagination-horizontal {
+            // bottom: calc(calc(14px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 2.5);
+            top: calc(539px - calc(var(--swiper-navigation-size) / 1.4));
+        }
+
+    }
+
     .artistPageNewsArtistsSliderContainer {
         // Контейнер слайдера
         margin: 87px $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
     }
 
+    .artistPageNewsArtistsSliderCardContainer {
+        // Обёртка карточки слайдера
+        margin: 0 29px;
+    }
+
     .artistPageNewsArtistsSliderCardTitleWrapper {
         // Обёртка заголовка карточки
         margin: 20px 0 0 0;
@@ -275,17 +303,17 @@
         // Обёртка заголовка карточки
         margin: 20px 0 0 0;
     }
-    
+
     .artistPageNewsArtistsSliderCardTitle {
         // Заголовок карточки
         font-size: 22px;
     }
-    
+
     .artistPageNewsArtistsSliderCardDescriptionWrapper {
         // Обёртка описания карточки
         height: calc(16px * 5); // Делаем ограничение вывода текста построчечно
     }
-    
+
     .artistPageNewsArtistsSliderCardDescription {
         // Описание карточки
         font-size: 16px;
@@ -297,9 +325,11 @@
         // Обёртка кнопок Like и Share
         width: 80px;
     }
+
     .artistPageNewsArtistsSliderLikeButton::after {
         display: none;
     }
+
     .artistPageNewsArtistsSliderShareButtonButton::before {
         display: none;
     }

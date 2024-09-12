@@ -12,7 +12,44 @@ import { Navigation, Pagination } from 'swiper/modules'
 
 import '/src/styles/components/Sliders/ArtistPageSliders/PopularOfThisArtistSlider.scss';
 
-const Slide = () => {
+const Slide1 = () => {
+	const { t } = useTranslation();
+	return (
+		<div className="popularOfThisArtistSliderCardContainer">
+
+			<div className="popularOfThisArtistSliderCardImgWrapper">
+				<img
+					className="popularOfThisArtistSliderCardImg"
+					src={'/Img/fullSizeRaven.jpg'}
+					alt={t('Світлина мистецтва')}
+					onError={e => {
+						e.target.onerror = null
+						e.target.src = '/public/Img/newsCardERROR.jpg'
+					}}
+				/>
+			</div>
+
+            <div className="popularOfThisArtistSliderSoldSellIconWrapper">
+
+                {/* <div className="popularOfThisArtistSliderSoldIcon">
+                    <p className="popularOfThisArtistSliderSoldIconText">
+                        {t('Продано')}
+                    </p>
+                </div> */}
+
+                <div className="popularOfThisArtistSliderSellIcon">
+                    <p className="popularOfThisArtistSliderSellIconText">
+                        {t('Продається')}
+                    </p>
+                </div>
+
+            </div>
+
+		</div>
+	)
+}
+
+const Slide2 = () => {
 	const { t } = useTranslation();
 	return (
 		<div className="popularOfThisArtistSliderCardContainer">
@@ -37,11 +74,11 @@ const Slide = () => {
                     </p>
                 </div>
 
-                <div className="popularOfThisArtistSliderSellIcon">
+                {/* <div className="popularOfThisArtistSliderSellIcon">
                     <p className="popularOfThisArtistSliderSellIconText">
-                        {t('Продаж')}
+                        {t('Продається')}
                     </p>
-                </div>
+                </div> */}
 
             </div>
 
@@ -98,25 +135,25 @@ const PopularOfThisArtistSlider = () => {
 						onSwiper={(swiper) => console.log(swiper)}
 					>
 						<SwiperSlide>
-							<Slide />
+							<Slide1 />
 						</SwiperSlide>
 						<SwiperSlide>
-							<Slide />
+							<Slide2 />
 						</SwiperSlide>
 						<SwiperSlide>
-							<Slide />
+							<Slide1 />
 						</SwiperSlide>
 						<SwiperSlide>
-							<Slide />
+							<Slide2 />
 						</SwiperSlide>
 						<SwiperSlide>
-							<Slide />
+							<Slide1 />
 						</SwiperSlide>
 						<SwiperSlide>
-							<Slide />
+							<Slide2 />
 						</SwiperSlide>
 						<SwiperSlide>
-							<Slide />
+							<Slide1 />
 						</SwiperSlide>
 					</Swiper>
 					<div className={'${swiper-button-prev}'}></div>

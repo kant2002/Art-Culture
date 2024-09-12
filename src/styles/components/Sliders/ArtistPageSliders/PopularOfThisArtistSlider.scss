@@ -229,35 +229,60 @@
     border-radius: 3px;
 }
 
-.popularOfThisArtistSliderCardTitleWrapper {
-    // Обёртка заголовка карточки
+.popularOfThisArtistSliderSoldSellIconWrapper {
+    // Обёртка иконки "Продано" и "Продажа"
+    position: absolute;
+    bottom: calc(9px - (2 * ((1440px - 100vw) / (1440 - 375))));
+    right: calc(9px - (2 * ((1440px - 100vw) / (1440 - 375))));
+    width: calc(50px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    min-width: 40px;
+    max-width: 50px;
+    height: calc(50px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    min-height: 40px;
+    max-height: 50px;
     display: flex;
-    margin: calc(20px - (2 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+    justify-content: center;
+    align-items: center;
 }
 
-.popularOfThisArtistSliderCardTitle {
-    // Заголовок карточки
-    color: #000000;
+.popularOfThisArtistSliderSoldIcon {
+    // Иконка "Продано"
+    width: calc(50px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    min-width: 40px;
+    max-width: 50px;
+    height: calc(50px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    min-height: 40px;
+    max-height: 50px;
+    background-color: $red;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(14px - (3 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 500;
     font-family: $default-font;
-    font-weight: 500;    
-    font-size: calc(22px - (4 * ((1440px - 100vw) / (1440 - 375))));
     text-transform: uppercase;
 }
 
-.popularOfThisArtistSliderCardDescriptionWrapper {
-    // Обёртка описания карточки
-    color: #000000;
-    margin: 12px 0 0 0;
-	height: calc(calc(16px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 5); // Делаем ограничение вывода текста построчечно
-	overflow: hidden;
-}
-
-.popularOfThisArtistSliderCardDescription {
-    // Описание карточки
-    color: #000000;
+.popularOfThisArtistSliderSellIcon {
+    // Иконка "Продажа"
+    width: calc(50px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    min-width: 40px;
+    max-width: 50px;
+    height: calc(50px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    min-height: 40px;
+    max-height: 50px;
+    background-color: white;
+    color: black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(14px - (3 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 500;
     font-family: $default-font;
-    font-weight: 400;    
-    font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
+    text-transform: uppercase;
 }
 
 @media screen and (min-width: 1441px) {
@@ -266,29 +291,21 @@
         margin: 87px $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
     }
 
-    .popularOfThisArtistSliderCardTitleWrapper {
-        // Обёртка заголовка карточки
-        margin: 20px 0 0 0;
-    }
-
-    .popularOfThisArtistSliderCardTitleWrapper {
-        // Обёртка заголовка карточки
-        margin: 20px 0 0 0;
+    .popularOfThisArtistSliderSoldSellIconWrapper {
+        // Обёртка иконки "Продано" и "Продажа"
+        position: absolute;
+        bottom: 9px;
+        right: 9px;
     }
     
-    .popularOfThisArtistSliderCardTitle {
-        // Заголовок карточки
-        font-size: 22px;
+    .popularOfThisArtistSliderSoldIcon {
+        // Иконка "Продано"
+        font-size: 14px;
     }
     
-    .popularOfThisArtistSliderCardDescriptionWrapper {
-        // Обёртка описания карточки
-        height: calc(16px * 5); // Делаем ограничение вывода текста построчечно
-    }
-    
-    .popularOfThisArtistSliderCardDescription {
-        // Описание карточки
-        font-size: 16px;
+    .popularOfThisArtistSliderSellIcon {
+        // Иконка "Продажа"
+        font-size: 14px;
     }
 }
 
