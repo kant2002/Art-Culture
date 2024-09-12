@@ -182,7 +182,6 @@
     .swiper-pagination-custom,
     .swiper-horizontal>.swiper-pagination-bullets,
     .swiper-pagination-bullets.swiper-pagination-horizontal {
-        // bottom: calc(calc(14px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 2.5);
         top: calc(calc(539px - (75 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 1.4));
         left: 0;
         width: 100%;
