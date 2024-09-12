@@ -261,6 +261,11 @@
 }
 
 @media screen and (min-width: 1441px) {
+    .artistPageNewsArtistsSliderTopInnerWrapper {
+        // Верхняя часть слайдера
+        padding: 0 0 51px 0;
+    }
+
     .artistPageNewsArtistsSliderBottomInnerWrapper {
         // Нижняя часть слайдера
         height: 561px;
