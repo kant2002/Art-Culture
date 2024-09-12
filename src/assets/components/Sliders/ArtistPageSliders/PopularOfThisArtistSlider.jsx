@@ -29,23 +29,21 @@ const Slide = () => {
 				/>
 			</div>
 
+            <div className="popularOfThisArtistSliderSoldSellIconWrapper">
 
-			<div className="popularOfThisArtistSliderCardTitleWrapper">
-				<h3 className="popularOfThisArtistSliderCardTitle">
-					Lorem Ipsum
-				</h3>
-			</div>
+                <div className="popularOfThisArtistSliderSoldIcon">
+                    <p className="popularOfThisArtistSliderSoldIconText">
+                        {t('Продано')}
+                    </p>
+                </div>
 
-			<div className="popularOfThisArtistSliderCardDescriptionWrapper">
-				<p className="popularOfThisArtistSliderCardDescription">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit.
-					Libero vero numquam cum excepturi enim iste quis
-					doloribus cupiditate? Temporibus, laboriosam quis?
-					Reprehenderit velit sequi, inventore nostrum odit illum?
-					Doloremque, veniam.
-				</p>
-			</div>
+                <div className="popularOfThisArtistSliderSellIcon">
+                    <p className="popularOfThisArtistSliderSellIconText">
+                        {t('Продаж')}
+                    </p>
+                </div>
 
+            </div>
 
 		</div>
 	)
@@ -59,7 +57,7 @@ const PopularOfThisArtistSlider = () => {
 				<div className="popularOfThisArtistSliderTopInnerWrapper">
 					<div className="popularOfThisArtistSliderTitleWrapper">
 						<p className="popularOfThisArtistSliderTitle">
-							{t('Популярне.')} &#8243;{t('Мистецтво')}&#8243;
+							{t('Популярне цього митця')}
 						</p>
 					</div>
 					<div className="popularOfThisArtistSliderLikeAndShareWrapper">
