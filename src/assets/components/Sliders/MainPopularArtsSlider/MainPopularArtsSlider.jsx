@@ -10,7 +10,7 @@ import 'swiper/css/pagination';
 // Import Swiper modules
 import { Navigation, Pagination } from 'swiper/modules'
 
-import '/src/styles/components/Sliders/MainPopularArtistsSlider/MainPopularArtistsSlider.scss';
+import '/src/styles/components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.scss';
 
 const Slide = () => {
 	const { t } = useTranslation();
