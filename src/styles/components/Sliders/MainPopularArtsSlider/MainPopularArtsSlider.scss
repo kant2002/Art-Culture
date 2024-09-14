@@ -3,7 +3,7 @@
 .mainPopularArtistsSliderContainer {
     // Контейнер слайдера
     display: flex;
-    margin: calc(28px - (-5 * ((1440px - 100vw) / (1440 - 375)))) calc(70px - (48 * ((1440px - 100vw) / (1440 - 375)))) calc(40px - (17 * ((1440px - 100vw) / (1440 - 375))));
+    margin: calc(79px - (12 * ((1440px - 100vw) / (1440 - 375)))) calc(70px - (48 * ((1440px - 100vw) / (1440 - 375)))) calc(40px - (17 * ((1440px - 100vw) / (1440 - 375))));
 }
 
 .mainPopularArtistsSliderWrapper {
@@ -17,7 +17,7 @@
     // Верхняя часть слайдера
     display: flex;
     justify-content: space-between;
-    padding: calc(51px - (17 * ((1440px - 100vw) / (1440 - 375)))) 0;
+    padding: 0 0 calc(51px - (17 * ((1440px - 100vw) / (1440 - 375)))) 0;
 }
 
 .mainPopularArtistsSliderTitleWrapper {
