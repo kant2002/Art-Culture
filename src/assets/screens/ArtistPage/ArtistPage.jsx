@@ -71,7 +71,24 @@ function ArtistPage() {
 
             <PopularOfThisArtistSlider />
 
-            {/* <ArtsOfThisArtistSlider /> */}
+            {/* <ArtsByArtistSlider /> */}
+
+            <div className={`${styles.underDevelopmentContainer}`}>
+                <p className={`${styles.underDevelopmentPreTitle}`}>{t('Цей контейнер')}</p>
+                <p className={`${styles.underDevelopmentTitle}`}>{t('В розробці')}</p>
+            </div>
+
+            <div className={`${styles.artistPageFollowContainer}`}>
+                <p className={`${styles.artistPageFollowTitle}`}>{t('Стежити за цим митцем')}</p>
+                <div className={`${styles.artistPageFollowEmailWrapper}`}>
+                    <input
+                        type="email"
+                        className={`${styles.artistPageFollowEmail}`}
+                        placeholder={t('Введіть ваш email')}
+                    />
+                    <button className={`${styles.artistPageFollowButton}`}>{t('Зареєструватися')}</button>
+                </div>
+            </div>            
 
 			<MainPopularArtsSlider />
 
