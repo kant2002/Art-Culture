@@ -33,13 +33,13 @@ const Slide = () => {
 
                 {/* <div className="popularOfThisArtistSliderSoldIcon">
                     <p className="popularOfThisArtistSliderSoldIconText">
-                        Sell
+                        {t('Продається')}
                     </p>
                 </div> */}
 
                 {/* <div className="popularOfThisArtistSliderSellIcon">
                     <p className="popularOfThisArtistSliderSellIconText">
-                        Sold
+                        {t('Продано')}
                     </p>
                 </div> */}
 
@@ -70,13 +70,13 @@ const Slide1 = () => {
 
                 {/* <div className="popularOfThisArtistSliderSoldIcon">
                     <p className="popularOfThisArtistSliderSoldIconText">
-                        Sell
+                        {t('Продається')}
                     </p>
                 </div> */}
 
                 <div className="popularOfThisArtistSliderSellIcon">
                     <p className="popularOfThisArtistSliderSellIconText">
-                        Sold
+                        {t('Продано')}
                     </p>
                 </div>
 
@@ -107,13 +107,13 @@ const Slide2 = () => {
 
                 <div className="popularOfThisArtistSliderSoldIcon">
                     <p className="popularOfThisArtistSliderSoldIconText">
-                        Sell
+						{t('Продається')}
                     </p>
                 </div>
 
                 {/* <div className="popularOfThisArtistSliderSellIcon">
                     <p className="popularOfThisArtistSliderSellIconText">
-                        Sold
+                        {t('Продано')}
                     </p>
                 </div> */}
 
@@ -144,13 +144,13 @@ const Slide3 = () => {
 
                 {/* <div className="popularOfThisArtistSliderSoldIcon">
                     <p className="popularOfThisArtistSliderSoldIconText">
-                        Sell
+                        {t('Продається')}
                     </p>
                 </div> */}
 
                 <div className="popularOfThisArtistSliderSellIcon">
                     <p className="popularOfThisArtistSliderSellIconText">
-                        Sold
+					{t('Продано')}
                     </p>
                 </div>
 
