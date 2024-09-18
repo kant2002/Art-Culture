@@ -35,13 +35,13 @@ function ArtistPage() {
                                 }}
                         />
                     </div>
-                    <div className={`${styles.artistPageArtisPhotoDescriptionWrapper}`}>
+                    {/* <div className={`${styles.artistPageArtisPhotoDescriptionWrapper}`}>
                         <p className={`${styles.artistPageArtisPhotoDescription}`}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur, tenetur debitis enim totam neque, laboriosam harum minima illo ducimus distinctio consequatur asperiores quaerat earum reiciendis. Quisquam impedit ut numquam vel.</p>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className={`${styles.artistPageArtisNameWrapper}`}>
-                    <p className={`${styles.artistPageArtisName}`}>{t('Митець')} 1</p>
+                    <p className={`${styles.artistPageArtisName}`}>{t('Митець')}</p>
                 </div>
 
                 <div className={`${styles.artistPageArtisSeparatorWrapper}`}>

@@ -370,10 +370,6 @@ function Header() {
 									<img src='/Img/mail.svg' alt='Mail' />
 								</button>
 								<div className='socialDownWrapper__separator'>
-									<img
-										src='/Img/verticalSeparator.svg'
-										alt='button separator'
-									/>
 								</div>
 								<button
 									className='socialDownWrapper__loginButton socialDownWrapperButton circleButton'
