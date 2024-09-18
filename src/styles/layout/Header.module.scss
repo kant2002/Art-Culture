@@ -345,11 +345,10 @@ h1 {
 	}
 	&__separator {
 		margin: 0 25px 0 24px;
-	}
-	&__separatorImg {
 		display: flex;
 		width: 1px;
 		height: 32px;
+		background-color: #fff;
 	}
 }
 .socialDownWrapperButton {
