@@ -41,7 +41,7 @@ function ArtistPage() {
                 </div>
 
                 <div className={`${styles.artistPageArtisNameWrapper}`}>
-                    <p className={`${styles.artistPageArtisName}`}>{t('Митець')} 1</p>
+                    <p className={`${styles.artistPageArtisName}`}>{t('Митець')}</p>
                 </div>
 
                 <div className={`${styles.artistPageArtisSeparatorWrapper}`}>
