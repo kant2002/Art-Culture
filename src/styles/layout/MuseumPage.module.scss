@@ -1,0 +1,29 @@
+@import '../../../src/styles/utilities/variables.scss';
+
+.museumPage {
+    // главный контейнер
+    margin: $responsiveTopPadding 0 0 0;
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
+    height: 1000px;
+    background: #000;
+
+    * {
+        font-family: $default-font;
+    }
+}
+
+.museumPageMuseumPhotoContainer {
+    // обертка для фото музею
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.museumPageMuseumPhoto {
+    // фото музею
+    width: 100%;
+    height: auto;
+}

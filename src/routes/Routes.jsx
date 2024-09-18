@@ -14,6 +14,7 @@ import UserProfileAddPost from '../assets/screens/userProfile/userProfileAddPost
 import UserProfilePosts from '../assets/screens/userProfile/userProfilePosts.jsx'
 import NewsPage from '../assets/screens/newsPage/NewsPage.jsx'
 import ArtistPage from '../assets/screens/ArtistPage/ArtistPage.jsx'
+import MuseumPage from '../assets/screens/MuseumPage/MuseumPage.jsx'
 import { routes } from './routes.data.js'
 
 const Router = () => {
@@ -32,6 +33,7 @@ const Router = () => {
 				<MainPage />
 				<NewsPage />
 				<ArtistPage />
+				<MuseumPage />
 				<UserProfile />
 				<UserProfileAddPost />
 				<UserProfilePosts />
