@@ -181,12 +181,12 @@ function Header() {
 									<p>&#8250;</p>
 								</a>
 							</li>
-							<li className='footerMenuLi'>
+							{/* <li className='footerMenuLi'>
 								<a className='footerMenuLink' href='#'>
 									<p>{t('Архітектура')}</p>
 									<p>&#8250;</p>
 								</a>
-							</li>
+							</li> */}
 							<li className='footerMenuLi'>
 								<a className='footerMenuLink' href='#'>
 									<p>{t('Арт терміни')}</p>

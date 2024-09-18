@@ -254,16 +254,15 @@
 .popularOfThisArtistSliderSoldIcon {
     // Иконка "Продано"
     padding: 0 12px;
-    // width: calc(50px - (10 * ((1440px - 100vw) / (1440 - 375))));
-    width: auto;
+    width: calc(50px - (10 * ((1440px - 100vw) / (1440 - 375))));
     min-width: 40px;
-    // max-width: 50px;
+    max-width: 50px;
     height: calc(50px - (10 * ((1440px - 100vw) / (1440 - 375))));
     min-height: 40px;
     max-height: 50px;
     background-color: $red;
     color: white;
-    border-radius: 25px;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -271,22 +270,20 @@
     font-weight: 500;
     font-family: $default-font;
     text-transform: uppercase;
-    box-shadow: #000000 0px 0px 10px 1px;
 }
 
 .popularOfThisArtistSliderSellIcon {
     // Иконка "Продажа"
     padding: 0 12px;
-    // width: calc(50px - (10 * ((1440px - 100vw) / (1440 - 375))));
-    width: auto;
+    width: calc(50px - (10 * ((1440px - 100vw) / (1440 - 375))));
     min-width: 40px;
-    // max-width: 50px;
+    max-width: 50px;
     height: calc(50px - (10 * ((1440px - 100vw) / (1440 - 375))));
     min-height: 40px;
     max-height: 50px;
     background-color: white;
     color: black;
-    border-radius: 25px;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -294,7 +291,6 @@
     font-weight: 500;
     font-family: $default-font;
     text-transform: uppercase;
-    box-shadow: #000000 0px 0px 10px 1px;
 }
 
 @media screen and (min-width: 1441px) {

@@ -168,7 +168,7 @@ const ArtistPageNewsArtistsSlider = () => {
 				<div className="artistPageNewsArtistsSliderTopInnerWrapper">
 					<div className="artistPageNewsArtistsSliderTitleWrapper">
 						<p className="artistPageNewsArtistsSliderTitle">
-							{t('Популярне.')} &#8243;{t('Мистецтво')}&#8243;
+							{t('Новини.')} &#8243;{t('Митці')}&#8243;
 						</p>
 					</div>
 					<div className="artistPageNewsArtistsSliderLikeAndShareWrapper">

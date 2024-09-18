@@ -36,11 +36,11 @@ const Footer = () => {
 									{t('Головна')}
 								</a>
 							</li>
-							<li className={`${styles.footerMenuLi}`}>
+							{/* <li className={`${styles.footerMenuLi}`}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
 									{t('Архітектура')}
 								</a>
-							</li>
+							</li> */}
 							<li className={`${styles.footerMenuLi}`} onClick={handleNewsPageClick}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
 									{t('Новини')}
