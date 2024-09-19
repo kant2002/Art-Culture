@@ -9,7 +9,6 @@ function MuseumPage() {
     return (
         <div className={`${styles.museumPage}`}>
 
-
             <div className={`${styles.museumPageMuseumPhotoContainer}`}>
                 <img
                     className={`${styles.museumPageMuseumPhoto}`}
@@ -21,7 +20,6 @@ function MuseumPage() {
                     }}
                 />
             </div>
-
 
         </div>
     )
