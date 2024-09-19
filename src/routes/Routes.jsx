@@ -1,7 +1,6 @@
 import {
 	BrowserRouter,
 	Route,
-	BrowserRouter as Router,
 	Routes,
 } from 'react-router-dom'
 import Login from '../assets/components/VerificationPages/LoginPage.jsx'
@@ -17,7 +16,7 @@ import ArtistPage from '../assets/screens/ArtistPage/ArtistPage.jsx'
 import MuseumPage from '../assets/screens/MuseumPage/MuseumPage.jsx'
 import { routes } from './routes.data.js'
 
-const Router = () => {
+const AppRouter = () => {
 	return (
 		<BrowserRouter>
 			<Routes>
@@ -45,4 +44,4 @@ const Router = () => {
 	)
 }
 
-export default Router
+export default AppRouter

@@ -7,7 +7,7 @@ function MuseumPage() {
     const { t } = useTranslation();
 
     return (
-        <div className={`${styles.museumPage111}`}>
+        <div className={`${styles.museumPage}`}>
 
             <div className={`${styles.museumPageMuseumPhotoContainer}`}>
                 <img
@@ -20,7 +20,6 @@ function MuseumPage() {
                     }}
                 />
             </div>
-
 
         </div>
     )
