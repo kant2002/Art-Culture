@@ -5,25 +5,176 @@
     margin: $responsiveTopPadding 0 0 0;
     display: flex;
     flex-direction: column;
-    width: 1000px;
-    height: 1000px;
-    background: #000;
 
     * {
         font-family: $default-font;
     }
 }
 
-.museumPageMuseumPhotoContainer {
-    // обертка для фото музею
+.museumPageNavigation {
+    // навигационный блок
+    margin: calc(51px - (15 * ((1440px - 100vw) / (1440 - 375)))) $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}
+
+.museumPageNavigationList {
+    // список навигации
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.museumPageNavigationItem {
+    // элемент списка навигации
+    display: flex;
+    font-size: calc(18px - (6 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.museumPageNavigationItemSeparator {
+    // разделитель между элементами списка навигации
+    margin: 0 18px;
+    font-size: calc(18px - (6 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 500;
+    color: $red;
+    user-select: none;
+}
+
+.museumPageAboutMuseumContainer {
+    // блок с описанием музея
+    margin: calc(69px - (41 * ((1440px - 100vw) / (1440 - 375)))) $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+.museumPageMuseumPhotoWrapper {
+    // обертка для фото музея
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+    max-width: max-content;
+    max-height: max-content;
+    border-radius: 3px;
+}
+
 .museumPageMuseumPhoto {
-    // фото музею
-    width: 100%;
-    height: auto;
+    // фото музея
+    // margin: 0 auto;
+    display: block;
+	object-fit: contain;
+	object-position: center center;
+    border-radius: 3px;
+    max-height: calc(415px - (228 * ((1440px - 100vw) / (1440 - 375))));
+}
+
+.museumPageMuseumLogoWrapper {
+    // обертка для логотипа музея
+    margin: calc(24px - (8 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.museumPageMuseumLogo {
+    // логотип музея
+    display: block;
+    object-fit: contain;
+    object-position: center center;
+    max-height: calc(100px - (40 * ((1440px - 100vw) / (1440 - 375))));
+}
+
+.museumPageMuseumTitleWrapper {
+    // обертка для названия музея
+    margin: 0;
+}
+
+.museumPageMuseumTitle {
+    // название музея
+    margin: 10px 0 0 0;
+    font-size: calc(18px - (6 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.museumPageMuseumLocationWrapper {
+    // обертка для местоположения музея
+    margin: 10px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.museumPageMuseumLocation {
+    // местоположение музея
+    font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 400;
+    text-align: center;
+}
+
+@media (min-width: 1441px) {
+    .museumPage {
+        // главный контейнер
+        margin: $staticPcTopPadding 0 0 0;
+    }
+
+    .museumPageNavigation {
+        // навигационный блок
+        margin: 51px $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+    }
+    
+    .museumPageNavigationItem {
+        // элемент списка навигации
+        font-size: 18px;
+    }
+    
+    .museumPageNavigationItemSeparator {
+        // разделитель между элементами списка навигации
+        font-size: 18px;
+    }
+    
+    .museumPageAboutMuseumContainer {
+        // блок с описанием музея
+        margin: 69px $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+    }
+    
+    .museumPageMuseumPhoto {
+        // фото музея
+        max-height: 415px;
+    }
+    
+    .museumPageMuseumLogoWrapper {
+        // обертка для логотипа музея
+        margin: 24px 0 0 0;
+    }
+    
+    .museumPageMuseumLogo {
+        // логотип музея
+        max-height: 100px;
+    }
+    
+    .museumPageMuseumTitle {
+        // название музея
+        font-size: 18px;
+    }
+    
+    .museumPageMuseumLocation {
+        // местоположение музея
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 569px) {
+    .museumPage {
+        // главный контейнер
+        margin: $staticMobileTopPadding 0 0 0;
+    }
 }
