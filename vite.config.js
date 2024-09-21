@@ -14,10 +14,16 @@ export default defineConfig({
 		},
 		proxy: {
 			'/api': {
-				target: 'https://zimbabaluba.pp.ua',
+				target: 'https://art.playukraine.com/',
 				changeOrigin: true,
 				rewrite: path => path.replace(/^\/api/, ''),
 			},
+		},
+		esbuild: {
+			minifyIdentifiers: false,
+		},
+		build: {
+			sourcemap: true,
 		},
 	},
 })

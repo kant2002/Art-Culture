@@ -9,9 +9,17 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const PORT = process.env.PORT || 5173
-const WP_BACKEND_URL = 'https://admin.playukraine.com/'
+const WP_BACKEND_URL = 'https://art.playukraine.com/'
 
 const addHeadersMiddleware = (req, res, next) => {
+	// Set CORS headers
+	res.header('Access-Control-Allow-Origin', '*') // Allow all origins
+	res.header(
+		'Access-Control-Allow-Headers',
+		'Authorization, X-WP-Nonce, Content-Type, Authorization'
+	) // Allow specific headers
+	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS') // Allow specific methods
+
 	const jwt = req.headers['authorization'] // Retrieve JWT from request authorization
 	const wpNonce = req.headers['x-wp-nonce'] // Retrieve WordPress nonce from request headers
 
@@ -21,6 +29,10 @@ const addHeadersMiddleware = (req, res, next) => {
 
 	if (wpNonce) {
 		req.headers['x-wp-nonce'] = wpNonce
+	}
+
+	if (req.method === 'OPTIONS') {
+		return res.sendStatus(200)
 	}
 
 	next()
