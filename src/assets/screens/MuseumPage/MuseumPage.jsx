@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import MuseumPageNewsMuseumSlider from '../../components/Sliders/MuseumPageSliders/MuseumPageNewsMuseumSlider.jsx'
+import PopularInThisMuseumSlider from '../../components/Sliders/MuseumPageSliders/PopularInThisMuseumSlider.jsx'
 import styles from '../../../styles/layout/MuseumPage.module.scss'
 
 function MuseumPage() {
@@ -37,24 +39,34 @@ function MuseumPage() {
                     />
                 </div>
 
-                <div className={`${styles.museumPageMuseumLogoWrapper}`}>
-                    <img
-                        className={`${styles.museumPageMuseumLogo}`}
-                        src={'/public/Img/MuseumLogo.png'}
-                        alt={t('Логотип музея')}
-                        onError={e => {
-                            e.target.onerror = null
-                            e.target.src = '/public/Img/newsCardERROR.jpg'
-                        }}
-                    />
-                </div>
+                <div className={`${styles.museumPageMuseumTopLogoWhithAdressWrapper}`}>
 
-                <div className={`${styles.museumPageMuseumTitleWrapper}`}>
-                    <p className={`${styles.museumPageMuseumTitle}`}>{t('Название этого музея')}</p>
-                </div>
+                    <div className={`${styles.museumPageMuseumLogoWrapper}`}>
+                        <img
+                            className={`${styles.museumPageMuseumLogo}`}
+                            src={'/public/Img/MuseumLogo.png'}
+                            alt={t('Логотип музея')}
+                            onError={e => {
+                                e.target.onerror = null
+                                e.target.src = '/public/Img/newsCardERROR.jpg'
+                            }}
+                        />
+                    </div>
 
-                <div className={`${styles.museumPageMuseumLocationWrapper}`}>
-                    <p className={`${styles.museumPageMuseumLocation}`}>Киев, Украина</p>
+                    <div className={`${styles.museumPageTopAdressWrapper}`}>
+
+                        <div className={`${styles.museumPageMuseumTitleWrapper}`}>
+                            <p className={`${styles.museumPageMuseumTitle}`}>{t('Название этого музея')}</p>
+                        </div>
+
+                        <div className={`${styles.museumPageMuseumTopLocationWrapper}`}>
+                            <p className={`${styles.museumPageMuseumLocationCity}`}>Київ</p>
+                            <p>&#44;&#160;</p>
+                            <p className={`${styles.museumPageMuseumLocationCountry}`}>Україна</p>
+                        </div>
+
+                    </div>
+
                 </div>
 
                 <div className={`${styles.museumPageMuseumDescriptionWrapper} ${isExpanded ? styles.expanded : ''}`}>
@@ -80,7 +92,59 @@ function MuseumPage() {
                 </button>
 
             </div>
-        </div>
+
+            <MuseumPageNewsMuseumSlider />
+
+            <PopularInThisMuseumSlider />
+
+            <div className={`${styles.underDevelopmentContainer}`}>
+                <p className={`${styles.underDevelopmentPreTitle}`}>{t('Цей контейнер')}</p>
+                <p className={`${styles.underDevelopmentTitle}`}>{t('В розробці')}</p>
+            </div>
+
+            <div className={`${styles.underDevelopmentContainer}`}>
+                <p className={`${styles.underDevelopmentPreTitle}`}>{t('Цей контейнер')}</p>
+                <p className={`${styles.underDevelopmentTitle}`}>{t('В розробці')}</p>
+            </div>
+
+            <div className={`${styles.museumPageMuseumBottomLogoWhithAdressWrapper}`}>
+
+                <div className={`${styles.museumPageищеещьAdressWrapper}`}>
+
+                    <div className={`${styles.museumPageMuseumLogoWrapper}`}>
+                        <img
+                            className={`${styles.museumPageMuseumLogo}`}
+                            src={'/public/Img/MuseumLogo.png'}
+                            alt={t('Логотип музея')}
+                            onError={e => {
+                                e.target.onerror = null
+                                e.target.src = '/public/Img/newsCardERROR.jpg'
+                            }}
+                        />
+                    </div>
+
+                    <div className={`${styles.museumPageMuseumTitleWrapper}`}>
+                        <p className={`${styles.museumPageMuseumTitle}`}>{t('Название этого музея')}</p>
+                    </div>
+
+                    <div className={`${styles.museumPageMuseumBottomLocationWrapper}`}>
+                        <p className={`${styles.museumPageMuseumLocationStreet}`}>вулиця Кирилівська, 41</p>
+                        <p className={`${styles.museumPageMuseumLocationCity}`}>Київ</p>
+                        <p className={`${styles.museumPageMuseumLocationCountry}`}>Україна</p>
+                        <p className={`${styles.museumPageMuseumLocationIndex}`}>02000</p>
+                    </div>
+
+                    <div className={`${styles.museumPageMuseumToTheSiteButtonWrapper}`}>
+                        <button className={`${styles.museumPageMuseumToTheSiteButton}`}>
+                            {t('Перейти до сайту')}
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div >
     );
 }
 

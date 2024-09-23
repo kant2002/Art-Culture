@@ -74,6 +74,10 @@
     max-height: calc(415px - (228 * ((1440px - 100vw) / (1440 - 375))));
 }
 
+.museumPageMuseumTopLogoWhithAdressWrapper {
+    // верхняя обёртка логотипа и адреса музея 
+}
+
 .museumPageMuseumLogoWrapper {
     // обертка для логотипа музея
     margin: calc(24px - (8 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
@@ -96,24 +100,29 @@
     margin: 0;
 }
 
+.museumPageTopAdressWrapper {
+    // верхняя оболочка не полного адреса музея
+}
+
 .museumPageMuseumTitle {
     // название музея
     margin: 10px 0 0 0;
     font-size: calc(18px - (6 * ((1440px - 100vw) / (1440 - 375))));
     font-weight: 500;
-    text-transform: uppercase;
+    text-align: center;
+    // text-transform: uppercase;
 }
 
-.museumPageMuseumLocationWrapper {
+.museumPageMuseumTopLocationWrapper {
     // обертка для местоположения музея
     margin: 10px 0 0 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-.museumPageMuseumLocation {
+.museumPageMuseumLocationStreet, .museumPageMuseumLocationCity, .museumPageMuseumLocationCountry, .museumPageMuseumLocationIndex {
     // местоположение музея
     font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
     font-weight: 400;
@@ -157,6 +166,63 @@
     cursor: pointer;
     user-select: none;
     background: none;
+}
+
+.museumPageMuseumBottomLogoWhithAdressWrapper {
+    // нижняя оболочка логотипа и адреса музея
+}
+
+.museumPageMuseumBottomLocationWrapper {
+    // обертка для местоположения музея
+    margin: 10px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.museumPageMuseumToTheSiteButtonWrapper {
+    // обёртка кнопки ведущей на сайт музея
+    margin: 0 0 30px 0;
+}
+
+.museumPageMuseumToTheSiteButton {
+    // кнопка ведущая на сайт музея
+    margin: 20px auto 0;
+    display: flex;    
+    justify-content: center;
+    align-items: center;
+    color: #d83934;
+    background: none;
+    cursor: pointer;
+}
+
+.underDevelopmentContainer {
+    // обертка для слайдера "арты митца"
+    margin: calc(65px - (25 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(983px - (582 * ((1440px - 100vw) / (1440 - 375))));
+    min-height: 401px;
+    max-height: 938px;
+    background: black;
+    color: white;
+}
+
+.underDevelopmentPreTitle {
+    // подзаголовок слайдера "арты митца"
+    font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 400;
+}
+
+.underDevelopmentTitle {
+    // заголовок слайдера "арты митца"
+    font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
 @media (min-width: 1441px) {
@@ -208,6 +274,21 @@
     .museumPageMuseumLocation {
         // местоположение музея
         font-size: 16px;
+    }
+
+    .underDevelopmentContainer {
+        // обертка для слайдера "арты митца"
+        margin: 65px 0 0 0;
+    }
+    
+    .underDevelopmentPreTitle {
+        // подзаголовок слайдера "арты митца"
+        font-size: 16px;
+    }
+    
+    .underDevelopmentTitle {
+        // заголовок слайдера "арты митца"
+        font-size: 28px;
     }
 }
 
