@@ -1,75 +1,46 @@
-import axios from 'axios'
+// src/components/UserProfile/UserProfilePosts.jsx
+
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { fetchUserPosts, validateJWT } from '../../components/API/ApiFetcher'
+import { useAuth } from '../../../Context/AuthContext.jsx'
+import API from '../../../utils/api.js'
 import styles from '/src/styles/components/UserProfile/userProfilePosts.module.scss'
 
 function UserProfilePosts() {
 	const { t } = useTranslation()
 	const navigate = useNavigate()
+	const { user } = useAuth()
 
-	const [posts, setPosts] = useState([]) // Posts state
+	const [posts, setPosts] = useState([]) // User's posts
 	const [loading, setLoading] = useState(true)
-	const [media, setMedia] = useState({})
 	const [error, setError] = useState('') // Error state
-	const [userId, setUserId] = useState(null)
 
 	useEffect(() => {
-		const fetchUserData = async () => {
+		const fetchUserPosts = async () => {
 			try {
-				const jwt = localStorage.getItem('jwt') // Retrieve JWT from localStorage
-				console.log('JWT token', jwt)
-
-				if (!jwt) {
+				if (!user) {
 					setError('User not authenticated')
-					setLoading(false)
+					navigate('/login')
 					return
 				}
 
-				// Validate JWT and get user ID
-				const validationResponse = await validateJWT(jwt)
-				console.log('Validation response:', validationResponse)
-				if (validationResponse.success) {
-					const userId = validationResponse.data.user.ID
-					setUserId(userId) // Set user ID in state
+				// Fetch posts by this user
+				const response = await API.get('/posts', {
+					params: { authorId: user.id }, // Assuming your API can filter by authorId
+				})
 
-					// Fetch posts by this user
-					console.log('Fetched user ID:', userId)
-					const userPosts = await fetchUserPosts(userId)
-					console.log('Fetched User posts:', userPosts)
-					setPosts(Array.isArray(userPosts) ? userPosts : [])
-
-					const mediaResponse = await axios.get(
-						'https://admin.playukraine.com/wp-json/wp/v2/media',
-						{
-							headers: {
-								Authorization: `Bearer ${jwt}`,
-							},
-						}
-					)
-
-					const mediaMap = mediaResponse.data.reduce((acc, mediaItem) => {
-						acc[mediaItem.id] = mediaItem.source_url
-						return acc
-					}, {})
-
-					console.log('Fetched Media data:', mediaMap)
-					setMedia(mediaMap)
-				} else {
-					setError('Failed to validate user')
-					navigate('/login') // Redirect to login if JWT validation fails
-				}
-			} catch (error) {
-				console.error('Error fetching data:', error)
+				setPosts(Array.isArray(response.data) ? response.data : [])
+			} catch (err) {
+				console.error('Error fetching user posts:', err)
 				setError('Failed to fetch posts')
 			} finally {
 				setLoading(false)
 			}
 		}
 
-		fetchUserData() // Fetch data on component mount
-	}, [navigate])
+		fetchUserPosts()
+	}, [user, navigate])
 
 	// Handlers for navigation
 	const handleProfilePageClick = () => {
@@ -102,53 +73,57 @@ function UserProfilePosts() {
 				{loading ? (
 					<p>{t('Завантаження...')}</p>
 				) : error ? (
-					<p>{error}</p>
+					<p className={styles.ErrorMessage}>{error}</p>
 				) : posts.length === 0 ? (
 					<p>{t('Публікацій немає')}</p>
 				) : (
-					posts.map(post => {
-						const mediaUrl =
-							media[post.featured_media] ||
-							'/Img/mainPopularArtistsSliderIMG.jpg'
-						return (
-							<div key={post.id} className={styles.userProfilePostsWrapper}>
-								<div className={styles.userProfilePostsPicAndTextWrapper}>
-									<div className={styles.userProfilePostsPicWrapper}>
+					posts.map(post => (
+						<div key={post.id} className={styles.userProfilePostsWrapper}>
+							<div className={styles.userProfilePostsPicAndTextWrapper}>
+								<div className={styles.userProfilePostsPicWrapper}>
+									{post.images ? (
 										<img
 											className={styles.userProfilePostsPic}
-											src={mediaUrl}
-											alt={t('Світлина мистецтва')}
+											src={post.images}
+											alt={t('Світлина публікації')}
 											onError={e => {
 												e.target.onerror = null
-												e.target.src = '/Img/mainPopularArtistsSlide.jpg'
+												e.target.src = '/Img/defaultPostImage.jpg' // Default image path
 											}}
 										/>
-									</div>
-									<div className={styles.userProfilePostsTextWrapper}>
-										<h3 className={styles.userProfilePostsTitle}>
-											{post.title.rendered || t('Нова публікація')}
-										</h3>
-										<p className={styles.userProfilePostsDescription}>
-											{post.excerpt.rendered || t('Опис публікації')}
+									) : (
+										<img
+											className={styles.userProfilePostsPic}
+											src='/Img/defaultPostImage.jpg'
+											alt={t('Світлина публікації')}
+										/>
+									)}
+								</div>
+								<div className={styles.userProfilePostsTextWrapper}>
+									<h3 className={styles.userProfilePostsTitle}>{post.title}</h3>
+									<p className={styles.userProfilePostsDescription}>
+										{post.content.substring(0, 100)}...
+									</p>
+									<div className={styles.userProfilePostsClockAndDateWrapper}>
+										<img
+											className={styles.userProfilePostsClock}
+											src='/Img/clock.svg'
+											alt={t('Дата')}
+										/>
+										<p className={styles.userProfilePostsDate}>
+											{new Date(post.createdAt).toLocaleDateString()}
 										</p>
-										<div className={styles.userProfilePostsClockAndDateWrapper}>
-											<img
-												className={styles.userProfilePostsClock}
-												src='/Img/clock.svg'
-												alt={t('Дата')}
-											/>
-											<p className={styles.userProfilePostsDate}>
-												{new Date(post.date).toLocaleDateString()}
-											</p>
-											<button className={styles.userProfilePostsButton}>
-												{t('До публікації')}
-											</button>
-										</div>
+										<button
+											className={styles.userProfilePostsButton}
+											onClick={() => navigate(`/posts/${post.id}`)} // Navigate to post detail page
+										>
+											{t('До публікації')}
+										</button>
 									</div>
 								</div>
 							</div>
-						)
-					})
+						</div>
+					))
 				)}
 			</div>
 		</div>

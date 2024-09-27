@@ -14,7 +14,7 @@ export default defineConfig({
 		},
 		proxy: {
 			'/api': {
-				target: 'https://art.playukraine.com/',
+				target: 'https://localhost:5173/',
 				changeOrigin: true,
 				rewrite: path => path.replace(/^\/api/, ''),
 			},
