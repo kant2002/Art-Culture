@@ -1,7 +1,7 @@
-.App {
+.SignUpContainer {
 	text-align: center;
 	height: 100dvh;
-
+	justify-content: center;
 	display: flex;
 
 	h2 {
@@ -11,18 +11,19 @@
 	}
 }
 
-.App-header {
+.SignUpWrapper {
 	background-color: #282c34;
 	padding: 20px;
 	border-radius: 8px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	color: white;
-	height: 100vw;
+	width: 100%;
 	height: 100%;
+	align-content: center;
 }
 
 // Form Styles
-form {
+.SignUpFormWrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -40,7 +41,7 @@ input[type='password'] {
 	font-size: 1rem;
 }
 
-input[type='submit'] {
+button[type='submit'] {
 	width: 80%;
 	max-width: 300px;
 	padding: 10px;
@@ -54,7 +55,7 @@ input[type='submit'] {
 	transition: background-color 0.3s ease;
 }
 
-input[type='submit']:hover {
+button[type='submit']:hover {
 	background-color: #21a1f1;
 }
 

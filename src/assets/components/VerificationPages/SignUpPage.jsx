@@ -1,13 +1,17 @@
 import React, { useState } from 'react'
-import { autoLoginUser, registerUser } from '../API/ApiFetcher'
-import '/src/styles/components/VerificationPage/SignUpPage.module.scss'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../../Context/AuthContext.jsx'
+import styles from '../../../styles/components/VerificationPage/SignUpPage.module.scss'
+import API from '../../../utils/api.js'
 
-const SignUp = ({ setUsername, setIsLoggedIn, setServerMessage }) => {
+const SignUp = () => {
 	const [signUpDetails, setSignUpDetails] = useState({
-		user: '',
 		email: '',
-		pass: '',
+		password: '',
 	})
+	const [serverMessage, setServerMessage] = useState('')
+	const { login } = useAuth() // Utilize login from AuthContext
+	const navigate = useNavigate()
 
 	const handleChange = e => {
 		const { name, value } = e.target
@@ -17,57 +21,62 @@ const SignUp = ({ setUsername, setIsLoggedIn, setServerMessage }) => {
 		}))
 	}
 
-	const handleSubmit = async () => {
+	const handleSubmit = async e => {
+		e.preventDefault()
+		setServerMessage('')
+
 		try {
-			const data = await registerUser(signUpDetails)
-			if (data.success) {
-				localStorage.setItem('jwt', data.data.jwt)
-				const autoLoginData = await autoLoginUser(data.data.jwt)
-				if (autoLoginData.success) {
-					setIsLoggedIn(true)
-					setUsername(signUpDetails.user)
-					window.location.replace('https://admin.playukraine.com/mysite/#/')
-				}
-			} else {
-				setServerMessage(data.data.message)
+			const response = await API.post(
+				'/auth/register',
+				{
+					email: signUpDetails.email,
+					password: signUpDetails.password,
+				},
+				console.log('signUpDetails', signUpDetails)
+			)
+
+			if (response.status === 201) {
+				const { token, user } = response.data // Assuming API returns user data
+				login(user, token) // Update AuthContext
+				navigate('/userProfile') // Redirect to profile
 			}
 		} catch (error) {
-			console.error('Sign Up Error:', error)
+			if (error.response && error.response.data) {
+				setServerMessage(error.response.data.error || 'Registration failed.')
+			} else {
+				setServerMessage('An error occurred during registration.')
+			}
 		}
 	}
 
 	return (
-		<div className='App'>
-			<header className='App-header'>
+		<div className={styles.SignUpContainer}>
+			<header className={styles.SignUpWrapper}>
 				<h2>Sign Up</h2>
-				<p>{setServerMessage}</p>
-				<div className='signup'>
-					<input
-						type='text'
-						placeholder='User Name'
-						name='user'
-						value={signUpDetails.user}
-						onChange={handleChange}
-					/>
+				{serverMessage && (
+					<p className={styles.ErrorMessage}>{serverMessage}</p>
+				)}
+				<form className={styles.SignUpForm} onSubmit={handleSubmit}>
 					<input
 						type='email'
-						placeholder='Email Address'
+						placeholder='Email'
 						name='email'
 						value={signUpDetails.email}
 						onChange={handleChange}
+						required
 					/>
 					<input
 						type='password'
 						placeholder='Password'
-						name='pass'
-						value={signUpDetails.pass}
+						name='password'
+						value={signUpDetails.password}
 						onChange={handleChange}
+						required
 					/>
-					<input type='submit' value='Sign Up' onClick={handleSubmit} />
-				</div>
+					<button type='submit'>Sign Up</button>
+				</form>
 			</header>
 		</div>
 	)
 }
-
 export default SignUp
