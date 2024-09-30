@@ -7,6 +7,7 @@ import morgan from 'morgan'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import errorHandler from './src/middleware/errorHandler.js'
+import adminRoutes from './src/routes/adminRoutes.js'
 import authRoutes from './src/routes/authRoutes.js'
 import postRoutes from './src/routes/postRoutes.js'
 dotenv.config()
@@ -19,7 +20,23 @@ const __dirname = dirname(__filename)
 app.use(express.json())
 
 // Security HTTP headers
-app.use(helmet())
+app.use(
+	helmet({
+		contentSecurityPolicy: {
+			directives: {
+				defaultSrc: ["'self'"],
+				scriptSrc: ["'unsafe-inline'", "'self'"],
+				//styleSrc: ["''"],
+				imgSrc: ["'self'", 'data:', 'blob:'], // Added 'blob:' here
+				connectSrc: ["'self'"],
+				//fontSrc: ["'self'"],
+				objectSrc: ["'none'"],
+				mediaSrc: ["'self'"],
+				frameSrc: ["'none'"],
+			},
+		},
+	})
+)
 
 // CORS Configuration
 app.use(
@@ -59,6 +76,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 // API Routes
 app.use('/api/auth', authRoutes)
 app.use('/api/posts', postRoutes)
+app.use('/api/admin', adminRoutes)
 
 // Error Handling Middleware
 app.use(errorHandler)

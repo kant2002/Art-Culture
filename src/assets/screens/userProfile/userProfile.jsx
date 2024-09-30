@@ -2,13 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
+import API from '../../../utils/api.js'
 import styles from '/src/styles/components/UserProfile/userProfile.module.scss'
 const UserProfile = () => {
-	const { user, logout } = useAuth() // Access user and logout from context
+	const { user, logout, updateUser } = useAuth() // Access user and logout from context
 	const [pageText, setPageText] = useState('')
 	const [email, setEmail] = useState('')
 	const [regDate, setRegDate] = useState('')
 	const [serverMessage, setServerMessage] = useState('')
+	const [title, setTitle] = useState('')
+	const [bio, setBio] = useState('')
+	const [profileImage, setProfileImage] = useState(null) // Can hold File object or URL
+	const [editMode, setEditMode] = useState(false)
 	const { t } = useTranslation()
 	const navigate = useNavigate()
 
@@ -19,6 +24,9 @@ const UserProfile = () => {
 				`Date of registration: ${new Date(user.createdAt).toLocaleDateString()}`
 			)
 			setPageText(`${user.username}'s User Profile`)
+			setTitle(user.title || '')
+			setBio(user.bio || '')
+			setProfileImage(user.images || null)
 		} else {
 			setServerMessage('No valid session found. Please login.')
 			navigate('/login') // Redirect to login page
@@ -41,6 +49,52 @@ const UserProfile = () => {
 	const handleLogout = () => {
 		logout()
 		navigate('/login')
+	}
+
+	const toggleEditMode = () => {
+		setEditMode(!editMode)
+		setServerMessage('')
+	}
+
+	const handleUpdateProfile = async e => {
+		e.preventDefault()
+		setServerMessage('')
+
+		const formData = new FormData()
+		formData.append('title', title)
+		formData.append('bio', bio)
+		if (profileImage instanceof File) {
+			formData.append('profileImage', profileImage)
+		}
+
+		try {
+			const response = await API.put('/auth/me', formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			})
+			if (response.status === 200) {
+				const { user: updatedUserProfile, message } = response.data
+				setServerMessage(message)
+				setEditMode(false)
+				updateUser(updatedUserProfile)
+				// const meResponse = await API.get('/auth/me')
+				// if (meResponse.status === 200) {
+				// 	login(meResponse.data.user, '')
+			}
+		} catch (error) {
+			if (error.response && error.response.data) {
+				setServerMessage(error.response.data.message || 'Update failed')
+			} else {
+				setServerMessage('An error occurred during profile update ')
+			}
+		}
+	}
+
+	const handleImageChange = e => {
+		if (e.target.files && e.target.files[0]) {
+			setProfileImage(e.target.files[0])
+		}
 	}
 
 	return (
@@ -66,10 +120,69 @@ const UserProfile = () => {
 			<div className={styles.profileInfo}>
 				<div className={styles.profileDetails}>
 					<h2>{pageText}</h2>
+					{profileImage && (
+						<div className={styles.profileAvatarWrapper}>
+							<div className={styles.profileAvatar}>
+								<img
+									src={
+										profileImage instanceof File
+											? URL.createObjectURL(profileImage)
+											: profileImage.startsWith('http') ||
+												  profileImage.startsWith('/uploads/profileImages')
+												? `${process.env.REACT_APP_API_URL}${profileImage}`
+												: profileImage
+									}
+									alt='Profile'
+									className={styles.profileImage}
+								/>
+							</div>
+						</div>
+					)}
 					<p>{email}</p>
 					<p>{regDate}</p>
+					{title && (
+						<p>
+							<strong>Title:</strong> {title}
+						</p>
+					)}
+					{bio && (
+						<p>
+							<strong>Bio:</strong> {bio}
+						</p>
+					)}
 					{serverMessage && (
 						<p className={styles.ErrorMessage}>{serverMessage}</p>
+					)}
+					{console.log(serverMessage)}
+					<button onClick={toggleEditMode} className={styles.editButton}>
+						{editMode ? 'Cancel' : 'Edit Profile'}
+					</button>
+					{editMode && (
+						<form
+							className={styles.editProfileForm}
+							onSubmit={handleUpdateProfile}
+						>
+							<input
+								type='text'
+								placeholder='Title'
+								name='title'
+								value={title}
+								onChange={e => setTitle(e.target.value)}
+							/>
+							<textarea
+								placeholder='Bio'
+								name='bio'
+								value={bio}
+								onChange={e => setBio(e.target.value)}
+							/>
+							<input
+								type='file'
+								name='profileImages'
+								accept='image/*'
+								onChange={handleImageChange}
+							/>
+							<button type='submit'>Update Profile</button>
+						</form>
 					)}
 				</div>
 			</div>

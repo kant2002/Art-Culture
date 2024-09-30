@@ -8,6 +8,7 @@ const SignUp = () => {
 	const [signUpDetails, setSignUpDetails] = useState({
 		email: '',
 		password: '',
+		role: 'USER',
 	})
 	const [serverMessage, setServerMessage] = useState('')
 	const { login } = useAuth() // Utilize login from AuthContext
@@ -31,6 +32,7 @@ const SignUp = () => {
 				{
 					email: signUpDetails.email,
 					password: signUpDetails.password,
+					role: signUpDetails.role,
 				},
 				console.log('signUpDetails', signUpDetails)
 			)
@@ -73,6 +75,18 @@ const SignUp = () => {
 						onChange={handleChange}
 						required
 					/>
+					<select
+						name='role'
+						value={signUpDetails.role}
+						onChange={handleChange}
+						className={styles.roleSelect}
+					>
+						<option value='USER'>User</option>
+
+						<option value='MUSEUM'>Museum</option>
+						<option value='CREATOR'>Creator</option>
+						<option value='EDITOR'>Editor</option>
+					</select>
 					<button type='submit'>Sign Up</button>
 				</form>
 			</header>

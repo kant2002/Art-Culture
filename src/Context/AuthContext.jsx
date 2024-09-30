@@ -45,6 +45,10 @@ export const AuthProvider = ({ children }) => {
 		console.log('User logged in:', userData)
 	}
 
+	const updateUser = userData => {
+		setUser(userData)
+	}
+
 	const logout = () => {
 		setUser(null)
 		setIsLoggedIn(false)
@@ -56,6 +60,7 @@ export const AuthProvider = ({ children }) => {
 			value={{
 				user,
 				login,
+				updateUser,
 				logout,
 				isLoggedIn,
 			}}

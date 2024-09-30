@@ -1,32 +1,32 @@
 @import '/src/styles/utilities/variables.scss';
 
-.profile { 
-    /* Основной контейнер профиля */
-    display: flex;
-    flex-direction: column;   
+.profile {
+	/* Основной контейнер профиля */
+	display: flex;
+	flex-direction: column;
 	padding: $responsiveTopPadding $responsiveLeftAndRightPadding 0;
 	width: 100%;
-    min-height: calc(100dvh - 234px);
-    background: white;
-    color: black;
+	min-height: calc(100dvh - 234px);
+	background: white;
+	color: black;
 }
 
 .profileActions {
-    /* Контейнер для верхних кнопок */
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    flex-wrap: wrap;
+	/* Контейнер для верхних кнопок */
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	flex-wrap: wrap;
 }
 
 .profileAction {
-    /* Стиль для каждой кнопки действия */
-    margin: 10px calc(20px - (10 * ((1440px - 100vw) / (1440 - 375)))) 0 0;
+	/* Стиль для каждой кнопки действия */
+	margin: 10px calc(20px - (10 * ((1440px - 100vw) / (1440 - 375)))) 0 0;
 	padding: 0 calc(20px - (10 * ((1440px - 100vw) / (1440 - 375))));
 	// width: calc(238px - (105 * ((1440px - 100vw) / (1440 - 375))));
 	height: calc(51px - (11 * ((1440px - 100vw) / (1440 - 375))));
 	// min-width: 163px;
-    min-width: fit-content;
+	min-width: fit-content;
 	min-height: 40px;
 	// max-width: 238px;
 	max-height: 51px;
@@ -36,97 +36,105 @@
 	border-radius: calc(34px - (4 * ((1440px - 100vw) / (1440 - 375))));
 	background-color: rgb(207, 207, 207);
 	cursor: pointer;
-    font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
 	font-weight: 500;
 }
 
 .profileAction:hover {
-    background: #3A8374;
-    color: #fff;
-    transition: 0.4s ease;
+	background: #3a8374;
+	color: #fff;
+	transition: 0.4s ease;
 }
 
 .profileAction:not(:hover) {
-    transition: 0.4s ease;
+	transition: 0.4s ease;
 }
 
 .profileActionActive {
-    background: #3A8374;
-    color: #fff;
-    border: none;
+	background: #3a8374;
+	color: #fff;
+	border: none;
 }
 
 .profileInfo {
-    // /* Контейнер для информации о пользователе */
-    margin: 20px 0 0 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: start;
+	// /* Контейнер для информации о пользователе */
+	margin: 20px 0 0 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: start;
 }
 
 .profileAvatar {
-    /* Контейнер для аватара */
+	display: flex;
+	/* Контейнер для аватара */
+	img {
+		display: block;
+		object-fit: contain;
+		object-position: center top;
+		border-radius: 3px;
+		max-width: 300px;
+		max-height: 300px;
+	}
 }
 
 .profileDetails {
-    /* Контейнер для деталей пользователя */
+	/* Контейнер для деталей пользователя */
 }
 
 .profileField {
-    /* Общий контейнер для полей информации */
-    margin: 20px 0 ;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: start;
-    line-height: 150%;
+	/* Общий контейнер для полей информации */
+	margin: 20px 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: start;
+	line-height: 150%;
 }
 
 .profileLabel {
-    /* Стиль для меток информации */
-    font-weight: 900;
+	/* Стиль для меток информации */
+	font-weight: 900;
 }
 
 .profileValue {
-    /* Стиль для значений информации */
+	/* Стиль для значений информации */
 }
 
 .profileEdit {
-    /* Стиль для кнопки редактирования */
-    background: rgb(207, 207, 207);
-    color: #000;
-    border-radius: calc(34px - (4 * ((1440px - 100vw) / (1440 - 375))));
-    font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
-    padding: 0 10px;
-    cursor: pointer;
+	/* Стиль для кнопки редактирования */
+	background: rgb(207, 207, 207);
+	color: #000;
+	border-radius: calc(34px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	padding: 0 10px;
+	cursor: pointer;
 }
 
 .profileEdit:hover {
-    background: #3A8374;
-    color: #fff;
-    border: none;
+	background: #3a8374;
+	color: #fff;
+	border: none;
 }
 
 .profileEdit:not(:hover) {
-    transition: 0.4s ease;
+	transition: 0.4s ease;
 }
-
 
 @media (min-width: 1441px) {
 	.profile {
 		padding: $staticPcTopPadding $responsiveLeftAndRightPadding 0;
 	}
 
-    .profileAction {
-        /* Стиль для каждой кнопки действия */
-        font-size: 16px;
-    }
+	.profileAction {
+		/* Стиль для каждой кнопки действия */
+		font-size: 16px;
+	}
 }
 
 @media (max-width: 799px) {
 	.profile {
-        min-height: calc(100dvh - 348px);
+		min-height: calc(100dvh - 348px);
 	}
 }
 

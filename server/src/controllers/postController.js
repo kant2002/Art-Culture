@@ -73,7 +73,8 @@ export const createPost = async (req, res, next) => {
 				images: imageUrl,
 				author: { connect: { id: userId } },
 			},
-			include: { author: { select: { email: true } } },
+			//TODO: include id: true
+			include: { author: { select: { email: true, id: true } } },
 		})
 
 		res.status(201).json(post)

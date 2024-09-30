@@ -13,12 +13,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  USER
+  ADMIN
+  MUSEUM
+  CREATOR
+  EDITOR
+}
+
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
-  password String
-  posts    Post[]
-  images   String?
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  posts     Post[]
+  images    String?
+  title     String? // New field for user title
+  bio       String? // New field for user bio
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Post {

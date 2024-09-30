@@ -44,6 +44,10 @@ const Login = () => {
 		}
 	}
 
+	const handleSignUPLinkClick = () => {
+		navigate('/SignUP')
+	}
+
 	return (
 		<div className={styles.LoginContainer}>
 			<header className={styles.LoginWrapper}>
@@ -69,8 +73,11 @@ const Login = () => {
 						onChange={handleChange}
 						required
 					/>
-					<button type='submit'>Go</button>
+					<button type='submit'>Увійти</button>
 				</form>
+				<p className={styles.SignUp} onClick={handleSignUPLinkClick}>
+					Зареєструватись
+				</p>
 			</header>
 		</div>
 	)
