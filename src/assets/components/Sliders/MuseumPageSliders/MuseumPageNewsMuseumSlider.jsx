@@ -168,7 +168,7 @@ const MuseumPageNewsMuseumSlider = () => {
 				<div className="museumPageNewsMuseumSliderTopInnerWrapper">
 					<div className="museumPageNewsMuseumSliderTitleWrapper">
 						<p className="museumPageNewsMuseumSliderTitle">
-							{t('Новини.')} &#8243;{t('Митці')}&#8243;
+							{t('Останні новини. Музей')}
 						</p>
 					</div>
 					<div className="museumPageNewsMuseumSliderLikeAndShareWrapper">

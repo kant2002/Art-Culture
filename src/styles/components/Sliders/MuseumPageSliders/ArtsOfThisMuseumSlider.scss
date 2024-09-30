@@ -1,0 +1,187 @@
+/* GallerySlider.scss */
+@import '/src/styles/utilities/variables.scss';
+
+/* Контейнер галереи */
+.gallery-slider-container {
+    margin: calc(87px - (43 * ((1440px - 100vw) / (1440 - 375)))) $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+    // width: 100%;
+    // height: auto;
+    min-height: 400px;
+    // max-height: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @at-root {
+        :root {
+            --swiper-navigation-size: calc(42px - (7 * ((1440px - 100vw) / (1440 - 375))));
+        }
+    }
+
+    .swiper-wrapper {
+        position: relative;
+        // margin: 0 0 0 calc(-29px - (-20 * ((1440px - 100vw) / (1440 - 375))));
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        display: flex;
+        transition-property: transform;
+        transition-timing-function: var(--swiper-wrapper-transition-timing-function, initial);
+        box-sizing: content-box;
+    }
+
+    .swiper-slide {
+        flex-shrink: 0;
+        width: auto;
+        height: 100%;
+        position: relative;
+        transition-property: transform;
+        display: block;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        position: absolute;
+        top: calc(calc(735px - (600 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 2));
+        width: var(--swiper-navigation-size);
+        height: var(--swiper-navigation-size);
+        z-index: 11;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #000000;
+        border-radius: 50%;
+        color: white;
+    }
+
+    .swiper-button-prev,
+    .swiper-rtl .swiper-button-next {
+        left: calc(50% - calc(var(--swiper-navigation-size) * 1.14) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
+        right: auto;
+    }
+
+    .swiper-button-next,
+    .swiper-rtl .swiper-button-prev {
+        right: calc(50% - calc(var(--swiper-navigation-size) * 1.14) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
+        left: auto;
+    }
+
+    /* Navigation font start */
+    .swiper-button-prev,
+    .swiper-button-next {
+        &:after {
+            font-family: swiper-icons;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: none !important;
+            letter-spacing: 0;
+            font-variant: initial;
+            line-height: 1;
+        }
+    }
+
+    .swiper-button-next,
+    .swiper-rtl .swiper-button-prev {
+        right: calc(50% - calc(var(--swiper-navigation-size) * 1.24) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
+        left: auto;
+    }
+
+    /* Common Styles */
+    .swiper-pagination-fraction,
+    .swiper-pagination-custom,
+    .swiper-horizontal>.swiper-pagination-bullets,
+    .swiper-pagination-bullets.swiper-pagination-horizontal {
+        top: calc(calc(735px - (72 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 1.4));
+        left: 0;
+        width: 100%;
+    }
+
+    /* Fraction */
+    .swiper-pagination-fraction {
+        color: black;
+    }
+}
+
+/* Контролы сортировки */
+.sort-controls {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.sort-button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #ccc;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &.active {
+        background-color: #007bff;
+    }
+
+    &:hover {
+        background-color: #999;
+    }
+}
+
+/* Swiper слайдер */
+.gallery-swiper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Стили для Masonry */
+.my-masonry-grid {
+    display: flex;
+    margin-left: -15px;
+    /* Отрицательный отступ для компенсации gutter */
+    width: auto;
+}
+
+.my-masonry-grid_column {
+    padding-left: 15px;
+    /* Размер gutter */
+    background-clip: padding-box;
+}
+
+/* Удаление нижнего отступа у последнего элемента в колонке */
+.my-masonry-grid_column>.masonry-item {
+    margin-bottom: 15px;
+}
+
+/* Стили для элементов Masonry */
+.masonry-item {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.masonry-image {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+// /* Адаптивность */
+// @media (min-width: 1440px) {
+//     .gallery-slider-container {
+//         width: 100%;
+//         height: auto;
+//     }
+
+//     .gallery-swiper {
+//         width: 100%;
+//         height: auto;
+//     }
+// }

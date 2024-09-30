@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import MuseumPageNewsMuseumSlider from '../../components/Sliders/MuseumPageSliders/MuseumPageNewsMuseumSlider.jsx'
 import PopularInThisMuseumSlider from '../../components/Sliders/MuseumPageSliders/PopularInThisMuseumSlider.jsx'
+import ArtsOfThisMuseumSlider from '../../components/Sliders/MuseumPageSliders/ArtsOfThisMuseumSlider.jsx'
 import styles from '../../../styles/layout/MuseumPage.module.scss'
 
 function MuseumPage() {
@@ -97,10 +98,12 @@ function MuseumPage() {
 
             <PopularInThisMuseumSlider />
 
-            <div className={`${styles.underDevelopmentContainer}`}>
+            <ArtsOfThisMuseumSlider />
+
+            {/* <div className={`${styles.underDevelopmentContainer}`}>
                 <p className={`${styles.underDevelopmentPreTitle}`}>{t('Цей контейнер')}</p>
                 <p className={`${styles.underDevelopmentTitle}`}>{t('В розробці')}</p>
-            </div>
+            </div> */}
 
             <div className={`${styles.underDevelopmentContainer}`}>
                 <p className={`${styles.underDevelopmentPreTitle}`}>{t('Цей контейнер')}</p>
