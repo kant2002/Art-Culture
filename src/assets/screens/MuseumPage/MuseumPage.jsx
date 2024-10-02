@@ -98,7 +98,7 @@ function MuseumPage() {
 
             <PopularInThisMuseumSlider />
 
-            {/* <ArtsOfThisMuseumSlider /> */}
+            <ArtsOfThisMuseumSlider />
 
             <div className={`${styles.underDevelopmentContainer}`}>
                 <p className={`${styles.underDevelopmentPreTitle}`}>{t('Цей контейнер')}</p>

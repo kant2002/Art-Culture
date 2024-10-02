@@ -104,6 +104,97 @@ const images = [
         timeAdded: '2024-04-02T12:30:00Z',
         rating: 2.8,
     },
+    
+    {
+        id: 51,
+        url: '/Img/gallery/1.webp',
+        timeAdded: '2024-04-01T10:00:00Z',
+        rating: 4.5,
+    },
+    {
+        id: 52,
+        url: '/Img/gallery/2.webp',
+        timeAdded: '2024-04-02T12:30:00Z',
+        rating: 3.8,
+    },
+    {
+        id: 53,
+        url: '/Img/gallery/3.webp',
+        timeAdded: '2024-04-02T12:30:00Z',
+        rating: 3.8,
+    },
+    {
+        id: 54,
+        url: '/Img/gallery/4.webp',
+        timeAdded: '2024-04-02T12:30:00Z',
+        rating: 3.8,
+    },
+    {
+        id: 55,
+        url: '/Img/gallery/5.webp',
+        timeAdded: '2024-04-02T12:30:00Z',
+        rating: 3.8,
+    },
+    {
+        id: 56,
+        url: '/Img/gallery/6.webp',
+        timeAdded: '2024-04-02T12:30:00Z',
+        rating: 3.8,
+    },
+    {
+        id: 57,
+        url: '/Img/gallery/7.webp',
+        timeAdded: '2024-04-02T12:30:00Z',
+        rating: 3.8,
+    },
+    {
+        id: 8,
+        url: '/Img/gallery/8.webp',
+        timeAdded: '2024-04-02T12:30:00Z',
+        rating: 3.8,
+    },
+    {
+        id: 9,
+        url: '/Img/gallery/9.webp',
+        timeAdded: '2024-04-02T12:30:00Z',
+        rating: 3.8,
+    },
+    {
+        id: 10,
+        url: '/Img/gallery/10.webp',
+        timeAdded: '2024-04-02T12:30:00Z',
+        rating: 3.8,
+    },
+    {
+        id: 11,
+        url: '/Img/gallery/11.webp',
+        timeAdded: '2024-04-02T12:30:00Z',
+        rating: 3.8,
+    },
+    {
+        id: 22,
+        url: '/Img/gallery/12.webp',
+        timeAdded: '2024-04-02T12:30:00Z',
+        rating: 3.8,
+    },
+    {
+        id: 23,
+        url: '/Img/gallery/13.webp',
+        timeAdded: '2024-04-02T12:30:00Z',
+        rating: 3.8,
+    },
+    {
+        id: 24,
+        url: '/Img/gallery/14.webp',
+        timeAdded: '2024-04-02T12:30:00Z',
+        rating: 3.8,
+    },
+    {
+        id: 25,
+        url: '/Img/gallery/15.webp',
+        timeAdded: '2024-04-02T12:30:00Z',
+        rating: 2.8,
+    },
     // Добавьте остальные изображения
 ];
 
