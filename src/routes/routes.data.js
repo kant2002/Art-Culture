@@ -1,14 +1,15 @@
 import Login from '../assets/components/VerificationPages/LoginPage'
 import SignUp from '../assets/components/VerificationPages/SignUpPage'
+import AdminDashboard from '../assets/screens/Admin/AdminDashboard'
+import ArtistPage from '../assets/screens/ArtistPage/ArtistPage'
+import MuseumPage from '../assets/screens/MuseumPage/MuseumPage'
 import Home from '../assets/screens/home/Home'
 import Layout from '../assets/screens/layout/Layout'
 import MainPage from '../assets/screens/mainPage/MainPage'
+import NewsPage from '../assets/screens/newsPage/NewsPage'
 import UserProfile from '../assets/screens/userProfile/userProfile'
 import UserProfileAddPost from '../assets/screens/userProfile/userProfileAddPost'
 import UserProfilePosts from '../assets/screens/userProfile/userProfilePosts'
-import NewsPage from '../assets/screens/newsPage/NewsPage'
-import ArtistPage from '../assets/screens/ArtistPage/ArtistPage'
-import MuseumPage from '../assets/screens/MuseumPage/MuseumPage'
 
 export const routes = [
 	{
@@ -74,5 +75,11 @@ export const routes = [
 		path: '/MuseumPage',
 		element: MuseumPage,
 		isAuth: false,
+	},
+
+	{
+		path: '/AdminDashboard',
+		element: AdminDashboard,
+		isAuth: true,
 	},
 ]

@@ -1,17 +1,20 @@
 import cn from 'clsx'
 import React, { useState } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import ProtectedRoute from '../../../routes/ProtectedRoute'
 import Login from '../../components/VerificationPages/LoginPage'
 import SignUp from '../../components/VerificationPages/SignUpPage'
+
+import AdminDashboard from '../Admin/AdminDashboard'
+import ArtistPage from '../ArtistPage/ArtistPage'
+import MuseumPage from '../MuseumPage/MuseumPage'
 import Footer from '../footer/Footer'
 import Header from '../header/Header'
 import MainPage from '../mainPage/MainPage'
+import NewsPage from '../newsPage/NewsPage'
 import UserProfile from '../userProfile/userProfile'
 import UserProfileAddPost from '../userProfile/userProfileAddPost'
 import UserProfilePosts from '../userProfile/userProfilePosts'
-import NewsPage from '../newsPage/NewsPage'
-import ArtistPage from '../ArtistPage/ArtistPage'
-import MuseumPage from '../MuseumPage/MuseumPage'
 import styles from '/src/styles/layout/Layout.module.scss'
 
 const Layout = ({ children, heading = '', backLink = '/' }) => {
@@ -28,8 +31,8 @@ const Layout = ({ children, heading = '', backLink = '/' }) => {
 				<Header />
 				<Routes>
 					<Route path='/' element={<Navigate to='/MainPage' />} />
-					<Route path='/MainPage' element={<MainPage />} />					
-					<Route path='/ArtistPage' element={<ArtistPage />} />					
+					<Route path='/MainPage' element={<MainPage />} />
+					<Route path='/ArtistPage' element={<ArtistPage />} />
 					<Route path='/MuseumPage' element={<MuseumPage />} />
 					<Route
 						path='/userProfile'
@@ -42,6 +45,14 @@ const Layout = ({ children, heading = '', backLink = '/' }) => {
 								serverMessage={serverMessage}
 								setServerMessage={setServerMessage}
 							/>
+						}
+					/>
+					<Route
+						path='/AdminDashboard'
+						element={
+							<ProtectedRoute roles={['ADMIN']}>
+								<AdminDashboard />
+							</ProtectedRoute>
 						}
 					/>
 					<Route path='/userProfileAddPost' element={<UserProfileAddPost />} />

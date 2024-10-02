@@ -1,56 +1,39 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../../Context/AuthContext'
+import API from '../../../utils/api.js'
 import styles from '/src/styles/components/UserProfile/userProfile.module.scss'
-
-function UserProfile({
-	setIsLoggedIn,
-	serverMessage,
-	setUsername,
-	setServerMessage,
-}) {
-	const [pageText, setPageText] = useState(
-		'You are not currently log in. Please log in to see your profile information.'
-	)
+const UserProfile = () => {
+	const { user, logout, updateUser } = useAuth() // Access user and logout from context
+	const [pageText, setPageText] = useState('')
 	const [email, setEmail] = useState('')
 	const [regDate, setRegDate] = useState('')
-
+	const [serverMessage, setServerMessage] = useState('')
+	const [title, setTitle] = useState('')
+	const [bio, setBio] = useState('')
+	const [profileImage, setProfileImage] = useState(null) // Can hold File object or URL
+	const [editMode, setEditMode] = useState(false)
 	const { t } = useTranslation()
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		const userJWT = localStorage.getItem('jwt')
-		if (userJWT) {
-			// Validate JWT
-			const url = `https://admin.playukraine.com/?rest_route=/simple-jwt-login/v1/auth/validate&JWT=${userJWT}`
-			fetch(url)
-				.then(res => res.json())
-				.then(data => {
-					if (data.success) {
-						// If validation is successful, set the user data
-						setEmail(`Email: ${data.data.user.user_email}`)
-						setRegDate(
-							`Date of registration: ${data.data.user.user_registered}`
-						)
-						setPageText(`${data.data.user.user_login}'s User Profile`)
-						setIsLoggedIn(true)
-						setUsername(data.data.user.user_login)
-						setServerMessage('')
-					} else {
-						// If validation fails, set an error message
-						setServerMessage('Session expired. Please log in again.')
-						navigate('/login')
-					}
-				})
-				.catch(error => {
-					console.log('Error validating JWT:', error)
-					setServerMessage('Error ocurred. Try again.')
-				})
+		if (user) {
+			setEmail(`Email: ${user.email}`)
+			setRegDate(
+				`Date of registration: ${new Date(user.createdAt).toLocaleDateString()}`
+			)
+			setPageText(`${user.username}'s User Profile`)
+			setTitle(user.title || '')
+			setBio(user.bio || '')
+			setProfileImage(user.images || null)
 		} else {
 			setServerMessage('No valid session found. Please login.')
 			navigate('/login') // Redirect to login page
 		}
-	}, [setIsLoggedIn, setUsername, setServerMessage, navigate])
+		console.log('UserProfile rendering for user:', user)
+	}, [user, navigate])
+
 	const handleProfilePageClick = () => {
 		navigate('/userProfile')
 	}
@@ -58,109 +41,149 @@ function UserProfile({
 	const handlePostsClick = () => {
 		navigate('/userProfilePosts')
 	}
+
 	const handleAddPostClick = () => {
 		navigate('/userProfileAddPost')
 	}
+
+	const handleLogout = () => {
+		logout()
+		navigate('/login')
+	}
+
+	const toggleEditMode = () => {
+		setEditMode(!editMode)
+		setServerMessage('')
+	}
+
+	const handleUpdateProfile = async e => {
+		e.preventDefault()
+		setServerMessage('')
+
+		const formData = new FormData()
+		formData.append('title', title)
+		formData.append('bio', bio)
+		if (profileImage instanceof File) {
+			formData.append('profileImage', profileImage)
+		}
+
+		try {
+			const response = await API.put('/auth/me', formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			})
+			if (response.status === 200) {
+				const { user: updatedUserProfile, message } = response.data
+				setServerMessage(message)
+				setEditMode(false)
+				updateUser(updatedUserProfile)
+				// const meResponse = await API.get('/auth/me')
+				// if (meResponse.status === 200) {
+				// 	login(meResponse.data.user, '')
+			}
+		} catch (error) {
+			if (error.response && error.response.data) {
+				setServerMessage(error.response.data.message || 'Update failed')
+			} else {
+				setServerMessage('An error occurred during profile update ')
+			}
+		}
+	}
+
+	const handleImageChange = e => {
+		if (e.target.files && e.target.files[0]) {
+			setProfileImage(e.target.files[0])
+		}
+	}
+
 	return (
-		// <div className={`${styles.profile}`}>
-		// 	{/* Верхние кнопки */}
-		// 	<div className={`${styles.profileActions}`}>
-		// 		<button
-		// 			className={`${styles.profileAction} ${styles.profileActionActive}`}
-		// 			onClick={handleProfilePageClick}
-		// 		>
-		// 			Інформація
-		// 		</button>
-		// 		<button
-		// 			className={`${styles.profileAction}`}
-		// 			onClick={handlePostsClick}
-		// 		>
-		// 			Публікації
-		// 		</button>
-		// 		<button
-		// 			className={`${styles.profileAction}`}
-		// 			onClick={handleAddPostClick}
-		// 		>
-		// 			Додати публікацію
-		// 		</button>
-		// 	</div>
-
-		// 	{/* Аватар и информация о пользователе */}
-		// 	<div className={`${styles.profileInfo}`}>
-		// 		<div className={`${styles.profileAvatar}`}>
-		// 			<img src='ссылка_на_аватар' alt='Фото користувача' />
-		// 		</div>
-		// 		<div className={`${styles.profileDetails}`}>
-		// 			<div className={`${styles.profileField}`}>
-		// 				<span className={`${styles.profileLabel}`}>ПІБ:</span>
-		// 				<span className={`${styles.profileValue}`}>
-		// 					Ведмедчук Микола Іванович
-		// 				</span>
-		// 				<button className={`${styles.profileEdit}`}>Редагувати</button>
-		// 			</div>
-		// 			<div className={`${styles.profileField}`}>
-		// 				<span className={`${styles.profileLabel}`}>Дата народження:</span>
-		// 				<span className={`${styles.profileValue}`}>01.01.1990</span>
-		// 				<button className={`${styles.profileEdit}`}>Редагувати</button>
-		// 			</div>
-		// 			<div className={`${styles.profileField}`}>
-		// 				<span className={`${styles.profileLabel}`}>
-		// 					Електронна скринька:
-		// 				</span>
-		// 				<span className={`${styles.profileValue}`}>example@mail.com</span>
-		// 				<button className={`${styles.profileEdit}`}>Редагувати</button>
-		// 			</div>
-		// 			<div className={`${styles.profileField}`}>
-		// 				<span className={`${styles.profileLabel}`}>Телефон:</span>
-		// 				<span className={`${styles.profileValue}`}>+38 123 456 7890</span>
-		// 				<button className={`${styles.profileEdit}`}>Редагувати</button>
-		// 			</div>
-		// 			<div className={`${styles.profileField}`}>
-		// 				<span className={`${styles.profileLabel}`}>Соцмережі:</span>
-		// 				<span className={`${styles.profileValue}`}>
-		// 					Instagram, Facebook
-		// 				</span>
-		// 				<button className={`${styles.profileEdit}`}>Редагувати</button>
-		// 			</div>
-		// 			<div className={`${styles.profileField}`}>
-		// 				<span className={`${styles.profileLabel}`}>О собі:</span>
-		// 				<span className={`${styles.profileValue}`}>
-		// 					Коротко про себе...
-		// 				</span>
-		// 				<button className={`${styles.profileEdit}`}>Редагувати</button>
-		// 			</div>
-		// 		</div>
-		// 	</div>
-
-		// </div>
-		<div className={`${styles.profile}`}>
-			<div className={`${styles.profileActions}`}>
+		<div className={styles.profile}>
+			<div className={styles.profileActions}>
 				<button
 					className={`${styles.profileAction} ${styles.profileActionActive}`}
 					onClick={handleProfilePageClick}
 				>
 					{t('Профіль')}
 				</button>
-				<button
-					className={`${styles.profileAction}`}
-					onClick={handlePostsClick}
-				>
+				<button className={styles.profileAction} onClick={handlePostsClick}>
 					{t('Публікації')}
 				</button>
-				<button
-					className={`${styles.profileAction}`}
-					onClick={handleAddPostClick}
-				>
+				<button className={styles.profileAction} onClick={handleAddPostClick}>
 					{t('Додати публікацію')}
+				</button>
+				<button className={styles.profileAction} onClick={handleLogout}>
+					{t('Вийти')}
 				</button>
 			</div>
 
-			<div className={`${styles.profileInfo}`}>
-				<div className={`${styles.profileDetails}`}>
+			<div className={styles.profileInfo}>
+				<div className={styles.profileDetails}>
 					<h2>{pageText}</h2>
+					{profileImage && (
+						<div className={styles.profileAvatarWrapper}>
+							<div className={styles.profileAvatar}>
+								<img
+									src={
+										profileImage instanceof File
+											? URL.createObjectURL(profileImage)
+											: profileImage.startsWith('http') ||
+												  profileImage.startsWith('/uploads/profileImages')
+												? `${process.env.REACT_APP_API_URL}${profileImage}`
+												: profileImage
+									}
+									alt='Profile'
+									className={styles.profileImage}
+								/>
+							</div>
+						</div>
+					)}
 					<p>{email}</p>
 					<p>{regDate}</p>
-					<p>{serverMessage}</p>
+					{title && (
+						<p>
+							<strong>Title:</strong> {title}
+						</p>
+					)}
+					{bio && (
+						<p>
+							<strong>Bio:</strong> {bio}
+						</p>
+					)}
+					{serverMessage && (
+						<p className={styles.ErrorMessage}>{serverMessage}</p>
+					)}
+					{console.log(serverMessage)}
+					<button onClick={toggleEditMode} className={styles.editButton}>
+						{editMode ? 'Cancel' : 'Edit Profile'}
+					</button>
+					{editMode && (
+						<form
+							className={styles.editProfileForm}
+							onSubmit={handleUpdateProfile}
+						>
+							<input
+								type='text'
+								placeholder='Title'
+								name='title'
+								value={title}
+								onChange={e => setTitle(e.target.value)}
+							/>
+							<textarea
+								placeholder='Bio'
+								name='bio'
+								value={bio}
+								onChange={e => setBio(e.target.value)}
+							/>
+							<input
+								type='file'
+								name='profileImages'
+								accept='image/*'
+								onChange={handleImageChange}
+							/>
+							<button type='submit'>Update Profile</button>
+						</form>
+					)}
 				</div>
 			</div>
 		</div>
