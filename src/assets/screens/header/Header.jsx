@@ -98,6 +98,14 @@ function Header() {
 		navigate('/NewsPage')
 	}
 
+	const handleArtistPageClick = () => {
+		navigate('/ArtistPage')
+	}
+
+	const handleMuseumPageClick = () => {
+		navigate('/MuseumPage')
+	}
+
 	const burgerMenu = (
 		<div className='burgerMenu'>
 			<div className='burgerMenuWrapper'>
@@ -163,7 +171,7 @@ function Header() {
 									<p>&#8250;</p>
 								</a>
 							</li>
-							<li className='footerMenuLi'>
+							<li className='footerMenuLi' onClick={handleArtistPageClick}>
 								<a className='footerMenuLink' href='#'>
 									<p>{t('Митці')}</p>
 									<p>&#8250;</p>
@@ -175,7 +183,7 @@ function Header() {
 									<p>&#8250;</p>
 								</a>
 							</li>
-							<li className='footerMenuLi'>
+							<li className='footerMenuLi' onClick={handleMuseumPageClick}>
 								<a className='footerMenuLink' href='#'>
 									<p>{t('Музеї')}</p>
 									<p>&#8250;</p>
@@ -303,7 +311,7 @@ function Header() {
 											{t('Новини')}
 										</a>
 									</li>
-									<li className='mainMenu__li'>
+									<li className='mainMenu__li' onClick={handleArtistPageClick}>
 										<a className='mainMenu__link' href='#'>
 											{t('Митці')}
 										</a>
@@ -313,7 +321,7 @@ function Header() {
 											{t('Виставки')}
 										</a>
 									</li>
-									<li className='mainMenu__li'>
+									<li className='mainMenu__li' onClick={handleMuseumPageClick}>
 										<a className='mainMenu__link' href='#'>
 											{t('Музеї')}
 										</a>

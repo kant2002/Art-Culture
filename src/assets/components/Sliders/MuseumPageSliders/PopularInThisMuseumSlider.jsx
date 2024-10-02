@@ -74,11 +74,11 @@ const Slide1 = () => {
                     </p>
                 </div> */}
 
-                <div className="popularInThisMuseumSliderSellIcon">
+                {/* <div className="popularInThisMuseumSliderSellIcon">
                     <p className="popularInThisMuseumSliderSellIconText">
                         Sell
                     </p>
-                </div>
+                </div> */}
 
             </div>
 
@@ -105,11 +105,11 @@ const Slide2 = () => {
 
             <div className="popularInThisMuseumSliderSoldSellIconWrapper">
 
-                <div className="popularInThisMuseumSliderSoldIcon">
+                {/* <div className="popularInThisMuseumSliderSoldIcon">
                     <p className="popularInThisMuseumSliderSoldIconText">
 						Sold
                     </p>
-                </div>
+                </div> */}
 
                 {/* <div className="popularInThisMuseumSliderSellIcon">
                     <p className="popularInThisMuseumSliderSellIconText">
@@ -148,11 +148,11 @@ const Slide3 = () => {
                     </p>
                 </div> */}
 
-                <div className="popularInThisMuseumSliderSellIcon">
+                {/* <div className="popularInThisMuseumSliderSellIcon">
                     <p className="popularInThisMuseumSliderSellIconText">
 						Sell
                     </p>
-                </div>
+                </div> */}
 
             </div>
 
@@ -168,7 +168,7 @@ const PopularInThisMuseumSlider = () => {
 				<div className="popularInThisMuseumSliderTopInnerWrapper">
 					<div className="popularInThisMuseumSliderTitleWrapper">
 						<p className="popularInThisMuseumSliderTitle">
-							{t('Популярне цього митця')}
+							{t('Популярні експонати цього музею')}
 						</p>
 					</div>
 					<div className="popularInThisMuseumSliderLikeAndShareWrapper">
