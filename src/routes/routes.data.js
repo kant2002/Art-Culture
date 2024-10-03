@@ -1,8 +1,10 @@
+import ProductCartCreate from '../assets/components/ProductCard/ProductCardCreate'
 import Login from '../assets/components/VerificationPages/LoginPage'
 import SignUp from '../assets/components/VerificationPages/SignUpPage'
 import AdminDashboard from '../assets/screens/Admin/AdminDashboard'
 import ArtistPage from '../assets/screens/ArtistPage/ArtistPage'
 import MuseumPage from '../assets/screens/MuseumPage/MuseumPage'
+import Paintings from '../assets/screens/ProductList/Paintings'
 import Home from '../assets/screens/home/Home'
 import Layout from '../assets/screens/layout/Layout'
 import MainPage from '../assets/screens/mainPage/MainPage'
@@ -80,6 +82,17 @@ export const routes = [
 	{
 		path: '/AdminDashboard',
 		element: AdminDashboard,
+		isAuth: true,
+	},
+	{
+		path: '/ProductCardCreate',
+		element: ProductCartCreate,
+		isAuth: true,
+	},
+
+	{
+		path: '/Paintings',
+		element: Paintings,
 		isAuth: true,
 	},
 ]

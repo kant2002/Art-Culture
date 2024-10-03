@@ -50,6 +50,19 @@ function UserProfilePosts() {
 		navigate('/userProfileAddPost')
 	}
 
+	const handleLogout = () => {
+		logout()
+		navigate('/login')
+	}
+
+	const handleProductCartCreateClick = () => {
+		navigate('/ProductCardCreate')
+	}
+
+	const handlePaintingCardListClick = () => {
+		navigate('/Paintings')
+	}
+
 	return (
 		<div className={styles.profile}>
 			<div className={styles.profileActions}>
@@ -66,6 +79,21 @@ function UserProfilePosts() {
 				</button>
 				<button className={styles.profileAction} onClick={handleAddPostClick}>
 					{t('Додати публікацію')}
+				</button>
+				<button
+					className={styles.profileAction}
+					onClick={handleProductCartCreateClick}
+				>
+					{t('Додати картину')}
+				</button>
+				<button
+					className={styles.profileAction}
+					onClick={handlePaintingCardListClick}
+				>
+					{t('Переглянути вироби/картини ')}
+				</button>
+				<button className={styles.profileAction} onClick={handleLogout}>
+					{t('Вийти')}
 				</button>
 			</div>
 
