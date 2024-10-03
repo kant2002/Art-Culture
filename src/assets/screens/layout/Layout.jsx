@@ -8,6 +8,7 @@ import SignUp from '../../components/VerificationPages/SignUpPage'
 import AdminDashboard from '../Admin/AdminDashboard'
 import ArtistPage from '../ArtistPage/ArtistPage'
 import MuseumPage from '../MuseumPage/MuseumPage'
+import Paintings from '../ProductList/Paintings'
 import Footer from '../footer/Footer'
 import Header from '../header/Header'
 import MainPage from '../mainPage/MainPage'
@@ -15,6 +16,7 @@ import NewsPage from '../newsPage/NewsPage'
 import UserProfile from '../userProfile/userProfile'
 import UserProfileAddPost from '../userProfile/userProfileAddPost'
 import UserProfilePosts from '../userProfile/userProfilePosts'
+import ProductCardCreate from '/src/assets/components/ProductCard/ProductCardCreate'
 import styles from '/src/styles/layout/Layout.module.scss'
 
 const Layout = ({ children, heading = '', backLink = '/' }) => {
@@ -57,6 +59,8 @@ const Layout = ({ children, heading = '', backLink = '/' }) => {
 					/>
 					<Route path='/userProfileAddPost' element={<UserProfileAddPost />} />
 					<Route path='/userProfilePosts' element={<UserProfilePosts />} />
+					<Route path='/Paintings' element={<Paintings />} />
+					<Route path='/ProductCardCreate' element={<ProductCardCreate />} />
 					<Route path='/NewsPage' element={<NewsPage />} />
 					<Route
 						path='/login'

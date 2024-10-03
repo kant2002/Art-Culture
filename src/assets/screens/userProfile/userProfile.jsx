@@ -51,6 +51,13 @@ const UserProfile = () => {
 		navigate('/login')
 	}
 
+	const handleProductCartCreateClick = () => {
+		navigate('/ProductCardCreate')
+	}
+
+	const handlePaintingCardListClick = () => {
+		navigate('/Paintings')
+	}
 	const toggleEditMode = () => {
 		setEditMode(!editMode)
 		setServerMessage('')
@@ -111,6 +118,19 @@ const UserProfile = () => {
 				</button>
 				<button className={styles.profileAction} onClick={handleAddPostClick}>
 					{t('Додати публікацію')}
+				</button>
+
+				<button
+					className={styles.profileAction}
+					onClick={handleProductCartCreateClick}
+				>
+					{t('Додати картину')}
+				</button>
+				<button
+					className={styles.profileAction}
+					onClick={handlePaintingCardListClick}
+				>
+					{t('Переглянути вироби/картини ')}
 				</button>
 				<button className={styles.profileAction} onClick={handleLogout}>
 					{t('Вийти')}

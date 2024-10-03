@@ -1,9 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import ProductCartCreate from '../assets/components/ProductCard/ProductCardCreate.jsx'
 import Login from '../assets/components/VerificationPages/LoginPage.jsx'
 import SignUp from '../assets/components/VerificationPages/SignUpPage.jsx'
 import AdminDashboard from '../assets/screens/Admin/AdminDashboard.jsx'
 import ArtistPage from '../assets/screens/ArtistPage/ArtistPage.jsx'
 import MuseumPage from '../assets/screens/MuseumPage/MuseumPage.jsx'
+import Paintings from '../assets/screens/ProductList/Paintings.jsx'
 import Footer from '../assets/screens/footer/Footer.jsx'
 import Home from '../assets/screens/home/Home.jsx'
 import MainPage from '../assets/screens/mainPage/MainPage.jsx'
@@ -34,6 +36,8 @@ const AppRouter = () => {
 				<UserProfileAddPost />
 				<UserProfilePosts />
 				<AdminDashboard />
+				<ProductCartCreate />
+				<Paintings />
 				<Login />
 				<SignUp />
 			</Routes>

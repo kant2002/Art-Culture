@@ -10,6 +10,7 @@ import errorHandler from './src/middleware/errorHandler.js'
 import adminRoutes from './src/routes/adminRoutes.js'
 import authRoutes from './src/routes/authRoutes.js'
 import postRoutes from './src/routes/postRoutes.js'
+import productRoutes from './src/routes/productRoutes.js'
 dotenv.config()
 
 const app = express()
@@ -77,6 +78,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 app.use('/api/auth', authRoutes)
 app.use('/api/posts', postRoutes)
 app.use('/api/admin', adminRoutes)
+app.use('/api/products', productRoutes)
 
 // Error Handling Middleware
 app.use(errorHandler)
@@ -84,4 +86,5 @@ app.get('/api/test', (req, res) => {
 	res.json({ message: 'API is working!' })
 })
 
+app.use(errorHandler)
 export default app
