@@ -100,10 +100,10 @@ function MuseumPage() {
 
             <ArtsOfThisMuseumSlider />
 
-            <div className={`${styles.underDevelopmentContainer}`}>
+            {/* <div className={`${styles.underDevelopmentContainer}`}>
                 <p className={`${styles.underDevelopmentPreTitle}`}>{t('Цей контейнер')}</p>
                 <p className={`${styles.underDevelopmentTitle}`}>{t('В розробці')}</p>
-            </div>
+            </div> */}
 
             <div className={`${styles.underDevelopmentContainer}`}>
                 <p className={`${styles.underDevelopmentPreTitle}`}>{t('Цей контейнер')}</p>
