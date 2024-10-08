@@ -1,281 +1,164 @@
-// GallerySlider.jsx
-import React, { useState } from 'react';
-import Masonry from 'react-masonry-css';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
-
-// Импорт стилей Swiper
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-
-// Импорт собственного SCSS
+import React from 'react';
+import { useTranslation } from 'react-i18next'
 import '../../../../styles/components/Sliders/MuseumPageSliders/ArtsOfThisMuseumSlider.scss';
 
-// Пример данных (замените на реальные или передайте через пропсы)
-const images = [
-    {
-        id: 1,
-        url: '/Img/gallery/1.webp',
-        timeAdded: '2024-04-01T10:00:00Z',
-        rating: 4.5,
-    },
-    {
-        id: 2,
-        url: '/Img/gallery/2.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 3,
-        url: '/Img/gallery/3.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 4,
-        url: '/Img/gallery/4.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 5,
-        url: '/Img/gallery/5.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 6,
-        url: '/Img/gallery/6.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 7,
-        url: '/Img/gallery/7.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 8,
-        url: '/Img/gallery/8.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 9,
-        url: '/Img/gallery/9.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 10,
-        url: '/Img/gallery/10.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 11,
-        url: '/Img/gallery/11.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 12,
-        url: '/Img/gallery/12.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 13,
-        url: '/Img/gallery/13.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 14,
-        url: '/Img/gallery/14.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 15,
-        url: '/Img/gallery/15.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 2.8,
-    },
-    
-    {
-        id: 51,
-        url: '/Img/gallery/1.webp',
-        timeAdded: '2024-04-01T10:00:00Z',
-        rating: 4.5,
-    },
-    {
-        id: 52,
-        url: '/Img/gallery/2.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 53,
-        url: '/Img/gallery/3.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 54,
-        url: '/Img/gallery/4.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 55,
-        url: '/Img/gallery/5.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 56,
-        url: '/Img/gallery/6.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 57,
-        url: '/Img/gallery/7.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 8,
-        url: '/Img/gallery/8.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 9,
-        url: '/Img/gallery/9.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 10,
-        url: '/Img/gallery/10.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 11,
-        url: '/Img/gallery/11.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 22,
-        url: '/Img/gallery/12.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 23,
-        url: '/Img/gallery/13.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 24,
-        url: '/Img/gallery/14.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 3.8,
-    },
-    {
-        id: 25,
-        url: '/Img/gallery/15.webp',
-        timeAdded: '2024-04-02T12:30:00Z',
-        rating: 2.8,
-    },
-    
-    // Добавьте остальные изображения
-];
-
-const GallerySlider = () => {
-    const [sortBy, setSortBy] = useState('timeAdded'); // 'timeAdded' или 'rating'
-
-    // Функция сортировки
-    const sortedImages = [...images].sort((a, b) => {
-        if (sortBy === 'timeAdded') {
-            return new Date(b.timeAdded) - new Date(a.timeAdded); // Новые первыми
-        } else if (sortBy === 'rating') {
-            return b.rating - a.rating; // Высокий рейтинг первыми
-        }
-        return 0;
-    });
-
-    // Разделим изображения на группы для слайдов
-    const imagesPerSlide = 10; // Количество изображений на одном слайде (настраиваемо)
-    const slides = [];
-    for (let i = 0; i < sortedImages.length; i += imagesPerSlide) {
-        slides.push(sortedImages.slice(i, i + imagesPerSlide));
-    }
-
-    // Настройки для react-masonry-css
-    const masonryBreakpoints = {
-        default: 4, // Количество колонок по умолчанию
-        1439: 3,
-        700: 2,
-        500: 1,
-    };
-
+const GridWrapper = () => {    
+	const { t } = useTranslation();
     return (
-        <div className="gallery-slider-container">
-            {/* Контролы сортировки */}
-            <div className="sort-controls">
-                <button
-                    onClick={() => setSortBy('timeAdded')}
-                    className={`sort-button ${sortBy === 'timeAdded' ? 'active' : ''}`}
-                >
-                    Сортировать по времени
-                </button>
-                <button
-                    onClick={() => setSortBy('rating')}
-                    className={`sort-button ${sortBy === 'rating' ? 'active' : ''}`}
-                >
-                    Сортировать по рейтингу
-                </button>
+        <div className="grid-wrapper">
+            <div>
+                <img className="popularInThisMuseumSliderShareButtonImg"
+                    src={'/Img/gallery/1.webp'}
+                    alt={t('Світлина поширити')}
+                    onError={e => {
+                        e.target.onerror = null
+                        e.target.src = '/Img/shareArrow.svg'
+                    }}
+                />
             </div>
-
-            {/* Swiper слайдер */}
-            <Swiper
-                modules={[Navigation, Pagination]}
-                navigation
-                pagination={{ clickable: false, type: 'fraction' }}
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
-                className="gallery-swiper"
-            >
-                {slides.map((slideImages, index) => (
-                    <SwiperSlide key={index}>
-                        <Masonry
-                            breakpointCols={masonryBreakpoints}
-                            className="my-masonry-grid"
-                            columnClassName="my-masonry-grid_column"
-                        >
-                            {slideImages.map((image) => (
-                                <div key={image.id} className="masonry-item">
-                                    <img
-                                        src={image.url}
-                                        alt={`Image ${image.id}`}
-                                        className="masonry-image"
-                                    />
-                                </div>
-                            ))}
-                        </Masonry>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+            <div>
+                <img className="popularInThisMuseumSliderShareButtonImg"
+                    src={'/Img/gallery/2.webp'}
+                    alt={t('Світлина поширити')}
+                    onError={e => {
+                        e.target.onerror = null
+                        e.target.src = '/Img/shareArrow.svg'
+                    }}
+                />
+            </div>
+            <div className="tall">
+                <img className="popularInThisMuseumSliderShareButtonImg"
+                    src={'/Img/gallery/3.webp'}
+                    alt={t('Світлина поширити')}
+                    onError={e => {
+                        e.target.onerror = null
+                        e.target.src = '/Img/shareArrow.svg'
+                    }}
+                />
+            </div>
+            <div className="wide">
+                <img className="popularInThisMuseumSliderShareButtonImg"
+                    src={'/Img/gallery/4.webp'}
+                    alt={t('Світлина поширити')}
+                    onError={e => {
+                        e.target.onerror = null
+                        e.target.src = '/Img/shareArrow.svg'
+                    }}
+                />
+            </div>
+            {/* Add the rest of your divs and images here */}
+            <div className="wide Last">
+                <img className="popularInThisMuseumSliderShareButtonImg"
+                    src={'/Img/gallery/5.webp'}
+                    alt={t('Світлина поширити')}
+                    onError={e => {
+                        e.target.onerror = null
+                        e.target.src = '/Img/shareArrow.svg'
+                    }}
+                />
+            </div>
+            <div className="last">
+                <img className="popularInThisMuseumSliderShareButtonImg"
+                    src={'/Img/gallery/6.webp'}
+                    alt={t('Світлина поширити')}
+                    onError={e => {
+                        e.target.onerror = null
+                        e.target.src = '/Img/shareArrow.svg'
+                    }}
+                />
+            </div>
+            <div className="last">
+                <img className="popularInThisMuseumSliderShareButtonImg"
+                    src={'/Img/gallery/7.webp'}
+                    alt={t('Світлина поширити')}
+                    onError={e => {
+                        e.target.onerror = null
+                        e.target.src = '/Img/shareArrow.svg'
+                    }}
+                />
+            </div>
+            <div className="last">
+                <img className="popularInThisMuseumSliderShareButtonImg"
+                    src={'/Img/gallery/8.webp'}
+                    alt={t('Світлина поширити')}
+                    onError={e => {
+                        e.target.onerror = null
+                        e.target.src = '/Img/shareArrow.svg'
+                    }}
+                />
+            </div>
+            <div className="last">
+                <img className="popularInThisMuseumSliderShareButtonImg"
+                    src={'/Img/gallery/9.webp'}
+                    alt={t('Світлина поширити')}
+                    onError={e => {
+                        e.target.onerror = null
+                        e.target.src = '/Img/shareArrow.svg'
+                    }}
+                />
+            </div>
+            <div className="last">
+                <img className="popularInThisMuseumSliderShareButtonImg"
+                    src={'/Img/gallery/10.webp'}
+                    alt={t('Світлина поширити')}
+                    onError={e => {
+                        e.target.onerror = null
+                        e.target.src = '/Img/shareArrow.svg'
+                    }}
+                />
+            </div>
+            <div className="last">
+                <img className="popularInThisMuseumSliderShareButtonImg"
+                    src={'/Img/gallery/11.webp'}
+                    alt={t('Світлина поширити')}
+                    onError={e => {
+                        e.target.onerror = null
+                        e.target.src = '/Img/shareArrow.svg'
+                    }}
+                />
+            </div>
+            <div className="last">
+                <img className="popularInThisMuseumSliderShareButtonImg"
+                    src={'/Img/gallery/12.webp'}
+                    alt={t('Світлина поширити')}
+                    onError={e => {
+                        e.target.onerror = null
+                        e.target.src = '/Img/shareArrow.svg'
+                    }}
+                />
+            </div>
+            <div className="last">
+                <img className="popularInThisMuseumSliderShareButtonImg"
+                    src={'/Img/gallery/13.webp'}
+                    alt={t('Світлина поширити')}
+                    onError={e => {
+                        e.target.onerror = null
+                        e.target.src = '/Img/shareArrow.svg'
+                    }}
+                />
+            </div>
+            <div className="last">
+                <img className="popularInThisMuseumSliderShareButtonImg"
+                    src={'/Img/gallery/14.webp'}
+                    alt={t('Світлина поширити')}
+                    onError={e => {
+                        e.target.onerror = null
+                        e.target.src = '/Img/shareArrow.svg'
+                    }}
+                />
+            </div>
+            <div className="last">
+                <img className="popularInThisMuseumSliderShareButtonImg"
+                    src={'/Img/gallery/15.webp'}
+                    alt={t('Світлина поширити')}
+                    onError={e => {
+                        e.target.onerror = null
+                        e.target.src = '/Img/shareArrow.svg'
+                    }}
+                />
+            </div>
         </div>
     );
 };
 
-export default GallerySlider;
+export default GridWrapper;
