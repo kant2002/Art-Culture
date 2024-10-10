@@ -18,7 +18,11 @@ const Paintings = () => {
 	useEffect(() => {
 		const fetchProducts = async () => {
 			try {
-				const response = await API.get('/products')
+				const response = await API.get('/products/my-products', {
+					headers: {
+						Authorization: `Bearer ${localStorage.getItem('token')}`,
+					},
+				})
 				setProducts(response.data.products)
 			} catch (error) {
 				console.error('Error fetching products:', error)

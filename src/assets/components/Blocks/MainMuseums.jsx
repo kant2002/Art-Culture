@@ -1,13 +1,14 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import styles from '/src/styles/components/Blocks/MainNews.module.scss'
 
 function MainMuseums() {
 	const { t } = useTranslation()
-	const [posts, setPosts] = useState([])
-	const [media, setMedia] = useState({})
-	const [visiblePostsCount, setVisiblePostsCount] = useState(
+	const [museums, setMuseums] = useState([])
+	const navigate = useNavigate()
+	const [visibleMuseumsCount, setVisibleMuseumsCount] = useState(
 		getPostsCount(window.innerWidth)
 	)
 
@@ -24,8 +25,8 @@ function MainMuseums() {
 	useEffect(() => {
 		const handleResize = () => {
 			const newPostCount = getPostsCount(window.innerWidth)
-			if (newPostCount !== visiblePostsCount) {
-				setVisiblePostsCount(newPostCount)
+			if (newPostCount !== visibleMuseumsCount) {
+				setVisibleMuseumsCount(newPostCount)
 				console.log(
 					`Window width: ${window.innerWidth}, Visible posts count: ${newPostCount}`
 				)
@@ -40,37 +41,24 @@ function MainMuseums() {
 		return () => {
 			window.removeEventListener('resize', handleResize)
 		}
-	}, [visiblePostsCount])
+	}, [visibleMuseumsCount])
 
 	useEffect(() => {
 		// Запит на отримання постів з медіа-даними
 		axios
-			.get(
-				'https://admin.playukraine.com/wp-json/wp/v2/posts?categories=5&_embed'
-			)
+			.get('/api/users/museums')
 			.then(response => {
 				console.log('Отримані дані постів:', response.data)
-				setPosts(response.data)
+				setMuseums(response.data.museums)
 			})
 			.catch(error => {
 				console.error('Помилка при завантаженні постів', error)
 			})
-
-		// Запит на отримання медіа
-		axios
-			.get('https://admin.playukraine.com/wp-json/wp/v2/media')
-			.then(response => {
-				const mediaMap = response.data.reduce((acc, mediaItem) => {
-					acc[mediaItem.id] = mediaItem.source_url
-					return acc
-				}, {})
-				console.log('Отримані медіа-дані:', mediaMap)
-				setMedia(mediaMap)
-			})
-			.catch(error => {
-				console.error('Помилка при завантаженні медіа', error)
-			})
 	}, [])
+
+	const handleMuseumPageClick = () => {
+		navigate('/MuseumPage')
+	}
 
 	return (
 		<div className={`${styles.mainPageNewsContainer}`}>
@@ -96,30 +84,30 @@ function MainMuseums() {
 				</div>
 			</div>
 			<div className={`${styles.mainPageNewsCardsWrapper}`}>
-				{posts.slice(0, visiblePostsCount).map((post, index) => {
+				{museums.slice(0, visibleMuseumsCount).map((museum, index) => {
 					// Логування даних для перевірки
-					console.log('Пост:', post)
+					console.log('Витягнені музеі:', museums)
 
-					const featuredMediaId = post.featured_media
-					const featuredMediaUrl =
-						media[featuredMediaId] || '/Img/halfNewsCard.jpg'
+					const featuredMediaUrl = museum.images
+						? `http://localhost:5000${museum.images.replace('../../', '/')}`
+						: '/Img/halfNewsCard.jpg'
 
 					console.log('Витягнуте медіа:', featuredMediaUrl)
 
-					const postDate = new Date(post.date)
-					const formattedDate = postDate.toLocaleDateString('uk-UA', {
-						year: 'numeric',
-						month: 'long',
-						day: 'numeric',
-					})
-					const formattedTime = postDate.toLocaleTimeString('uk-UA', {
-						hour: 'numeric',
-						minute: 'numeric',
-					})
+					// const postDate = new Date(post.date)
+					// const formattedDate = postDate.toLocaleDateString('uk-UA', {
+					// 	year: 'numeric',
+					// 	month: 'long',
+					// 	day: 'numeric',
+					// })
+					// const formattedTime = postDate.toLocaleTimeString('uk-UA', {
+					// 	hour: 'numeric',
+					// 	minute: 'numeric',
+					// })
 
 					return (
 						<div
-							key={post.id}
+							key={museum.id}
 							className={`${styles.mainPageNewsCard} ${index === 0 ? styles.firstCard : index === 1 ? styles.secondCard : styles.thirdCard}`}
 						>
 							<div className={`${styles.cardInner}`}>
@@ -138,22 +126,19 @@ function MainMuseums() {
 									<div className={`${styles.cardTitleWrapper}`}>
 										<h3
 											className={`${styles.cardTitle} ${index === 0 ? styles.firstCardTitle : index === 1 ? styles.secondCardTitle : index === 2 ? styles.thirdCardTitle : styles.fourthCardTitle}`}
-											dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-										/>
+										>
+											{museum.title || museum.email}
+										</h3>
 									</div>
 									<div className={`${styles.cardDescriptioneWrapper}`}>
 										<p
 											className={`${styles.cardDescription} ${index === 0 ? styles.firstCardDescription : index === 1 ? styles.secondCardDescription : styles.thirdCardDescription}`}
-											dangerouslySetInnerHTML={{
-												__html: post.excerpt.rendered,
-											}}
-										/>
+										>
+											{museum.bio || t('Немає біографії')}
+										</p>
 									</div>
 									<div className={`${styles.cardReadMoreWrapper}`}>
-										<a
-											href={post.link}
-											className={`${styles.cardReadMoreLink}`}
-										>
+										<a className={`${styles.cardReadMoreLink}`}>
 											{t('Читати далі')}
 										</a>
 									</div>
@@ -173,10 +158,14 @@ function MainMuseums() {
 										/>
 									</div>
 									<div className={`${styles.cardDateWrapper}`}>
-										<p className={`${styles.cardDate}`}>{formattedDate}</p>
+										<p className={`${styles.cardDate}`}>
+											{/*{formattedDate}*/}
+										</p>
 									</div>
 									<div className={`${styles.cardTimeWrapper}`}>
-										<p className={`${styles.cardTime}`}>{formattedTime}</p>
+										<p className={`${styles.cardTime}`}>
+											{/*{formattedTime}*/}
+										</p>
 									</div>
 								</div>
 							</div>
@@ -188,7 +177,10 @@ function MainMuseums() {
 				className={`${styles.mainPageNewsButtonWrapper} ${styles.mobileButtonWrapper}`}
 			>
 				<button className={`${styles.mainPageNewsButton}`}>
-					<p className={`${styles.mainPageNewsButtonTitle}`}>
+					<p
+						className={`${styles.mainPageNewsButtonTitle}`}
+						onClick={handleMuseumPageClick}
+					>
 						{t('Усі музеї')}
 					</p>
 					<img

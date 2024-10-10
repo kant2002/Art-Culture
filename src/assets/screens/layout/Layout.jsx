@@ -2,9 +2,9 @@ import cn from 'clsx'
 import React, { useState } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import ProtectedRoute from '../../../routes/ProtectedRoute'
+import PostDetail from '../../components/Post/PostDetail'
 import Login from '../../components/VerificationPages/LoginPage'
 import SignUp from '../../components/VerificationPages/SignUpPage'
-
 import AdminDashboard from '../Admin/AdminDashboard'
 import ArtistPage from '../ArtistPage/ArtistPage'
 import MuseumPage from '../MuseumPage/MuseumPage'
@@ -73,6 +73,7 @@ const Layout = ({ children, heading = '', backLink = '/' }) => {
 							/>
 						}
 					/>
+					<Route path='/posts/:id' element={<PostDetail />} />
 					<Route
 						path='/signup'
 						element={

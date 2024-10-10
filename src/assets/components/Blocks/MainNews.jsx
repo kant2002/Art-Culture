@@ -7,7 +7,7 @@ import styles from '/src/styles/components/Blocks/MainNews.module.scss'
 function MainNews() {
 	const { t } = useTranslation()
 	const [posts, setPosts] = useState([])
-	const [media, setMedia] = useState({})
+
 	const [visiblePostsCount, setVisiblePostsCount] = useState(
 		getPostsCount(window.innerWidth)
 	)
@@ -50,30 +50,13 @@ function MainNews() {
 	useEffect(() => {
 		// Запит на отримання постів з медіа-даними
 		axios
-			.get(
-				'https://admin.playukraine.com/wp-json/wp/v2/posts?categories=2&_embed'
-			)
+			.get('/api/posts')
 			.then(response => {
 				console.log('Отримані дані постів:', response.data)
 				setPosts(response.data)
 			})
 			.catch(error => {
 				console.error('Помилка при завантаженні постів', error)
-			})
-
-		// Запит на отримання медіа
-		axios
-			.get('https://admin.playukraine.com/wp-json/wp/v2/media')
-			.then(response => {
-				const mediaMap = response.data.reduce((acc, mediaItem) => {
-					acc[mediaItem.id] = mediaItem.source_url
-					return acc
-				}, {})
-				console.log('Отримані медіа-дані:', mediaMap)
-				setMedia(mediaMap)
-			})
-			.catch(error => {
-				console.error('Помилка при завантаженні медіа', error)
 			})
 	}, [])
 
@@ -84,7 +67,10 @@ function MainNews() {
 				<div
 					className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}
 				>
-					<button className={`${styles.mainPageNewsButton}`} onClick={handleNewsPageClick}>
+					<button
+						className={`${styles.mainPageNewsButton}`}
+						onClick={handleNewsPageClick}
+					>
 						<p className={`${styles.mainPageNewsButtonTitle}`}>
 							{t('Усі новини')}
 						</p>
@@ -105,13 +91,12 @@ function MainNews() {
 					// Логування даних для перевірки
 					console.log('Пост:', post)
 
-					const featuredMediaId = post.featured_media
-					const featuredMediaUrl =
-						media[featuredMediaId] || '/Img/halfNewsCard.jpg'
-
+					const featuredMediaUrl = post.images
+						? `http://localhost:5000${post.images.replace('../../', '/')}`
+						: '/Img/halfNewsCard.jpg'
 					console.log('Витягнуте медіа:', featuredMediaUrl)
 
-					const postDate = new Date(post.date)
+					const postDate = new Date(post.createdAt)
 					const formattedDate = postDate.toLocaleDateString('uk-UA', {
 						year: 'numeric',
 						month: 'long',
@@ -143,20 +128,22 @@ function MainNews() {
 									<div className={`${styles.cardTitleWrapper}`}>
 										<h3
 											className={`${styles.cardTitle} ${index === 0 ? styles.firstCardTitle : index === 1 ? styles.secondCardTitle : index === 2 ? styles.thirdCardTitle : styles.fourthCardTitle}`}
-											dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-										/>
+										>
+											{post.title}
+										</h3>
 									</div>
 									<div className={`${styles.cardDescriptioneWrapper}`}>
 										<p
 											className={`${styles.cardDescription} ${index === 0 ? styles.firstCardDescription : index === 1 ? styles.secondCardDescription : styles.thirdCardDescription}`}
-											dangerouslySetInnerHTML={{
-												__html: post.excerpt.rendered,
-											}}
-										/>
+										>
+											{post.content.length > 100
+												? `${post.content.substring(0, 100)}...`
+												: post.content}
+										</p>
 									</div>
 									<div className={`${styles.cardReadMoreWrapper}`}>
 										<a
-											href={post.link}
+											href={`/posts/${post.id}`}
 											className={`${styles.cardReadMoreLink}`}
 										>
 											{t('Читати далі')}
@@ -192,7 +179,10 @@ function MainNews() {
 			<div
 				className={`${styles.mainPageNewsButtonWrapper} ${styles.mobileButtonWrapper}`}
 			>
-				<button className={`${styles.mainPageNewsButton}`} onClick={handleNewsPageClick}>
+				<button
+					className={`${styles.mainPageNewsButton}`}
+					onClick={handleNewsPageClick}
+				>
 					<p className={`${styles.mainPageNewsButtonTitle}`}>
 						{t('Усі новини')}
 					</p>

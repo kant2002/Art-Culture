@@ -61,3 +61,32 @@ export const getProducts = async (req, res, next) => {
 	}
 	console.log('createProduct - req.user:', req.user)
 }
+
+export const getUserProducts = async (req, res, next) => {
+	try {
+		const userId = req.user.id
+
+		console.log('getUserProducts - req.user:', req.user)
+
+		const products = await prisma.product.findMany({
+			where: {
+				authorId: userId,
+			},
+			include: {
+				images: true,
+				author: {
+					select: {
+						id: true,
+						email: true,
+						title: true,
+					},
+				},
+			},
+		})
+
+		res.json({ products })
+	} catch (error) {
+		console.error('Error fetching user products:', error)
+		next(error)
+	}
+}
