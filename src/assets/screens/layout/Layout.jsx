@@ -7,6 +7,7 @@ import SignUp from '../../components/VerificationPages/SignUpPage'
 
 import AdminDashboard from '../Admin/AdminDashboard'
 import ArtistPage from '../ArtistPage/ArtistPage'
+import MuseumsPage from '../MuseumsPage/MuseumsPage'
 import MuseumPage from '../MuseumPage/MuseumPage'
 import Paintings from '../ProductList/Paintings'
 import Footer from '../footer/Footer'
@@ -35,6 +36,7 @@ const Layout = ({ children, heading = '', backLink = '/' }) => {
 					<Route path='/' element={<Navigate to='/MainPage' />} />
 					<Route path='/MainPage' element={<MainPage />} />
 					<Route path='/ArtistPage' element={<ArtistPage />} />
+					<Route path='/MuseumsPage' element={<MuseumsPage />} />
 					<Route path='/MuseumPage' element={<MuseumPage />} />
 					<Route
 						path='/userProfile'

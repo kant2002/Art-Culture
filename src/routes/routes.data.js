@@ -3,6 +3,7 @@ import Login from '../assets/components/VerificationPages/LoginPage'
 import SignUp from '../assets/components/VerificationPages/SignUpPage'
 import AdminDashboard from '../assets/screens/Admin/AdminDashboard'
 import ArtistPage from '../assets/screens/ArtistPage/ArtistPage'
+import MuseumsPage from '../assets/screens/MuseumsPage/MuseumsPage'
 import MuseumPage from '../assets/screens/MuseumPage/MuseumPage'
 import Paintings from '../assets/screens/ProductList/Paintings'
 import Home from '../assets/screens/home/Home'
@@ -70,6 +71,12 @@ export const routes = [
 	{
 		path: '/ArtistPage',
 		element: ArtistPage,
+		isAuth: false,
+	},
+
+	{
+		path: '/MuseumsPage',
+		element: MuseumsPage,
 		isAuth: false,
 	},
 
