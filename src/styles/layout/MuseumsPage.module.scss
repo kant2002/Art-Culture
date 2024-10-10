@@ -43,4 +43,7 @@
 }
 
 @media (max-width: 569px) {
+    .MuseumsPageContainer {
+        margin: $staticMobileTopPadding 0 0 0;
+    }
 }
