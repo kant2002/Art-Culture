@@ -53,6 +53,10 @@ img {
     .big.Last {
         grid-row: span 3;
     }
+    
+    .wide.Last {
+        grid-row: span 2;
+    }
 
     .last {
         grid-row: span 1;

@@ -5,6 +5,7 @@ import Login from '../assets/components/VerificationPages/LoginPage.jsx'
 import SignUp from '../assets/components/VerificationPages/SignUpPage.jsx'
 import AdminDashboard from '../assets/screens/Admin/AdminDashboard.jsx'
 import ArtistPage from '../assets/screens/ArtistPage/ArtistPage.jsx'
+import MuseumsPage from '../assets/screens/MuseumsPage/MuseumsPage.jsx'
 import MuseumPage from '../assets/screens/MuseumPage/MuseumPage.jsx'
 import Paintings from '../assets/screens/ProductList/Paintings.jsx'
 import Footer from '../assets/screens/footer/Footer.jsx'
@@ -32,6 +33,7 @@ const AppRouter = () => {
 				<MainPage />
 				<NewsPage />
 				<ArtistPage />
+				<MuseumsPage />
 				<MuseumPage />
 				<UserProfile />
 				<UserProfileAddPost />
