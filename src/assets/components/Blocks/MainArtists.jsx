@@ -1,13 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import styles from '/src/styles/components/Blocks/MainNews.module.scss' // Assuming you have a CSS module for styling
-
 function MainArtists() {
 	const { t } = useTranslation()
-	const [posts, setPosts] = useState([])
-	const [media, setMedia] = useState({})
-	const [visiblePostsCount, setVisiblePostsCount] = useState(
+	const [creators, setCreators] = useState([])
+	const navigate = useNavigate()
+	const [visibleCreatorsCount, setVisibleCreatorsCount] = useState(
 		getPostsCount(window.innerWidth)
 	)
 
@@ -35,8 +35,8 @@ function MainArtists() {
 			console.log(
 				`Window width: ${window.innerWidth}, New post count: ${newPostCount}`
 			)
-			if (newPostCount !== visiblePostsCount) {
-				setVisiblePostsCount(newPostCount)
+			if (newPostCount !== visibleCreatorsCount) {
+				setVisibleCreatorsCount(newPostCount)
 				console.log(`Updated visiblePostsCount to: ${newPostCount}`)
 			}
 		}
@@ -49,35 +49,23 @@ function MainArtists() {
 		return () => {
 			window.removeEventListener('resize', handleResize)
 		}
-	}, [visiblePostsCount])
+	}, [visibleCreatorsCount])
 
 	useEffect(() => {
 		axios
-			.get(
-				'https://admin.playukraine.com/wp-json/wp/v2/posts?categories=3&_embed'
-			)
+			.get('/api/users/creators')
 			.then(response => {
-				console.log('Received post data:', response.data)
-				setPosts(response.data)
+				console.log('Received creator data:', response.data)
+				setCreators(response.data.creators)
 			})
 			.catch(error => {
-				console.error('Error loading posts', error)
-			})
-
-		axios
-			.get('https://admin.playukraine.com/wp-json/wp/v2/media')
-			.then(response => {
-				const mediaMap = response.data.reduce((acc, mediaItem) => {
-					acc[mediaItem.id] = mediaItem.source_url
-					return acc
-				}, {})
-				console.log('Received media data:', mediaMap)
-				setMedia(mediaMap)
-			})
-			.catch(error => {
-				console.error('Error loading media', error)
+				console.error('Error loading creator', error)
 			})
 	}, [])
+
+	const handleArtistPageClick = () => {
+		navigate('/ArtistPage')
+	}
 
 	return (
 		<div className={styles.mainPageNewsContainer}>
@@ -101,25 +89,25 @@ function MainArtists() {
 				</div>
 			</div>
 			<div className={styles.mainPageNewsCardsWrapper}>
-				{posts.slice(0, visiblePostsCount).map((post, index) => {
-					const featuredMediaId = post.featured_media
-					const featuredMediaUrl =
-						media[featuredMediaId] || '/Img/halfNewsCard.jpg'
+				{creators.slice(0, visibleCreatorsCount).map((creator, index) => {
+					const featuredMediaUrl = creator.images
+						? `http://localhost:5000${creator.images.replace('../../', '/')}`
+						: '/Img/halfNewsCard.jpg'
 
-					const postDate = new Date(post.date)
-					const formattedDate = postDate.toLocaleDateString('uk-UA', {
-						year: 'numeric',
-						month: 'long',
-						day: 'numeric',
-					})
-					const formattedTime = postDate.toLocaleTimeString('uk-UA', {
-						hour: 'numeric',
-						minute: 'numeric',
-					})
+					// const postDate = new Date(post.date)
+					// const formattedDate = postDate.toLocaleDateString('uk-UA', {
+					// 	year: 'numeric',
+					// 	month: 'long',
+					// 	day: 'numeric',
+					// })
+					// const formattedTime = postDate.toLocaleTimeString('uk-UA', {
+					// 	hour: 'numeric',
+					// 	minute: 'numeric',
+					// })
 
 					return (
 						<div
-							key={post.id}
+							key={creator.id}
 							className={`${styles.mainPageNewsCard} ${index === 0 ? styles.firstCard : index === 1 ? styles.secondCard : styles.thirdCard}`}
 						>
 							<div className={styles.cardInner}>
@@ -130,7 +118,7 @@ function MainArtists() {
 										alt={t('Світлина')}
 										onError={e => {
 											e.target.onerror = null
-											e.target.src = '/Img/newsCardERROR.jpg'
+											e.target.src = '/Img/halfNewsCard.jpg'
 										}}
 									/>
 								</div>
@@ -138,19 +126,22 @@ function MainArtists() {
 									<div className={styles.cardTitleWrapper}>
 										<h3
 											className={`${styles.cardTitle} ${index === 0 ? styles.firstCardTitle : index === 1 ? styles.secondCardTitle : index === 2 ? styles.thirdCardTitle : styles.fourthCardTitle}`}
-											dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-										/>
+										>
+											{creator.title || creator.email}
+										</h3>
 									</div>
 									<div className={styles.cardDescriptioneWrapper}>
 										<p
 											className={`${styles.cardDescription} ${index === 0 ? styles.firstCardDescription : index === 1 ? styles.secondCardDescription : styles.thirdCardDescription}`}
-											dangerouslySetInnerHTML={{
-												__html: post.excerpt.rendered,
-											}}
-										/>
+										>
+											{creator.bio || t('Немає біографії')}
+										</p>
 									</div>
 									<div className={styles.cardReadMoreWrapper}>
-										<a href={post.link} className={styles.cardReadMoreLink}>
+										<a
+											onClick={handleArtistPageClick}
+											className={styles.cardReadMoreLink}
+										>
 											{t('Читати далі')}
 										</a>
 									</div>
@@ -170,10 +161,10 @@ function MainArtists() {
 										/>
 									</div>
 									<div className={styles.cardDateWrapper}>
-										<p className={styles.cardDate}>{formattedDate}</p>
+										<p className={styles.cardDate}>{/*{formattedDate}*/}</p>
 									</div>
 									<div className={styles.cardTimeWrapper}>
-										<p className={styles.cardTime}>{formattedTime}</p>
+										<p className={styles.cardTime}>{/*{formattedTime}*/}</p>
 									</div>
 								</div>
 							</div>
@@ -185,7 +176,12 @@ function MainArtists() {
 				className={`${styles.mainPageNewsButtonWrapper} ${styles.mobileButtonWrapper}`}
 			>
 				<button className={styles.mainPageNewsButton}>
-					<p className={styles.mainPageNewsButtonTitle}>{t('Усі митці')}</p>
+					<p
+						className={styles.mainPageNewsButtonTitle}
+						onClick={handleArtistPageClick}
+					>
+						{t('Усі митці')}
+					</p>
 					<img
 						className={styles.mainPageNewsButtonImg}
 						src={'/Img/buttonArrow.svg'}

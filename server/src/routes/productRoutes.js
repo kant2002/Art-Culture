@@ -2,7 +2,11 @@
 
 import express from 'express'
 import { body } from 'express-validator'
-import { createProduct, getProducts } from '../controllers/productController.js'
+import {
+	createProduct,
+	getProducts,
+	getUserProducts,
+} from '../controllers/productController.js'
 import authenticateToken from '../middleware/authMiddleware.js'
 import uploadPaintings from '../middleware/productImageUploader.js'
 import authorize from '../middleware/roleMIddleware.js'
@@ -26,5 +30,6 @@ router.post(
 
 // Get all products
 router.get('/', getProducts)
+router.get('/my-products', authenticateToken, getUserProducts)
 
 export default router

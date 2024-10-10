@@ -8,6 +8,7 @@ const generateToken = user => {
 	const payload = {
 		id: user.id,
 		role: user.role,
+		email: user.email,
 	}
 	return jwt.sign(payload, process.env.JWT_SECRET, {
 		expiresIn: '5h',

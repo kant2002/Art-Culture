@@ -11,6 +11,7 @@ import adminRoutes from './src/routes/adminRoutes.js'
 import authRoutes from './src/routes/authRoutes.js'
 import postRoutes from './src/routes/postRoutes.js'
 import productRoutes from './src/routes/productRoutes.js'
+import userRoutes from './src/routes/userRoutes.js'
 dotenv.config()
 
 const app = express()
@@ -73,12 +74,23 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+// server.js or index.js
+
+app.use(
+	'/uploads/profileImages',
+	express.static(path.join(__dirname, 'uploads/profileImages'))
+)
 
 // API Routes
 app.use('/api/auth', authRoutes)
 app.use('/api/posts', postRoutes)
 app.use('/api/admin', adminRoutes)
 app.use('/api/products', productRoutes)
+app.use('/api/users', userRoutes)
+app.use('/api/posts/postId', postRoutes)
+console.log(process.env.NODE_ENV)
+console.log(process.env.CLIENT_URL)
+console.log(userRoutes)
 
 // Error Handling Middleware
 app.use(errorHandler)

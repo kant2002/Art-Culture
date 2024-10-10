@@ -1,3 +1,4 @@
+import PostDetail from '../assets/components/Post/PostDetail'
 import ProductCartCreate from '../assets/components/ProductCard/ProductCardCreate'
 import Login from '../assets/components/VerificationPages/LoginPage'
 import SignUp from '../assets/components/VerificationPages/SignUpPage'
@@ -94,5 +95,11 @@ export const routes = [
 		path: '/Paintings',
 		element: Paintings,
 		isAuth: true,
+	},
+
+	{
+		path: '/post/:id',
+		element: PostDetail,
+		isAuth: false,
 	},
 ]

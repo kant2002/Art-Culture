@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import PostDetail from '../assets/components/Post/PostDetail.jsx'
 import ProductCartCreate from '../assets/components/ProductCard/ProductCardCreate.jsx'
 import Login from '../assets/components/VerificationPages/LoginPage.jsx'
 import SignUp from '../assets/components/VerificationPages/SignUpPage.jsx'
@@ -38,6 +39,7 @@ const AppRouter = () => {
 				<AdminDashboard />
 				<ProductCartCreate />
 				<Paintings />
+				<PostDetail />
 				<Login />
 				<SignUp />
 			</Routes>

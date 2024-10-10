@@ -90,7 +90,7 @@ export const getAllPosts = async (req, res, next) => {
 
 		const posts = await prisma.post.findMany({
 			where: filter,
-			include: { author: { select: { email: true, id: true } } },
+			include: { author: { select: { email: true, id: true, title: true } } },
 			orderBy: { createdAt: 'desc' },
 		})
 		res.json(posts)
@@ -101,17 +101,18 @@ export const getAllPosts = async (req, res, next) => {
 
 export const getPostById = async (req, res, next) => {
 	try {
-		const { id } = req.params
+		const postId = parseInt(req.params.id)
 
 		const post = await prisma.post.findUnique({
-			where: { id: parseInt(id) },
-			include: { author: { select: { email: true, id: true } } },
+			where: { id: postId },
+			include: { author: { select: { email: true, id: true, title: true } } },
 		})
 
 		if (!post) return res.status(404).json({ error: 'Post not found' })
 
 		res.json(post)
 	} catch (error) {
+		console.error('Error fetching post:', error)
 		next(error)
 	}
 }
