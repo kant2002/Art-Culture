@@ -27,6 +27,7 @@
 	width: 100%;
 	margin: 0 auto;
 	overflow: hidden; // Prevent horizontal scroll due to rounding errors
+	padding: 20px;
 }
 
 .justifiedGallery {
@@ -47,6 +48,7 @@
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	border-radius: 20px;
 }
 
 .item:not(:last-child) {
