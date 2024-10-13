@@ -57,6 +57,7 @@ const Slide = () => {
 // 	)
 // }
 
+
 const MuseumsPageTopSlider = () => {
 	// const { t } = useTranslation();
 	return (
