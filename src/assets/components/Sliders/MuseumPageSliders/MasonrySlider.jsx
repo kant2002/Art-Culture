@@ -174,7 +174,7 @@ const MasonryGallery = () => {
 			const galleryBottomPosition =
 				containerRef.current.offsetTop + containerRef.current.offsetHeight
 
-			if (scrollPosition >= galleryBottomPosition - 150) {
+			if (scrollPosition >= galleryBottomPosition - 1500) {
 				loadMoreImages()
 			}
 		}
