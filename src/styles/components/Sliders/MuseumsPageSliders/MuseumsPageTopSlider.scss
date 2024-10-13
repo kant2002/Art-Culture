@@ -1,106 +1,42 @@
 @import '/src/styles/utilities/variables.scss';
 
-.MuseumsPageTopSliderContainer {
-    // Контейнер слайдера
-    display: flex;
-    margin: calc(87px - (43 * ((1440px - 100vw) / (1440 - 375)))) $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
-}
-
-.MuseumsPageTopSliderWrapper {
-    // Обёртка слайдера
+.MuseumsPageTopSliderCardContainer {
+    // Обёртка карточки слайдера
     display: flex;
     flex-direction: column;
-    width: 100%;
-}
-
-.MuseumsPageTopSliderTopInnerWrapper {
-    // Верхняя часть слайдера
-    display: flex;
-    justify-content: space-between;
-    padding: 0 0 calc(51px - (17 * ((1440px - 100vw) / (1440 - 375)))) 0;
-}
-
-.MuseumsPageTopSliderTitleWrapper {
-    // Обёртка заголовка
-    display: flex;
-    align-items: center;
-}
-
-.MuseumsPageTopSliderTitle {
-    // Заголовок    
-    font-family: $default-font;
-    font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
-    font-weight: 600;
-    color: rgb(0, 0, 0);
-    text-transform: uppercase;
-}
-
-.MuseumsPageTopSliderLikeAndShareWrapper {
-    // Обёртка кнопок Like и Share
-    display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 0 auto;
-    width: 177px;
+    width: 100%;
+    height: 100%;
 }
 
-.MuseumsPageTopSliderLikeInnerWrapper {
-    // Обёртка кнопки Like
-}
-
-.MuseumsPageTopSliderLikeButton {
-    // Кнопка Like
-    position: relative;
+.MuseumsPageTopSliderCardWrapper {
+    // Обёртка карточки слайдера
     display: flex;
-    border-radius: 50%;
-    cursor: pointer;
 }
 
-.MuseumsPageTopSliderLikeButton::after {
-    content: "Like";
-    position: absolute;
-    top: 6px;
-    left: 38px;
-    font-size: 18px;
-    user-select: none;
-    color: #000000;
-}
-
-.MuseumsPageTopSliderLikeButtonImg {
-    // Изображение кнопки Like
-}
-
-.MuseumsPageTopSliderShareInnerWrapper {
-    // Обёртка кнопки Share
-}
-
-.MuseumsPageTopSliderShareButtonButton {
-    // Кнопка Share
+.MuseumsPageTopSliderCardImgWrapper {
+    // Внутренняя обёртка карточки
     position: relative;
-    display: flex;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.MuseumsPageTopSliderShareButtonButton::before {
-    content: "Share";
-    position: absolute;
-    top: 6px;
-    right: 38px;
-    font-size: 18px;
-    user-select: none;
-    color: #000000;
-}
-
-.MuseumsPageTopSliderShareButtonImg {
-    // Изображение кнопки Share
-}
-
-.MuseumsPageTopSliderBottomInnerWrapper {
-    // Нижняя часть слайдера
     display: flex;
     width: 100%;
-    height: calc(561px - (90 * ((1440px - 100vw) / (1440 - 375))));
+    height: 100%;    
+}
+
+.MuseumsPageTopSliderCardImg {
+    // Карточка слайдера
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.MuseumsPageTopSliderContainer {
+    // Основной стиль для блока слайдера
+    width: 100%;
+    height: calc(600px - (140 * ((1440px - 100vw) / (1440 - 375))));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     @at-root {
         :root {
