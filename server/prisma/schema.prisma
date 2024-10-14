@@ -22,17 +22,18 @@ enum Role {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  email     String    @unique
-  password  String
-  role      Role      @default(USER)
-  posts     Post[]
-  products  Product[]
-  images    String?
-  title     String? // New field for user title
-  bio       String? // New field for user bio
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id                 Int          @id @default(autoincrement())
+  email              String       @unique
+  password           String
+  role               Role         @default(USER)
+  posts              Post[]
+  products           Product[]
+  images             String?
+  title              String? // New field for user title
+  bio                String? // New field for user bio
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+  createdExhibitions Exhibition[]
 }
 
 model Post {
@@ -63,4 +64,38 @@ model ProductImage {
   imageUrl  String
   productId Int
   product   Product @relation("ProductImages", fields: [productId], references: [id])
+}
+
+model Exhibition {
+  id                Int                @id @default(autoincrement())
+  title             String
+  description       String
+  startDate         DateTime
+  endDate           DateTime
+  time              String
+  location          String
+  createdBy         User               @relation(fields: [createdById], references: [id])
+  createdById       Int
+  exhibitionArtists ExhibitionArtist[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Artist {
+  id                Int                @id @default(autoincrement())
+  name              String
+  bio               String?
+  exhibitionArtists ExhibitionArtist[]
+
+  // Other fields...
+}
+
+model ExhibitionArtist {
+  exhibition   Exhibition @relation(fields: [exhibitionId], references: [id])
+  exhibitionId Int
+  artist       Artist     @relation(fields: [artistId], references: [id])
+  artistId     Int
+
+  @@id([exhibitionId, artistId])
 }
