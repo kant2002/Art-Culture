@@ -2,6 +2,7 @@
 
 .MuseumsPageTopSliderCardContainer {
     // Обёртка карточки слайдера
+    margin: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -12,15 +13,31 @@
 
 .MuseumsPageTopSliderCardWrapper {
     // Обёртка карточки слайдера
+    position: relative;
+    width: 100%;
+    height: 100%;
     display: flex;
 }
 
 .MuseumsPageTopSliderCardImgWrapper {
     // Внутренняя обёртка карточки
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
     width: 100%;
     height: 100%;    
+}
+
+.MuseumsPageTopSliderCardImgWrapper::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	opacity: 0.34;
 }
 
 .MuseumsPageTopSliderCardImg {
@@ -33,7 +50,6 @@
 .MuseumsPageTopSliderContainer {
     // Основной стиль для блока слайдера
     width: 100%;
-    height: calc(600px - (140 * ((1440px - 100vw) / (1440 - 375))));
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -46,9 +62,9 @@
 
     .swiper-wrapper {
         position: relative;
-        margin: 0 0 0 calc(-29px - (-20 * ((1440px - 100vw) / (1440 - 375))));
-        width: 100%;
-        height: 100%;
+        margin: 0;
+        width: 100vw;
+        height: calc(600px - (140 * ((1440px - 100vw) / (1440 - 375))));
         z-index: 1;
         display: flex;
         transition-property: transform;
@@ -131,148 +147,8 @@
     }
 }
 
-.MuseumsPageTopSliderCardContainer {
-    // Обёртка карточки слайдера
-    width: calc(282px - (32 * ((1440px - 100vw) / (1440 - 375))));
-    min-width: 250px;
-    max-width: 282px;
-    height: auto;
-    margin: 0 calc(29px - (20 * ((1440px - 100vw) / (1440 - 375))));
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    position: relative;
-}
-
-.MuseumsPageTopSliderCardImgWrapper {
-    // Внутренняя обёртка карточки
-    position: relative;
-    display: flex;
-    width: calc(282px - (32 * ((1440px - 100vw) / (1440 - 375))));
-    min-width: 250px;
-    max-width: 282px;
-    height: calc(282px - (32 * ((1440px - 100vw) / (1440 - 375))));
-    min-height: 250px;
-    max-height: 282px;
-}
-
-.MuseumsPageTopSliderCardImg {
-    // Изображение карточки
-    // aspect-ratio: 630 / 330; // например, соотношение сторон 21:11
-    object-fit: cover;
-    object-position: center;
-    width: 100%;
-    height: 100%;
-    border-radius: 3px;
-}
-
-.MuseumsPageTopSliderCardTitleWrapper {
-    // Обёртка заголовка карточки
-    display: flex;
-    margin: calc(20px - (2 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
-}
-
-.MuseumsPageTopSliderCardTitle {
-    // Заголовок карточки
-    color: #000000;
-    font-family: $default-font;
-    font-weight: 500;
-    font-size: calc(22px - (4 * ((1440px - 100vw) / (1440 - 375))));
-    text-transform: uppercase;
-}
-
-.MuseumsPageTopSliderCardDescriptionWrapper {
-    // Обёртка описания карточки
-    color: #000000;
-    margin: 12px 0 0 0;
-    height: calc(calc(16px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 5); // Делаем ограничение вывода текста построчечно
-    overflow: hidden;
-}
-
-.MuseumsPageTopSliderCardDescription {
-    // Описание карточки
-    color: #000000;
-    font-family: $default-font;
-    font-weight: 400;
-    font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
-}
-
 @media screen and (min-width: 1441px) {
-    .MuseumsPageTopSliderTopInnerWrapper {
-        // Верхняя часть слайдера
-        padding: 0 0 51px 0;
-    }
-
-    .MuseumsPageTopSliderBottomInnerWrapper {
-        // Нижняя часть слайдера
-        height: 561px;
-
-        .swiper-wrapper {
-            margin: 0 0 0 -29px;
-        }
-
-        .swiper-button-prev,
-        .swiper-button-next {
-            top: calc(539px - calc(var(--swiper-navigation-size) / 2));
-        }
-
-        .swiper-pagination-fraction,
-        .swiper-pagination-custom,
-        .swiper-horizontal>.swiper-pagination-bullets,
-        .swiper-pagination-bullets.swiper-pagination-horizontal {
-            // bottom: calc(calc(14px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 2.5);
-            top: calc(539px - calc(var(--swiper-navigation-size) / 1.4));
-        }
-
-    }
-
-    .MuseumsPageTopSliderContainer {
-        // Контейнер слайдера
-        margin: 87px $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
-    }
-
-    .MuseumsPageTopSliderCardContainer {
-        // Обёртка карточки слайдера
-        margin: 0 29px;
-    }
-
-    .MuseumsPageTopSliderCardTitleWrapper {
-        // Обёртка заголовка карточки
-        margin: 20px 0 0 0;
-    }
-
-    .MuseumsPageTopSliderCardTitleWrapper {
-        // Обёртка заголовка карточки
-        margin: 20px 0 0 0;
-    }
-
-    .MuseumsPageTopSliderCardTitle {
-        // Заголовок карточки
-        font-size: 22px;
-    }
-
-    .MuseumsPageTopSliderCardDescriptionWrapper {
-        // Обёртка описания карточки
-        height: calc(16px * 5); // Делаем ограничение вывода текста построчечно
-    }
-
-    .MuseumsPageTopSliderCardDescription {
-        // Описание карточки
-        font-size: 16px;
-    }
 }
 
 @media screen and (max-width: 600px) {
-    .MuseumsPageTopSliderLikeAndShareWrapper {
-        // Обёртка кнопок Like и Share
-        width: 80px;
-    }
-
-    .MuseumsPageTopSliderLikeButton::after {
-        display: none;
-    }
-
-    .MuseumsPageTopSliderShareButtonButton::before {
-        display: none;
-    }
 }
