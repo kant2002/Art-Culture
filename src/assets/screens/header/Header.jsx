@@ -102,7 +102,7 @@ function Header() {
 		navigate('/ArtistPage')
 	}
 
-	const handleMuseumPageClick = () => {
+	const handleMuseumsPageClick = () => {
 		navigate('/MuseumsPage')
 	}
 
