@@ -103,7 +103,7 @@ function Header() {
 	}
 
 	const handleMuseumPageClick = () => {
-		navigate('/MuseumPage')
+		navigate('/MuseumsPage')
 	}
 
 	const burgerMenu = (
@@ -183,7 +183,7 @@ function Header() {
 									<p>&#8250;</p>
 								</a>
 							</li>
-							<li className='footerMenuLi' onClick={handleMuseumPageClick}>
+							<li className='footerMenuLi' onClick={handleMuseumsPageClick}>
 								<a className='footerMenuLink' href='#'>
 									<p>{t('Музеї')}</p>
 									<p>&#8250;</p>
@@ -321,7 +321,7 @@ function Header() {
 											{t('Виставки')}
 										</a>
 									</li>
-									<li className='mainMenu__li' onClick={handleMuseumPageClick}>
+									<li className='mainMenu__li' onClick={handleMuseumsPageClick}>
 										<a className='mainMenu__link' href='#'>
 											{t('Музеї')}
 										</a>
