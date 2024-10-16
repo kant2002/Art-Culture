@@ -19,6 +19,47 @@ const Slide = () => {
 
 			<div className="MuseumsPageTopSliderCardWrapper">
 
+				<div className="MuseumsPageTopSliderCardLogoWrapper">
+
+					<img
+						className="MuseumsPageTopSliderCardLogo"
+						src={'/Img/logoMuseum_3.png'}
+						alt={t('Фото музея')}
+						onError={e => {
+							e.target.onerror = null
+							e.target.src = '/public/Img/newsCardERROR.jpg'
+						}}
+					/>
+
+				</div>
+
+				<div className="MuseumsPageTopSliderCardTitleWrapper">
+
+					<p className="MuseumsPageTopSliderCardTitle">
+						{t('Назва першого музею')}
+					</p>
+
+				</div>
+
+				<div className="MuseumsPageTopSliderCardDescriptionWrapper">
+
+					<p className="MuseumsPageTopSliderCardDescription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam deleniti odit nesciunt consequatur modi at totam impedit harum natus ratione! Aliquam illo quos, deleniti sunt sapiente molestiae aperiam dolore consequuntur?
+						Dignissimos saepe maxime totam magnam libero at tempora. Corporis laborum, consequatur quasi reiciendis necessitatibus sapiente ipsum nobis doloremque omnis temporibus incidunt deleniti! Autem cupiditate ut veritatis, aliquid nisi iste cumque!
+						Neque aliquam nemo accusantium saepe debitis praesentium dolor officiis in doloremque, tempora blanditiis totam impedit modi iure. Iste, impedit reiciendis. Vel fugiat asperiores reiciendis sint nisi odit accusamus sunt eius!
+						Eum, ipsam, consequatur ex deserunt ut vitae, necessitatibus iure tempora numquam eius incidunt debitis voluptatem ea odit? Magnam, enim iure, vitae eius officiis magni fugit qui, corporis ratione illo sint!
+						Doloribus sint architecto dicta repellat repellendus consequatur impedit deserunt ipsa laboriosam, nemo amet dolorum voluptatum quam velit aliquam incidunt exercitationem id facilis magnam vero enim tenetur animi minus. Ab, deleniti.
+					</p>
+
+				</div>
+
+				<div className="MuseumsPageTopSliderCardReadMoreButtonWrapper">
+
+					<button className="MuseumsPageTopSliderCardReadMoreButton">
+						{t('Читати далі')}
+					</button>
+
+				</div>
+
 				<div className="MuseumsPageTopSliderCardImgWrapper">
 
 					<img
@@ -39,27 +80,144 @@ const Slide = () => {
 	)
 }
 
-// const Slide1 = () => {
-// 	const { t } = useTranslation();
-// 	return (
-// 	)
-// }
+const Slide1 = () => {
+	const { t } = useTranslation();
+	return (
+		<div className="MuseumsPageTopSliderCardContainer">
 
-// const Slide2 = () => {
-// 	const { t } = useTranslation();
-// 	return (
-// 	)
-// }
+			<div className="MuseumsPageTopSliderCardWrapper">
 
-// const Slide3 = () => {
-// 	const { t } = useTranslation();
-// 	return (
-// 	)
-// }
+				<div className="MuseumsPageTopSliderCardLogoWrapper">
 
+					<img
+						className="MuseumsPageTopSliderCardLogo"
+						src={'/Img/logoMuseum_1.png'}
+						alt={t('Фото музея')}
+						onError={e => {
+							e.target.onerror = null
+							e.target.src = '/public/Img/newsCardERROR.jpg'
+						}}
+					/>
+
+				</div>
+
+				<div className="MuseumsPageTopSliderCardTitleWrapper">
+
+					<p className="MuseumsPageTopSliderCardTitle">
+						{t('Назва другого музею')}
+					</p>
+
+				</div>
+
+				<div className="MuseumsPageTopSliderCardDescriptionWrapper">
+
+					<p className="MuseumsPageTopSliderCardDescription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam deleniti odit nesciunt consequatur modi at totam impedit harum natus ratione! Aliquam illo quos, deleniti sunt sapiente molestiae aperiam dolore consequuntur?
+						Dignissimos saepe maxime totam magnam libero at tempora. Corporis laborum, consequatur quasi reiciendis necessitatibus sapiente ipsum nobis doloremque omnis temporibus incidunt deleniti! Autem cupiditate ut veritatis, aliquid nisi iste cumque!
+						Neque aliquam nemo accusantium saepe debitis praesentium dolor officiis in doloremque, tempora blanditiis totam impedit modi iure. Iste, impedit reiciendis. Vel fugiat asperiores reiciendis sint nisi odit accusamus sunt eius!
+						Eum, ipsam, consequatur ex deserunt ut vitae, necessitatibus iure tempora numquam eius incidunt debitis voluptatem ea odit? Magnam, enim iure, vitae eius officiis magni fugit qui, corporis ratione illo sint!
+						Doloribus sint architecto dicta repellat repellendus consequatur impedit deserunt ipsa laboriosam, nemo amet dolorum voluptatum quam velit aliquam incidunt exercitationem id facilis magnam vero enim tenetur animi minus. Ab, deleniti.
+					</p>
+
+				</div>
+
+				<div className="MuseumsPageTopSliderCardReadMoreButtonWrapper">
+
+					<button className="MuseumsPageTopSliderCardReadMoreButton">
+						{t('Читати далі')}
+					</button>
+
+				</div>
+
+				<div className="MuseumsPageTopSliderCardImgWrapper">
+
+					<img
+						className="MuseumsPageTopSliderCardImg"
+						src={'/Img/museumPhoto_1.jpg'}
+						alt={t('Фото музея')}
+						onError={e => {
+							e.target.onerror = null
+							e.target.src = '/public/Img/newsCardERROR.jpg'
+						}}
+					/>
+
+				</div>
+
+			</div>
+
+		</div>
+	)
+}
+
+const Slide2 = () => {
+	const { t } = useTranslation();
+	return (
+		<div className="MuseumsPageTopSliderCardContainer">
+
+			<div className="MuseumsPageTopSliderCardWrapper">
+
+				<div className="MuseumsPageTopSliderCardLogoWrapper">
+
+					<img
+						className="MuseumsPageTopSliderCardLogo"
+						src={'/Img/logoMuseum_2.png'}
+						alt={t('Фото музея')}
+						onError={e => {
+							e.target.onerror = null
+							e.target.src = '/public/Img/newsCardERROR.jpg'
+						}}
+					/>
+
+				</div>
+
+				<div className="MuseumsPageTopSliderCardTitleWrapper">
+
+					<p className="MuseumsPageTopSliderCardTitle">
+						{t('Назва третього музею')}
+					</p>
+
+				</div>
+
+				<div className="MuseumsPageTopSliderCardDescriptionWrapper">
+
+					<p className="MuseumsPageTopSliderCardDescription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam deleniti odit nesciunt consequatur modi at totam impedit harum natus ratione! Aliquam illo quos, deleniti sunt sapiente molestiae aperiam dolore consequuntur?
+						Dignissimos saepe maxime totam magnam libero at tempora. Corporis laborum, consequatur quasi reiciendis necessitatibus sapiente ipsum nobis doloremque omnis temporibus incidunt deleniti! Autem cupiditate ut veritatis, aliquid nisi iste cumque!
+						Neque aliquam nemo accusantium saepe debitis praesentium dolor officiis in doloremque, tempora blanditiis totam impedit modi iure. Iste, impedit reiciendis. Vel fugiat asperiores reiciendis sint nisi odit accusamus sunt eius!
+						Eum, ipsam, consequatur ex deserunt ut vitae, necessitatibus iure tempora numquam eius incidunt debitis voluptatem ea odit? Magnam, enim iure, vitae eius officiis magni fugit qui, corporis ratione illo sint!
+						Doloribus sint architecto dicta repellat repellendus consequatur impedit deserunt ipsa laboriosam, nemo amet dolorum voluptatum quam velit aliquam incidunt exercitationem id facilis magnam vero enim tenetur animi minus. Ab, deleniti.
+					</p>
+
+				</div>
+
+				<div className="MuseumsPageTopSliderCardReadMoreButtonWrapper">
+
+					<button className="MuseumsPageTopSliderCardReadMoreButton">
+						{t('Читати далі')}
+					</button>
+
+				</div>
+
+				<div className="MuseumsPageTopSliderCardImgWrapper">
+
+					<img
+						className="MuseumsPageTopSliderCardImg"
+						src={'/Img/museumPhoto_2.jpg'}
+						alt={t('Фото музея')}
+						onError={e => {
+							e.target.onerror = null
+							e.target.src = '/public/Img/newsCardERROR.jpg'
+						}}
+					/>
+
+				</div>
+
+			</div>
+
+		</div>
+	)
+}
 
 const MuseumsPageTopSlider = () => {
-	// const { t } = useTranslation();
+	const { t } = useTranslation();
 	return (
 		<div className="MuseumsPageTopSliderContainer">
 
@@ -74,15 +232,12 @@ const MuseumsPageTopSlider = () => {
 			>
 				<SwiperSlide>
 					<Slide />
-					{/* </SwiperSlide>
+				</SwiperSlide>
 				<SwiperSlide>
 					<Slide1 />
 				</SwiperSlide>
 				<SwiperSlide>
 					<Slide2 />
-				</SwiperSlide>
-				<SwiperSlide>
-					<Slide3 /> */}
 				</SwiperSlide>
 			</Swiper>
 
