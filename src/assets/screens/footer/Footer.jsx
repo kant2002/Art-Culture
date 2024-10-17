@@ -15,6 +15,15 @@ const Footer = () => {
 	const handleNewsPageClick = () => {
 		navigate('/NewsPage')
 	}
+
+	const handleArtistPageClick = () => {
+		navigate('/ArtistPage')
+	}
+
+	const handleMuseumsPageClick = () => {
+		navigate('/MuseumsPage')
+	}
+
 	return (
 		<footer className={`${styles.footer}`}>
 			<div className={`${styles.footerWrapper}`}>
@@ -51,7 +60,7 @@ const Footer = () => {
 									{t('Арт терміни')}
 								</a>
 							</li>
-							<li className={`${styles.footerMenuLi}`}>
+							<li className={`${styles.footerMenuLi}`} onClick={handleArtistPageClick}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
 									{t('Митці')}
 								</a>
@@ -71,7 +80,7 @@ const Footer = () => {
 									{t('Контакти')}
 								</a>
 							</li>
-							<li className={`${styles.footerMenuLi}`}>
+							<li className={`${styles.footerMenuLi}`} onClick={handleMuseumsPageClick}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
 									{t('Музеї')}
 								</a>
