@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 // Import Swiper styles
@@ -13,7 +14,12 @@ import { Navigation, Pagination } from 'swiper/modules'
 import '/src/styles/components/Sliders/MuseumsPageSliders/MuseumsPageTopSlider.scss';
 
 const Slide = () => {
-	const { t } = useTranslation();
+	const { t } = useTranslation();const navigate = useNavigate()
+
+	const handleMuseumPageClick = () => {
+		navigate('/MuseumPage')
+	}
+	
 	return (
 		<div className="MuseumsPageTopSliderCardContainer">
 
@@ -54,7 +60,7 @@ const Slide = () => {
 
 				<div className="MuseumsPageTopSliderCardReadMoreButtonWrapper">
 
-					<button className="MuseumsPageTopSliderCardReadMoreButton">
+					<button className="MuseumsPageTopSliderCardReadMoreButton" onClick={handleMuseumPageClick}>
 						{t('Читати далі')}
 					</button>
 
@@ -217,7 +223,7 @@ const Slide2 = () => {
 }
 
 const MuseumsPageTopSlider = () => {
-	const { t } = useTranslation();
+	// const { t } = useTranslation();
 	return (
 		<div className="MuseumsPageTopSliderContainer">
 
