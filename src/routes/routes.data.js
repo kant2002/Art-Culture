@@ -3,6 +3,7 @@ import ProductCartCreate from '../assets/components/ProductCard/ProductCardCreat
 import Login from '../assets/components/VerificationPages/LoginPage'
 import SignUp from '../assets/components/VerificationPages/SignUpPage'
 import AdminDashboard from '../assets/screens/Admin/AdminDashboard'
+import ArtistsPage from '../assets/screens/ArtistsPage/ArtistsPage'
 import ArtistPage from '../assets/screens/ArtistPage/ArtistPage'
 import MuseumsPage from '../assets/screens/MuseumsPage/MuseumsPage'
 import MuseumPage from '../assets/screens/MuseumPage/MuseumPage'
@@ -66,6 +67,12 @@ export const routes = [
 	{
 		path: '/NewsPage',
 		element: NewsPage,
+		isAuth: false,
+	},
+
+	{
+		path: '/ArtistsPage',
+		element: ArtistsPage,
 		isAuth: false,
 	},
 

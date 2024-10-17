@@ -1,0 +1,29 @@
+@import '../../../src/styles/utilities/variables.scss';
+
+.ArtistsPageContainer {
+    // главный контейнер
+    margin: $responsiveTopPadding 0 0 0;
+    display: flex;
+    flex-direction: column;
+
+    * {
+        font-family: $default-font;
+    }
+}
+
+@media (min-width: 1441px) {
+}
+
+// @media (max-width: 569px) {
+//     .s {
+//         // главный контейнер
+//         margin: $staticMobileTopPadding 0 0 0;
+//     }
+// }
+
+// @media (max-width: 374px) {    
+//     .sArtistPhoto {
+//         // фото митця
+//         max-width: 100%;
+//     }
+// }
