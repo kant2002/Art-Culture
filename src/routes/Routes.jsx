@@ -4,6 +4,7 @@ import ProductCartCreate from '../assets/components/ProductCard/ProductCardCreat
 import Login from '../assets/components/VerificationPages/LoginPage.jsx'
 import SignUp from '../assets/components/VerificationPages/SignUpPage.jsx'
 import AdminDashboard from '../assets/screens/Admin/AdminDashboard.jsx'
+import ArtistsPage from '../assets/screens/ArtistsPage/ArtistsPage.jsx'
 import ArtistPage from '../assets/screens/ArtistPage/ArtistPage.jsx'
 import MuseumsPage from '../assets/screens/MuseumsPage/MuseumsPage.jsx'
 import MuseumPage from '../assets/screens/MuseumPage/MuseumPage.jsx'
@@ -32,6 +33,7 @@ const AppRouter = () => {
 				<Home />
 				<MainPage />
 				<NewsPage />
+				<ArtistsPage />
 				<ArtistPage />
 				<MuseumsPage />
 				<MuseumPage />
