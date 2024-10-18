@@ -10,16 +10,16 @@ import 'swiper/css/pagination';
 // Import Swiper modules
 import { Navigation, Pagination } from 'swiper/modules'
 
-import '/src/styles/components/Sliders/ArtistPageSliders/ArtistPageNewsArtistsSlider.scss';
+import '/src/styles/components/Sliders/ArtistsPageSliders/ArtistsPageNewsArtistsSlider.scss';
 
 const Slide = () => {
 	const { t } = useTranslation();
 	return (
-		<div className="artistPageNewsArtistsSliderCardContainer">
+		<div className="ArtistsPageNewsArtistsSliderCardContainer">
 
-			<div className="artistPageNewsArtistsSliderCardImgWrapper">
+			<div className="ArtistsPageNewsArtistsSliderCardImgWrapper">
 				<img
-					className="artistPageNewsArtistsSliderCardImg"
+					className="ArtistsPageNewsArtistsSliderCardImg"
 					src={'/Img/fullSizeRaven.jpg'}
 					alt={t('Світлина мистецтва')}
 					onError={e => {
@@ -29,14 +29,14 @@ const Slide = () => {
 				/>
 			</div>
 
-			<div className="artistPageNewsArtistsSliderCardTitleWrapper">
-				<h3 className="artistPageNewsArtistsSliderCardTitle">
+			<div className="ArtistsPageNewsArtistsSliderCardTitleWrapper">
+				<h3 className="ArtistsPageNewsArtistsSliderCardTitle">
 					Lorem Ipsum
 				</h3>
 			</div>
 
-			<div className="artistPageNewsArtistsSliderCardDescriptionWrapper">
-				<p className="artistPageNewsArtistsSliderCardDescription">
+			<div className="ArtistsPageNewsArtistsSliderCardDescriptionWrapper">
+				<p className="ArtistsPageNewsArtistsSliderCardDescription">
 					Lorem ipsum dolor sit amet consectetur adipisicing elit.
 					Libero vero numquam cum excepturi enim iste quis
 					doloribus cupiditate? Temporibus, laboriosam quis?
@@ -52,11 +52,11 @@ const Slide = () => {
 const Slide1 = () => {
 	const { t } = useTranslation();
 	return (
-		<div className="artistPageNewsArtistsSliderCardContainer">
+		<div className="ArtistsPageNewsArtistsSliderCardContainer">
 
-			<div className="artistPageNewsArtistsSliderCardImgWrapper">
+			<div className="ArtistsPageNewsArtistsSliderCardImgWrapper">
 				<img
-					className="artistPageNewsArtistsSliderCardImg"
+					className="ArtistsPageNewsArtistsSliderCardImg"
 					src={'/Img/mainInstagramSliderIMG.jpg'}
 					alt={t('Світлина мистецтва')}
 					onError={e => {
@@ -66,14 +66,14 @@ const Slide1 = () => {
 				/>
 			</div>
 
-			<div className="artistPageNewsArtistsSliderCardTitleWrapper">
-				<h3 className="artistPageNewsArtistsSliderCardTitle">
+			<div className="ArtistsPageNewsArtistsSliderCardTitleWrapper">
+				<h3 className="ArtistsPageNewsArtistsSliderCardTitle">
 					Lorem Ipsum
 				</h3>
 			</div>
 
-			<div className="artistPageNewsArtistsSliderCardDescriptionWrapper">
-				<p className="artistPageNewsArtistsSliderCardDescription">
+			<div className="ArtistsPageNewsArtistsSliderCardDescriptionWrapper">
+				<p className="ArtistsPageNewsArtistsSliderCardDescription">
 					Lorem ipsum dolor sit amet consectetur adipisicing elit.
 					Libero vero numquam cum excepturi enim iste quis
 					doloribus cupiditate? Temporibus, laboriosam quis?
@@ -89,11 +89,11 @@ const Slide1 = () => {
 const Slide2 = () => {
 	const { t } = useTranslation();
 	return (
-		<div className="artistPageNewsArtistsSliderCardContainer">
+		<div className="ArtistsPageNewsArtistsSliderCardContainer">
 
-			<div className="artistPageNewsArtistsSliderCardImgWrapper">
+			<div className="ArtistsPageNewsArtistsSliderCardImgWrapper">
 				<img
-					className="artistPageNewsArtistsSliderCardImg"
+					className="ArtistsPageNewsArtistsSliderCardImg"
 					src={'/Img/mainPopularArtistsSlide.jpg'}
 					alt={t('Світлина мистецтва')}
 					onError={e => {
@@ -103,14 +103,14 @@ const Slide2 = () => {
 				/>
 			</div>
 
-			<div className="artistPageNewsArtistsSliderCardTitleWrapper">
-				<h3 className="artistPageNewsArtistsSliderCardTitle">
+			<div className="ArtistsPageNewsArtistsSliderCardTitleWrapper">
+				<h3 className="ArtistsPageNewsArtistsSliderCardTitle">
 					Lorem Ipsum
 				</h3>
 			</div>
 
-			<div className="artistPageNewsArtistsSliderCardDescriptionWrapper">
-				<p className="artistPageNewsArtistsSliderCardDescription">
+			<div className="ArtistsPageNewsArtistsSliderCardDescriptionWrapper">
+				<p className="ArtistsPageNewsArtistsSliderCardDescription">
 					Lorem ipsum dolor sit amet consectetur adipisicing elit.
 					Libero vero numquam cum excepturi enim iste quis
 					doloribus cupiditate? Temporibus, laboriosam quis?
@@ -126,11 +126,11 @@ const Slide2 = () => {
 const Slide3 = () => {
 	const { t } = useTranslation();
 	return (
-		<div className="artistPageNewsArtistsSliderCardContainer">
+		<div className="ArtistsPageNewsArtistsSliderCardContainer">
 
-			<div className="artistPageNewsArtistsSliderCardImgWrapper">
+			<div className="ArtistsPageNewsArtistsSliderCardImgWrapper">
 				<img
-					className="artistPageNewsArtistsSliderCardImg"
+					className="ArtistsPageNewsArtistsSliderCardImg"
 					src={'/Img/newsCard1.jpg'}
 					alt={t('Світлина мистецтва')}
 					onError={e => {
@@ -140,14 +140,14 @@ const Slide3 = () => {
 				/>
 			</div>
 
-			<div className="artistPageNewsArtistsSliderCardTitleWrapper">
-				<h3 className="artistPageNewsArtistsSliderCardTitle">
+			<div className="ArtistsPageNewsArtistsSliderCardTitleWrapper">
+				<h3 className="ArtistsPageNewsArtistsSliderCardTitle">
 					Lorem Ipsum
 				</h3>
 			</div>
 
-			<div className="artistPageNewsArtistsSliderCardDescriptionWrapper">
-				<p className="artistPageNewsArtistsSliderCardDescription">
+			<div className="ArtistsPageNewsArtistsSliderCardDescriptionWrapper">
+				<p className="ArtistsPageNewsArtistsSliderCardDescription">
 					Lorem ipsum dolor sit amet consectetur adipisicing elit.
 					Libero vero numquam cum excepturi enim iste quis
 					doloribus cupiditate? Temporibus, laboriosam quis?
@@ -160,21 +160,21 @@ const Slide3 = () => {
 	)
 }
 
-const ArtistPageNewsArtistsSlider = () => {
+const ArtistsPageNewsArtistsSlider = () => {
 	const { t } = useTranslation();
 	return (
-		<div className="artistPageNewsArtistsSliderContainer">
-			<div className="artistPageNewsArtistsSliderWrapper">
-				<div className="artistPageNewsArtistsSliderTopInnerWrapper">
-					<div className="artistPageNewsArtistsSliderTitleWrapper">
-						<p className="artistPageNewsArtistsSliderTitle">
+		<div className="ArtistsPageNewsArtistsSliderContainer">
+			<div className="ArtistsPageNewsArtistsSliderWrapper">
+				<div className="ArtistsPageNewsArtistsSliderTopInnerWrapper">
+					<div className="ArtistsPageNewsArtistsSliderTitleWrapper">
+						<p className="ArtistsPageNewsArtistsSliderTitle">
 							{t('Новини.')} &#8243;{t('Митці')}&#8243;
 						</p>
 					</div>
-					<div className="artistPageNewsArtistsSliderLikeAndShareWrapper">
-						<div className="artistPageNewsArtistsSliderLikeInnerWrapper">
-							<button className="artistPageNewsArtistsSliderLikeButton">
-								<img className="artistPageNewsArtistsSliderLikeButtonImg"
+					<div className="ArtistsPageNewsArtistsSliderLikeAndShareWrapper">
+						<div className="ArtistsPageNewsArtistsSliderLikeInnerWrapper">
+							<button className="ArtistsPageNewsArtistsSliderLikeButton">
+								<img className="ArtistsPageNewsArtistsSliderLikeButtonImg"
 									src={'/Img/likeHeart.svg'}
 									alt={t('Світлина вподобайки')}
 									onError={e => {
@@ -184,9 +184,9 @@ const ArtistPageNewsArtistsSlider = () => {
 								/>
 							</button>
 						</div>
-						<div className="artistPageNewsArtistsSliderShareInnerWrapper">
-							<button className="artistPageNewsArtistsSliderShareButtonButton">
-								<img className="artistPageNewsArtistsSliderShareButtonImg"
+						<div className="ArtistsPageNewsArtistsSliderShareInnerWrapper">
+							<button className="ArtistsPageNewsArtistsSliderShareButtonButton">
+								<img className="ArtistsPageNewsArtistsSliderShareButtonImg"
 									src={'/Img/shareArrow.svg'}
 									alt={t('Світлина поширити')}
 									onError={e => {
@@ -198,7 +198,7 @@ const ArtistPageNewsArtistsSlider = () => {
 						</div>
 					</div>
 				</div>
-				<div className="artistPageNewsArtistsSliderBottomInnerWrapper">
+				<div className="ArtistsPageNewsArtistsSliderBottomInnerWrapper">
 					<Swiper
 						modules={[Navigation, Pagination]}
 						spaceBetween={0}
@@ -239,4 +239,4 @@ const ArtistPageNewsArtistsSlider = () => {
 	)
 }
 
-export default ArtistPageNewsArtistsSlider;
+export default ArtistsPageNewsArtistsSlider;
