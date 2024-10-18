@@ -98,8 +98,8 @@ function Header() {
 		navigate('/NewsPage')
 	}
 
-	const handleArtistPageClick = () => {
-		navigate('/ArtistPage')
+	const handleArtistsPageClick = () => {
+		navigate('/ArtistsPage')
 	}
 
 	const handleMuseumsPageClick = () => {
@@ -171,7 +171,7 @@ function Header() {
 									<p>&#8250;</p>
 								</a>
 							</li>
-							<li className='footerMenuLi' onClick={handleArtistPageClick}>
+							<li className='footerMenuLi' onClick={handleArtistsPageClick}>
 								<a className='footerMenuLink' href='#'>
 									<p>{t('Митці')}</p>
 									<p>&#8250;</p>
@@ -311,7 +311,7 @@ function Header() {
 											{t('Новини')}
 										</a>
 									</li>
-									<li className='mainMenu__li' onClick={handleArtistPageClick}>
+									<li className='mainMenu__li' onClick={handleArtistsPageClick}>
 										<a className='mainMenu__link' href='#'>
 											{t('Митці')}
 										</a>

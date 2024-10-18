@@ -16,8 +16,8 @@ const Footer = () => {
 		navigate('/NewsPage')
 	}
 
-	const handleArtistPageClick = () => {
-		navigate('/ArtistPage')
+	const handleArtistsPageClick = () => {
+		navigate('/ArtistsPage')
 	}
 
 	const handleMuseumsPageClick = () => {
@@ -60,7 +60,7 @@ const Footer = () => {
 									{t('Арт терміни')}
 								</a>
 							</li>
-							<li className={`${styles.footerMenuLi}`} onClick={handleArtistPageClick}>
+							<li className={`${styles.footerMenuLi}`} onClick={handleArtistsPageClick}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
 									{t('Митці')}
 								</a>
