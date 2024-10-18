@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 // Import Swiper styles
@@ -14,36 +15,47 @@ import '/src/styles/components/Sliders/ArtistsPageSliders/ArtistsPageNewsArtists
 
 const Slide = () => {
 	const { t } = useTranslation();
+	
+	const navigate = useNavigate()
+
+	const handleArtistPageClick = () => {
+		navigate('/ArtistPage')
+	}
+
 	return (
 		<div className="ArtistsPageNewsArtistsSliderCardContainer">
 
-			<div className="ArtistsPageNewsArtistsSliderCardImgWrapper">
-				<img
-					className="ArtistsPageNewsArtistsSliderCardImg"
-					src={'/Img/fullSizeRaven.jpg'}
-					alt={t('Світлина мистецтва')}
-					onError={e => {
-						e.target.onerror = null
-						e.target.src = '/public/Img/newsCardERROR.jpg'
-					}}
-				/>
-			</div>
+			<a className="ArtistsPageNewsArtistsSliderCardLink" onClick={handleArtistPageClick}>
 
-			<div className="ArtistsPageNewsArtistsSliderCardTitleWrapper">
-				<h3 className="ArtistsPageNewsArtistsSliderCardTitle">
-					Lorem Ipsum
-				</h3>
-			</div>
+				<div className="ArtistsPageNewsArtistsSliderCardImgWrapper">
+					<img
+						className="ArtistsPageNewsArtistsSliderCardImg"
+						src={'/Img/fullSizeRaven.jpg'}
+						alt={t('Світлина мистецтва')}
+						onError={e => {
+							e.target.onerror = null
+							e.target.src = '/public/Img/newsCardERROR.jpg'
+						}}
+					/>
+				</div>
 
-			<div className="ArtistsPageNewsArtistsSliderCardDescriptionWrapper">
-				<p className="ArtistsPageNewsArtistsSliderCardDescription">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit.
-					Libero vero numquam cum excepturi enim iste quis
-					doloribus cupiditate? Temporibus, laboriosam quis?
-					Reprehenderit velit sequi, inventore nostrum odit illum?
-					Doloremque, veniam.
-				</p>
-			</div>
+				<div className="ArtistsPageNewsArtistsSliderCardTitleWrapper">
+					<h3 className="ArtistsPageNewsArtistsSliderCardTitle">
+						Lorem Ipsum
+					</h3>
+				</div>
+
+				<div className="ArtistsPageNewsArtistsSliderCardDescriptionWrapper">
+					<p className="ArtistsPageNewsArtistsSliderCardDescription">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit.
+						Libero vero numquam cum excepturi enim iste quis
+						doloribus cupiditate? Temporibus, laboriosam quis?
+						Reprehenderit velit sequi, inventore nostrum odit illum?
+						Doloremque, veniam.
+					</p>
+				</div>
+
+			</a>
 
 		</div>
 	)
