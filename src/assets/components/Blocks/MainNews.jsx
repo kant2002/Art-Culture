@@ -92,8 +92,12 @@ function MainNews() {
 					console.log('Пост:', post)
 
 					const featuredMediaUrl = post.images
-						? `http://localhost:5000${post.images.replace('../../', '/')}`
+						? // ? `http://localhost:5000${post.images.replace('../../', '/')}`
+							// : '/Img/halfNewsCard.jpg'
+
+							`https://art.playukraine.com${creator.images.replace('../../', '/')}`
 						: '/Img/halfNewsCard.jpg'
+
 					console.log('Витягнуте медіа:', featuredMediaUrl)
 
 					const postDate = new Date(post.createdAt)

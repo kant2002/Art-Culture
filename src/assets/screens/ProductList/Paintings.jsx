@@ -49,6 +49,10 @@ const Paintings = () => {
 		navigate('/ProductCardCreate')
 	}
 
+	const handleExhibitionCardCreateClick = () => {
+		navigate('/ExhibitionCardCreate')
+	}
+
 	const handleLogout = () => {
 		logout()
 		navigate('/login')
@@ -85,6 +89,12 @@ const Paintings = () => {
 					onClick={handleProductCartCreateClick}
 				>
 					{t('Додати картину')}
+				</button>
+				<button
+					className={styles.profileAction}
+					onClick={handleExhibitionCardCreateClick}
+				>
+					{t('Додати виставку ')}
 				</button>
 				<button className={styles.profileAction} onClick={handleLogout}>
 					{t('Вийти')}

@@ -4,7 +4,8 @@ import axios from 'axios'
 
 // Create an instance of axios with default configurations
 const API = axios.create({
-	baseURL: 'http://localhost:5000/api/', // Replace with your backend URL
+	// baseURL: 'http://localhost:5000/api/', // Replace with your backend URL
+	baseURL: 'https://art.playukraine.com/api/',
 	timeout: 10000, // Optional: set a timeout for requests
 	headers: {
 		'Content-Type': 'application/json',

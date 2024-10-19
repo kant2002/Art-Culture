@@ -166,7 +166,10 @@ function NewsPage() {
 						filteredPosts.slice(0, visiblePostsCount).map((post, index) => {
 							// Construct image URL similar to MainNews component
 							const featuredMediaUrl = post.images
-								? `http://localhost:5000${post.images.replace('../../', '/')}` // Adjust based on your server setup
+								? // ? `http://localhost:5000${post.images.replace('../../', '/')}` // Adjust based on your server setup
+									// : '/Img/halfNewsCard.jpg'
+
+									`https://art.playukraine.com${creator.images.replace('../../', '/')}`
 								: '/Img/halfNewsCard.jpg'
 
 							// Format date and time
@@ -279,7 +282,10 @@ function NewsPage() {
 
 							// Construct image URL similar to MainNews component
 							const featuredMediaUrl = post.images
-								? `http://localhost:5000${post.images.replace('../../', '/')}` // Adjust based on your server setup
+								? // ? `http://localhost:5000${post.images.replace('../../', '/')}` // Adjust based on your server setup
+									// : '/Img/halfNewsCard.jpg'
+
+									`https://art.playukraine.com${creator.images.replace('../../', '/')}`
 								: '/Img/halfNewsCard.jpg'
 
 							// Format date and time

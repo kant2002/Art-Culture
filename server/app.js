@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url'
 import errorHandler from './src/middleware/errorHandler.js'
 import adminRoutes from './src/routes/adminRoutes.js'
 import authRoutes from './src/routes/authRoutes.js'
+import exhibitionRoutes from './src/routes/exhibitionRoutes.js'
 import postRoutes from './src/routes/postRoutes.js'
 import productRoutes from './src/routes/productRoutes.js'
 import userRoutes from './src/routes/userRoutes.js'
@@ -18,6 +19,8 @@ const app = express()
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
+
+app.set('trust proxy', true)
 
 app.use(express.json())
 
@@ -88,6 +91,9 @@ app.use('/api/admin', adminRoutes)
 app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/posts/postId', postRoutes)
+app.use('/api/exhibitions', exhibitionRoutes)
+
+// Routes
 console.log(process.env.NODE_ENV)
 console.log(process.env.CLIENT_URL)
 console.log(userRoutes)
