@@ -169,7 +169,7 @@ function NewsPage() {
 								? // ? `http://localhost:5000${post.images.replace('../../', '/')}` // Adjust based on your server setup
 									// : '/Img/halfNewsCard.jpg'
 
-									`https://art.playukraine.com${creator.images.replace('../../', '/')}`
+									`https://art.playukraine.com${post.images.replace('../../', '/')}`
 								: '/Img/halfNewsCard.jpg'
 
 							// Format date and time
@@ -285,7 +285,7 @@ function NewsPage() {
 								? // ? `http://localhost:5000${post.images.replace('../../', '/')}` // Adjust based on your server setup
 									// : '/Img/halfNewsCard.jpg'
 
-									`https://art.playukraine.com${creator.images.replace('../../', '/')}`
+									`https://art.playukraine.com${post.images.replace('../../', '/')}`
 								: '/Img/halfNewsCard.jpg'
 
 							// Format date and time

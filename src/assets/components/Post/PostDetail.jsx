@@ -37,7 +37,7 @@ function PostDetail() {
 		? // ? `http://localhost:5000${post.images.replace('../../', '/')}`
 			// : '/Img/halfNewsCard.jpg'
 
-			`https://art.playukraine.com${creator.images.replace('../../', '/')}`
+			`https://art.playukraine.com${post.images.replace('../../', '/')}`
 		: '/Img/halfNewsCard.jpg'
 
 	const postDate = new Date(post.createdAt)

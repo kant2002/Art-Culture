@@ -91,7 +91,7 @@ function MainMuseums() {
 					const featuredMediaUrl = museum.images
 						? // ? `http://localhost:5000${museum.images.replace('../../', '/')}`
 							// : '/Img/halfNewsCard.jpg'
-							`https://art.playukraine.com${creator.images.replace('../../', '/')}`
+							`https://art.playukraine.com${museum.images.replace('../../', '/')}`
 						: '/Img/halfNewsCard.jpg'
 					console.log('Витягнуте медіа:', featuredMediaUrl)
 
