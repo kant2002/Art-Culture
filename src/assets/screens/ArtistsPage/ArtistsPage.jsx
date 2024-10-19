@@ -44,7 +44,225 @@ function ArtistsPage() {
 
             </div>
 
-            <ArtistsPageNewsArtistsSlider />            
+            <ArtistsPageNewsArtistsSlider />
+
+            <div className={`${styles.ArtistsPageGalleryContainer}`}>
+
+                <div className={`${styles.ArtistsPageGalleryButtonsWrapper}`}>
+
+                    <button className={`${styles.ArtistsPageGalleryButton}`}></button>
+                    <button className={`${styles.ArtistsPageGalleryButton}`}></button>
+                    <button className={`${styles.ArtistsPageGalleryButtonWhithClock}`}></button>
+
+                </div>
+
+                <div className={`${styles.ArtistsPageGalleryCardsWrapper}`}>
+
+                    <div className={`${styles.ArtistsPageGalleryInnerWrapper}`}>
+
+                        <div className={`${styles.ArtistsPageGalleryCardWrapper}`}>
+
+                            <div className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}>
+
+                                <img
+                                    className={`${styles.ArtistsPageGalleryCardPicture}`}
+                                    src={'/Img/ArtistPhoto.jpg'}
+                                    alt='Слідкуйте за мистецтвом!'
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsCardERROR.jpg'
+                                    }}
+                                />
+
+                            </div>
+
+                            <div className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}>
+
+                                <p className={`${styles.ArtistsPageGalleryCardDescription}`}>{t('Слідкуйте за мистецтвом!')}</p>
+
+                            </div>
+
+                        </div>
+
+                        <div className={`${styles.ArtistsPageGalleryCardWrapper}`}>
+
+                            <div className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}>
+
+                                <img
+                                    className={`${styles.ArtistsPageGalleryCardPicture}`}
+                                    src={'/Img/ArtistPhoto.jpg'}
+                                    alt='Слідкуйте за мистецтвом!'
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsCardERROR.jpg'
+                                    }}
+                                />
+
+                            </div>
+
+                            <div className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}>
+
+                                <p className={`${styles.ArtistsPageGalleryCardDescription}`}>{t('Слідкуйте за мистецтвом!')}</p>
+
+                            </div>
+
+                        </div>
+
+                        <div className={`${styles.ArtistsPageGalleryCardWrapper}`}>
+
+                            <div className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}>
+
+                                <img
+                                    className={`${styles.ArtistsPageGalleryCardPicture}`}
+                                    src={'/Img/ArtistPhoto.jpg'}
+                                    alt='Слідкуйте за мистецтвом!'
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsCardERROR.jpg'
+                                    }}
+                                />
+
+                            </div>
+
+                            <div className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}>
+
+                                <p className={`${styles.ArtistsPageGalleryCardDescription}`}>{t('Слідкуйте за мистецтвом!')}</p>
+
+                            </div>
+
+                        </div>
+
+                        <div className={`${styles.ArtistsPageGalleryCardWrapper}`}>
+
+                            <div className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}>
+
+                                <img
+                                    className={`${styles.ArtistsPageGalleryCardPicture}`}
+                                    src={'/Img/ArtistPhoto.jpg'}
+                                    alt='Слідкуйте за мистецтвом!'
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsCardERROR.jpg'
+                                    }}
+                                />
+
+                            </div>
+
+                            <div className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}>
+
+                                <p className={`${styles.ArtistsPageGalleryCardDescription}`}>{t('Слідкуйте за мистецтвом!')}</p>
+
+                            </div>
+
+                        </div>
+
+                        <div className={`${styles.ArtistsPageGalleryCardWrapper}`}>
+
+                            <div className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}>
+
+                                <img
+                                    className={`${styles.ArtistsPageGalleryCardPicture}`}
+                                    src={'/Img/ArtistPhoto.jpg'}
+                                    alt='Слідкуйте за мистецтвом!'
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsCardERROR.jpg'
+                                    }}
+                                />
+
+                            </div>
+
+                            <div className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}>
+
+                                <p className={`${styles.ArtistsPageGalleryCardDescription}`}>{t('Слідкуйте за мистецтвом!')}</p>
+
+                            </div>
+
+                        </div>
+
+                        <div className={`${styles.ArtistsPageGalleryCardWrapper}`}>
+
+                            <div className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}>
+
+                                <img
+                                    className={`${styles.ArtistsPageGalleryCardPicture}`}
+                                    src={'/Img/ArtistPhoto.jpg'}
+                                    alt='Слідкуйте за мистецтвом!'
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsCardERROR.jpg'
+                                    }}
+                                />
+
+                            </div>
+
+                            <div className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}>
+
+                                <p className={`${styles.ArtistsPageGalleryCardDescription}`}>{t('Слідкуйте за мистецтвом!')}</p>
+
+                            </div>
+
+                        </div>
+
+                        <div className={`${styles.ArtistsPageGalleryCardWrapper}`}>
+
+                            <div className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}>
+
+                                <img
+                                    className={`${styles.ArtistsPageGalleryCardPicture}`}
+                                    src={'/Img/ArtistPhoto.jpg'}
+                                    alt='Слідкуйте за мистецтвом!'
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsCardERROR.jpg'
+                                    }}
+                                />
+
+                            </div>
+
+                            <div className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}>
+
+                                <p className={`${styles.ArtistsPageGalleryCardDescription}`}>{t('Слідкуйте за мистецтвом!')}</p>
+
+                            </div>
+
+                        </div>
+
+                        <div className={`${styles.ArtistsPageGalleryCardWrapper}`}>
+
+                            <div className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}>
+
+                                <img
+                                    className={`${styles.ArtistsPageGalleryCardPicture}`}
+                                    src={'/Img/ArtistPhoto.jpg'}
+                                    alt='Слідкуйте за мистецтвом!'
+                                    onError={e => {
+                                        e.target.onerror = null
+                                        e.target.src = '/Img/newsCardERROR.jpg'
+                                    }}
+                                />
+
+                            </div>
+
+                            <div className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}>
+
+                                <p className={`${styles.ArtistsPageGalleryCardDescription}`}>{t('Слідкуйте за мистецтвом!')}</p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div className={`${styles.ArtistsPageGalleryAllArtistsButtonWrapper}`}>
+
+                    <button className={`${styles.ArtistsPageGalleryAllArtistsButton}`}>{t('Всі митці')}</button>
+
+                </div>
+
+            </div>
 
             <PopularArtsSlider />
 

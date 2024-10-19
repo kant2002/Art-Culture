@@ -109,6 +109,125 @@
     margin: 0 !important;
 }
 
+.ArtistsPageGalleryContainer {
+    // Контейнер для галереи
+    margin: 0 $responsiveLeftAndRightPadding;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ArtistsPageGalleryButtonsWrapper {
+    // Контейнер для кнопок
+    margin: calc(31px - (-15 * ((1440px - 100vw) / (1440 - 375)))) $responsiveLeftAndRightPadding 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ArtistsPageGalleryButton {
+    // Кнопка
+    display: flex;
+    width: 51px;
+    height: 51px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    font-size: calc(18px - (2 * ((1440px - 100vw) / (1440 - 375))));
+    text-align: center;
+    margin: 0 !important;
+    cursor: pointer;
+}
+
+.ArtistsPageGalleryButtonWhithClock {
+    // Кнопка с часами
+    display: flex;
+    width: 51px;
+    height: 51px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    font-size: calc(18px - (2 * ((1440px - 100vw) / (1440 - 375))));
+    text-align: center;
+    margin: 0 !important;
+    cursor: pointer;
+    background-color: #000;
+    color: white;
+    border: none;
+}
+
+.ArtistsPageGalleryCardsWrapper {
+    // Контейнер для карточек
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.ArtistsPageGalleryInnerWrapper {
+    // Контейнер для карточек
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); // 4 столбца при ширине 1440px и выше
+    gap: calc(58px - (44 * ((1440px - 100vw) / (1440 - 375)))); // Расстояние между карточками
+}
+
+.ArtistsPageGalleryCardWrapper {
+    // Контейнер для карточек
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ArtistsPageGalleryCardPictureWrapper {
+    // Контейнер для картинки
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+}
+
+.ArtistsPageGalleryCardPicture {
+    // Картинка
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ArtistsPageGalleryCardDescriptionWrapper {
+    // Контейнер для описания
+    margin: 10px 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ArtistsPageGalleryCardDescription {
+    // Описание
+    font-size: calc(18px - (2 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 400;
+    text-align: center;
+    user-select: none;
+}
+
+.ArtistsPageGalleryAllArtistsButtonWrapper {
+    // Контейнер для кнопки "Все артисты"
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.ArtistsPageGalleryAllArtistsButton {
+    // Кнопка "Все артисты"
+    display: flex;
+    font-size: calc(18px - (2 * ((1440px - 100vw) / (1440 - 375))));
+    text-align: center;
+    margin: 0 !important;
+    cursor: pointer;
+
+}
+
+
+
 @media (min-width: 1441px) {
     .ArtistsPageContainer {
         // главный контейнер
@@ -130,5 +249,10 @@
     .ArtistsPageArtistsDescriptionWrapper {
         // Контейнер для описания
         display: none;
+    }
+
+    .ArtistsPageGalleryInnerWrapper {
+        // Контейнер для карточек
+        grid-template-columns: repeat(2, 1fr);
     }
 }
