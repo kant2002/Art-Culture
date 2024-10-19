@@ -91,9 +91,10 @@ function MainArtists() {
 			<div className={styles.mainPageNewsCardsWrapper}>
 				{creators.slice(0, visibleCreatorsCount).map((creator, index) => {
 					const featuredMediaUrl = creator.images
-						? `http://localhost:5000${creator.images.replace('../../', '/')}`
+						? // ? `http://localhost:5000${creator.images.replace('../../', '/')}`
+							// : '/Img/halfNewsCard.jpg'
+							`https://art.playukraine.com${creator.images.replace('../../', '/')}`
 						: '/Img/halfNewsCard.jpg'
-
 					// const postDate = new Date(post.date)
 					// const formattedDate = postDate.toLocaleDateString('uk-UA', {
 					// 	year: 'numeric',

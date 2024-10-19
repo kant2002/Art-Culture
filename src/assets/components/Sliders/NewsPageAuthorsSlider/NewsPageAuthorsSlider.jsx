@@ -150,8 +150,11 @@ const Slide = ({ creator, onClick }) => {
 						className='newsPageAuthorsSliderCardUserPhoto'
 						src={
 							creator.images
-								? `http://localhost:5000${creator.images.replace('../../', '/')}`
-								: '/Img/mainInstagramSliderUserPhoto.png'
+								? // ? `http://localhost:5000${creator.images.replace('../../', '/')}`
+									// : '/Img/mainInstagramSliderUserPhoto.png'
+
+									`https://art.playukraine.com${creator.images.replace('../../', '/')}`
+								: '/Img/halfNewsCard.jpg'
 						}
 						alt={t('Фотографія автора')}
 						loading='lazy'

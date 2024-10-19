@@ -34,7 +34,10 @@ function PostDetail() {
 	}
 
 	const featuredMediaUrl = post.images
-		? `http://localhost:5000${post.images.replace('../../', '/')}`
+		? // ? `http://localhost:5000${post.images.replace('../../', '/')}`
+			// : '/Img/halfNewsCard.jpg'
+
+			`https://art.playukraine.com${post.images.replace('../../', '/')}`
 		: '/Img/halfNewsCard.jpg'
 
 	const postDate = new Date(post.createdAt)

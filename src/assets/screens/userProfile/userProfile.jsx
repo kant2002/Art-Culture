@@ -58,6 +58,11 @@ const UserProfile = () => {
 	const handlePaintingCardListClick = () => {
 		navigate('/Paintings')
 	}
+
+	const handleExhibitionCardCreateClick = () => {
+		navigate('/ExhibitionCardCreate')
+	}
+
 	const toggleEditMode = () => {
 		setEditMode(!editMode)
 		setServerMessage('')
@@ -131,6 +136,12 @@ const UserProfile = () => {
 					onClick={handlePaintingCardListClick}
 				>
 					{t('Переглянути вироби/картини ')}
+				</button>
+				<button
+					className={styles.profileAction}
+					onClick={handleExhibitionCardCreateClick}
+				>
+					{t('Додати виставку ')}
 				</button>
 				<button className={styles.profileAction} onClick={handleLogout}>
 					{t('Вийти')}

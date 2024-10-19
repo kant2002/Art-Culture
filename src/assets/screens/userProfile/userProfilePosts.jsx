@@ -62,6 +62,9 @@ function UserProfilePosts() {
 	const handlePaintingCardListClick = () => {
 		navigate('/Paintings')
 	}
+	const handleExhibitionCardCreateClick = () => {
+		navigate('/ExhibitionCardCreate')
+	}
 
 	return (
 		<div className={styles.profile}>
@@ -91,6 +94,12 @@ function UserProfilePosts() {
 					onClick={handlePaintingCardListClick}
 				>
 					{t('Переглянути вироби/картини ')}
+				</button>
+				<button
+					className={styles.profileAction}
+					onClick={handleExhibitionCardCreateClick}
+				>
+					{t('Додати виставку ')}
 				</button>
 				<button className={styles.profileAction} onClick={handleLogout}>
 					{t('Вийти')}

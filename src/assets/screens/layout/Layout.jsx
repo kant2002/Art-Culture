@@ -2,14 +2,16 @@ import cn from 'clsx'
 import React, { useState } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import ProtectedRoute from '../../../routes/ProtectedRoute'
+import ExhibitionCardCreate from '../../components/ExhibitionCard/ExhibitionCardCreate'
 import PostDetail from '../../components/Post/PostDetail'
 import Login from '../../components/VerificationPages/LoginPage'
 import SignUp from '../../components/VerificationPages/SignUpPage'
 import AdminDashboard from '../Admin/AdminDashboard'
 import ArtistsPage from '../ArtistsPage/ArtistsPage'
 import ArtistPage from '../ArtistPage/ArtistPage'
-import MuseumsPage from '../MuseumsPage/MuseumsPage'
+import MuseumExhibitions from '../ExhibitionList/Exhibitions'
 import MuseumPage from '../MuseumPage/MuseumPage'
+import MuseumsPage from '../MuseumsPage/MuseumsPage'
 import Paintings from '../ProductList/Paintings'
 import Footer from '../footer/Footer'
 import Header from '../header/Header'
@@ -65,6 +67,11 @@ const Layout = ({ children, heading = '', backLink = '/' }) => {
 					<Route path='/userProfilePosts' element={<UserProfilePosts />} />
 					<Route path='/Paintings' element={<Paintings />} />
 					<Route path='/ProductCardCreate' element={<ProductCardCreate />} />
+					<Route
+						path='/ExhibitionCardCreate'
+						element={<ExhibitionCardCreate />}
+					/>
+					<Route path='/Exhibitions' element={<MuseumExhibitions />} />
 					<Route path='/NewsPage' element={<NewsPage />} />
 					<Route
 						path='/login'

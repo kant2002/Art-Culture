@@ -1,8 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// schema.prisma
 
 generator client {
   provider = "prisma-client-js"
@@ -22,18 +18,22 @@ enum Role {
 }
 
 model User {
-  id                 Int          @id @default(autoincrement())
-  email              String       @unique
+  id                 Int                @id @default(autoincrement())
+  email              String             @unique
   password           String
-  role               Role         @default(USER)
+  role               Role               @default(USER)
   posts              Post[]
   products           Product[]
   images             String?
   title              String? // New field for user title
   bio                String? // New field for user bio
-  createdAt          DateTime     @default(now())
-  updatedAt          DateTime     @updatedAt
-  createdExhibitions Exhibition[]
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  createdExhibitions Exhibition[]       @relation("UserCreatedExhibitions")
+  exhibitionArtists  ExhibitionArtist[] // Added relation to ExhibitionArtist
+  // Other fields...
+
+  @@map("user")
 }
 
 model Post {
@@ -72,30 +72,30 @@ model Exhibition {
   description       String
   startDate         DateTime
   endDate           DateTime
-  time              String
+  time              String?
   location          String
-  createdBy         User               @relation(fields: [createdById], references: [id])
   createdById       Int
+  createdBy         User               @relation("UserCreatedExhibitions", fields: [createdById], references: [id])
   exhibitionArtists ExhibitionArtist[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  images            ExhibitionImage[]
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
 }
 
-model Artist {
-  id                Int                @id @default(autoincrement())
-  name              String
-  bio               String?
-  exhibitionArtists ExhibitionArtist[]
-
-  // Other fields...
+model ExhibitionImage {
+  id           Int        @id @default(autoincrement())
+  imageUrl     String
+  exhibition   Exhibition @relation(fields: [exhibitionId], references: [id])
+  exhibitionId Int
 }
 
 model ExhibitionArtist {
   exhibition   Exhibition @relation(fields: [exhibitionId], references: [id])
   exhibitionId Int
-  artist       Artist     @relation(fields: [artistId], references: [id])
+  artist       User       @relation(fields: [artistId], references: [id])
   artistId     Int
 
   @@id([exhibitionId, artistId])
 }
+
+// Removed the Artist model

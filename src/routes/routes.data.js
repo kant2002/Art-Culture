@@ -1,3 +1,4 @@
+import ExhibitionCardCreate from '../assets/components/ExhibitionCard/ExhibitionCardCreate'
 import PostDetail from '../assets/components/Post/PostDetail'
 import ProductCartCreate from '../assets/components/ProductCard/ProductCardCreate'
 import Login from '../assets/components/VerificationPages/LoginPage'
@@ -5,8 +6,9 @@ import SignUp from '../assets/components/VerificationPages/SignUpPage'
 import AdminDashboard from '../assets/screens/Admin/AdminDashboard'
 import ArtistsPage from '../assets/screens/ArtistsPage/ArtistsPage'
 import ArtistPage from '../assets/screens/ArtistPage/ArtistPage'
-import MuseumsPage from '../assets/screens/MuseumsPage/MuseumsPage'
+import MuseumExhibitions from '../assets/screens/ExhibitionList/Exhibitions'
 import MuseumPage from '../assets/screens/MuseumPage/MuseumPage'
+import MuseumsPage from '../assets/screens/MuseumsPage/MuseumsPage'
 import Paintings from '../assets/screens/ProductList/Paintings'
 import Home from '../assets/screens/home/Home'
 import Layout from '../assets/screens/layout/Layout'
@@ -102,6 +104,18 @@ export const routes = [
 	{
 		path: '/ProductCardCreate',
 		element: ProductCartCreate,
+		isAuth: true,
+	},
+
+	{
+		path: '/ExhibitionCardCreate',
+		element: ExhibitionCardCreate,
+		isAuth: true,
+	},
+
+	{
+		path: '/Exhibitions',
+		element: MuseumExhibitions,
 		isAuth: true,
 	},
 
