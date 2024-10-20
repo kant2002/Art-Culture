@@ -118,9 +118,26 @@
     align-items: center;
 }
 
+.ArtistsPageGalleryTitleWrapper {
+    // Контейнер для названия галереи
+    margin: calc(87px - (43 * ((1440px - 100vw) / (1440 - 375)))) $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.ArtistsPageGalleryTitle {
+    // Название галереи 
+    font-family: $default-font;
+    font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+}
+
 .ArtistsPageGalleryButtonsWrapper {
     // Контейнер для кнопок
-    margin: calc(31px - (-15 * ((1440px - 100vw) / (1440 - 375)))) $responsiveLeftAndRightPadding 0;
+    margin: calc(32px - (15 * ((1440px - 100vw) / (1440 - 375)))) $responsiveLeftAndRightPadding 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -129,34 +146,51 @@
 .ArtistsPageGalleryButton {
     // Кнопка
     display: flex;
-    width: 51px;
-    height: 51px;
-    border: 1px solid #000;
-    border-radius: 5px;
-    font-size: calc(18px - (2 * ((1440px - 100vw) / (1440 - 375))));
-    text-align: center;
+    justify-content: center;
+    align-items: center;
     margin: 0 !important;
     cursor: pointer;
+    background: none;
 }
 
 .ArtistsPageGalleryButtonWhithClock {
     // Кнопка с часами
     display: flex;
-    width: 51px;
-    height: 51px;
-    border: 1px solid #000;
-    border-radius: 5px;
-    font-size: calc(18px - (2 * ((1440px - 100vw) / (1440 - 375))));
-    text-align: center;
+    justify-content: center;
+    align-items: center;
     margin: 0 !important;
     cursor: pointer;
-    background-color: #000;
-    color: white;
-    border: none;
+    background: none;
+}
+
+.ArtistsPageGalleryButtonTitle {
+    // Название кнопки
+    margin: 0 0 0 calc(10px - (5 * ((1440px - 100vw) / (1440 - 375))));
+    font-size: calc(24px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.ArtistsPageGalleryButtonClock {
+    // Часы
+    margin: 0 0 0 calc(15px - (5 * ((1440px - 100vw) / (1440 - 375))));
+    width: calc(24px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    height: calc(24px - (10 * ((1440px - 100vw) / (1440 - 375))));
+}
+
+.ArtistsPageGalleryButtonSeparator {
+    // Разделитель
+    margin: 0 0 0 calc(15px - (5 * ((1440px - 100vw) / (1440 - 375))));
+    font-size: calc(24px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
 }
 
 .ArtistsPageGalleryCardsWrapper {
     // Контейнер для карточек
+    margin: calc(36px - (25 * ((1440px - 100vw) / (1440 - 375)))) $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -211,6 +245,7 @@
 .ArtistsPageGalleryAllArtistsButtonWrapper {
     // Контейнер для кнопки "Все артисты"
     width: 100%;
+    margin: calc(36px - (25 * ((1440px - 100vw) / (1440 - 375)))) $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -219,11 +254,26 @@
 .ArtistsPageGalleryAllArtistsButton {
     // Кнопка "Все артисты"
     display: flex;
+    align-items: center;
     font-size: calc(18px - (2 * ((1440px - 100vw) / (1440 - 375))));
     text-align: center;
     margin: 0 !important;
     cursor: pointer;
+    background: none;
+}
 
+.ArtistsPageGalleryAllArtistsButtonText {
+    // Текст кнопки "Все артисты"
+    margin: 0 0 0 calc(10px - (5 * ((1440px - 100vw) / (1440 - 375))));
+    font-size: calc(24px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    text-align: center;
+    font-weight: 400;
+}
+
+.ArtistsPageGalleryAllArtistsButtonArrow {
+    // Стрелка кнопки "Все артисты"
+    margin: 0 0 0 calc(10px - (5 * ((1440px - 100vw) / (1440 - 375))));
+    text-align: center;
 }
 
 

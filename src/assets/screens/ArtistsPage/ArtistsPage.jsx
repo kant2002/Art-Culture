@@ -48,11 +48,45 @@ function ArtistsPage() {
 
             <div className={`${styles.ArtistsPageGalleryContainer}`}>
 
+                <div className={`${styles.ArtistsPageGalleryTitleWrapper}`}>
+
+                    <h3 className={`${styles.ArtistsPageGalleryTitle}`}>{t('Перегляд.')} &#8243;{t('Митці')}&#8243;</h3>
+
+                </div>
+
                 <div className={`${styles.ArtistsPageGalleryButtonsWrapper}`}>
 
-                    <button className={`${styles.ArtistsPageGalleryButton}`}></button>
-                    <button className={`${styles.ArtistsPageGalleryButton}`}></button>
-                    <button className={`${styles.ArtistsPageGalleryButtonWhithClock}`}></button>
+                    <button className={`${styles.ArtistsPageGalleryButton}`}>
+
+                        <p className={`${styles.ArtistsPageGalleryButtonTitle}`}>{t('Усі')}</p>
+
+                    </button>
+
+                    <p className={`${styles.ArtistsPageGalleryButtonSeparator}`}>|</p>
+
+                    <button className={`${styles.ArtistsPageGalleryButton}`}>
+
+                        <p className={`${styles.ArtistsPageGalleryButtonTitle}`}>{t('А-Я')}</p>
+
+                    </button>
+
+                    <p className={`${styles.ArtistsPageGalleryButtonSeparator}`}>|</p>
+
+                    <button className={`${styles.ArtistsPageGalleryButtonWhithClock}`}>
+
+                        <p className={`${styles.ArtistsPageGalleryButtonTitle}`}>{t('Час')}</p>
+
+                        <img
+                            className={`${styles.ArtistsPageGalleryButtonClock}`}
+                            src={'/Img/clock.svg'}
+                            alt='Слідкуйте за мистецтвом!'
+                            onError={e => {
+                                e.target.onerror = null
+                                e.target.src = '/Img/newsCardERROR.jpg'
+                            }}
+                        />
+
+                    </button>
 
                 </div>
 
@@ -258,7 +292,21 @@ function ArtistsPage() {
 
                 <div className={`${styles.ArtistsPageGalleryAllArtistsButtonWrapper}`}>
 
-                    <button className={`${styles.ArtistsPageGalleryAllArtistsButton}`}>{t('Всі митці')}</button>
+                    <button className={`${styles.ArtistsPageGalleryAllArtistsButton}`}>
+
+                        <p className={`${styles.ArtistsPageGalleryAllArtistsButtonText}`}>{t('Всі митці')}</p>
+
+                        <img
+                            className={`${styles.ArtistsPageGalleryAllArtistsButtonArrow}`}
+                            src={'/public/Img/buttonArrow.svg'}
+                            alt='Слідкуйте за мистецтвом!'
+                            onError={e => {
+                                e.target.onerror = null
+                                e.target.src = '/Img/newsCardERROR.jpg'
+                            }}
+                        />
+
+                    </button>
 
                 </div>
 
