@@ -298,7 +298,7 @@ function ArtistsPage() {
 
                         <img
                             className={`${styles.ArtistsPageGalleryAllArtistsButtonArrow}`}
-                            src={'/public/Img/buttonArrow.svg'}
+                            src={'/Img/buttonArrow.svg'}
                             alt='Слідкуйте за мистецтвом!'
                             onError={e => {
                                 e.target.onerror = null
