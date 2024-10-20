@@ -118,6 +118,22 @@
     align-items: center;
 }
 
+.ArtistsPageGalleryTitleWrapper {
+    // Контейнер для названия галереи
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.ArtistsPageGalleryTitle {
+    // Название галереи 
+    font-family: $default-font;
+    font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+}
+
 .ArtistsPageGalleryButtonsWrapper {
     // Контейнер для кнопок
     margin: calc(31px - (-15 * ((1440px - 100vw) / (1440 - 375)))) $responsiveLeftAndRightPadding 0;
@@ -223,7 +239,6 @@
     text-align: center;
     margin: 0 !important;
     cursor: pointer;
-
 }
 
 

@@ -48,6 +48,12 @@ function ArtistsPage() {
 
             <div className={`${styles.ArtistsPageGalleryContainer}`}>
 
+                <div className={`${styles.ArtistsPageGalleryTitleWrapper}`}>
+
+                    <h3 className={`${styles.ArtistsPageGalleryTitle}`}>{t('Перегляд.')} &#8243;{t('Митці')}&#8243;</h3>
+
+                </div>
+
                 <div className={`${styles.ArtistsPageGalleryButtonsWrapper}`}>
 
                     <button className={`${styles.ArtistsPageGalleryButton}`}></button>
