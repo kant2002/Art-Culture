@@ -2,55 +2,55 @@
 @import '/src/styles/utilities/variables.scss';
 
 .userProfilePostsContainer {
-    /* Контейнер для карточек публикаций */
-    font-family: $default-font;
-    margin: 15px 0;
+	/* Контейнер для карточек публикаций */
+	font-family: $default-font;
+	margin: 15px 0;
 }
 
 .userProfilePostsWrapper {
-    /* Контейнер для карточек публикаций */
-    margin: 0 0 30px 0;
-    display: flex;
-    flex-direction: column;
+	/* Контейнер для карточек публикаций */
+	margin: 0 0 30px 0;
+	display: flex;
+	flex-direction: column;
 }
 
 .userProfilePostsPicAndTextWrapper {
-    /* Обертка для изображения и текста публикации */
-    display: flex;
+	/* Обертка для изображения и текста публикации */
+	display: flex;
 }
 
 .userProfilePostsPicWrapper {
-    /* Обертка для изображения публикации */
-    display: inline-block;
-    width: fit-content;
-    height: fit-content;
-    max-width: max-content;
-    max-height: max-content;
+	/* Обертка для изображения публикации */
+	display: inline-block;
+	width: fit-content;
+	height: fit-content;
+	max-width: max-content;
+	max-height: max-content;
 }
 
 .userProfilePostsPic {
-    /* Стили для изображения публикации */
-    display: block;
+	/* Стили для изображения публикации */
+	display: block;
 	object-fit: contain;
 	object-position: center top;
-    border-radius: 3px;
-    max-width: 300px;
-    max-height: 300px;
+	border-radius: 3px;
+	max-width: 300px;
+	max-height: 300px;
 }
 
 .userProfilePostsTextWrapper {
-    /* Обертка для текста публикации */
-    margin: 0 0 0 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    width: 100%;
+	/* Обертка для текста публикации */
+	margin: 0 0 0 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	width: 100%;
 }
 
 .userProfilePostsTitleWrapper {
-    /* Обертка для заголовка публикации */
-    display: flex;
-    justify-content: start;
+	/* Обертка для заголовка публикации */
+	display: flex;
+	justify-content: start;
 	// max-height: calc(
 	// 	28px * 2
 	// ); // Делаем ограничение вывода текста построчечно
@@ -58,101 +58,198 @@
 }
 
 .userProfilePostsTitle {
-    /* Стили для заголовка публикации */
-    font-weight: 600;
+	/* Стили для заголовка публикации */
+	font-weight: 600;
 	font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
-    text-transform: uppercase;
+	text-transform: uppercase;
 }
 
 .userProfilePostsDescriptionWrapper {
-    /* Обертка для описания публикации */
-    margin: 10px 0 0 0;
-    display: flex;
-    justify-content: start;
-	max-height: calc(
-		18px * 11
-	); // Делаем ограничение вывода текста построчечно
+	/* Обертка для описания публикации */
+	margin: 10px 0 0 0;
+	display: flex;
+	justify-content: start;
+	max-height: calc(18px * 11); // Делаем ограничение вывода текста построчечно
 	overflow: hidden;
 }
 
 .userProfilePostsDescription {
-    /* Стили для описания публикации */
-    margin: 10px 0 0 0;
-    font-weight: 400;
-    font-size: 18px;
-	max-height: calc(
-		18px * 3
-	); // Делаем ограничение вывода текста построчечно
+	/* Стили для описания публикации */
+	margin: 10px 0 0 0;
+	font-weight: 400;
+	font-size: 18px;
+	max-height: calc(18px * 3); // Делаем ограничение вывода текста построчечно
 	overflow: hidden;
 }
 
 .userProfilePostsClockDateAndButtonWrapper {
-    /* Обертка для часов, даты и кнопки */
-    margin: 10px 0 auto 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	/* Обертка для часов, даты и кнопки */
+	margin: 10px 0 auto 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .userProfilePostsClockAndDateWrapper {
-    /* Обертка для часов и даты */
-    margin: 10px 0 auto 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	/* Обертка для часов и даты */
+	margin: 10px 0 auto 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .userProfilePostsClock {
-    /* Стили для изображения часов */
-    display: flex;
+	/* Стили для изображения часов */
+	display: flex;
 	width: 20px;
 	height: 20px;
 }
 
 .userProfilePostsDate {
-    /* Стили для даты публикации */
-    margin: 0 0 0 10px;
-    font-weight: 400;
-    font-size: 18px;
+	/* Стили для даты публикации */
+	margin: 0 0 0 10px;
+	font-weight: 400;
+	font-size: 18px;
 }
 
 .userProfilePostsButton {
-    /* Стили для кнопки публикации */
-    margin: 0 0 0 auto;
-    font-weight: 400;
-    font-size: 18px;
-    background: none;
-    border: none;
-    cursor: pointer;
+	/* Стили для кнопки публикации */
+	margin: 0 0 0 auto;
+	font-weight: 400;
+	font-size: 18px;
+	background: none;
+	border: none;
+	cursor: pointer;
 	color: #d83934;
 }
 
 @media (min-width: 1440px) {
-    .userProfilePostsTitle {
-        /* Стили для заголовка публикации */
-        font-size: 28px;
-    }
+	.userProfilePostsTitle {
+		/* Стили для заголовка публикации */
+		font-size: 28px;
+	}
 }
 
 @media (max-width: 679px) {
-    .userProfilePostsPicAndTextWrapper {
-        /* Обертка для изображения и текста публикации */
-        flex-wrap: wrap;
-    }
+	.userProfilePostsPicAndTextWrapper {
+		/* Обертка для изображения и текста публикации */
+		flex-wrap: wrap;
+	}
 
-    .userProfilePostsPicWrapper {
-        /* Обертка для изображения публикации */
-        width: 100%;
-        margin: 0 auto;
-    }
+	.userProfilePostsPicWrapper {
+		/* Обертка для изображения публикации */
+		width: 100%;
+		margin: 0 auto;
+	}
 
-    .userProfilePostsPic {
-        /* Стили для изображения публикации */
-        width: 100%;
-    }
+	.userProfilePostsPic {
+		/* Стили для изображения публикации */
+		width: 100%;
+	}
 
-    .userProfilePostsTextWrapper {
-        /* Обертка для текста публикации */
-        margin: 10px 0 0 0;
-    }
+	.userProfilePostsTextWrapper {
+		/* Обертка для текста публикации */
+		margin: 10px 0 0 0;
+	}
+}
+
+// src/styles/components/UserProfile/userProfilePosts.module.scss
+
+/* Modal Overlay */
+.modalOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+/* Modal Content */
+.modalContent {
+	background-color: #fff;
+	padding: 2rem;
+	width: 90%;
+	max-width: 600px;
+	border-radius: 8px;
+	position: relative;
+}
+
+/* Modal Title */
+.modalTitle {
+	margin-top: 0;
+	margin-bottom: 1rem;
+	text-align: center;
+}
+
+/* Modal Form */
+.modalForm {
+	display: flex;
+	flex-direction: column;
+}
+
+/* Modal Field */
+.modalField {
+	margin-bottom: 1rem;
+}
+
+/* Modal Label */
+.modalLabel {
+	display: flex;
+	flex-direction: column;
+	font-weight: bold;
+}
+
+/* Modal Input */
+.modalInput {
+	padding: 0.5rem;
+	font-size: 1rem;
+}
+
+/* Modal Textarea */
+.modalTextarea {
+	padding: 0.5rem;
+	font-size: 1rem;
+	resize: vertical;
+}
+
+/* Remaining Characters */
+.remainingChars {
+	font-size: 0.875rem;
+	color: #666;
+}
+
+/* Modal Buttons */
+.modalButtons {
+	display: flex;
+	justify-content: flex-end;
+	gap: 1rem;
+}
+
+/* Save Button */
+.modalSaveButton {
+	padding: 0.5rem 1rem;
+	background-color: #4caf50;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+}
+
+/* Cancel Button */
+.modalCancelButton {
+	padding: 0.5rem 1rem;
+	background-color: #f44336;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+}
+
+/* Current Image */
+.currentImage {
+	max-width: 100%;
+	margin-top: 1rem;
 }

@@ -21,6 +21,12 @@ function MainExhibitions() {
 		}
 	}
 
+	const host = window.location.hostname
+	const isLocalhost = host === 'localhost' || host === '127.0.0.1'
+	const baseUrl = isLocalhost
+		? 'http://localhost:5000'
+		: 'https://art.playukraine.com'
+
 	useEffect(() => {
 		const handleResize = () => {
 			const newPostCount = getPostsCount(window.innerWidth)
@@ -87,9 +93,7 @@ function MainExhibitions() {
 						console.log('Витягнуті виставки:', exhibitions)
 
 						const featuredMediaUrl = exhibition.images
-							? // ? `http://localhost:5000${exhibition.images[0].imageUrl.replace('../../', '/')}`
-								// : '/Img/halfNewsCard.jpg'
-								`https://art.playukraine.com${exhibition.images.replace('../../', '/')}`
+							? `${baseUrl}${exhibition.images.replace('../../', '/')}`
 							: '/Img/halfNewsCard.jpg'
 						console.log('Витягнуте медіа:', featuredMediaUrl)
 

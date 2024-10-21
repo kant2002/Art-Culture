@@ -12,6 +12,12 @@ function MainMuseums() {
 		getPostsCount(window.innerWidth)
 	)
 
+	const host = window.location.hostname
+	const isLocalhost = host === 'localhost' || host === '127.0.0.1'
+	const baseUrl = isLocalhost
+		? 'http://localhost:5000'
+		: 'https://art.playukraine.com'
+
 	function getPostsCount(Width) {
 		if (Width >= 1600) {
 			return 3
@@ -89,9 +95,7 @@ function MainMuseums() {
 					console.log('Витягнені музеі:', museums)
 
 					const featuredMediaUrl = museum.images
-						? // ? `http://localhost:5000${museum.images.replace('../../', '/')}`
-							// : '/Img/halfNewsCard.jpg'
-							`https://art.playukraine.com${museum.images.replace('../../', '/')}`
+						? `${baseUrl}${museum.images.replace('../../', '/')}`
 						: '/Img/halfNewsCard.jpg'
 					console.log('Витягнуте медіа:', featuredMediaUrl)
 

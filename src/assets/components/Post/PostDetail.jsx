@@ -25,6 +25,12 @@ function PostDetail() {
 			})
 	}, [id])
 
+	const host = window.location.hostname
+	const isLocalhost = host === 'localhost' || host === '127.0.0.1'
+	const baseUrl = isLocalhost
+		? 'http://localhost:5000'
+		: 'https://art.playukraine.com'
+
 	if (error) {
 		return <div>{t('Error loading post')}</div>
 	}
@@ -34,10 +40,7 @@ function PostDetail() {
 	}
 
 	const featuredMediaUrl = post.images
-		? // ? `http://localhost:5000${post.images.replace('../../', '/')}`
-			// : '/Img/halfNewsCard.jpg'
-
-			`https://art.playukraine.com${post.images.replace('../../', '/')}`
+		? `${baseUrl}${post.images.replace('../../', '/')}`
 		: '/Img/halfNewsCard.jpg'
 
 	const postDate = new Date(post.createdAt)

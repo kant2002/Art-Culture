@@ -129,10 +129,18 @@ export const updatePost = async (req, res, next) => {
 		if (post.authorId !== userId)
 			return res.status(403).json({ error: 'Unauthorized' })
 
+		let imageUrl = post.images
+		if (req.file) {
+			if (post.images) {
+				const oldImagePath = path.join(__dirname, '../../', post.images)
+				fs.unlinkSync(oldImagePath)
+			}
+			imageUrl = `/uploads/${req.file.filename}`
+		}
 		// Update post
 		const updatedPost = await prisma.post.update({
 			where: { id: parseInt(id) },
-			data: { title, content, images },
+			data: { title, content, images: imageUrl },
 			include: { author: { select: { email: true, id: true } } },
 		})
 
@@ -152,6 +160,12 @@ export const deletePost = async (req, res, next) => {
 		if (!post) return res.status(404).json({ error: 'Post not found' })
 		if (post.authorId !== userId)
 			return res.status(403).json({ error: 'Unauthorized' })
+
+		// Delete image if exist
+		if (post.images) {
+			const imagePath = path.join(__dirname, '../../', post.images)
+			fs.unlinkSync(imagePath)
+		}
 
 		// Delete post
 		await prisma.post.delete({ where: { id: parseInt(id) } })
