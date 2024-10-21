@@ -3,8 +3,8 @@
 .profile {
 	/* Основной контейнер профиля */
 	display: flex;
-	flex-direction: column;
-	padding: $responsiveTopPadding $responsiveLeftAndRightPadding 0;
+	flex-direction: row;
+	padding: $responsiveTopPadding $responsiveLeftAndRightPadding 0 0;
 	width: 100%;
 	min-height: calc(100dvh - 234px);
 	background: white;
@@ -13,18 +13,22 @@
 
 .profileActions {
 	/* Контейнер для верхних кнопок */
+	padding: 0 $responsiveLeftAndRightPadding;
 	display: flex;
+	flex-direction: column;
 	justify-content: start;
-	align-items: center;
+	align-items: start;
 	flex-wrap: wrap;
+	background: #000;
+
 }
 
 .profileAction {
 	/* Стиль для каждой кнопки действия */
 	margin: 10px calc(20px - (10 * ((1440px - 100vw) / (1440 - 375)))) 0 0;
-	padding: 0 calc(20px - (10 * ((1440px - 100vw) / (1440 - 375))));
+	// padding: 0 calc(20px - (10 * ((1440px - 100vw) / (1440 - 375))));
 	// width: calc(238px - (105 * ((1440px - 100vw) / (1440 - 375))));
-	height: calc(51px - (11 * ((1440px - 100vw) / (1440 - 375))));
+	// height: calc(51px - (11 * ((1440px - 100vw) / (1440 - 375))));
 	// min-width: 163px;
 	min-width: fit-content;
 	min-height: 40px;
@@ -33,15 +37,18 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border-radius: calc(34px - (4 * ((1440px - 100vw) / (1440 - 375))));
-	background-color: rgb(207, 207, 207);
+	// border-radius: calc(34px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	// background-color: black;
+	background: none;
 	cursor: pointer;
 	font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
 	font-weight: 500;
+	color: #fff;
+	white-space: nowrap;
 }
 
 .profileAction:hover {
-	background: #3a8374;
+	// background: #3a8374;
 	color: #fff;
 	transition: 0.4s ease;
 }
@@ -51,14 +58,14 @@
 }
 
 .profileActionActive {
-	background: #3a8374;
+	// background: #3a8374;
 	color: #fff;
 	border: none;
 }
 
 .profileInfo {
 	// /* Контейнер для информации о пользователе */
-	margin: 20px 0 0 0;
+	margin: 20px 0 0 $responsiveLeftAndRightPadding;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
