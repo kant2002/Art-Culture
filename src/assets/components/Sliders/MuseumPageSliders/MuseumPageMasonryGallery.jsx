@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
-import style from '../../../../styles/components/Sliders/MuseumPageSliders/MasonryGallery.module.scss'
+import style from '../../../../styles/components/Sliders/MuseumPageSliders/MuseumPageMasonryGallery.module.scss'
 
-const MasonryGallery = () => {
+const MuseumPageMasonryGallery = () => {
 	// Hardcoded list of image URLs
 	const allImages = [
 		'/Img/gallery/1.webp',
@@ -207,4 +207,4 @@ const MasonryGallery = () => {
 	)
 }
 
-export default MasonryGallery
+export default MuseumPageMasonryGallery

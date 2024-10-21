@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from '../../../styles/layout/MuseumPage.module.scss'
-import MasonryGallery from '../../components/Sliders/MuseumPageSliders/MasonrySlider.jsx'
+import MuseumPageMasonryGallery
+from '../../components/Sliders/MuseumPageSliders/MuseumPageMasonryGallery.jsx'
 
 function MuseumPage() {
 	const { t } = useTranslation()
@@ -122,7 +123,7 @@ function MuseumPage() {
 				</button>
 			</div>
 
-			<MasonryGallery />
+			<MuseumPageMasonryGallery/>
 
 			{/* <div className={`${styles.underDevelopmentContainer}`}>
                 <p className={`${styles.underDevelopmentPreTitle}`}>{t('Цей контейнер')}</p>

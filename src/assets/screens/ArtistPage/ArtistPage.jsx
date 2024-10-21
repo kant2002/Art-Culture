@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import ArtistPageNewsArtistsSlider from '../../components/Sliders/ArtistPageSliders/ArtistPageNewsArtistsSlider.jsx'
 import PopularOfThisArtistSlider from '../../components/Sliders/ArtistPageSliders/PopularOfThisArtistSlider.jsx'
 import MainPopularArtsSlider from '../../components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.jsx'
-import MasonryGallery from '../../components/Sliders/MuseumPageSliders/MasonrySlider.jsx'
+import ArtistPageMasonryGallery from '../../components/Sliders/ArtistPageSliders/ArtistPageMasonryGallery.jsx'
 import styles from '../../../styles/layout/ArtistPage.module.scss' 
 
 function ArtistPage() {
@@ -72,7 +72,7 @@ function ArtistPage() {
 
             <PopularOfThisArtistSlider />
 
-            <MasonryGallery />
+            <ArtistPageMasonryGallery />
 
             {/* <div className={`${styles.underDevelopmentContainer}`}>
                 <p className={`${styles.underDevelopmentPreTitle}`}>{t('Цей контейнер')}</p>

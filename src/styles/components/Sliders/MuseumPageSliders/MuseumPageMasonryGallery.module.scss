@@ -1,0 +1,56 @@
+// .masonryGallery {
+// 	width: 100%;
+// 	margin: 0 auto;
+// }
+
+// .row {
+// 	display: flex;
+// 	margin-bottom: 10px; // Gap between rows
+// }
+
+// .item {
+// 	display: block;
+// }
+
+// .item:not(:last-child) {
+// 	margin-right: 10px; // Gap between items
+// }
+
+// img {
+// 	display: block;
+// 	width: 100%;
+// 	height: 100%;
+// 	object-fit: cover;
+// }
+/* JustifiedGallery.module.scss */
+.galleryContainer {
+	width: 100%;
+	margin: 0 auto;
+	overflow: hidden; // Prevent horizontal scroll due to rounding errors
+	padding: 20px;
+}
+
+.justifiedGallery {
+	width: 100%;
+}
+
+.row {
+	display: flex;
+	margin-bottom: 10px; // Gap between rows
+}
+
+.item {
+	display: block;
+}
+
+.item img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 20px;
+}
+
+.item:not(:last-child) {
+	margin-right: 10px; // Gap between items
+}
