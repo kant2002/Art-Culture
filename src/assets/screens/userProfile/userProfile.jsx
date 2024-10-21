@@ -159,7 +159,7 @@ const UserProfile = () => {
 										profileImage instanceof File
 											? URL.createObjectURL(profileImage)
 											: profileImage.startsWith('http') ||
-												  profileImage.startsWith('/uploads/profileImages')
+												profileImage.startsWith('/uploads/profileImages')
 												? `${process.env.REACT_APP_API_URL}${profileImage}`
 												: profileImage
 									}
