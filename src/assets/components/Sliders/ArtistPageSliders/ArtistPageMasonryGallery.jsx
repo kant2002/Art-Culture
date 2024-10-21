@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import style from '../../../../styles/components/Sliders/ArtistPageSliders/ArtistPageMasonryGallery.module.scss'
 
 const ArtistPageMasonryGallery = () => {
@@ -200,9 +201,39 @@ const ArtistPageMasonryGallery = () => {
 		})
 	}
 
+	const { t } = useTranslation();
+
 	return (
 		<div className={style.galleryContainer}>
+
+			<div className={style.galleryTitleWrapper}>
+
+				<h3 className={style.galleryTitle}>{t('Роботи цього митця')}</h3>
+
+			</div>
+
 			<div className={style.justifiedGallery} ref={containerRef}></div>
+
+			<div className={style.moreArtsButtonWrapper}>
+
+				<button className={style.moreArtsButton} onClick={loadMoreImages}>
+
+					<p className={style.moreArtsButtonText}>{t('Всі роботи Митця')}</p>
+
+					<img
+						className={`${style.buttonArrow}`}
+						src={'/Img/buttonArrow.svg'}
+						alt={t('Фото митця')}
+						onError={e => {
+							e.target.onerror = null
+							e.target.src = '/Img/newsCardERROR.jpg'
+						}}
+					/>
+
+				</button>
+
+			</div>
+
 		</div>
 	)
 }

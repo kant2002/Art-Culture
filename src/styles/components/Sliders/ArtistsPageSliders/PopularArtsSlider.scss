@@ -291,7 +291,7 @@
     font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 569px) {
     .PopularArtsSliderLikeAndShareWrapper {
         // Обёртка кнопок Like и Share
         width: 80px;
