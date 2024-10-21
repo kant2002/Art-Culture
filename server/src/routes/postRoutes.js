@@ -33,7 +33,17 @@ router.get('/', getAllPosts)
 router.get('/:id', getPostById)
 
 // Update a post
-router.put('/:id', authenticateToken, updatePost)
+router.put(
+	'/:id',
+	authenticateToken,
+	updatePost,
+	upload.single('images'),
+	[
+		body('title').notEmpty().withMessage('Title is required'),
+		body('content').notEmpty().withMessage('Content is required'),
+	],
+	updatePost
+)
 
 // Delete a post
 router.delete('/:id', authenticateToken, deletePost)

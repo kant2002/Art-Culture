@@ -11,6 +11,12 @@ function MainArtists() {
 		getPostsCount(window.innerWidth)
 	)
 
+	const host = window.location.hostname
+	const isLocalhost = host === 'localhost' || host === '127.0.0.1'
+	const baseUrl = isLocalhost
+		? 'http://localhost:5000'
+		: 'https://art.playukraine.com'
+
 	function getPostsCount(width) {
 		if (width === null || width === undefined) {
 			throw new Error('Width must be a number')
@@ -91,9 +97,7 @@ function MainArtists() {
 			<div className={styles.mainPageNewsCardsWrapper}>
 				{creators.slice(0, visibleCreatorsCount).map((creator, index) => {
 					const featuredMediaUrl = creator.images
-						? // ? `http://localhost:5000${creator.images.replace('../../', '/')}`
-							// : '/Img/halfNewsCard.jpg'
-							`https://art.playukraine.com${creator.images.replace('../../', '/')}`
+						? `${baseUrl}${creator.images.replace('../../', '/')}`
 						: '/Img/halfNewsCard.jpg'
 					// const postDate = new Date(post.date)
 					// const formattedDate = postDate.toLocaleDateString('uk-UA', {
