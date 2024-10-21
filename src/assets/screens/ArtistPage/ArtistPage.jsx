@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import ArtistPageNewsArtistsSlider from '../../components/Sliders/ArtistPageSliders/ArtistPageNewsArtistsSlider.jsx'
 import PopularOfThisArtistSlider from '../../components/Sliders/ArtistPageSliders/PopularOfThisArtistSlider.jsx'
 import MainPopularArtsSlider from '../../components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.jsx'
+import MasonryGallery from '../../components/Sliders/MuseumPageSliders/MasonrySlider.jsx'
 import styles from '../../../styles/layout/ArtistPage.module.scss' 
 
 function ArtistPage() {
@@ -71,12 +72,12 @@ function ArtistPage() {
 
             <PopularOfThisArtistSlider />
 
-            {/* <ArtsByArtistSlider /> */}
+            <MasonryGallery />
 
-            <div className={`${styles.underDevelopmentContainer}`}>
+            {/* <div className={`${styles.underDevelopmentContainer}`}>
                 <p className={`${styles.underDevelopmentPreTitle}`}>{t('Цей контейнер')}</p>
                 <p className={`${styles.underDevelopmentTitle}`}>{t('В розробці')}</p>
-            </div>
+            </div> */}
 
             <div className={`${styles.artistPageFollowContainer}`}>
                 <p className={`${styles.artistPageFollowTitle}`}>{t('Стежити за цим митцем')}</p>
