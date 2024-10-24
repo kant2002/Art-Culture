@@ -13,7 +13,7 @@
 	flex-direction: column;
 	justify-content: start;
 	align-items: start;
-	margin: calc(60px - (24 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+	margin: $responsiveBigPadding 0 0 0;
 	padding: 0 $responsiveLeftAndRightPadding;
 	font-family: $default-font;
 }
@@ -29,7 +29,7 @@
 	overflow: hidden;
 	max-height: calc(calc(18px - (4 * ((1440px - 100vw) / (1440 - 375)))) * 6);
 	position: relative;
-	margin: calc(20px - (3 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+	margin: $responsiveMediumPadding 0 0 0;
 	color: #5a5a5a;
 	font-size: calc(18px - (4 * ((1440px - 100vw) / (1440 - 375))));
 	text-overflow: ellipsis;
@@ -51,6 +51,16 @@
 }
 
 @media (min-width: 1441px) {
+
+	.mainPageWelcomeTitleWrapper {
+		margin: $staticPcBigPadding 0 0 0;
+	}
+
+	.welcomeParagraph {
+		margin: $staticPcMediumPadding 0 0 0;
+		font-size: 18px;
+	}
+
 	.mainPage {
 		padding: $staticPcTopPadding 0 0 0;
 		width: 100vw;
@@ -72,6 +82,15 @@
 }
 
 @media (max-width: 569px) {
+
+	.mainPageWelcomeTitleWrapper {
+		margin: $staticMobileBigPadding 0 0 0;
+	}
+
+	.welcomeParagraph {
+		margin: $staticMobileMediumPadding 0 0 0;
+	}
+
 	.mainPage {
 		padding: $staticMobileTopPadding 0 0 0;
 		width: 100vw;
