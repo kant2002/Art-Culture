@@ -8,9 +8,10 @@ import API from '../../../utils/api.js'
 import styles from '/src/styles/components/UserProfile/userProfilePosts.module.scss'
 
 function UserProfilePosts() {
-	const { t } = useTranslation()
+	const { t, i18n } = useTranslation()
 	const navigate = useNavigate()
 	const { user } = useAuth()
+	const [currentLanguage, setCurrentLanguage] = useState(i18n.language)
 
 	const [posts, setPosts] = useState([]) // User's posts
 	const [loading, setLoading] = useState(true)
@@ -19,8 +20,10 @@ function UserProfilePosts() {
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [editingPost, setEditingPost] = useState(null)
 	const [formData, setFormData] = useState({
-		title: '',
-		content: '',
+		title_en: '',
+		content_en: '',
+		title_uk: '',
+		content_uk: '',
 		images: null,
 	})
 	const [remainingTitle, setRemainingTitle] = useState(50)
@@ -53,6 +56,18 @@ function UserProfilePosts() {
 		fetchUserPosts()
 	}, [user, navigate])
 
+	useEffect(() => {
+		const handleLanguageChange = lng => {
+			setCurrentLanguage(lng)
+		}
+
+		i18n.on('languageChanged', handleLanguageChange)
+
+		return () => {
+			i18n.off('languageChanged', handleLanguageChange)
+		}
+	}, [i18n])
+
 	// Handlers for navigation
 	const handleProfilePageClick = () => {
 		navigate('/userProfile')
@@ -81,8 +96,10 @@ function UserProfilePosts() {
 	const openEditModal = post => {
 		setEditingPost(post)
 		setFormData({
-			title: post.title,
-			content: post.content,
+			title_en: post.title_en || '',
+			content_en: post.content_en || '',
+			title_uk: post.title_uk || '',
+			content_uk: post.content_uk || '',
 			images: null,
 		})
 		setRemainingTitle(50 - post.title.length)
@@ -104,7 +121,7 @@ function UserProfilePosts() {
 		} else {
 			setFormData({ ...formData, [name]: value })
 
-			if (name === 'title') {
+			if (name === 'title_') {
 				setRemainingTitle(50 - value.length)
 			}
 
@@ -120,15 +137,22 @@ function UserProfilePosts() {
 		setMessage('')
 		setFormErrors({})
 
-		if (formData.title || !formData.content) {
+		if (
+			!formData.title_en.trim() ||
+			!formData.content_en.trim() ||
+			!formData.title_uk.trim() ||
+			!formData.content_uk.trim()
+		) {
 			setFormErrors({ form: 'Заголовок та опис необхідні' })
 			return
 		}
 
 		try {
 			const postData = new FormData()
-			postData.append('title', formData.title)
-			postData.append('content', formData.content)
+			postData.append('title_en', formData.title_en)
+			postData.append('content_en', formData.content_en)
+			postData.append('title_uk', formData.title_uk)
+			postData.append('content_uk', formData.content_uk)
 			if (formData.images instanceof File) {
 				postData.append('images', formData.images)
 			}
@@ -243,9 +267,14 @@ function UserProfilePosts() {
 									)}
 								</div>
 								<div className={styles.userProfilePostsTextWrapper}>
-									<h3 className={styles.userProfilePostsTitle}>{post.title}</h3>
+									<h3 className={styles.userProfilePostsTitle}>
+										{currentLanguage === 'en' ? post.title_en : post.title_uk}
+									</h3>
 									<p className={styles.userProfilePostsDescription}>
-										{post.content.substring(0, 100)}...
+										{currentLanguage === 'en'
+											? post.content_en.substring(0, 100)
+											: post.content_uk.substring(0, 100)}
+										...
 									</p>
 									<div className={styles.userProfilePostsClockAndDateWrapper}>
 										<img
@@ -296,8 +325,8 @@ function UserProfilePosts() {
 									{t('Назва публікації:')}
 									<input
 										type='text'
-										name='title'
-										value={formData.title}
+										name='title_uk'
+										value={formData.title_uk}
 										onChange={handleChange}
 										maxLength='50'
 										className={styles.modalInput}
@@ -311,13 +340,44 @@ function UserProfilePosts() {
 							</div>
 							<div className={styles.modalField}>
 								<label className={styles.modalLabel}>
+									{t('Title name:')}
+									<input
+										type='text'
+										name='title_en'
+										value={formData.title_en}
+										onChange={handleChange}
+										maxLength='50'
+										className={styles.modalInput}
+										placeholder='Title'
+										required
+									/>
+								</label>
+								<small className={styles.remainingChars}>
+									{remainingTitle} {t('символів залишилось')}
+								</small>
+							</div>
+							<div className={styles.modalField}>
+								<label className={styles.modalLabel}>
 									{t('Опис публікації:')}
 									<textarea
-										name='content'
-										value={formData.content}
+										name='content_uk'
+										value={formData.content_uk}
 										onChange={handleChange}
 										className={styles.modalTextarea}
 										placeholder='Введіть детальний опис публікації'
+										required
+									/>
+								</label>
+							</div>
+							<div className={styles.modalField}>
+								<label className={styles.modalLabel}>
+									{t('Add description:')}
+									<textarea
+										name='content_en'
+										value={formData.content_en}
+										onChange={handleChange}
+										className={styles.modalTextarea}
+										placeholder='Description'
 										required
 									/>
 								</label>

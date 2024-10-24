@@ -13,8 +13,10 @@ function UserProfileAddPost() {
 	const { user } = useAuth()
 
 	const [formData, setFormData] = useState({
-		title: '',
-		content: '',
+		title_en: '',
+		title_uk: '',
+		content_en: '',
+		content_uk: '',
 		images: null,
 	})
 	const [remainingTitle, setRemainingTitle] = useState(50)
@@ -29,7 +31,11 @@ function UserProfileAddPost() {
 		} else {
 			setFormData({ ...formData, [name]: value })
 
-			if (name === 'title') {
+			if (name === 'title_uk') {
+				setRemainingTitle(50 - value.length)
+			}
+
+			if (name === 'title_en') {
 				setRemainingTitle(50 - value.length)
 			}
 
@@ -46,7 +52,12 @@ function UserProfileAddPost() {
 		setErrors({})
 
 		// Frontend Validation
-		if (!formData.title || !formData.content) {
+		if (
+			!formData.title_en ||
+			!formData.content_en ||
+			!formData.title_uk ||
+			!formData.content_uk
+		) {
 			setErrors({ form: 'Title and content are required.' })
 			return
 		}
@@ -66,8 +77,10 @@ function UserProfileAddPost() {
 
 		try {
 			const postData = new FormData()
-			postData.append('title', formData.title)
-			postData.append('content', formData.content)
+			postData.append('title_en', formData.title_en)
+			postData.append('content_en', formData.content_en)
+			postData.append('title_uk', formData.title_uk)
+			postData.append('content_uk', formData.content_uk)
 			if (formData.images) {
 				postData.append('images', formData.images)
 			}
@@ -163,8 +176,8 @@ function UserProfileAddPost() {
 							{t('Назва публікації:')}
 							<input
 								type='text'
-								name='title'
-								value={formData.title}
+								name='title_uk'
+								value={formData.title_uk}
 								onChange={handleChange}
 								maxLength='50'
 								className={styles.profileAddPostInput}
@@ -178,13 +191,44 @@ function UserProfileAddPost() {
 					</div>
 					<div className={styles.profileAddPostField}>
 						<label className={styles.profileAddPostLabel}>
+							{t('Title name:')}
+							<input
+								type='text'
+								name='title_en'
+								value={formData.title_en}
+								onChange={handleChange}
+								maxLength='50'
+								className={styles.profileAddPostInput}
+								placeholder='Title'
+								required
+							/>
+						</label>
+						<small className={styles.remainingChars}>
+							{remainingTitle} {t('charset left')}
+						</small>
+					</div>
+					<div className={styles.profileAddPostField}>
+						<label className={styles.profileAddPostLabel}>
 							{t('Опис публікації:')}
 							<textarea
-								name='content'
-								value={formData.content}
+								name='content_uk'
+								value={formData.content_uk}
 								onChange={handleChange}
 								className={styles.profileAddPostTextarea}
 								placeholder='Введіть детальний опис публікації'
+								required
+							/>
+						</label>
+					</div>
+					<div className={styles.profileAddPostField}>
+						<label className={styles.profileAddPostLabel}>
+							{t('Description Name:')}
+							<textarea
+								name='content_en'
+								value={formData.content_en}
+								onChange={handleChange}
+								className={styles.profileAddPostTextarea}
+								placeholder='Add description'
 								required
 							/>
 						</label>
