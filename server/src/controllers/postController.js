@@ -51,25 +51,27 @@ export const createPost = async (req, res, next) => {
 	try {
 		const errors = validationResult(req)
 		if (!errors.isEmpty()) {
-			if (reg.file) {
-				fs.unlinkSync(reg.file.path)
+			if (req.file) {
+				fs.unlinkSync(req.file.path)
 			}
 			return res.status(400).json({ errors: errors.array() })
 		}
 
-		const { title, content } = req.body
+		const { title_en, title_uk, content_en, content_uk } = req.body
 		const userId = req.user.id
 
 		let imageUrl = null
 		if (req.file) {
-			const file = req.file
+			// const file = req.file
 			imageUrl = `/uploads/${req.file.filename}`
 		}
 
 		const post = await prisma.post.create({
 			data: {
-				title,
-				content,
+				title_en,
+				title_uk,
+				content_en,
+				content_uk,
 				images: imageUrl,
 				author: { connect: { id: userId } },
 			},
@@ -90,7 +92,14 @@ export const getAllPosts = async (req, res, next) => {
 
 		const posts = await prisma.post.findMany({
 			where: filter,
-			include: { author: { select: { email: true, id: true, title: true } } },
+			include: {
+				author: {
+					select: {
+						email: true,
+						id: true,
+					},
+				},
+			},
 			orderBy: { createdAt: 'desc' },
 		})
 		res.json(posts)
@@ -105,7 +114,14 @@ export const getPostById = async (req, res, next) => {
 
 		const post = await prisma.post.findUnique({
 			where: { id: postId },
-			include: { author: { select: { email: true, id: true, title: true } } },
+			include: {
+				author: {
+					select: {
+						email: true,
+						id: true,
+					},
+				},
+			},
 		})
 
 		if (!post) return res.status(404).json({ error: 'Post not found' })
@@ -120,7 +136,7 @@ export const getPostById = async (req, res, next) => {
 export const updatePost = async (req, res, next) => {
 	try {
 		const { id } = req.params
-		const { title, content, images } = req.body
+		const { title_en, title_uk, content_en, content_uk, images } = req.body
 		const userId = req.user.id
 
 		// Verify ownership
@@ -140,7 +156,7 @@ export const updatePost = async (req, res, next) => {
 		// Update post
 		const updatedPost = await prisma.post.update({
 			where: { id: parseInt(id) },
-			data: { title, content, images: imageUrl },
+			data: { title_en, title_uk, content_en, content_uk, images: imageUrl },
 			include: { author: { select: { email: true, id: true } } },
 		})
 

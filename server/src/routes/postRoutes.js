@@ -20,8 +20,10 @@ router.post(
 	logPostActions,
 	upload.single('images'),
 	[
-		body('title').notEmpty().withMessage('Title is required'),
-		body('content').notEmpty().withMessage('Content is required'),
+		body('title_en').notEmpty().withMessage('Title is required'),
+		body('content_en').notEmpty().withMessage('Content is required'),
+		body('title_uk').notEmpty().withMessage('Потрібен заголовок'),
+		body('content_uk').notEmpty().withMessage('Потрібен опис'),
 	],
 	createPost
 )
@@ -39,8 +41,10 @@ router.put(
 	updatePost,
 	upload.single('images'),
 	[
-		body('title').notEmpty().withMessage('Title is required'),
-		body('content').notEmpty().withMessage('Content is required'),
+		body('title_en').notEmpty().withMessage('Title is required'),
+		body('content_en').notEmpty().withMessage('Content is required'),
+		body('title_uk').notEmpty().withMessage('Потрібен заголовок'),
+		body('content_uk').notEmpty().withMessage('Потрібен опис'),
 	],
 	updatePost
 )
