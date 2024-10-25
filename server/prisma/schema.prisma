@@ -7,62 +7,85 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  USER
+  ADMIN
+  MUSEUM
+  CREATOR
+  EDITOR
+}
+
+model User {
+  id                 Int                @id @default(autoincrement())
+  email              String             @unique
+  password           String
+  role               Role               @default(USER)
+  posts              Post[]
+  products           Product[]
+  images             String?
+  title              String? // New field for user title
+  bio                String? // New field for user bio
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  createdExhibitions Exhibition[]       @relation("UserCreatedExhibitions")
+  exhibitionArtists  ExhibitionArtist[] // Added relation to ExhibitionArtist
+  // Other fields...
+
+  @@map("user")
+}
+
 model Post {
-  id        Int      @id @default(autoincrement())
-  title     String
-  content   String
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int      @map("author_id")
-  images    String?
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id         Int      @id @default(autoincrement())
+  title_en   String?
+  title_uk   String?
+  content_en String?
+  content_uk String?
+  author     User     @relation(fields: [authorId], references: [id])
+  authorId   Int      @map("author_id")
+  images     String?
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
 }
 
 model Product {
-  id           Int            @id @default(autoincrement())
-  title        String
-  description  String
-  specs        String?
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  authorId     Int
-  author       User           @relation(fields: [authorId], references: [id])
-  Productimage Productimage[]
+  id          Int            @id @default(autoincrement())
+  title       String
+  description String
+  specs       String?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  author      User           @relation(fields: [authorId], references: [id])
+  authorId    Int
+  images      ProductImage[] @relation("ProductImages")
+}
 
-  @@index([authorId], map: "Product_authorId_fkey")
+model ProductImage {
+  id        Int     @id @default(autoincrement())
+  imageUrl  String
+  productId Int
+  product   Product @relation("ProductImages", fields: [productId], references: [id])
 }
 
 model Exhibition {
-  id               Int                @id @default(autoincrement())
-  title            String
-  description      String
-  startDate        DateTime
-  endDate          DateTime
-  time             String?
-  location         String
-  createdById      Int
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  createdBy        User               @relation("UserCreatedExhibitions", fields: [createdById], references: [id])
-  Exhibitionartist Exhibitionartist[]
-  Exhibitionimage  Exhibitionimage[]
-
-  @@index([createdById], map: "Exhibition_createdById_fkey")
+  id                Int                @id @default(autoincrement())
+  title             String
+  description       String
+  startDate         DateTime
+  endDate           DateTime
+  time              String?
+  location          String
+  createdById       Int
+  createdBy         User               @relation("UserCreatedExhibitions", fields: [createdById], references: [id])
+  exhibitionArtists ExhibitionArtist[]
+  images            ExhibitionImage[]
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
 }
 
-model Exhibitionartist {
-  exhibitionId Int
-  artistId     Int
-  User         User       @relation(fields: [artistId], references: [id], map: "ExhibitionArtist_artistId_fkey")
-  Exhibition   Exhibition @relation(fields: [exhibitionId], references: [id], map: "ExhibitionArtist_exhibitionId_fkey")
-
-  @@id([exhibitionId, artistId])
-  @@index([artistId], map: "ExhibitionArtist_artistId_fkey")
-}
-
-model Exhibitionimage {
+model ExhibitionImage {
   id           Int        @id @default(autoincrement())
   imageUrl     String
+  exhibition   Exhibition @relation(fields: [exhibitionId], references: [id])
   exhibitionId Int
 }
 
@@ -72,7 +95,5 @@ model ExhibitionArtist {
   artist       User       @relation(fields: [artistId], references: [id])
   artistId     Int
 
-  @@id([exhibitionId, artistId])
+  @@id([exhibitionId, artistId])
 }
-
-// Removed the Artist model
