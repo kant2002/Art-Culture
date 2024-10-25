@@ -65,9 +65,22 @@ $CormorantSCSemiBold: 'CormorantSCBold', sans-serif;
 // static mobile
 $staticMobileTopPadding: 70px;
 
+
+$staticMobileBigPadding: 25px;
+$staticMobileMediumPadding: 10px;
+$staticMobileSmallPadding: 5px;
+
 // responsive
 $responsiveTopPadding: calc(177px - (107 * ((1440px - 100vw) / (1440 - 569))));
 $responsiveLeftAndRightPadding: calc(70 / 1440 * 100vw);
 
+$responsiveBigPadding: calc(50px - (25 * ((1440px - 100vw) / (1440 - 569))));
+$responsiveMediumPadding: calc(20px - (10 * ((1440px - 100vw) / (1440 - 569))));
+$responsiveSmallPadding: calc(10px - (5 * ((1440px - 100vw) / (1440 - 569))));
+
 // static pc
 $staticPcTopPadding: 177px;
+
+$staticPcBigPadding: 50px;
+$staticPcMediumPadding: 20px;
+$staticPcSmallPadding: 10px;

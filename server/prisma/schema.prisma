@@ -95,5 +95,5 @@ model ExhibitionArtist {
   artist       User       @relation(fields: [artistId], references: [id])
   artistId     Int
 
-  @@id([exhibitionId, artistId])
+  @@id([exhibitionId, artistId])
 }
