@@ -134,8 +134,6 @@
 .cardClockAndDateWrapper {
 	// Стили для обертки даты и времени карточки
 	margin: auto 0 0 0;
-	display: flex;
-	justify-content: space-between;
 }
 
 .cardClockAndDateInner {
@@ -150,25 +148,21 @@
 	height: 20px;
 }
 
-.cardClockImg {
-	// Стили для изображения часов
-}
-
 .cardDateWrapper {
 	// Стили для обертки даты
-	margin: 0 0 0 calc(10px - (3 * ((1440px - 100vw) / (1440 - 375))));
+	margin: 0 0 0 $responsiveSmallPadding;
 	display: flex;
 }
 
 .cardTimeWrapper {
 	// Стили для обертки даты
-	margin: 0 0 0 calc(10px - (3 * ((1440px - 100vw) / (1440 - 375))));
+	margin: 0 0 0 $responsiveSmallPadding;
 	display: flex;
 }
 
 .cardReadMoreWrapper {
 	// Стили для обертки ссылки "Читати далi"
-	margin: $responsiveSmallPadding 0 0 0;
+	margin: 0 0 0 auto;
 	display: flex;
 	justify-content: end;
 	align-items: center;
@@ -178,6 +172,7 @@
 	// Стили для ссылки "Читати далi"
 	cursor: pointer;
 	color: #d83934;
+	font-weight: 500;
 }
 
 @media (min-width: 1920px) {
@@ -262,19 +257,14 @@
 		font-size: 16px;
 	}
 
-	.cardClockAndDateWrapper {
-		// Стили для обертки даты и времени карточки
-		margin: 18px 0 0 0;
-	}
-
 	.cardDateWrapper {
 		// Стили для обертки даты
-		margin: 0 0 0 10px;
+		margin: 0 0 0 $staticPcSmallPadding;
 	}
-
-	.cardReadMoreWrapper {
-		// Стили для обертки ссылки "Читати далi"
-		margin: $staticPcSmallPadding 0 0 0;
+	
+	.cardTimeWrapper {
+		// Стили для обертки даты
+		margin: 0 0 0 $staticPcSmallPadding;
 	}
 }
 
@@ -326,8 +316,13 @@
 		margin: $staticMobileSmallPadding 0 0 0;
 	}
 
-	.cardReadMoreWrapper {
-		// Стили для обертки ссылки "Читати далi"
-		margin: $staticMobileSmallPadding 0 0 0;
+	.cardDateWrapper {
+		// Стили для обертки даты
+		margin: 0 0 0 $staticMobileSmallPadding;
+	}
+	
+	.cardTimeWrapper {
+		// Стили для обертки даты
+		margin: 0 0 0 $staticMobileSmallPadding;
 	}
 }
