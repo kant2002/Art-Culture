@@ -48,15 +48,18 @@ model Post {
 }
 
 model Product {
-  id          Int            @id @default(autoincrement())
-  title       String
-  description String
-  specs       String?
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
-  author      User           @relation(fields: [authorId], references: [id])
-  authorId    Int
-  images      ProductImage[] @relation("ProductImages")
+  id             Int            @id @default(autoincrement())
+  title_en       String
+  title_uk       String
+  description_en String
+  description_uk String
+  specs_en       String?
+  specs_uk       String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  author         User           @relation(fields: [authorId], references: [id])
+  authorId       Int
+  images         ProductImage[] @relation("ProductImages")
 }
 
 model ProductImage {
@@ -95,5 +98,5 @@ model ExhibitionArtist {
   artist       User       @relation(fields: [artistId], references: [id])
   artistId     Int
 
-  @@id([exhibitionId, artistId])
+  @@id([exhibitionId, artistId])
 }
