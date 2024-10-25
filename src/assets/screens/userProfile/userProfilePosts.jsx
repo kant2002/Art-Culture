@@ -102,7 +102,7 @@ function UserProfilePosts() {
 			content_uk: post.content_uk || '',
 			images: null,
 		})
-		setRemainingTitle(50 - post.title.length)
+		setRemainingTitle(50 - post.title_en.length || post.title_uk.length)
 		setIsModalOpen(true)
 	}
 
@@ -138,10 +138,10 @@ function UserProfilePosts() {
 		setFormErrors({})
 
 		if (
-			!formData.title_en.trim() ||
-			!formData.content_en.trim() ||
-			!formData.title_uk.trim() ||
-			!formData.content_uk.trim()
+			!formData.title_en ||
+			!formData.content_en ||
+			!formData.title_uk ||
+			!formData.content_uk
 		) {
 			setFormErrors({ form: 'Заголовок та опис необхідні' })
 			return
@@ -291,6 +291,8 @@ function UserProfilePosts() {
 										>
 											{t('До публікації')}
 										</button>
+									</div>
+									<div className={styles.userProfileDelEditWrapper}>
 										<button
 											className={styles.userProfileEditButton}
 											onClick={() => openEditModal(post)}
