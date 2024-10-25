@@ -148,14 +148,6 @@ function MainNews() {
 												: post.content}
 										</p>
 									</div>
-									<div className={`${styles.cardReadMoreWrapper}`}>
-										<a
-											href={`/posts/${post.id}`}
-											className={`${styles.cardReadMoreLink}`}
-										>
-											{t('Читати далі')}
-										</a>
-									</div>
 								</div>
 							</div>
 							<div className={`${styles.cardClockAndDateWrapper}`}>
@@ -176,6 +168,14 @@ function MainNews() {
 									</div>
 									<div className={`${styles.cardTimeWrapper}`}>
 										<p className={`${styles.cardTime}`}>{formattedTime}</p>
+									</div>
+									<div className={`${styles.cardReadMoreWrapper}`}>
+										<a
+											href={`/posts/${post.id}`}
+											className={`${styles.cardReadMoreLink}`}
+										>
+											{t('Читати далі')}
+										</a>
 									</div>
 								</div>
 							</div>
