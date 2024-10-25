@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import styles from '/src/styles/components/Blocks/MainNews.module.scss'
 
 function MainNews() {
-	const { t } = useTranslation()
+	const { t, i18n } = useTranslation()
+	const currentLanguage = i18n.language
 	const [posts, setPosts] = useState([])
 
 	const [visiblePostsCount, setVisiblePostsCount] = useState(
@@ -114,6 +115,10 @@ function MainNews() {
 						minute: 'numeric',
 					})
 
+					const title = currentLanguage === 'en' ? post.title_en : post.title_uk
+					const content =
+						(currentLanguage === 'en' ? post.title_en : post.title_uk) || ''
+
 					return (
 						<div
 							key={post.id}
@@ -136,16 +141,16 @@ function MainNews() {
 										<h3
 											className={`${styles.cardTitle} ${index === 0 ? styles.firstCardTitle : index === 1 ? styles.secondCardTitle : index === 2 ? styles.thirdCardTitle : styles.fourthCardTitle}`}
 										>
-											{post.title}
+											{title}
 										</h3>
 									</div>
 									<div className={`${styles.cardDescriptioneWrapper}`}>
 										<p
 											className={`${styles.cardDescription} ${index === 0 ? styles.firstCardDescription : index === 1 ? styles.secondCardDescription : styles.thirdCardDescription}`}
 										>
-											{post.content.length > 100
-												? `${post.content.substring(0, 100)}...`
-												: post.content}
+											{content.length > 100
+												? `${content.substring(0, 100)}...`
+												: content}
 										</p>
 									</div>
 								</div>

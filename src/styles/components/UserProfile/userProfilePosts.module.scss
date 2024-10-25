@@ -153,6 +153,18 @@
 	}
 }
 
+.userProfileDelEditWrapper {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+
+	.userProfileEditButton,
+	.userProfileDeleteButton {
+		padding: calc(10 / 1440 * 100vw);
+		border-radius: calc((51 / 1440 * 100vw) / 2);
+	}
+}
+
 // src/styles/components/UserProfile/userProfilePosts.module.scss
 
 /* Modal Overlay */
@@ -173,10 +185,10 @@
 .modalContent {
 	background-color: #fff;
 	padding: 2rem;
-	width: 90%;
-	max-width: 600px;
+	width: calc(1200px - (166 * ((1440px - 100vw) / (1440 - 375))));
 	border-radius: 8px;
 	position: relative;
+	height: 100dvh;
 }
 
 /* Modal Title */
@@ -189,7 +201,10 @@
 /* Modal Form */
 .modalForm {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	align-items: center;
 }
 
 /* Modal Field */
@@ -197,11 +212,40 @@
 	margin-bottom: 1rem;
 }
 
+.modalFieldImageUploadWrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	.modalFieldImage {
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+
+		.modalLabelUploadContainer {
+			display: flex;
+			flex-direction: column;
+			font-weight: bold;
+			align-items: center;
+			margin: 0 auto;
+			width: calc(600px - (166 * ((1440px - 100vw) / (1440 - 375))));
+		}
+		.modalInputImageField {
+			margin: 10px 10px;
+			left: calc(80px - (166 * ((1440px - 100vw) / (1440 - 375))));
+			position: relative;
+			width: calc(358px - (166 * ((1440px - 100vw) / (1440 - 375))));
+		}
+	}
+}
+
 /* Modal Label */
 .modalLabel {
 	display: flex;
 	flex-direction: column;
 	font-weight: bold;
+	align-items: center;
 }
 
 /* Modal Input */
@@ -228,28 +272,31 @@
 	display: flex;
 	justify-content: flex-end;
 	gap: 1rem;
-}
+	justify-content: space-around;
+	align-items: center;
 
-/* Save Button */
-.modalSaveButton {
-	padding: 0.5rem 1rem;
-	background-color: #4caf50;
-	color: #fff;
-	border: none;
-	cursor: pointer;
-}
+	/* Save Button */
+	.modalSaveButton {
+		padding: 0.5rem 1rem;
+		background-color: #4caf50;
+		color: #fff;
+		border: none;
+		cursor: pointer;
+		border-radius: calc((16 / 1440 * 100vw) / 2);
+	}
 
-/* Cancel Button */
-.modalCancelButton {
-	padding: 0.5rem 1rem;
-	background-color: #f44336;
-	color: #fff;
-	border: none;
-	cursor: pointer;
+	/* Cancel Button */
+	.modalCancelButton {
+		padding: 0.5rem 1rem;
+		background-color: #f44336;
+		color: #fff;
+		border: none;
+		cursor: pointer;
+		border-radius: calc((16 / 1440 * 100vw) / 2);
+	}
 }
-
 /* Current Image */
 .currentImage {
-	max-width: 100%;
+	max-width: 17%;
 	margin-top: 1rem;
 }

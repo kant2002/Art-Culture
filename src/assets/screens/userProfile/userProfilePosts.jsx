@@ -157,7 +157,7 @@ function UserProfilePosts() {
 				postData.append('images', formData.images)
 			}
 
-			const response = await API.put(`/post/${editingPost.id}`, postData, {
+			const response = await API.put(`/posts/${editingPost.id}`, postData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
 				},
@@ -322,86 +322,93 @@ function UserProfilePosts() {
 							<p className={styles.error}>{formErrors.form}</p>
 						)}
 						<form onSubmit={handleEditSubmit} className={styles.modalForm}>
-							<div className={styles.modalField}>
-								<label className={styles.modalLabel}>
-									{t('Назва публікації:')}
-									<input
-										type='text'
-										name='title_uk'
-										value={formData.title_uk}
-										onChange={handleChange}
-										maxLength='50'
-										className={styles.modalInput}
-										placeholder='Наприклад: Моя перша публікація'
-										required
-									/>
-								</label>
-								<small className={styles.remainingChars}>
-									{remainingTitle} {t('символів залишилось')}
-								</small>
+							<div className={styles.modalFieldUk}>
+								<div className={styles.modalField}>
+									<label className={styles.modalLabel}>
+										{t('Назва публікації:')}
+										<input
+											type='text'
+											name='title_uk'
+											value={formData.title_uk}
+											onChange={handleChange}
+											maxLength='50'
+											className={styles.modalInput}
+											placeholder='Наприклад: Моя перша публікація'
+											required
+										/>
+									</label>
+									<small className={styles.remainingChars}>
+										{remainingTitle} {t('символів залишилось')}
+									</small>
+								</div>
+								<div className={styles.modalField}>
+									<label className={styles.modalLabel}>
+										{t('Опис публікації:')}
+										<textarea
+											name='content_uk'
+											value={formData.content_uk}
+											onChange={handleChange}
+											className={styles.modalTextarea}
+											placeholder='Введіть детальний опис публікації'
+											required
+										/>
+									</label>
+								</div>
 							</div>
-							<div className={styles.modalField}>
-								<label className={styles.modalLabel}>
-									{t('Title name:')}
-									<input
-										type='text'
-										name='title_en'
-										value={formData.title_en}
-										onChange={handleChange}
-										maxLength='50'
-										className={styles.modalInput}
-										placeholder='Title'
-										required
-									/>
-								</label>
-								<small className={styles.remainingChars}>
-									{remainingTitle} {t('символів залишилось')}
-								</small>
+							<div className={styles.modalFieldEn}>
+								<div className={styles.modalField}>
+									<label className={styles.modalLabel}>
+										{t('Title name:')}
+										<input
+											type='text'
+											name='title_en'
+											value={formData.title_en}
+											onChange={handleChange}
+											maxLength='50'
+											className={styles.modalInput}
+											placeholder='Title'
+											required
+										/>
+									</label>
+									<small className={styles.remainingChars}>
+										{remainingTitle} {t('символів залишилось')}
+									</small>
+								</div>
+
+								<div className={styles.modalField}>
+									<label className={styles.modalLabel}>
+										{t('Add description:')}
+										<textarea
+											name='content_en'
+											value={formData.content_en}
+											onChange={handleChange}
+											className={styles.modalTextarea}
+											placeholder='Description'
+											required
+										/>
+									</label>
+								</div>
 							</div>
-							<div className={styles.modalField}>
-								<label className={styles.modalLabel}>
-									{t('Опис публікації:')}
-									<textarea
-										name='content_uk'
-										value={formData.content_uk}
-										onChange={handleChange}
-										className={styles.modalTextarea}
-										placeholder='Введіть детальний опис публікації'
-										required
-									/>
-								</label>
-							</div>
-							<div className={styles.modalField}>
-								<label className={styles.modalLabel}>
-									{t('Add description:')}
-									<textarea
-										name='content_en'
-										value={formData.content_en}
-										onChange={handleChange}
-										className={styles.modalTextarea}
-										placeholder='Description'
-										required
-									/>
-								</label>
-							</div>
-							<div className={styles.modalField}>
-								<label className={styles.modalLabel}>
-									{t('Змінити зображення (опційно):')}
-									<input
-										type='file'
-										name='images'
-										accept='image/*'
-										onChange={handleChange}
-										className={styles.modalInput}
-									/>
-								</label>
-								{editingPost.images && !(formData.images instanceof File) && (
-									<img
-										src={editingPost.images}
-										alt={t('Поточне зображення')}
-										className={styles.currentImage}
-									/>
-								)}
+							<div className={styles.modalFieldImageUploadWrapper}>
+								<div className={styles.modalFieldImage}>
+									<label className={styles.modalLabelUploadContainer}>
+										{t('Змінити зображення (опційно):')}
+										<input
+											type='file'
+											name='images'
+											accept='image/*'
+											onChange={handleChange}
+											className={styles.modalInputImageField}
+										/>
+									</label>
+									{editingPost.images && !(formData.images instanceof File) && (
+										<img
+											src={editingPost.images}
+											alt={t('Поточне зображення')}
+											className={styles.currentImage}
+										/>
+									)}
+								</div>
 							</div>
 							<div className={styles.modalButtons}>
 								<button type='submit' className={styles.modalSaveButton}>
