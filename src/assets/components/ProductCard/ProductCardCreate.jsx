@@ -9,36 +9,50 @@ const ProductCardCreate = () => {
 	const { user, logout } = useAuth()
 	console.log('CurrentUser:', user)
 	const navigate = useNavigate()
-	const [title, setTitle] = useState('')
-	const [description, setDescription] = useState('')
-	const [specs, setSpecs] = useState('')
-	const [images, setImages] = useState([])
+	const [formData, setFormData] = useState({
+		title_en: '',
+		title_uk: '',
+		description_en: '',
+		description_uk: '',
+		specs_en: '',
+		specs_uk: '',
+		images: [],
+	})
+
 	const [imagePreviews, setImagePreviews] = useState([])
 	const [serverMessage, setServerMessage] = useState('')
 
-	const handleImageChange = e => {
-		const files = Array.from(e.target.files)
-		setImages(files)
+	const handleChange = e => {
+		const { name, value, files } = e.target
 
-		const previews = files.map(file => URL.createObjectURL(file))
-		setImagePreviews(previews)
+		if (name === 'images') {
+			const filesArray = Array.from(files)
+			setFormData(prevData => ({ ...prevData, images: filesArray }))
+			const previews = filesArray.map(file => URL.createObjectURL(file))
+			setImagePreviews(previews)
+		} else {
+			setFormData(prevData => ({ ...prevData, [name]: value }))
+		}
 	}
 
 	const handleSubmit = async e => {
 		e.preventDefault()
 		setServerMessage('')
 
-		const formData = new FormData()
-		formData.append('title', title)
-		formData.append('description', description)
-		formData.append('specs', specs)
+		const formDataToSend = new FormData()
+		formDataToSend.append('title_en', formData.title_en)
+		formDataToSend.append('title_uk', formData.title_uk)
+		formDataToSend.append('description_en', formData.description_en)
+		formDataToSend.append('description_uk', formData.description_uk)
+		formDataToSend.append('specs_en', formData.specs_en)
+		formDataToSend.append('specs_uk', formData.specs_uk)
 
-		images.forEach(image => {
-			formData.append('productImages', image)
+		formData.images.forEach(image => {
+			formDataToSend.append('productImages', image)
 		})
 
 		try {
-			const response = await API.post('/products', formData, {
+			const response = await API.post('/products', formDataToSend, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
 					Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -122,35 +136,64 @@ const ProductCardCreate = () => {
 					<p className={styles.serverMessage}>{serverMessage}</p>
 				)}
 				<form onSubmit={handleSubmit}>
+					{/* Title in Ukrainian */}
 					<input
 						type='text'
-						placeholder={t('Заголовок')}
-						name='Title'
-						value={title}
-						onChange={e => setTitle(e.target.value)}
+						placeholder={t('Заголовок українською')}
+						name='title_uk'
+						value={formData.title_uk}
+						onChange={handleChange}
 						required
 					/>
+					{/* Title in English */}
+					<input
+						type='text'
+						placeholder={t('Title in English')}
+						name='title_en'
+						value={formData.title_en}
+						onChange={handleChange}
+						required
+					/>
+					{/* Description in Ukrainian */}
 					<textarea
-						placeholder={t('Опис')}
-						name='Description'
-						value={description}
-						onChange={e => setDescription(e.target.value)}
+						placeholder={t('Опис українською')}
+						name='description_uk'
+						value={formData.description_uk}
+						onChange={handleChange}
 						required
 					/>
+					{/* Description in English */}
+					<textarea
+						placeholder={t('Description in English')}
+						name='description_en'
+						value={formData.description_en}
+						onChange={handleChange}
+						required
+					/>
+					{/* Specs on Ukrainian */}
 					<textarea
 						placeholder={t('Специфікація')}
-						name='Specifications' // 'Специфікація'
-						value={specs}
-						onChange={e => setSpecs(e.target.value)}
+						name='specs_uk'
+						value={formData.specs_uk}
+						onChange={handleChange}
 					/>
+					{/* Specs on English */}
+					<textarea
+						placeholder={t('Specifications')}
+						name='specs_en'
+						value={formData.specs_en}
+						onChange={handleChange}
+					/>
+					{/* Images */}
 					<input
 						type='file'
-						name='productImages'
+						name='images'
 						accept='image/*'
 						multiple
-						onChange={handleImageChange}
+						onChange={handleChange}
 						required
 					/>
+					{/* Image Previews */}
 					<div className={styles.imagePreviews}>
 						{imagePreviews.map((preview, index) => (
 							<img
