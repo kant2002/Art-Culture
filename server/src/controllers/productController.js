@@ -10,7 +10,14 @@ export const createProduct = async (req, res, next) => {
 			return res.status(400).json({ errors: errors.array() })
 		}
 
-		const { title, description, specs } = req.body
+		const {
+			title_en,
+			title_uk,
+			description_en,
+			description_uk,
+			specs_en,
+			specs_uk,
+		} = req.body
 		const userId = req.user.id
 
 		console.log('reg.user', req.user)
@@ -21,9 +28,12 @@ export const createProduct = async (req, res, next) => {
 
 		const product = await prisma.product.create({
 			data: {
-				title,
-				description,
-				specs,
+				title_en,
+				title_uk,
+				description_en,
+				description_uk,
+				specs_en,
+				specs_uk,
 				images: {
 					create: images,
 				},

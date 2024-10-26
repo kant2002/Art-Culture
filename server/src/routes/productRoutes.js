@@ -21,8 +21,10 @@ router.post(
 	uploadPaintings.array('productImages', 7),
 	// Maximum of 7 images
 	[
-		body('title').notEmpty().withMessage('Title is required'),
-		body('description').notEmpty().withMessage('Description is required'),
+		body('title_en').notEmpty().withMessage('Title  is required'),
+		body('description_en').notEmpty().withMessage('Description  is required'),
+		body('title_uk').notEmpty().withMessage('Потрібен заголовок '),
+		body('description_uk').notEmpty().withMessage('Потрібен опис '),
 		body('specs').optional().isString(),
 	],
 	createProduct
