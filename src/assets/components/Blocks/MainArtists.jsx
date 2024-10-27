@@ -142,14 +142,6 @@ function MainArtists() {
 											{creator.bio || t('Немає біографії')}
 										</p>
 									</div>
-									<div className={styles.cardReadMoreWrapper}>
-										<a
-											onClick={handleArtistPageClick}
-											className={styles.cardReadMoreLink}
-										>
-											{t('Читати далі')}
-										</a>
-									</div>
 								</div>
 							</div>
 							<div className={styles.cardClockAndDateWrapper}>
@@ -170,6 +162,14 @@ function MainArtists() {
 									</div>
 									<div className={styles.cardTimeWrapper}>
 										<p className={styles.cardTime}>{/*{formattedTime}*/}</p>
+									</div>
+									<div className={styles.cardReadMoreWrapper}>
+										<a
+											onClick={handleArtistPageClick}
+											className={styles.cardReadMoreLink}
+										>
+											{t('Читати далі')}
+										</a>
 									</div>
 								</div>
 							</div>
