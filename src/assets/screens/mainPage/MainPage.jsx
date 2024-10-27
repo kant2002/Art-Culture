@@ -59,7 +59,7 @@ function MainPage() {
 					</a>
 				</p>
 			</div>
-			<MainNews />.,
+			<MainNews />
 			<MainArtists />
 			<MainInstagramSlider />
 			<MainExhibitions />
