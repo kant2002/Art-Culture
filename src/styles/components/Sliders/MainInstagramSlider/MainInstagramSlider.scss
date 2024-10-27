@@ -260,7 +260,7 @@
 
     .mainInstagramSliderTopInnerWrapper {
         // Внутренний верхний контейнер слайдера
-        padding: $staticPcMediumPadding $responsiveLeftAndRightPadding;
+        padding: $staticPcMediumPadding calc($responsiveLeftAndRightPadding - 8px);
     }
 
     .mainInstagramSliderCardTopInnerWrapper {
@@ -282,7 +282,7 @@
 
     .mainInstagramSliderTopInnerWrapper {
         // Внутренний верхний контейнер слайдера
-        padding: $staticMobileMediumPadding $responsiveLeftAndRightPadding;
+        padding: $staticMobileMediumPadding calc($responsiveLeftAndRightPadding - 8px);
     }
 
     .mainInstagramSliderCardTopInnerWrapper {
