@@ -20,7 +20,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: $responsiveMediumPadding $responsiveLeftAndRightPadding;
+    padding: $responsiveMediumPadding calc($responsiveLeftAndRightPadding - 8px);
     width: 100%;
 }
 
