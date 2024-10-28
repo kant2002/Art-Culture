@@ -100,3 +100,33 @@ export const getUserProducts = async (req, res, next) => {
 		next(error)
 	}
 }
+
+export const getCreatorProducts = async (req, res, next) => {
+	try {
+		const products = await prisma.product.findMany({
+			where: {
+				author: {
+					role: 'CREATOR',
+				},
+			},
+			include: {
+				images: true,
+				author: {
+					select: {
+						id: true,
+						email: true,
+						title: true,
+						role: true,
+					},
+				},
+			},
+			orderBy: {
+				createdAt: 'desc',
+			},
+		})
+		res.json({ products })
+	} catch (error) {
+		console.error('Error fetching creator products', error)
+		next(error)
+	}
+}
