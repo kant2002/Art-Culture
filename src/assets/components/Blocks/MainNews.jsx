@@ -117,7 +117,7 @@ function MainNews() {
 
 					const title = currentLanguage === 'en' ? post.title_en : post.title_uk
 					const content =
-						(currentLanguage === 'en' ? post.title_en : post.title_uk) || ''
+						(currentLanguage === 'en' ? post.content_en : post.content_uk) || ''
 
 					return (
 						<div

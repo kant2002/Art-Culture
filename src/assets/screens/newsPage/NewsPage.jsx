@@ -6,8 +6,9 @@ import styles from '../../../styles/layout/newsPage.module.scss'
 import NewsPageAuthorsSlider from '../../components/Sliders/NewsPageAuthorsSlider/NewsPageAuthorsSlider.jsx'
 
 function NewsPage() {
-	const { t } = useTranslation()
+	const { t, i18n } = useTranslation()
 	const navigate = useNavigate()
+	const currentLanguage = i18n.language
 
 	// State to hold all posts
 	const [posts, setPosts] = useState([])
@@ -96,6 +97,14 @@ function NewsPage() {
 		navigate('/SignUp')
 	}
 
+	// Inside your NewsPage component
+	const getLocalizedFields = post => {
+		const title = currentLanguage === 'en' ? post.title_en : post.title_uk || ''
+		const content =
+			currentLanguage === 'en' ? post.content_en : post.content_uk || ''
+		return { title, content }
+	}
+
 	return (
 		<div className={`${styles.newsPageContainer}`}>
 			{/* Title Section */}
@@ -170,6 +179,7 @@ function NewsPage() {
 						<p>{t('Немає новин, що відповідають вашому запиту.')}</p>
 					) : (
 						filteredPosts.slice(0, visiblePostsCount).map((post, index) => {
+							const { title, content } = getLocalizedFields(post)
 							// Construct image URL similar to MainNews component
 							const featuredMediaUrl = post.images
 								? `${baseUrl}${post.images.replace('../../', '/')}`
@@ -212,18 +222,18 @@ function NewsPage() {
 										{/* Title */}
 										<div className={`${styles.newsPageCardTitleWrapper}`}>
 											<p className={`${styles.newsPageCardTitle}`}>
-												{post.title.length > 50
-													? `${post.title.substring(0, 50)}...`
-													: post.title}
+												{title.length > 50
+													? `${title.substring(0, 50)}...`
+													: title}
 											</p>
 										</div>
 
 										{/* Description */}
 										<div className={`${styles.newsPageCardDescriptionWrapper}`}>
 											<p className={`${styles.newsPageCardDescription}`}>
-												{post.content.length > 100
-													? `${post.content.substring(0, 100)}...`
-													: post.content}
+												{content.length > 100
+													? `${content.substring(0, 100)}...`
+													: content}
 											</p>
 										</div>
 
@@ -280,6 +290,7 @@ function NewsPage() {
 						<p>{t('Немає новин, що відповідають вашому запиту.')}</p>
 					) : (
 						filteredPosts.slice(visiblePostsCount, 12).map((post, index) => {
+							const { title, content } = getLocalizedFields(post)
 							// Calculate the card number starting from 5
 							const cardNumber = visiblePostsCount + index + 1
 
@@ -322,18 +333,18 @@ function NewsPage() {
 										{/* Title */}
 										<div className={`${styles.newsPageCardTitleWrapper}`}>
 											<p className={`${styles.newsPageCardTitle}`}>
-												{post.title.length > 50
-													? `${post.title.substring(0, 50)}...`
-													: post.title}
+												{title.length > 50
+													? `${title.substring(0, 50)}...`
+													: title}
 											</p>
 										</div>
 
 										{/* Description */}
 										<div className={`${styles.newsPageCardDescriptionWrapper}`}>
 											<p className={`${styles.newsPageCardDescription}`}>
-												{post.content.length > 100
-													? `${post.content.substring(0, 100)}...`
-													: post.content}
+												{content.length > 100
+													? `${content.substring(0, 100)}...`
+													: content}
 											</p>
 										</div>
 

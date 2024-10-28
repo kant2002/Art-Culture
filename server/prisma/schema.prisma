@@ -114,11 +114,3 @@ model ExhibitionArtist {
   @@id([exhibitionId, artistId])
   @@index([artistId], map: "ExhibitionArtist_artistId_fkey")
 }
-
-enum Role {
-  USER
-  ADMIN
-  MUSEUM
-  CREATOR
-  EDITOR
-}
