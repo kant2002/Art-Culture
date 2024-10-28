@@ -4,6 +4,7 @@ import express from 'express'
 import { body } from 'express-validator'
 import {
 	createProduct,
+	getCreatorProducts,
 	getProducts,
 	getUserProducts,
 } from '../controllers/productController.js'
@@ -29,6 +30,8 @@ router.post(
 	],
 	createProduct
 )
+
+router.get('/creators-products', getCreatorProducts)
 
 // Get all products
 router.get('/', getProducts)
