@@ -4,6 +4,7 @@ import {
 	createPost,
 	deletePost,
 	getAllPosts,
+	getCreatorsPosts,
 	getPostById,
 	updatePost,
 	upload,
@@ -27,6 +28,9 @@ router.post(
 	],
 	createPost
 )
+
+// Get post by Creator
+router.get('/creators', getCreatorsPosts)
 
 // Get all posts
 router.get('/', getAllPosts)

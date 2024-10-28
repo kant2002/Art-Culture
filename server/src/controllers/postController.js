@@ -111,7 +111,9 @@ export const getAllPosts = async (req, res, next) => {
 export const getPostById = async (req, res, next) => {
 	try {
 		const postId = parseInt(req.params.id)
-
+		if (isNaN(postId)) {
+			return res.status(400).json({ error: 'Invalid post ID' })
+		}
 		const post = await prisma.post.findUnique({
 			where: { id: postId },
 			include: {
@@ -129,6 +131,36 @@ export const getPostById = async (req, res, next) => {
 		res.json(post)
 	} catch (error) {
 		console.error('Error fetching post:', error)
+		next(error)
+	}
+}
+
+export const getCreatorsPosts = async (req, res, next) => {
+	try {
+		const posts = await prisma.post.findMany({
+			where: {
+				author: {
+					role: 'CREATOR',
+				},
+			},
+			include: {
+				author: {
+					select: {
+						id: true,
+						email: true,
+						title: true,
+						// Include other fields if necessary
+					},
+				},
+			},
+			orderBy: {
+				createdAt: 'desc',
+			},
+		})
+
+		res.json({ posts })
+	} catch (error) {
+		console.error('Error fetching creator posts:', error)
 		next(error)
 	}
 }

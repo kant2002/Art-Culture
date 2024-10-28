@@ -1,0 +1,374 @@
+@import '/src/styles/utilities/variables.scss';
+
+.ArtistsPageNewsArtistsSliderContainer {
+	// Контейнер слайдера
+	display: flex;
+	margin: calc(87px - (43 * ((1440px - 100vw) / (1440 - 375))))
+		$responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+}
+
+.ArtistsPageNewsArtistsSliderWrapper {
+	// Обёртка слайдера
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.ArtistsPageNewsArtistsSliderTopInnerWrapper {
+	// Верхняя часть слайдера
+	display: flex;
+	justify-content: space-between;
+	padding: 0 0 calc(51px - (17 * ((1440px - 100vw) / (1440 - 375)))) 0;
+}
+
+.ArtistsPageNewsArtistsSliderTitleWrapper {
+	// Обёртка заголовка
+	display: flex;
+	align-items: center;
+}
+
+.ArtistsPageNewsArtistsSliderTitle {
+	// Заголовок
+	font-family: $default-font;
+	font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+	font-weight: 600;
+	color: rgb(0, 0, 0);
+	text-transform: uppercase;
+}
+
+.ArtistsPageNewsArtistsSliderLikeAndShareWrapper {
+	// Обёртка кнопок Like и Share
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 0 0 auto;
+	width: 177px;
+}
+
+.ArtistsPageNewsArtistsSliderLikeInnerWrapper {
+	// Обёртка кнопки Like
+}
+
+.ArtistsPageNewsArtistsSliderLikeButton {
+	// Кнопка Like
+	position: relative;
+	display: flex;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.ArtistsPageNewsArtistsSliderLikeButton::after {
+	content: 'Like';
+	position: absolute;
+	top: 6px;
+	left: 38px;
+	font-size: 18px;
+	user-select: none;
+	color: #000000;
+}
+
+.ArtistsPageNewsArtistsSliderLikeButtonImg {
+	// Изображение кнопки Like
+}
+
+.ArtistsPageNewsArtistsSliderShareInnerWrapper {
+	// Обёртка кнопки Share
+}
+
+.ArtistsPageNewsArtistsSliderShareButtonButton {
+	// Кнопка Share
+	position: relative;
+	display: flex;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.ArtistsPageNewsArtistsSliderShareButtonButton::before {
+	content: 'Share';
+	position: absolute;
+	top: 6px;
+	right: 38px;
+	font-size: 18px;
+	user-select: none;
+	color: #000000;
+}
+
+.ArtistsPageNewsArtistsSliderShareButtonImg {
+	// Изображение кнопки Share
+}
+
+.ArtistsPageNewsArtistsSliderBottomInnerWrapper {
+	// Нижняя часть слайдера
+	display: flex;
+	width: 100%;
+	height: calc(561px - (90 * ((1440px - 100vw) / (1440 - 375))));
+
+	@at-root {
+		:root {
+			--swiper-navigation-size: calc(
+				42px - (7 * ((1440px - 100vw) / (1440 - 375)))
+			);
+		}
+	}
+
+	.swiper-wrapper {
+		position: relative;
+		margin: 0 0 0 calc(-29px - (-20 * ((1440px - 100vw) / (1440 - 375))));
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+		display: flex;
+		transition-property: transform;
+		transition-timing-function: var(
+			--swiper-wrapper-transition-timing-function,
+			initial
+		);
+		box-sizing: content-box;
+	}
+
+	.swiper-slide {
+		flex-shrink: 0;
+		width: auto;
+		height: 100%;
+		position: relative;
+		transition-property: transform;
+		display: block;
+	}
+
+	.swiper-button-prev,
+	.swiper-button-next {
+		position: absolute;
+		top: calc(
+			calc(539px - (75 * ((1440px - 100vw) / (1440 - 375)))) - calc(
+					var(--swiper-navigation-size) / 2
+				)
+		);
+		width: var(--swiper-navigation-size);
+		height: var(--swiper-navigation-size);
+		// margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
+		z-index: 11;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: #000000;
+		border-radius: 50%;
+		color: white;
+	}
+
+	.swiper-button-prev,
+	.swiper-rtl .swiper-button-next {
+		// left: calc(638px - (505 * ((1440px - 100vw) / (1440 - 375))));
+		left: calc(
+			50% - calc(var(--swiper-navigation-size) * 1.14) - calc(
+					34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))
+				)
+		);
+		right: auto;
+	}
+
+	.swiper-button-next,
+	.swiper-rtl .swiper-button-prev {
+		right: calc(
+			50% - calc(var(--swiper-navigation-size) * 1.14) - calc(
+					34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))
+				)
+		);
+		left: auto;
+	}
+
+	/* Navigation font start */
+	.swiper-button-prev,
+	.swiper-button-next {
+		&:after {
+			font-family: swiper-icons;
+			font-size: 10px;
+			font-weight: 900;
+			text-transform: none !important;
+			letter-spacing: 0;
+			font-variant: initial;
+			line-height: 1;
+		}
+	}
+
+	.swiper-button-next,
+	.swiper-rtl .swiper-button-prev {
+		right: calc(
+			50% - calc(var(--swiper-navigation-size) * 1.24) - calc(
+					34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))
+				)
+		);
+		left: auto;
+	}
+
+	/* Common Styles */
+	.swiper-pagination-fraction,
+	.swiper-pagination-custom,
+	.swiper-horizontal > .swiper-pagination-bullets,
+	.swiper-pagination-bullets.swiper-pagination-horizontal {
+		top: calc(
+			calc(539px - (75 * ((1440px - 100vw) / (1440 - 375)))) - calc(
+					var(--swiper-navigation-size) / 1.4
+				)
+		);
+		left: 0;
+		width: 100%;
+	}
+
+	/* Fraction */
+	.swiper-pagination-fraction {
+		color: black;
+	}
+}
+
+.ArtistsPageNewsArtistsSliderCardContainer {
+	// Обёртка карточки слайдера
+	width: calc(282px - (32 * ((1440px - 100vw) / (1440 - 375))));
+	min-width: 250px;
+	max-width: 282px;
+	height: auto;
+	margin: 0 calc(29px - (20 * ((1440px - 100vw) / (1440 - 375))));
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	position: relative;
+}
+
+.ArtistsPageNewsArtistsSliderCardLink {
+	// Ссылка на карточку
+	cursor: pointer;
+}
+
+.ArtistsPageNewsArtistsSliderCardImgWrapper {
+	// Внутренняя обёртка карточки
+	position: relative;
+	display: flex;
+	width: calc(282px - (32 * ((1440px - 100vw) / (1440 - 375))));
+	min-width: 250px;
+	max-width: 282px;
+	height: calc(282px - (32 * ((1440px - 100vw) / (1440 - 375))));
+	min-height: 250px;
+	max-height: 282px;
+}
+
+.ArtistsPageNewsArtistsSliderCardImg {
+	// Изображение карточки
+	// aspect-ratio: 630 / 330; // например, соотношение сторон 21:11
+	object-fit: cover;
+	object-position: center;
+	width: 100%;
+	height: 100%;
+	border-radius: 3px;
+}
+
+.ArtistsPageNewsArtistsSliderCardTitleWrapper {
+	// Обёртка заголовка карточки
+	display: flex;
+	margin: calc(20px - (2 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+}
+
+.ArtistsPageNewsArtistsSliderCardTitle {
+	// Заголовок карточки
+	color: #000000;
+	font-family: $default-font;
+	font-weight: 500;
+	font-size: calc(22px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	text-transform: uppercase;
+}
+
+.ArtistsPageNewsArtistsSliderCardDescriptionWrapper {
+	// Обёртка описания карточки
+	color: #000000;
+	margin: 12px 0 0 0;
+	height: calc(
+		calc(16px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 5
+	); // Делаем ограничение вывода текста построчечно
+	overflow: hidden;
+}
+
+.ArtistsPageNewsArtistsSliderCardDescription {
+	// Описание карточки
+	color: #000000;
+	font-family: $default-font;
+	font-weight: 400;
+	font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
+}
+
+@media screen and (min-width: 1441px) {
+	.ArtistsPageNewsArtistsSliderTopInnerWrapper {
+		// Верхняя часть слайдера
+		padding: 0 0 51px 0;
+	}
+
+	.ArtistsPageNewsArtistsSliderBottomInnerWrapper {
+		// Нижняя часть слайдера
+		height: 561px;
+
+		.swiper-wrapper {
+			margin: 0 0 0 -29px;
+		}
+
+		.swiper-button-prev,
+		.swiper-button-next {
+			top: calc(539px - calc(var(--swiper-navigation-size) / 2));
+		}
+
+		.swiper-pagination-fraction,
+		.swiper-pagination-custom,
+		.swiper-horizontal > .swiper-pagination-bullets,
+		.swiper-pagination-bullets.swiper-pagination-horizontal {
+			// bottom: calc(calc(14px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 2.5);
+			top: calc(539px - calc(var(--swiper-navigation-size) / 1.4));
+		}
+	}
+
+	.ArtistsPageNewsArtistsSliderContainer {
+		// Контейнер слайдера
+		margin: 87px $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+	}
+
+	.ArtistsPageNewsArtistsSliderCardContainer {
+		// Обёртка карточки слайдера
+		margin: 0 29px;
+	}
+
+	.ArtistsPageNewsArtistsSliderCardTitleWrapper {
+		// Обёртка заголовка карточки
+		margin: 20px 0 0 0;
+	}
+
+	.ArtistsPageNewsArtistsSliderCardTitleWrapper {
+		// Обёртка заголовка карточки
+		margin: 20px 0 0 0;
+	}
+
+	.ArtistsPageNewsArtistsSliderCardTitle {
+		// Заголовок карточки
+		font-size: 22px;
+	}
+
+	.ArtistsPageNewsArtistsSliderCardDescriptionWrapper {
+		// Обёртка описания карточки
+		height: calc(16px * 5); // Делаем ограничение вывода текста построчечно
+	}
+
+	.ArtistsPageNewsArtistsSliderCardDescription {
+		// Описание карточки
+		font-size: 16px;
+	}
+}
+
+@media screen and (max-width: 569px) {
+	.ArtistsPageNewsArtistsSliderLikeAndShareWrapper {
+		// Обёртка кнопок Like и Share
+		width: 80px;
+	}
+
+	.ArtistsPageNewsArtistsSliderLikeButton::after {
+		display: none;
+	}
+
+	.ArtistsPageNewsArtistsSliderShareButtonButton::before {
+		display: none;
+	}
+}
