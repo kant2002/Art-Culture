@@ -18,10 +18,10 @@ const Slide = ({ post, baseUrl }) => {
 	const { t, i18n } = useTranslation()
 	const currentLanguage = i18n.language
 	const navigate = useNavigate()
-
-	const handleArtistPageClick = () => {
-		navigate('/ArtistPage')
-	}
+	// TODO:Rewrite component to use navigate for post
+	// const handleArtistPageClick = () => {
+	// 	navigate('/ArtistPage')
+	// }
 
 	const title = currentLanguage === 'en' ? post.title_en : post.title_uk
 	const content =
@@ -35,7 +35,7 @@ const Slide = ({ post, baseUrl }) => {
 		<div className={styles.ArtistsPageNewsArtistsSliderCardContainer}>
 			<a
 				className={styles.ArtistsPageNewsArtistsSliderCardLink}
-				onClick={handleArtistPageClick}
+				// TODO:Rewrite component to use navigate for post	onClick={handleArtistPageClick}
 			>
 				<div className={styles.ArtistsPageNewsArtistsSliderCardImgWrapper}>
 					<img

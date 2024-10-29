@@ -72,6 +72,38 @@ export const getProducts = async (req, res, next) => {
 	console.log('createProduct - req.user:', req.user)
 }
 
+export const getProductById = async (req, res, next) => {
+	try {
+		const productId = parseInt(req.params.productId, 10)
+		if (isNaN(productId)) {
+			return res.status(400).json({ error: 'Invalid product ID' })
+		}
+
+		const product = await prisma.product.findUnique({
+			where: { id: productId },
+			include: {
+				images: true,
+				author: {
+					select: {
+						id: true,
+						email: true,
+						title: true,
+					},
+				},
+			},
+		})
+
+		if (!product) {
+			return res.status(404).json({ error: 'Product not found' })
+		}
+
+		res.json({ product })
+	} catch (error) {
+		console.error('Error fetching product by ID:', error)
+		next(error)
+	}
+}
+
 export const getUserProducts = async (req, res, next) => {
 	try {
 		const userId = req.user.id
@@ -127,6 +159,42 @@ export const getCreatorProducts = async (req, res, next) => {
 		res.json({ products })
 	} catch (error) {
 		console.error('Error fetching creator products', error)
+		next(error)
+	}
+}
+
+export const getProductByAuthorId = async (req, res, next) => {
+	try {
+		const authorId = parseInt(req.params.authorId, 10)
+		if (isNaN(authorId)) {
+			return res.status(400).json({ error: 'invalid product id' })
+		}
+		const products = await prisma.product.findMany({
+			where: {
+				authorId: authorId,
+			},
+			include: {
+				images: true,
+				author: {
+					select: {
+						id: true,
+						email: true,
+						title: true,
+					},
+				},
+			},
+			orderBy: {
+				createdAt: 'desc',
+			},
+		})
+
+		if (!products || products.length === 0) {
+			return res.status(404).json({ error: 'Products not found' })
+		}
+
+		res.json({ products }) // Wrap products in an object
+	} catch (error) {
+		console.error('Error fetching products by author ID:', error)
 		next(error)
 	}
 }
