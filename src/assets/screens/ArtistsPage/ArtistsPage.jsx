@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import styles from '../../../styles/layout/ArtistsPage.module.scss'
 
-function ArtistsPage(creator, onClick) {
+function ArtistsPage() {
 	const { t, i18n } = useTranslation()
 	const currentLanguage = i18n.language
 	const host = window.location.hostname
@@ -19,7 +19,7 @@ function ArtistsPage(creator, onClick) {
 	const [creators, setCreators] = useState([])
 	const [loading, setLoading] = useState(true)
 	const navigate = useNavigate()
-	const [error] = useState(null)
+	const [error, setError] = useState(null)
 	const [visibleCreatorsCount, setVisibleCreatorsCount] = useState(
 		getPostsCount(window.innerWidth)
 	)
@@ -79,8 +79,8 @@ function ArtistsPage(creator, onClick) {
 		fetchCreator()
 	}, [])
 
-	const handleAuthorPreviewClick = creatorId => {
-		navigate(`/creators/${creatorId}`)
+	const handleAuthorPreviewClick = id => {
+		navigate(`/artist/${id}`)
 	}
 
 	return (
@@ -166,47 +166,59 @@ function ArtistsPage(creator, onClick) {
 				</div>
 
 				<div className={`${styles.ArtistsPageGalleryCardsWrapper}`}>
-					{creators.slice(0, visibleCreatorsCount).map((creator, index) => {
-						const featuredMediaUrl = creator.images
-							? `${baseUrl}${creator.images.replace('../../', '/')}`
-							: '/Img/ArtistPhoto.jpg'
-						return (
-							<div className={`${styles.ArtistsPageGalleryInnerWrapper}`}>
-								<div className={`${styles.ArtistsPageGalleryCardWrapper}`}>
-									<div
-										key={creator.id}
-										className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}
-										onClick={() => onClick(creator.id)}
-									>
-										<img
-											className={`${styles.ArtistsPageGalleryCardPicture}`}
-											src={featuredMediaUrl}
-											alt='Слідкуйте за мистецтвом!'
-											loading='lazy'
-											onError={e => {
-												e.target.onerror = null
-												e.target.src = '/Img/ArtistPhoto.jpg'
-											}}
-										/>
-									</div>
-
-									<div
-										className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}
-									>
-										<p
-											className={`${styles.ArtistsPageGalleryCardDescription}`}
+					{loading ? (
+						<div className={styles.loading}>{t('Завантаження...')}</div>
+					) : error ? (
+						<div className={styles.error}>{error}</div>
+					) : creators.length === 0 ? (
+						<div className={styles.noCreators}>
+							{t('Немає митців для відображення.')}
+						</div>
+					) : (
+						creators.slice(0, visibleCreatorsCount).map(creator => {
+							const featuredMediaUrl = creator.images
+								? `${baseUrl}${creator.images.replace('../../', '/')}`
+								: '/Img/ArtistPhoto.jpg'
+							return (
+								<div className={`${styles.ArtistsPageGalleryInnerWrapper}`}>
+									<div className={`${styles.ArtistsPageGalleryCardWrapper}`}>
+										<div
+											key={creator.id}
+											className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}
+											onClick={() => handleAuthorPreviewClick(creator.id)}
+											style={{ cursor: 'pointer' }}
 										>
-											{creator.title}
-										</p>
+											<img
+												className={`${styles.ArtistsPageGalleryCardPicture}`}
+												src={featuredMediaUrl}
+												alt='Слідкуйте за мистецтвом!'
+												loading='lazy'
+												onError={e => {
+													e.target.onerror = null
+													e.target.src = '/Img/ArtistPhoto.jpg'
+												}}
+											/>
+										</div>
+
+										<div
+											className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}
+										>
+											<p
+												className={`${styles.ArtistsPageGalleryCardDescription}`}
+											>
+												{creator.title}
+											</p>
+										</div>
 									</div>
 								</div>
-							</div>
-						)
-					})}
+							)
+						})
+					)}
 				</div>
 
 				<div className={`${styles.ArtistsPageGalleryAllArtistsButtonWrapper}`}>
 					<button className={`${styles.ArtistsPageGalleryAllArtistsButton}`}>
+						{/* TODO: write page for all artists              */}
 						<p className={`${styles.ArtistsPageGalleryAllArtistsButtonText}`}>
 							{t('Всі митці')}
 						</p>

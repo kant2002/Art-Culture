@@ -7,8 +7,8 @@ import PostDetail from '../../components/Post/PostDetail'
 import Login from '../../components/VerificationPages/LoginPage'
 import SignUp from '../../components/VerificationPages/SignUpPage'
 import AdminDashboard from '../Admin/AdminDashboard'
-import ArtistsPage from '../ArtistsPage/ArtistsPage'
 import ArtistPage from '../ArtistPage/ArtistPage'
+import ArtistsPage from '../ArtistsPage/ArtistsPage'
 import MuseumExhibitions from '../ExhibitionList/Exhibitions'
 import MuseumPage from '../MuseumPage/MuseumPage'
 import MuseumsPage from '../MuseumsPage/MuseumsPage'
@@ -39,7 +39,7 @@ const Layout = ({ children, heading = '', backLink = '/' }) => {
 					<Route path='/' element={<Navigate to='/MainPage' />} />
 					<Route path='/MainPage' element={<MainPage />} />
 					<Route path='/ArtistsPage' element={<ArtistsPage />} />
-					<Route path='/ArtistPage' element={<ArtistPage />} />
+					<Route path='/artist/:id' element={<ArtistPage />} />
 					<Route path='/MuseumsPage' element={<MuseumsPage />} />
 					<Route path='/MuseumPage' element={<MuseumPage />} />
 					<Route
