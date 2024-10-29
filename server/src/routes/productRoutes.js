@@ -5,6 +5,8 @@ import { body } from 'express-validator'
 import {
 	createProduct,
 	getCreatorProducts,
+	getProductByAuthorId,
+	getProductById,
 	getProducts,
 	getUserProducts,
 } from '../controllers/productController.js'
@@ -36,5 +38,6 @@ router.get('/creators-products', getCreatorProducts)
 // Get all products
 router.get('/', getProducts)
 router.get('/my-products', authenticateToken, getUserProducts)
-
+router.get('/author/:authorId', getProductByAuthorId)
+router.get('/:productId', getProductById)
 export default router

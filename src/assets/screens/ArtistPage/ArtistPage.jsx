@@ -19,15 +19,21 @@ function ArtistPage() {
 		: 'https://art.playukraine.com'
 
 	const [creator, setCreator] = useState(null)
+	const [products, setProducts] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 
 	useEffect(() => {
-		const fetchCreator = async () => {
+		const fetchCreatorAndProduct = async () => {
 			try {
 				const response = await axios.get(`/api/users/creators/${id}`)
 				console.log('Fetched creator', response.data)
 				setCreator(response.data.creator)
+				// Fetch creator's products
+				const productsResponse = await axios.get(`/api/products/author/${id}`)
+				console.log('Fetched products:', productsResponse.data)
+				setProducts(productsResponse.data.products)
+
 				setLoading(false)
 			} catch (error) {
 				console.error('Error fetch creator', error)
@@ -36,7 +42,7 @@ function ArtistPage() {
 			}
 		}
 
-		fetchCreator()
+		fetchCreatorAndProduct()
 	}, [id, t])
 
 	if (loading) {
@@ -54,10 +60,12 @@ function ArtistPage() {
 	// Extract data based on current language
 	const title =
 		currentLanguage === 'en'
-			? creator.title_en
+			? creator.title_en || creator.title
 			: creator.title_uk || creator.title
 	const bio =
-		currentLanguage === 'en' ? creator.bio_en : creator.bio_uk || creator.bio
+		currentLanguage === 'en'
+			? creator.bio_en || creator.bio
+			: creator.bio_uk || creator.bio
 	const images = creator.images
 		? `${baseUrl}${creator.images.replace('../../', '/')}`
 		: '/Img/defaultArtistPhoto.jpg'
@@ -121,7 +129,7 @@ function ArtistPage() {
 
 			<ArtistPageNewsArtistsSlider />
 
-			<PopularOfThisArtistSlider />
+			<PopularOfThisArtistSlider products={products} baseUrl={baseUrl} />
 
 			<ArtistPageMasonryGallery />
 
