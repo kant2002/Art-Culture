@@ -19,9 +19,9 @@ const UserProfile = () => {
 
 	useEffect(() => {
 		if (user) {
-			setEmail(`Email: ${user.email}`)
+			setEmail(`${user.email}`)
 			setRegDate(
-				`Date of registration: ${new Date(user.createdAt).toLocaleDateString()}`
+				`${new Date(user.createdAt).toLocaleDateString()}`
 			)
 			setPageText(`${user.username}'s User Profile`)
 			setTitle(user.title || '')
@@ -152,42 +152,62 @@ const UserProfile = () => {
 				<div className={styles.profileDetails}>
 					<h2>{pageText}</h2>
 					{profileImage && (
-						<div className={styles.profileAvatarWrapper}>
-							<div className={styles.profileAvatar}>
-								<img
-									src={
-										profileImage instanceof File
-											? URL.createObjectURL(profileImage)
-											: profileImage.startsWith('http') ||
-												profileImage.startsWith('/uploads/profileImages')
-												? `${process.env.REACT_APP_API_URL}${profileImage}`
-												: profileImage
-									}
-									alt='Profile'
-									className={styles.profileImage}
-								/>
+						<div className={styles.profileInformationContainer}>
+							<div className={styles.profileAvatarWrapper}>
+								<div className={styles.profileAvatar}>
+									<img
+										src={
+											profileImage instanceof File
+												? URL.createObjectURL(profileImage)
+												: profileImage.startsWith('http') ||
+													profileImage.startsWith('/uploads/profileImages')
+													? `${process.env.REACT_APP_API_URL}${profileImage}`
+													: profileImage
+										}
+										alt='Profile'
+										className={styles.profileImage}
+									/>
+								</div>
 							</div>
+
+							<div className={styles.profileTextWrapper}>
+
+								{title && (
+									<p>
+										<strong>{t('П.І.Б.')}:&#8194;</strong>{title}
+									</p>
+								)}
+
+								{bio && (
+									<p>
+										<strong>{t('Про себе')}:&#8194;</strong> {bio}
+									</p>
+								)}
+
+								<p><strong>E-Mail:&#8194;</strong>{email}</p>
+								<p><strong>{t('Дата реєстрації')}:&#8194;</strong>{regDate}</p>
+
+								{serverMessage && (
+									<p className={styles.ErrorMessage}>{serverMessage}</p>
+								)}
+
+								{console.log(serverMessage)}
+
+
+								<div className={styles.editButtonWrapper}>
+
+									<button onClick={toggleEditMode} className={styles.editButton}>
+										{editMode ? t('Скасувати') : t('Редагувати')}
+									</button>
+
+								</div>
+
+							</div>
+
 						</div>
 					)}
-					<p>{email}</p>
-					<p>{regDate}</p>
-					{title && (
-						<p>
-							<strong>Title:</strong> {title}
-						</p>
-					)}
-					{bio && (
-						<p>
-							<strong>Bio:</strong> {bio}
-						</p>
-					)}
-					{serverMessage && (
-						<p className={styles.ErrorMessage}>{serverMessage}</p>
-					)}
-					{console.log(serverMessage)}
-					<button onClick={toggleEditMode} className={styles.editButton}>
-						{editMode ? 'Cancel' : 'Edit Profile'}
-					</button>
+
+
 					{editMode && (
 						<form
 							className={styles.editProfileForm}
