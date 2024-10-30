@@ -102,6 +102,10 @@ const UserProfile = () => {
 			}
 		}
 	}
+	const [isOpen, setIsOpen] = useState(false);
+
+	const openModal = () => setIsOpen(true);
+	const closeModal = () => setIsOpen(false);
 
 	const handleImageChange = e => {
 		if (e.target.files && e.target.files[0]) {
@@ -196,9 +200,16 @@ const UserProfile = () => {
 
 								<div className={styles.editButtonWrapper}>
 
-									<button onClick={toggleEditMode} className={styles.editButton}>
+									<button
+										onClick={() => {
+											toggleEditMode();
+											openModal();
+										}}
+										className={styles.editButton}
+									>
 										{editMode ? t('Скасувати') : t('Редагувати')}
 									</button>
+
 
 								</div>
 
@@ -208,33 +219,66 @@ const UserProfile = () => {
 					)}
 
 
-					{editMode && (
-						<form
-							className={styles.editProfileForm}
-							onSubmit={handleUpdateProfile}
-						>
-							<input
-								type='text'
-								placeholder='Title'
-								name='title'
-								value={title}
-								onChange={e => setTitle(e.target.value)}
-							/>
-							<textarea
-								placeholder='Bio'
-								name='bio'
-								value={bio}
-								onChange={e => setBio(e.target.value)}
-							/>
-							<input
-								type='file'
-								name='profileImages'
-								accept='image/*'
-								onChange={handleImageChange}
-							/>
-							<button type='submit'>Update Profile</button>
-						</form>
-					)}
+					<div className="App">
+
+						{isOpen && (
+							<div className={styles.modal}>
+								<div className={styles.modalContent}>
+									{/* <span className={styles.close} onClick={closeModal}>&times;</span> */}
+									<button
+										onClick={() => {
+											toggleEditMode();
+											openModal();
+											closeModal();
+										}}
+										className={styles.editButton}
+									>
+										{editMode ? t('Скасувати') : t('Редагувати')}
+									</button>
+									{editMode && (
+										<form
+											className={styles.editProfileForm}
+											onSubmit={handleUpdateProfile}
+										>
+											<input
+												type='text'
+												placeholder='Title'
+												name='title'
+												value={title}
+												onChange={e => setTitle(e.target.value)}
+											/>
+											<textarea
+												placeholder='Bio'
+												name='bio'
+												value={bio}
+												onChange={e => setBio(e.target.value)}
+											/>
+											<input
+												type='file'
+												name='profileImages'
+												accept='image/*'
+												onChange={handleImageChange}
+											/>
+											<button
+												onClick={() => {
+													toggleEditMode();
+													closeModal();
+												}}
+												type="submit"
+											>
+												Update Profile
+											</button>
+
+										</form>
+									)}
+
+								</div>
+							</div>
+						)}
+					</div>
+
+
+
 				</div>
 			</div>
 		</div>
