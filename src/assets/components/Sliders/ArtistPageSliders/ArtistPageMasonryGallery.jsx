@@ -436,7 +436,7 @@ const ArtistPageMasonryGallery = () => {
 									key={`${img.src}-${index}-${rowIndex}`}
 									className={style.item}
 									style={{
-										marginRight: '10px',
+										marginRight: '20px',
 										marginBottom: '20px',
 										width: `${img.scaledWidth}px`,
 										height: `${img.scaledHeight}px`,
