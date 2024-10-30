@@ -27,7 +27,8 @@
 /* JustifiedGallery.module.scss */
 
 .galleryContainer {
-	margin: calc(87px - (43 * ((1440px - 100vw) / (1440 - 375)))) $responsiveLeftAndRightPadding 0;
+	margin: calc(87px - (43 * ((1440px - 100vw) / (1440 - 375))))
+		$responsiveLeftAndRightPadding 0;
 	overflow: hidden; // Prevent horizontal scroll due to rounding errors
 }
 
@@ -66,11 +67,11 @@
 
 .galleryTitle {
 	// Заголовок
-    font-family: $default-font;
-    font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
-    font-weight: 600;
-    color: rgb(0, 0, 0);
-    text-transform: uppercase;
+	font-family: $default-font;
+	font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+	font-weight: 600;
+	color: rgb(0, 0, 0);
+	text-transform: uppercase;
 }
 
 .moreArtsButtonWrapper {
@@ -109,7 +110,7 @@
 	.galleryContainer {
 		margin: 87px $responsiveLeftAndRightPadding 0;
 	}
-	
+
 	.justifiedGallery {
 		margin: 46px 0 0;
 	}
