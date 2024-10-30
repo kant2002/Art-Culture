@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
 import API from '../../../utils/api.js'
 import styles from '/src/styles/components/UserProfile/userProfile.module.scss'
+
 const UserProfile = () => {
 	const { user, logout, updateUser } = useAuth() // Access user and logout from context
 	const [pageText, setPageText] = useState('')
@@ -20,9 +21,7 @@ const UserProfile = () => {
 	useEffect(() => {
 		if (user) {
 			setEmail(`${user.email}`)
-			setRegDate(
-				`${new Date(user.createdAt).toLocaleDateString()}`
-			)
+			setRegDate(`${new Date(user.createdAt).toLocaleDateString()}`)
 			setPageText(`${user.username}'s User Profile`)
 			setTitle(user.title || '')
 			setBio(user.bio || '')
@@ -90,9 +89,7 @@ const UserProfile = () => {
 				setServerMessage(message)
 				setEditMode(false)
 				updateUser(updatedUserProfile)
-				// const meResponse = await API.get('/auth/me')
-				// if (meResponse.status === 200) {
-				// 	login(meResponse.data.user, '')
+				closeModal() // Закрываем модальное окно после успешного обновления
 			}
 		} catch (error) {
 			if (error.response && error.response.data) {
@@ -102,6 +99,7 @@ const UserProfile = () => {
 			}
 		}
 	}
+
 	const [isOpen, setIsOpen] = useState(false);
 
 	const openModal = () => setIsOpen(true);
@@ -195,11 +193,7 @@ const UserProfile = () => {
 									<p className={styles.ErrorMessage}>{serverMessage}</p>
 								)}
 
-								{console.log(serverMessage)}
-
-
 								<div className={styles.editButtonWrapper}>
-
 									<button
 										onClick={() => {
 											toggleEditMode();
@@ -209,26 +203,18 @@ const UserProfile = () => {
 									>
 										{editMode ? t('Скасувати') : t('Редагувати')}
 									</button>
-
-
 								</div>
-
 							</div>
-
 						</div>
 					)}
 
-
 					<div className="App">
-
 						{isOpen && (
 							<div className={styles.modal}>
 								<div className={styles.modalContent}>
-									{/* <span className={styles.close} onClick={closeModal}>&times;</span> */}
 									<button
 										onClick={() => {
 											toggleEditMode();
-											openModal();
 											closeModal();
 										}}
 										className={styles.editButton}
@@ -259,26 +245,15 @@ const UserProfile = () => {
 												accept='image/*'
 												onChange={handleImageChange}
 											/>
-											<button
-												onClick={() => {
-													toggleEditMode();
-													closeModal();
-												}}
-												type="submit"
-											>
+											<button type="submit">
 												Update Profile
 											</button>
-
 										</form>
 									)}
-
 								</div>
 							</div>
 						)}
 					</div>
-
-
-
 				</div>
 			</div>
 		</div>
