@@ -1,229 +1,9 @@
-// import React, { useEffect, useRef, useState } from 'react'
-// import { useTranslation } from 'react-i18next'
-// import style from '../../../../styles/components/Sliders/ArtistPageSliders/ArtistPageMasonryGallery.module.scss'
-
-// const ArtistPageMasonryGallery = () => {
-// 	const { t } = useTranslation()
-// 	const containerRef = useRef(null)
-// 	const [isPaused, setIsPaused] = useState(false)
-// 	const [sliderWidth, setSliderWidth] = useState(0)
-// 	const [position, setPosition] = useState(0)
-// 	const sliderRef = useRef(null)
-// 	const speed = 0.5 // Adjust this value to change the speed
-
-// 	console.log('Component rendered. Initial position:', position)
-
-// 	// Hardcoded list of image URLs
-// 	const images = [
-// 		'/Img/gallery/1.webp',
-// 		'/Img/gallery/2.webp',
-// 		'/Img/gallery/3.webp',
-// 		'/Img/gallery/4.webp',
-// 		'/Img/gallery/5.webp',
-// 		'/Img/gallery/6.webp',
-// 		'/Img/gallery/7.webp',
-// 		'/Img/gallery/8.webp',
-// 		'/Img/gallery/9.webp',
-// 		'/Img/gallery/10.webp',
-// 		'/Img/gallery/11.webp',
-// 		'/Img/gallery/12.webp',
-// 		'/Img/gallery/13.webp',
-// 		'/Img/gallery/14.webp',
-// 		'/Img/gallery/15.webp',
-// 		// Add more images if needed
-// 	]
-
-// 	console.log('Images array:', images)
-
-// 	// Prepare images with dimensions
-// 	const [loadedImages, setLoadedImages] = useState([])
-
-// 	useEffect(() => {
-// 		console.log('Starting to load images...')
-// 		const imagePromises = images.map(
-// 			(src, index) =>
-// 				new Promise(resolve => {
-// 					const img = new Image()
-// 					img.src = src
-// 					img.onload = () => {
-// 						console.log(
-// 							`Image ${index} loaded: ${src}, width: ${img.width}, height: ${img.height}`
-// 						)
-// 						resolve({ src, width: img.width, height: img.height })
-// 					}
-// 					img.onerror = () => {
-// 						console.error(`Failed to load image ${index}: ${src}`)
-// 						resolve({ src, width: 0, height: 0 })
-// 					}
-// 				})
-// 		)
-
-// 		Promise.all(imagePromises).then(imgs => {
-// 			console.log('All images loaded:', imgs)
-// 			setLoadedImages(imgs)
-// 		})
-// 	}, [images])
-
-// 	// Layout images into a single row to make a full-width slider
-// 	useEffect(() => {
-// 		if (loadedImages.length === 0) return
-
-// 		const containerWidth = window.innerWidth // Full window width
-// 		const rowHeight = 250 // Desired image height
-// 		const gap = 10
-
-// 		let totalWidth = 0
-// 		const scaledImages = loadedImages.map((img, index) => {
-// 			const aspectRatio = img.width / img.height || 1
-// 			const scaledHeight = rowHeight
-// 			const scaledWidth = aspectRatio * scaledHeight
-
-// 			totalWidth += scaledWidth + (index > 0 ? gap : 0)
-// 			return {
-// 				...img,
-// 				scaledWidth,
-// 				scaledHeight,
-// 			}
-// 		})
-
-// 		console.log('Initial totalWidth:', totalWidth)
-
-// 		// Ensure totalWidth is sufficient for seamless looping
-// 		if (totalWidth < containerWidth) {
-// 			const scaleFactor = containerWidth / totalWidth
-// 			scaledImages.forEach(img => {
-// 				img.scaledWidth *= scaleFactor
-// 				img.scaledHeight *= scaleFactor
-// 			})
-// 			totalWidth = containerWidth
-// 			console.log('Adjusted totalWidth to containerWidth:', totalWidth)
-// 		}
-
-// 		setSliderWidth(totalWidth)
-// 		setLoadedImages(scaledImages)
-// 		console.log('Slider total width:', totalWidth)
-// 	}, [loadedImages])
-
-// 	// Automatically move images to the left
-// 	useEffect(() => {
-// 		let animationFrameId
-
-// 		const animate = () => {
-// 			if (!isPaused) {
-// 				setPosition(prev => {
-// 					let newPosition = prev - speed
-
-// 					if (-newPosition >= sliderWidth) {
-// 						// Loop back seamlessly
-// 						console.log('Looping back to start')
-// 						return 0
-// 					}
-// 					return newPosition
-// 				})
-// 			} else {
-// 				console.log('Animation paused')
-// 			}
-// 			animationFrameId = requestAnimationFrame(animate)
-// 		}
-
-// 		animationFrameId = requestAnimationFrame(animate)
-
-// 		return () => {
-// 			cancelAnimationFrame(animationFrameId)
-// 			console.log('Animation stopped')
-// 		}
-// 	}, [isPaused, sliderWidth, speed])
-
-// 	// Handle mouse events to pause and resume animation
-// 	const handleMouseEnter = () => {
-// 		console.log('Mouse entered slider')
-// 		setIsPaused(true)
-// 	}
-
-// 	const handleMouseLeave = () => {
-// 		console.log('Mouse left slider')
-// 		setIsPaused(false)
-// 	}
-
-// 	return (
-// 		<div className={style.galleryContainer} style={{ overflow: 'hidden' }}>
-// 			<div className={style.galleryTitleWrapper}>
-// 				<h3 className={style.galleryTitle}>{t('Роботи цього митця')}</h3>
-// 			</div>
-// 			<div
-// 				className={style.justifiedGallery}
-// 				ref={containerRef}
-// 				style={{
-// 					overflow: 'hidden',
-// 					width: '100vw', // Full window width
-// 				}}
-// 				onMouseEnter={handleMouseEnter}
-// 				onMouseLeave={handleMouseLeave}
-// 			>
-// 				<div
-// 					ref={sliderRef}
-// 					style={{
-// 						display: 'flex',
-// 						transform: `translateX(${position}px)`,
-// 						width: `${sliderWidth * 2}px`, // Set width to accommodate seamless looping
-// 					}}
-// 				>
-// 					{/* Display images twice for seamless looping */}
-// 					{loadedImages.concat(loadedImages).map((img, index) => (
-// 						<div
-// 							key={`${img.src}-${index}`}
-// 							className={style.item}
-// 							style={{
-// 								marginRight: '10px',
-// 								width: `${img.scaledWidth}px`,
-// 								height: `${img.scaledHeight}px`,
-// 								flex: '0 0 auto',
-// 							}}
-// 						>
-// 							<img
-// 								src={img.src}
-// 								alt=''
-// 								style={{
-// 									width: '100%',
-// 									height: '100%',
-// 									objectFit: 'cover',
-// 								}}
-// 								onError={e => {
-// 									e.target.onerror = null
-// 									e.target.src = '/Img/newsCardERROR.jpg'
-// 									console.error(`Error loading image: ${img.src}`)
-// 								}}
-// 							/>
-// 						</div>
-// 					))}
-// 				</div>
-// 			</div>
-// 			<div className={style.moreArtsButtonWrapper}>
-// 				<button className={style.moreArtsButton}>
-// 					<p className={style.moreArtsButtonText}>{t('Всі роботи Митця')}</p>
-// 					<img
-// 						className={`${style.buttonArrow}`}
-// 						src={'/Img/buttonArrow.svg'}
-// 						alt={t('Фото митця')}
-// 						onError={e => {
-// 							e.target.onerror = null
-// 							e.target.src = '/Img/newsCardERROR.jpg'
-// 							console.error('Error loading button arrow image')
-// 						}}
-// 					/>
-// 				</button>
-// 			</div>
-// 		</div>
-// 	)
-// }
-
-// export default ArtistPageMasonryGallery
-
+import PropTypes from 'prop-types'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import style from '../../../../styles/components/Sliders/ArtistPageSliders/ArtistPageMasonryGallery.module.scss'
 
-const ArtistPageMasonryGallery = () => {
+const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
 	const { t } = useTranslation()
 	const containerRef = useRef(null)
 	const [isPaused, setIsPaused] = useState(false)
@@ -231,69 +11,66 @@ const ArtistPageMasonryGallery = () => {
 	const [position, setPosition] = useState(0)
 	const sliderRef = useRef(null)
 	const speed = 0.5 // Adjust this value to change the speed
+	const [isModalOpen, setIsModalOpen] = useState(false)
+	const [selectedProductImages, setSelectedProductImages] = useState([])
 
-	console.log('Component rendered. Initial position:', position)
+	// Zoom-related state variables
+	const [zoomStates, setZoomStates] = useState([])
 
 	// Define the number of rows and custom scaling factor
 	const numberOfRows = 3 // Change this to the desired number of rows
 	const customScaleFactor = 1.0 // Change this to scale images up or down
 
-	// Hardcoded list of image URLs
-	const images = [
-		'/Img/gallery/1.webp',
-		'/Img/gallery/2.webp',
-		'/Img/gallery/3.webp',
-		'/Img/gallery/4.webp',
-		'/Img/gallery/5.webp',
-		'/Img/gallery/6.webp',
-		'/Img/gallery/7.webp',
-		'/Img/gallery/8.webp',
-		'/Img/gallery/9.webp',
-		'/Img/gallery/10.webp',
-		'/Img/gallery/11.webp',
-		'/Img/gallery/12.webp',
-		'/Img/gallery/13.webp',
-		'/Img/gallery/14.webp',
-		'/Img/gallery/15.webp',
-		// Add more images if needed
-	]
+	// Build the images array with product information
+	const images = products.map(product => {
+		const mainImageSrc =
+			product.images && product.images.length > 0
+				? `${baseUrl}${product.images[0].imageUrl.replace('../../', '/')}`
+				: '/Img/defaultProductImage.jpg' // Fallback image
 
-	console.log('Images array:', images)
+		return {
+			src: mainImageSrc,
+			productId: product.id,
+			productImages: product.images,
+		}
+	})
 
 	// Prepare images with dimensions
 	const [loadedImages, setLoadedImages] = useState([])
 
 	useEffect(() => {
-		console.log('Starting to load images...')
-		const imagePromises = images.map(
-			(src, index) =>
-				new Promise(resolve => {
-					const img = new Image()
-					img.src = src
-					img.onload = () => {
-						console.log(
-							`Image ${index} loaded: ${src}, width: ${img.width}, height: ${img.height}`
-						)
-						resolve({ src, width: img.width, height: img.height })
-					}
-					img.onerror = () => {
-						console.error(`Failed to load image ${index}: ${src}`)
-						resolve({ src, width: 0, height: 0 })
-					}
-				})
-		)
+		const imagePromises = images.map(imageObj => {
+			return new Promise(resolve => {
+				const img = new Image()
+				img.src = imageObj.src
+				img.onload = () => {
+					resolve({
+						...imageObj,
+						width: img.width,
+						height: img.height,
+					})
+				}
+				img.onerror = () => {
+					resolve({
+						...imageObj,
+						width: 0,
+						height: 0,
+					})
+				}
+			})
+		})
 
 		Promise.all(imagePromises).then(imgs => {
-			console.log('All images loaded:', imgs)
 			setLoadedImages(imgs)
 		})
 	}, [images])
 
 	// Split images into rows
+	const [rows, setRows] = useState([])
+
 	useEffect(() => {
 		if (loadedImages.length === 0) return
 
-		console.log('Splitting images into rows...')
 		const imagesPerRow = Math.ceil(loadedImages.length / numberOfRows)
 		const newRows = []
 
@@ -305,12 +82,9 @@ const ArtistPageMasonryGallery = () => {
 		}
 
 		setRows(newRows)
-		console.log('Rows set:', newRows)
 	}, [loadedImages, numberOfRows])
 
 	// Calculate slider width and scale images
-	const [rows, setRows] = useState([])
-
 	useEffect(() => {
 		if (rows.length === 0) return
 
@@ -319,7 +93,7 @@ const ArtistPageMasonryGallery = () => {
 		const gap = 10
 
 		let maxTotalWidth = 0
-		const scaledRows = rows.map((row, rowIndex) => {
+		const scaledRows = rows.map(row => {
 			let totalWidth = 0
 			const scaledImages = row.map((img, index) => {
 				const aspectRatio = img.width / img.height || 1
@@ -334,8 +108,6 @@ const ArtistPageMasonryGallery = () => {
 				}
 			})
 
-			console.log(`Row ${rowIndex} initial totalWidth:`, totalWidth)
-
 			// Ensure totalWidth is sufficient for seamless looping
 			if (totalWidth < containerWidth) {
 				const scaleFactor = containerWidth / totalWidth
@@ -344,10 +116,6 @@ const ArtistPageMasonryGallery = () => {
 					img.scaledHeight *= scaleFactor
 				})
 				totalWidth = containerWidth
-				console.log(
-					`Row ${rowIndex} adjusted totalWidth to containerWidth:`,
-					totalWidth
-				)
 			}
 
 			if (totalWidth > maxTotalWidth) {
@@ -359,7 +127,6 @@ const ArtistPageMasonryGallery = () => {
 
 		setSliderWidth(maxTotalWidth)
 		setRows(scaledRows)
-		console.log('Slider total width (max of rows):', maxTotalWidth)
 	}, [rows, customScaleFactor])
 
 	// Automatically move images to the left
@@ -373,13 +140,10 @@ const ArtistPageMasonryGallery = () => {
 
 					if (-newPosition >= sliderWidth) {
 						// Loop back seamlessly
-						console.log('Looping back to start')
 						return 0
 					}
 					return newPosition
 				})
-			} else {
-				console.log('Animation paused')
 			}
 			animationFrameId = requestAnimationFrame(animate)
 		}
@@ -388,19 +152,66 @@ const ArtistPageMasonryGallery = () => {
 
 		return () => {
 			cancelAnimationFrame(animationFrameId)
-			console.log('Animation stopped')
 		}
 	}, [isPaused, sliderWidth, speed])
 
 	// Handle mouse events to pause and resume animation
 	const handleMouseEnter = () => {
-		console.log('Mouse entered slider')
 		setIsPaused(true)
 	}
 
 	const handleMouseLeave = () => {
-		console.log('Mouse left slider')
 		setIsPaused(false)
+	}
+
+	const handleImageClick = productImages => {
+		if (productImages && productImages.length > 0) {
+			setSelectedProductImages(productImages)
+			setZoomStates(
+				productImages.map(() => ({
+					zoomLevel: 1,
+					isZoomed: false,
+					cursorPos: { x: 0, y: 0 },
+					showLens: false,
+				}))
+			)
+		} else {
+			// If no sub-images, you can choose to display a message or fallback
+			setSelectedProductImages([])
+			setZoomStates([])
+		}
+		setIsModalOpen(true)
+	}
+
+	const handleCloseModal = () => {
+		setIsModalOpen(false)
+		setSelectedProductImages([])
+		setZoomStates([])
+	}
+
+	const handleWheelImage = (e, index) => {
+		e.preventDefault()
+		e.stopPropagation()
+		if (e.nativeEvent) {
+			e.nativeEvent.preventDefault()
+		}
+		const zoomState = zoomStates[index]
+		if (zoomState.isZoomed) {
+			let newZoomLevel = zoomState.zoomLevel - e.deltaY * 0.01
+			if (newZoomLevel < 1) newZoomLevel = 1
+			if (newZoomLevel > 5) newZoomLevel = 5 // Maximum zoom level
+
+			console.log(`Zoom level changed for image ${index}:`, newZoomLevel)
+
+			setZoomStates(prevZoomStates => {
+				const newZoomStates = [...prevZoomStates]
+				newZoomStates[index] = {
+					...prevZoomStates[index],
+					zoomLevel: newZoomLevel,
+				}
+				return newZoomStates
+			})
+		}
 	}
 
 	return (
@@ -441,7 +252,9 @@ const ArtistPageMasonryGallery = () => {
 										width: `${img.scaledWidth}px`,
 										height: `${img.scaledHeight}px`,
 										flex: '0 0 auto',
+										cursor: 'pointer',
 									}}
+									onClick={() => handleImageClick(img.productImages)}
 								>
 									<img
 										src={img.src}
@@ -454,7 +267,6 @@ const ArtistPageMasonryGallery = () => {
 										onError={e => {
 											e.target.onerror = null
 											e.target.src = '/Img/newsCardERROR.jpg'
-											console.error(`Error loading image: ${img.src}`)
 										}}
 									/>
 								</div>
@@ -473,13 +285,179 @@ const ArtistPageMasonryGallery = () => {
 						onError={e => {
 							e.target.onerror = null
 							e.target.src = '/Img/newsCardERROR.jpg'
-							console.error('Error loading button arrow image')
 						}}
 					/>
 				</button>
 			</div>
+			{isModalOpen && (
+				<div className={style.modalOverlay} onClick={handleCloseModal}>
+					<div
+						className={style.modalContent}
+						onClick={e => e.stopPropagation()}
+					>
+						<button className={style.closeButton} onClick={handleCloseModal}>
+							&times;
+						</button>
+						<div className={style.modalImages}>
+							{selectedProductImages && selectedProductImages.length > 0 ? (
+								selectedProductImages.map((image, index) => {
+									const zoomState = zoomStates[index] || {
+										zoomLevel: 1,
+										isZoomed: false,
+										cursorPos: { x: 0, y: 0 },
+										showLens: false,
+									}
+
+									// Handlers for zoom functionality per image
+									const handleMouseEnterImage = () => {
+										console.log(`Mouse entered image ${index}`)
+										setZoomStates(prevZoomStates => {
+											const newZoomStates = [...prevZoomStates]
+											newZoomStates[index] = {
+												...prevZoomStates[index],
+												showLens: true,
+											}
+											return newZoomStates
+										})
+									}
+
+									const handleMouseLeaveImage = () => {
+										console.log(`Mouse left image ${index}`)
+										setZoomStates(prevZoomStates => {
+											const newZoomStates = [...prevZoomStates]
+											newZoomStates[index] = {
+												...prevZoomStates[index],
+												showLens: false,
+												cursorPos: { x: 0, y: 0 },
+											}
+											return newZoomStates
+										})
+									}
+
+									const handleMouseMoveImage = e => {
+										const rect = e.currentTarget.getBoundingClientRect()
+										const x = e.clientX - rect.left
+										const y = e.clientY - rect.top
+
+										console.log(`Mouse moved over image ${index}:`, {
+											x,
+											y,
+										})
+
+										setZoomStates(prevZoomStates => {
+											const newZoomStates = [...prevZoomStates]
+											newZoomStates[index] = {
+												...prevZoomStates[index],
+												cursorPos: { x, y },
+											}
+											return newZoomStates
+										})
+									}
+
+									const handleImageClick = () => {
+										console.log(`Image ${index} clicked`)
+										setZoomStates(prevZoomStates => {
+											const zoomState = prevZoomStates[index]
+											const isZoomed = !zoomState.isZoomed
+											const zoomLevel = isZoomed ? 2 : 1
+
+											const newZoomStates = [...prevZoomStates]
+											newZoomStates[index] = {
+												...zoomState,
+												isZoomed,
+												zoomLevel,
+											}
+											return newZoomStates
+										})
+									}
+
+									return (
+										<div
+											key={index}
+											className={style.modalImageWrapper}
+											style={{
+												position: 'relative',
+												overflow: 'hidden',
+												cursor: zoomState.isZoomed ? 'zoom-out' : 'zoom-in',
+												width: '100%',
+												height: 'auto',
+											}}
+											onMouseEnter={handleMouseEnterImage}
+											onMouseLeave={handleMouseLeaveImage}
+											onMouseMove={handleMouseMoveImage}
+											onClick={handleImageClick}
+											onWheelCapture={e => handleWheelImage(e, index)}
+										>
+											<div
+												className={style.zoomContainer}
+												style={{
+													transform: `scale(${zoomState.zoomLevel})`,
+													transformOrigin: `${zoomState.cursorPos.x}px ${zoomState.cursorPos.y}px`,
+													transition: 'transform 0.3s ease-in-out',
+													display: 'inline-block',
+												}}
+											>
+												<img
+													src={`${baseUrl}${image.imageUrl.replace('../../', '/')}`}
+													alt={`Product Image ${index + 1}`}
+													className={style.modalImage}
+													style={{
+														width: '100%',
+														height: 'auto',
+													}}
+													onError={e => {
+														e.target.onerror = null
+														e.target.src = '/Img/defaultProductImage.jpg'
+														console.error(
+															'Error loading modal image:',
+															e.target.src
+														)
+													}}
+												/>
+											</div>
+											{zoomState.showLens && !zoomState.isZoomed && (
+												<div
+													className={style.zoomLens}
+													style={{
+														position: 'absolute',
+														top: zoomState.cursorPos.y - 50,
+														left: zoomState.cursorPos.x - 50,
+														width: '100px',
+														height: '100px',
+														border: '2px solid #fff',
+														borderRadius: '50%',
+														pointerEvents: 'none',
+														backgroundColor: 'rgba(255, 255, 255, 0.2)',
+													}}
+												></div>
+											)}
+										</div>
+									)
+								})
+							) : (
+								<p>{t('Немає додаткових зображень для цього продукту.')}</p>
+							)}
+						</div>
+					</div>
+				</div>
+			)}
 		</div>
 	)
+}
+
+ArtistPageMasonryGallery.propTypes = {
+	products: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.number.isRequired,
+			images: PropTypes.arrayOf(
+				PropTypes.shape({
+					id: PropTypes.number.isRequired,
+					imageUrl: PropTypes.string.isRequired,
+				})
+			),
+		})
+	).isRequired,
+	baseUrl: PropTypes.string.isRequired,
 }
 
 export default ArtistPageMasonryGallery
