@@ -217,6 +217,7 @@
 }
 
 .modal {
+	// модальное окно
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -226,9 +227,15 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	button {
+		//кнопка закрытия модального окна
+
+	}
 }
 
 .modalContent {
+	// контент модального окна
 	background-color: #fff;
 	padding: 20px;
 	border-radius: 8px;

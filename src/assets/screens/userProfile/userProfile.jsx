@@ -226,25 +226,48 @@ const UserProfile = () => {
 											className={styles.editProfileForm}
 											onSubmit={handleUpdateProfile}
 										>
-											<input
-												type='text'
-												placeholder='Title'
-												name='title'
-												value={title}
-												onChange={e => setTitle(e.target.value)}
-											/>
-											<textarea
-												placeholder='Bio'
-												name='bio'
-												value={bio}
-												onChange={e => setBio(e.target.value)}
-											/>
-											<input
-												type='file'
-												name='profileImages'
-												accept='image/*'
-												onChange={handleImageChange}
-											/>
+											<div className={styles.profileModalNameWrapper}>
+
+												<p>
+													<strong>{t('П.І.Б.')}:&#8194;</strong>
+												</p>
+
+												<input
+													type='text'
+													placeholder='Title'
+													name='title'
+													value={title}
+													onChange={e => setTitle(e.target.value)}
+												/>
+
+											</div>
+
+											<div className={styles.profileModalBioWrapper}>
+
+												<p>
+													<strong>{t('Про себе')}:&#8194;</strong>
+												</p>
+
+												<textarea
+													placeholder='Bio'
+													name='bio'
+													value={bio}
+													onChange={e => setBio(e.target.value)}
+												/>
+
+											</div>
+
+											<div className={styles.profileModalImageDownloadWrapper}>
+
+												<input
+													type='file'
+													name='profileImages'
+													accept='image/*'
+													onChange={handleImageChange}
+												/>
+
+											</div>
+											
 											<button type="submit">
 												Update Profile
 											</button>
