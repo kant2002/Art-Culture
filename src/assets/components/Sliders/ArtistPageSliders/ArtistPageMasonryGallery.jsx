@@ -379,7 +379,8 @@ const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
 												position: 'relative',
 												overflow: 'hidden',
 												cursor: zoomState.isZoomed ? 'zoom-out' : 'zoom-in',
-												width: '100%',
+												width:
+													'calc(320px - (166 * ((1440px - 100vw) / (1440 - 375))))',
 												height: 'auto',
 											}}
 											onMouseEnter={handleMouseEnterImage}
