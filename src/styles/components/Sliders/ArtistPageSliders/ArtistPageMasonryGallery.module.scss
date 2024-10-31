@@ -150,13 +150,15 @@
 	justify-content: center;
 	align-items: center;
 	z-index: 1000;
+	overflow: hidden;
+	overscroll-behavior: contain;
 }
 
 .modalContent {
 	position: relative;
 	background-color: #fff;
 	padding: 20px;
-	width: calc(1200px - (166 * ((1440px - 100vw) / (1440 - 375))));
+	width: calc(1920px - (166 * ((1440px - 100vw) / (1440 - 375))));
 	height: 100dvh;
 	overflow-y: auto;
 	border-radius: 8px;
@@ -190,5 +192,62 @@
 	height: 320px;
 	margin: 10px;
 	object-fit: cover;
-	width: calc(320px - (166 * ((1440px - 100vw) / (1440 - 375))));
+	width: calc(500px - (166 * ((1440px - 100vw) / (1440 - 375))));
+}
+.zoomControls {
+	position: absolute;
+	bottom: 10px;
+	right: 0px;
+	left: 0px;
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	justify-content: center;
+	align-items: center;
+}
+
+.zoomButton {
+	width: 30px;
+	height: 30px;
+	background-color: rgba(255, 255, 255, 0.7);
+	border: none;
+	border-radius: 50%;
+	font-size: 20px;
+	cursor: pointer;
+	outline: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color 0.2s;
+
+	&:hover {
+		background-color: rgba(255, 255, 255, 1);
+	}
+}
+
+.zoomIndicator {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 5px;
+}
+
+.zoomIndicator span {
+	font-size: 14px;
+	color: #fff;
+	margin-bottom: 5px;
+}
+
+.zoomBar {
+	width: 80px;
+	height: 8px;
+	background-color: rgba(255, 255, 255, 0.3);
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.zoomProgress {
+	height: 100%;
+	background-color: #fff;
+	transition: width 0.3s ease-in-out;
 }

@@ -93,6 +93,7 @@ function ArtistPage() {
 					<div className={`${styles.artistPageArtistPhotoWrapper}`}>
 						<img
 							className={`${styles.artistPageArtistPhoto}`}
+							loading='lazy'
 							src={images}
 							alt={t('Фото митця')}
 							onError={e => {
