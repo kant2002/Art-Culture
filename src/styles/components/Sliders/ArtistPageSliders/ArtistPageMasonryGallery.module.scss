@@ -193,6 +193,8 @@
 	margin: 10px;
 	object-fit: cover;
 	width: calc(500px - (166 * ((1440px - 100vw) / (1440 - 375))));
+	margin: 10px;
+	padding: 0px 10px;
 }
 .zoomControls {
 	position: absolute;
