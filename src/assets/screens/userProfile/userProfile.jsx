@@ -212,15 +212,7 @@ const UserProfile = () => {
 						{isOpen && (
 							<div className={styles.modal}>
 								<div className={styles.modalContent}>
-									<button
-										onClick={() => {
-											toggleEditMode();
-											closeModal();
-										}}
-										className={styles.editButton}
-									>
-										{editMode ? t('Скасувати') : t('Редагувати')}
-									</button>
+
 									{editMode && (
 										<form
 											className={styles.editProfileForm}
@@ -267,12 +259,29 @@ const UserProfile = () => {
 												/>
 
 											</div>
-											
-											<button type="submit">
+
+											<button className={styles.submitButton} type="submit">
 												Update Profile
 											</button>
 										</form>
 									)}
+
+									<div className={styles.closeButtonWrapper}>
+
+
+										<button
+											onClick={() => {
+												toggleEditMode();
+												closeModal();
+											}}
+											className={styles.editButton}
+										>
+
+											<span className={styles.close}>&times;</span>
+
+										</button>
+
+									</div>
 								</div>
 							</div>
 						)}
