@@ -231,14 +231,26 @@
 
 	.editButton {
 		padding: 0;
-		width: 1em;
-		background: none;
+		height: 30px;
+		width: 30px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		border: none;
+		border-radius: none;
+		cursor: pointer;
+	}
+
+	p {
+		// метка имени пользователя
+		font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+		font-weight: 900;
 	}
 }
 
 .modalContent {
 	// контент модального окна
+	position: relative;
 	margin: auto auto;
 	background-color: #fff;
 	padding: $responsiveBigPadding;
@@ -259,21 +271,48 @@
 	justify-content: space-between;
 	align-items: start;
 	width: 100%;
+	height: 100%;
+}
+
+.profileModalNameWrapper,
+.profileModalBioWrapper {
+	// обертка для имени пользователя
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: start;
+
+	input {
+		// поле ввода имени пользователя
+		width: 100%;
+		height: 1en;
+		margin: 0 0 0 $responsiveMediumPadding;
+		padding: 0;
+		font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	}
 }
 
 .closeButtonWrapper {
 	// обертка для кнопки закрытия модального окна
-	display: block;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .close {
 	//кнопка закрытия модального окна
-	display: inline-block;
+	display: flex;
 	padding: 0;
 	width: 30px;
+	height: 30px;
 	background: none;
 	border: none;
 	font-size: 51px;
+	line-height: 30px;
 	font-weight: 900;
 }
 
