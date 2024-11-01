@@ -151,6 +151,9 @@ const UserProfile = () => {
 			</div>
 
 			<div className={styles.profileInfo}>
+				<div className={styles.profileTitleWrapper}>
+					<h3 className={styles.profileTitle}>{t('Інформація профілю')}</h3>
+				</div>
 				<div className={styles.profileDetails}>
 					<h2>{pageText}</h2>
 					{profileImage && (

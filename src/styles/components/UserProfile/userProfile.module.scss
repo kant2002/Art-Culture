@@ -159,7 +159,7 @@
 }
 
 .profileInfo {
-	// /* Контейнер для информации о пользователе */
+	/* Контейнер для информации о пользователе */
 	margin: $responsiveMediumPadding 0 $responsiveMediumPadding $responsiveLeftAndRightPadding;
 	width: 100%;
 	height: 100%;
@@ -171,6 +171,27 @@
 	h2 {
 		display: none;
 	}
+}
+
+.profileTitleWrapper {
+	/* Обертка для заголовка профиля */
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
+	align-items: center;
+}
+
+.profileTitle {
+	/* Заголовок профиля */
+	font-size: calc(28px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	font-weight: 700;
+}
+
+.profileDetails {
+	/* Контейнер для деталей профиля */
+	margin: $responsiveMediumPadding 0 0 0;
+	width: 100%;
 }
 
 .profileInformationContainer {
@@ -454,6 +475,16 @@
 	.profileInfo {
 		// /* Контейнер для информации о пользователе */
 		margin: $staticPcMediumPadding 0 $staticPcMediumPadding $responsiveLeftAndRightPadding;
+	}
+	
+	.profileTitle {
+		/* Заголовок профиля */
+		font-size: 28px;
+	}
+	
+	.profileDetails {
+		/* Контейнер для деталей профиля */
+		margin: $staticPcMediumPadding 0 0 0;
 	}
 
 	.profileTextWrapper {
