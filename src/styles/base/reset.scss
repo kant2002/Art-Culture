@@ -93,8 +93,10 @@ video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	box-sizing: border-box; /* для учёта паддингов в размер блоков*/
+	box-sizing: border-box;
+	/* для учёта паддингов в размер блоков*/
 }
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -109,17 +111,21 @@ nav,
 section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
+
 ol,
 ul {
 	list-style: none;
 }
+
 blockquote,
 q {
 	quotes: none;
 }
+
 blockquote:before,
 blockquote:after,
 q:before,
@@ -127,6 +133,7 @@ q:after {
 	content: "";
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -136,7 +143,9 @@ a {
 	text-decoration: none;
 }
 
-.button, a, li,
+.button,
+a,
+li,
 .link {
 	background-color: initial; // Исходный фон
 	border: none; // Убираем границу
