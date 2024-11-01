@@ -218,6 +218,30 @@ const UserProfile = () => {
 											className={styles.editProfileForm}
 											onSubmit={handleUpdateProfile}
 										>
+
+											<div className={styles.modalTitleWrapper}>
+
+												<h3 className={styles.modalTitle}>{t('Редагування профілю')}</h3>
+
+												<div className={styles.closeButtonWrapper}>
+
+
+													<button
+														onClick={() => {
+															toggleEditMode();
+															closeModal();
+														}}
+														className={styles.editButton}
+													>
+
+														<span className={styles.close}>&times;</span>
+
+													</button>
+
+												</div>
+
+											</div>
+
 											<div className={styles.profileModalNameWrapper}>
 
 												<p>
@@ -261,27 +285,10 @@ const UserProfile = () => {
 											</div>
 
 											<button className={styles.submitButton} type="submit">
-												Update Profile
+												{t('Оновити профіль')}
 											</button>
 										</form>
 									)}
-
-									<div className={styles.closeButtonWrapper}>
-
-
-										<button
-											onClick={() => {
-												toggleEditMode();
-												closeModal();
-											}}
-											className={styles.editButton}
-										>
-
-											<span className={styles.close}>&times;</span>
-
-										</button>
-
-									</div>
 								</div>
 							</div>
 						)}
