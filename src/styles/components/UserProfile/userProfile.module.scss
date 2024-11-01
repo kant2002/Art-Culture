@@ -44,7 +44,7 @@
 		margin: 0em;
 		border-width: 1px;
 		border-style: solid;
-		border-color:#ddd;
+		border-color: #ddd;
 		border-image: initial;
 		padding: 2px;
 		white-space: pre-wrap;
@@ -191,7 +191,7 @@
 		display: block;
 		object-fit: cover;
 		object-position: center center;
-		// border-radius: 3px;
+		border-radius: 8px;
 		width: 300px;
 		height: 300px;
 	}
@@ -235,9 +235,6 @@
 	/* Обертка для кнопки редактирования */
 	margin: auto 0 0 0;
 	display: block;
-	// flex-direction: column;
-	// justify-content: space-between;
-	// align-items: start;
 }
 
 .editButton {
@@ -255,11 +252,6 @@
 	cursor: pointer;
 }
 
-
-.profileDetails {
-	/* Контейнер для деталей пользователя */
-}
-
 .profileField {
 	/* Общий контейнер для полей информации */
 	margin: 20px 0;
@@ -273,10 +265,6 @@
 .profileLabel {
 	/* Стиль для меток информации */
 	font-weight: 900;
-}
-
-.profileValue {
-	/* Стиль для значений информации */
 }
 
 .profileEdit {
@@ -352,7 +340,6 @@
 	display: flex;
 	flex-direction: column;
 	align-items: start;
-	// justify-content: space-between;
 	width: 100%;
 	height: 100%;
 }
@@ -398,7 +385,6 @@
 
 .closeButtonWrapper {
 	// обертка для кнопки закрытия модального окна
-	// position: absolute;
 	top: 10px;
 	right: 10px;
 	display: flex;
@@ -421,13 +407,115 @@
 
 @media (min-width: 1441px) {
 	.profile {
-		padding: $staticPcTopPadding $responsiveLeftAndRightPadding 0;
+		/* Основной контейнер профиля */
+		padding: $staticPcTopPadding $responsiveLeftAndRightPadding 0 0;
+
+		input {
+			// поле ввода имени пользователя
+			font-size: 16px;
+		}
+
+		textarea {
+			// поле ввода имени пользователя
+			margin: 0 0 0 $staticPcMediumPadding;
+			font-size: 16px;
+		}
+
+		.submitButton {
+			// кнопка подтверждения изменений
+			margin: $staticPcMediumPadding 0 0 auto;
+			border-radius: 34px;
+			font-size: 16px;
+		}
+	}
+
+	.modalTitle {
+		/* Заголовок модального окна */
+		font-size: 28px;
 	}
 
 	.profileAction {
 		/* Стиль для каждой кнопки действия */
+		margin: $staticPcMediumPadding 0 0 0;
 		font-size: 16px;
 	}
+
+	.profileAction {
+		/* Стиль для каждой кнопки действия */
+		margin: $staticPcMediumPadding 0 0 0;
+		font-size: 16px;
+
+		&:last-child {
+			/* Стиль для последней кнопки действия */
+			margin: $staticPcBigPadding 0 0 0;
+		}
+	}
+
+	.profileInfo {
+		// /* Контейнер для информации о пользователе */
+		margin: $staticPcMediumPadding 0 $staticPcMediumPadding $responsiveLeftAndRightPadding;
+	}
+
+	.profileTextWrapper {
+		/* Обертка для текста профиля */
+
+		p {
+			margin: $staticPcSmallPadding 0 0 0;
+			font-size: 16px;
+
+			&.ErrorMessage {
+				/* Стиль для сообщения об ошибке */
+				margin: $staticPcBigPadding 0 0 0;
+				font-size: 16px;
+			}
+		}
+
+		strong {
+			font-size: 16px;
+		}
+	}
+
+	.editButton {
+		/* Стиль для кнопки редактирования */
+		border-radius: 34px;
+	}
+
+	.profileEdit {
+		/* Стиль для кнопки редактирования */
+		border-radius: 34px;
+		font-size: 16px;
+	}
+
+	.modal {
+		// модальное окно
+
+
+		p {
+			// метка имени пользователя
+			font-size: 16px;
+		}
+	}
+
+	.modalContent {
+		// контент модального окна
+		padding: $staticPcBigPadding;
+	}
+
+	.profileModalNameWrapper {
+		// обертка для имени пользователя
+		margin: $staticPcMediumPadding 0 0 0;
+	}
+
+	.profileModalBioWrapper {
+		// обертка для имени пользователя
+		margin: $staticPcMediumPadding 0 0 0;
+	}
+
+	.profileModalImageDownloadWrapper {
+		// обертка для загрузки аватара
+		margin: $staticPcMediumPadding 0 0 0;
+	}
+
 }
 
 @media (max-width: 799px) {
