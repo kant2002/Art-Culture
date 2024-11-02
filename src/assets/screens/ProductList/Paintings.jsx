@@ -47,11 +47,6 @@ const Paintings = () => {
 		navigate('/userProfileAddPost')
 	}
 
-	const handleLogout = () => {
-		logout()
-		navigate('/login')
-	}
-
 	const handleProductCartCreateClick = () => {
 		navigate('/ProductCardCreate')
 	}
@@ -64,54 +59,58 @@ const Paintings = () => {
 		navigate('/ExhibitionCardCreate')
 	}
 
-	const handleExhibitionListClick = () => {
-		navigate('/Exhibitions')
+	const handleLogout = () => {
+		logout()
+		navigate('/login')
+	}
+
+	const handleImageClick = images => {
+		setSelectedProductImages(images)
+		setIsModalOpen(true)
+	}
+
+	const handleCloseModal = () => {
+		setIsModalOpen(false)
+		setSelectedProductImages([])
 	}
 
 	return (
 		<div className={styles.profile}>
-			<div className={styles.profileActions}>
-				<button
-					className={`${styles.profileAction} ${styles.profileActionActive}`}
-					onClick={handleProfilePageClick}
-				>
-					{t('Профіль')}
-				</button>
-				<button className={styles.profileAction} onClick={handlePostsClick}>
-					{t('Публікації')}
-				</button>
-				<button className={styles.profileAction} onClick={handleAddPostClick}>
-					{t('Додати публікацію')}
-				</button>
-
-				<button
-					className={styles.profileAction}
-					onClick={handleProductCartCreateClick}
-				>
-					{t('Додати картину')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handlePaintingCardListClick}
-				>
-					{t('Переглянути вироби/картини ')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handleExhibitionCardCreateClick}
-				>
-					{t('Додати виставку ')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handleExhibitionListClick}
-				>
-					{t('Переглянути виставки')}
-				</button>
-				<button className={styles.profileAction} onClick={handleLogout}>
-					{t('Вийти')}
-				</button>
-			</div>
+		<div className={styles.profileActions}>
+			<button
+				className={`${styles.profileAction} ${styles.profileActionActive}`}
+				onClick={handleProfilePageClick}
+			>
+				{t('Профіль')}
+			</button>
+			<button className={styles.profileAction} onClick={handlePostsClick}>
+				{t('Публікації')}
+			</button>
+			<button className={styles.profileAction} onClick={handleAddPostClick}>
+				{t('Додати публікацію')}
+			</button>
+			<button
+				className={styles.profileAction}
+				onClick={handleProductCartCreateClick}
+			>
+				{t('Додати картину')}
+			</button>
+			<button
+				className={styles.profileAction}
+				onClick={handlePaintingCardListClick}
+			>
+				{t('Переглянути вироби/картини ')}
+			</button>
+			<button
+				className={styles.profileAction}
+				onClick={handleExhibitionCardCreateClick}
+			>
+				{t('Додати виставку ')}
+			</button>
+			<button className={styles.profileAction} onClick={handleLogout}>
+				{t('Вийти')}
+			</button>
+		</div>
 			<div className={styles.productList}>
 				<h2>{t('Картини')}</h2>
 				{serverMessage && (
