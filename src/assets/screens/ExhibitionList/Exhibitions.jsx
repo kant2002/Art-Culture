@@ -52,17 +52,25 @@ function MuseumExhibitions() {
 		navigate('/userProfileAddPost')
 	}
 
+	const handleLogout = () => {
+		logout()
+		navigate('/login')
+	}
+
 	const handleProductCartCreateClick = () => {
 		navigate('/ProductCardCreate')
+	}
+
+	const handlePaintingCardListClick = () => {
+		navigate('/Paintings')
 	}
 
 	const handleExhibitionCardCreateClick = () => {
 		navigate('/ExhibitionCardCreate')
 	}
 
-	const handleLogout = () => {
-		logout()
-		navigate('/login')
+	const handleExhibitionListClick = () => {
+		navigate('/Exhibitions')
 	}
 
 	return (
@@ -89,9 +97,21 @@ function MuseumExhibitions() {
 				</button>
 				<button
 					className={styles.profileAction}
+					onClick={handlePaintingCardListClick}
+				>
+					{t('Переглянути вироби/картини ')}
+				</button>
+				<button
+					className={styles.profileAction}
 					onClick={handleExhibitionCardCreateClick}
 				>
 					{t('Додати виставку ')}
+				</button>
+				<button
+					className={styles.profileAction}
+					onClick={handleExhibitionListClick}
+				>
+					{t('Переглянути виставки')}
 				</button>
 				<button className={styles.profileAction} onClick={handleLogout}>
 					{t('Вийти')}
