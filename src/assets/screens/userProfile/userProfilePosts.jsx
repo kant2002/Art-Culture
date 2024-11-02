@@ -69,9 +69,15 @@ function UserProfilePosts() {
 	}, [i18n])
 
 	// Handlers for navigation
+
 	const handleProfilePageClick = () => {
 		navigate('/userProfile')
 	}
+
+	const handlePostsClick = () => {
+		navigate('/userProfilePosts')
+	}
+
 	const handleAddPostClick = () => {
 		navigate('/userProfileAddPost')
 	}
@@ -88,8 +94,13 @@ function UserProfilePosts() {
 	const handlePaintingCardListClick = () => {
 		navigate('/Paintings')
 	}
+
 	const handleExhibitionCardCreateClick = () => {
 		navigate('/ExhibitionCardCreate')
+	}
+
+	const handleExhibitionListClick = () => {
+		navigate('/Exhibitions')
 	}
 
 	// Modal Handlers
@@ -177,7 +188,7 @@ function UserProfilePosts() {
 			console.error('Error updating post', error)
 			setMessage(
 				error.response?.data?.error ||
-					'Failed to update post. Please try again.'
+				'Failed to update post. Please try again.'
 			)
 		}
 	}
@@ -200,19 +211,18 @@ function UserProfilePosts() {
 		<div className={styles.profile}>
 			<div className={styles.profileActions}>
 				<button
-					className={styles.profileAction}
+					className={`${styles.profileAction} ${styles.profileActionActive}`}
 					onClick={handleProfilePageClick}
 				>
 					{t('Профіль')}
 				</button>
-				<button
-					className={`${styles.profileAction} ${styles.profileActionActive}`}
-				>
+				<button className={styles.profileAction} onClick={handlePostsClick}>
 					{t('Публікації')}
 				</button>
 				<button className={styles.profileAction} onClick={handleAddPostClick}>
 					{t('Додати публікацію')}
 				</button>
+
 				<button
 					className={styles.profileAction}
 					onClick={handleProductCartCreateClick}
@@ -230,6 +240,12 @@ function UserProfilePosts() {
 					onClick={handleExhibitionCardCreateClick}
 				>
 					{t('Додати виставку ')}
+				</button>
+				<button
+					className={styles.profileAction}
+					onClick={handleExhibitionListClick}
+				>
+					{t('Переглянути виставки')}
 				</button>
 				<button className={styles.profileAction} onClick={handleLogout}>
 					{t('Вийти')}

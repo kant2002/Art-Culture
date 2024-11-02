@@ -88,17 +88,27 @@ const ProductCardCreate = () => {
 		navigate('/userProfileAddPost')
 	}
 
-	const handlePaintingCardListClick = () => {
-		navigate('/Paintings')
-	}
-	const handleExhibitionCardCreateClick = () => {
-		navigate('/ExhibitionCardCreate')
-	}
-
 	const handleLogout = () => {
 		logout()
 		navigate('/login')
 	}
+
+	const handleProductCartCreateClick = () => {
+		navigate('/ProductCardCreate')
+	}
+
+	const handlePaintingCardListClick = () => {
+		navigate('/Paintings')
+	}
+
+	const handleExhibitionCardCreateClick = () => {
+		navigate('/ExhibitionCardCreate')
+	}
+
+	const handleExhibitionListClick = () => {
+		navigate('/Exhibitions')
+	}
+
 	return (
 		<div className={styles.profile}>
 			<div className={styles.profileActions}>
@@ -114,6 +124,13 @@ const ProductCardCreate = () => {
 				<button className={styles.profileAction} onClick={handleAddPostClick}>
 					{t('Додати публікацію')}
 				</button>
+
+				<button
+					className={styles.profileAction}
+					onClick={handleProductCartCreateClick}
+				>
+					{t('Додати картину')}
+				</button>
 				<button
 					className={styles.profileAction}
 					onClick={handlePaintingCardListClick}
@@ -126,10 +143,17 @@ const ProductCardCreate = () => {
 				>
 					{t('Додати виставку ')}
 				</button>
+				<button
+					className={styles.profileAction}
+					onClick={handleExhibitionListClick}
+				>
+					{t('Переглянути виставки')}
+				</button>
 				<button className={styles.profileAction} onClick={handleLogout}>
 					{t('Вийти')}
 				</button>
 			</div>
+
 			<div className={styles.productCreate}>
 				<h2>{t('Додати картину')}</h2>
 				{serverMessage && (
