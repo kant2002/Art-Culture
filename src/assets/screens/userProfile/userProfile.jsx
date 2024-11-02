@@ -141,13 +141,13 @@ const UserProfile = () => {
 					className={styles.profileAction}
 					onClick={handlePaintingCardListClick}
 				>
-					{t('Переглянути вироби/картини ')}
+					{t('Переглянути вироби/картини')}
 				</button>
 				<button
 					className={styles.profileAction}
 					onClick={handleExhibitionCardCreateClick}
 				>
-					{t('Додати виставку ')}
+					{t('Додати виставку')}
 				</button>
 				<button
 					className={styles.profileAction}
