@@ -348,7 +348,7 @@ function UserProfilePosts() {
 								<div className={styles.modalFieldUk}>
 									<div className={styles.modalField}>
 										<label className={styles.modalLabel}>
-											{t('Назва публікації:')}
+											Назва публікації:
 											<input
 												type='text'
 												name='title_uk'
@@ -366,7 +366,7 @@ function UserProfilePosts() {
 									</div>
 									<div className={styles.modalField}>
 										<label className={styles.modalLabel}>
-											{t('Опис публікації:')}
+											Опис публікації:
 											<textarea
 												name='content_uk'
 												value={formData.content_uk}
@@ -383,7 +383,7 @@ function UserProfilePosts() {
 								<div className={styles.modalFieldEn}>
 									<div className={styles.modalField}>
 										<label className={styles.modalLabel}>
-											{t('Title name:')}
+											Title name:
 											<input
 												type='text'
 												name='title_en'
@@ -401,7 +401,7 @@ function UserProfilePosts() {
 									</div>
 									<div className={styles.modalField}>
 										<label className={styles.modalLabel}>
-											{t('Add description:')}
+											Add description:
 											<textarea
 												name='content_en'
 												value={formData.content_en}
