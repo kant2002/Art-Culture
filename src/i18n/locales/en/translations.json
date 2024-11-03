@@ -78,5 +78,9 @@
     "Переглянути вироби/картини": "View products/pictures",
     "Додати виставку": "Add an exhibition",
     "Переглянути виставки": "View exhibitions",
-    "Вийти": "Log out"
+    "Вийти": "Log out",
+    "Завантаження...": "Loading...",
+    "Публікацій немає": "There is no publication",
+    "До публікації": "Go to publication",
+    "Видалити": "Delete"
 }
