@@ -253,10 +253,13 @@ function UserProfilePosts() {
 			</div>
 
 			<div className={styles.userProfilePostsContainer}>
+				<div className={styles.profileTitleWrapper}>
+					<h3 className={styles.profileTitle}>{t('Публікації')}</h3>
+				</div>
 				{loading ? (
-					<p>{t('Завантаження...')}</p>
+					<p className={styles.userPageLoadingMessage}>{t('Завантаження...')}</p>
 				) : error ? (
-					<p className={styles.ErrorMessage}>{error}</p>
+					<p className={styles.userPageErrorMessage}>{error}</p>
 				) : posts.length === 0 ? (
 					<p>{t('Публікацій немає')}</p>
 				) : (
@@ -286,12 +289,14 @@ function UserProfilePosts() {
 									<h3 className={styles.userProfilePostsTitle}>
 										{currentLanguage === 'en' ? post.title_en : post.title_uk}
 									</h3>
-									<p className={styles.userProfilePostsDescription}>
-										{currentLanguage === 'en'
-											? post.content_en.substring(0, 100)
-											: post.content_uk.substring(0, 100)}
-										...
-									</p>
+									<div className={styles.userProfilePostsDescriptionWrapper}>
+										<p className={styles.userProfilePostsDescription}>
+											{currentLanguage === 'en'
+												? post.content_en.substring(0, 100)
+												: post.content_uk.substring(0, 100)}
+											...
+										</p>
+									</div>
 									<div className={styles.userProfilePostsClockAndDateWrapper}>
 										<img
 											className={styles.userProfilePostsClock}
@@ -305,7 +310,7 @@ function UserProfilePosts() {
 											className={styles.userProfilePostsButton}
 											onClick={() => navigate(`/posts/${post.id}`)} // Navigate to post detail page
 										>
-											{t('До публікації')}
+											{t('До публікації')}&#8194;&#187;
 										</button>
 									</div>
 									<div className={styles.userProfileDelEditWrapper}>
