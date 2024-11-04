@@ -7,6 +7,7 @@ import styles from '/src/styles/components/UserProfile/userProfile.module.scss'
 
 const UserProfile = () => {
 	const { user, logout, updateUser } = useAuth() // Access user and logout from context
+	const { user, logout, updateUser } = useAuth() // Access user and logout from context
 	const [pageText, setPageText] = useState('')
 	const [email, setEmail] = useState('')
 	const [regDate, setRegDate] = useState('')
@@ -23,14 +24,19 @@ const UserProfile = () => {
 			setEmail(`${user.email}`)
 			setRegDate(`${new Date(user.createdAt).toLocaleDateString()}`)
 			setPageText(`${user.username}'s User Profile`)
+			setEmail(`${user.email}`)
+			setRegDate(`${new Date(user.createdAt).toLocaleDateString()}`)
+			setPageText(`${user.username}'s User Profile`)
 			setTitle(user.title || '')
 			setBio(user.bio || '')
 			setProfileImage(user.images)
 		} else {
 			setServerMessage('No valid session found. Please login.')
+			setServerMessage('No valid session found. Please login.')
 			navigate('/login') // Redirect to login page
 		}
 		console.log('UserProfile rendering for user:', user)
+	}, [user, navigate])
 	}, [user, navigate])
 
 	const handleProfilePageClick = () => {
@@ -104,10 +110,10 @@ const UserProfile = () => {
 		}
 	}
 
-	const [isOpen, setIsOpen] = useState(false)
+	const [isOpen, setIsOpen] = useState(false);
 
-	const openModal = () => setIsOpen(true)
-	const closeModal = () => setIsOpen(false)
+	const openModal = () => setIsOpen(true);
+	const closeModal = () => setIsOpen(false);
 
 	const handleImageChange = e => {
 		if (e.target.files && e.target.files[0]) {
@@ -188,10 +194,10 @@ const UserProfile = () => {
 							</div>
 
 							<div className={styles.profileTextWrapper}>
+
 								{title && (
 									<p>
-										<strong>{t('П.І.Б.')}:&#8194;</strong>
-										{title}
+										<strong>{t('П.І.Б.')}:&#8194;</strong>{title}
 									</p>
 								)}
 
@@ -201,14 +207,8 @@ const UserProfile = () => {
 									</p>
 								)}
 
-								<p>
-									<strong>E-Mail:&#8194;</strong>
-									{email}
-								</p>
-								<p>
-									<strong>{t('Дата реєстрації')}:&#8194;</strong>
-									{regDate}
-								</p>
+								<p><strong>E-Mail:&#8194;</strong>{email}</p>
+								<p><strong>{t('Дата реєстрації')}:&#8194;</strong>{regDate}</p>
 
 								{serverMessage && (
 									<p className={styles.ErrorMessage}>{serverMessage}</p>
@@ -217,8 +217,8 @@ const UserProfile = () => {
 								<div className={styles.editButtonWrapper}>
 									<button
 										onClick={() => {
-											toggleEditMode()
-											openModal()
+											toggleEditMode();
+											openModal();
 										}}
 										className={styles.editButton}
 									>
@@ -229,34 +229,42 @@ const UserProfile = () => {
 						</div>
 					)}
 
-					<div className='App'>
+					<div className="App">
 						{isOpen && (
 							<div className={styles.modal}>
 								<div className={styles.modalContent}>
+
 									{editMode && (
 										<form
 											className={styles.editProfileForm}
 											onSubmit={handleUpdateProfile}
 										>
+
 											<div className={styles.modalTitleWrapper}>
-												<h3 className={styles.modalTitle}>
-													{t('Редагування профілю')}
-												</h3>
+
+												<h3 className={styles.modalTitle}>{t('Редагування профілю')}</h3>
 
 												<div className={styles.closeButtonWrapper}>
+
+
 													<button
 														onClick={() => {
-															toggleEditMode()
-															closeModal()
+															toggleEditMode();
+															closeModal();
 														}}
 														className={styles.editButton}
 													>
+
 														<span className={styles.close}>&times;</span>
+
 													</button>
+
 												</div>
+
 											</div>
 
 											<div className={styles.profileModalNameWrapper}>
+
 												<p>
 													<strong>{t('П.І.Б.')}:&#8194;</strong>
 												</p>
@@ -268,9 +276,11 @@ const UserProfile = () => {
 													value={title}
 													onChange={e => setTitle(e.target.value)}
 												/>
+
 											</div>
 
 											<div className={styles.profileModalBioWrapper}>
+
 												<p>
 													<strong>{t('Про себе')}:&#8194;</strong>
 												</p>
@@ -281,18 +291,21 @@ const UserProfile = () => {
 													value={bio}
 													onChange={e => setBio(e.target.value)}
 												/>
+
 											</div>
 
 											<div className={styles.profileModalImageDownloadWrapper}>
+
 												<input
 													type='file'
 													name='profileImages'
 													accept='image/*'
 													onChange={handleImageChange}
 												/>
+
 											</div>
 
-											<button className={styles.submitButton} type='submit'>
+											<button className={styles.submitButton} type="submit">
 												{t('Оновити профіль')}
 											</button>
 										</form>
