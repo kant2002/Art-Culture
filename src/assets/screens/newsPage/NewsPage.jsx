@@ -12,7 +12,7 @@ function NewsPage() {
 
 	// State to hold all posts
 	const [posts, setPosts] = useState([])
-
+	const [creator, setCreators] = useState([])
 	// State to handle search input
 	const [searchTerm, setSearchTerm] = useState('')
 

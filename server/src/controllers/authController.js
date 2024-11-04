@@ -18,7 +18,7 @@ export const register = async (req, res, next) => {
 			return res.status(400).json({ errors: errors.array() })
 		}
 
-		const { email, password, images, role } = req.body
+		const { email, password, images, role, title, bio } = req.body
 
 		// Check if user exists
 		const existingUser = await prisma.user.findUnique({ where: { email } })
@@ -31,7 +31,14 @@ export const register = async (req, res, next) => {
 
 		// Create user
 		const user = await prisma.user.create({
-			data: { email, password: hashedPassword, images, role: role || 'USER' },
+			data: {
+				email,
+				password: hashedPassword,
+				images,
+				role: role || 'USER',
+				title,
+				bio,
+			},
 		})
 		console.log('User object after creation:', user)
 		const token = generateToken(user)

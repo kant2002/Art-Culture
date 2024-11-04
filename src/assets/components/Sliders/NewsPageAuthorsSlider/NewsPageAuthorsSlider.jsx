@@ -75,8 +75,8 @@ const NewsPageAuthorsSlider = () => {
 		fetchCreator()
 	}, [])
 
-	const handleSlideClick = creatorId => {
-		navigate(`/creators/${creatorId}`)
+	const handleSlideClick = id => {
+		navigate(`/artist/${id}`)
 	}
 
 	return (

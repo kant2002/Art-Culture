@@ -6,7 +6,7 @@ import API from '../../../utils/api.js'
 import styles from '/src/styles/components/UserProfile/userProfile.module.scss'
 
 const UserProfile = () => {
-	const { user, logout, updateUser, loading, error } = useAuth() // Access user and logout from context
+	const { user, logout, updateUser } = useAuth() // Access user and logout from context
 	const [pageText, setPageText] = useState('')
 	const [email, setEmail] = useState('')
 	const [regDate, setRegDate] = useState('')
@@ -19,26 +19,19 @@ const UserProfile = () => {
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		if (loading) return
-
 		if (user) {
-			console.log('User is logged in:', user)
-			setEmail(user.email || '')
-			setRegDate(
-				user.createdAt ? new Date(user.createdAt).toLocaleDateString() : ''
-			)
-			setPageText(`${user.username || 'User'}'s User Profile`)
+			setEmail(`${user.email}`)
+			setRegDate(`${new Date(user.createdAt).toLocaleDateString()}`)
+			setPageText(`${user.username}'s User Profile`)
 			setTitle(user.title || '')
 			setBio(user.bio || '')
-			setProfileImage(user.images || null)
+			setProfileImage(user.images)
 		} else {
-			if (error) {
-				setServerMessage('No valid session found. Please login.')
-			}
+			setServerMessage('No valid session found. Please login.')
 			navigate('/login') // Redirect to login page
 		}
 		console.log('UserProfile rendering for user:', user)
-	}, [user, loading, error, navigate])
+	}, [user, navigate])
 
 	const handleProfilePageClick = () => {
 		navigate('/userProfile')
@@ -181,10 +174,12 @@ const UserProfile = () => {
 										src={
 											profileImage instanceof File
 												? URL.createObjectURL(profileImage)
-												: profileImage.startsWith('http') ||
-													  profileImage.startsWith('/uploads/profileImages')
-													? `${process.env.REACT_APP_API_URL}${profileImage}`
-													: profileImage
+												: profileImage
+													? profileImage.startsWith('http') ||
+														profileImage.startsWith('/uploads/profileImages')
+														? `${process.env.REACT_APP_API_URL}${profileImage}`
+														: profileImage
+													: '/Img/1.webp' // Default Image Path
 										}
 										alt='Profile'
 										className={styles.profileImage}

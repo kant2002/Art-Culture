@@ -9,22 +9,43 @@ const SignUp = () => {
 		email: '',
 		password: '',
 		role: 'USER',
+		title: '',
+		bio: '',
+		images: null,
 	})
 	const [serverMessage, setServerMessage] = useState('')
 	const { login } = useAuth() // Utilize login from AuthContext
 	const navigate = useNavigate()
 
 	const handleChange = e => {
-		const { name, value } = e.target
-		setSignUpDetails(prev => ({
-			...prev,
-			[name]: value,
-		}))
+		const { name, value, files } = e.target
+		if (name === 'image') {
+			setSignUpDetails(prev => ({
+				...prev,
+				image: files[0] || null,
+				[name]: value,
+			}))
+		} else {
+			setSignUpDetails(prev => ({
+				...prev,
+				[name]: value,
+			}))
+		}
 	}
 
 	const handleSubmit = async e => {
 		e.preventDefault()
 		setServerMessage('')
+
+		const formData = new FormData()
+		formData.append('email', signUpDetails.email)
+		formData.append('password', signUpDetails.password)
+		formData.append('role', signUpDetails.role)
+		formData.append('title', signUpDetails.title)
+		formData.append('bio', signUpDetails.bio)
+		if (signUpDetails.images) {
+			formData.append('image', signUpDetails.images)
+		}
 
 		try {
 			const response = await API.post(
@@ -33,6 +54,9 @@ const SignUp = () => {
 					email: signUpDetails.email,
 					password: signUpDetails.password,
 					role: signUpDetails.role,
+					title: signUpDetails.title, // Include title
+					bio: signUpDetails.bio,
+					images: signUpDetails.images,
 				},
 				console.log('signUpDetails', signUpDetails)
 			)
@@ -74,6 +98,25 @@ const SignUp = () => {
 						value={signUpDetails.password}
 						onChange={handleChange}
 						required
+					/>
+					<input
+						type='text'
+						placeholder='Title'
+						name='title'
+						value={signUpDetails.title}
+						onChange={handleChange}
+					/>
+					<textarea
+						placeholder='Bio'
+						name='bio'
+						value={signUpDetails.bio}
+						onChange={handleChange}
+					/>
+					<input
+						type='file'
+						name='images'
+						accept='images/*'
+						onChange={handleChange}
 					/>
 					<select
 						name='role'

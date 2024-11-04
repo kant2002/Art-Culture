@@ -2,11 +2,15 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../../Context/AuthContext'
 import styles from '/src/styles/components/Blocks/MainNews.module.scss' // Assuming you have a CSS module for styling
 function MainArtists() {
 	const { t } = useTranslation()
 	const [creators, setCreators] = useState([])
 	const navigate = useNavigate()
+	const [regDate, setRegDate] = useState('')
+	const [regTime, setRegTime] = useState('')
+	const { user } = useAuth()
 	const [visibleCreatorsCount, setVisibleCreatorsCount] = useState(
 		getPostsCount(window.innerWidth)
 	)
@@ -69,9 +73,32 @@ function MainArtists() {
 			})
 	}, [])
 
-	const handleArtistPageClick = () => {
-		navigate('/ArtistPage')
+	const handleArtistPageClick = id => {
+		navigate(`/artist/${id}`)
 	}
+
+	useEffect(() => {
+		if (user) {
+			setRegDate(
+				user.createdAt
+					? new Date(user.createdAt).toLocaleDateString('uk-UA', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+						})
+					: ''
+			)
+			setRegTime(
+				user.createdAt
+					? new Date(user.createdAt).toLocaleTimeString('uk-UA', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+						})
+					: ''
+			)
+		}
+	})
 
 	return (
 		<div className={styles.mainPageNewsContainer}>
@@ -99,16 +126,6 @@ function MainArtists() {
 					const featuredMediaUrl = creator.images
 						? `${baseUrl}${creator.images.replace('../../', '/')}`
 						: '/Img/halfNewsCard.jpg'
-					// const postDate = new Date(post.date)
-					// const formattedDate = postDate.toLocaleDateString('uk-UA', {
-					// 	year: 'numeric',
-					// 	month: 'long',
-					// 	day: 'numeric',
-					// })
-					// const formattedTime = postDate.toLocaleTimeString('uk-UA', {
-					// 	hour: 'numeric',
-					// 	minute: 'numeric',
-					// })
 
 					return (
 						<div
@@ -158,10 +175,10 @@ function MainArtists() {
 										/>
 									</div>
 									<div className={styles.cardDateWrapper}>
-										<p className={styles.cardDate}>{/*{formattedDate}*/}</p>
+										<p className={styles.cardDate}></p>
 									</div>
 									<div className={styles.cardTimeWrapper}>
-										<p className={styles.cardTime}>{/*{formattedTime}*/}</p>
+										<p className={styles.cardTime}></p>
 									</div>
 									<div className={styles.cardReadMoreWrapper}>
 										<a
