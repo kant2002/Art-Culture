@@ -133,9 +133,18 @@ const Paintings = () => {
 										onClick={() => handleImageClick(product.images)}
 									/>
 								)}
-								<h3>{title}</h3>
-								<p>{description}</p>
-								<p>{specs}</p>
+								<h3>
+									{t('Назва картини')}
+									<p>{title}</p>
+								</h3>
+								<h4>
+									{t('Про картину')}
+									<p>{description}</p>
+								</h4>
+								<h4>
+									{t('Використані матеріали')}
+									<p>{specs}</p>
+								</h4>
 								{/* Add more fields as needed */}
 							</div>
 						)
