@@ -198,11 +198,26 @@ export const resetPasswordConfirm = async (req, res, next) => {
 // Add the following controller method
 export const getCurrentUser = async (req, res, next) => {
 	try {
-		const user = req.user // Attached by authenticateToken middleware
-		if (!user) return res.status(401).json({ error: 'Unauthorized' })
-		const { password, ...userWithoutPassword } = user
-		res.json({ user: userWithoutPassword })
+		const userId = req.user.id
+		const user = await prisma.user.findUnique({
+			where: { id: userId },
+			select: {
+				id: true,
+				email: true,
+				role: true,
+				title: true,
+				bio: true,
+				images: true,
+				createdAt: true,
+				updatedAt: true,
+			},
+		})
+
+		if (!user) return res.status(404).json({ error: 'User not found' })
+
+		res.json({ user })
 	} catch (error) {
+		console.error('Error fetching current user:', error)
 		next(error)
 	}
 }
