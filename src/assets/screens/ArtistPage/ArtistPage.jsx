@@ -132,7 +132,11 @@ function ArtistPage() {
 
 			<PopularOfThisArtistSlider products={products} baseUrl={baseUrl} />
 
-			<ArtistPageMasonryGallery products={products} baseUrl={baseUrl} />
+			<ArtistPageMasonryGallery
+				products={products}
+				baseUrl={baseUrl}
+				creator={creator}
+			/>
 
 			<div className={`${styles.artistPageFollowContainer}`}>
 				<p className={`${styles.artistPageFollowTitle}`}>

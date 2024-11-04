@@ -1,21 +1,26 @@
 // import PropTypes from 'prop-types'
-// import React, { useEffect, useRef, useState } from 'react'
+// import React, { useCallback, useEffect, useRef, useState } from 'react'
 // import { useTranslation } from 'react-i18next'
 // import style from '../../../../styles/components/Sliders/ArtistPageSliders/ArtistPageMasonryGallery.module.scss'
 
 // const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
-// 	const { t } = useTranslation()
+// 	const { t, i18n } = useTranslation()
+// 	const currentLanguage = i18n.language
 // 	const containerRef = useRef(null)
+// 	const sliderRef = useRef(null)
 // 	const [isPaused, setIsPaused] = useState(false)
 // 	const [sliderWidth, setSliderWidth] = useState(0)
 // 	const [position, setPosition] = useState(0)
-// 	const sliderRef = useRef(null)
 // 	const speed = 0.5 // Adjust this value to change the speed
 // 	const [isModalOpen, setIsModalOpen] = useState(false)
 // 	const [selectedProductImages, setSelectedProductImages] = useState([])
+// 	const [selectedProduct, setSelectedProduct] = useState(null)
 
 // 	// Zoom-related state variables
 // 	const [zoomStates, setZoomStates] = useState([])
+
+// 	// Carousel state
+// 	const [currentSlide, setCurrentSlide] = useState(0)
 
 // 	// Define the number of rows and custom scaling factor
 // 	const numberOfRows = 3 // Change this to the desired number of rows
@@ -155,6 +160,18 @@
 // 		}
 // 	}, [isPaused, sliderWidth, speed])
 
+// 	// Compute if any image is zoomed
+// 	const isAnyImageZoomed = zoomStates.some(state => state.isZoomed)
+
+// 	// Prevent body scrolling when any image is zoomed
+// 	useEffect(() => {
+// 		if (isAnyImageZoomed) {
+// 			document.body.style.overflow = 'hidden'
+// 		} else {
+// 			document.body.style.overflow = 'auto'
+// 		}
+// 	}, [isAnyImageZoomed])
+
 // 	// Handle mouse events to pause and resume animation
 // 	const handleMouseEnter = () => {
 // 		setIsPaused(true)
@@ -164,9 +181,10 @@
 // 		setIsPaused(false)
 // 	}
 
-// 	const handleImageClick = productImages => {
+// 	const handleImageClick = (productImages, product) => {
 // 		if (productImages && productImages.length > 0) {
 // 			setSelectedProductImages(productImages)
+// 			setSelectedProduct(product)
 // 			setZoomStates(
 // 				productImages.map(() => ({
 // 					zoomLevel: 1,
@@ -175,9 +193,11 @@
 // 					showLens: false,
 // 				}))
 // 			)
+// 			setCurrentSlide(0) // Reset carousel to first slide
 // 		} else {
 // 			// If no sub-images, you can choose to display a message or fallback
 // 			setSelectedProductImages([])
+// 			setSelectedProduct(null)
 // 			setZoomStates([])
 // 		}
 // 		setIsModalOpen(true)
@@ -186,32 +206,135 @@
 // 	const handleCloseModal = () => {
 // 		setIsModalOpen(false)
 // 		setSelectedProductImages([])
+// 		setSelectedProduct
 // 		setZoomStates([])
+// 		setCurrentSlide(0) // Reset carousel
 // 	}
 
-// 	const handleWheelImage = (e, index) => {
-// 		e.preventDefault()
-// 		e.stopPropagation()
-// 		if (e.nativeEvent) {
-// 			e.nativeEvent.preventDefault()
-// 		}
-// 		const zoomState = zoomStates[index]
-// 		if (zoomState.isZoomed) {
-// 			let newZoomLevel = zoomState.zoomLevel - e.deltaY * 0.01
-// 			if (newZoomLevel < 1) newZoomLevel = 1
-// 			if (newZoomLevel > 5) newZoomLevel = 5 // Maximum zoom level
+// 	// Handle zoom in
+// 	const handleZoomIn = index => {
+// 		setZoomStates(prevZoomStates => {
+// 			const newZoomStates = [...prevZoomStates]
+// 			const currentZoom = newZoomStates[index].zoomLevel
+// 			if (currentZoom < 5) {
+// 				newZoomStates[index].zoomLevel = parseFloat(
+// 					(currentZoom + 0.5).toFixed(1)
+// 				)
+// 				newZoomStates[index].isZoomed = true
+// 			}
+// 			return newZoomStates
+// 		})
+// 	}
 
-// 			console.log(`Zoom level changed for image ${index}:`, newZoomLevel)
+// 	// Handle zoom out
+// 	const handleZoomOut = index => {
+// 		setZoomStates(prevZoomStates => {
+// 			const newZoomStates = [...prevZoomStates]
+// 			const currentZoom = newZoomStates[index].zoomLevel
+// 			if (currentZoom > 1) {
+// 				newZoomStates[index].zoomLevel = parseFloat(
+// 					(currentZoom - 0.5).toFixed(1)
+// 				)
+// 				if (newZoomStates[index].zoomLevel === 1) {
+// 					newZoomStates[index].isZoomed = false
+// 				}
+// 			}
+// 			return newZoomStates
+// 		})
+// 	}
 
+// 	// Handle mouse move events to update cursor position for zoom
+// 	const handleMouseMoveImage = useCallback(
+// 		(e, index) => {
+// 			const rect = e.currentTarget.getBoundingClientRect()
+// 			const x = e.clientX - rect.left
+// 			const y = e.clientY - rect.top
+
+// 			// Update cursor position
+// 			setZoomStates(prevZoomStates => {
+// 				const newZoomStates = [...prevZoomStates]
+// 				newZoomStates[index] = {
+// 					...newZoomStates[index],
+// 					cursorPos: { x, y },
+// 				}
+// 				return newZoomStates
+// 			})
+// 		},
+// 		[setZoomStates]
+// 	)
+
+// 	// Handle mouse enter to show zoom lens
+// 	const handleMouseEnterImage = useCallback(
+// 		index => {
 // 			setZoomStates(prevZoomStates => {
 // 				const newZoomStates = [...prevZoomStates]
 // 				newZoomStates[index] = {
 // 					...prevZoomStates[index],
-// 					zoomLevel: newZoomLevel,
+// 					showLens: true,
 // 				}
 // 				return newZoomStates
 // 			})
-// 		}
+// 		},
+// 		[setZoomStates]
+// 	)
+
+// 	// Handle mouse leave to hide zoom lens
+// 	const handleMouseLeaveImage = useCallback(
+// 		index => {
+// 			setZoomStates(prevZoomStates => {
+// 				const newZoomStates = [...prevZoomStates]
+// 				newZoomStates[index] = {
+// 					...prevZoomStates[index],
+// 					showLens: false,
+// 					cursorPos: { x: 0, y: 0 },
+// 				}
+// 				return newZoomStates
+// 			})
+// 		},
+// 		[setZoomStates]
+// 	)
+
+// 	// Handle click to toggle zoom
+// 	const handleImageClickToggleZoom = useCallback(
+// 		index => {
+// 			setZoomStates(prevZoomStates => {
+// 				const newZoomStates = [...prevZoomStates]
+// 				const zoomState = newZoomStates[index]
+// 				const isZoomed = !zoomState.isZoomed
+// 				const zoomLevel = isZoomed ? 2 : 1
+
+// 				newZoomStates[index] = {
+// 					...zoomState,
+// 					isZoomed,
+// 					zoomLevel,
+// 				}
+// 				return newZoomStates
+// 			})
+// 		},
+// 		[setZoomStates]
+// 	)
+
+// 	// Auto-slide functionality for carousel
+// 	// useEffect(() => {
+// 	// 	if (isModalOpen) {
+// 	// 		const slideInterval = setInterval(() => {
+// 	// 			setCurrentSlide(prev => (prev + 1) % selectedProductImages.length)
+// 	// 		}, 3000) // Slide every 3 seconds
+
+// 	// 		return () => clearInterval(slideInterval)
+// 	// 	}
+// 	// }, [isModalOpen, selectedProductImages.length])
+
+// 	// Handle manual navigation
+// 	const handlePrevSlide = () => {
+// 		setCurrentSlide(
+// 			prev =>
+// 				(prev - 1 + selectedProductImages.length) % selectedProductImages.length
+// 		)
+// 	}
+
+// 	const handleNextSlide = () => {
+// 		setCurrentSlide(prev => (prev + 1) % selectedProductImages.length)
 // 	}
 
 // 	return (
@@ -254,11 +377,17 @@
 // 										flex: '0 0 auto',
 // 										cursor: 'pointer',
 // 									}}
-// 									onClick={() => handleImageClick(img.productImages)}
+// 									onClick={() =>
+// 										handleImageClick(
+// 											img.productImages,
+// 											products.find(p => p.id === img.productId)
+// 										)
+// 									}
 // 								>
 // 									<img
 // 										src={img.src}
 // 										alt=''
+// 										loading='lazy'
 // 										style={{
 // 											width: '100%',
 // 											height: '100%',
@@ -282,6 +411,7 @@
 // 						className={`${style.buttonArrow}`}
 // 						src={'/Img/buttonArrow.svg'}
 // 						alt={t('Фото митця')}
+// 						loading='lazy'
 // 						onError={e => {
 // 							e.target.onerror = null
 // 							e.target.src = '/Img/newsCardERROR.jpg'
@@ -289,18 +419,94 @@
 // 					/>
 // 				</button>
 // 			</div>
-// 			{isModalOpen && (
-// 				<div className={style.modalOverlay} onClick={handleCloseModal}>
+// 			{isModalOpen && selectedProduct && (
+// 				<div
+// 					className={style.modalOverlay}
+// 					onClick={handleCloseModal}
+// 					style={{
+// 						overflow: isAnyImageZoomed ? 'hidden' : 'auto',
+// 					}}
+// 					role='dialog'
+// 					aria-modal='true'
+// 					aria-labelledby='productInfoContainer '
+// 				>
 // 					<div
 // 						className={style.modalContent}
 // 						onClick={e => e.stopPropagation()}
+// 						aria-labelledby='productInfoContainer '
 // 					>
-// 						<button className={style.closeButton} onClick={handleCloseModal}>
+// 						<div
+// 							id='productInfoContainer '
+// 							className={style.productInfoContainer}
+// 						>
+// 							<div className={style.productHeaderWrapper}>
+// 								<h2 className={style.productModalTitle}>
+// 									{t(' Назва Картини:')}
+// 									<p>
+// 										{selectedProduct.title_en ||
+// 											selectedProduct.title_uk ||
+// 											selectedProduct.title}
+// 									</p>
+// 								</h2>
+// 								<p className={style.productModalAuthorName}>
+// 									{t('Імя автора:')}
+// 								</p>
+// 							</div>
+
+// 							<div className={style.productModalMainInfoAbout}>
+// 								<h3 className={style.productModelAboutTitle}>
+// 									{t('Докладніше')}
+// 								</h3>
+// 								<h4 className={style.productModelDescr}>
+// 									{t('Про Картину:')}
+// 									<p>
+// 										{selectedProduct.description_en ||
+// 											selectedProduct.description_uk ||
+// 											selectedProduct.description}
+// 									</p>
+// 								</h4>
+// 								<h4 className={style.productModelSpecs}>
+// 									{t('Використані матеріали:')}
+// 									<p>
+// 										{selectedProduct.specs_en ||
+// 											selectedProduct.specs_uk ||
+// 											selectedProduct.specs}
+// 									</p>
+// 								</h4>
+// 							</div>
+// 						</div>
+// 						<button
+// 							className={style.closeButton}
+// 							onClick={handleCloseModal}
+// 							aria-label={t('Закрити модальне вікно')}
+// 						>
 // 							&times;
 // 						</button>
+// 						{/* Carousel Navigation Buttons */}
+// 						{selectedProductImages.length > 1 && (
+// 							<div className={style.carouselNav}>
+// 								<button
+// 									className={style.carouselButton}
+// 									onClick={handlePrevSlide}
+// 									aria-label={t('Попереднє зображення')}
+// 								>
+// 									&#10094; {/* Left Arrow */}
+// 								</button>
+// 								<button
+// 									className={style.carouselButton}
+// 									onClick={handleNextSlide}
+// 									aria-label={t('Наступне зображення')}
+// 								>
+// 									&#10095; {/* Right Arrow */}
+// 								</button>
+// 							</div>
+// 						)}
 // 						<div className={style.modalImages}>
 // 							{selectedProductImages && selectedProductImages.length > 0 ? (
 // 								selectedProductImages.map((image, index) => {
+// 									// Only render the current slide
+// 									if (index !== currentSlide) return null
+
 // 									const zoomState = zoomStates[index] || {
 // 										zoomLevel: 1,
 // 										isZoomed: false,
@@ -308,86 +514,23 @@
 // 										showLens: false,
 // 									}
 
-// 									// Handlers for zoom functionality per image
-// 									const handleMouseEnterImage = () => {
-// 										console.log(`Mouse entered image ${index}`)
-// 										setZoomStates(prevZoomStates => {
-// 											const newZoomStates = [...prevZoomStates]
-// 											newZoomStates[index] = {
-// 												...prevZoomStates[index],
-// 												showLens: true,
-// 											}
-// 											return newZoomStates
-// 										})
-// 									}
-
-// 									const handleMouseLeaveImage = () => {
-// 										console.log(`Mouse left image ${index}`)
-// 										setZoomStates(prevZoomStates => {
-// 											const newZoomStates = [...prevZoomStates]
-// 											newZoomStates[index] = {
-// 												...prevZoomStates[index],
-// 												showLens: false,
-// 												cursorPos: { x: 0, y: 0 },
-// 											}
-// 											return newZoomStates
-// 										})
-// 									}
-
-// 									const handleMouseMoveImage = e => {
-// 										const rect = e.currentTarget.getBoundingClientRect()
-// 										const x = e.clientX - rect.left
-// 										const y = e.clientY - rect.top
-
-// 										console.log(`Mouse moved over image ${index}:`, {
-// 											x,
-// 											y,
-// 										})
-
-// 										setZoomStates(prevZoomStates => {
-// 											const newZoomStates = [...prevZoomStates]
-// 											newZoomStates[index] = {
-// 												...prevZoomStates[index],
-// 												cursorPos: { x, y },
-// 											}
-// 											return newZoomStates
-// 										})
-// 									}
-
-// 									const handleImageClick = () => {
-// 										console.log(`Image ${index} clicked`)
-// 										setZoomStates(prevZoomStates => {
-// 											const zoomState = prevZoomStates[index]
-// 											const isZoomed = !zoomState.isZoomed
-// 											const zoomLevel = isZoomed ? 2 : 1
-
-// 											const newZoomStates = [...prevZoomStates]
-// 											newZoomStates[index] = {
-// 												...zoomState,
-// 												isZoomed,
-// 												zoomLevel,
-// 											}
-// 											return newZoomStates
-// 										})
-// 									}
-
 // 									return (
 // 										<div
 // 											key={index}
 // 											className={style.modalImageWrapper}
+// 											onMouseEnter={() => handleMouseEnterImage(index)}
+// 											onMouseLeave={() => handleMouseLeaveImage(index)}
+// 											onMouseMove={e => handleMouseMoveImage(e, index)}
+// 											onClick={() => handleImageClickToggleZoom(index)}
 // 											style={{
 // 												position: 'relative',
 // 												overflow: 'hidden',
 // 												cursor: zoomState.isZoomed ? 'zoom-out' : 'zoom-in',
 // 												width:
-// 													'calc(700px - (166 * ((1440px - 100vw) / (1440 - 375))))',
+// 													'calc(700px - (166 * ((1440px - 100vw) / (1440 - 375))))', // Ensure the wrapper takes full width
 // 												height: 'auto',
+// 												margin: '0 auto', // Center the image
 // 											}}
-// 											onMouseEnter={handleMouseEnterImage}
-// 											onMouseLeave={handleMouseLeaveImage}
-// 											onMouseMove={handleMouseMoveImage}
-// 											onClick={handleImageClick}
-// 											onWheelCapture={e => handleWheelImage(e, index)}
 // 										>
 // 											<div
 // 												className={style.zoomContainer}
@@ -401,6 +544,7 @@
 // 												<img
 // 													src={`${baseUrl}${image.imageUrl.replace('../../', '/')}`}
 // 													alt={`Product Image ${index + 1}`}
+// 													loading='lazy'
 // 													className={style.modalImage}
 // 													style={{
 // 														width: '100%',
@@ -432,6 +576,43 @@
 // 													}}
 // 												></div>
 // 											)}
+// 											{/* Zoom Controls */}
+// 											{zoomState.isZoomed && (
+// 												<div className={style.zoomControls}>
+// 													<button
+// 														className={style.zoomButton}
+// 														onClick={e => {
+// 															e.stopPropagation()
+// 															handleZoomOut(index)
+// 														}}
+// 														aria-label={t('Zoom Out')}
+// 													>
+// 														-
+// 													</button>
+// 													<div className={style.zoomIndicator}>
+// 														<span>{`Zoom: ${zoomState.zoomLevel}x`}</span>
+// 														<div className={style.zoomBar}>
+// 															<div
+// 																className={style.zoomProgress}
+// 																style={{
+// 																	width: `${((zoomState.zoomLevel - 1) / 4) * 100}%`,
+// 																}}
+// 															></div>
+// 														</div>
+// 													</div>
+
+// 													<button
+// 														className={style.zoomButton}
+// 														onClick={e => {
+// 															e.stopPropagation()
+// 															handleZoomIn(index)
+// 														}}
+// 														aria-label={t('Zoom In')}
+// 													>
+// 														+
+// 													</button>
+// 												</div>
+// 											)}
 // 										</div>
 // 									)
 // 								})
@@ -456,6 +637,16 @@
 // 					imageUrl: PropTypes.string.isRequired,
 // 				})
 // 			),
+// 			title: PropTypes.string.isRequired, // Ensure title fields are present
+// 			title_en: PropTypes.string,
+// 			title_uk: PropTypes.string,
+// 			description: PropTypes.string.isRequired,
+// 			description_en: PropTypes.string,
+// 			description_uk: PropTypes.string,
+// 			specs: PropTypes.string.isRequired,
+// 			specs_en: PropTypes.string,
+// 			specs_uk: PropTypes.string,
+// 			author: PropTypes.string, // Assuming you have an author field
 // 		})
 // 	).isRequired,
 // 	baseUrl: PropTypes.string.isRequired,
@@ -468,8 +659,9 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import style from '../../../../styles/components/Sliders/ArtistPageSliders/ArtistPageMasonryGallery.module.scss'
 
-const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
-	const { t } = useTranslation()
+const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
+	const { t, i18n } = useTranslation()
+	const currentLanguage = i18n.language
 	const containerRef = useRef(null)
 	const sliderRef = useRef(null)
 	const [isPaused, setIsPaused] = useState(false)
@@ -478,9 +670,14 @@ const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
 	const speed = 0.5 // Adjust this value to change the speed
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [selectedProductImages, setSelectedProductImages] = useState([])
+	const [selectedProduct, setSelectedProduct] = useState(null)
+	const [selectedCreator, setSelectedCreator] = useState(null) // Initialize with null
 
 	// Zoom-related state variables
 	const [zoomStates, setZoomStates] = useState([])
+
+	// Carousel state
+	const [currentSlide, setCurrentSlide] = useState(0)
 
 	// Define the number of rows and custom scaling factor
 	const numberOfRows = 3 // Change this to the desired number of rows
@@ -641,9 +838,13 @@ const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
 		setIsPaused(false)
 	}
 
-	const handleImageClick = productImages => {
+	// Updated handleImageClick to accept product
+	const handleImageClick = (productImages, product) => {
 		if (productImages && productImages.length > 0) {
 			setSelectedProductImages(productImages)
+			setSelectedProduct(product) // Set the selected product
+			setSelectedCreator(creator) // Set the selected creator
+			console.log('Selected Creator:', creator) // Debugging line
 			setZoomStates(
 				productImages.map(() => ({
 					zoomLevel: 1,
@@ -652,18 +853,25 @@ const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
 					showLens: false,
 				}))
 			)
+			setCurrentSlide(0) // Reset carousel to first slide
 		} else {
-			// If no sub-images, you can choose to display a message or fallback
+			// If no sub-images, display fallback
 			setSelectedProductImages([])
+			setSelectedProduct(null)
+			setSelectedCreator(null)
 			setZoomStates([])
 		}
 		setIsModalOpen(true)
 	}
 
+	// Corrected handleCloseModal
 	const handleCloseModal = () => {
 		setIsModalOpen(false)
 		setSelectedProductImages([])
+		setSelectedProduct(null) // Reset to null
+		setSelectedCreator(null) // Reset to null
 		setZoomStates([])
+		setCurrentSlide(0) // Reset carousel
 	}
 
 	// Handle zoom in
@@ -672,7 +880,9 @@ const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
 			const newZoomStates = [...prevZoomStates]
 			const currentZoom = newZoomStates[index].zoomLevel
 			if (currentZoom < 5) {
-				newZoomStates[index].zoomLevel = currentZoom + 0.5
+				newZoomStates[index].zoomLevel = parseFloat(
+					(currentZoom + 0.5).toFixed(1)
+				)
 				newZoomStates[index].isZoomed = true
 			}
 			return newZoomStates
@@ -685,7 +895,9 @@ const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
 			const newZoomStates = [...prevZoomStates]
 			const currentZoom = newZoomStates[index].zoomLevel
 			if (currentZoom > 1) {
-				newZoomStates[index].zoomLevel = currentZoom - 0.5
+				newZoomStates[index].zoomLevel = parseFloat(
+					(currentZoom - 0.5).toFixed(1)
+				)
 				if (newZoomStates[index].zoomLevel === 1) {
 					newZoomStates[index].isZoomed = false
 				}
@@ -694,9 +906,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
 		})
 	}
 
-	// Handle wheel events on the modal overlay to prevent scroll when zoomed
-
-	// Throttle mouse move events to improve performance
+	// Handle mouse move events to update cursor position for zoom
 	const handleMouseMoveImage = useCallback(
 		(e, index) => {
 			const rect = e.currentTarget.getBoundingClientRect()
@@ -707,7 +917,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
 			setZoomStates(prevZoomStates => {
 				const newZoomStates = [...prevZoomStates]
 				newZoomStates[index] = {
-					...prevZoomStates[index],
+					...newZoomStates[index],
 					cursorPos: { x, y },
 				}
 				return newZoomStates
@@ -716,12 +926,13 @@ const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
 		[setZoomStates]
 	)
 
+	// Handle mouse enter to show zoom lens
 	const handleMouseEnterImage = useCallback(
 		index => {
 			setZoomStates(prevZoomStates => {
 				const newZoomStates = [...prevZoomStates]
 				newZoomStates[index] = {
-					...prevZoomStates[index],
+					...newZoomStates[index],
 					showLens: true,
 				}
 				return newZoomStates
@@ -736,7 +947,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
 			setZoomStates(prevZoomStates => {
 				const newZoomStates = [...prevZoomStates]
 				newZoomStates[index] = {
-					...prevZoomStates[index],
+					...newZoomStates[index],
 					showLens: false,
 					cursorPos: { x: 0, y: 0 },
 				}
@@ -765,6 +976,29 @@ const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
 		},
 		[setZoomStates]
 	)
+
+	// Auto-slide functionality for carousel
+	// useEffect(() => {
+	// 	if (isModalOpen && selectedProductImages.length > 1) {
+	// 		const slideInterval = setInterval(() => {
+	// 			setCurrentSlide(prev => (prev + 1) % selectedProductImages.length)
+	// 		}, 3000) // Slide every 3 seconds
+
+	// 		return () => clearInterval(slideInterval)
+	// 	}
+	// }, [isModalOpen, selectedProductImages.length])
+
+	// Handle manual navigation
+	const handlePrevSlide = () => {
+		setCurrentSlide(
+			prev =>
+				(prev - 1 + selectedProductImages.length) % selectedProductImages.length
+		)
+	}
+
+	const handleNextSlide = () => {
+		setCurrentSlide(prev => (prev + 1) % selectedProductImages.length)
+	}
 
 	return (
 		<div className={style.galleryContainer} style={{ overflow: 'hidden' }}>
@@ -806,7 +1040,12 @@ const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
 										flex: '0 0 auto',
 										cursor: 'pointer',
 									}}
-									onClick={() => handleImageClick(img.productImages)}
+									onClick={() =>
+										handleImageClick(
+											img.productImages,
+											products.find(p => p.id === img.productId)
+										)
+									}
 								>
 									<img
 										src={img.src}
@@ -843,24 +1082,110 @@ const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
 					/>
 				</button>
 			</div>
-			{isModalOpen && (
+			{isModalOpen && selectedProduct && selectedCreator && (
 				<div
 					className={style.modalOverlay}
 					onClick={handleCloseModal}
 					style={{
 						overflow: isAnyImageZoomed ? 'hidden' : 'auto',
 					}}
+					role='dialog'
+					aria-modal='true'
+					aria-labelledby='productInfoContainer'
 				>
 					<div
 						className={style.modalContent}
 						onClick={e => e.stopPropagation()}
+						aria-labelledby='productInfoContainer'
 					>
-						<button className={style.closeButton} onClick={handleCloseModal}>
+						{/* Product Information */}
+						<div
+							id='productInfoContainer'
+							className={style.productInfoContainer}
+							tabIndex='-1' // Make it focusable
+						>
+							<div className={style.productHeaderWrapper}>
+								<h2 className={style.productModalTitle}>
+									{t('Назва Картини:')}
+									<p>
+										{selectedProduct.title_en ||
+											selectedProduct.title_uk ||
+											selectedProduct.title ||
+											'—'}
+									</p>
+								</h2>
+								<h3 className={style.productModalAuthorName}>
+									{t('Імя автора:')}
+									<p>
+										{selectedCreator.title_en ||
+											selectedCreator.title_uk ||
+											selectedCreator.title ||
+											'—'}
+									</p>
+								</h3>
+							</div>
+
+							<div className={style.productModalMainInfoAbout}>
+								<h3 className={style.productModelAboutTitle}>
+									{t('Докладніше')}
+								</h3>
+								<h4 className={style.productModelDescr}>
+									{t('Про Картину:')}
+									<p>
+										{selectedProduct.description_en ||
+											selectedProduct.description_uk ||
+											selectedProduct.description ||
+											'—'}
+									</p>
+								</h4>
+								<h4 className={style.productModelSpecs}>
+									{t('Використані матеріали:')}
+									<p>
+										{selectedProduct.specs_en ||
+											selectedProduct.specs_uk ||
+											selectedProduct.specs ||
+											'—'}
+									</p>
+								</h4>
+							</div>
+						</div>
+
+						{/* Close Button */}
+						<button
+							className={style.closeButton}
+							onClick={handleCloseModal}
+							aria-label={t('Закрити модальне вікно')}
+						>
 							&times;
 						</button>
+
+						{/* Carousel Navigation Buttons */}
+						{selectedProductImages.length > 1 && (
+							<div className={style.carouselNav}>
+								<button
+									className={style.carouselButton}
+									onClick={handlePrevSlide}
+									aria-label={t('Попереднє зображення')}
+								>
+									&#10094; {/* Left Arrow */}
+								</button>
+								<button
+									className={style.carouselButton}
+									onClick={handleNextSlide}
+									aria-label={t('Наступне зображення')}
+								>
+									&#10095; {/* Right Arrow */}
+								</button>
+							</div>
+						)}
+
+						{/* Carousel Images */}
 						<div className={style.modalImages}>
 							{selectedProductImages && selectedProductImages.length > 0 ? (
 								selectedProductImages.map((image, index) => {
+									// Only render the current slide
+									if (index !== currentSlide) return null
+
 									const zoomState = zoomStates[index] || {
 										zoomLevel: 1,
 										isZoomed: false,
@@ -868,52 +1193,22 @@ const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
 										showLens: false,
 									}
 
-									// Handlers for zoom functionality per image
-									const handleMouseEnterImage = () => {
-										setZoomStates(prevZoomStates => {
-											const newZoomStates = [...prevZoomStates]
-											newZoomStates[index] = {
-												...prevZoomStates[index],
-												showLens: true,
-											}
-											return newZoomStates
-										})
-									}
-
-									const handleMouseLeaveImage = () => {
-										setZoomStates(prevZoomStates => {
-											const newZoomStates = [...prevZoomStates]
-											newZoomStates[index] = {
-												...prevZoomStates[index],
-												showLens: false,
-												cursorPos: { x: 0, y: 0 },
-											}
-											return newZoomStates
-										})
-									}
-
 									return (
 										<div
 											key={index}
 											className={style.modalImageWrapper}
-											onMouseEnter={handleMouseEnterImage}
-											onMouseLeave={handleMouseLeaveImage}
+											onMouseEnter={() => handleMouseEnterImage(index)}
+											onMouseLeave={() => handleMouseLeaveImage(index)}
 											onMouseMove={e => handleMouseMoveImage(e, index)}
 											onClick={() => handleImageClickToggleZoom(index)}
-											onWheelCapture={e => {
-												// No wheel zoom, but still prevent scrolling if zoomed
-												if (zoomState.isZoomed) {
-													e.preventDefault()
-													e.stopPropagation()
-												}
-											}}
 											style={{
 												position: 'relative',
 												overflow: 'hidden',
 												cursor: zoomState.isZoomed ? 'zoom-out' : 'zoom-in',
 												width:
-													' calc(700px - (166 * ((1440px - 100vw) / (1440 - 375))))', // Ensure the wrapper takes full width
+													'calc(700px - (166 * ((1440px - 100vw) / (1440 - 375))))', // Adjust as needed
 												height: 'auto',
+												margin: '0 auto', // Center the image
 											}}
 										>
 											<div
@@ -931,8 +1226,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
 													loading='lazy'
 													className={style.modalImage}
 													style={{
-														width:
-															' calc(700px - (166 * ((1440px - 100vw) / (1440 - 375))))',
+														width: '100%',
 														height: 'auto',
 													}}
 													onError={e => {
@@ -968,11 +1262,11 @@ const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
 														className={style.zoomButton}
 														onClick={e => {
 															e.stopPropagation()
-															handleZoomIn(index)
+															handleZoomOut(index)
 														}}
-														aria-label={t('Zoom In')}
+														aria-label={t('Zoom Out')}
 													>
-														+
+														-
 													</button>
 													<div className={style.zoomIndicator}>
 														<span>{`Zoom: ${zoomState.zoomLevel}x`}</span>
@@ -985,17 +1279,17 @@ const ArtistPageMasonryGallery = ({ products, baseUrl }) => {
 															></div>
 														</div>
 													</div>
+
 													<button
 														className={style.zoomButton}
 														onClick={e => {
 															e.stopPropagation()
-															handleZoomOut(index)
+															handleZoomIn(index)
 														}}
-														aria-label={t('Zoom Out')}
+														aria-label={t('Zoom In')}
 													>
-														-
+														+
 													</button>
-													{/* Zoom Level Indicator */}
 												</div>
 											)}
 										</div>
@@ -1022,9 +1316,30 @@ ArtistPageMasonryGallery.propTypes = {
 					imageUrl: PropTypes.string.isRequired,
 				})
 			),
+			title: PropTypes.string.isRequired,
+			title_en: PropTypes.string,
+			title_uk: PropTypes.string,
+			description: PropTypes.string.isRequired,
+			description_en: PropTypes.string,
+			description_uk: PropTypes.string,
+			specs: PropTypes.string.isRequired,
+			specs_en: PropTypes.string,
+			specs_uk: PropTypes.string,
+			author: PropTypes.shape({
+				title: PropTypes.string,
+				title_en: PropTypes.string,
+				title_uk: PropTypes.string,
+				// ... other fields
+			}),
 		})
 	).isRequired,
 	baseUrl: PropTypes.string.isRequired,
+	creator: PropTypes.shape({
+		title: PropTypes.string,
+		title_en: PropTypes.string,
+		title_uk: PropTypes.string,
+		// ... other fields
+	}), // Ensure creator has the necessary fields
 }
 
 export default ArtistPageMasonryGallery
