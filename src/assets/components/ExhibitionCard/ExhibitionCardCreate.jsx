@@ -151,6 +151,10 @@ function ExhibitionForm() {
 		navigate('/Paintings')
 	}
 
+	const handleExhibitionCardCreateClick = () => {
+		navigate('/ExhibitionCardCreate')
+	}
+
 	const handleExhibitionListClick = () => {
 		navigate('/Exhibitions')
 	}
@@ -183,14 +187,18 @@ function ExhibitionForm() {
 				>
 					{t('Переглянути вироби/картини ')}
 				</button>
-
+				<button
+					className={styles.profileAction}
+					onClick={handleExhibitionCardCreateClick}
+				>
+					{t('Додати виставку ')}
+				</button>
 				<button
 					className={styles.profileAction}
 					onClick={handleExhibitionListClick}
 				>
 					{t('Переглянути виставки')}
 				</button>
-
 				<button className={styles.profileAction} onClick={handleLogout}>
 					{t('Вийти')}
 				</button>

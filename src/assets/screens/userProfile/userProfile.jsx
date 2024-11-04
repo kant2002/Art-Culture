@@ -62,6 +62,10 @@ const UserProfile = () => {
 		navigate('/ExhibitionCardCreate')
 	}
 
+	const handleExhibitionListClick = () => {
+		navigate('/Exhibitions')
+	}
+
 	const toggleEditMode = () => {
 		setEditMode(!editMode)
 		setServerMessage('')
@@ -137,13 +141,19 @@ const UserProfile = () => {
 					className={styles.profileAction}
 					onClick={handlePaintingCardListClick}
 				>
-					{t('Переглянути вироби/картини ')}
+					{t('Переглянути вироби/картини')}
 				</button>
 				<button
 					className={styles.profileAction}
 					onClick={handleExhibitionCardCreateClick}
 				>
-					{t('Додати виставку ')}
+					{t('Додати виставку')}
+				</button>
+				<button
+					className={styles.profileAction}
+					onClick={handleExhibitionListClick}
+				>
+					{t('Переглянути виставки')}
 				</button>
 				<button className={styles.profileAction} onClick={handleLogout}>
 					{t('Вийти')}
@@ -151,6 +161,9 @@ const UserProfile = () => {
 			</div>
 
 			<div className={styles.profileInfo}>
+				<div className={styles.profileTitleWrapper}>
+					<h3 className={styles.profileTitle}>{t('Інформація профілю')}</h3>
+				</div>
 				<div className={styles.profileDetails}>
 					<h2>{pageText}</h2>
 					{profileImage && (
@@ -218,6 +231,30 @@ const UserProfile = () => {
 											className={styles.editProfileForm}
 											onSubmit={handleUpdateProfile}
 										>
+
+											<div className={styles.modalTitleWrapper}>
+
+												<h3 className={styles.modalTitle}>{t('Редагування профілю')}</h3>
+
+												<div className={styles.closeButtonWrapper}>
+
+
+													<button
+														onClick={() => {
+															toggleEditMode();
+															closeModal();
+														}}
+														className={styles.editButton}
+													>
+
+														<span className={styles.close}>&times;</span>
+
+													</button>
+
+												</div>
+
+											</div>
+
 											<div className={styles.profileModalNameWrapper}>
 
 												<p>
@@ -261,27 +298,10 @@ const UserProfile = () => {
 											</div>
 
 											<button className={styles.submitButton} type="submit">
-												Update Profile
+												{t('Оновити профіль')}
 											</button>
 										</form>
 									)}
-
-									<div className={styles.closeButtonWrapper}>
-
-
-										<button
-											onClick={() => {
-												toggleEditMode();
-												closeModal();
-											}}
-											className={styles.editButton}
-										>
-
-											<span className={styles.close}>&times;</span>
-
-										</button>
-
-									</div>
 								</div>
 							</div>
 						)}

@@ -51,6 +51,10 @@ const Paintings = () => {
 		navigate('/ProductCardCreate')
 	}
 
+	const handlePaintingCardListClick = () => {
+		navigate('/Paintings')
+	}
+
 	const handleExhibitionCardCreateClick = () => {
 		navigate('/ExhibitionCardCreate')
 	}
@@ -72,36 +76,41 @@ const Paintings = () => {
 
 	return (
 		<div className={styles.profile}>
-			<div className={styles.profileActions}>
-				<button
-					className={`${styles.profileAction} ${styles.profileActionActive}`}
-					onClick={handleProfilePageClick}
-				>
-					{t('Профіль')}
-				</button>
-				<button className={styles.profileAction} onClick={handlePostsClick}>
-					{t('Публікації')}
-				</button>
-				<button className={styles.profileAction} onClick={handleAddPostClick}>
-					{t('Додати публікацію')}
-				</button>
-
-				<button
-					className={styles.profileAction}
-					onClick={handleProductCartCreateClick}
-				>
-					{t('Додати картину')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handleExhibitionCardCreateClick}
-				>
-					{t('Додати виставку ')}
-				</button>
-				<button className={styles.profileAction} onClick={handleLogout}>
-					{t('Вийти')}
-				</button>
-			</div>
+		<div className={styles.profileActions}>
+			<button
+				className={`${styles.profileAction} ${styles.profileActionActive}`}
+				onClick={handleProfilePageClick}
+			>
+				{t('Профіль')}
+			</button>
+			<button className={styles.profileAction} onClick={handlePostsClick}>
+				{t('Публікації')}
+			</button>
+			<button className={styles.profileAction} onClick={handleAddPostClick}>
+				{t('Додати публікацію')}
+			</button>
+			<button
+				className={styles.profileAction}
+				onClick={handleProductCartCreateClick}
+			>
+				{t('Додати картину')}
+			</button>
+			<button
+				className={styles.profileAction}
+				onClick={handlePaintingCardListClick}
+			>
+				{t('Переглянути вироби/картини ')}
+			</button>
+			<button
+				className={styles.profileAction}
+				onClick={handleExhibitionCardCreateClick}
+			>
+				{t('Додати виставку ')}
+			</button>
+			<button className={styles.profileAction} onClick={handleLogout}>
+				{t('Вийти')}
+			</button>
+		</div>
 			<div className={styles.productList}>
 				<h2>{t('Картини')}</h2>
 				{serverMessage && (

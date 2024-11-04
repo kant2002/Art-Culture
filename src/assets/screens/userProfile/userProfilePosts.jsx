@@ -69,9 +69,15 @@ function UserProfilePosts() {
 	}, [i18n])
 
 	// Handlers for navigation
+
 	const handleProfilePageClick = () => {
 		navigate('/userProfile')
 	}
+
+	const handlePostsClick = () => {
+		navigate('/userProfilePosts')
+	}
+
 	const handleAddPostClick = () => {
 		navigate('/userProfileAddPost')
 	}
@@ -88,8 +94,13 @@ function UserProfilePosts() {
 	const handlePaintingCardListClick = () => {
 		navigate('/Paintings')
 	}
+
 	const handleExhibitionCardCreateClick = () => {
 		navigate('/ExhibitionCardCreate')
+	}
+
+	const handleExhibitionListClick = () => {
+		navigate('/Exhibitions')
 	}
 
 	// Modal Handlers
@@ -177,7 +188,7 @@ function UserProfilePosts() {
 			console.error('Error updating post', error)
 			setMessage(
 				error.response?.data?.error ||
-					'Failed to update post. Please try again.'
+				'Failed to update post. Please try again.'
 			)
 		}
 	}
@@ -200,19 +211,18 @@ function UserProfilePosts() {
 		<div className={styles.profile}>
 			<div className={styles.profileActions}>
 				<button
-					className={styles.profileAction}
+					className={`${styles.profileAction} ${styles.profileActionActive}`}
 					onClick={handleProfilePageClick}
 				>
 					{t('Профіль')}
 				</button>
-				<button
-					className={`${styles.profileAction} ${styles.profileActionActive}`}
-				>
+				<button className={styles.profileAction} onClick={handlePostsClick}>
 					{t('Публікації')}
 				</button>
 				<button className={styles.profileAction} onClick={handleAddPostClick}>
 					{t('Додати публікацію')}
 				</button>
+
 				<button
 					className={styles.profileAction}
 					onClick={handleProductCartCreateClick}
@@ -231,16 +241,25 @@ function UserProfilePosts() {
 				>
 					{t('Додати виставку ')}
 				</button>
+				<button
+					className={styles.profileAction}
+					onClick={handleExhibitionListClick}
+				>
+					{t('Переглянути виставки')}
+				</button>
 				<button className={styles.profileAction} onClick={handleLogout}>
 					{t('Вийти')}
 				</button>
 			</div>
 
 			<div className={styles.userProfilePostsContainer}>
+				<div className={styles.profileTitleWrapper}>
+					<h3 className={styles.profileTitle}>{t('Публікації')}</h3>
+				</div>
 				{loading ? (
-					<p>{t('Завантаження...')}</p>
+					<p className={styles.userPageLoadingMessage}>{t('Завантаження...')}</p>
 				) : error ? (
-					<p className={styles.ErrorMessage}>{error}</p>
+					<p className={styles.userPageErrorMessage}>{error}</p>
 				) : posts.length === 0 ? (
 					<p>{t('Публікацій немає')}</p>
 				) : (
@@ -270,12 +289,14 @@ function UserProfilePosts() {
 									<h3 className={styles.userProfilePostsTitle}>
 										{currentLanguage === 'en' ? post.title_en : post.title_uk}
 									</h3>
-									<p className={styles.userProfilePostsDescription}>
-										{currentLanguage === 'en'
-											? post.content_en.substring(0, 100)
-											: post.content_uk.substring(0, 100)}
-										...
-									</p>
+									<div className={styles.userProfilePostsDescriptionWrapper}>
+										<p className={styles.userProfilePostsDescription}>
+											{currentLanguage === 'en'
+												? post.content_en.substring(0, 100)
+												: post.content_uk.substring(0, 100)}
+											...
+										</p>
+									</div>
 									<div className={styles.userProfilePostsClockAndDateWrapper}>
 										<img
 											className={styles.userProfilePostsClock}
@@ -289,7 +310,7 @@ function UserProfilePosts() {
 											className={styles.userProfilePostsButton}
 											onClick={() => navigate(`/posts/${post.id}`)} // Navigate to post detail page
 										>
-											{t('До публікації')}
+											{t('До публікації')}&#8194;&#187;
 										</button>
 									</div>
 									<div className={styles.userProfileDelEditWrapper}>
@@ -322,71 +343,75 @@ function UserProfilePosts() {
 							<p className={styles.error}>{formErrors.form}</p>
 						)}
 						<form onSubmit={handleEditSubmit} className={styles.modalForm}>
-							<div className={styles.modalFieldUk}>
-								<div className={styles.modalField}>
-									<label className={styles.modalLabel}>
-										{t('Назва публікації:')}
-										<input
-											type='text'
-											name='title_uk'
-											value={formData.title_uk}
-											onChange={handleChange}
-											maxLength='50'
-											className={styles.modalInput}
-											placeholder='Наприклад: Моя перша публікація'
-											required
-										/>
-									</label>
-									<small className={styles.remainingChars}>
-										{remainingTitle} {t('символів залишилось')}
-									</small>
-								</div>
-								<div className={styles.modalField}>
-									<label className={styles.modalLabel}>
-										{t('Опис публікації:')}
-										<textarea
-											name='content_uk'
-											value={formData.content_uk}
-											onChange={handleChange}
-											className={styles.modalTextarea}
-											placeholder='Введіть детальний опис публікації'
-											required
-										/>
-									</label>
-								</div>
-							</div>
-							<div className={styles.modalFieldEn}>
-								<div className={styles.modalField}>
-									<label className={styles.modalLabel}>
-										{t('Title name:')}
-										<input
-											type='text'
-											name='title_en'
-											value={formData.title_en}
-											onChange={handleChange}
-											maxLength='50'
-											className={styles.modalInput}
-											placeholder='Title'
-											required
-										/>
-									</label>
-									<small className={styles.remainingChars}>
-										{remainingTitle} {t('символів залишилось')}
-									</small>
+							<div className={styles.modalFormWrapper}>
+
+								<div className={styles.modalFieldUk}>
+									<div className={styles.modalField}>
+										<label className={styles.modalLabel}>
+											Назва публікації:
+											<input
+												type='text'
+												name='title_uk'
+												value={formData.title_uk}
+												onChange={handleChange}
+												maxLength='50'
+												className={styles.modalInput}
+												placeholder='Наприклад: Моя перша публікація'
+												required
+											/>
+										</label>
+										<small className={styles.remainingChars}>
+											{remainingTitle} {t('символів залишилось')}
+										</small>
+									</div>
+									<div className={styles.modalField}>
+										<label className={styles.modalLabel}>
+											Опис публікації:
+											<textarea
+												name='content_uk'
+												value={formData.content_uk}
+												onChange={handleChange}
+												className={styles.modalTextarea}
+												placeholder='Введіть детальний опис публікації'
+												required
+											/>
+										</label>
+									</div>
 								</div>
 
-								<div className={styles.modalField}>
-									<label className={styles.modalLabel}>
-										{t('Add description:')}
-										<textarea
-											name='content_en'
-											value={formData.content_en}
-											onChange={handleChange}
-											className={styles.modalTextarea}
-											placeholder='Description'
-											required
-										/>
-									</label>
+
+								<div className={styles.modalFieldEn}>
+									<div className={styles.modalField}>
+										<label className={styles.modalLabel}>
+											Title name:
+											<input
+												type='text'
+												name='title_en'
+												value={formData.title_en}
+												onChange={handleChange}
+												maxLength='50'
+												className={styles.modalInput}
+												placeholder='Title'
+												required
+											/>
+										</label>
+										<small className={styles.remainingChars}>
+											{remainingTitle} {t('символів залишилось')}
+										</small>
+									</div>
+									<div className={styles.modalField}>
+										<label className={styles.modalLabel}>
+											Add description:
+											<textarea
+												name='content_en'
+												value={formData.content_en}
+												onChange={handleChange}
+												className={styles.modalTextarea}
+												placeholder='Description'
+												required
+											/>
+										</label>
+									</div>
 								</div>
 							</div>
 							<div className={styles.modalFieldImageUploadWrapper}>
