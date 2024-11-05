@@ -67,16 +67,16 @@
 
 .userPageLoadingMessage {
 	/* Стили для сообщения о загрузке */
-		margin: $responsiveMediumPadding 0 0 0;
-		font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
-		font-weight: 400;
+	margin: $responsiveMediumPadding 0 0 0;
+	font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	font-weight: 400;
 }
 
 .userPageErrorMessage {
 	/* Стили для сообщения об ошибке */
-		margin: $responsiveMediumPadding 0 0 0;
-		font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
-		font-weight: 400;
+	margin: $responsiveMediumPadding 0 0 0;
+	font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	font-weight: 400;
 }
 
 .userProfilePostsDescriptionWrapper {
@@ -237,10 +237,66 @@
 	padding: $responsiveBigPadding;
 	border-radius: 10px;
 	width: 90%;
-	height: 90%;
+	height: auto;
+	max-height: 90%;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+
+	.modalInput {
+		/* Стили для поля ввода */
+		margin: $responsiveSmallPadding 0 0 0;
+		width: 100%;
+		max-width: none;
+		height: 1en;
+		padding: 0;
+		font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+		border: 1px solid #ddd;
+		font-weight: 400;
+	}
+
+	.modalTextarea {
+		/* Стили для поля ввода */
+		margin: $responsiveSmallPadding 0 0 0;
+		text-rendering: auto;
+		color: fieldtext;
+		letter-spacing: normal;
+		word-spacing: normal;
+		line-height: normal;
+		text-transform: none;
+		text-indent: 0px;
+		text-shadow: none;
+		display: inline-block;
+		text-align: start;
+		appearance: auto;
+		-webkit-rtl-ordering: logical;
+		cursor: text;
+		overflow-wrap: break-word;
+		background-color: field;
+		column-count: initial !important;
+		border-width: 1px;
+		border-style: solid;
+		border-color: #ddd;
+		border-image: initial;
+		white-space: pre-wrap;
+		width: 100%;
+		max-width: none;
+		min-height: calc(calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))))*3);
+		max-height: calc(calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))))*7);
+		height: 100%;
+		padding: 0;
+		font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+		font-family: $default-font;
+		resize: none;
+	}
+}
+
+.modalTitleAndCloseButtonWrapper {
+	/* Обертка для заголовка и кнопки закрытия модального окна */
+	width: 100%;
+	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
@@ -249,11 +305,25 @@
 	/* Заголовок модального окна */
 	width: 100%;
 	text-align: start;
+	font-size: calc(28px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	font-weight: 700;
+}
+
+.modalCancelButton {
+	//кнопка закрытия модального окна
+	display: flex;
+	padding: 0;
+	width: 30px;
+	height: 30px;
+	background: none;
+	border: none;
+	font-size: 51px;
+	line-height: 30px;
+	font-weight: 900;
 }
 
 .modalForm {
 	/* Обертка для формы */
-	margin: $responsiveMediumPadding 0 0 0;
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -287,15 +357,18 @@
 .modalField {
 	/* Обертка для полей формы */
 	width: 100%;
-	height: 100%;
 }
 
 .modalFieldImageUploadWrapper {
+	margin: $responsiveMediumPadding 0 0 0;
+	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
 	.modalFieldImage {
 		display: flex;
+		width: 100%;
 		flex-wrap: nowrap;
 		justify-content: center;
 		align-items: center;
@@ -307,60 +380,68 @@
 			font-weight: bold;
 			align-items: center;
 			margin: 0 auto;
-			width: calc(600px - (166 * ((1440px - 100vw) / (1440 - 375))));
+			width: 70%;
 		}
+
 		.modalInputImageField {
-			margin: 10px 10px;
-			left: calc(80px - (166 * ((1440px - 100vw) / (1440 - 375))));
+			margin: $responsiveSmallPadding 0 0 0;
 			position: relative;
-			width: calc(358px - (166 * ((1440px - 100vw) / (1440 - 375))));
+			width: 100%;
+			font-weight: normal;
 		}
 	}
 }
 
-/* Modal Label */
 .modalLabel {
+	/* Стили для подписей полей формы */
+	margin: $responsiveSmallPadding 0 0 0;
 	display: flex;
 	flex-direction: column;
-	font-weight: bold;
-	align-items: center;
+	justify-content: center;
+	align-items: start;
+	font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	font-weight: 700;
 }
 
-/* Modal Input */
-.modalInput {
-	padding: 0.5rem;
-	font-size: 1rem;
-}
-
-/* Modal Textarea */
-.modalTextarea {
-	padding: 0.5rem;
-	font-size: 1rem;
-	resize: vertical;
-}
-
-/* Remaining Characters */
-.remainingChars {
-	font-size: 0.875rem;
-	color: #666;
-}
-
-/* Modal Buttons */
-.modalButtons {
+.remainingCharsWrapper {
+	/* Обертка для оставшихся символов */
 	display: flex;
 	justify-content: flex-end;
-	gap: 1rem;
-	justify-content: space-around;
+	align-items: center;
+}
+
+.remainingChars {
+	/* Стили для оставшихся символов */
+	margin: $responsiveSmallPadding 0 0 auto;
+	font-size: calc(14px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	color: $secondary-color;
+}
+
+
+.modalButtons {
+	/* Обертка для кнопок */
+	display: flex;
+	justify-content: center;
 	align-items: center;
 
-	/* Save Button */
 	.modalSaveButton {
-		padding: 0.5rem 1rem;
-		background-color: #4caf50;
-		color: #fff;
+		/* Стили для кнопки сохранения */
+		width: fit-content;
+		max-width: none;
+		margin: $responsiveMediumPadding 0 0 auto;
+		padding: 0 $staticButtonLeftAndRightPadding;
+		height: calc(51px - (11 * ((1440px - 100vw) / (1440 - 375))));
+		min-height: 40px;
+		max-height: 51px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		border: none;
+		border-radius: calc(34px - (4 * ((1440px - 100vw) / (1440 - 375))));
+		font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+		font-weight: 500;
+		background-color: #3a8374;
 		cursor: pointer;
-		border-radius: calc((16 / 1440 * 100vw) / 2);
 	}
 
 	/* Cancel Button */
@@ -373,8 +454,9 @@
 		border-radius: calc((16 / 1440 * 100vw) / 2);
 	}
 }
+
 /* Current Image */
 .currentImage {
-	max-width: 17%;
-	margin-top: 1rem;
+	max-width: 15%;
+	margin-top: $responsiveSmallPadding;
 }
