@@ -82,5 +82,8 @@
     "Завантаження...": "Loading...",
     "Публікацій немає": "There is no publication",
     "До публікації": "Go to publication",
-    "Видалити": "Delete"
+    "Видалити": "Delete",
+    "Редагувати публікацію": "Edit publication",
+    "Змінити зображення (опційно):": "Change image (optional):",
+    "Зберегти": "Save"
 }

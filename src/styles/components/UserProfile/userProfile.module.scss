@@ -347,7 +347,7 @@
 	padding: $responsiveBigPadding;
 	border-radius: 10px;
 	width: 50%;
-	height: 50%;
+	height: fit-content;
 	max-height: 90%;
 	text-align: center;
 	display: flex;
@@ -545,18 +545,5 @@
 	.profileModalImageDownloadWrapper {
 		// обертка для загрузки аватара
 		margin: $staticPcMediumPadding 0 0 0;
-	}
-
-}
-
-@media (max-width: 799px) {
-	.profile {
-		min-height: calc(100dvh - 348px);
-	}
-}
-
-@media (max-width: 569px) {
-	.profile {
-		padding: $staticMobileTopPadding $responsiveLeftAndRightPadding 0;
 	}
 }
