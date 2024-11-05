@@ -18,7 +18,12 @@ export const register = async (req, res, next) => {
 			return res.status(400).json({ errors: errors.array() })
 		}
 
-		const { email, password, images, role, title, bio } = req.body
+		const { email, password, role, title, bio } = req.body
+
+		// Access the uploaded file
+		const profileImage = req.file
+			? `../../uploads/profileImages/${req.file.filename}`
+			: null
 
 		// Check if user exists
 		const existingUser = await prisma.user.findUnique({ where: { email } })
@@ -34,7 +39,7 @@ export const register = async (req, res, next) => {
 			data: {
 				email,
 				password: hashedPassword,
-				images,
+				images: profileImage,
 				role: role || 'USER',
 				title,
 				bio,
@@ -44,6 +49,8 @@ export const register = async (req, res, next) => {
 		const token = generateToken(user)
 
 		const { password: pwd, ...userWithoutPassword } = user
+		console.log('Request body:', req.body)
+		console.log('Uploaded file:', req.file)
 
 		res.status(201).json({
 			token,
@@ -203,12 +210,39 @@ export const resetPasswordConfirm = async (req, res, next) => {
 	}
 }
 // Add the following controller method
+// export const getCurrentUser = async (req, res, next) => {
+// 	try {
+// 		const user = req.user // Attached by authenticateToken middleware
+// 		if (!user) return res.status(401).json({ error: 'Unauthorized' })
+// 		const { password, ...userWithoutPassword } = user
+// 		res.json({ user: userWithoutPassword })
+// 	} catch (error) {
+// 		next(error)
+// 	}
+// }
+
 export const getCurrentUser = async (req, res, next) => {
 	try {
-		const user = req.user // Attached by authenticateToken middleware
-		if (!user) return res.status(401).json({ error: 'Unauthorized' })
-		const { password, ...userWithoutPassword } = user
-		res.json({ user: userWithoutPassword })
+		const userId = req.user.id
+		if (!userId) return res.status(401).json({ error: 'Unauthorized' })
+
+		const user = await prisma.user.findUnique({
+			where: { id: userId },
+			select: {
+				id: true,
+				email: true,
+				role: true,
+				title: true,
+				bio: true,
+				images: true,
+				createdAt: true,
+				updatedAt: true,
+			},
+		})
+
+		if (!user) return res.status(404).json({ error: 'User not found' })
+
+		res.json({ user })
 	} catch (error) {
 		next(error)
 	}

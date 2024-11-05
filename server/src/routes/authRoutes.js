@@ -20,7 +20,7 @@ const router = express.Router()
 router.post(
 	'/register',
 	upload.single('profileImage'),
-	registerUser,
+
 	[
 		body('email').isEmail().withMessage('Enter a valid email'),
 		body('password')
@@ -31,6 +31,7 @@ router.post(
 			.isIn(['ADMIN', 'USER', 'MUSEUM', 'CREATOR', 'EDITOR'])
 			.withMessage('Invalid role'),
 	],
+
 	register
 )
 

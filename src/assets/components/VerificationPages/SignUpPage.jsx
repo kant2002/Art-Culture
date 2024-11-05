@@ -11,19 +11,19 @@ const SignUp = () => {
 		role: 'USER',
 		title: '',
 		bio: '',
-		images: null,
+		profileImage: null,
 	})
 	const [serverMessage, setServerMessage] = useState('')
 	const { login } = useAuth() // Utilize login from AuthContext
+	const [profileImage, setProfileImage] = useState(null)
 	const navigate = useNavigate()
 
 	const handleChange = e => {
 		const { name, value, files } = e.target
-		if (name === 'image') {
+		if (name === 'profileImage') {
 			setSignUpDetails(prev => ({
 				...prev,
-				image: files[0] || null,
-				[name]: value,
+				profileImage: files[0] || null,
 			}))
 		} else {
 			setSignUpDetails(prev => ({
@@ -37,26 +37,31 @@ const SignUp = () => {
 		e.preventDefault()
 		setServerMessage('')
 
+		console.log('signUpDetails before submission:', signUpDetails)
+
 		const formData = new FormData()
 		formData.append('email', signUpDetails.email)
 		formData.append('password', signUpDetails.password)
 		formData.append('role', signUpDetails.role)
 		formData.append('title', signUpDetails.title)
 		formData.append('bio', signUpDetails.bio)
-		if (signUpDetails.images) {
-			formData.append('image', signUpDetails.images)
+		if (signUpDetails.profileImage) {
+			formData.append('profileImage', signUpDetails.profileImage)
+		}
+
+		// Log formData entries for debugging
+		for (let [key, value] of formData.entries()) {
+			console.log(`${key}:`, value)
 		}
 
 		try {
 			const response = await API.post(
 				'/auth/register',
+				formData,
 				{
-					email: signUpDetails.email,
-					password: signUpDetails.password,
-					role: signUpDetails.role,
-					title: signUpDetails.title, // Include title
-					bio: signUpDetails.bio,
-					images: signUpDetails.images,
+					headers: {
+						'Content-Type': 'multipart/form-data',
+					},
 				},
 				console.log('signUpDetails', signUpDetails)
 			)
@@ -114,8 +119,8 @@ const SignUp = () => {
 					/>
 					<input
 						type='file'
-						name='images'
-						accept='images/*'
+						name='profileImage'
+						accept='image/*'
 						onChange={handleChange}
 					/>
 					<select

@@ -16,6 +16,6 @@ const userSchema = new prisma.Schema(
 	{ timestamps: true }
 )
 
-const User = mongoose.model('User', userSchema)
+const User = prisma.model('User', userSchema)
 
 export default User
