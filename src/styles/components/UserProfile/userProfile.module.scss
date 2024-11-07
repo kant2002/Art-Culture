@@ -91,6 +91,7 @@
 	margin: 0;
 	font-size: calc(28px - (4 * ((1440px - 100vw) / (1440 - 375))));
 	font-weight: 700;
+	text-transform: uppercase;
 }
 
 .profileActions {
@@ -184,7 +185,8 @@
 .profileTitle {
 	/* Заголовок профиля */
 	font-size: calc(28px - (4 * ((1440px - 100vw) / (1440 - 375))));
-	font-weight: 700;
+	font-weight: 700;	
+	text-transform: uppercase;
 }
 
 .profileDetails {

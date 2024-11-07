@@ -52,17 +52,12 @@
 	/* Обертка для заголовка публикации */
 	display: flex;
 	justify-content: start;
-	// max-height: calc(
-	// 	28px * 2
-	// ); // Делаем ограничение вывода текста построчечно
-	// overflow: hidden;
 }
 
 .userProfilePostsTitle {
 	/* Стили для заголовка публикации */
 	font-weight: 600;
 	font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
-	text-transform: uppercase;
 }
 
 .userPageLoadingMessage {
@@ -197,7 +192,6 @@
 	z-index: 1000;
 }
 
-
 .modalContent {
 	/* Стили для модального окна */
 	position: relative;
@@ -276,6 +270,7 @@
 	text-align: start;
 	font-size: calc(28px - (4 * ((1440px - 100vw) / (1440 - 375))));
 	font-weight: 700;
+	text-transform: uppercase;
 }
 
 .modalCancelButton {
@@ -386,7 +381,6 @@
 	font-size: calc(14px - (4 * ((1440px - 100vw) / (1440 - 375))));
 	color: $secondary-color;
 }
-
 
 .modalButtons {
 	/* Обертка для кнопок */
