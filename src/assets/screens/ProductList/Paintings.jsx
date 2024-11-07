@@ -16,6 +16,20 @@ const Paintings = () => {
 	const { logout, user } = useAuth()
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [selectedProductImages, setSelectedProductImages] = useState([])
+	const [editingProduct, setEditingProduct] = useState(null)
+	const [formData, setFormData] = useState({
+		title_en: '',
+		description_en: '',
+		specs_en: '',
+		title_uk: '',
+		description_uk: '',
+		specs_uk: '',
+		images: null,
+	})
+	const [message, setMessage] = useState('')
+	const [formErrors, setFormErrors] = useState([])
+	const [remainingTitle, setRemainingTitle] = useState(50)
+	const [remainingDescription, setRemainingDescription] = useState(500)
 
 	useEffect(() => {
 		const fetchProducts = async () => {
@@ -74,43 +88,161 @@ const Paintings = () => {
 		setSelectedProductImages([])
 	}
 
+	const openEditModal = product => {
+		setEditingProduct(product)
+		setFormData({
+			title_en: product.title_en || '',
+			description_en: product.description_en || '',
+			specs_en: product.specs_en || '',
+			title_uk: product.title_uk || '',
+			description_uk: product.description_uk || '',
+			specs_uk: product.specs_uk || '',
+			images: null,
+		})
+		setRemainingTitle(50 - product.title_en.length || product.title_uk.length)
+		setRemainingDescription(
+			500 - product.description_en.length || product.description_uk.length
+		)
+		setIsModalOpen(true)
+	}
+
+	const closeEditModal = () => {
+		setIsModalOpen(false)
+		setEditingProduct(null)
+		setFormErrors({})
+		setMessage('')
+	}
+
+	const handleChange = e => {
+		const { name, value, files } = e.target
+
+		if (name === 'images') {
+			setFormData({ ...formData, images: files[0] })
+		} else {
+			setFormData({ ...formData, [name]: value })
+
+			if (name === 'title') {
+				setRemainingTitle(50 - value.length)
+			}
+
+			if (name === 'description') {
+				setRemainingDescription(500 - value.length)
+			}
+
+			if (e.target.tagname.toLowerCase() === 'textarea') {
+				e.target.style.height = 'auto'
+				e.target.style.height = `${e.target.scrollHeight}px`
+			}
+		}
+	}
+
+	const handleEditSubmit = async e => {
+		e.preventDefault()
+		setMessage('')
+		setFormErrors({})
+
+		if (
+			!formData.title_en ||
+			!formData.description_en ||
+			!formData.title_uk ||
+			!formData.description_uk ||
+			!formData.specs_en ||
+			!formData.specs_uk
+		) {
+			setFormErrors({ form: 'Потрібно заповнити поля' })
+			return
+		}
+
+		try {
+			const productData = new FormData()
+			productData.append('title_en', formData.title_en)
+			productData.append('description_en', formData.description_en)
+			productData.append('title_uk', formData.title_uk)
+			productData.append('description_uk', formData.description_uk)
+			productData.append('specs_en', formData.specs_en)
+			productData.append('specs_uk', formData.specs_uk)
+			if (formData.images instanceof File) {
+				productData.append('images', formData.images)
+			}
+			const response = await API.put(
+				`/products/my-products/${editingProduct.id}`,
+				productData,
+				{
+					headers: {
+						'content-Type': 'multipart/form-data',
+					},
+				}
+			)
+			if (response.status === 200) {
+				setMessage('Product update successfully')
+
+				setProducts(prevProducts =>
+					prevProducts.map(product =>
+						product.id === editingProduct.id ? response.data : product
+					)
+				)
+				closeEditModal()
+			}
+		} catch (error) {
+			console.error('Error updating product', error)
+			setMessage(
+				error.response?.data?.error ||
+					'Failed to update product. Please try again.'
+			)
+		}
+	}
+
+	const handleDeleteProduct = async productId => {
+		if (window.confirm(t('Ви впевнені, що хочете видалити цей виріб?'))) {
+			try {
+				const response = await API.delete(`/products/my-products/${productId}`)
+				if (response.status === 200) {
+					setProducts(products.filter(product => product.id !== productId))
+				}
+			} catch (err) {
+				console.error('Error deleting product', err)
+				setError('Failed to delete product')
+			}
+		}
+	}
+
 	return (
 		<div className={styles.profile}>
-		<div className={styles.profileActions}>
-			<button
-				className={`${styles.profileAction} ${styles.profileActionActive}`}
-				onClick={handleProfilePageClick}
-			>
-				{t('Профіль')}
-			</button>
-			<button className={styles.profileAction} onClick={handlePostsClick}>
-				{t('Публікації')}
-			</button>
-			<button className={styles.profileAction} onClick={handleAddPostClick}>
-				{t('Додати публікацію')}
-			</button>
-			<button
-				className={styles.profileAction}
-				onClick={handleProductCartCreateClick}
-			>
-				{t('Додати картину')}
-			</button>
-			<button
-				className={styles.profileAction}
-				onClick={handlePaintingCardListClick}
-			>
-				{t('Переглянути вироби/картини ')}
-			</button>
-			<button
-				className={styles.profileAction}
-				onClick={handleExhibitionCardCreateClick}
-			>
-				{t('Додати виставку ')}
-			</button>
-			<button className={styles.profileAction} onClick={handleLogout}>
-				{t('Вийти')}
-			</button>
-		</div>
+			<div className={styles.profileActions}>
+				<button
+					className={`${styles.profileAction} ${styles.profileActionActive}`}
+					onClick={handleProfilePageClick}
+				>
+					{t('Профіль')}
+				</button>
+				<button className={styles.profileAction} onClick={handlePostsClick}>
+					{t('Публікації')}
+				</button>
+				<button className={styles.profileAction} onClick={handleAddPostClick}>
+					{t('Додати публікацію')}
+				</button>
+				<button
+					className={styles.profileAction}
+					onClick={handleProductCartCreateClick}
+				>
+					{t('Додати картину')}
+				</button>
+				<button
+					className={styles.profileAction}
+					onClick={handlePaintingCardListClick}
+				>
+					{t('Переглянути вироби/картини ')}
+				</button>
+				<button
+					className={styles.profileAction}
+					onClick={handleExhibitionCardCreateClick}
+				>
+					{t('Додати виставку ')}
+				</button>
+				<button className={styles.profileAction} onClick={handleLogout}>
+					{t('Вийти')}
+				</button>
+			</div>
 			<div className={styles.productList}>
 				<h2>{t('Картини')}</h2>
 				{serverMessage && (
@@ -155,6 +287,20 @@ const Paintings = () => {
 									<p>{specs}</p>
 								</h4>
 								{/* Add more fields as needed */}
+								<div className={styles.paintingsDelEditWrapper}>
+									<button
+										className={styles.paintingsEditButton}
+										onClick={() => openEditModal(product)}
+									>
+										{t('Редагувати')}
+									</button>
+									<button
+										className={styles.paintingsDeleteButton}
+										onClick={() => handleDeleteProduct(product.id)}
+									>
+										{t('Видалити')}
+									</button>
+								</div>
 							</div>
 						)
 					})}

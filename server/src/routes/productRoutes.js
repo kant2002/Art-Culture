@@ -4,11 +4,13 @@ import express from 'express'
 import { body } from 'express-validator'
 import {
 	createProduct,
+	deleteProduct,
 	getCreatorProducts,
 	getProductByAuthorId,
 	getProductById,
 	getProducts,
 	getUserProducts,
+	updateProduct,
 } from '../controllers/productController.js'
 import authenticateToken from '../middleware/authMiddleware.js'
 import uploadPaintings from '../middleware/productImageUploader.js'
@@ -40,4 +42,21 @@ router.get('/', getProducts)
 router.get('/my-products', authenticateToken, getUserProducts)
 router.get('/author/:authorId', getProductByAuthorId)
 router.get('/:productId', getProductById)
+
+router.put(
+	'/:id',
+	authenticateToken,
+	updateProduct,
+	uploadPaintings.array('productImages', 7),
+	[
+		body('title_en').notEmpty().withMessage('Title  is required'),
+		body('description_en').notEmpty().withMessage('Description  is required'),
+		body('title_uk').notEmpty().withMessage('Потрібен заголовок '),
+		body('description_uk').notEmpty().withMessage('Потрібен опис '),
+		body('specs').optional().isString(),
+	],
+	updateProduct
+)
+
+router.delete('my-products/:id', authenticateToken, deleteProduct)
 export default router

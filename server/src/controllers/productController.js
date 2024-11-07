@@ -198,3 +198,87 @@ export const getProductByAuthorId = async (req, res, next) => {
 		next(error)
 	}
 }
+
+export const updateProduct = async (req, res, next) => {
+	try {
+		const { id } = req.params
+		const {
+			title_en,
+			title_uk,
+			description_en,
+			description_uk,
+			specs_en,
+			specs_uk,
+			images,
+		} = req.body
+		const userId = req.user.id
+
+		// Verify ownership
+		const product = await postMessage.findUnique({
+			where: {
+				id: parseInt(id),
+			},
+		})
+		if (!post) return res.status(404).json({ error: 'Paintings not found' })
+		if (post.authorId !== userId)
+			return res.status(403).json({ error: 'Unauthorized' })
+
+		let imageUrl = product.images
+		if (req.files) {
+			if (product.images) {
+				const oldImagePath = path.join(__dirname, '../../', product.images)
+				FSWatcher.unlinkSync(oldImagePath)
+			}
+			imageUrl = `/uploads/productImages/${req.file.filename}`
+		}
+
+		//Update product
+		const updateProduct = await prisma.product.update({
+			where: { id: parseInt(id) },
+			data: {
+				title_en,
+				title_uk,
+				description_en,
+				description_uk,
+				specs_en,
+				specs_uk,
+				images: imageUrl,
+			},
+			include: { author: { select: { email: true, id: true } } },
+		})
+
+		res.json(updateProduct)
+	} catch (error) {
+		next(error)
+	}
+}
+
+export const deleteProduct = async (req, res, next) => {
+	try {
+		const { id } = req.params
+		const userId = req.user.id
+
+		//Verify ownership
+		const product = await prisma.product.findUnique({
+			where: {
+				id: parseInt(id),
+			},
+		})
+		if (!post) return res.status(404).json({ error: 'Product not found' })
+		if (product.authorId !== userId)
+			return res.status(403).json({ error: 'Unauthorized' })
+
+		//Delete image if exist
+		if (product.images) {
+			const imagePath = path.join(__dirname, '../../', product.images)
+			fs.unlinkSync(imagePath)
+		}
+
+		// Delete post
+		await prisma.product.delete({ where: { id: parseInt(id) } })
+
+		res.json({ message: 'Product delete successfully' })
+	} catch (error) {
+		next(error)
+	}
+}
