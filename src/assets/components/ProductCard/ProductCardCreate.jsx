@@ -1,4 +1,4 @@
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext.jsx'
@@ -6,6 +6,7 @@ import API from '../../../utils/api.js'
 import styles from '/src/styles/components/ProductCard/ProductCardCreate.module.scss'
 
 const ProductCardCreate = () => {
+	const { t } = useTranslation()
 	const { user, logout } = useAuth()
 	console.log('CurrentUser:', user)
 	const navigate = useNavigate()
@@ -155,59 +156,83 @@ const ProductCardCreate = () => {
 			</div>
 
 			<div className={styles.productCreate}>
-				<h2>{t('Додати картину')}</h2>
+				<h2 className={styles.productCreateTitle}>{t('Додати картину')}</h2>
 				{serverMessage && (
 					<p className={styles.serverMessage}>{serverMessage}</p>
 				)}
 				<form onSubmit={handleSubmit}>
-					{/* Title in Ukrainian */}
-					<input
-						type='text'
-						placeholder={t('Заголовок українською')}
-						name='title_uk'
-						value={formData.title_uk}
-						onChange={handleChange}
-						required
-					/>
-					{/* Title in English */}
-					<input
-						type='text'
-						placeholder={t('Title in English')}
-						name='title_en'
-						value={formData.title_en}
-						onChange={handleChange}
-						required
-					/>
-					{/* Description in Ukrainian */}
-					<textarea
-						placeholder={t('Опис українською')}
-						name='description_uk'
-						value={formData.description_uk}
-						onChange={handleChange}
-						required
-					/>
-					{/* Description in English */}
-					<textarea
-						placeholder={t('Description in English')}
-						name='description_en'
-						value={formData.description_en}
-						onChange={handleChange}
-						required
-					/>
-					{/* Specs on Ukrainian */}
-					<textarea
-						placeholder={t('Специфікація')}
-						name='specs_uk'
-						value={formData.specs_uk}
-						onChange={handleChange}
-					/>
-					{/* Specs on English */}
-					<textarea
-						placeholder={t('Specifications')}
-						name='specs_en'
-						value={formData.specs_en}
-						onChange={handleChange}
-					/>
+					<div className={styles.modalTextWrapper}>
+						<div className={styles.modalFieldUk}>
+							<label className={styles.profileLabel}>
+								{t('Заголовок')}
+								{/* Title in Ukrainian */}
+								<input
+									type='text'
+									placeholder={t('Заголовок українською')}
+									name='title_uk'
+									value={formData.title_uk}
+									onChange={handleChange}
+									required
+								/>
+							</label>
+							<label className={styles.profileLabel}>
+							{t('Опис українською')}
+								{/* Description in Ukrainian */}
+								<textarea
+									placeholder={t('Опис українською')}
+									name='description_uk'
+									value={formData.description_uk}
+									onChange={handleChange}
+									required
+								/>
+							</label>
+							<label className={styles.profileLabel}>
+								{t('Специфікація')}
+								{/* Specs on Ukrainian */}
+								<textarea
+									placeholder={t('Специфікація')}
+									name='specs_uk'
+									value={formData.specs_uk}
+									onChange={handleChange}
+								/>
+							</label>
+						</div>
+						<div className={styles.modalFieldEn}>
+							<label className={styles.profileLabel}>
+								{t('Title in English')}
+								{/* Title in English */}
+								<input
+									type='text'
+									placeholder={t('Title in English')}
+									name='title_en'
+									value={formData.title_en}
+									onChange={handleChange}
+									required
+								/>
+							</label>
+							<label className={styles.profileLabel}>
+								{t('Description in English')}
+								{/* Description in English */}
+								<textarea
+									placeholder={t('Description in English')}
+									name='description_en'
+									value={formData.description_en}
+									onChange={handleChange}
+									required
+								/>
+							</label>
+							<label className={styles.profileLabel}>
+								{t('Specifications')}
+								{/* Specs on English */}
+								<textarea
+									placeholder={t('Specifications')}
+									name='specs_en'
+									value={formData.specs_en}
+									onChange={handleChange}
+								/>
+							</label>
+						</div>
+					</div>
 					{/* Images */}
 					<input
 						type='file'
@@ -230,8 +255,8 @@ const ProductCardCreate = () => {
 					</div>
 					<button type='submit'>{t('Створити')}</button>
 				</form>
-			</div>
-		</div>
+			</div >
+		</div >
 	)
 }
 
