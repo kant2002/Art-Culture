@@ -36,20 +36,19 @@
 		text-align: start;
 		appearance: auto;
 		-webkit-rtl-ordering: logical;
-		resize: -internal-textarea-auto;
 		cursor: text;
 		overflow-wrap: break-word;
 		background-color: field;
 		column-count: initial !important;
-		margin: 0em;
 		border-width: 1px;
 		border-style: solid;
 		border-color: #ddd;
 		border-image: initial;
-		padding: 2px;
 		white-space: pre-wrap;
 		width: 100%;
 		max-width: none;
+		min-height: calc(calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))))*3);
+		max-height: calc(calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))))*7);
 		height: 100%;
 		margin: 0 0 0 $responsiveMediumPadding;
 		padding: 0;
@@ -92,6 +91,7 @@
 	margin: 0;
 	font-size: calc(28px - (4 * ((1440px - 100vw) / (1440 - 375))));
 	font-weight: 700;
+	text-transform: uppercase;
 }
 
 .profileActions {
@@ -185,7 +185,8 @@
 .profileTitle {
 	/* Заголовок профиля */
 	font-size: calc(28px - (4 * ((1440px - 100vw) / (1440 - 375))));
-	font-weight: 700;
+	font-weight: 700;	
+	text-transform: uppercase;
 }
 
 .profileDetails {
@@ -348,7 +349,8 @@
 	padding: $responsiveBigPadding;
 	border-radius: 10px;
 	width: 50%;
-	height: 50%;
+	height: fit-content;
+	max-height: 90%;
 	text-align: center;
 	display: flex;
 	flex-direction: row;
@@ -545,18 +547,5 @@
 	.profileModalImageDownloadWrapper {
 		// обертка для загрузки аватара
 		margin: $staticPcMediumPadding 0 0 0;
-	}
-
-}
-
-@media (max-width: 799px) {
-	.profile {
-		min-height: calc(100dvh - 348px);
-	}
-}
-
-@media (max-width: 569px) {
-	.profile {
-		padding: $staticMobileTopPadding $responsiveLeftAndRightPadding 0;
 	}
 }

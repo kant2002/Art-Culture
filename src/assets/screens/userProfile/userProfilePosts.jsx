@@ -337,7 +337,16 @@ function UserProfilePosts() {
 			{isModalOpen && (
 				<div className={styles.modalOverlay}>
 					<div className={styles.modalContent}>
-						<h2 className={styles.modalTitle}>{t('Редагувати публікацію')}</h2>
+						<div className={styles.modalTitleAndCloseButtonWrapper}>
+							<h2 className={styles.modalTitle}>{t('Редагувати публікацію')}</h2>
+							<button
+								type='button'
+								className={styles.modalCancelButton}
+								onClick={closeEditModal}
+							>
+								<span className={styles.close}>&times;</span>
+							</button>
+						</div>
 						{message && <p className={styles.message}>{message}</p>}
 						{formErrors.form && (
 							<p className={styles.error}>{formErrors.form}</p>
@@ -360,9 +369,11 @@ function UserProfilePosts() {
 												required
 											/>
 										</label>
-										<small className={styles.remainingChars}>
-											{remainingTitle} {t('символів залишилось')}
-										</small>
+										<div className={styles.remainingCharsWrapper}>
+											<small className={styles.remainingChars}>
+												{remainingTitle} {t('символів залишилось')}
+											</small>
+										</div>
 									</div>
 									<div className={styles.modalField}>
 										<label className={styles.modalLabel}>
@@ -395,9 +406,11 @@ function UserProfilePosts() {
 												required
 											/>
 										</label>
-										<small className={styles.remainingChars}>
-											{remainingTitle} {t('символів залишилось')}
-										</small>
+										<div className={styles.remainingCharsWrapper}>
+											<small className={styles.remainingChars}>
+												{remainingTitle} {t('символів залишилось')}
+											</small>
+										</div>
 									</div>
 									<div className={styles.modalField}>
 										<label className={styles.modalLabel}>
@@ -438,13 +451,6 @@ function UserProfilePosts() {
 							<div className={styles.modalButtons}>
 								<button type='submit' className={styles.modalSaveButton}>
 									{t('Зберегти')}
-								</button>
-								<button
-									type='button'
-									className={styles.modalCancelButton}
-									onClick={closeEditModal}
-								>
-									{t('Скасувати')}
 								</button>
 							</div>
 						</form>
