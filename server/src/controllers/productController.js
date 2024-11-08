@@ -1,8 +1,12 @@
 import { PrismaClient } from '@prisma/client'
 import { validationResult } from 'express-validator'
-
+import fs from 'fs'
+import path, { dirname } from 'path'
+import { fileURLToPath } from 'url'
 const prisma = new PrismaClient()
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 export const createProduct = async (req, res, next) => {
 	try {
 		const errors = validationResult(req)
@@ -209,27 +213,34 @@ export const updateProduct = async (req, res, next) => {
 			description_uk,
 			specs_en,
 			specs_uk,
-			images,
 		} = req.body
 		const userId = req.user.id
 
 		// Verify ownership
-		const product = await postMessage.findUnique({
+		const product = await prisma.product.findUnique({
 			where: {
 				id: parseInt(id),
 			},
+			include: { images: true },
 		})
-		if (!post) return res.status(404).json({ error: 'Paintings not found' })
-		if (post.authorId !== userId)
+		if (!product) return res.status(404).json({ error: 'Paintings not found' })
+		if (product.authorId !== userId)
 			return res.status(403).json({ error: 'Unauthorized' })
 
-		let imageUrl = product.images
-		if (req.files) {
-			if (product.images) {
-				const oldImagePath = path.join(__dirname, '../../', product.images)
-				FSWatcher.unlinkSync(oldImagePath)
+		let imagesData = []
+		if (req.files && req.files.length > 0) {
+			for (let img of product.images) {
+				const oldImagePath = path.join(__dirname, `../../${img.imageUrl}`)
+				try {
+					fs.unlinkSync(oldImagePath)
+				} catch (err) {
+					console.error('Error deleting images', err)
+				}
 			}
-			imageUrl = `/uploads/productImages/${req.file.filename}`
+			await prisma.productImage.deleteMany({ where: { productId: product.id } })
+			imagesData = req.files.map(file => ({
+				imageUrl: `../../uploads/productImages/${file.filename}`,
+			}))
 		}
 
 		//Update product
@@ -242,13 +253,21 @@ export const updateProduct = async (req, res, next) => {
 				description_uk,
 				specs_en,
 				specs_uk,
-				images: imageUrl,
+				images: {
+					create: imagesData,
+				},
 			},
-			include: { author: { select: { email: true, id: true } } },
+			include: {
+				images: true,
+				author: {
+					select: { email: true, id: true },
+				},
+			},
 		})
 
 		res.json(updateProduct)
 	} catch (error) {
+		console.error('Error updating product:', error)
 		next(error)
 	}
 }
@@ -263,22 +282,33 @@ export const deleteProduct = async (req, res, next) => {
 			where: {
 				id: parseInt(id),
 			},
+			include: { images: true },
 		})
-		if (!post) return res.status(404).json({ error: 'Product not found' })
+		if (!product) return res.status(404).json({ error: 'Product not found' })
 		if (product.authorId !== userId)
 			return res.status(403).json({ error: 'Unauthorized' })
 
-		//Delete image if exist
-		if (product.images) {
-			const imagePath = path.join(__dirname, '../../', product.images)
-			fs.unlinkSync(imagePath)
+		for (let img of product.images) {
+			const imagePath = path.join(__dirname, `../../${img.imageUrl}`)
+			try {
+				if (fs.existsSync(imagePath)) {
+					fs.unlinkSync(imagePath)
+				} else {
+					console.error('File not found:', imagePath)
+				}
+			} catch (err) {
+				console.error('Error deleting image', err)
+			}
 		}
 
-		// Delete post
+		// Delete images from database
+		await prisma.productImage.deleteMany({ where: { productId: product.id } })
+		// Delete product
 		await prisma.product.delete({ where: { id: parseInt(id) } })
 
 		res.json({ message: 'Product delete successfully' })
 	} catch (error) {
+		console.error('Error deleting product:', error)
 		next(error)
 	}
 }

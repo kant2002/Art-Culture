@@ -46,17 +46,17 @@ router.get('/:productId', getProductById)
 router.put(
 	'/:id',
 	authenticateToken,
-	updateProduct,
 	uploadPaintings.array('productImages', 7),
 	[
-		body('title_en').notEmpty().withMessage('Title  is required'),
-		body('description_en').notEmpty().withMessage('Description  is required'),
-		body('title_uk').notEmpty().withMessage('Потрібен заголовок '),
-		body('description_uk').notEmpty().withMessage('Потрібен опис '),
-		body('specs').optional().isString(),
+		body('title_en').notEmpty().withMessage('Title is required'),
+		body('description_en').notEmpty().withMessage('Description is required'),
+		body('title_uk').notEmpty().withMessage('Потрібен заголовок'),
+		body('description_uk').notEmpty().withMessage('Потрібен опис'),
+		body('specs_en').optional().isString(),
+		body('specs_uk').optional().isString(),
 	],
 	updateProduct
 )
 
-router.delete('my-products/:id', authenticateToken, deleteProduct)
+router.delete('/:id', authenticateToken, deleteProduct)
 export default router

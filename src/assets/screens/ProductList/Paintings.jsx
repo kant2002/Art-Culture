@@ -27,9 +27,10 @@ const Paintings = () => {
 		images: null,
 	})
 	const [message, setMessage] = useState('')
-	const [formErrors, setFormErrors] = useState([])
+	const [formErrors, setFormErrors] = useState({})
 	const [remainingTitle, setRemainingTitle] = useState(50)
 	const [remainingDescription, setRemainingDescription] = useState(500)
+	const [error, setError] = useState('')
 
 	useEffect(() => {
 		const fetchProducts = async () => {
@@ -116,20 +117,20 @@ const Paintings = () => {
 	const handleChange = e => {
 		const { name, value, files } = e.target
 
-		if (name === 'images') {
-			setFormData({ ...formData, images: files[0] })
+		if (name === 'images' || name === 'productImages') {
+			setFormData({ ...formData, images: files })
 		} else {
 			setFormData({ ...formData, [name]: value })
 
-			if (name === 'title') {
+			if (name === 'title_en' || name === 'title_uk') {
 				setRemainingTitle(50 - value.length)
 			}
 
-			if (name === 'description') {
+			if (name === 'description_en' || name === 'description_uk') {
 				setRemainingDescription(500 - value.length)
 			}
 
-			if (e.target.tagname.toLowerCase() === 'textarea') {
+			if (e.target.tagName.toLowerCase() === 'textarea') {
 				e.target.style.height = 'auto'
 				e.target.style.height = `${e.target.scrollHeight}px`
 			}
@@ -161,15 +162,18 @@ const Paintings = () => {
 			productData.append('description_uk', formData.description_uk)
 			productData.append('specs_en', formData.specs_en)
 			productData.append('specs_uk', formData.specs_uk)
-			if (formData.images instanceof File) {
-				productData.append('images', formData.images)
+			if (formData.images && formData.images.length > 0) {
+				for (let i = 0; i < formData.images.length; i++) {
+					productData.append('productImages', formData.images[i])
+				}
 			}
 			const response = await API.put(
-				`/products/my-products/${editingProduct.id}`,
+				`/products/${editingProduct.id}`,
 				productData,
 				{
 					headers: {
 						'content-Type': 'multipart/form-data',
+						Authorization: `Bearer ${localStorage.getItem('token')}`,
 					},
 				}
 			)
@@ -195,7 +199,11 @@ const Paintings = () => {
 	const handleDeleteProduct = async productId => {
 		if (window.confirm(t('Ви впевнені, що хочете видалити цей виріб?'))) {
 			try {
-				const response = await API.delete(`/products/my-products/${productId}`)
+				const response = await API.delete(`/products/${productId}`, {
+					headers: {
+						Authorization: `Bearer ${localStorage.getItem('token')}`,
+					},
+				})
 				if (response.status === 200) {
 					setProducts(products.filter(product => product.id !== productId))
 				}
@@ -306,8 +314,8 @@ const Paintings = () => {
 					})}
 				</div>
 			</div>
-			{/* Modal Component */}
-			{isModalOpen && (
+			{/* Image Modal Component */}
+			{isModalOpen && !editingProduct && (
 				<div className={styles.modalOverlay} onClick={handleCloseModal}>
 					<div
 						className={styles.modalContent}
@@ -326,6 +334,87 @@ const Paintings = () => {
 								/>
 							))}
 						</div>
+					</div>
+				</div>
+			)}
+			{/* Modal edit component */}
+			{isModalOpen && editingProduct && (
+				<div className={styles.modalOverlay} onClick={closeEditModal}>
+					<div
+						className={styles.modalContent}
+						onClick={e => e.stopPropagation()}
+					>
+						<button className={styles.closeButton} onClick={closeEditModal}>
+							&times;
+						</button>
+
+						<form onSubmit={handleEditSubmit}>
+							{formErrors.form && (
+								<p className={styles.error}>{formErrors.form}</p>
+							)}
+							{message && <p className={styles.success}>{message}</p>}
+							<div>
+								<label>{t('Title (English)')}</label>
+								<input
+									type='text'
+									name='title_en'
+									value={formData.title_en}
+									onChange={handleChange}
+								/>
+							</div>
+							<div>
+								<label>{t('Description (English)')}</label>
+								<textarea
+									name='description_en'
+									value={formData.description_en}
+									onChange={handleChange}
+								/>
+							</div>
+							<div>
+								<label>{t('Title (Ukrainian)')}</label>
+								<input
+									type='text'
+									name='title_uk'
+									value={formData.title_uk}
+									onChange={handleChange}
+								/>
+							</div>
+							<div>
+								<label>{t('Description (Ukrainian)')}</label>
+								<textarea
+									name='description_uk'
+									value={formData.description_uk}
+									onChange={handleChange}
+								/>
+							</div>
+							<div>
+								<label>{t('Specs (English)')}</label>
+								<textarea
+									name='specs_en'
+									value={formData.specs_en}
+									onChange={handleChange}
+								/>
+							</div>
+							<div>
+								<label>{t('Specs (Ukrainian)')}</label>
+								<textarea
+									name='specs_uk'
+									value={formData.specs_uk}
+									onChange={handleChange}
+								/>
+							</div>
+							<div>
+								<label>{t('Upload Images')}</label>
+								<input
+									type='file'
+									name='productImages'
+									accept='image/*'
+									onChange={handleChange}
+									multiple
+								/>
+							</div>
+							<button type='submit'>{t('Update Product')}</button>
+						</form>
 					</div>
 				</div>
 			)}
