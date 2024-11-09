@@ -12,6 +12,7 @@
 	.productCreateTitle {
 		font-weight: 600;
 		font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+		text-transform: uppercase;
 	}
 }
 
@@ -33,7 +34,7 @@
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	margin: 0 0 0 $responsiveMediumPadding;
+	margin: 0 0 0 $responsiveBigPadding;
 }
 
 .profileLabel {
@@ -112,7 +113,7 @@ input[type='file'] {
 	font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
 	font-weight: normal;
 	border: 1px solid #ddd;
-	margin: $responsiveMediumPadding 0 0 0 !important;
+	margin: $responsiveSmallPadding 0 0 0 !important;
 }
 
 .imagePreviews {

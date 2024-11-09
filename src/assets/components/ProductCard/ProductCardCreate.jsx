@@ -176,7 +176,7 @@ const ProductCardCreate = () => {
 								/>
 							</label>
 							<label className={styles.profileLabel}>
-							{t('Опис українською')}
+								{t('Опис українською')}
 								{/* Description in Ukrainian */}
 								<textarea
 									placeholder={t('Опис українською')}
@@ -233,15 +233,18 @@ const ProductCardCreate = () => {
 							</label>
 						</div>
 					</div>
-					{/* Images */}
-					<input
-						type='file'
-						name='images'
-						accept='image/*'
-						multiple
-						onChange={handleChange}
-						required
-					/>
+					<label className={styles.profileLabel}>
+						{t('Додати зображення:')}
+						{/* Images */}
+						<input
+							type='file'
+							name='images'
+							accept='image/*'
+							multiple
+							onChange={handleChange}
+							required
+						/>
+					</label>
 					{/* Image Previews */}
 					<div className={styles.imagePreviews}>
 						{imagePreviews.map((preview, index) => (
