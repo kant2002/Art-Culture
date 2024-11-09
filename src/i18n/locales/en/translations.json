@@ -88,6 +88,14 @@
     "Зберегти": "Save",
     "Додати нову публікацію": "Add a new publication",
     "Додати зображення (опційно):": "Add an image (optional):",
+    "Додати зображення": "Add an image",
     "Онлайн перекладач": "Online translator",
-    "Онлайн WEBP конвертер": "Online WEBP converter"
+    "Онлайн WEBP конвертер": "Online WEBP converter",
+    "Заголовок українською": "Title in Ukrainian",
+    "Опис українською": "Description in Ukrainian",
+    "Специфікація українською": "Specification in Ukrainian",
+    "Заголовок англійською": "Title in English",
+    "Опис англійською": "Description in English",
+    "Специфікація англійською": "Specification in English",
+    "Створити": "Create"
 }

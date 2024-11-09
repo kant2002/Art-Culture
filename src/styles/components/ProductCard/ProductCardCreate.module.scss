@@ -149,3 +149,54 @@ button[type='submit'] {
 	background-color: $turquoise;
 	cursor: pointer;
 }
+
+@media (min-width: 1441px) {
+	.productCreate {
+		margin: $staticPcMediumPadding 0 $staticPcMediumPadding $responsiveLeftAndRightPadding;
+
+		.productCreateTitle {
+			font-size: 28px;
+		}
+	}
+
+	.modalFieldEn {
+		margin: 0 0 0 $staticPcBigPadding;
+	}
+
+	.profileLabel {
+		font-size: 16px;
+		margin: $staticPcMediumPadding 0 0 0;
+	}
+
+	input[type='text'] {
+		font-size: 16px;
+		margin: $staticPcSmallPadding 0 0 0;
+	}
+
+	textarea {
+		margin: $staticPcSmallPadding 0 0 0 !important;
+		font-size: 16px;
+	}
+
+	.serverMessage {
+		margin: $staticPcBigPadding 0 0 0;
+		font-size: 16px;
+	}
+
+	input[type='file'] {
+		font-size: 16px;
+		margin: $staticPcSmallPadding 0 0 0 !important;
+	}
+
+	.imagePreviews {
+		margin: $staticPcSmallPadding 0 0 0;
+	}
+
+	button[type='submit'] {
+		width: fit-content;
+		max-width: none;
+		margin: $staticPcMediumPadding auto 0 auto;
+		border-radius: 34px;
+		font-size: 16px;
+	}
+}

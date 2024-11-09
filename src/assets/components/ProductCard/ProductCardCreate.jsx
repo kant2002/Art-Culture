@@ -125,7 +125,6 @@ const ProductCardCreate = () => {
 				<button className={styles.profileAction} onClick={handleAddPostClick}>
 					{t('Додати публікацію')}
 				</button>
-
 				<button
 					className={styles.profileAction}
 					onClick={handleProductCartCreateClick}
@@ -154,7 +153,6 @@ const ProductCardCreate = () => {
 					{t('Вийти')}
 				</button>
 			</div>
-
 			<div className={styles.productCreate}>
 				<h2 className={styles.productCreateTitle}>{t('Додати картину')}</h2>
 				{serverMessage && (
@@ -164,11 +162,11 @@ const ProductCardCreate = () => {
 					<div className={styles.modalTextWrapper}>
 						<div className={styles.modalFieldUk}>
 							<label className={styles.profileLabel}>
-								{t('Заголовок')}
+								{t('Заголовок українською')}
 								{/* Title in Ukrainian */}
 								<input
 									type='text'
-									placeholder={t('Заголовок українською')}
+									// placeholder={t('Заголовок українською')}
 									name='title_uk'
 									value={formData.title_uk}
 									onChange={handleChange}
@@ -179,7 +177,7 @@ const ProductCardCreate = () => {
 								{t('Опис українською')}
 								{/* Description in Ukrainian */}
 								<textarea
-									placeholder={t('Опис українською')}
+									// placeholder={t('Опис українською')}
 									name='description_uk'
 									value={formData.description_uk}
 									onChange={handleChange}
@@ -187,10 +185,10 @@ const ProductCardCreate = () => {
 								/>
 							</label>
 							<label className={styles.profileLabel}>
-								{t('Специфікація')}
-								{/* Specs on Ukrainian */}
+								{t('Специфікація українською')}
+								{/* Specification in Ukrainian */}
 								<textarea
-									placeholder={t('Специфікація')}
+									// placeholder={t('Специфікація')}
 									name='specs_uk'
 									value={formData.specs_uk}
 									onChange={handleChange}
@@ -199,11 +197,11 @@ const ProductCardCreate = () => {
 						</div>
 						<div className={styles.modalFieldEn}>
 							<label className={styles.profileLabel}>
-								{t('Title in English')}
+								{t('Заголовок англійською')}
 								{/* Title in English */}
 								<input
 									type='text'
-									placeholder={t('Title in English')}
+									// placeholder={t('Title in English')}
 									name='title_en'
 									value={formData.title_en}
 									onChange={handleChange}
@@ -211,10 +209,10 @@ const ProductCardCreate = () => {
 								/>
 							</label>
 							<label className={styles.profileLabel}>
-								{t('Description in English')}
+								{t('Опис англійською')}
 								{/* Description in English */}
 								<textarea
-									placeholder={t('Description in English')}
+									// placeholder={t('Description in English')}
 									name='description_en'
 									value={formData.description_en}
 									onChange={handleChange}
@@ -222,10 +220,10 @@ const ProductCardCreate = () => {
 								/>
 							</label>
 							<label className={styles.profileLabel}>
-								{t('Specifications')}
+								{t('Специфікація англійською')}
 								{/* Specs on English */}
 								<textarea
-									placeholder={t('Specifications')}
+									// placeholder={t('Specifications')}
 									name='specs_en'
 									value={formData.specs_en}
 									onChange={handleChange}
@@ -234,7 +232,7 @@ const ProductCardCreate = () => {
 						</div>
 					</div>
 					<label className={styles.profileLabel}>
-						{t('Додати зображення:')}
+						{t('Додати зображення')}
 						{/* Images */}
 						<input
 							type='file'
