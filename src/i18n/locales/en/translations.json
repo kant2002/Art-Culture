@@ -97,5 +97,9 @@
     "Заголовок англійською": "Title in English",
     "Опис англійською": "Description in English",
     "Специфікація англійською": "Specification in English",
-    "Створити": "Create"
+    "Створити": "Create",
+    "Назва публікації українською": "Publication title in Ukrainian",
+    "Опис публікації українською": "Description of the publication in Ukrainian",
+    "Назва публікації англійською": "Publication title in English",
+    "Опис публікації англійською": "Description of the publication in English"
 }

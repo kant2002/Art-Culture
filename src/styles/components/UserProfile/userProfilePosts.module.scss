@@ -341,11 +341,11 @@
 
 		.modalLabelUploadContainer {
 			display: flex;
+			justify-content: center;
 			flex-direction: column;
 			font-weight: bold;
-			align-items: center;
-			margin: 0 auto;
-			width: 70%;
+			align-items: start;
+			width: 100%;
 		}
 
 		.modalInputImageField {
