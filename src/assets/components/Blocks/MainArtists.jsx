@@ -77,29 +77,6 @@ function MainArtists() {
 		navigate(`/artist/${id}`)
 	}
 
-	useEffect(() => {
-		if (user) {
-			setRegDate(
-				user.createdAt
-					? new Date(user.createdAt).toLocaleDateString('uk-UA', {
-							year: 'numeric',
-							month: 'long',
-							day: 'numeric',
-						})
-					: ''
-			)
-			setRegTime(
-				user.createdAt
-					? new Date(user.createdAt).toLocaleTimeString('uk-UA', {
-							year: 'numeric',
-							month: 'long',
-							day: 'numeric',
-						})
-					: ''
-			)
-		}
-	})
-
 	return (
 		<div className={styles.mainPageNewsContainer}>
 			<div className={styles.mainPageNewsTitleWithButton}>
@@ -126,6 +103,23 @@ function MainArtists() {
 					const featuredMediaUrl = creator.images
 						? `${baseUrl}${creator.images.replace('../../', '/')}`
 						: '/Img/halfNewsCard.jpg'
+
+					const formattedDate = new Date(creator.createdAt).toLocaleDateString(
+						'uk-UA',
+						{
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+						}
+					)
+
+					const formattedTime = new Date(creator.createdAt).toLocaleTimeString(
+						'uk-UA',
+						{
+							hour: '2-digit',
+							minute: '2-digit',
+						}
+					)
 
 					return (
 						<div
@@ -175,10 +169,10 @@ function MainArtists() {
 										/>
 									</div>
 									<div className={styles.cardDateWrapper}>
-										<p className={styles.cardDate}></p>
+										<p className={styles.cardDate}>{formattedDate}</p>
 									</div>
 									<div className={styles.cardTimeWrapper}>
-										<p className={styles.cardTime}></p>
+										<p className={styles.cardTime}>{formattedTime}</p>
 									</div>
 									<div className={styles.cardReadMoreWrapper}>
 										<a
