@@ -192,7 +192,7 @@ function UserProfileAddPost() {
 						<div className={styles.modalFieldUk}>
 							<div className={styles.profileAddPostField}>
 								<label className={styles.profileAddPostLabel}>
-									{t('Назва публікації:')}
+									{t('Назва публікації українською')}
 									<input
 										type='text'
 										name='title_uk'
@@ -200,7 +200,7 @@ function UserProfileAddPost() {
 										onChange={handleChange}
 										maxLength='50'
 										className={styles.profileAddPostInput}
-										placeholder='Наприклад: Моя перша публікація'
+										// placeholder='Наприклад: Моя перша публікація'
 										required
 									/>
 								</label>
@@ -210,13 +210,13 @@ function UserProfileAddPost() {
 							</div>
 							<div className={styles.profileAddPostField}>
 								<label className={styles.profileAddPostLabel}>
-									{t('Опис публікації:')}
+									{t('Опис публікації українською')}
 									<textarea
 										name='content_uk'
 										value={formData.content_uk}
 										onChange={handleChange}
 										className={styles.profileAddPostTextarea}
-										placeholder='Введіть детальний опис публікації'
+										// placeholder='Введіть детальний опис публікації'
 										required
 									/>
 								</label>
@@ -225,7 +225,7 @@ function UserProfileAddPost() {
 						<div className={styles.modalFieldEn}>
 							<div className={styles.profileAddPostField}>
 								<label className={styles.profileAddPostLabel}>
-									{t('Title name:')}
+									{t('Назва публікації англійською')}
 									<input
 										type='text'
 										name='title_en'
@@ -233,7 +233,7 @@ function UserProfileAddPost() {
 										onChange={handleChange}
 										maxLength='50'
 										className={styles.profileAddPostInput}
-										placeholder='Title'
+										// placeholder='Title'
 										required
 									/>
 								</label>
@@ -243,13 +243,13 @@ function UserProfileAddPost() {
 							</div>
 							<div className={styles.profileAddPostField}>
 								<label className={styles.profileAddPostLabel}>
-									{t('Description Name:')}
+									{t('Опис публікації англійською')}
 									<textarea
 										name='content_en'
 										value={formData.content_en}
 										onChange={handleChange}
 										className={styles.profileAddPostTextarea}
-										placeholder='Add description'
+										// placeholder='Add description'
 										required
 									/>
 								</label>
