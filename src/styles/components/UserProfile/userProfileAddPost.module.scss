@@ -148,6 +148,7 @@
 .profileAddPostFileInput {
     /* Стиль для поля загрузки файла */
     width: 70%;
+    margin: $responsiveSmallPadding 0 0 0;
 }
 
 .profileLinksWrapper {
@@ -227,6 +228,11 @@
         /* Стиль для оставшихся символов */
         margin: $staticPcSmallPadding 0 0 auto;
         font-size: 14px;
+    }
+
+    .profileAddPostFileInput {
+        /* Стиль для поля загрузки файла */
+        margin: $staticPcSmallPadding 0 0 0;
     }
 
     .profileLinksWrapper {

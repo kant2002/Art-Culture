@@ -357,7 +357,7 @@ function UserProfilePosts() {
 								<div className={styles.modalFieldUk}>
 									<div className={styles.modalField}>
 										<label className={styles.modalLabel}>
-											Назва публікації:
+											{t('Назва публікації українською')}
 											<input
 												type='text'
 												name='title_uk'
@@ -365,7 +365,7 @@ function UserProfilePosts() {
 												onChange={handleChange}
 												maxLength='50'
 												className={styles.modalInput}
-												placeholder='Наприклад: Моя перша публікація'
+												// placeholder='Наприклад: Моя перша публікація'
 												required
 											/>
 										</label>
@@ -377,13 +377,13 @@ function UserProfilePosts() {
 									</div>
 									<div className={styles.modalField}>
 										<label className={styles.modalLabel}>
-											Опис публікації:
+											{t('Опис публікації українською')}
 											<textarea
 												name='content_uk'
 												value={formData.content_uk}
 												onChange={handleChange}
 												className={styles.modalTextarea}
-												placeholder='Введіть детальний опис публікації'
+												// placeholder='Введіть детальний опис публікації'
 												required
 											/>
 										</label>
@@ -394,7 +394,7 @@ function UserProfilePosts() {
 								<div className={styles.modalFieldEn}>
 									<div className={styles.modalField}>
 										<label className={styles.modalLabel}>
-											Title name:
+											{t('Назва публікації англійською')}
 											<input
 												type='text'
 												name='title_en'
@@ -402,7 +402,7 @@ function UserProfilePosts() {
 												onChange={handleChange}
 												maxLength='50'
 												className={styles.modalInput}
-												placeholder='Title'
+												// placeholder='Title'
 												required
 											/>
 										</label>
@@ -414,13 +414,13 @@ function UserProfilePosts() {
 									</div>
 									<div className={styles.modalField}>
 										<label className={styles.modalLabel}>
-											Add description:
+											{t('Опис публікації англійською')}
 											<textarea
 												name='content_en'
 												value={formData.content_en}
 												onChange={handleChange}
 												className={styles.modalTextarea}
-												placeholder='Description'
+												// placeholder='Description'
 												required
 											/>
 										</label>

@@ -182,7 +182,7 @@ const UserProfile = () => {
 											profileImage instanceof File
 												? URL.createObjectURL(profileImage)
 												: profileImage.startsWith('http') ||
-													  profileImage.startsWith('/uploads/profileImages')
+													profileImage.startsWith('/uploads/profileImages')
 													? `${process.env.REACT_APP_API_URL}${profileImage}`
 													: profileImage
 										}
@@ -263,7 +263,7 @@ const UserProfile = () => {
 
 											<div className={styles.profileModalNameWrapper}>
 												<p>
-													<strong>{t('П.І.Б.')}:&#8194;</strong>
+													<strong>{t('П.І.Б.')}&#8194;</strong>
 												</p>
 
 												<input
@@ -277,7 +277,7 @@ const UserProfile = () => {
 
 											<div className={styles.profileModalBioWrapper}>
 												<p>
-													<strong>{t('Про себе')}:&#8194;</strong>
+													<strong>{t('Про себе')}&#8194;</strong>
 												</p>
 
 												<textarea
@@ -289,12 +289,15 @@ const UserProfile = () => {
 											</div>
 
 											<div className={styles.profileModalImageDownloadWrapper}>
-												<input
-													type='file'
-													name='profileImages'
-													accept='image/*'
-													onChange={handleImageChange}
-												/>
+												<label className={styles.profileLabel}>
+													{t('Додати зображення')}
+													<input
+														type='file'
+														name='profileImages'
+														accept='image/*'
+														onChange={handleImageChange}
+													/>
+												</label>
 											</div>
 
 											<button className={styles.submitButton} type='submit'>
