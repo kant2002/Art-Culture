@@ -132,7 +132,7 @@ function UserProfilePosts() {
 		} else {
 			setFormData({ ...formData, [name]: value })
 
-			if (name === 'title_') {
+			if (name === 'title_en' || name === 'title_uk') {
 				setRemainingTitle(50 - value.length)
 			}
 
@@ -171,6 +171,7 @@ function UserProfilePosts() {
 			const response = await API.put(`/posts/${editingPost.id}`, postData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
+					Authorization: `Bearer ${localStorage.getItem('token')}`,
 				},
 			})
 
@@ -188,7 +189,7 @@ function UserProfilePosts() {
 			console.error('Error updating post', error)
 			setMessage(
 				error.response?.data?.error ||
-				'Failed to update post. Please try again.'
+					'Failed to update post. Please try again.'
 			)
 		}
 	}
@@ -257,7 +258,9 @@ function UserProfilePosts() {
 					<h3 className={styles.profileTitle}>{t('Публікації')}</h3>
 				</div>
 				{loading ? (
-					<p className={styles.userPageLoadingMessage}>{t('Завантаження...')}</p>
+					<p className={styles.userPageLoadingMessage}>
+						{t('Завантаження...')}
+					</p>
 				) : error ? (
 					<p className={styles.userPageErrorMessage}>{error}</p>
 				) : posts.length === 0 ? (
@@ -338,7 +341,9 @@ function UserProfilePosts() {
 				<div className={styles.modalOverlay}>
 					<div className={styles.modalContent}>
 						<div className={styles.modalTitleAndCloseButtonWrapper}>
-							<h2 className={styles.modalTitle}>{t('Редагувати публікацію')}</h2>
+							<h2 className={styles.modalTitle}>
+								{t('Редагувати публікацію')}
+							</h2>
 							<button
 								type='button'
 								className={styles.modalCancelButton}
@@ -353,7 +358,6 @@ function UserProfilePosts() {
 						)}
 						<form onSubmit={handleEditSubmit} className={styles.modalForm}>
 							<div className={styles.modalFormWrapper}>
-
 								<div className={styles.modalFieldUk}>
 									<div className={styles.modalField}>
 										<label className={styles.modalLabel}>
@@ -389,7 +393,6 @@ function UserProfilePosts() {
 										</label>
 									</div>
 								</div>
-
 
 								<div className={styles.modalFieldEn}>
 									<div className={styles.modalField}>

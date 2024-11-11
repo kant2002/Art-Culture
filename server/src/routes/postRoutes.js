@@ -42,7 +42,6 @@ router.get('/:id', getPostById)
 router.put(
 	'/:id',
 	authenticateToken,
-	updatePost,
 	upload.single('images'),
 	[
 		body('title_en').notEmpty().withMessage('Title is required'),
