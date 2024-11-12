@@ -2,20 +2,17 @@
 @import '/src/styles/utilities/variables.scss';
 
 .productList {
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 20px;
+	width: 100%;
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-wrap: wrap;
 	flex-direction: column;
+	justify-content: start;
+	font-family: $default-font;
+	margin: $responsiveMediumPadding 0 $responsiveMediumPadding $responsiveLeftAndRightPadding;
 
 	h2 {
-		margin-bottom: 20px;
-		text-align: center;
-		font-size: 32px;
-		color: #333;
+		font-weight: 600;
+		font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+		text-transform: uppercase;
 	}
 
 	//	.serverMessage {
@@ -26,17 +23,18 @@
 	//	}
 
 	.products {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-
+		margin: $responsiveMediumPadding 0 0 0;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: auto;
+		gap: $responsiveSmallPadding;
+		
 		.productCard {
-			width: calc(33% - 20px); /* Adjust for margins */
-			margin-bottom: 30px;
+			width: 100%;
 			background-color: #fff;
-			padding: 15px;
+			padding: $responsiveSmallPadding;
 			border: 1px solid #ddd;
-			border-radius: 4px;
+			border-radius: 10px;
 			box-sizing: border-box;
 			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
@@ -46,10 +44,10 @@
 
 			.productImage {
 				width: 100%;
-				height: 200px;
+				aspect-ratio: 1 / 1;
 				object-fit: cover;
-				margin-bottom: 15px;
-				border-radius: 4px;
+				// margin-bottom: 15px;
+				border-radius: 10px;
 			}
 
 			h3 {
