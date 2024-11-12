@@ -74,6 +74,10 @@ const Paintings = () => {
 		navigate('/ExhibitionCardCreate')
 	}
 
+	const handleExhibitionListClick = () => {
+		navigate('/Exhibitions')
+	}
+
 	const handleLogout = () => {
 		logout()
 		navigate('/login')
@@ -191,7 +195,7 @@ const Paintings = () => {
 			console.error('Error updating product', error)
 			setMessage(
 				error.response?.data?.error ||
-					'Failed to update product. Please try again.'
+				'Failed to update product. Please try again.'
 			)
 		}
 	}
@@ -239,13 +243,19 @@ const Paintings = () => {
 					className={styles.profileAction}
 					onClick={handlePaintingCardListClick}
 				>
-					{t('Переглянути вироби/картини ')}
+					{t('Переглянути вироби/картини')}
 				</button>
 				<button
 					className={styles.profileAction}
 					onClick={handleExhibitionCardCreateClick}
 				>
-					{t('Додати виставку ')}
+					{t('Додати виставку')}
+				</button>
+				<button
+					className={styles.profileAction}
+					onClick={handleExhibitionListClick}
+				>
+					{t('Переглянути виставки')}
 				</button>
 				<button className={styles.profileAction} onClick={handleLogout}>
 					{t('Вийти')}
