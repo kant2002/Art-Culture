@@ -294,15 +294,15 @@ const Paintings = () => {
 								)}
 								<h3>
 									{t('Назва картини')}
-									<p>{title}</p>
+									<p className={styles.productCardSubTitle}>{title}</p>
 								</h3>
 								<h4>
 									{t('Про картину')}
-									<p>{description}</p>
+									<p className={styles.productCardSubTitle}>{description}</p>
 								</h4>
 								<h4>
 									{t('Використані матеріали')}
-									<p>{specs}</p>
+									<p className={styles.productCardSubTitle}>{specs}</p>
 								</h4>
 								{/* Add more fields as needed */}
 								<div className={styles.paintingsDelEditWrapper}>
