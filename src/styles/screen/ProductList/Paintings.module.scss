@@ -141,12 +141,18 @@
 
 .modalContent {
 	position: relative;
+	margin: auto auto;
 	background-color: #fff;
-	padding: 20px;
-	max-width: 80%;
-	max-height: 80%;
-	overflow-y: auto;
-	border-radius: 8px;
+	padding: $responsiveBigPadding;
+	border-radius: 10px;
+	width: 90%;
+	height: auto;
+	max-height: 90%;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .closeButton {
@@ -160,17 +166,24 @@
 }
 
 .modalImages {
+	width: 100%;
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
+	flex-direction: column;
+	// flex-wrap: wrap;
+	justify-content: start;
 	align-items: center;
+	overflow-y: auto;
 }
 
 .modalImage {
-	max-width: 100%;
-	max-height: 400px;
-	margin: 10px;
+	// width: auto;
+	// min-width: 10%;
+	// max-width: 100%;
+	// min-height: 10%;
+	max-height: 77dvh;
+	margin: 0 0 $responsiveSmallPadding 0;
 	object-fit: contain;
+	border-radius: 10px;
 }
 
 @media (min-width: 1600px) {
