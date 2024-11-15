@@ -349,7 +349,7 @@ function UserProfilePosts() {
 						</button>
 						<div className={styles.modalTitleAndCloseButtonWrapper}>
 							<h2 className={styles.modalTitle}>
-								{t('Редагувати публікацію')}
+								{t('Редагування публікації')}
 							</h2>
 						</div>
 						{message && <p className={styles.message}>{message}</p>}

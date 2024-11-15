@@ -83,7 +83,7 @@
     "Публікацій немає": "There is no publication",
     "До публікації": "Go to publication",
     "Видалити": "Delete",
-    "Редагувати публікацію": "Edit publication",
+    "Редагування публікації": "Edit publication",
     "Змінити зображення (опційно):": "Change image (optional):",
     "Зберегти": "Save",
     "Додати нову публікацію": "Add a new publication",
@@ -104,5 +104,6 @@
     "Опис публікації англійською": "Description of the publication in English",
     "Назва картини": "Name of the painting",
     "Про картину": "About the painting",
-    "Використані матеріали": "Used materials"
+    "Використані матеріали": "Used materials",
+    "Редагування картини/виробу": "Editing a picture/product"
 }

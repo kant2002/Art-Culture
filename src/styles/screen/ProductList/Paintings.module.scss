@@ -151,6 +151,61 @@
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+
+	form {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.modalTextWrapper {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.modalFieldUk {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.modalFieldEn {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		margin: 0 0 0 $responsiveBigPadding;
+	}
+
+	.profileLabel {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: start;
+		font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+		font-weight: 700;
+		margin: $responsiveMediumPadding 0 0 0;
+	}
+}
+
+.modalTitleWrapper {
+	/* Обертка для заголовка модального окна */
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	width: 100%;
+}
+
+.modalTitle {
+	/* Заголовок модального окна */
+	margin: 0;
+	font-size: calc(28px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	font-weight: 700;
+	text-transform: uppercase;
 }
 
 .closeButton {
