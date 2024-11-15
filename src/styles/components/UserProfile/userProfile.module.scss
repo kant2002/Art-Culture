@@ -348,7 +348,7 @@
 	position: relative;
 	margin: auto auto;
 	background-color: #fff;
-	padding: $responsiveBigPadding;
+	padding: $responsiveBigPadding $responsiveLeftAndRightPadding;
 	border-radius: 10px;
 	width: 50%;
 	height: fit-content;
@@ -429,7 +429,11 @@
 
 .close {
 	//кнопка закрытия модального окна
+	position: absolute;
+	top: $responsiveSmallPadding;
+	right: $responsiveSmallPadding;
 	display: flex;
+	margin: 0 0 0 auto;
 	padding: 0;
 	width: 30px;
 	height: 30px;
@@ -438,6 +442,7 @@
 	font-size: 51px;
 	line-height: 30px;
 	font-weight: 900;
+	cursor: pointer;
 }
 
 @media (min-width: 1441px) {
@@ -548,7 +553,7 @@
 
 	.modalContent {
 		// контент модального окна
-		padding: $staticPcBigPadding;
+		padding: $staticPcBigPadding $responsiveLeftAndRightPadding;
 	}
 
 	.profileModalNameWrapper {

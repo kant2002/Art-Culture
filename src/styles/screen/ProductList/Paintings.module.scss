@@ -123,8 +123,6 @@
 	cursor: pointer;
 }
 
-/* ... existing styles ... */
-
 /* Modal Styles */
 .modalOverlay {
 	position: fixed;
@@ -143,7 +141,7 @@
 	position: relative;
 	margin: auto auto;
 	background-color: #fff;
-	padding: $responsiveBigPadding;
+	padding: $responsiveBigPadding $responsiveLeftAndRightPadding;
 	border-radius: 10px;
 	width: 90%;
 	height: auto;
@@ -157,11 +155,17 @@
 
 .closeButton {
 	position: absolute;
-	top: 10px;
-	right: 15px;
-	font-size: 30px;
+	top: $responsiveSmallPadding;
+	right: $responsiveSmallPadding;
+	display: flex;
+	padding: 0;
+	width: 30px;
+	height: 30px;
 	background: none;
 	border: none;
+	font-size: 51px;
+	line-height: 30px;
+	font-weight: 900;
 	cursor: pointer;
 }
 
@@ -178,9 +182,9 @@
 .modalImage {
 	// width: auto;
 	// min-width: 10%;
-	// max-width: 100%;
+	max-width: 95%;
 	// min-height: 10%;
-	max-height: 77dvh;
+	max-height: 76dvh;
 	margin: 0 0 $responsiveSmallPadding 0;
 	object-fit: contain;
 	border-radius: 10px;

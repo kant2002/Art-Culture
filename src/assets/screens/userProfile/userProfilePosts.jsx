@@ -189,7 +189,7 @@ function UserProfilePosts() {
 			console.error('Error updating post', error)
 			setMessage(
 				error.response?.data?.error ||
-					'Failed to update post. Please try again.'
+				'Failed to update post. Please try again.'
 			)
 		}
 	}
@@ -340,17 +340,17 @@ function UserProfilePosts() {
 			{isModalOpen && (
 				<div className={styles.modalOverlay}>
 					<div className={styles.modalContent}>
+						<button
+							type='button'
+							className={styles.modalCancelButton}
+							onClick={closeEditModal}
+						>
+							<span className={styles.close}>&times;</span>
+						</button>
 						<div className={styles.modalTitleAndCloseButtonWrapper}>
 							<h2 className={styles.modalTitle}>
 								{t('Редагувати публікацію')}
 							</h2>
-							<button
-								type='button'
-								className={styles.modalCancelButton}
-								onClick={closeEditModal}
-							>
-								<span className={styles.close}>&times;</span>
-							</button>
 						</div>
 						{message && <p className={styles.message}>{message}</p>}
 						{formErrors.form && (
