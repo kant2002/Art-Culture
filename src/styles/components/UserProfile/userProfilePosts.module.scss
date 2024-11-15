@@ -172,12 +172,6 @@
 	cursor: pointer;
 }
 
-.userProfileDelEditWrapper {
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-}
-
 .modalOverlay {
 	/* Стили для фона модального окна */
 	position: fixed;
@@ -197,7 +191,7 @@
 	position: relative;
 	margin: auto auto;
 	background-color: #fff;
-	padding: $responsiveBigPadding;
+	padding: $responsiveBigPadding $responsiveLeftAndRightPadding;
 	border-radius: 10px;
 	width: 90%;
 	height: auto;
@@ -254,6 +248,24 @@
 		font-family: $default-font;
 		resize: none;
 	}
+
+	// .modalCancelButton {
+	// 	//кнопка закрытия модального окна
+	// 	position: absolute;
+	// 	top: $responsiveSmallPadding;
+	// 	right: $responsiveSmallPadding;
+	// 	display: flex;
+	// 	margin: 0 0 0 auto;
+	// 	padding: 0;
+	// 	width: 30px;
+	// 	height: 30px;
+	// 	background: none;
+	// 	border: none;
+	// 	font-size: 51px;
+	// 	line-height: 30px;
+	// 	font-weight: 900;
+	// 	cursor: pointer;
+	// }
 }
 
 .modalTitleAndCloseButtonWrapper {
@@ -271,19 +283,6 @@
 	font-size: calc(28px - (4 * ((1440px - 100vw) / (1440 - 375))));
 	font-weight: 700;
 	text-transform: uppercase;
-}
-
-.modalCancelButton {
-	//кнопка закрытия модального окна
-	display: flex;
-	padding: 0;
-	width: 30px;
-	height: 30px;
-	background: none;
-	border: none;
-	font-size: 51px;
-	line-height: 30px;
-	font-weight: 900;
 }
 
 .modalForm {
@@ -407,16 +406,6 @@
 		background-color: $turquoise;
 		cursor: pointer;
 	}
-
-	.modalCancelButton {
-		/* Стили для кнопки закрытия модального окна */
-		padding: 0.5rem 1rem;
-		background-color: #f44336;
-		color: #fff;
-		border: none;
-		cursor: pointer;
-		border-radius: calc((16 / 1440 * 100vw) / 2);
-	}
 }
 
 .currentImage {
@@ -512,7 +501,7 @@
 
 	.modalContent {
 		/* Стили для модального окна */
-		padding: $staticPcBigPadding;
+		padding: $staticPcBigPadding $responsiveLeftAndRightPadding;
 
 		.modalInput {
 			/* Стили для поля ввода */

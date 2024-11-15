@@ -357,73 +357,81 @@ const Paintings = () => {
 						<button className={styles.closeButton} onClick={closeEditModal}>
 							&times;
 						</button>
-
 						<form onSubmit={handleEditSubmit}>
 							{formErrors.form && (
 								<p className={styles.error}>{formErrors.form}</p>
 							)}
 							{message && <p className={styles.success}>{message}</p>}
-							<div>
-								<label>{t('Title (English)')}</label>
-								<input
-									type='text'
-									name='title_en'
-									value={formData.title_en}
-									onChange={handleChange}
-								/>
+							<div className={styles.modalTitleWrapper}>
+								<h2 className={styles.modalTitle}>
+									{t('Редагування картини/виробу')}
+								</h2>
 							</div>
-							<div>
-								<label>{t('Description (English)')}</label>
-								<textarea
-									name='description_en'
-									value={formData.description_en}
-									onChange={handleChange}
-								/>
+							<div className={styles.modalTextWrapper}>
+								<div className={styles.modalFieldUk}>
+									<div>
+										<label className={styles.profileLabel}>{t('Заголовок українською')}</label>
+										<input
+											type='text'
+											name='title_uk'
+											value={formData.title_uk}
+											onChange={handleChange}
+										/>
+									</div>
+									<div>
+										<label className={styles.profileLabel}>{t('Опис українською')}</label>
+										<textarea
+											name='description_uk'
+											value={formData.description_uk}
+											onChange={handleChange}
+										/>
+									</div>
+									<div>
+										<label className={styles.profileLabel}>{t('Специфікація українською')}</label>
+										<textarea
+											name='specs_uk'
+											value={formData.specs_uk}
+											onChange={handleChange}
+										/>
+									</div>
+								</div>
+								<div className={styles.modalFieldEn}>
+									<div>
+										<label className={styles.profileLabel}>{t('Заголовок англійською')}</label>
+										<input
+											type='text'
+											name='title_en'
+											value={formData.title_en}
+											onChange={handleChange}
+										/>
+									</div>
+									<div>
+										<label className={styles.profileLabel}>{t('Опис англійською')}</label>
+										<textarea
+											name='description_en'
+											value={formData.description_en}
+											onChange={handleChange}
+										/>
+									</div>
+									<div>
+										<label className={styles.profileLabel}>{t('Специфікація англійською')}</label>
+										<textarea
+											name='specs_en'
+											value={formData.specs_en}
+											onChange={handleChange}
+										/>
+									</div>
+								</div>
 							</div>
-							<div>
-								<label>{t('Title (Ukrainian)')}</label>
-								<input
-									type='text'
-									name='title_uk'
-									value={formData.title_uk}
-									onChange={handleChange}
-								/>
-							</div>
-							<div>
-								<label>{t('Description (Ukrainian)')}</label>
-								<textarea
-									name='description_uk'
-									value={formData.description_uk}
-									onChange={handleChange}
-								/>
-							</div>
-							<div>
-								<label>{t('Specs (English)')}</label>
-								<textarea
-									name='specs_en'
-									value={formData.specs_en}
-									onChange={handleChange}
-								/>
-							</div>
-							<div>
-								<label>{t('Specs (Ukrainian)')}</label>
-								<textarea
-									name='specs_uk'
-									value={formData.specs_uk}
-									onChange={handleChange}
-								/>
-							</div>
-							<div>
-								<label>{t('Upload Images')}</label>
-								<input
-									type='file'
-									name='productImages'
-									accept='image/*'
-									onChange={handleChange}
-									multiple
-								/>
-							</div>
-							<button type='submit'>{t('Update Product')}</button>
+							<label className={styles.profileLabel}>{t('Додати зображення')}</label>
+							<input
+								type='file'
+								name='productImages'
+								accept='image/*'
+								onChange={handleChange}
+								multiple
+							/>
+							<button type='submit'>{t('Зберегти')}</button>
 						</form>
 					</div>
 				</div>
