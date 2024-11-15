@@ -29,13 +29,6 @@
 		text-transform: none !important;
 	}
 
-	//	.serverMessage {
-	//		color: #d9534f;
-	//		margin-bottom: 15px;
-	//		text-align: center;
-	//		font-weight: bold;
-	//	}
-
 	.products {
 		margin: $responsiveMediumPadding 0 0 0;
 		display: grid;
@@ -60,7 +53,6 @@
 				width: 100%;
 				aspect-ratio: 1 / 1;
 				object-fit: cover;
-				// margin-bottom: 15px;
 				border-radius: 10px;
 			}
 
@@ -72,7 +64,6 @@
 
 			p {
 				font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
-				// margin: $responsiveSmallPadding 0 0 0;
 				color: #666;
 				line-height: 1.5;
 				text-transform: uppercase;
@@ -85,7 +76,6 @@
 .paintingsDelEditWrapper {
 	/* Обертка для кнопок редактирования и удаления */
 	margin: $responsiveMediumPadding 0 0 auto;
-	// width: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -228,17 +218,13 @@
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	// flex-wrap: wrap;
 	justify-content: start;
 	align-items: center;
 	overflow-y: auto;
 }
 
 .modalImage {
-	// width: auto;
-	// min-width: 10%;
 	max-width: 95%;
-	// min-height: 10%;
 	max-height: 76dvh;
 	margin: 0 0 $responsiveSmallPadding 0;
 	object-fit: contain;
@@ -250,6 +236,91 @@
 		.products {
 			grid-template-columns: repeat(4, 1fr);
 		}
+	}
+}
+
+@media (min-width: 1441px) {
+	.productList {
+		margin: $staticPcMediumPadding 0 $staticPcMediumPadding $responsiveLeftAndRightPadding;
+
+		h2 {
+			font-size: 28px;
+		}
+
+		h3,
+		h4 {
+			font-size: 14px;
+			margin: $staticPcSmallPadding 0 0 0;
+		}
+
+		.productCardSubTitle {
+			font-size: 16px;
+		}
+
+		.products {
+			margin: $staticPcMediumPadding 0 0 0;
+			gap: $staticPcSmallPadding;
+
+			.productCard {
+				padding: $staticPcSmallPadding;
+
+				h3 {
+					margin: $staticPcSmallPadding 0 0 auto;
+					font-size: 14px;
+				}
+
+				p {
+					font-size: 16px;
+				}
+			}
+		}
+	}
+
+	.paintingsDelEditWrapper {
+		/* Обертка для кнопок редактирования и удаления */
+		margin: $staticPcMediumPadding 0 0 auto;
+	}
+
+	.paintingsEditButton {
+		/* Стили для кнопки редактирования */
+		padding: 0 $staticButtonLeftAndRightPadding;
+		border-radius: 34px;
+	}
+
+	.paintingsDeleteButton {
+		/* Стили для кнопки редактирования */
+		margin: 0 0 0 $staticPcMediumPadding;
+		padding: 0 $staticButtonLeftAndRightPadding;
+		border-radius: 34px;
+	}
+
+	/* Modal Styles */
+
+	.modalContent {
+		padding: $responsiveBigPadding $responsiveLeftAndRightPadding;
+
+		.modalFieldEn {
+			margin: 0 0 0 $staticPcBigPadding;
+		}
+
+		.profileLabel {
+			font-size: 16px;
+			margin: $staticPcMediumPadding 0 0 0;
+		}
+	}
+
+	.modalTitle {
+		/* Заголовок модального окна */
+		font-size: 28px;
+	}
+
+	.closeButton {
+		top: $staticPcSmallPadding;
+		right: $staticPcSmallPadding;
+	}
+
+	.modalImage {
+		margin: 0 0 $staticPcSmallPadding 0;
 	}
 }
 
