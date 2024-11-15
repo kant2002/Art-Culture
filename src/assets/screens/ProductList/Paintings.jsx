@@ -370,34 +370,7 @@ const Paintings = () => {
 							<div className={styles.modalTextWrapper}>
 								<div className={styles.modalFieldUk}>
 									<div>
-										<label className={styles.profileLabel}>{t('Title (English)')}</label>
-										<input
-											type='text'
-											name='title_en'
-											value={formData.title_en}
-											onChange={handleChange}
-										/>
-									</div>
-									<div>
-										<label className={styles.profileLabel}>{t('Description (English)')}</label>
-										<textarea
-											name='description_en'
-											value={formData.description_en}
-											onChange={handleChange}
-										/>
-									</div>
-									<div>
-										<label className={styles.profileLabel}>{t('Specs (English)')}</label>
-										<textarea
-											name='specs_en'
-											value={formData.specs_en}
-											onChange={handleChange}
-										/>
-									</div>
-								</div>
-								<div className={styles.modalFieldEn}>
-									<div>
-										<label className={styles.profileLabel}>{t('Title (Ukrainian)')}</label>
+										<label className={styles.profileLabel}>{t('Заголовок українською')}</label>
 										<input
 											type='text'
 											name='title_uk'
@@ -406,7 +379,7 @@ const Paintings = () => {
 										/>
 									</div>
 									<div>
-										<label className={styles.profileLabel}>{t('Description (Ukrainian)')}</label>
+										<label className={styles.profileLabel}>{t('Опис українською')}</label>
 										<textarea
 											name='description_uk'
 											value={formData.description_uk}
@@ -414,7 +387,7 @@ const Paintings = () => {
 										/>
 									</div>
 									<div>
-										<label className={styles.profileLabel}>{t('Specs (Ukrainian)')}</label>
+										<label className={styles.profileLabel}>{t('Специфікація українською')}</label>
 										<textarea
 											name='specs_uk'
 											value={formData.specs_uk}
@@ -422,8 +395,35 @@ const Paintings = () => {
 										/>
 									</div>
 								</div>
+								<div className={styles.modalFieldEn}>
+									<div>
+										<label className={styles.profileLabel}>{t('Заголовок англійською')}</label>
+										<input
+											type='text'
+											name='title_en'
+											value={formData.title_en}
+											onChange={handleChange}
+										/>
+									</div>
+									<div>
+										<label className={styles.profileLabel}>{t('Опис англійською')}</label>
+										<textarea
+											name='description_en'
+											value={formData.description_en}
+											onChange={handleChange}
+										/>
+									</div>
+									<div>
+										<label className={styles.profileLabel}>{t('Специфікація англійською')}</label>
+										<textarea
+											name='specs_en'
+											value={formData.specs_en}
+											onChange={handleChange}
+										/>
+									</div>
+								</div>
 							</div>
-							<label className={styles.profileLabel}>{t('Upload Images')}</label>
+							<label className={styles.profileLabel}>{t('Додати зображення')}</label>
 							<input
 								type='file'
 								name='productImages'
@@ -431,7 +431,7 @@ const Paintings = () => {
 								onChange={handleChange}
 								multiple
 							/>
-							<button type='submit'>{t('Update Product')}</button>
+							<button type='submit'>{t('Зберегти')}</button>
 						</form>
 					</div>
 				</div>
