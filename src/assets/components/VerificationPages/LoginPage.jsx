@@ -75,7 +75,13 @@ const Login = () => {
 					/>
 					<button type='submit'>Увійти</button>
 				</form>
-				<p className={styles.SignUp} onClick={handleSignUPLinkClick}>
+				<p
+					className={styles.SignUp}
+					style={{
+						cursor: 'pointer',
+					}}
+					onClick={handleSignUPLinkClick}
+				>
 					Зареєструватись
 				</p>
 			</header>

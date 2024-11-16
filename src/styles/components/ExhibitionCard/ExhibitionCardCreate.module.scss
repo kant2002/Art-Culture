@@ -89,6 +89,9 @@
 
 .formGroup {
 	margin-bottom: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .formLabel {
@@ -104,8 +107,20 @@
 	box-sizing: border-box;
 }
 
-.formSelect {
+.checkArtistWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem; /* Adjust spacing between checkboxes */
+}
+
+.checkArtistItem {
+	display: flex;
+	align-items: center;
 	width: calc(202px - (166 * ((1440px - 100vw) / (1440 - 375))));
+}
+
+.checkboxLabel {
+	cursor: pointer;
 }
 
 .formOption,
