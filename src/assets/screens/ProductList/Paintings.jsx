@@ -28,8 +28,8 @@ const Paintings = () => {
 	})
 	const [message, setMessage] = useState('')
 	const [formErrors, setFormErrors] = useState({})
-	const [remainingTitle, setRemainingTitle] = useState(50)
-	const [remainingDescription, setRemainingDescription] = useState(500)
+	const [remainingTitle, setRemainingTitle] = useState(500)
+	const [remainingDescription, setRemainingDescription] = useState(5000)
 	const [error, setError] = useState('')
 
 	useEffect(() => {
@@ -100,9 +100,9 @@ const Paintings = () => {
 			specs_uk: product.specs_uk || '',
 			images: null,
 		})
-		setRemainingTitle(50 - product.title_en.length || product.title_uk.length)
+		setRemainingTitle(500 - product.title_en.length || product.title_uk.length)
 		setRemainingDescription(
-			500 - product.description_en.length || product.description_uk.length
+			5000 - product.description_en.length || product.description_uk.length
 		)
 		setIsModalOpen(true)
 	}
@@ -123,11 +123,11 @@ const Paintings = () => {
 			setFormData({ ...formData, [name]: value })
 
 			if (name === 'title_en' || name === 'title_uk') {
-				setRemainingTitle(50 - value.length)
+				setRemainingTitle(500 - value.length)
 			}
 
 			if (name === 'description_en' || name === 'description_uk') {
-				setRemainingDescription(500 - value.length)
+				setRemainingDescription(5000 - value.length)
 			}
 
 			if (e.target.tagName.toLowerCase() === 'textarea') {
@@ -280,6 +280,7 @@ const Paintings = () => {
 										alt={title}
 										className={styles.productImage}
 										onClick={() => handleImageClick(product.images)}
+										loading='lazy'
 									/>
 								)}
 								<h3>

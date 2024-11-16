@@ -1,101 +1,195 @@
-// src/components/ExhibitionForm/ExhibitionForm.jsx
-
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { memo, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
 import API from '../../../utils/api'
 import styles from '/src/styles/components/ExhibitionCard/ExhibitionCardCreate.module.scss'
 
+const ArtistCheckbox = memo(({ artist, isChecked, onChange }) => (
+	<div className={styles.checkArtistItem}>
+		<input
+			type='checkbox'
+			id={`artist-${artist.id}`}
+			name='artists'
+			value={artist.id}
+			checked={isChecked}
+			onChange={onChange}
+			className={styles.formSelect}
+		/>
+		<label htmlFor={`artist-${artist.id}`} className={styles.checkboxLabel}>
+			{artist.name || artist.title || artist.email}
+		</label>
+	</div>
+))
+
 function ExhibitionForm() {
-	const [title, setTitle] = useState('')
-	const [description, setDescription] = useState('')
-	const [startDate, setStartDate] = useState('')
-	const [endDate, setEndDate] = useState('')
-	const [time, setTime] = useState('')
-	const [location, setLocation] = useState('')
+	const [formData, setFormData] = useState({
+		title_en: '',
+		title_uk: '',
+		description_en: '',
+		description_uk: '',
+		startDate: '',
+		endDate: '',
+		time: '',
+		location_en: '',
+		location_uk: '',
+		artists: [],
+		images: [],
+	})
 	const [artists, setArtists] = useState([]) // All available artists
-	const [selectedArtistIds, setSelectedArtistIds] = useState([])
-	const [images, setImages] = useState([]) // For storing selected images
 	const [errors, setErrors] = useState([])
+	const [serverMessage, setServerMessage] = useState('')
+	const [isSubmitting, setIsSubmitting] = useState(false)
 	const navigate = useNavigate()
 	const { t } = useTranslation()
 	const { user, logout } = useAuth()
+
 	console.log('CurrentUser:', user)
 
 	useEffect(() => {
-		// Fetch artists to populate the dropdown
-		axios
-			.get('/api/users/creators', {
-				headers: {
-					Authorization: `Bearer ${localStorage.getItem('token')}`,
-				},
-			})
-			.then(response => {
+		// Fetch artists to populate the checkboxes
+		const fetchArtists = async () => {
+			try {
+				const response = await axios.get('/api/users/creators', {
+					headers: {
+						Authorization: `Bearer ${localStorage.getItem('token')}`,
+					},
+				})
 				console.log('Artists data:', response.data.creators)
 				setArtists(response.data.creators)
-			})
-			.catch(error => {
+			} catch (error) {
 				console.error('Error fetching artists:', error)
 				setErrors(prevErrors => [...prevErrors, 'Failed to load artists.'])
 				setArtists([])
-			})
+			}
+		}
+
+		fetchArtists()
+	}, [])
+
+	const handleInputChange = useCallback(e => {
+		const { name, value } = e.target
+		setFormData(prevState => ({
+			...prevState,
+			[name]: value,
+		}))
+	}, [])
+
+	const handleArtistSelection = useCallback(e => {
+		const artistId = parseInt(e.target.value, 10)
+		if (e.target.checked) {
+			setFormData(prevState => ({
+				...prevState,
+				artists: [...prevState.artists, artistId],
+			}))
+		} else {
+			setFormData(prevState => ({
+				...prevState,
+				artists: prevState.artists.filter(id => id !== artistId),
+			}))
+		}
+	}, [])
+
+	const handleImageChange = useCallback(e => {
+		setFormData(prevState => ({
+			...prevState,
+			images: [...e.target.files],
+		}))
 	}, [])
 
 	const handleSubmit = async e => {
 		e.preventDefault()
+		setErrors([])
+		setServerMessage('')
+		setIsSubmitting(true)
+
+		// Destructure formData for easier access
+		const {
+			title_en,
+			title_uk,
+			description_en,
+			description_uk,
+			startDate,
+			endDate,
+			time,
+			location_en,
+			location_uk,
+			artists: selectedArtists,
+			images,
+		} = formData
 
 		// Form validation
 		if (
-			!title ||
-			!description ||
+			!title_en ||
+			!title_uk ||
+			!description_en ||
+			!description_uk ||
 			!startDate ||
 			!endDate ||
 			!time ||
-			!location
+			!location_en ||
+			!location_uk
 		) {
 			setErrors(['All fields are required.'])
+			setIsSubmitting(false)
 			return
 		}
 
-		if (selectedArtistIds.length === 0) {
+		if (selectedArtists.length === 0) {
 			setErrors(['Please select at least one artist.'])
+			setIsSubmitting(false)
 			return
 		}
 
 		// Prepare form data
-		const formData = new FormData()
-		formData.append('title', title)
-		formData.append('description', description)
-		formData.append('startDate', startDate)
-		formData.append('endDate', endDate)
-		formData.append('time', time)
-		formData.append('location', location)
+		const submissionData = new FormData()
+
+		// Append multilingual title
+		submissionData.append('title_en', title_en)
+		submissionData.append('title_uk', title_uk)
+
+		// Append multilingual description
+		submissionData.append('description_en', description_en)
+		submissionData.append('description_uk', description_uk)
+
+		// Append multilingual location
+		submissionData.append('location_en', location_en)
+		submissionData.append('location_uk', location_uk)
+
+		// Append dates and time
+		submissionData.append('startDate', startDate)
+		submissionData.append('endDate', endDate)
+		submissionData.append('time', time)
 
 		// Append selected artists
-		selectedArtistIds.forEach(artistId => {
-			formData.append('artistIds', artistId)
+		selectedArtists.forEach(artistId => {
+			submissionData.append('artistIds', artistId)
 		})
 
 		// Append images
 		images.forEach(image => {
-			formData.append('exhibitionImages', image)
+			submissionData.append('exhibitionImages', image)
 		})
 
+		// Debug: Log FormData entries
+		for (let pair of submissionData.entries()) {
+			console.log(`${pair[0]}: ${pair[1]}`)
+		}
+
 		try {
-			const response = await API.post('/exhibitions', formData, {
+			const response = await API.post('/exhibitions', submissionData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
 					Authorization: `Bearer ${localStorage.getItem('token')}`,
-					// Include authorization header if needed
 				},
 			})
 			console.log('Exhibition created:', response.data)
-			// Redirect to the exhibition details page or reset the form
+			setServerMessage('Exhibition created successfully!')
+			// Redirect to the exhibition details page
 			navigate(`/Exhibitions/${response.data.exhibition.id}`)
 		} catch (error) {
-			console.error('Error creating exhibition:', error.response.data)
+			console.error('Error creating exhibition:', error.response)
 			if (error.response && error.response.data && error.response.data.errors) {
 				setErrors(error.response.data.errors.map(err => err.msg))
 			} else if (
@@ -107,23 +201,9 @@ function ExhibitionForm() {
 			} else {
 				setErrors(['An error occurred while creating the exhibition.'])
 			}
+		} finally {
+			setIsSubmitting(false)
 		}
-	}
-
-	const handleArtistSelection = e => {
-		const options = e.target.options
-		const selectedIds = []
-		for (const option of options) {
-			if (option.selected) {
-				selectedIds.push(parseInt(option.value))
-			}
-		}
-		console.log('Selected Artist IDs:', selectedIds)
-		setSelectedArtistIds(selectedIds)
-	}
-
-	const handleImageChange = e => {
-		setImages([...e.target.files])
 	}
 
 	const handleProfilePageClick = () => {
@@ -185,13 +265,13 @@ function ExhibitionForm() {
 					className={styles.profileAction}
 					onClick={handlePaintingCardListClick}
 				>
-					{t('Переглянути вироби/картини ')}
+					{t('Переглянути вироби/картини')}
 				</button>
 				<button
 					className={styles.profileAction}
 					onClick={handleExhibitionCardCreateClick}
 				>
-					{t('Додати виставку ')}
+					{t('Додати виставку')}
 				</button>
 				<button
 					className={styles.profileAction}
@@ -205,7 +285,7 @@ function ExhibitionForm() {
 			</div>
 
 			<div className={styles.exhibitionFormContainer}>
-				<h2 className={styles.formTitle}>Create Exhibition</h2>
+				<h2 className={styles.formTitle}>{t('Створити виставку')}</h2>
 				{errors.length > 0 && (
 					<div className={styles.errorMessages}>
 						<ul className={styles.errorList}>
@@ -217,89 +297,159 @@ function ExhibitionForm() {
 						</ul>
 					</div>
 				)}
+				{serverMessage && (
+					<div className={styles.successMessage}>{serverMessage}</div>
+				)}
 				<form
 					onSubmit={handleSubmit}
 					encType='multipart/form-data'
 					className={styles.exhibitionForm}
 				>
+					{/* Title in Ukrainian */}
 					<div className={styles.formGroup}>
-						<label className={styles.formLabel}>Title:</label>
+						<label className={styles.formLabel}>
+							{t('Назва виставки українською')}
+						</label>
 						<input
 							type='text'
-							value={title}
-							onChange={e => setTitle(e.target.value)}
+							name='title_uk'
+							value={formData.title_uk}
+							onChange={handleInputChange}
 							required
 							className={styles.formInput}
 						/>
 					</div>
+
+					{/* Description in Ukrainian */}
 					<div className={styles.formGroup}>
-						<label className={styles.formLabel}>Description:</label>
+						<label className={styles.formLabel}>
+							{t('Опис виставки українською')}
+						</label>
 						<textarea
-							value={description}
-							onChange={e => setDescription(e.target.value)}
+							name='description_uk'
+							value={formData.description_uk}
+							onChange={handleInputChange}
 							required
 							className={styles.formTextarea}
 						></textarea>
 					</div>
+
+					{/* Location in Ukrainian */}
 					<div className={styles.formGroup}>
-						<label className={styles.formLabel}>Start Date:</label>
-						<input
-							type='date'
-							value={startDate}
-							onChange={e => setStartDate(e.target.value)}
-							required
-							className={styles.formInput}
-						/>
-					</div>
-					<div className={styles.formGroup}>
-						<label className={styles.formLabel}>End Date:</label>
-						<input
-							type='date'
-							value={endDate}
-							onChange={e => setEndDate(e.target.value)}
-							required
-							className={styles.formInput}
-						/>
-					</div>
-					<div className={styles.formGroup}>
-						<label className={styles.formLabel}>Time:</label>
+						<label className={styles.formLabel}>
+							{t('Місце проведення українською')}
+						</label>
 						<input
 							type='text'
-							value={time}
-							onChange={e => setTime(e.target.value)}
+							name='location_uk'
+							value={formData.location_uk}
+							onChange={handleInputChange}
 							required
 							className={styles.formInput}
 						/>
 					</div>
+
+					{/* Title in English */}
 					<div className={styles.formGroup}>
-						<label className={styles.formLabel}>Location:</label>
+						<label className={styles.formLabel}>
+							{t('Назва виставки англійською')}
+						</label>
 						<input
 							type='text'
-							value={location}
-							onChange={e => setLocation(e.target.value)}
+							name='title_en'
+							value={formData.title_en}
+							onChange={handleInputChange}
 							required
 							className={styles.formInput}
 						/>
 					</div>
+
+					{/* Description in English */}
 					<div className={styles.formGroup}>
-						<label className={styles.formLabel}>Artists:</label>
-						<select
-							multiple
-							value={selectedArtistIds}
-							onChange={handleArtistSelection}
+						<label className={styles.formLabel}>
+							{t('Опис виставки англійською')}
+						</label>
+						<textarea
+							name='description_en'
+							value={formData.description_en}
+							onChange={handleInputChange}
 							required
-							className={styles.formSelect}
-						>
+							className={styles.formTextarea}
+						></textarea>
+					</div>
+
+					{/* Location in English */}
+					<div className={styles.formGroup}>
+						<label className={styles.formLabel}>
+							{t('Місце проведення англійською')}
+						</label>
+						<input
+							type='text'
+							name='location_en'
+							value={formData.location_en}
+							onChange={handleInputChange}
+							required
+							className={styles.formInput}
+						/>
+					</div>
+
+					{/* Start Date */}
+					<div className={styles.formGroup}>
+						<label className={styles.formLabel}>{t('Дата початку')}</label>
+						<input
+							type='date'
+							name='startDate'
+							value={formData.startDate}
+							onChange={handleInputChange}
+							required
+							className={styles.formInput}
+						/>
+					</div>
+
+					{/* End Date */}
+					<div className={styles.formGroup}>
+						<label className={styles.formLabel}>{t('Дата завершення')}</label>
+						<input
+							type='date'
+							name='endDate'
+							value={formData.endDate}
+							onChange={handleInputChange}
+							required
+							className={styles.formInput}
+						/>
+					</div>
+
+					{/* Time */}
+					<div className={styles.formGroup}>
+						<label className={styles.formLabel}>{t('Час')}</label>
+						<input
+							type='text'
+							name='time'
+							value={formData.time}
+							onChange={handleInputChange}
+							required
+							className={styles.formInput}
+						/>
+					</div>
+
+					{/* Artists (Checkboxes) */}
+					<div className={styles.formGroup}>
+						<label className={styles.formLabel}>{t('Митці')}:</label>
+						<div className={styles.checkArtistWrapper}>
 							{artists.map(artist => (
-								// < className={styles.artistOption}>
-								<option key={artist.id} value={String(artist.id)}>
-									{artist.name || artist.title || artist.email}
-								</option>
+								<ArtistCheckbox
+									key={artist.id}
+									artist={artist}
+									isChecked={formData.artists.includes(artist.id)}
+									onChange={handleArtistSelection}
+								/>
 							))}
-						</select>
+						</div>
 					</div>
+
+					{/* Images */}
 					<div className={styles.formGroup}>
-						<label className={styles.formLabel}>Images:</label>
+						<label className={styles.formLabel}>{t('Додати зображення')}</label>
 						<input
 							type='file'
 							accept='image/*'
@@ -308,8 +458,14 @@ function ExhibitionForm() {
 							className={styles.formFileInput}
 						/>
 					</div>
-					<button type='submit' className={styles.submitButton}>
-						Create Exhibition
+
+					{/* Submit Button */}
+					<button
+						type='submit'
+						className={styles.submitButton}
+						disabled={isSubmitting}
+					>
+						{isSubmitting ? t('Створюється...') : t('Створити виставку')}
 					</button>
 				</form>
 			</div>
