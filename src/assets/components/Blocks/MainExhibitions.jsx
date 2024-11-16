@@ -49,7 +49,7 @@ function MainExhibitions() {
 	}, [visibleExhibitionsCount])
 
 	useEffect(() => {
-		// Запит на отримання постів з медіа-даними
+		// Запит на отримання виставок з медіа-даними
 		axios
 			.get('/api/exhibitions')
 			.then(response => {
@@ -92,21 +92,29 @@ function MainExhibitions() {
 						// Логування даних для перевірки
 						console.log('Витягнуті виставки:', exhibitions)
 
-						const featuredMediaUrl = exhibition.images
-							? `${baseUrl}${exhibition.images.replace('../../', '/')}`
-							: '/Img/halfNewsCard.jpg'
+						const featuredMediaUrl =
+							exhibition.images && exhibition.images.length > 0
+								? `${baseUrl}${exhibition.images[0].imageUrl.replace('../../', '/')}`
+								: '/Img/halfNewsCard.jpg'
 						console.log('Витягнуте медіа:', featuredMediaUrl)
 
-						const exhibitionDate = new Date(exhibition.date)
-						const formattedDate = exhibitionDate.toLocaleDateString('uk-UA', {
+						const formattedStartDate = new Date(
+							exhibition.startDate
+						).toLocaleDateString('uk-UA', {
 							year: 'numeric',
 							month: 'long',
 							day: 'numeric',
 						})
-						const formattedTime = exhibitionDate.toLocaleTimeString('uk-UA', {
-							hour: 'numeric',
-							minute: 'numeric',
+						const formattedEndDate = new Date(
+							exhibition.endDate
+						).toLocaleTimeString('uk-UA', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
 						})
+						const formattedTime = exhibition.cardTime
+							? exhibition.cardTime
+							: '-'
 
 						return (
 							<div
@@ -160,7 +168,9 @@ function MainExhibitions() {
 											/>
 										</div>
 										<div className={`${styles.cardDateWrapper}`}>
-											<p className={`${styles.cardDate}`}>{formattedDate}</p>
+											<p className={`${styles.cardDate}`}>
+												{formattedStartDate} - {formattedEndDate}
+											</p>
 										</div>
 										<div className={`${styles.cardTimeWrapper}`}>
 											<p className={`${styles.cardTime}`}>{formattedTime}</p>

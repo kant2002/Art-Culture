@@ -84,16 +84,19 @@ model ProductImage {
 
 model Exhibition {
   id                Int                @id @default(autoincrement())
-  title             String
-  description       String
+  title_en          String?
+  description_en    String?
+  title_uk          String?
+  description_uk    String?
   startDate         DateTime
   endDate           DateTime
   time              String?
-  location          String
+  location_en       String?
+  location_uk       String?
   createdById       Int
   createdBy         User               @relation("UserCreatedExhibitions", fields: [createdById], references: [id])
   exhibitionArtists ExhibitionArtist[]
-  images            ExhibitionImage[]
+  images            ExhibitionImage[]  @relation("ExhibitionsImages")
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
 }
@@ -101,7 +104,7 @@ model Exhibition {
 model ExhibitionImage {
   id           Int        @id @default(autoincrement())
   imageUrl     String
-  exhibition   Exhibition @relation(fields: [exhibitionId], references: [id])
+  exhibition   Exhibition @relation("ExhibitionsImages", onDelete: Cascade, fields: [exhibitionId], references: [id])
   exhibitionId Int
 }
 

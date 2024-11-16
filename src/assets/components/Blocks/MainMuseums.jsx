@@ -99,16 +99,21 @@ function MainMuseums() {
 						: '/Img/halfNewsCard.jpg'
 					console.log('Витягнуте медіа:', featuredMediaUrl)
 
-					// const postDate = new Date(post.date)
-					// const formattedDate = postDate.toLocaleDateString('uk-UA', {
-					// 	year: 'numeric',
-					// 	month: 'long',
-					// 	day: 'numeric',
-					// })
-					// const formattedTime = postDate.toLocaleTimeString('uk-UA', {
-					// 	hour: 'numeric',
-					// 	minute: 'numeric',
-					// })
+					const formattedDate = new Date(museum.createdAt).toLocaleDateString(
+						'uk-UA',
+						{
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+						}
+					)
+					const formattedTime = new Date(museum.createdAt).toLocaleTimeString(
+						'uk-UA',
+						{
+							hour: 'numeric',
+							minute: 'numeric',
+						}
+					)
 
 					return (
 						<div
@@ -163,14 +168,10 @@ function MainMuseums() {
 										/>
 									</div>
 									<div className={`${styles.cardDateWrapper}`}>
-										<p className={`${styles.cardDate}`}>
-											{/*{formattedDate}*/}
-										</p>
+										<p className={`${styles.cardDate}`}>{formattedDate}</p>
 									</div>
 									<div className={`${styles.cardTimeWrapper}`}>
-										<p className={`${styles.cardTime}`}>
-											{/*{formattedTime}*/}
-										</p>
+										<p className={`${styles.cardTime}`}>{formattedTime}</p>
 									</div>
 								</div>
 							</div>
