@@ -248,13 +248,12 @@ function ExhibitionForm() {
 				>
 					{t('Профіль')}
 				</button>
-				<button className={styles.profileAction} onClick={handlePostsClick}>
-					{t('Публікації')}
-				</button>
 				<button className={styles.profileAction} onClick={handleAddPostClick}>
 					{t('Додати публікацію')}
 				</button>
-
+				<button className={styles.profileAction} onClick={handlePostsClick}>
+					{t('Публікації')}
+				</button>
 				<button
 					className={styles.profileAction}
 					onClick={handleProductCartCreateClick}
@@ -351,9 +350,7 @@ function ExhibitionForm() {
 
 					{/* Title in English */}
 					<div className={styles.formGroup}>
-						<label className={styles.formLabel}>
-							{t('Назва виставки англійською')}
-						</label>
+						<label className={styles.formLabel}>Title:</label>
 						<input
 							type='text'
 							name='title_en'
