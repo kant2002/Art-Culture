@@ -119,11 +119,11 @@ const ProductCardCreate = () => {
 				>
 					{t('Профіль')}
 				</button>
-				<button className={styles.profileAction} onClick={handlePostsClick}>
-					{t('Публікації')}
-				</button>
 				<button className={styles.profileAction} onClick={handleAddPostClick}>
 					{t('Додати публікацію')}
+				</button>
+				<button className={styles.profileAction} onClick={handlePostsClick}>
+					{t('Публікації')}
 				</button>
 				<button
 					className={styles.profileAction}
