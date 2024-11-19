@@ -366,7 +366,7 @@ function ExhibitionForm() {
 
 							{/* Time */}
 							<div className={styles.formGroup}>
-								<label className={styles.formLabel}>{t('Час')}</label>
+								<label className={styles.formLabel}>{t('Час початку')}</label>
 								<input
 									type='text'
 									name='time'
@@ -381,7 +381,7 @@ function ExhibitionForm() {
 						<div className={styles.modalFieldEn}>
 							{/* Title in English */}
 							<div className={styles.formGroup}>
-								<label className={styles.formLabel}>Title:</label>
+								<label className={styles.formLabel}>{t('Назва виставки англійською')}</label>
 								<input
 									type='text'
 									name='title_en'
@@ -434,7 +434,7 @@ function ExhibitionForm() {
 							</div>
 							{/* Time */}
 							<div className={styles.formGroup}>
-								<label className={styles.formLabel}>{t('Час')}</label>
+								<label className={styles.formLabel}>{t('Час завершення')}</label>
 								<input
 									type='text'
 									name='time'
