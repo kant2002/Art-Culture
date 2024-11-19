@@ -350,6 +350,32 @@ function ExhibitionForm() {
 									className={styles.formInput}
 								/>
 							</div>
+
+							{/* Start Date */}
+							<div className={styles.formGroup}>
+								<label className={styles.formLabel}>{t('Дата початку')}</label>
+								<input
+									type='date'
+									name='startDate'
+									value={formData.startDate}
+									onChange={handleInputChange}
+									required
+									className={styles.formInput}
+								/>
+							</div>
+
+							{/* Time */}
+							<div className={styles.formGroup}>
+								<label className={styles.formLabel}>{t('Час')}</label>
+								<input
+									type='text'
+									name='time'
+									value={formData.time}
+									onChange={handleInputChange}
+									required
+									className={styles.formInput}
+								/>
+							</div>
 						</div>
 
 						<div className={styles.modalFieldEn}>
@@ -394,46 +420,31 @@ function ExhibitionForm() {
 									className={styles.formInput}
 								/>
 							</div>
+							{/* End Date */}
+							<div className={styles.formGroup}>
+								<label className={styles.formLabel}>{t('Дата завершення')}</label>
+								<input
+									type='date'
+									name='endDate'
+									value={formData.endDate}
+									onChange={handleInputChange}
+									required
+									className={styles.formInput}
+								/>
+							</div>
+							{/* Time */}
+							<div className={styles.formGroup}>
+								<label className={styles.formLabel}>{t('Час')}</label>
+								<input
+									type='text'
+									name='time'
+									value={formData.time}
+									onChange={handleInputChange}
+									required
+									className={styles.formInput}
+								/>
+							</div>
 						</div>
-					</div>
-
-					{/* Start Date */}
-					<div className={styles.formGroup}>
-						<label className={styles.formLabel}>{t('Дата початку')}</label>
-						<input
-							type='date'
-							name='startDate'
-							value={formData.startDate}
-							onChange={handleInputChange}
-							required
-							className={styles.formInput}
-						/>
-					</div>
-
-					{/* End Date */}
-					<div className={styles.formGroup}>
-						<label className={styles.formLabel}>{t('Дата завершення')}</label>
-						<input
-							type='date'
-							name='endDate'
-							value={formData.endDate}
-							onChange={handleInputChange}
-							required
-							className={styles.formInput}
-						/>
-					</div>
-
-					{/* Time */}
-					<div className={styles.formGroup}>
-						<label className={styles.formLabel}>{t('Час')}</label>
-						<input
-							type='text'
-							name='time'
-							value={formData.time}
-							onChange={handleInputChange}
-							required
-							className={styles.formInput}
-						/>
 					</div>
 
 					{/* Artists (Checkboxes) */}

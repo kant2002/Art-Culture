@@ -8,7 +8,6 @@
 	justify-content: start;
 	font-family: $default-font;
 	margin: $responsiveMediumPadding 0 $responsiveMediumPadding $responsiveLeftAndRightPadding;
-
 }
 
 .formTitle {
@@ -37,9 +36,14 @@
 }
 
 .formGroup {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
+	input {
+		margin: $responsiveSmallPadding 0 0 0;
+	}
 }
 
 .modalTextWrapper {
@@ -74,24 +78,32 @@
 	margin: $responsiveMediumPadding 0 0 0;
 }
 
-.formInput,
-.formTextarea,
-.formFileInput {
-	width: 100%;
-	padding: 8px;
-	box-sizing: border-box;
-}
-
 .checkArtistWrapper {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem; /* Adjust spacing between checkboxes */
 }
 
 .checkArtistItem {
+	margin: $responsiveSmallPadding 0 0 0;
+	width: fit-content;
 	display: flex;
 	align-items: center;
-	width: calc(202px - (166 * ((1440px - 100vw) / (1440 - 375))));
+	justify-content: center;
+
+	input {
+		margin: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: fit-content;
+	}
+
+	label {
+		font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+		font-weight: 500;
+		margin: 0 0 0 $responsiveSmallPadding;
+	}
 }
 
 .checkboxLabel {
@@ -101,6 +113,7 @@
 .formOption,
 .artistOption {
 	color: #000000;
+
 	.key,
 	.value {
 		color: #000000;
@@ -114,12 +127,14 @@
 
 .submitButton {
 	padding: 10px 15px;
-	background-color: #007bff; /* Adjust color as needed */
+	background-color: #007bff;
+	/* Adjust color as needed */
 	color: #fff;
 	border: none;
 	cursor: pointer;
 }
 
 .submitButton:hover {
-	background-color: #0056b3; /* Adjust hover color as needed */
+	background-color: #0056b3;
+	/* Adjust hover color as needed */
 }
