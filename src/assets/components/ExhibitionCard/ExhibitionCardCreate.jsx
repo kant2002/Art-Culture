@@ -304,90 +304,97 @@ function ExhibitionForm() {
 					encType='multipart/form-data'
 					className={styles.exhibitionForm}
 				>
-					{/* Title in Ukrainian */}
-					<div className={styles.formGroup}>
-						<label className={styles.formLabel}>
-							{t('Назва виставки українською')}
-						</label>
-						<input
-							type='text'
-							name='title_uk'
-							value={formData.title_uk}
-							onChange={handleInputChange}
-							required
-							className={styles.formInput}
-						/>
-					</div>
+					<div className={styles.modalTextWrapper}>
+						<div className={styles.modalFieldUk}>
 
-					{/* Description in Ukrainian */}
-					<div className={styles.formGroup}>
-						<label className={styles.formLabel}>
-							{t('Опис виставки українською')}
-						</label>
-						<textarea
-							name='description_uk'
-							value={formData.description_uk}
-							onChange={handleInputChange}
-							required
-							className={styles.formTextarea}
-						></textarea>
-					</div>
+							{/* Title in Ukrainian */}
+							<div className={styles.formGroup}>
+								<label className={styles.formLabel}>
+									{t('Назва виставки українською')}
+								</label>
+								<input
+									type='text'
+									name='title_uk'
+									value={formData.title_uk}
+									onChange={handleInputChange}
+									required
+									className={styles.formInput}
+								/>
+							</div>
 
-					{/* Location in Ukrainian */}
-					<div className={styles.formGroup}>
-						<label className={styles.formLabel}>
-							{t('Місце проведення українською')}
-						</label>
-						<input
-							type='text'
-							name='location_uk'
-							value={formData.location_uk}
-							onChange={handleInputChange}
-							required
-							className={styles.formInput}
-						/>
-					</div>
+							{/* Description in Ukrainian */}
+							<div className={styles.formGroup}>
+								<label className={styles.formLabel}>
+									{t('Опис виставки українською')}
+								</label>
+								<textarea
+									name='description_uk'
+									value={formData.description_uk}
+									onChange={handleInputChange}
+									required
+									className={styles.formTextarea}
+								></textarea>
+							</div>
 
-					{/* Title in English */}
-					<div className={styles.formGroup}>
-						<label className={styles.formLabel}>Title:</label>
-						<input
-							type='text'
-							name='title_en'
-							value={formData.title_en}
-							onChange={handleInputChange}
-							required
-							className={styles.formInput}
-						/>
-					</div>
+							{/* Location in Ukrainian */}
+							<div className={styles.formGroup}>
+								<label className={styles.formLabel}>
+									{t('Місце проведення українською')}
+								</label>
+								<input
+									type='text'
+									name='location_uk'
+									value={formData.location_uk}
+									onChange={handleInputChange}
+									required
+									className={styles.formInput}
+								/>
+							</div>
+						</div>
 
-					{/* Description in English */}
-					<div className={styles.formGroup}>
-						<label className={styles.formLabel}>
-							{t('Опис виставки англійською')}
-						</label>
-						<textarea
-							name='description_en'
-							value={formData.description_en}
-							onChange={handleInputChange}
-							required
-							className={styles.formTextarea}
-						></textarea>
-					</div>
+						<div className={styles.modalFieldEn}>
+							{/* Title in English */}
+							<div className={styles.formGroup}>
+								<label className={styles.formLabel}>Title:</label>
+								<input
+									type='text'
+									name='title_en'
+									value={formData.title_en}
+									onChange={handleInputChange}
+									required
+									className={styles.formInput}
+								/>
+							</div>
 
-					{/* Location in English */}
-					<div className={styles.formGroup}>
-						<label className={styles.formLabel}>
-							{t('Місце проведення англійською')}
-						</label>
-						<input
-							type='text'
-							name='location_en'
-							value={formData.location_en}
-							onChange={handleInputChange}
-							required
-							className={styles.formInput}
-						/>
+							{/* Description in English */}
+							<div className={styles.formGroup}>
+								<label className={styles.formLabel}>
+									{t('Опис виставки англійською')}
+								</label>
+								<textarea
+									name='description_en'
+									value={formData.description_en}
+									onChange={handleInputChange}
+									required
+									className={styles.formTextarea}
+								></textarea>
+							</div>
+
+							{/* Location in English */}
+							<div className={styles.formGroup}>
+								<label className={styles.formLabel}>
+									{t('Місце проведення англійською')}
+								</label>
+								<input
+									type='text'
+									name='location_en'
+									value={formData.location_en}
+									onChange={handleInputChange}
+									required
+									className={styles.formInput}
+								/>
+							</div>
+						</div>
 					</div>
 
 					{/* Start Date */}

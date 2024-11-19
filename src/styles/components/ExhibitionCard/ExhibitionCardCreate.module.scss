@@ -2,14 +2,19 @@
 @import '/src/styles/utilities/variables.scss';
 
 .exhibitionFormContainer {
-	max-width: 600px;
-	margin: 0 auto;
-	padding: 20px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	font-family: $default-font;
+	margin: $responsiveMediumPadding 0 $responsiveMediumPadding $responsiveLeftAndRightPadding;
+
 }
 
 .formTitle {
-	text-align: center;
-	margin-bottom: 20px;
+	font-weight: 600;
+	font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+	text-transform: uppercase;
 }
 
 .errorMessages {
@@ -32,15 +37,41 @@
 }
 
 .formGroup {
-	margin-bottom: 15px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
+.modalTextWrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.modalFieldUk {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.modalFieldEn {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	margin: 0 0 0 $responsiveBigPadding;
+}
+
 .formLabel {
-	display: block;
-	margin-bottom: 5px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: start;
+	font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	font-weight: 700;
+	margin: $responsiveMediumPadding 0 0 0;
 }
 
 .formInput,
