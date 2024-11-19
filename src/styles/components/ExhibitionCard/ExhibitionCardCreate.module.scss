@@ -18,7 +18,7 @@
 
 .errorMessages {
 	color: red;
-	margin-bottom: 20px;
+	margin-bottom: $responsiveSmallPadding;
 }
 
 .errorList {
@@ -27,7 +27,7 @@
 }
 
 .errorItem {
-	margin-bottom: 5px;
+	margin-bottom: $responsiveSmallPadding;
 }
 
 .exhibitionForm {
@@ -126,15 +126,61 @@
 }
 
 .submitButton {
-	padding: 10px 15px;
-	background-color: #007bff;
-	/* Adjust color as needed */
-	color: #fff;
-	border: none;
+	padding: 0 $staticButtonLeftAndRightPadding;
+	height: calc(51px - (11 * ((1440px - 100vw) / (1440 - 375))));
+	min-height: 40px;
+	max-height: 51px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #000;
+	border-radius: calc(34px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	background-color: #fff;
 	cursor: pointer;
 }
 
-.submitButton:hover {
-	background-color: #0056b3;
-	/* Adjust hover color as needed */
+@media (min-width: 1441px) {
+	.exhibitionFormContainer {
+		margin: $staticPcMediumPadding 0 $staticPcMediumPadding $responsiveLeftAndRightPadding;
+	}
+
+	.formTitle {
+		font-size: 28px;
+	}
+
+	.errorMessages {
+		margin-bottom: $staticPcSmallPadding;
+	}
+
+	.errorItem {
+		margin-bottom: $staticPcSmallPadding;
+	}
+
+	.formGroup {
+		input {
+			margin: $staticPcSmallPadding 0 0 0;
+		}
+	}
+
+	.modalFieldEn {
+		margin: 0 0 0 $staticPcBigPadding;
+	}
+
+	.formLabel {
+		font-size: 16px;
+		margin: $staticPcMediumPadding 0 0 0;
+	}
+
+	.checkArtistItem {
+		margin: $staticPcSmallPadding 0 0 0;
+
+		label {
+			font-size: 16px;
+			margin: 0 0 0 $staticPcSmallPadding;
+		}
+	}
+
+	.submitButton {
+		border-radius: 34px;
+	}
 }
