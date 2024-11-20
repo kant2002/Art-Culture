@@ -108,5 +108,15 @@
     "Редагування картини/виробу": "Editing a picture/product",
     "Створити виставку": "Create an exhibition",
     "Назва виставки": "The name of the exhibition",
-    "Картини": "Pictures"
+    "Картини": "Pictures",
+    "Назва виставки українською": "The name of the exhibition in Ukrainian",
+    "Опис виставки українською": "Description of the exhibition in Ukrainian",
+    "Місце проведення українською": "Venue in Ukrainian",
+    "Дата початку": "Start date",
+    "Дата завершення": "End date",
+    "Час початку": "Start time",
+    "Час завершення": "End time",
+    "Назва виставки англійською": "The name of the exhibition in English",
+    "Опис виставки англійською": "Description of the exhibition in English",
+    "Місце проведення англійською": "Venue in English"
 }
