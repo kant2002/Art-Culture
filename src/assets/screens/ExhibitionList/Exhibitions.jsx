@@ -18,6 +18,7 @@ function MuseumExhibitions() {
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [selectedExhibitionImages, setSelectedExhibitionImages] = useState([])
 	const [editingExhibition, setEditingExhibition] = useState(null)
+	const [artists, setArtists] = useState([])
 	const [formData, setFormData] = useState({
 		title_en: '',
 		description_en: '',
@@ -28,7 +29,7 @@ function MuseumExhibitions() {
 		startDate: '',
 		endDate: '',
 		time: '',
-		artists: null,
+		artists: [],
 		images: null,
 	})
 	const [message, setMessage] = useState('')
@@ -61,6 +62,23 @@ function MuseumExhibitions() {
 
 		fetchExhibitions()
 	}, [page])
+	useEffect(() => {
+		const fetchArtists = async () => {
+			try {
+				const response = await API.get('/users/creators', {
+					headers: {
+						Authorization: `Bearer ${localStorage.getItem('token')}`,
+					},
+				})
+				setArtists(response.data.creators)
+			} catch (error) {
+				console.error('Error fetching artists:', error)
+				setFormErrors(prevErrors => [...prevErrors, 'Failed to load artists.'])
+				setArtists([])
+			}
+		}
+		fetchArtists()
+	}, [])
 
 	if (loading) {
 		return <div>Loading exhibitions...</div>
@@ -123,13 +141,25 @@ function MuseumExhibitions() {
 			description_uk: exhibition.description_uk || '',
 			location_uk: exhibition.location_uk || '',
 			images: exhibition.images || null,
+			time: exhibition.time || '',
+			startDate: exhibition.startDate
+				? new Date(exhibition.startDate).toISOString().split('T')[0]
+				: '',
+			endDate: exhibition.endDate
+				? new Date(exhibition.endDate).toISOString().split('T')[0]
+				: '',
+			artists: exhibition.exhibitionArtists
+				? exhibition.exhibitionArtists.map(ea => ea.artist.id)
+				: [],
 		})
 		setRemainingTitle(
-			500 - exhibition.title_en.length || exhibition.title_uk.length
+			500 - (exhibition.title_en?.length || exhibition.title_uk?.length || 0)
 		)
 		setRemainingDescription(
-			5000 - exhibition.description_en.length ||
-				exhibition.description_uk.length
+			5000 -
+				(exhibition.description_en?.length ||
+					exhibition.description_uk?.length ||
+					0)
 		)
 		setIsModalOpen(true)
 	}
@@ -139,13 +169,28 @@ function MuseumExhibitions() {
 		setEditingExhibition(null)
 		setFormErrors({})
 		setMessage('')
+		setFormData({
+			title_en: '',
+			description_en: '',
+			location_en: '',
+			title_uk: '',
+			description_uk: '',
+			location_uk: '',
+			startDate: '',
+			endDate: '',
+			time: '',
+			artists: [],
+			images: null,
+		})
 	}
 
 	const handleChange = e => {
 		const { name, value, files } = e.target
 
-		if (name === 'images' || name === 'exhibitionsImages') {
+		if (name === 'images' || name === 'exhibitionImages') {
 			setFormData({ ...formData, images: files })
+		} else if (name === 'artists') {
+			// Handled in handleArtistSelection
 		} else {
 			setFormData({ ...formData, [name]: value })
 
@@ -175,7 +220,11 @@ function MuseumExhibitions() {
 			!formData.location_en ||
 			!formData.title_uk ||
 			!formData.description_uk ||
-			!formData.location_uk
+			!formData.location_uk ||
+			formData.artists.length === 0 ||
+			!formData.startDate ||
+			!formData.endDate ||
+			!formData.time
 		) {
 			setFormErrors({ form: 'Потрібно заповнити поля' })
 			return
@@ -187,13 +236,28 @@ function MuseumExhibitions() {
 			exhibitionData.append('description_en', formData.description_en)
 			exhibitionData.append('title_uk', formData.title_uk)
 			exhibitionData.append('description_uk', formData.description_uk)
-			exhibitionData.append('specs_en', formData.specs_en)
-			exhibitionData.append('specs_uk', formData.specs_uk)
+			exhibitionData.append('location_en', formData.location_en)
+			exhibitionData.append('location_uk', formData.location_uk)
+			exhibitionData.append('time', formData.time)
+			exhibitionData.append('startDate', formData.startDate)
+			exhibitionData.append('endDate', formData.endDate)
+
+			// Append artistIds as a JSON string
+			exhibitionData.append('artistIds', JSON.stringify(formData.artists))
+
+			// Append images
 			if (formData.images && formData.images.length > 0) {
 				for (let i = 0; i < formData.images.length; i++) {
-					exhibitionData.append('exhibitionsImages', formData.images[i])
+					exhibitionData.append('exhibitionImages', formData.images[i])
 				}
 			}
+
+			// Log FormData entries
+			console.log('FormData entries:')
+			for (let pair of exhibitionData.entries()) {
+				console.log(`${pair[0]}: ${pair[1]}`)
+			}
+
 			const response = await API.put(
 				`/exhibitions/${editingExhibition.id}`,
 				exhibitionData,
@@ -204,17 +268,18 @@ function MuseumExhibitions() {
 					},
 				}
 			)
-
 			if (response.status === 200) {
-				setMessage('Публікація оновлено')
+				setMessage('Публікацію оновлено')
 
 				setExhibitions(prevExhibitions =>
 					prevExhibitions.map(exhibition =>
 						exhibition.id === editingExhibition.id ? response.data : exhibition
 					)
 				)
+
 				closeEditModal()
 			}
+			// ...rest of the code...
 		} catch (error) {
 			console.error('Error updating exhibition:', error)
 			setMessage(
@@ -242,6 +307,22 @@ function MuseumExhibitions() {
 			}
 		}
 	}
+
+	const handleArtistSelection = e => {
+		const artistId = parseInt(e.target.value, 10)
+		if (e.target.checked) {
+			setFormData(prevState => ({
+				...prevState,
+				artists: [...prevState.artists, artistId],
+			}))
+		} else {
+			setFormData(prevState => ({
+				...prevState,
+				artists: prevState.artists.filter(id => id !== artistId),
+			}))
+		}
+	}
+
 	return (
 		<div className={styles.profile}>
 			<div className={styles.profileActions}>
@@ -404,6 +485,182 @@ function MuseumExhibitions() {
 					</button>
 				</div>
 			</div>
+			{/* Image Modal Component */}
+			{isModalOpen && !editingExhibition && (
+				<div className={styles.modalOverlay} onClick={handleCloseModal}>
+					<div
+						className={styles.modalContent}
+						onClick={e => e.stopPropagation()}
+					>
+						<button className={styles.closeButton} onClick={handleCloseModal}>
+							&times;
+						</button>
+						<div className={styles.modalImages}>
+							{selectedExhibitionImages.map((image, index) => (
+								<img
+									key={index}
+									src={`${process.env.REACT_APP_API_URL}${image.imageUrl}`}
+									alt={`Exhibition Image ${index + 1}`}
+									className={styles.modalImage}
+									loading='lazy'
+								/>
+							))}
+						</div>
+					</div>
+				</div>
+			)}
+			{/* Modal Edit Component */}
+			{isModalOpen && editingExhibition && (
+				<div className={styles.modalOverlay} onClick={handleCloseModal}>
+					<div
+						className={styles.modalContent}
+						onClick={e => e.stopPropagation()}
+					>
+						<button className={styles.closeButton} onClick={closeEditModal}>
+							&times;
+						</button>
+						<form onSubmit={handleEditSubmit}>
+							{formErrors.form && (
+								<p className={styles.error}>{formErrors.form}</p>
+							)}
+							{message && <p className={styles.success}>{message}</p>}
+							<div className={styles.modalTitleWrapper}>
+								<h2 className={styles.modalTitle}>
+									{t('Редагування виставки')}
+								</h2>
+							</div>
+							<div className={styles.modalTextWrapper}>
+								<div className={styles.modalFieldUk}>
+									<div>
+										<label className={styles.fieldUkTitle}>
+											{t('Заголовок Українською')}
+										</label>
+										<input
+											type='text'
+											name='title_uk'
+											value={formData.title_uk}
+											onChange={handleChange}
+										/>
+									</div>
+									<div>
+										<label className={styles.fieldUkDescription}>
+											{t('Опис Українською')}
+										</label>
+										<textarea
+											name='description_uk'
+											value={formData.description_uk}
+											onChange={handleChange}
+										/>
+									</div>
+									<div>
+										<label className={styles.fieldUkLocation}>
+											{t('Місце проведення')}
+										</label>
+										<textarea
+											name='location_uk'
+											value={formData.location_uk}
+											onChange={handleChange}
+										/>
+									</div>
+								</div>
+								<div className={styles.modalFieldEn}>
+									<div>
+										<label className={styles.fieldEnTitle}>
+											{t('Заголовок англійською')}
+										</label>
+										<input
+											type='text'
+											name='title_en'
+											value={formData.title_en}
+											onChange={handleChange}
+										/>
+									</div>
+									<div>
+										<label className={styles.fieldEnDescription}>
+											{t('Опис англійською')}
+										</label>
+										<textarea
+											name='description_en'
+											value={formData.description_en}
+											onChange={handleChange}
+										/>
+									</div>
+									<div>
+										<label className={styles.fieldEnLocation}>
+											{t('Місце проведення Англійською')}
+										</label>
+										<textarea
+											name='location_en'
+											value={formData.location_en}
+											onChange={handleChange}
+										/>
+									</div>
+								</div>
+								{/* Time Field */}
+								<div>
+									<label>{t('Час виставки')}</label>
+									<input
+										type='text'
+										name='time'
+										value={formData.time}
+										onChange={handleChange}
+									/>
+								</div>
+								{/* Start Date Field */}
+								<div>
+									<label>{t('Дата початку')}</label>
+									<input
+										type='date'
+										name='startDate'
+										value={formData.startDate}
+										onChange={handleChange}
+									/>
+								</div>
+								{/* End Date Field */}
+								<div>
+									<label>{t('Дата закінчення')}</label>
+									<input
+										type='date'
+										name='endDate'
+										value={formData.endDate}
+										onChange={handleChange}
+									/>
+								</div>
+								{/* Artists Field */}
+								<div>
+									<label>{t('Митці')}</label>
+									<div>
+										{artists.map(artist => (
+											<label key={artist.id}>
+												<input
+													type='checkbox'
+													name='artists'
+													value={artist.id}
+													checked={formData.artists.includes(artist.id)}
+													onChange={handleArtistSelection}
+												/>
+												{artist.name || artist.title || artist.email}
+											</label>
+										))}
+									</div>
+								</div>
+								{/* Image Upload */}
+								<label className={styles.profileLabel}>
+									{t('Додати зображення')}
+								</label>
+								<input
+									type='file'
+									name='exhibitionImages'
+									accept='image/*'
+									onChange={handleChange}
+									multiple
+								/>
+								<button type='submit'>{t('Зберегти')}</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			)}
 		</div>
 	)
 }

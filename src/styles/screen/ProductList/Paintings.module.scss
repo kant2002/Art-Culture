@@ -7,7 +7,8 @@
 	flex-direction: column;
 	justify-content: start;
 	font-family: $default-font;
-	margin: $responsiveMediumPadding 0 $responsiveMediumPadding $responsiveLeftAndRightPadding;
+	margin: $responsiveMediumPadding 0 $responsiveMediumPadding
+		$responsiveLeftAndRightPadding;
 
 	h2 {
 		font-weight: 600;
@@ -241,7 +242,8 @@
 
 @media (min-width: 1441px) {
 	.productList {
-		margin: $staticPcMediumPadding 0 $staticPcMediumPadding $responsiveLeftAndRightPadding;
+		margin: $staticPcMediumPadding 0 $staticPcMediumPadding
+			$responsiveLeftAndRightPadding;
 
 		h2 {
 			font-size: 28px;

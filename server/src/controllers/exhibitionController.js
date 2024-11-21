@@ -191,16 +191,22 @@ export const updateExhibition = async (req, res, next) => {
 	try {
 		const { id } = req.params
 		const {
-			title,
-			description,
+			title_en,
+			title_uk,
+			description_en,
+			description_uk,
 			startDate,
 			endDate,
 			time,
-			location,
-			artistIds,
+			location_en,
+			location_uk,
 		} = req.body
+		let { artistIds } = req.body
 		const userId = req.user.id
 
+		// Log received data
+		console.log('Received artistIds:', artistIds)
+		console.log('Type of artistIds:', typeof artistIds)
 		// Verify ownership
 		const exhibition = await prisma.exhibition.findUnique({
 			where: { id: parseInt(id) },
@@ -210,26 +216,62 @@ export const updateExhibition = async (req, res, next) => {
 		if (exhibition.createdById !== userId)
 			return res.status(403).json({ error: 'Unauthorized' })
 
+		// Prepare data for update
+		const updateData = {
+			title_en,
+			title_uk,
+			description_en,
+			description_uk,
+			startDate: new Date(startDate),
+			endDate: new Date(endDate),
+			time,
+			location_en,
+			location_uk,
+		}
+
+		// Parse artistIds if it's a JSON string
+		if (artistIds) {
+			if (typeof artistIds === 'string') {
+				try {
+					artistIds = JSON.parse(artistIds)
+				} catch (e) {
+					artistIds = [artistIds] // Single artistId as a string
+				}
+			}
+			if (!Array.isArray(artistIds)) {
+				artistIds = [artistIds]
+			}
+			artistIds = artistIds.map(id => parseInt(id, 10))
+			// Handle NaN values
+			if (artistIds.some(isNaN)) {
+				return res.status(400).json({ error: 'Invalid artist IDs' })
+			}
+			updateData.exhibitionArtists = {
+				deleteMany: {}, // Remove existing relations
+				create: artistIds.map(artistId => ({
+					artist: { connect: { id: artistId } },
+				})),
+			}
+		}
+
+		// Handle images if provided
+		if (req.files && req.files.length > 0) {
+			// Delete old images
+			await prisma.exhibitionImage.deleteMany({
+				where: { exhibitionId: exhibition.id },
+			})
+			// Add new images
+			updateData.images = {
+				create: req.files.map(file => ({
+					imageUrl: `../../uploads/exhibitionsImages/${file.filename}`,
+				})),
+			}
+		}
+
 		// Update exhibition
 		const updatedExhibition = await prisma.exhibition.update({
 			where: { id: parseInt(id) },
-			data: {
-				title,
-				description,
-				startDate: new Date(startDate),
-				endDate: new Date(endDate),
-				time,
-				location,
-				// Update artists if provided
-				...(artistIds && {
-					exhibitionArtists: {
-						deleteMany: {}, // Remove existing relations
-						create: artistIds.map(artistId => ({
-							artist: { connect: { id: artistId } },
-						})),
-					},
-				}),
-			},
+			data: updateData,
 			include: {
 				images: true,
 				createdBy: true,
