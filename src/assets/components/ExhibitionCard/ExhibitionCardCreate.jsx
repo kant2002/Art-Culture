@@ -364,7 +364,7 @@ function ExhibitionForm() {
 								/>
 							</div>
 
-							{/* Time */}
+							{/* Start time */}
 							<div className={styles.formGroup}>
 								<label className={styles.formLabel}>{t('Час початку')}</label>
 								<input
@@ -432,7 +432,8 @@ function ExhibitionForm() {
 									className={styles.formInput}
 								/>
 							</div>
-							{/* Time
+
+							{/* End time */}
 							<div className={styles.formGroup}>
 								<label className={styles.formLabel}>{t('Час завершення')}</label>
 								<input
@@ -443,7 +444,7 @@ function ExhibitionForm() {
 									required
 									className={styles.formInput}
 								/>
-							</div> */}
+							</div>
 						</div>
 					</div>
 
