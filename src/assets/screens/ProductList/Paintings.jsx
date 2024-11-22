@@ -305,7 +305,6 @@ const Paintings = () => {
 									{t('Використані матеріали')}
 									<p className={styles.productCardSubTitle}>{specs}</p>
 								</h4>
-								{/* Add more fields as needed */}
 								<div className={styles.paintingsDelEditWrapper}>
 									<button
 										className={styles.paintingsEditButton}

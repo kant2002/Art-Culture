@@ -159,8 +159,8 @@ const ProductCardCreate = () => {
 					<p className={styles.serverMessage}>{serverMessage}</p>
 				)}
 				<form onSubmit={handleSubmit}>
-						<div className={styles.modalFieldUk}>
 					<div className={styles.modalTextWrapper}>
+						<div className={styles.modalFieldUk}>
 							<label className={styles.profileLabel}>
 								{t('Заголовок українською')}
 								{/* Title in Ukrainian */}
