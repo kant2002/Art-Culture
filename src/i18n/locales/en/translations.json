@@ -112,11 +112,19 @@
     "Назва виставки українською": "The name of the exhibition in Ukrainian",
     "Опис виставки українською": "Description of the exhibition in Ukrainian",
     "Місце проведення українською": "Venue in Ukrainian",
+    "Опис виставки": "Description of the exhibition",
+    "Місце проведення": "Venue",
     "Дата початку": "Start date",
     "Дата завершення": "End date",
     "Час початку": "Start time",
     "Час завершення": "End time",
     "Назва виставки англійською": "The name of the exhibition in English",
     "Опис виставки англійською": "Description of the exhibition in English",
-    "Місце проведення англійською": "Venue in English"
+    "Місце проведення англійською": "Venue in English",
+    "Ваші виставки": "Your exhibitions",
+    "Ви не створили жодної виставки": "You have not created a single exhibition",
+    "Немає митців": "No artists",
+    "Сторінка": "Page",
+    "з": "of",
+    "Редагування виставки": "Edit an exhibition"
 }

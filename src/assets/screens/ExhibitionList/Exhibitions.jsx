@@ -157,9 +157,9 @@ function MuseumExhibitions() {
 		)
 		setRemainingDescription(
 			5000 -
-				(exhibition.description_en?.length ||
-					exhibition.description_uk?.length ||
-					0)
+			(exhibition.description_en?.length ||
+				exhibition.description_uk?.length ||
+				0)
 		)
 		setIsModalOpen(true)
 	}
@@ -338,7 +338,6 @@ function MuseumExhibitions() {
 				<button className={styles.profileAction} onClick={handleAddPostClick}>
 					{t('Додати публікацію')}
 				</button>
-
 				<button
 					className={styles.profileAction}
 					onClick={handleProductCartCreateClick}
@@ -349,13 +348,13 @@ function MuseumExhibitions() {
 					className={styles.profileAction}
 					onClick={handlePaintingCardListClick}
 				>
-					{t('Переглянути вироби/картини ')}
+					{t('Переглянути вироби/картини')}
 				</button>
 				<button
 					className={styles.profileAction}
 					onClick={handleExhibitionCardCreateClick}
 				>
-					{t('Додати виставку ')}
+					{t('Додати виставку')}
 				</button>
 				<button
 					className={styles.profileAction}
@@ -369,8 +368,7 @@ function MuseumExhibitions() {
 			</div>
 			<div className={styles.exhibitionsContainer}>
 				<h2>
-					{t('Ваші виставки:')}
-					{/*  TODO: Need translate  */}
+					{t('Ваші виставки')}
 				</h2>
 				{exhibitions.length === 0 ? (
 					<p>{t('Ви не створили жодної виставки')}</p>
@@ -394,60 +392,67 @@ function MuseumExhibitions() {
 
 							const artistNames =
 								exhibition.exhibitionArtists &&
-								exhibition.exhibitionArtists.length > 0
+									exhibition.exhibitionArtists.length > 0
 									? exhibition.exhibitionArtists
-											.map(ea => {
-												const artist = ea.artist
-												return artist.name || artist.title || artist.email
-											})
-											.join(',')
+										.map(ea => {
+											const artist = ea.artist
+											return artist.name || artist.title || artist.email
+										})
+										.join(',')
 									: t('Немає митців')
 							return (
 								<div key={exhibition.id} className={styles.exhibitionCard}>
-									<h3>
-										{/*  TODO: Need translate  */}
-										{t('Назва:')}
-										{title}
-									</h3>
-									{/*  TODO: Need translate  */}
-									<p>
-										{t('Опис:')}
-										{description}
-									</p>
-									<p>
-										{/*  TODO: Need translate  */}
-										{t('Дата виставки:')}{' '}
-										{new Date(exhibition.startDate).toLocaleDateString()} -{' '}
-										{new Date(exhibition.endDate).toLocaleDateString()}
-									</p>
-									<p>
-										{/*  TODO: Need translate  */}
-										{t('Місце проведення:')} {location}
-									</p>
+									{/* {exhibition.images && exhibition.images.length > 0 && (
+									<div className={styles.imagesContainer}>
+										{exhibition.images.map(image => (
+											<img
+												key={image.id}
+												src={`${process.env.REACT_APP_API_URL}${image.imageUrl}`}
+												alt={title}
+												className={styles.exhibitionImage}
+												loading='lazy'
+											/>
+										))}
+									</div>
+									)} */}
 
-									<p>
-										{/*  TODO: Need translate  */}
-										{t('Час виставки:')} {exhibition.time}
-									</p>
-									<p>
-										{/*  TODO: Need translate  */}
-										{t('Митці:')} {artistNames}
-									</p>
-									{console.log('type data artists:', artistNames)}
-									{/* Display images if available */}
 									{exhibition.images && exhibition.images.length > 0 && (
 										<div className={styles.imagesContainer}>
-											{exhibition.images.map(image => (
-												<img
-													key={image.id}
-													src={`${process.env.REACT_APP_API_URL}${image.imageUrl}`}
-													alt={title}
-													className={styles.exhibitionImage}
-													loading='lazy'
-												/>
-											))}
+											<img
+												src={`${process.env.REACT_APP_API_URL}${exhibition.images[0].imageUrl}`}
+												alt={title}
+												className={styles.exhibitionImage}
+												loading="lazy"
+											/>
 										</div>
 									)}
+									<h3>
+										{t('Назва виставки')}
+										<p className={styles.productCardSubTitle}>{title}</p>
+									</h3>
+									<h4>
+										{t('Опис виставки')}
+										<p className={styles.productCardSubTitle}>{description}</p>
+									</h4>
+									<h4>
+										{t('Митці')}
+										<p className={styles.productCardSubTitle}>{artistNames}</p>
+									</h4>
+									<h4>
+										{t('Дата початку')}
+										<p className={styles.productCardSubTitle}>{' '}</p>
+										<p className={styles.productCardSubTitle}>{new Date(exhibition.startDate).toLocaleDateString()} -{' '}
+											{new Date(exhibition.endDate).toLocaleDateString()}</p>
+									</h4>
+									<h4>
+										{t('Час початку')}
+										<p className={styles.productCardSubTitle}>{exhibition.time}</p>
+									</h4>
+									<h4>
+										{t('Місце проведення')}
+										<p className={styles.productCardSubTitle}>{location}</p>
+									</h4>
+									{console.log('type data artists:', artistNames)}
 									<div className={styles.exhibitionDelEditWrapper}>
 										<button
 											className={styles.exhibitionEditButton}
@@ -472,16 +477,18 @@ function MuseumExhibitions() {
 						onClick={() => setPage(prev => Math.max(prev - 1, 1))}
 						disabled={page === 1}
 					>
-						{t('Попередня')}
+						{/* {t('Попередня')} */}
+						&#8592;
 					</button>
-					<span>
+					<p>
 						{t('Сторінка')} {page} {t('з')} {totalPages}
-					</span>
+					</p>
 					<button
 						onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
 						disabled={page === totalPages}
 					>
-						{t('Наступна')}
+						{/* {t('Наступна')} */}
+						&#8594;
 					</button>
 				</div>
 			</div>
@@ -516,122 +523,135 @@ function MuseumExhibitions() {
 						className={styles.modalContent}
 						onClick={e => e.stopPropagation()}
 					>
-						<button className={styles.closeButton} onClick={closeEditModal}>
-							&times;
-						</button>
-						<form onSubmit={handleEditSubmit}>
-							{formErrors.form && (
-								<p className={styles.error}>{formErrors.form}</p>
-							)}
-							{message && <p className={styles.success}>{message}</p>}
-							<div className={styles.modalTitleWrapper}>
-								<h2 className={styles.modalTitle}>
-									{t('Редагування виставки')}
-								</h2>
-							</div>
-							<div className={styles.modalTextWrapper}>
-								<div className={styles.modalFieldUk}>
-									<div>
-										<label className={styles.fieldUkTitle}>
-											{t('Заголовок Українською')}
-										</label>
-										<input
-											type='text'
-											name='title_uk'
-											value={formData.title_uk}
-											onChange={handleChange}
-										/>
-									</div>
-									<div>
-										<label className={styles.fieldUkDescription}>
-											{t('Опис Українською')}
-										</label>
-										<textarea
-											name='description_uk'
-											value={formData.description_uk}
-											onChange={handleChange}
-										/>
-									</div>
-									<div>
-										<label className={styles.fieldUkLocation}>
-											{t('Місце проведення')}
-										</label>
-										<textarea
-											name='location_uk'
-											value={formData.location_uk}
-											onChange={handleChange}
-										/>
-									</div>
+						<div className={styles.modalFormWrapper}>
+							<button className={styles.closeButton} onClick={closeEditModal}>
+								&times;
+							</button>
+							<form onSubmit={handleEditSubmit}>
+								{formErrors.form && (
+									<p className={styles.error}>{formErrors.form}</p>
+								)}
+								{message && <p className={styles.success}>{message}</p>}
+								<div className={styles.modalTitleWrapper}>
+									<h2 className={styles.modalTitle}>
+										{t('Редагування виставки')}
+									</h2>
 								</div>
-								<div className={styles.modalFieldEn}>
-									<div>
-										<label className={styles.fieldEnTitle}>
-											{t('Заголовок англійською')}
-										</label>
-										<input
-											type='text'
-											name='title_en'
-											value={formData.title_en}
-											onChange={handleChange}
-										/>
+								<div className={styles.modalTextWrapper}>
+									<div className={styles.modalFieldUk}>
+										<div className={styles.formGroup}>
+											<label className={styles.formLabel}>
+												{t('Назва виставки українською')}
+											</label>
+											<input
+												type='text'
+												name='title_uk'
+												value={formData.title_uk}
+												onChange={handleChange}
+											/>
+										</div>
+										<div className={styles.formGroup}>
+											<label className={styles.formLabel}>
+												{t('Опис виставки українською')}
+											</label>
+											<textarea
+												name='description_uk'
+												value={formData.description_uk}
+												onChange={handleChange}
+											/>
+										</div>
+										<div className={styles.formGroup}>
+											<label className={styles.formLabel}>
+												{t('Місце проведення українською')}
+											</label>
+											<textarea
+												name='location_uk'
+												value={formData.location_uk}
+												onChange={handleChange}
+											/>
+										</div>
+										{/* Start Date Field */}
+										<div className={styles.formGroup}>
+											<label className={styles.formLabel}>{t('Дата початку')}</label>
+											<input
+												type='date'
+												name='startDate'
+												value={formData.startDate}
+												onChange={handleChange}
+											/>
+										</div>
+										{/* Time Field */}
+										<div className={styles.formGroup}>
+											<label className={styles.formLabel}>{t('Час початку')}</label>
+											<input
+												type='text'
+												name='time'
+												value={formData.time}
+												onChange={handleChange}
+											/>
+										</div>
 									</div>
-									<div>
-										<label className={styles.fieldEnDescription}>
-											{t('Опис англійською')}
-										</label>
-										<textarea
-											name='description_en'
-											value={formData.description_en}
-											onChange={handleChange}
-										/>
+
+									<div className={styles.modalFieldEn}>
+										<div className={styles.formGroup}>
+											<label className={styles.formLabel}>
+												{t('Назва виставки англійською')}
+											</label>
+											<input
+												type='text'
+												name='title_en'
+												value={formData.title_en}
+												onChange={handleChange}
+											/>
+										</div>
+										<div className={styles.formGroup}>
+											<label className={styles.formLabel}>
+												{t('Опис виставки англійською')}
+											</label>
+											<textarea
+												name='description_en'
+												value={formData.description_en}
+												onChange={handleChange}
+											/>
+										</div>
+										<div className={styles.formGroup}>
+											<label className={styles.formLabel}>
+												{t('Місце проведення англійською')}
+											</label>
+											<textarea
+												name='location_en'
+												value={formData.location_en}
+												onChange={handleChange}
+											/>
+										</div>
+										{/* End Date Field */}
+										<div className={styles.formGroup}>
+											<label className={styles.formLabel}>{t('Дата завершення')}</label>
+											<input
+												type='date'
+												name='endDate'
+												value={formData.endDate}
+												onChange={handleChange}
+											/>
+										</div>
+										{/* Time Field */}
+										<div className={styles.formGroup}>
+											<label className={styles.formLabel}>{t('Час завершення')}</label>
+											<input
+												type='text'
+												name='time'
+												value={formData.time}
+												onChange={handleChange}
+											/>
+										</div>
 									</div>
-									<div>
-										<label className={styles.fieldEnLocation}>
-											{t('Місце проведення Англійською')}
-										</label>
-										<textarea
-											name='location_en'
-											value={formData.location_en}
-											onChange={handleChange}
-										/>
-									</div>
-								</div>
-								{/* Time Field */}
-								<div>
-									<label>{t('Час виставки')}</label>
-									<input
-										type='text'
-										name='time'
-										value={formData.time}
-										onChange={handleChange}
-									/>
-								</div>
-								{/* Start Date Field */}
-								<div>
-									<label>{t('Дата початку')}</label>
-									<input
-										type='date'
-										name='startDate'
-										value={formData.startDate}
-										onChange={handleChange}
-									/>
-								</div>
-								{/* End Date Field */}
-								<div>
-									<label>{t('Дата закінчення')}</label>
-									<input
-										type='date'
-										name='endDate'
-										value={formData.endDate}
-										onChange={handleChange}
-									/>
 								</div>
 								{/* Artists Field */}
-								<div>
-									<label>{t('Митці')}</label>
-									<div>
+								<div className={styles.formGroup}>
+									<label className={styles.formLabel}>{t('Митці')}</label>
+									<div className={styles.checkArtistWrapper}>
 										{artists.map(artist => (
-											<label key={artist.id}>
+											<div className={styles.checkArtistItem} key={artist.id}>
 												<input
 													type='checkbox'
 													name='artists'
@@ -639,13 +659,14 @@ function MuseumExhibitions() {
 													checked={formData.artists.includes(artist.id)}
 													onChange={handleArtistSelection}
 												/>
-												{artist.name || artist.title || artist.email}
-											</label>
+												<label htmlFor={`artist-${artist.id}`} className={styles.checkboxLabel}>{artist.name || artist.title || artist.email}</label>
+
+											</div>
 										))}
 									</div>
 								</div>
 								{/* Image Upload */}
-								<label className={styles.profileLabel}>
+								<label className={styles.formLabel}>
 									{t('Додати зображення')}
 								</label>
 								<input
@@ -656,8 +677,8 @@ function MuseumExhibitions() {
 									multiple
 								/>
 								<button type='submit'>{t('Зберегти')}</button>
-							</div>
-						</form>
+							</form>
+						</div>
 					</div>
 				</div>
 			)}
