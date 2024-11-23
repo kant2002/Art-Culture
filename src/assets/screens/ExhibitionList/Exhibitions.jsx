@@ -439,7 +439,7 @@ function MuseumExhibitions() {
 										<p className={styles.productCardSubTitle}>{artistNames}</p>
 									</h4>
 									<h4>
-										{t('Дата початку')}
+										{t('Дата проведення')}
 										<p className={styles.productCardSubTitle}>{' '}</p>
 										<p className={styles.productCardSubTitle}>{new Date(exhibition.startDate).toLocaleDateString()} -{' '}
 											{new Date(exhibition.endDate).toLocaleDateString()}</p>
