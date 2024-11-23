@@ -47,7 +47,7 @@ function MuseumExhibitions() {
 					},
 					params: {
 						page,
-						limit: 10,
+						limit: 12,
 					},
 				})
 				setExhibitions(response.data.exhibitions)
@@ -332,11 +332,11 @@ function MuseumExhibitions() {
 				>
 					{t('Профіль')}
 				</button>
-				<button className={styles.profileAction} onClick={handlePostsClick}>
-					{t('Публікації')}
-				</button>
 				<button className={styles.profileAction} onClick={handleAddPostClick}>
 					{t('Додати публікацію')}
+				</button>
+				<button className={styles.profileAction} onClick={handlePostsClick}>
+					{t('Публікації')}
 				</button>
 				<button
 					className={styles.profileAction}
