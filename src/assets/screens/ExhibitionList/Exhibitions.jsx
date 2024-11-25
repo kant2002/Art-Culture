@@ -309,7 +309,7 @@ function MuseumExhibitions() {
 	}
 
 	const handleArtistSelection = e => {
-		const artistId = parseInt(e.target.value, 10)
+		const artistId = parseInt(e.target.value, 12)
 		if (e.target.checked) {
 			setFormData(prevState => ({
 				...prevState,
