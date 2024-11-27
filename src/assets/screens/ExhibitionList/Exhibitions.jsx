@@ -309,7 +309,7 @@ function MuseumExhibitions() {
 	}
 
 	const handleArtistSelection = e => {
-		const artistId = parseInt(e.target.value, 10)
+		const artistId = parseInt(e.target.value, 12)
 		if (e.target.checked) {
 			setFormData(prevState => ({
 				...prevState,
@@ -439,7 +439,7 @@ function MuseumExhibitions() {
 										<p className={styles.productCardSubTitle}>{artistNames}</p>
 									</h4>
 									<h4>
-										{t('Дата початку')}
+										{t('Дата проведення')}
 										<p className={styles.productCardSubTitle}>{' '}</p>
 										<p className={styles.productCardSubTitle}>{new Date(exhibition.startDate).toLocaleDateString()} -{' '}
 											{new Date(exhibition.endDate).toLocaleDateString()}</p>
