@@ -116,11 +116,11 @@ function NewsPage() {
 			<div className={`${styles.newsPageHorizontalSeparatorContainer}`}>
 				<img
 					className={`${styles.newsPageHorizontalSeparator}`}
-					src='/Img/horizontalSeparator.svg' // Ensure this path is correct
+					src='/Img/verticalSeparator.svg' // Ensure this path is correct
 					alt={t('Горизонтальний сепаратор')}
 					onError={e => {
 						e.target.onerror = null
-						e.target.src = '/Img/defaultSeparator.svg' // Fallback image
+						e.target.src = '/Img/verticalSeparator.svg' // Fallback image
 					}}
 				/>
 			</div>

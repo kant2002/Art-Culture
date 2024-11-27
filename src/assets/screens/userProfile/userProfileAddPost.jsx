@@ -268,14 +268,20 @@ function UserProfileAddPost() {
 						</label>
 					</div>
 
-				<div className={styles.profileLinksWrapper}>
-					<a className={styles.profileLink} href='/'>
-						{t('Онлайн перекладач')}&#8194;&#187;
-					</a>
-					<a className={styles.profileLink} href='/'>
-						{t('Онлайн WEBP-конвертер')}&#8194;&#187;
-					</a>
-				</div>
+					<div className={styles.profileLinksWrapper}>
+						<a
+							className={styles.profileLink}
+							href='https://www.deepl.com/en/translator'
+						>
+							{t('Онлайн перекладач')}&#8194;&#187;
+						</a>
+						<a
+							className={styles.profileLink}
+							href='https://cloudconvert.com/jpeg-to-webp'
+						>
+							{t('Онлайн WEBP-конвертер')}&#8194;&#187;
+						</a>
+					</div>
 					<button type='submit' className={styles.profileAddPostButton}>
 						{t('Зберегти')}
 					</button>
