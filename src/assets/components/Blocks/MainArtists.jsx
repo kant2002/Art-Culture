@@ -176,7 +176,7 @@ function MainArtists() {
 									</div>
 									<div className={styles.cardReadMoreWrapper}>
 										<a
-											onClick={handleArtistPageClick}
+											onClick={() => handleArtistPageClick(creator.id)}
 											className={styles.cardReadMoreLink}
 										>
 											{t('Читати далі')}
