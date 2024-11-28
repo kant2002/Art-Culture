@@ -21,7 +21,9 @@ function MainNews() {
 	const isLocalhost = host === 'localhost' || host === '127.0.0.1'
 	const baseUrl = isLocalhost
 		? 'http://localhost:5000'
-		: 'https://art.playukraine.com'
+		: process.env.NODE_ENV === 'production'
+			? 'https://art.playukraine.com'
+			: 'https://art-culture-omega.vercel.app/'
 
 	function getPostsCount(Width) {
 		if (Width >= 1600) {
