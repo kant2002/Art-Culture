@@ -7,10 +7,11 @@ import { useParams } from 'react-router-dom'
 import styles from '../../../styles/components/Post/PostDetail.module.scss'
 
 function PostDetail() {
-	const { t } = useTranslation()
+	const { t, i18n } = useTranslation()
 	const { id } = useParams()
 	const [post, setPost] = useState(null)
 	const [error, setError] = useState(null)
+	const currentLanguage = i18n.language
 
 	useEffect(() => {
 		axios
@@ -54,6 +55,9 @@ function PostDetail() {
 		minute: 'numeric',
 	})
 
+	const title = currentLanguage === 'en' ? post.title_en : post.title_uk
+	const content = currentLanguage === 'en' ? post.content_en : post.content_uk
+
 	return (
 		<div className={styles.postDetailContainer}>
 			<img
@@ -64,8 +68,8 @@ function PostDetail() {
 					e.target.src = '/Img/newsCardERROR.jpg'
 				}}
 			/>
-			<h1>{post.title}</h1>
-			<p>{post.content}</p>
+			<h1>{title}</h1>
+			<p>{content}</p>
 			<p>
 				{t('Автор')}: {post.author.title || post.author.email}
 			</p>

@@ -121,6 +121,7 @@ export const getPostById = async (req, res, next) => {
 					select: {
 						email: true,
 						id: true,
+						title: true,
 					},
 				},
 			},
