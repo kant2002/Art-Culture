@@ -11,6 +11,10 @@ function UserProfileAddPost() {
 	const { t } = useTranslation()
 	const navigate = useNavigate()
 	const { user } = useAuth()
+	const isUser = user && user.role === 'USER'
+	const isCreator = user && user.role === 'CREATOR'
+	const isMuseum = user && user.role === 'MUSEUM'
+	const isAdmin = user && user.role === 'ADMIN'
 
 	const [formData, setFormData] = useState({
 		title_en: '',
@@ -145,36 +149,47 @@ function UserProfileAddPost() {
 				>
 					{t('Профіль')}
 				</button>
-				<button className={styles.profileAction} onClick={handleAddPostClick}>
-					{t('Додати публікацію')}
-				</button>
-				<button className={styles.profileAction} onClick={handlePostsClick}>
-					{t('Публікації')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handleProductCartCreateClick}
-				>
-					{t('Додати картину')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handlePaintingCardListClick}
-				>
-					{t('Переглянути вироби/картини')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handleExhibitionCardCreateClick}
-				>
-					{t('Додати виставку')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handleExhibitionListClick}
-				>
-					{t('Переглянути виставки')}
-				</button>
+				{!isUser && !isMuseum && (
+					<>
+						<button
+							className={styles.profileAction}
+							onClick={handleAddPostClick}
+						>
+							{t('Додати публікацію')}
+						</button>
+						<button className={styles.profileAction} onClick={handlePostsClick}>
+							{t('Публікації')}
+						</button>
+						<button
+							className={styles.profileAction}
+							onClick={handleProductCartCreateClick}
+						>
+							{t('Додати картину')}
+						</button>
+						<button
+							className={styles.profileAction}
+							onClick={handlePaintingCardListClick}
+						>
+							{t('Переглянути вироби/картини')}
+						</button>
+					</>
+				)}
+				{isMuseum && (
+					<>
+						<button
+							className={styles.profileAction}
+							onClick={handleExhibitionCardCreateClick}
+						>
+							{t('Додати виставку')}
+						</button>
+						<button
+							className={styles.profileAction}
+							onClick={handleExhibitionListClick}
+						>
+							{t('Переглянути виставки')}
+						</button>
+					</>
+				)}
 				<button className={styles.profileAction} onClick={handleLogout}>
 					{t('Вийти')}
 				</button>

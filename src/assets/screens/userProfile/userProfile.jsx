@@ -7,6 +7,11 @@ import styles from '/src/styles/components/UserProfile/userProfile.module.scss'
 
 const UserProfile = () => {
 	const { user, logout, updateUser, loading, error } = useAuth() // Access user and logout from context
+	const isUser = user && user.role === 'USER'
+	const isCreator = user && user.role === 'CREATOR'
+	const isMuseum = user && user.role === 'MUSEUM'
+	const isAdmin = user && user.role === 'ADMIN'
+
 	const [pageText, setPageText] = useState('')
 	const [email, setEmail] = useState('')
 	const [regDate, setRegDate] = useState('')
@@ -131,36 +136,47 @@ const UserProfile = () => {
 				>
 					{t('Профіль')}
 				</button>
-				<button className={styles.profileAction} onClick={handleAddPostClick}>
-					{t('Додати публікацію')}
-				</button>
-				<button className={styles.profileAction} onClick={handlePostsClick}>
-					{t('Публікації')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handleProductCartCreateClick}
-				>
-					{t('Додати картину')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handlePaintingCardListClick}
-				>
-					{t('Переглянути вироби/картини')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handleExhibitionCardCreateClick}
-				>
-					{t('Додати виставку')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handleExhibitionListClick}
-				>
-					{t('Переглянути виставки')}
-				</button>
+				{!isUser && !isMuseum && (
+					<>
+						<button
+							className={styles.profileAction}
+							onClick={handleAddPostClick}
+						>
+							{t('Додати публікацію')}
+						</button>
+						<button className={styles.profileAction} onClick={handlePostsClick}>
+							{t('Публікації')}
+						</button>
+						<button
+							className={styles.profileAction}
+							onClick={handleProductCartCreateClick}
+						>
+							{t('Додати картину')}
+						</button>
+						<button
+							className={styles.profileAction}
+							onClick={handlePaintingCardListClick}
+						>
+							{t('Переглянути вироби/картини')}
+						</button>
+					</>
+				)}
+				{isMuseum && (
+					<>
+						<button
+							className={styles.profileAction}
+							onClick={handleExhibitionCardCreateClick}
+						>
+							{t('Додати виставку')}
+						</button>
+						<button
+							className={styles.profileAction}
+							onClick={handleExhibitionListClick}
+						>
+							{t('Переглянути виставки')}
+						</button>
+					</>
+				)}
 				<button className={styles.profileAction} onClick={handleLogout}>
 					{t('Вийти')}
 				</button>
@@ -181,7 +197,7 @@ const UserProfile = () => {
 											profileImage instanceof File
 												? URL.createObjectURL(profileImage)
 												: profileImage.startsWith('http') ||
-													profileImage.startsWith('/uploads/profileImages')
+													  profileImage.startsWith('/uploads/profileImages')
 													? `${process.env.REACT_APP_API_URL}${profileImage}`
 													: profileImage
 										}

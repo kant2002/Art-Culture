@@ -14,6 +14,10 @@ function MuseumExhibitions() {
 	const [exhibitions, setExhibitions] = useState([])
 	const [loading, setLoading] = useState(true)
 	const { user, logout } = useAuth()
+	const isUser = user && user.role === 'USER'
+	const isCreator = user && user.role === 'CREATOR'
+	const isMuseum = user && user.role === 'MUSEUM'
+	const isAdmin = user && user.role === 'ADMIN'
 	const navigate = useNavigate()
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [selectedExhibitionImages, setSelectedExhibitionImages] = useState([])
@@ -157,9 +161,9 @@ function MuseumExhibitions() {
 		)
 		setRemainingDescription(
 			5000 -
-			(exhibition.description_en?.length ||
-				exhibition.description_uk?.length ||
-				0)
+				(exhibition.description_en?.length ||
+					exhibition.description_uk?.length ||
+					0)
 		)
 		setIsModalOpen(true)
 	}
@@ -332,44 +336,53 @@ function MuseumExhibitions() {
 				>
 					{t('Профіль')}
 				</button>
-				<button className={styles.profileAction} onClick={handleAddPostClick}>
-					{t('Додати публікацію')}
-				</button>
-				<button className={styles.profileAction} onClick={handlePostsClick}>
-					{t('Публікації')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handleProductCartCreateClick}
-				>
-					{t('Додати картину')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handlePaintingCardListClick}
-				>
-					{t('Переглянути вироби/картини')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handleExhibitionCardCreateClick}
-				>
-					{t('Додати виставку')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handleExhibitionListClick}
-				>
-					{t('Переглянути виставки')}
-				</button>
+				{!isUser && !isMuseum && (
+					<>
+						<button
+							className={styles.profileAction}
+							onClick={handleAddPostClick}
+						>
+							{t('Додати публікацію')}
+						</button>
+						<button className={styles.profileAction} onClick={handlePostsClick}>
+							{t('Публікації')}
+						</button>
+						<button
+							className={styles.profileAction}
+							onClick={handleProductCartCreateClick}
+						>
+							{t('Додати картину')}
+						</button>
+						<button
+							className={styles.profileAction}
+							onClick={handlePaintingCardListClick}
+						>
+							{t('Переглянути вироби/картини')}
+						</button>
+					</>
+				)}
+				{isMuseum && (
+					<>
+						<button
+							className={styles.profileAction}
+							onClick={handleExhibitionCardCreateClick}
+						>
+							{t('Додати виставку')}
+						</button>
+						<button
+							className={styles.profileAction}
+							onClick={handleExhibitionListClick}
+						>
+							{t('Переглянути виставки')}
+						</button>
+					</>
+				)}
 				<button className={styles.profileAction} onClick={handleLogout}>
 					{t('Вийти')}
 				</button>
 			</div>
 			<div className={styles.exhibitionsContainer}>
-				<h2>
-					{t('Ваші виставки')}
-				</h2>
+				<h2>{t('Ваші виставки')}</h2>
 				{exhibitions.length === 0 ? (
 					<p>{t('Ви не створили жодної виставки')}</p>
 				) : (
@@ -392,13 +405,13 @@ function MuseumExhibitions() {
 
 							const artistNames =
 								exhibition.exhibitionArtists &&
-									exhibition.exhibitionArtists.length > 0
+								exhibition.exhibitionArtists.length > 0
 									? exhibition.exhibitionArtists
-										.map(ea => {
-											const artist = ea.artist
-											return artist.name || artist.title || artist.email
-										})
-										.join(',')
+											.map(ea => {
+												const artist = ea.artist
+												return artist.name || artist.title || artist.email
+											})
+											.join(',')
 									: t('Немає митців')
 							return (
 								<div key={exhibition.id} className={styles.exhibitionCard}>
@@ -422,7 +435,7 @@ function MuseumExhibitions() {
 												src={`${process.env.REACT_APP_API_URL}${exhibition.images[0].imageUrl}`}
 												alt={title}
 												className={styles.exhibitionImage}
-												loading="lazy"
+												loading='lazy'
 											/>
 										</div>
 									)}
@@ -440,13 +453,17 @@ function MuseumExhibitions() {
 									</h4>
 									<h4>
 										{t('Дата проведення')}
-										<p className={styles.productCardSubTitle}>{' '}</p>
-										<p className={styles.productCardSubTitle}>{new Date(exhibition.startDate).toLocaleDateString()} -{' '}
-											{new Date(exhibition.endDate).toLocaleDateString()}</p>
+										<p className={styles.productCardSubTitle}> </p>
+										<p className={styles.productCardSubTitle}>
+											{new Date(exhibition.startDate).toLocaleDateString()} -{' '}
+											{new Date(exhibition.endDate).toLocaleDateString()}
+										</p>
 									</h4>
 									<h4>
 										{t('Час початку')}
-										<p className={styles.productCardSubTitle}>{exhibition.time}</p>
+										<p className={styles.productCardSubTitle}>
+											{exhibition.time}
+										</p>
 									</h4>
 									<h4>
 										{t('Місце проведення')}
@@ -572,7 +589,9 @@ function MuseumExhibitions() {
 										</div>
 										{/* Start Date Field */}
 										<div className={styles.formGroup}>
-											<label className={styles.formLabel}>{t('Дата початку')}</label>
+											<label className={styles.formLabel}>
+												{t('Дата початку')}
+											</label>
 											<input
 												type='date'
 												name='startDate'
@@ -582,7 +601,9 @@ function MuseumExhibitions() {
 										</div>
 										{/* Time Field */}
 										<div className={styles.formGroup}>
-											<label className={styles.formLabel}>{t('Час початку')}</label>
+											<label className={styles.formLabel}>
+												{t('Час початку')}
+											</label>
 											<input
 												type='text'
 												name='time'
@@ -626,7 +647,9 @@ function MuseumExhibitions() {
 										</div>
 										{/* End Date Field */}
 										<div className={styles.formGroup}>
-											<label className={styles.formLabel}>{t('Дата завершення')}</label>
+											<label className={styles.formLabel}>
+												{t('Дата завершення')}
+											</label>
 											<input
 												type='date'
 												name='endDate'
@@ -636,7 +659,9 @@ function MuseumExhibitions() {
 										</div>
 										{/* Time Field */}
 										<div className={styles.formGroup}>
-											<label className={styles.formLabel}>{t('Час завершення')}</label>
+											<label className={styles.formLabel}>
+												{t('Час завершення')}
+											</label>
 											<input
 												type='text'
 												name='time'
@@ -659,8 +684,12 @@ function MuseumExhibitions() {
 													checked={formData.artists.includes(artist.id)}
 													onChange={handleArtistSelection}
 												/>
-												<label htmlFor={`artist-${artist.id}`} className={styles.checkboxLabel}>{artist.name || artist.title || artist.email}</label>
-
+												<label
+													htmlFor={`artist-${artist.id}`}
+													className={styles.checkboxLabel}
+												>
+													{artist.name || artist.title || artist.email}
+												</label>
 											</div>
 										))}
 									</div>

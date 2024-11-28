@@ -44,6 +44,10 @@ function ExhibitionForm() {
 	const navigate = useNavigate()
 	const { t } = useTranslation()
 	const { user, logout } = useAuth()
+	const isUser = user && user.role === 'USER'
+	const isCreator = user && user.role === 'CREATOR'
+	const isMuseum = user && user.role === 'MUSEUM'
+	const isAdmin = user && user.role === 'ADMIN'
 
 	console.log('CurrentUser:', user)
 
@@ -248,36 +252,47 @@ function ExhibitionForm() {
 				>
 					{t('Профіль')}
 				</button>
-				<button className={styles.profileAction} onClick={handleAddPostClick}>
-					{t('Додати публікацію')}
-				</button>
-				<button className={styles.profileAction} onClick={handlePostsClick}>
-					{t('Публікації')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handleProductCartCreateClick}
-				>
-					{t('Додати картину')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handlePaintingCardListClick}
-				>
-					{t('Переглянути вироби/картини')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handleExhibitionCardCreateClick}
-				>
-					{t('Додати виставку')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handleExhibitionListClick}
-				>
-					{t('Переглянути виставки')}
-				</button>
+				{!isUser && !isMuseum && (
+					<>
+						<button
+							className={styles.profileAction}
+							onClick={handleAddPostClick}
+						>
+							{t('Додати публікацію')}
+						</button>
+						<button className={styles.profileAction} onClick={handlePostsClick}>
+							{t('Публікації')}
+						</button>
+						<button
+							className={styles.profileAction}
+							onClick={handleProductCartCreateClick}
+						>
+							{t('Додати картину')}
+						</button>
+						<button
+							className={styles.profileAction}
+							onClick={handlePaintingCardListClick}
+						>
+							{t('Переглянути вироби/картини')}
+						</button>
+					</>
+				)}
+				{isMuseum && (
+					<>
+						<button
+							className={styles.profileAction}
+							onClick={handleExhibitionCardCreateClick}
+						>
+							{t('Додати виставку')}
+						</button>
+						<button
+							className={styles.profileAction}
+							onClick={handleExhibitionListClick}
+						>
+							{t('Переглянути виставки')}
+						</button>
+					</>
+				)}
 				<button className={styles.profileAction} onClick={handleLogout}>
 					{t('Вийти')}
 				</button>
@@ -306,7 +321,6 @@ function ExhibitionForm() {
 				>
 					<div className={styles.modalTextWrapper}>
 						<div className={styles.modalFieldUk}>
-
 							{/* Title in Ukrainian */}
 							<div className={styles.formGroup}>
 								<label className={styles.formLabel}>
@@ -381,7 +395,9 @@ function ExhibitionForm() {
 						<div className={styles.modalFieldEn}>
 							{/* Title in English */}
 							<div className={styles.formGroup}>
-								<label className={styles.formLabel}>{t('Назва виставки англійською')}</label>
+								<label className={styles.formLabel}>
+									{t('Назва виставки англійською')}
+								</label>
 								<input
 									type='text'
 									name='title_en'
@@ -422,7 +438,9 @@ function ExhibitionForm() {
 							</div>
 							{/* End Date */}
 							<div className={styles.formGroup}>
-								<label className={styles.formLabel}>{t('Дата завершення')}</label>
+								<label className={styles.formLabel}>
+									{t('Дата завершення')}
+								</label>
 								<input
 									type='date'
 									name='endDate'
@@ -435,7 +453,9 @@ function ExhibitionForm() {
 
 							{/* End time */}
 							<div className={styles.formGroup}>
-								<label className={styles.formLabel}>{t('Час завершення')}</label>
+								<label className={styles.formLabel}>
+									{t('Час завершення')}
+								</label>
 								<input
 									type='text'
 									name='time'

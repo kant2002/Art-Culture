@@ -14,6 +14,10 @@ const Paintings = () => {
 	const [serverMessage, setServerMessage] = useState('')
 	const navigate = useNavigate()
 	const { logout, user } = useAuth()
+	const isUser = user && user.role === 'USER'
+	const isCreator = user && user.role === 'CREATOR'
+	const isMuseum = user && user.role === 'MUSEUM'
+	const isAdmin = user && user.role === 'ADMIN'
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [selectedProductImages, setSelectedProductImages] = useState([])
 	const [editingProduct, setEditingProduct] = useState(null)
@@ -195,7 +199,7 @@ const Paintings = () => {
 			console.error('Error updating product', error)
 			setMessage(
 				error.response?.data?.error ||
-				'Failed to update product. Please try again.'
+					'Failed to update product. Please try again.'
 			)
 		}
 	}
@@ -227,36 +231,47 @@ const Paintings = () => {
 				>
 					{t('Профіль')}
 				</button>
-				<button className={styles.profileAction} onClick={handleAddPostClick}>
-					{t('Додати публікацію')}
-				</button>
-				<button className={styles.profileAction} onClick={handlePostsClick}>
-					{t('Публікації')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handleProductCartCreateClick}
-				>
-					{t('Додати картину')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handlePaintingCardListClick}
-				>
-					{t('Переглянути вироби/картини')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handleExhibitionCardCreateClick}
-				>
-					{t('Додати виставку')}
-				</button>
-				<button
-					className={styles.profileAction}
-					onClick={handleExhibitionListClick}
-				>
-					{t('Переглянути виставки')}
-				</button>
+				{!isUser && !isMuseum && (
+					<>
+						<button
+							className={styles.profileAction}
+							onClick={handleAddPostClick}
+						>
+							{t('Додати публікацію')}
+						</button>
+						<button className={styles.profileAction} onClick={handlePostsClick}>
+							{t('Публікації')}
+						</button>
+						<button
+							className={styles.profileAction}
+							onClick={handleProductCartCreateClick}
+						>
+							{t('Додати картину')}
+						</button>
+						<button
+							className={styles.profileAction}
+							onClick={handlePaintingCardListClick}
+						>
+							{t('Переглянути вироби/картини')}
+						</button>
+					</>
+				)}
+				{isMuseum && (
+					<>
+						<button
+							className={styles.profileAction}
+							onClick={handleExhibitionCardCreateClick}
+						>
+							{t('Додати виставку')}
+						</button>
+						<button
+							className={styles.profileAction}
+							onClick={handleExhibitionListClick}
+						>
+							{t('Переглянути виставки')}
+						</button>
+					</>
+				)}
 				<button className={styles.profileAction} onClick={handleLogout}>
 					{t('Вийти')}
 				</button>
@@ -370,7 +385,9 @@ const Paintings = () => {
 							<div className={styles.modalTextWrapper}>
 								<div className={styles.modalFieldUk}>
 									<div>
-										<label className={styles.profileLabel}>{t('Заголовок українською')}</label>
+										<label className={styles.profileLabel}>
+											{t('Заголовок українською')}
+										</label>
 										<input
 											type='text'
 											name='title_uk'
@@ -379,7 +396,9 @@ const Paintings = () => {
 										/>
 									</div>
 									<div>
-										<label className={styles.profileLabel}>{t('Опис українською')}</label>
+										<label className={styles.profileLabel}>
+											{t('Опис українською')}
+										</label>
 										<textarea
 											name='description_uk'
 											value={formData.description_uk}
@@ -387,7 +406,9 @@ const Paintings = () => {
 										/>
 									</div>
 									<div>
-										<label className={styles.profileLabel}>{t('Специфікація українською')}</label>
+										<label className={styles.profileLabel}>
+											{t('Специфікація українською')}
+										</label>
 										<textarea
 											name='specs_uk'
 											value={formData.specs_uk}
@@ -397,7 +418,9 @@ const Paintings = () => {
 								</div>
 								<div className={styles.modalFieldEn}>
 									<div>
-										<label className={styles.profileLabel}>{t('Заголовок англійською')}</label>
+										<label className={styles.profileLabel}>
+											{t('Заголовок англійською')}
+										</label>
 										<input
 											type='text'
 											name='title_en'
@@ -406,7 +429,9 @@ const Paintings = () => {
 										/>
 									</div>
 									<div>
-										<label className={styles.profileLabel}>{t('Опис англійською')}</label>
+										<label className={styles.profileLabel}>
+											{t('Опис англійською')}
+										</label>
 										<textarea
 											name='description_en'
 											value={formData.description_en}
@@ -414,7 +439,9 @@ const Paintings = () => {
 										/>
 									</div>
 									<div>
-										<label className={styles.profileLabel}>{t('Специфікація англійською')}</label>
+										<label className={styles.profileLabel}>
+											{t('Специфікація англійською')}
+										</label>
 										<textarea
 											name='specs_en'
 											value={formData.specs_en}
@@ -423,7 +450,9 @@ const Paintings = () => {
 									</div>
 								</div>
 							</div>
-							<label className={styles.profileLabel}>{t('Додати зображення')}</label>
+							<label className={styles.profileLabel}>
+								{t('Додати зображення')}
+							</label>
 							<input
 								type='file'
 								name='productImages'
