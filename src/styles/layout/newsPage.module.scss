@@ -59,7 +59,7 @@
 .newsPageSearchInput {
     /* Поле ввода для поиска авторов */
     display: flex;
-    width: calc(275px - (-13 * ((1440px - 100vw) / (1440 - 375))));
+    width: calc(275px - (-13 * ((1440px - 100vw) / (1440 - 375)))) !important;
     min-width: 275px;
     max-width: 288px;
     height: 51px;
@@ -67,6 +67,7 @@
     border-radius: 5px;
     font-size: calc(18px - (2 * ((1440px - 100vw) / (1440 - 375))));
     margin: 0 !important;
+    padding: 0 $responsiveSmallPadding !important;
 }
 
 .newsPageLikeAndShareContainer {
