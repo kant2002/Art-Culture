@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import styles from '../../../styles/layout/newsPage.module.scss'
 import NewsPageAuthorsSlider from '../../components/Sliders/NewsPageAuthorsSlider/NewsPageAuthorsSlider.jsx'
 import { getFormattedDate, getImageUrl } from '../../../utils/helper.js'
+import LikeAndShare from '@components/Blocks/LikeAndShare'
+import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 
 function NewsPage() {
 	const { t, i18n } = useTranslation()
@@ -381,36 +383,8 @@ function NewsPage() {
 						/>
 					</button>
 				</div>
-				<div className={`${styles.newsPageLikeAndShareContainer}`}>
-					<div className={`${styles.newsPageLikeWrapper}`}>
-						<button className={`${styles.newsPageLikeButton}`}>
-							<img
-								className={`${styles.newsPageLikeButtonImg}`}
-								src={'/Img/likeHeart.svg'}
-								alt={t('Світлина вподобайки')}
-								onError={e => {
-									e.target.onerror = null
-									e.target.src = '/Img/likeHeart.svg' // Fallback image
-								}}
-							/>
-							<p className={`${styles.newsPageLikeButtonText}`}>Like</p>
-						</button>
-					</div>
-					<div className={`${styles.newsPageShareWrapper}`}>
-						<button className={`${styles.newsPageShareButton}`}>
-							<p className={`${styles.newsPageShareButtonText}`}>Share</p>
-							<img
-								className={`${styles.newsPageShareButtonImg}`}
-								src={'/Img/shareArrow.svg'}
-								alt={t('Світлина поширити')}
-								onError={e => {
-									e.target.onerror = null
-									e.target.src = '/Img/shareArrow.svg' // Fallback image
-								}}
-							/>
-						</button>
-					</div>
-				</div>
+				
+				<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 			</div>
 
 			{/* Subscription Section */}

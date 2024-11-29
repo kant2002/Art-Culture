@@ -13,6 +13,9 @@ import { useNavigate } from 'react-router-dom'
 import { Navigation, Pagination } from 'swiper/modules'
 import '/src/styles/components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.scss'
 import { getBaseUrl } from '../../../../utils/helper'
+import LikeAndShare from '@components/Blocks/LikeAndShare'
+import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
+
 const Slide = ({ product, baseUrl }) => {
 	const { t, i18n } = useTranslation()
 	const currentLanguage = i18n.language
@@ -110,34 +113,8 @@ const MainPopularArtistsSlider = () => {
 							{t('Популярне.')} &#8243;{t('Мистецтво')}&#8243;
 						</p>
 					</div>
-					<div className='mainPopularArtistsSliderLikeAndShareWrapper'>
-						<div className='mainPopularArtistsSliderLikeInnerWrapper'>
-							<button className='mainPopularArtistsSliderLikeButton'>
-								<img
-									className='mainPopularArtistsSliderLikeButtonImg'
-									src={'/Img/likeHeart.svg'}
-									alt={t('Світлина вподобайки')}
-									onError={e => {
-										e.target.onerror = null
-										e.target.src = '/Img/likeHeart.svg'
-									}}
-								/>
-							</button>
-						</div>
-						<div className='mainPopularArtistsSliderShareInnerWrapper'>
-							<button className='mainPopularArtistsSliderShareButtonButton'>
-								<img
-									className='mainPopularArtistsSliderShareButtonImg'
-									src={'/Img/shareArrow.svg'}
-									alt={t('Світлина поширити')}
-									onError={e => {
-										e.target.onerror = null
-										e.target.src = '/Img/shareArrow.svg'
-									}}
-								/>
-							</button>
-						</div>
-					</div>
+					
+					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 				</div>
 				<div className='mainPopularArtistsSliderBottomInnerWrapper'>
 					<Swiper

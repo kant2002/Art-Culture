@@ -35,67 +35,6 @@
     text-transform: uppercase;
 }
 
-.artistPageNewsArtistsSliderLikeAndShareWrapper {
-    // Обёртка кнопок Like и Share
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 0 0 auto;
-    width: 177px;
-}
-
-.artistPageNewsArtistsSliderLikeInnerWrapper {
-    // Обёртка кнопки Like
-}
-
-.artistPageNewsArtistsSliderLikeButton {
-    // Кнопка Like
-    position: relative;
-    display: flex;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.artistPageNewsArtistsSliderLikeButton::after {
-    content: "Like";
-    position: absolute;
-    top: 6px;
-    left: 38px;
-    font-size: 18px;
-    user-select: none;
-    color: #000000;
-}
-
-.artistPageNewsArtistsSliderLikeButtonImg {
-    // Изображение кнопки Like
-}
-
-.artistPageNewsArtistsSliderShareInnerWrapper {
-    // Обёртка кнопки Share
-}
-
-.artistPageNewsArtistsSliderShareButtonButton {
-    // Кнопка Share
-    position: relative;
-    display: flex;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.artistPageNewsArtistsSliderShareButtonButton::before {
-    content: "Share";
-    position: absolute;
-    top: 6px;
-    right: 38px;
-    font-size: 18px;
-    user-select: none;
-    color: #000000;
-}
-
-.artistPageNewsArtistsSliderShareButtonImg {
-    // Изображение кнопки Share
-}
-
 .artistPageNewsArtistsSliderBottomInnerWrapper {
     // Нижняя часть слайдера
     display: flex;
@@ -323,20 +262,5 @@
     .artistPageNewsArtistsSliderCardDescription {
         // Описание карточки
         font-size: 16px;
-    }
-}
-
-@media screen and (max-width: 569px) {
-    .artistPageNewsArtistsSliderLikeAndShareWrapper {
-        // Обёртка кнопок Like и Share
-        width: 80px;
-    }
-
-    .artistPageNewsArtistsSliderLikeButton::after {
-        display: none;
-    }
-
-    .artistPageNewsArtistsSliderShareButtonButton::before {
-        display: none;
     }
 }

@@ -35,67 +35,6 @@
     text-transform: uppercase;
 }
 
-.popularOfThisArtistSliderLikeAndShareWrapper {
-    // Обёртка кнопок Like и Share
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 0 0 auto;
-    width: 177px;
-}
-
-.popularOfThisArtistSliderLikeInnerWrapper {
-    // Обёртка кнопки Like
-}
-
-.popularOfThisArtistSliderLikeButton {
-    // Кнопка Like
-    position: relative;
-    display: flex;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.popularOfThisArtistSliderLikeButton::after {
-    content: "Like";
-    position: absolute;
-    top: 6px;
-    left: 38px;
-    font-size: 18px;
-    user-select: none;
-    color: #000000;
-}
-
-.popularOfThisArtistSliderLikeButtonImg {
-    // Изображение кнопки Like
-}
-
-.popularOfThisArtistSliderShareInnerWrapper {
-    // Обёртка кнопки Share
-}
-
-.popularOfThisArtistSliderShareButtonButton {
-    // Кнопка Share
-    position: relative;
-    display: flex;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.popularOfThisArtistSliderShareButtonButton::before {
-    content: "Share";
-    position: absolute;
-    top: 6px;
-    right: 38px;
-    font-size: 18px;
-    user-select: none;
-    color: #000000;
-}
-
-.popularOfThisArtistSliderShareButtonImg {
-    // Изображение кнопки Share
-}
-
 .popularOfThisArtistSliderBottomInnerWrapper {
     // Нижняя часть слайдера
     display: flex;
@@ -346,18 +285,5 @@
     .popularOfThisArtistSliderSellIcon {
         // Иконка "Продажа"
         font-size: 14px;
-    }
-}
-
-@media screen and (max-width: 569px) {
-    .popularOfThisArtistSliderLikeAndShareWrapper {
-        // Обёртка кнопок Like и Share
-        width: 80px;
-    }
-    .popularOfThisArtistSliderLikeButton::after {
-        display: none;
-    }
-    .popularOfThisArtistSliderShareButtonButton::before {
-        display: none;
     }
 }
