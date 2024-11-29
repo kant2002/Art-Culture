@@ -1,0 +1,11 @@
+.LikeAndShareFixed {
+    // Обёртка кнопок Like и Share
+    width: 177px !important;
+}
+
+@media screen and (max-width: 569px) {
+    .LikeAndShareFixed {
+        // Обёртка кнопок Like и Share
+        width: 80px !important;
+    }
+}

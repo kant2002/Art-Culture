@@ -13,6 +13,8 @@ import { Navigation, Pagination } from 'swiper/modules'
 import { useNavigate } from 'react-router-dom'
 import styles from '/src/styles/components/Sliders/ArtistPageSliders/ArtistPageNewsArtistsSlider.module.scss'
 import { getBaseUrl } from '../../../../utils/helper'
+import LikeAndShare from '@components/Blocks/LikeAndShare'
+import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 
 const Slide = ({ post, baseUrl }) => {
 	const { t, i18n } = useTranslation()
@@ -207,40 +209,7 @@ const ArtistPageNewsArtistsSlider = () => {
 							{t('Новини.')} &#8243;{t('Митці')}&#8243;
 						</p>
 					</div>
-					<div
-						className={styles.artistPageNewsArtistsSliderLikeAndShareWrapper}
-					>
-						<div className={styles.artistPageNewsArtistsSliderLikeInnerWrapper}>
-							<button className={styles.artistPageNewsArtistsSliderLikeButton}>
-								<img
-									className={styles.artistPageNewsArtistsSliderLikeButtonImg}
-									src={'/Img/likeHeart.svg'}
-									alt={t('Світлина вподобайки')}
-									onError={e => {
-										e.target.onerror = null
-										e.target.src = '/Img/likeHeart.svg'
-									}}
-								/>
-							</button>
-						</div>
-						<div
-							className={styles.artistPageNewsArtistsSliderShareInnerWrapper}
-						>
-							<button
-								className={styles.artistPageNewsArtistsSliderShareButtonButton}
-							>
-								<img
-									className={styles.artistPageNewsArtistsSliderShareButtonImg}
-									src={'/Img/shareArrow.svg'}
-									alt={t('Світлина поширити')}
-									onError={e => {
-										e.target.onerror = null
-										e.target.src = '/Img/shareArrow.svg'
-									}}
-								/>
-							</button>
-						</div>
-					</div>
+					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 				</div>
 				<div className={styles.artistPageNewsArtistsSliderBottomInnerWrapper}>
 					<Swiper
