@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import ArtistsPageNewsArtistsSlider from '../../components/Sliders/ArtistsPageSliders/ArtistsPageNewsArtistsSlider.jsx'
-import PopularArtsSlider from '../../components/Sliders/ArtistsPageSliders/PopularArtsSlider.jsx'
-// import MainPopularArtsSlider from '../../components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.jsx'
+import ArtistsPageNewsArtistsSlider from '@components/Sliders/ArtistsPageSliders/ArtistsPageNewsArtistsSlider.jsx'
+import PopularArtsSlider from '@components/Sliders/ArtistsPageSliders/PopularArtsSlider.jsx'
+// import MainPopularArtsSlider from '@/components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.jsx'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import styles from '../../../styles/layout/ArtistsPage.module.scss'
+import styles from '@/styles/layout/ArtistsPage.module.scss'
 import { getImageUrl } from '../../../utils/helper.js'
 
 function ArtistsPage() {
@@ -161,7 +161,7 @@ function ArtistsPage() {
 					</button>
 				</div>
 
-				<div className={`${styles.ArtistsPageGalleryCardsWrapper}`}>
+				{/* <div className={`${styles.ArtistsPageGalleryCardsWrapper}`}>
 					{loading ? (
 						<div className={styles.loading}>{t('Завантаження...')}</div>
 					) : error ? (
@@ -173,6 +173,7 @@ function ArtistsPage() {
 					) : (
 						creators.slice(0, visibleCreatorsCount).map(creator => {
 							const featuredMediaUrl = getImageUrl(creator.images, '/Img/ArtistPhoto.jpg')
+
 							return (
 								<div key={creator.id} className={`${styles.ArtistsPageGalleryInnerWrapper}`}>
 									<div className={`${styles.ArtistsPageGalleryCardWrapper}`}>
@@ -207,11 +208,54 @@ function ArtistsPage() {
 							)
 						})
 					)}
+				</div> */}
+
+				<div className={`${styles.ArtistsPageGalleryCardsWrapper}`}>
+					{loading ? (
+						<div className={styles.loading}>{t('Завантаження...')}</div>
+					) : error ? (
+						<div className={styles.error}>{error}</div>
+					) : creators.length === 0 ? (
+						<div className={styles.noCreators}>
+							{t('Немає митців для відображення.')}
+						</div>
+					) : (
+						<div className={`${styles.ArtistsPageGalleryInnerWrapper}`}>
+							{creators.slice(0, visibleCreatorsCount).map(creator => {
+								const featuredMediaUrl = getImageUrl(creator.images, '/Img/ArtistPhoto.jpg')
+
+								return (
+									<div key={creator.id} className={`${styles.ArtistsPageGalleryCardWrapper}`}>
+										<div
+											className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}
+											onClick={() => handleAuthorPreviewClick(creator.id)}
+											style={{ cursor: 'pointer' }}
+										>
+											<img
+												className={`${styles.ArtistsPageGalleryCardPicture}`}
+												src={featuredMediaUrl}
+												alt={`Фото митця ${creator.title}`}
+												loading="lazy"
+												onError={e => {
+													e.target.onerror = null
+													e.target.src = '/Img/ArtistPhoto.jpg'
+												}}
+											/>
+										</div>
+										<div className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}>
+											<p className={`${styles.ArtistsPageGalleryCardDescription}`}>{creator.title}</p>
+										</div>
+									</div>
+								)
+							})}
+						</div>
+					)}
 				</div>
+
+
 
 				<div className={`${styles.ArtistsPageGalleryAllArtistsButtonWrapper}`}>
 					<button className={`${styles.ArtistsPageGalleryAllArtistsButton}`}>
-						{/* TODO: write page for all artists              */}
 						<p className={`${styles.ArtistsPageGalleryAllArtistsButtonText}`}>
 							{t('Всі митці')}
 						</p>
