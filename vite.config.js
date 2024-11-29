@@ -23,12 +23,6 @@ export default defineConfig({
 			{ find: '@screens', replacement: path.resolve(__dirname, 'src', 'assets', 'screens') },
 		],
 	},
-	"rewrites": [
-		{
-			"source": "/((?!api/.*).*)",
-			"destination": "/"
-		}
-	],
 	server: {
 		https: {
 			key: fs.readFileSync(path.resolve(__dirname, 'server.key')),
