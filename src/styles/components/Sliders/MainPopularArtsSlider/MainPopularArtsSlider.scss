@@ -49,6 +49,7 @@
     position: relative;
     display: flex;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .mainPopularArtistsSliderLikeButton::after {
@@ -66,6 +67,7 @@
     position: relative;
     display: flex;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .mainPopularArtistsSliderShareButtonButton::before {
