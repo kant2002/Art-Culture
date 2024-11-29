@@ -36,53 +36,6 @@
 	text-transform: uppercase;
 }
 
-.ArtistsPageNewsArtistsSliderLikeAndShareWrapper {
-	// Обёртка кнопок Like и Share
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin: 0 0 0 auto;
-	width: 177px;
-}
-
-.ArtistsPageNewsArtistsSliderLikeInnerWrapper {
-	// Обёртка кнопки Like
-}
-
-.ArtistsPageNewsArtistsSliderLikeButton {
-	// Кнопка Like
-	position: relative;
-	display: flex;
-	border-radius: 50%;
-	cursor: pointer;
-}
-
-.ArtistsPageNewsArtistsSliderLikeButton::after {
-	content: 'Like';
-	position: absolute;
-	top: 6px;
-	left: 38px;
-	font-size: 18px;
-	user-select: none;
-	color: #000000;
-}
-
-.ArtistsPageNewsArtistsSliderLikeButtonImg {
-	// Изображение кнопки Like
-}
-
-.ArtistsPageNewsArtistsSliderShareInnerWrapper {
-	// Обёртка кнопки Share
-}
-
-.ArtistsPageNewsArtistsSliderShareButtonButton {
-	// Кнопка Share
-	position: relative;
-	display: flex;
-	border-radius: 50%;
-	cursor: pointer;
-}
-
 .ArtistsPageNewsArtistsSliderShareButtonButton::before {
 	content: 'Share';
 	position: absolute;
@@ -355,20 +308,5 @@
 	.ArtistsPageNewsArtistsSliderCardDescription {
 		// Описание карточки
 		font-size: 16px;
-	}
-}
-
-@media screen and (max-width: 569px) {
-	.ArtistsPageNewsArtistsSliderLikeAndShareWrapper {
-		// Обёртка кнопок Like и Share
-		width: 80px;
-	}
-
-	.ArtistsPageNewsArtistsSliderLikeButton::after {
-		display: none;
-	}
-
-	.ArtistsPageNewsArtistsSliderShareButtonButton::before {
-		display: none;
 	}
 }
