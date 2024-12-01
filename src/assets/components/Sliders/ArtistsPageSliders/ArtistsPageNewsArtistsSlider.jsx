@@ -13,9 +13,6 @@ import 'swiper/css/pagination'
 import { Navigation, Pagination } from 'swiper/modules'
 
 import styles from '/src/styles/components/Sliders/ArtistsPageSliders/ArtistsPageNewsArtistsSlider.module.scss'
-import { getBaseUrl } from '../../../../utils/helper'
-import LikeAndShare from '@components/Blocks/LikeAndShare'
-import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 
 const Slide = ({ post, baseUrl }) => {
 	const { t, i18n } = useTranslation()
@@ -38,7 +35,7 @@ const Slide = ({ post, baseUrl }) => {
 		<div className={styles.ArtistsPageNewsArtistsSliderCardContainer}>
 			<a
 				className={styles.ArtistsPageNewsArtistsSliderCardLink}
-				// TODO:Rewrite component to use navigate for post	onClick={handleArtistPageClick}
+			// TODO:Rewrite component to use navigate for post	onClick={handleArtistPageClick}
 			>
 				<div className={styles.ArtistsPageNewsArtistsSliderCardImgWrapper}>
 					<img
@@ -78,7 +75,11 @@ const ArtistsPageNewsArtistsSlider = () => {
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 
-	const baseUrl = getBaseUrl()
+	const host = window.location.hostname
+	const isLocalhost = host === 'localhost' || host === '127.0.0.1'
+	const baseUrl = isLocalhost
+		? 'http://localhost:5000'
+		: 'https://art.playukraine.com'
 
 	useEffect(() => {
 		const fetchCreatorPosts = async () => {
@@ -106,7 +107,42 @@ const ArtistsPageNewsArtistsSlider = () => {
 							{t('Новини.')} &#8243;{t('Митці')}&#8243;
 						</p>
 					</div>
-					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
+					<div
+						className={styles.ArtistsPageNewsArtistsSliderLikeAndShareWrapper}
+					>
+						<div
+							className={styles.ArtistsPageNewsArtistsSliderLikeInnerWrapper}
+						>
+							<button className={styles.ArtistsPageNewsArtistsSliderLikeButton}>
+								<img
+									className={styles.ArtistsPageNewsArtistsSliderLikeButtonImg}
+									src={'/Img/likeHeart.svg'}
+									alt={t('Світлина вподобайки')}
+									onError={e => {
+										e.target.onerror = null
+										e.target.src = '/Img/likeHeart.svg'
+									}}
+								/>
+							</button>
+						</div>
+						<div
+							className={styles.ArtistsPageNewsArtistsSliderShareInnerWrapper}
+						>
+							<button
+								className={styles.ArtistsPageNewsArtistsSliderShareButtonButton}
+							>
+								<img
+									className={styles.ArtistsPageNewsArtistsSliderShareButtonImg}
+									src={'/Img/shareArrow.svg'}
+									alt={t('Світлина поширити')}
+									onError={e => {
+										e.target.onerror = null
+										e.target.src = '/Img/shareArrow.svg'
+									}}
+								/>
+							</button>
+						</div>
+					</div>
 				</div>
 				<div className={styles.ArtistsPageNewsArtistsSliderBottomInnerWrapper}>
 					<Swiper
