@@ -12,7 +12,7 @@ import 'swiper/css/pagination'
 // Import Swiper modules
 import { Navigation, Pagination } from 'swiper/modules'
 
-import styles from '/src/styles/components/Sliders/ArtistsPageSliders/ArtistsPageNewsArtistsSlider.module.scss'
+import '/src/styles/components/Sliders/ArtistsPageSliders/ArtistsPageNewsArtistsSlider.scss'
 
 const Slide = ({ post, baseUrl }) => {
 	const { t, i18n } = useTranslation()
@@ -32,14 +32,14 @@ const Slide = ({ post, baseUrl }) => {
 		: '/Img/halfNewsCard.jpg'
 
 	return (
-		<div className={styles.ArtistsPageNewsArtistsSliderCardContainer}>
+		<div className="ArtistsPageNewsArtistsSliderCardContainer">
 			<a
-				className={styles.ArtistsPageNewsArtistsSliderCardLink}
+				className="ArtistsPageNewsArtistsSliderCardLink"
 			// TODO:Rewrite component to use navigate for post	onClick={handleArtistPageClick}
 			>
-				<div className={styles.ArtistsPageNewsArtistsSliderCardImgWrapper}>
+				<div className="ArtistsPageNewsArtistsSliderCardImgWrapper">
 					<img
-						className={styles.ArtistsPageNewsArtistsSliderCardImg}
+						className="ArtistsPageNewsArtistsSliderCardImg"
 						src={featuredMediaUrl}
 						alt={t('Світлина мистецтва')}
 						onError={e => {
@@ -49,16 +49,16 @@ const Slide = ({ post, baseUrl }) => {
 					/>
 				</div>
 
-				<div className={styles.ArtistsPageNewsArtistsSliderCardTitleWrapper}>
-					<h3 className={styles.ArtistsPageNewsArtistsSliderCardTitle}>
+				<div className="ArtistsPageNewsArtistsSliderCardTitleWrapper">
+					<h3 className="ArtistsPageNewsArtistsSliderCardTitle">
 						{title.length > 50 ? `${title.substring(0, 50)}...` : title}
 					</h3>
 				</div>
 
 				<div
-					className={styles.ArtistsPageNewsArtistsSliderCardDescriptionWrapper}
+					className="ArtistsPageNewsArtistsSliderCardDescriptionWrapper"
 				>
-					<p className={styles.ArtistsPageNewsArtistsSliderCardDescription}>
+					<p className="ArtistsPageNewsArtistsSliderCardDescription">
 						{content.length > 100 ? `${content.substring(0, 100)}...` : content}
 					</p>
 				</div>
@@ -99,23 +99,23 @@ const ArtistsPageNewsArtistsSlider = () => {
 	}, [t])
 
 	return (
-		<div className={styles.ArtistsPageNewsArtistsSliderContainer}>
-			<div className={styles.ArtistsPageNewsArtistsSliderWrapper}>
-				<div className={styles.ArtistsPageNewsArtistsSliderTopInnerWrapper}>
-					<div className={styles.ArtistsPageNewsArtistsSliderTitleWrapper}>
-						<p className={styles.ArtistsPageNewsArtistsSliderTitle}>
+		<div className="ArtistsPageNewsArtistsSliderContainer">
+			<div className="ArtistsPageNewsArtistsSliderWrapper">
+				<div className="ArtistsPageNewsArtistsSliderTopInnerWrapper">
+					<div className="ArtistsPageNewsArtistsSliderTitleWrapper">
+						<p className="ArtistsPageNewsArtistsSliderTitle">
 							{t('Новини.')} &#8243;{t('Митці')}&#8243;
 						</p>
 					</div>
 					<div
-						className={styles.ArtistsPageNewsArtistsSliderLikeAndShareWrapper}
+						className="ArtistsPageNewsArtistsSliderLikeAndShareWrapper"
 					>
 						<div
-							className={styles.ArtistsPageNewsArtistsSliderLikeInnerWrapper}
+							className="ArtistsPageNewsArtistsSliderLikeInnerWrapper"
 						>
-							<button className={styles.ArtistsPageNewsArtistsSliderLikeButton}>
+							<button className="ArtistsPageNewsArtistsSliderLikeButton">
 								<img
-									className={styles.ArtistsPageNewsArtistsSliderLikeButtonImg}
+									className="ArtistsPageNewsArtistsSliderLikeButtonImg"
 									src={'/Img/likeHeart.svg'}
 									alt={t('Світлина вподобайки')}
 									onError={e => {
@@ -126,13 +126,13 @@ const ArtistsPageNewsArtistsSlider = () => {
 							</button>
 						</div>
 						<div
-							className={styles.ArtistsPageNewsArtistsSliderShareInnerWrapper}
+							className="ArtistsPageNewsArtistsSliderShareInnerWrapper"
 						>
 							<button
-								className={styles.ArtistsPageNewsArtistsSliderShareButtonButton}
+								className="ArtistsPageNewsArtistsSliderShareButtonButton"
 							>
 								<img
-									className={styles.ArtistsPageNewsArtistsSliderShareButtonImg}
+									className="ArtistsPageNewsArtistsSliderShareButtonImg"
 									src={'/Img/shareArrow.svg'}
 									alt={t('Світлина поширити')}
 									onError={e => {
@@ -144,7 +144,7 @@ const ArtistsPageNewsArtistsSlider = () => {
 						</div>
 					</div>
 				</div>
-				<div className={styles.ArtistsPageNewsArtistsSliderBottomInnerWrapper}>
+				<div className="ArtistsPageNewsArtistsSliderBottomInnerWrapper">
 					<Swiper
 						modules={[Navigation, Pagination]}
 						spaceBetween={0}
@@ -156,15 +156,15 @@ const ArtistsPageNewsArtistsSlider = () => {
 					>
 						{loading ? (
 							<SwiperSlide>
-								<div className={styles.loading}>{t('Завантаження...')}</div>
+								<div className="loading">{t('Завантаження...')}</div>
 							</SwiperSlide>
 						) : error ? (
 							<SwiperSlide>
-								<div className={styles.error}>{error}</div>
+								<div className="error">{error}</div>
 							</SwiperSlide>
 						) : creatorPosts.length === 0 ? (
 							<SwiperSlide>
-								<div className={styles.noPosts}>
+								<div className="noPosts">
 									{t('Немає публікацій від митців.')}
 								</div>
 							</SwiperSlide>
