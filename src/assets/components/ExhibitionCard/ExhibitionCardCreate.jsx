@@ -379,6 +379,15 @@ function ExhibitionForm() {
 		navigate('/Exhibitions')
 	}
 
+	const getImageUrl = path => {
+		// Remove any leading '../' or './' from the path
+		const cleanedPath = path.replace(/^(\.\.?\/)+/, '/')
+		return `${process.env.REACT_APP_BASE_URL}${cleanedPath}`
+	}
+
+	const defaultAuthorImageUrl = '/Img/ArtistPhoto.jpg'
+	const defaultPaintingImageUrl = '/Img/ArtistPhoto.jpg'
+
 	return (
 		<div className={styles.profile}>
 			<div className={styles.profileActions}>
@@ -639,9 +648,39 @@ function ExhibitionForm() {
 										onClick={() => handleSelectedResult(result)}
 									>
 										{result.type === 'author' ? (
-											<p>{result.title || result.email}</p>
+											<>
+												{result.images ? (
+													<img
+														src={getImageUrl(result.images)}
+														alt={result.title || result.email}
+														className={styles.resultImage}
+													/>
+												) : (
+													<img
+														src={defaultAuthorImageUrl}
+														alt='Default author'
+														className={styles.resultImage}
+													/>
+												)}
+												<p>{result.title || result.email}</p>
+											</>
 										) : (
-											<p>{result.title_en || result.title_uk}</p>
+											<>
+												{result.images && result.images.length > 0 ? (
+													<img
+														src={getImageUrl(result.images[0].imageUrl)}
+														alt={result.title_en || result.title_uk}
+														className={styles.resultImage}
+													/>
+												) : (
+													<img
+														src={defaultPaintingImageUrl}
+														alt='Default painting'
+														className={styles.resultImage}
+													/>
+												)}
+												<p>{result.title_en || result.title_uk}</p>
+											</>
 										)}
 									</div>
 								))}
@@ -652,6 +691,19 @@ function ExhibitionForm() {
 					<div className={styles.selectedItems}>
 						{selectedAuthors.map(author => (
 							<div key={`author-${author.id}`} className={styles.chip}>
+								{author.images ? (
+									<img
+										src={getImageUrl(author.images)}
+										alt={author.title || author.email}
+										className={styles.chipImage}
+									/>
+								) : (
+									<img
+										src={defaultAuthorImageUrl}
+										alt='Default author'
+										className={styles.chipImage}
+									/>
+								)}
 								<p>{author.title || author.email}</p>
 								<button onClick={() => handleRemoveAuthor(author.id)}>×</button>
 								<button onClick={() => handleSelectAuthorPaintings(author.id)}>
@@ -665,6 +717,19 @@ function ExhibitionForm() {
 												key={`painting-${painting.id}`}
 												className={styles.chip}
 											>
+												{painting.images && painting.images.length > 0 ? (
+													<img
+														src={getImageUrl(painting.images[0].imageUrl)}
+														alt={painting.title_en || painting.title_uk}
+														className={styles.chipImage}
+													/>
+												) : (
+													<img
+														src={defaultPaintingImageUrl}
+														alt='Default painting'
+														className={styles.chipImage}
+													/>
+												)}
 												<span>{painting.title_en || painting.title_uk}</span>
 												<button
 													onClick={() =>
@@ -730,6 +795,19 @@ function ExhibitionForm() {
 						<div className={styles.paintingsList}>
 							{modalData.paintings.map(painting => (
 								<div key={painting.id} className={styles.paintingItem}>
+									{painting.images && painting.images.length > 0 ? (
+										<img
+											src={getImageUrl(painting.images[0].imageUrl)}
+											alt={painting.title_en || painting.title_uk}
+											className={styles.paintingImage}
+										/>
+									) : (
+										<img
+											src={defaultPaintingImageUrl}
+											alt='Default painting'
+											className={styles.paintingImage}
+										/>
+									)}
 									<span>{painting.title_en || painting.title_uk}</span>
 									<input
 										type='checkbox'

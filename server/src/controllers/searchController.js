@@ -56,6 +56,7 @@ export const searchPainting = async (req, res, next) => {
 						email: true,
 						title: true,
 						bio: true,
+						images: true,
 					},
 				},
 			},
