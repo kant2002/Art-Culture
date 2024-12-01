@@ -6,23 +6,6 @@ import { useAuth } from '../../../Context/AuthContext'
 import styles from '../../../styles/components/ExhibitionCard/ExhibitionCardCreate.module.scss'
 import API from '../../../utils/api'
 
-// const ArtistCheckbox = memo(({ artist, isChecked, onChange }) => (
-// 	<div className={styles.checkArtistItem}>
-// 		<input
-// 			type='checkbox'
-// 			id={`artist-${artist.id}`}
-// 			name='artists'
-// 			value={artist.id}
-// 			checked={isChecked}
-// 			onChange={onChange}
-// 			className={styles.formSelect}
-// 		/>
-// 		<label htmlFor={`artist-${artist.id}`} className={styles.checkboxLabel}>
-// 			{artist.name || artist.title || artist.email}
-// 		</label>
-// 	</div>
-// ))
-
 function ExhibitionForm() {
 	const [formData, setFormData] = useState({
 		title_en: '',
@@ -240,6 +223,20 @@ function ExhibitionForm() {
 				.map(p => p.id),
 		]
 
+		const paintingAuthorIds = selectedPaintings
+			.map(p => p.author.id)
+			.filter(authorId => !artistIds.includes(authorId))
+
+		// Combine all artist IDs, ensuring uniqueness
+		const allArtistIds = [...new Set([...artistIds, ...paintingAuthorIds])]
+
+		// Update form validation
+		if (allArtistIds.length === 0) {
+			setErrors(['Please select at least one artist.'])
+			setIsSubmitting(false)
+			return
+		}
+
 		// Destructure formData for easier access
 		const {
 			title_en,
@@ -304,6 +301,11 @@ function ExhibitionForm() {
 
 		// Append selected artists
 		artistIds.forEach(artistId => {
+			submissionData.append('artistIds', artistId)
+		})
+
+		// Append selected artists
+		allArtistIds.forEach(artistId => {
 			submissionData.append('artistIds', artistId)
 		})
 
@@ -381,8 +383,8 @@ function ExhibitionForm() {
 
 	const getImageUrl = path => {
 		// Remove any leading '../' or './' from the path
-		const cleanedPath = path.replace(/^(\.\.?\/)+/, '/')
-		return `${process.env.REACT_APP_BASE_URL}${cleanedPath}`
+		const normalizedPath = path.startsWith('/') ? path : `/${path}`
+		return `${process.env.REACT_APP_BASE_URL}${normalizedPath}`
 	}
 
 	const defaultAuthorImageUrl = '/Img/ArtistPhoto.jpg'
@@ -613,21 +615,6 @@ function ExhibitionForm() {
 						</div>
 					</div>
 
-					{/* Artists (Checkboxes)
-					<div className={styles.formGroup}>
-						<label className={styles.formLabel}>{t('Митці')}:</label>
-						<div className={styles.checkArtistWrapper}>
-							{artists.map(artist => (
-								<ArtistCheckbox
-									key={artist.id}
-									artist={artist}
-									isChecked={formData.artists.includes(artist.id)}
-									onChange={handleArtistSelection}
-								/>
-							))}
-						</div>
-					</div> */}
-
 					{/* Search input */}
 					<div className={styles.formGroup}>
 						<label className={styles.formLabel}>{t('Пошук')}</label>
@@ -649,37 +636,41 @@ function ExhibitionForm() {
 									>
 										{result.type === 'author' ? (
 											<>
-												{result.images ? (
-													<img
-														src={getImageUrl(result.images)}
-														alt={result.title || result.email}
-														className={styles.resultImage}
-													/>
-												) : (
-													<img
-														src={defaultAuthorImageUrl}
-														alt='Default author'
-														className={styles.resultImage}
-													/>
-												)}
-												<p>{result.title || result.email}</p>
+												<div className={styles.resultAuthorWrapper}>
+													{result.images ? (
+														<img
+															src={getImageUrl(result.images)}
+															alt={result.title || result.email}
+															className={styles.resultAuthorImage}
+														/>
+													) : (
+														<img
+															src={defaultAuthorImageUrl}
+															alt='Default author'
+															className={styles.resultImage}
+														/>
+													)}
+													<p>{result.title || result.email}</p>
+												</div>
 											</>
 										) : (
 											<>
-												{result.images && result.images.length > 0 ? (
-													<img
-														src={getImageUrl(result.images[0].imageUrl)}
-														alt={result.title_en || result.title_uk}
-														className={styles.resultImage}
-													/>
-												) : (
-													<img
-														src={defaultPaintingImageUrl}
-														alt='Default painting'
-														className={styles.resultImage}
-													/>
-												)}
-												<p>{result.title_en || result.title_uk}</p>
+												<div className={styles.resultPaintingsWrapper}>
+													{result.images && result.images.length > 0 ? (
+														<img
+															src={getImageUrl(result.images[0].imageUrl)}
+															alt={result.title_en || result.title_uk}
+															className={styles.resultPaintingsImage}
+														/>
+													) : (
+														<img
+															src={defaultPaintingImageUrl}
+															alt='Default painting'
+															className={styles.resultImage}
+														/>
+													)}
+													<p>{result.title_en || result.title_uk}</p>
+												</div>
 											</>
 										)}
 									</div>
@@ -688,9 +679,9 @@ function ExhibitionForm() {
 						)}
 					</div>
 					{/* Selected items search */}
-					<div className={styles.selectedItems}>
+					<div className={styles.selectedObjectWrapper}>
 						{selectedAuthors.map(author => (
-							<div key={`author-${author.id}`} className={styles.chip}>
+							<div key={`author-${author.id}`} className={styles.chipContainer}>
 								{author.images ? (
 									<img
 										src={getImageUrl(author.images)}
@@ -745,8 +736,47 @@ function ExhibitionForm() {
 							</div>
 						))}
 						{selectedPaintings.map(painting => (
-							<div key={`painting-${painting.id}`} className={styles.chip}>
-								<span>{painting.title_en || painting.title_uk}</span>
+							<div
+								key={`painting-${painting.id}`}
+								className={styles.chipContainer}
+							>
+								<div className={styles.paintingInfo}>
+									{/* Painting Image */}
+									{painting.images && painting.images.length > 0 ? (
+										<img
+											src={getImageUrl(painting.images[0].imageUrl)}
+											alt={painting.title_en || painting.title_uk}
+											className={styles.chipImage}
+										/>
+									) : (
+										<img
+											src={defaultPaintingImageUrl}
+											alt='Default painting'
+											className={styles.chipImage}
+										/>
+									)}
+									{/* Painting Title */}
+									<span>{painting.title_en || painting.title_uk}</span>
+								</div>
+								<div className={styles.authorInfo}>
+									{/* Author Image */}
+									{painting.author && painting.author.images ? (
+										<img
+											src={getImageUrl(painting.author.images)}
+											alt={painting.author.title || painting.author.email}
+											className={styles.chipImage}
+										/>
+									) : (
+										<img
+											src={defaultAuthorImageUrl}
+											alt='Default author'
+											className={styles.chipImage}
+										/>
+									)}
+									{/* Author Name */}
+									<span>{painting.author.title || painting.author.email}</span>
+								</div>
+								{/* Remove Button */}
 								<button onClick={() => handleRemovePainting(null, painting.id)}>
 									×
 								</button>

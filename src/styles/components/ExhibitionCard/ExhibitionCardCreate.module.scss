@@ -7,7 +7,8 @@
 	flex-direction: column;
 	justify-content: start;
 	font-family: $default-font;
-	margin: $responsiveMediumPadding 0 $responsiveMediumPadding $responsiveLeftAndRightPadding;
+	margin: $responsiveMediumPadding 0 $responsiveMediumPadding
+		$responsiveLeftAndRightPadding;
 }
 
 .formTitle {
@@ -141,7 +142,8 @@
 
 @media (min-width: 1441px) {
 	.exhibitionFormContainer {
-		margin: $staticPcMediumPadding 0 $staticPcMediumPadding $responsiveLeftAndRightPadding;
+		margin: $staticPcMediumPadding 0 $staticPcMediumPadding
+			$responsiveLeftAndRightPadding;
 	}
 
 	.formTitle {
@@ -183,4 +185,118 @@
 	.submitButton {
 		border-radius: 34px;
 	}
+}
+
+// Search block definition style
+
+.resultAuthorWrapper {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	.resultAuthorImage {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+	}
+}
+
+.resultPaintingsWrapper {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	.resultPaintingsImage {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+	}
+}
+
+.formFileInput {
+	/* Your styles */
+}
+
+.modalOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+.modalContent {
+	position: relative;
+	margin: auto auto;
+	background-color: #fff;
+	padding: $responsiveBigPadding $responsiveLeftAndRightPadding;
+	border-radius: 10px;
+	width: 90%;
+	height: auto;
+	max-height: 90%;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.closeButton {
+	/* Your styles */
+}
+
+.searchResults {
+	display: flex;
+	flex-direction: column;
+	align-items: baseline;
+	gap: 10px;
+}
+
+.searchResultItem {
+	/* Your styles */
+	display: flex;
+}
+
+.selectedObjectWrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: baseline;
+	/* Your styles */
+}
+
+.chipContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.chipImage {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+
+.authorPaintings {
+	/* Your styles */
+}
+
+.paintingsList {
+	/* Your styles */
+}
+
+.paintingItem {
+	/* Your styles */
+}
+
+.paintingImage {
+	width: 15%;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
+	overflow-y: auto;
 }
