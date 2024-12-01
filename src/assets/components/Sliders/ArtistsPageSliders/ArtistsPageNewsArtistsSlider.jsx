@@ -13,6 +13,9 @@ import 'swiper/css/pagination'
 import { Navigation, Pagination } from 'swiper/modules'
 
 import '/src/styles/components/Sliders/ArtistsPageSliders/ArtistsPageNewsArtistsSlider.scss'
+import { getBaseUrl } from '../../../../utils/helper'
+import LikeAndShare from '@components/Blocks/LikeAndShare'
+import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 
 const Slide = ({ post, baseUrl }) => {
 	const { t, i18n } = useTranslation()
@@ -35,7 +38,7 @@ const Slide = ({ post, baseUrl }) => {
 		<div className="ArtistsPageNewsArtistsSliderCardContainer">
 			<a
 				className="ArtistsPageNewsArtistsSliderCardLink"
-			// TODO:Rewrite component to use navigate for post	onClick={handleArtistPageClick}
+				// TODO:Rewrite component to use navigate for post	onClick={handleArtistPageClick}
 			>
 				<div className="ArtistsPageNewsArtistsSliderCardImgWrapper">
 					<img
@@ -50,7 +53,7 @@ const Slide = ({ post, baseUrl }) => {
 				</div>
 
 				<div className="ArtistsPageNewsArtistsSliderCardTitleWrapper">
-					<h3 className="ArtistsPageNewsArtistsSliderCardTitle">
+					<h3 className="ArtistsPageNewsArtistsSliderCardTitl">
 						{title.length > 50 ? `${title.substring(0, 50)}...` : title}
 					</h3>
 				</div>
@@ -75,11 +78,7 @@ const ArtistsPageNewsArtistsSlider = () => {
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 
-	const host = window.location.hostname
-	const isLocalhost = host === 'localhost' || host === '127.0.0.1'
-	const baseUrl = isLocalhost
-		? 'http://localhost:5000'
-		: 'https://art.playukraine.com'
+	const baseUrl = getBaseUrl()
 
 	useEffect(() => {
 		const fetchCreatorPosts = async () => {
@@ -107,42 +106,7 @@ const ArtistsPageNewsArtistsSlider = () => {
 							{t('Новини.')} &#8243;{t('Митці')}&#8243;
 						</p>
 					</div>
-					<div
-						className="ArtistsPageNewsArtistsSliderLikeAndShareWrapper"
-					>
-						<div
-							className="ArtistsPageNewsArtistsSliderLikeInnerWrapper"
-						>
-							<button className="ArtistsPageNewsArtistsSliderLikeButton">
-								<img
-									className="ArtistsPageNewsArtistsSliderLikeButtonImg"
-									src={'/Img/likeHeart.svg'}
-									alt={t('Світлина вподобайки')}
-									onError={e => {
-										e.target.onerror = null
-										e.target.src = '/Img/likeHeart.svg'
-									}}
-								/>
-							</button>
-						</div>
-						<div
-							className="ArtistsPageNewsArtistsSliderShareInnerWrapper"
-						>
-							<button
-								className="ArtistsPageNewsArtistsSliderShareButtonButton"
-							>
-								<img
-									className="ArtistsPageNewsArtistsSliderShareButtonImg"
-									src={'/Img/shareArrow.svg'}
-									alt={t('Світлина поширити')}
-									onError={e => {
-										e.target.onerror = null
-										e.target.src = '/Img/shareArrow.svg'
-									}}
-								/>
-							</button>
-						</div>
-					</div>
+					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 				</div>
 				<div className="ArtistsPageNewsArtistsSliderBottomInnerWrapper">
 					<Swiper
