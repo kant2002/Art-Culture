@@ -8,12 +8,13 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import errorHandler from './src/middleware/errorHandler.js'
 import adminRoutes from './src/routes/adminRoutes.js'
+import artTermsRoutes from './src/routes/artTermsRoutes.js'
 import authRoutes from './src/routes/authRoutes.js'
 import exhibitionRoutes from './src/routes/exhibitionRoutes.js'
 import postRoutes from './src/routes/postRoutes.js'
 import productRoutes from './src/routes/productRoutes.js'
+import searchRoutes from './src/routes/searchRoutes.js'
 import userRoutes from './src/routes/userRoutes.js'
-import artTermsRoutes from './src/routes/artTermsRoutes.js'
 dotenv.config()
 
 const app = express()
@@ -94,6 +95,7 @@ app.use('/api/users', userRoutes)
 app.use('/api/posts/postId', postRoutes)
 app.use('/api/exhibitions', exhibitionRoutes)
 app.use('/api/art-terms', artTermsRoutes)
+app.use('/api/search', searchRoutes)
 
 // Routes
 console.log(process.env.NODE_ENV)
