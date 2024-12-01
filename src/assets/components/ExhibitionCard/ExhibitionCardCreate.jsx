@@ -1,27 +1,27 @@
 import axios from 'axios'
-import React, { memo, useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
-import API from '../../../utils/api'
 import styles from '../../../styles/components/ExhibitionCard/ExhibitionCardCreate.module.scss'
+import API from '../../../utils/api'
 
-const ArtistCheckbox = memo(({ artist, isChecked, onChange }) => (
-	<div className={styles.checkArtistItem}>
-		<input
-			type='checkbox'
-			id={`artist-${artist.id}`}
-			name='artists'
-			value={artist.id}
-			checked={isChecked}
-			onChange={onChange}
-			className={styles.formSelect}
-		/>
-		<label htmlFor={`artist-${artist.id}`} className={styles.checkboxLabel}>
-			{artist.name || artist.title || artist.email}
-		</label>
-	</div>
-))
+// const ArtistCheckbox = memo(({ artist, isChecked, onChange }) => (
+// 	<div className={styles.checkArtistItem}>
+// 		<input
+// 			type='checkbox'
+// 			id={`artist-${artist.id}`}
+// 			name='artists'
+// 			value={artist.id}
+// 			checked={isChecked}
+// 			onChange={onChange}
+// 			className={styles.formSelect}
+// 		/>
+// 		<label htmlFor={`artist-${artist.id}`} className={styles.checkboxLabel}>
+// 			{artist.name || artist.title || artist.email}
+// 		</label>
+// 	</div>
+// ))
 
 function ExhibitionForm() {
 	const [formData, setFormData] = useState({
@@ -41,6 +41,12 @@ function ExhibitionForm() {
 	const [errors, setErrors] = useState([])
 	const [serverMessage, setServerMessage] = useState('')
 	const [isSubmitting, setIsSubmitting] = useState(false)
+	const [searchQuery, setSearchQuery] = useState('')
+	const [searchResults, setSearchResults] = useState([])
+	const [selectedAuthors, setSelectedAuthors] = useState([])
+	const [selectedPaintings, setSelectedPaintings] = useState([])
+	const [selectedAuthorPaintings, setSelectedAuthorPaintings] = useState({})
+
 	const navigate = useNavigate()
 	const { t } = useTranslation()
 	const { user, logout } = useAuth()
@@ -48,6 +54,13 @@ function ExhibitionForm() {
 	const isCreator = user && user.role === 'CREATOR'
 	const isMuseum = user && user.role === 'MUSEUM'
 	const isAdmin = user && user.role === 'ADMIN'
+
+	const [isModalOpen, setIsModalOpen] = useState(false)
+	const [modalData, setModalData] = useState({
+		authorId: null,
+		paintings: [],
+		selectedPaintings: [],
+	})
 
 	console.log('CurrentUser:', user)
 
@@ -72,6 +85,90 @@ function ExhibitionForm() {
 		fetchArtists()
 	}, [])
 
+	const handleSearchChange = async e => {
+		const query = e.target.value
+		setSearchQuery(query)
+
+		if (query.length > 2) {
+			const [authorsResponse, paintingsResponse] = await Promise.all([
+				API.get(`/search/authors?q=${query}`),
+				API.get(`/search/paintings?q=${query}`),
+			])
+			setSearchResults([
+				...authorsResponse.data.authors.map(authors => ({
+					...authors,
+					type: 'author',
+				})),
+				...paintingsResponse.data.paintings.map(painting => ({
+					...painting,
+					type: 'painting',
+				})),
+			])
+		} else {
+			setSearchResults([])
+		}
+	}
+
+	const handleSelectedResult = result => {
+		if (result.type === 'author') {
+			if (!selectedAuthors.find(author => author.id === result.id)) {
+				setSelectedAuthors([...selectedAuthors, result])
+			}
+		} else if (result.type === 'painting') {
+			if (!selectedPaintings.find(painting => painting.id === result.id)) {
+				setSelectedPaintings([...selectedPaintings, result])
+			}
+		}
+		setSearchQuery('')
+		setSearchResults([])
+	}
+
+	const handleSelectAuthorPaintings = async authorId => {
+		try {
+			// Fetch paintings by the author
+			const response = await API.get(`/products/author/${authorId}`)
+			const paintings = response.data.products
+
+			setModalData({
+				authorId,
+				paintings,
+				selectedPaintings: selectedAuthorPaintings[authorId] || [],
+			})
+			setIsModalOpen(true)
+		} catch (error) {
+			console.error('Error fetching author paintings:', error)
+		}
+	}
+
+	const handleTogglePaintingSelection = painting => {
+		setModalData(prevData => {
+			const isSelected = prevData.selectedPaintings.find(
+				p => p.id === painting.id
+			)
+			if (isSelected) {
+				return {
+					...prevData,
+					selectedPaintings: prevData.selectedPaintings.filter(
+						p => p.id !== painting.id
+					),
+				}
+			} else {
+				return {
+					...prevData,
+					selectedPaintings: [...prevData.selectedPaintings, painting],
+				}
+			}
+		})
+	}
+
+	const handleSaveSelectedPaintings = () => {
+		setSelectedAuthorPaintings(prevState => ({
+			...prevState,
+			[modalData.authorId]: modalData.selectedPaintings,
+		}))
+		setIsModalOpen(false)
+	}
+
 	const handleInputChange = useCallback(e => {
 		const { name, value } = e.target
 		setFormData(prevState => ({
@@ -95,6 +192,32 @@ function ExhibitionForm() {
 		}
 	}, [])
 
+	const handleRemoveAuthor = authorId => {
+		setSelectedAuthors(prevAuthors =>
+			prevAuthors.filter(author => author.id !== authorId)
+		)
+		setSelectedAuthorPaintings(prevState => {
+			const newState = { ...prevState }
+			delete newState[authorId]
+			return newState
+		})
+	}
+
+	const handleRemovePainting = (authorId, paintingId) => {
+		if (authorId) {
+			// Remove painting from author's selected paintings
+			setSelectedAuthorPaintings(prevState => ({
+				...prevState,
+				[authorId]: prevState[authorId].filter(p => p.id !== paintingId),
+			}))
+		} else {
+			// Remove painting from selectedPaintings
+			setSelectedPaintings(prevPaintings =>
+				prevPaintings.filter(p => p.id !== paintingId)
+			)
+		}
+	}
+
 	const handleImageChange = useCallback(e => {
 		setFormData(prevState => ({
 			...prevState,
@@ -107,6 +230,15 @@ function ExhibitionForm() {
 		setErrors([])
 		setServerMessage('')
 		setIsSubmitting(true)
+
+		// Prepare artistIds and paintingIds
+		const artistIds = selectedAuthors.map(author => author.id)
+		const paintingIds = [
+			...selectedPaintings.map(p => p.id),
+			...Object.values(selectedAuthorPaintings)
+				.flat()
+				.map(p => p.id),
+		]
 
 		// Destructure formData for easier access
 		const {
@@ -140,12 +272,6 @@ function ExhibitionForm() {
 			return
 		}
 
-		if (selectedArtists.length === 0) {
-			setErrors(['Please select at least one artist.'])
-			setIsSubmitting(false)
-			return
-		}
-
 		// Prepare form data
 		const submissionData = new FormData()
 
@@ -174,6 +300,16 @@ function ExhibitionForm() {
 		// Append images
 		images.forEach(image => {
 			submissionData.append('exhibitionImages', image)
+		})
+
+		// Append selected artists
+		artistIds.forEach(artistId => {
+			submissionData.append('artistIds', artistId)
+		})
+
+		// Append selected paintings
+		paintingIds.forEach(paintingId => {
+			submissionData.append('paintingIds', paintingId)
 		})
 
 		// Debug: Log FormData entries
@@ -468,7 +604,7 @@ function ExhibitionForm() {
 						</div>
 					</div>
 
-					{/* Artists (Checkboxes) */}
+					{/* Artists (Checkboxes)
 					<div className={styles.formGroup}>
 						<label className={styles.formLabel}>{t('Митці')}:</label>
 						<div className={styles.checkArtistWrapper}>
@@ -481,6 +617,76 @@ function ExhibitionForm() {
 								/>
 							))}
 						</div>
+					</div> */}
+
+					{/* Search input */}
+					<div className={styles.formGroup}>
+						<label className={styles.formLabel}>{t('Пошук')}</label>
+						<input
+							type='text'
+							name='search'
+							value={searchQuery}
+							onChange={handleSearchChange}
+							placeholder={t("Введіть ім'я митця або картини")}
+							className={styles.formInput}
+						/>
+						{searchResults.length > 0 && (
+							<div className={styles.searchResults}>
+								{searchResults.map(result => (
+									<div
+										key={`${result.type}-${result.id}`}
+										className={styles.searchResultItem}
+										onClick={() => handleSelectedResult(result)}
+									>
+										{result.type === 'author' ? (
+											<p>{result.title || result.email}</p>
+										) : (
+											<p>{result.title_en || result.title_uk}</p>
+										)}
+									</div>
+								))}
+							</div>
+						)}
+					</div>
+					{/* Selected items search */}
+					<div className={styles.selectedItems}>
+						{selectedAuthors.map(author => (
+							<div key={`author-${author.id}`} className={styles.chip}>
+								<p>{author.title || author.email}</p>
+								<button onClick={() => handleRemoveAuthor(author.id)}>×</button>
+								<button onClick={() => handleSelectAuthorPaintings(author.id)}>
+									{t('Обрати картини')}
+								</button>
+								{/* Render selected paintings for this author */}
+								{selectedAuthorPaintings[author.id] && (
+									<div className={styles.authorPaintings}>
+										{selectedAuthorPaintings[author.id].map(painting => (
+											<div
+												key={`painting-${painting.id}`}
+												className={styles.chip}
+											>
+												<span>{painting.title_en || painting.title_uk}</span>
+												<button
+													onClick={() =>
+														handleRemovePainting(author.id, painting.id)
+													}
+												>
+													×
+												</button>
+											</div>
+										))}
+									</div>
+								)}
+							</div>
+						))}
+						{selectedPaintings.map(painting => (
+							<div key={`painting-${painting.id}`} className={styles.chip}>
+								<span>{painting.title_en || painting.title_uk}</span>
+								<button onClick={() => handleRemovePainting(null, painting.id)}>
+									×
+								</button>
+							</div>
+						))}
 					</div>
 
 					{/* Images */}
@@ -505,6 +711,44 @@ function ExhibitionForm() {
 					</button>
 				</form>
 			</div>
+			{isModalOpen && (
+				<div
+					className={styles.modalOverlay}
+					onClick={() => setIsModalOpen(false)}
+				>
+					<div
+						className={styles.modalContent}
+						onClick={e => e.stopPropagation()}
+					>
+						<button
+							className={styles.closeButton}
+							onClick={() => setIsModalOpen(false)}
+						>
+							&times;
+						</button>
+						<h2>{t('Обрати картини митця')}</h2>
+						<div className={styles.paintingsList}>
+							{modalData.paintings.map(painting => (
+								<div key={painting.id} className={styles.paintingItem}>
+									<span>{painting.title_en || painting.title_uk}</span>
+									<input
+										type='checkbox'
+										checked={
+											!!modalData.selectedPaintings.find(
+												p => p.id === painting.id
+											)
+										}
+										onChange={() => handleTogglePaintingSelection(painting)}
+									/>
+								</div>
+							))}
+						</div>
+						<button onClick={handleSaveSelectedPaintings}>
+							{t('Зберегти')}
+						</button>
+					</div>
+				</div>
+			)}
 		</div>
 	)
 }
