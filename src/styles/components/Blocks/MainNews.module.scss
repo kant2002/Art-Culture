@@ -325,4 +325,9 @@
 		// Стили для обертки даты
 		margin: 0 0 0 $staticMobileSmallPadding;
 	}
+
+	.cardClockAndDateInner {
+		// Стили для обертки даты
+		flex-direction: column;
+	}
 }

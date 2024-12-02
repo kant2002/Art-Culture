@@ -34,7 +34,7 @@ export function getFormattedDate(date) {
 }
 
 export function getFormattedTime(date) {
-    const formattedDate = new Date(date).toLocaleDateString(
+    const formattedDate = new Date(date).toLocaleTimeString(
         'uk-UA',
         {
             hour: 'numeric',
