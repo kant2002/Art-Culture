@@ -27,7 +27,6 @@ function ExhibitionForm() {
 	const [searchQuery, setSearchQuery] = useState('')
 	const [searchResults, setSearchResults] = useState([])
 	const [selectedAuthors, setSelectedAuthors] = useState([])
-	const [selectedPaintings, setSelectedPaintings] = useState([])
 	const [selectedAuthorPaintings, setSelectedAuthorPaintings] = useState({})
 
 	const navigate = useNavigate()
@@ -94,13 +93,26 @@ function ExhibitionForm() {
 
 	const handleSelectedResult = result => {
 		if (result.type === 'author') {
-			if (!selectedAuthors.find(author => author.id === result.id)) {
+			const authorId = Number(result.id)
+			if (!selectedAuthors.find(author => Number(author.id) === authorId)) {
 				setSelectedAuthors([...selectedAuthors, result])
 			}
 		} else if (result.type === 'painting') {
-			if (!selectedPaintings.find(painting => painting.id === result.id)) {
-				setSelectedPaintings([...selectedPaintings, result])
+			const paintingId = Number(result.id)
+			const authorId = Number(result.author.id)
+			if (!selectedAuthors.find(author => Number(author.id) === authorId)) {
+				setSelectedAuthors(prevAuthors => [...prevAuthors, result.author])
 			}
+			setSelectedAuthorPaintings(prevState => {
+				const prevPaintings = prevState[authorId] || []
+				if (!prevPaintings.find(p => Number(p.id) === paintingId)) {
+					return {
+						...prevState,
+						[authorId]: [...prevPaintings, result],
+					}
+				}
+				return prevState
+			})
 		}
 		setSearchQuery('')
 		setSearchResults([])
@@ -145,10 +157,19 @@ function ExhibitionForm() {
 	}
 
 	const handleSaveSelectedPaintings = () => {
-		setSelectedAuthorPaintings(prevState => ({
-			...prevState,
-			[modalData.authorId]: modalData.selectedPaintings,
-		}))
+		setSelectedAuthorPaintings(prevState => {
+			const prevPaintings = prevState[modalData.authorId] || []
+			const modalPaintings = modalData.selectedPaintings
+			const allPaintings = [...prevPaintings, ...modalPaintings]
+			const uniquePaintings = allPaintings.filter(
+				(painting, index, self) =>
+					index === self.findIndex(p => p.id === painting.id)
+			)
+			return {
+				...prevState,
+				[modalData.authorId]: uniquePaintings,
+			}
+		})
 		setIsModalOpen(false)
 	}
 
@@ -187,18 +208,24 @@ function ExhibitionForm() {
 	}
 
 	const handleRemovePainting = (authorId, paintingId) => {
-		if (authorId) {
-			// Remove painting from author's selected paintings
-			setSelectedAuthorPaintings(prevState => ({
-				...prevState,
-				[authorId]: prevState[authorId].filter(p => p.id !== paintingId),
-			}))
-		} else {
-			// Remove painting from selectedPaintings
-			setSelectedPaintings(prevPaintings =>
-				prevPaintings.filter(p => p.id !== paintingId)
+		setSelectedAuthorPaintings(prevState => {
+			const updatePaintings = prevState[authorId].filter(
+				p => p.id !== paintingId
 			)
-		}
+			if (updatePaintings.length > 0) {
+				return {
+					...prevState,
+					[authorId]: updatePaintings,
+				}
+			} else {
+				const newState = { ...prevState }
+				delete newState[authorId]
+				setSelectedAuthors(prevAuthors =>
+					prevAuthors.filter(author => author.id !== authorId)
+				)
+				return newState
+			}
+		})
 	}
 
 	const handleImageChange = useCallback(e => {
@@ -215,23 +242,16 @@ function ExhibitionForm() {
 		setIsSubmitting(true)
 
 		// Prepare artistIds and paintingIds
-		const artistIds = selectedAuthors.map(author => author.id)
-		const paintingIds = [
-			...selectedPaintings.map(p => p.id),
-			...Object.values(selectedAuthorPaintings)
-				.flat()
-				.map(p => p.id),
-		]
+		const artistIds = selectedAuthors.map(author => Number(author.id))
+		const paintingIds = Object.values(selectedAuthorPaintings)
+			.flat()
+			.map(p => Number(p.id))
 
-		const paintingAuthorIds = selectedPaintings
-			.map(p => p.author.id)
-			.filter(authorId => !artistIds.includes(authorId))
-
-		// Combine all artist IDs, ensuring uniqueness
-		const allArtistIds = [...new Set([...artistIds, ...paintingAuthorIds])]
+		const uniqueArtistIds = [...new Set(artistIds)]
+		const uniquePaintingIds = [...new Set(paintingIds)]
 
 		// Update form validation
-		if (allArtistIds.length === 0) {
+		if (uniqueArtistIds.length === 0) {
 			setErrors(['Please select at least one artist.'])
 			setIsSubmitting(false)
 			return
@@ -248,7 +268,6 @@ function ExhibitionForm() {
 			time,
 			location_en,
 			location_uk,
-			artists: selectedArtists,
 			images,
 		} = formData
 
@@ -289,29 +308,18 @@ function ExhibitionForm() {
 		submissionData.append('endDate', endDate)
 		submissionData.append('time', time)
 
-		// Append selected artists
-		selectedArtists.forEach(artistId => {
-			submissionData.append('artistIds', artistId)
-		})
-
 		// Append images
 		images.forEach(image => {
 			submissionData.append('exhibitionImages', image)
 		})
 
-		// Append selected artists
-		artistIds.forEach(artistId => {
+		// Use uniqueArtistIds and uniquePaintingIds in the submission
+		uniqueArtistIds.forEach(artistId => {
 			submissionData.append('artistIds', artistId)
 		})
 
-		// Append selected artists
-		allArtistIds.forEach(artistId => {
-			submissionData.append('artistIds', artistId)
-		})
-
-		// Append selected paintings
-		paintingIds.forEach(paintingId => {
-			submissionData.append('paintingIds', paintingId)
+		uniquePaintingIds.forEach(paintingIds => {
+			submissionData.append('paintingIds', paintingIds)
 		})
 
 		// Debug: Log FormData entries
@@ -696,10 +704,10 @@ function ExhibitionForm() {
 									/>
 								)}
 								<p>{author.title || author.email}</p>
-								<button onClick={() => handleRemoveAuthor(author.id)}>×</button>
 								<button onClick={() => handleSelectAuthorPaintings(author.id)}>
 									{t('Обрати картини')}
 								</button>
+								<button onClick={() => handleRemoveAuthor(author.id)}>×</button>
 								{/* Render selected paintings for this author */}
 								{selectedAuthorPaintings[author.id] && (
 									<div className={styles.authorPaintings}>
@@ -733,53 +741,6 @@ function ExhibitionForm() {
 										))}
 									</div>
 								)}
-							</div>
-						))}
-						{selectedPaintings.map(painting => (
-							<div
-								key={`painting-${painting.id}`}
-								className={styles.chipContainer}
-							>
-								<div className={styles.paintingInfo}>
-									{/* Painting Image */}
-									{painting.images && painting.images.length > 0 ? (
-										<img
-											src={getImageUrl(painting.images[0].imageUrl)}
-											alt={painting.title_en || painting.title_uk}
-											className={styles.chipImage}
-										/>
-									) : (
-										<img
-											src={defaultPaintingImageUrl}
-											alt='Default painting'
-											className={styles.chipImage}
-										/>
-									)}
-									{/* Painting Title */}
-									<span>{painting.title_en || painting.title_uk}</span>
-								</div>
-								<div className={styles.authorInfo}>
-									{/* Author Image */}
-									{painting.author && painting.author.images ? (
-										<img
-											src={getImageUrl(painting.author.images)}
-											alt={painting.author.title || painting.author.email}
-											className={styles.chipImage}
-										/>
-									) : (
-										<img
-											src={defaultAuthorImageUrl}
-											alt='Default author'
-											className={styles.chipImage}
-										/>
-									)}
-									{/* Author Name */}
-									<span>{painting.author.title || painting.author.email}</span>
-								</div>
-								{/* Remove Button */}
-								<button onClick={() => handleRemovePainting(null, painting.id)}>
-									×
-								</button>
 							</div>
 						))}
 					</div>
