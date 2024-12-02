@@ -74,10 +74,6 @@
     max-height: calc(415px - (228 * ((1440px - 100vw) / (1440 - 375))));
 }
 
-.museumPageMuseumTopLogoWhithAdressWrapper {
-    // верхняя обёртка логотипа и адреса музея 
-}
-
 .museumPageMuseumLogoWrapper {
     // обертка для логотипа музея
     margin: calc(24px - (8 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
@@ -98,10 +94,6 @@
 .museumPageMuseumTitleWrapper {
     // обертка для названия музея
     margin: 0;
-}
-
-.museumPageTopAdressWrapper {
-    // верхняя оболочка не полного адреса музея
 }
 
 .museumPageMuseumTitle {

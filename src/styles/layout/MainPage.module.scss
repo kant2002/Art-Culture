@@ -3,7 +3,7 @@
 .mainPage {
 	display: flex;
 	flex-direction: column;
-	background: rgb(255, 255, 255);
+	background: white;
 	padding: $responsiveTopPadding 0 0 0;
 	width: 100%;
 }
@@ -25,45 +25,49 @@
 }
 
 .welcomeParagraph {
-	padding: 0 15px 0 0;
 	overflow: hidden;
-	max-height: calc(calc(18px - (4 * ((1440px - 100vw) / (1440 - 375)))) * 6);
 	position: relative;
-	margin: $responsiveMediumPadding 0 0 0;
-	color: #5a5a5a;
+	margin: $responsiveSmallPadding 0 0 0;
 	font-size: calc(18px - (4 * ((1440px - 100vw) / (1440 - 375))));
 	text-overflow: ellipsis;
 }
 
 .mainPageWelcomeTitleParagraphLink {
-	color: #d83934;
+	color: $red;
 	text-decoration: underline;
 	cursor: pointer;
 }
 
-.mainPageWelcomeTitleParagraphReadMoreLink {
-	position: absolute;
-	bottom: -3px;
-	right: 0;
-	color: #d83934;
-	font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+.mainPageDescriptionWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
+	overflow: hidden;
+	max-height: Calc(calc(calc(18px - (4 * ((1440px - 100vw) / (1440 - 375)))) * 6) - calc(4px - (-3 * ((1440px - 100vw) / (1440 - 375)))));
+	transition: max-height 0.4s ease-in-out;
+
+	&.expanded {
+		max-height: none;
+	}
+}
+
+.mainPageWelcomeTitleParagraphReadMoreButton {
+	margin: $responsiveSmallPadding 0 0 auto;
+	color: $red;
+	font-size: calc(18px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	font-weight: 500;
 	cursor: pointer;
+	background: white;
 }
 
 @media (min-width: 1441px) {
+	.mainPage {
+		padding: $staticPcTopPadding 0 0 0;
+	}
 
 	.mainPageWelcomeTitleWrapper {
 		margin: $staticPcBigPadding 0 0 0;
-	}
-
-	.welcomeParagraph {
-		margin: $staticPcMediumPadding 0 0 0;
-		font-size: 18px;
-	}
-
-	.mainPage {
-		padding: $staticPcTopPadding 0 0 0;
-		width: 100vw;
 	}
 
 	.welcomeTitle {
@@ -71,28 +75,34 @@
 	}
 
 	.welcomeParagraph {
-		max-height: calc(18px * 6);
-		margin: 20px 0 0 0;
+		margin: $staticPcSmallPadding 0 0 0;
 		font-size: 18px;
 	}
 
-	.mainPageWelcomeTitleParagraphReadMoreLink {
-		font-size: 28px;
+	.mainPageDescriptionWrapper {
+		max-height: Calc(calc(18px * 6) - 4px);
+	}
+
+	.mainPageWelcomeTitleParagraphReadMoreButton {
+		margin: $staticPcSmallPadding 0 0 auto;
+		font-size: 18px;
 	}
 }
 
 @media (max-width: 569px) {
+	.mainPage {
+		padding: $staticMobileTopPadding 0 0 0;
+	}
 
 	.mainPageWelcomeTitleWrapper {
 		margin: $staticMobileBigPadding 0 0 0;
 	}
 
 	.welcomeParagraph {
-		margin: $staticMobileMediumPadding 0 0 0;
+		margin: $staticMobileSmallPadding 0 0 0;
 	}
 
-	.mainPage {
-		padding: $staticMobileTopPadding 0 0 0;
-		width: 100vw;
+	.mainPageWelcomeTitleParagraphReadMoreButton {
+		margin: $staticMobileSmallPadding 0 0 auto;
 	}
 }
