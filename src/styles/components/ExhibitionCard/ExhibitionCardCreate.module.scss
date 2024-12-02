@@ -300,3 +300,14 @@
 	align-items: center;
 	overflow-y: auto;
 }
+.disabled {
+	pointer-events: none;
+	opacity: 0.6;
+}
+
+/* Style for the no paintings message */
+.noPaintingsMessage {
+	color: red;
+	font-size: 0.9em;
+	margin-top: 5px;
+}

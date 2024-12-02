@@ -76,15 +76,45 @@ function ExhibitionForm() {
 				API.get(`/search/authors?q=${query}`),
 				API.get(`/search/paintings?q=${query}`),
 			])
-			setSearchResults([
-				...authorsResponse.data.authors.map(authors => ({
-					...authors,
-					type: 'author',
-				})),
-				...paintingsResponse.data.paintings.map(painting => ({
+
+			const authors = authorsResponse.data.authors
+
+			const authorsToProcess = authors.slice(0, 5)
+
+			const authorsWithPaintingsInfo = await Promise.all(
+				authorsToProcess.map(async author => {
+					try {
+						const paintingsRes = await API.get(`/products/author/${author.id}`)
+						const hasPaintings = paintingsRes.data.paintings.length > 0
+						return {
+							...author,
+							type: 'author',
+							hasPaintings,
+						}
+					} catch (error) {
+						console.error(
+							`Error fetching paintings for author ${author.id}:`,
+							error
+						)
+						return {
+							...author,
+							type: 'author',
+							hasPaintings: false,
+						}
+					}
+				})
+			)
+			// Combine with paintings results
+			const updatedPaintingsResults = paintingsResponse.data.paintings.map(
+				painting => ({
 					...painting,
 					type: 'painting',
-				})),
+				})
+			)
+
+			setSearchResults([
+				...authorsWithPaintingsInfo,
+				...updatedPaintingsResults,
 			])
 		} else {
 			setSearchResults([])
@@ -639,8 +669,16 @@ function ExhibitionForm() {
 								{searchResults.map(result => (
 									<div
 										key={`${result.type}-${result.id}`}
-										className={styles.searchResultItem}
-										onClick={() => handleSelectedResult(result)}
+										className={`${styles.searchResultItem} ${result.type === 'author' && !result.paintings ? styles.disabled : ''}`}
+										onClick={() => {
+											if (result.type === 'author') {
+												if (!result.paintings) {
+													handleSelectedResult(result)
+												}
+											} else {
+												handleSelectedResult(result)
+											}
+										}}
 									>
 										{result.type === 'author' ? (
 											<>
@@ -659,6 +697,11 @@ function ExhibitionForm() {
 														/>
 													)}
 													<p>{result.title || result.email}</p>
+													{!result.hasPaintings && (
+														<p className={styles.noPaintingsMessage}>
+															{t('Цей автор не має картин')}
+														</p>
+													)}
 												</div>
 											</>
 										) : (
