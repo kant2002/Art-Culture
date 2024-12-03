@@ -108,18 +108,41 @@ function UserProfilePosts() {
 	}
 
 	// Modal Handlers
-	const openEditModal = post => {
-		setEditingPost(post)
-		setFormData({
+	const openEditModal = (post) => {
+		setEditingPost(post);
+		const initialFormData = {
 			title_en: post.title_en || '',
 			content_en: post.content_en || '',
 			title_uk: post.title_uk || '',
 			content_uk: post.content_uk || '',
 			images: null,
-		})
-		setRemainingTitle(50 - post.title_en.length || post.title_uk.length)
-		setIsModalOpen(true)
-	}
+		};
+		setFormData(initialFormData);
+
+		// Устанавливаем количество оставшихся символов для заголовков
+		setRemainingTitle(50 - (post.title_en?.length || 0));
+
+		// Устанавливаем количество оставшихся символов для описаний
+		setRemainingContent({
+			content_en: 500 - (post.content_en?.length || 0),
+			content_uk: 500 - (post.content_uk?.length || 0),
+		});
+
+		setIsModalOpen(true);
+	};
+
+	// const openEditModal = post => {
+	// 	setEditingPost(post)
+	// 	setFormData({
+	// 		title_en: post.title_en || '',
+	// 		content_en: post.content_en || '',
+	// 		title_uk: post.title_uk || '',
+	// 		content_uk: post.content_uk || '',
+	// 		images: null,
+	// 	})
+	// 	setRemainingTitle(50 - post.title_en.length || post.title_uk.length)
+	// 	setIsModalOpen(true)
+	// }
 
 	const closeEditModal = () => {
 		setIsModalOpen(false)
@@ -128,24 +151,42 @@ function UserProfilePosts() {
 		setMessage('')
 	}
 
-	const handleChange = e => {
-		const { name, value, files } = e.target
+	const handleChange = (e) => {
+		const { name, value, files } = e.target;
 
 		if (name === 'images') {
-			setFormData({ ...formData, images: files[0] })
+			setFormData({ ...formData, images: files[0] });
 		} else {
-			setFormData({ ...formData, [name]: value })
-
-			if (name === 'title_en' || name === 'title_uk') {
-				setRemainingTitle(50 - value.length)
+			// Проверяем длину описания
+			if ((name === 'content_en' || name === 'content_uk') && value.length > 500) {
+				return; // Блокируем изменение, если больше 500 символов
 			}
 
+			setFormData({ ...formData, [name]: value });
+
+			// Рассчитываем оставшиеся символы
+			if (name === 'title_en') {
+				setRemainingTitleEn(50 - value.length); // Для заголовка на английском
+			}
+			if (name === 'title_uk') {
+				setRemainingTitleUk(50 - value.length); // Для заголовка на украинском
+			}
+
+			if (name === 'content_en' || name === 'content_uk') {
+				setRemainingContent((prev) => ({
+					...prev,
+					[name]: 500 - value.length,
+				}));
+			}
+
+			// Автоматическая регулировка высоты текстового поля
 			if (e.target.tagName.toLowerCase() === 'textarea') {
-				e.target.style.height = 'auto'
-				e.target.style.height = `${e.target.scrollHeight}px`
+				e.target.style.height = 'auto';
+				e.target.style.height = `${e.target.scrollHeight}px`;
 			}
 		}
-	}
+	};
+
 
 	const handleEditSubmit = async e => {
 		e.preventDefault()
@@ -193,7 +234,7 @@ function UserProfilePosts() {
 			console.error('Error updating post', error)
 			setMessage(
 				error.response?.data?.error ||
-					'Failed to update post. Please try again.'
+				'Failed to update post. Please try again.'
 			)
 		}
 	}
@@ -211,6 +252,15 @@ function UserProfilePosts() {
 			}
 		}
 	}
+
+	const [remainingContent, setRemainingContent] = useState({
+		content_uk: 500,
+		content_en: 500,
+	})
+
+	const [remainingTitleUk, setRemainingTitleUk] = useState(50);
+	const [remainingTitleEn, setRemainingTitleEn] = useState(50);
+
 
 	return (
 		<div className={styles.profile}>
@@ -383,13 +433,12 @@ function UserProfilePosts() {
 												onChange={handleChange}
 												maxLength='50'
 												className={styles.modalInput}
-												// placeholder='Наприклад: Моя перша публікація'
 												required
 											/>
 										</label>
 										<div className={styles.remainingCharsWrapper}>
 											<small className={styles.remainingChars}>
-												{remainingTitle} {t('символів залишилось')}
+												{remainingTitleUk} {t('символів залишилось')}
 											</small>
 										</div>
 									</div>
@@ -400,11 +449,16 @@ function UserProfilePosts() {
 												name='content_uk'
 												value={formData.content_uk}
 												onChange={handleChange}
+												maxLength="500"
 												className={styles.modalTextarea}
-												// placeholder='Введіть детальний опис публікації'
 												required
 											/>
 										</label>
+										<div className={styles.remainingCharsWrapper}>
+											<small className={styles.remainingChars}>
+												{remainingContent.content_uk} {t('символів залишилось')}
+											</small>
+										</div>
 									</div>
 								</div>
 
@@ -419,13 +473,12 @@ function UserProfilePosts() {
 												onChange={handleChange}
 												maxLength='50'
 												className={styles.modalInput}
-												// placeholder='Title'
 												required
 											/>
 										</label>
 										<div className={styles.remainingCharsWrapper}>
 											<small className={styles.remainingChars}>
-												{remainingTitle} {t('символів залишилось')}
+												{remainingTitleEn} {t('символів залишилось')}
 											</small>
 										</div>
 									</div>
@@ -436,11 +489,16 @@ function UserProfilePosts() {
 												name='content_en'
 												value={formData.content_en}
 												onChange={handleChange}
+												maxLength="500"
 												className={styles.modalTextarea}
-												// placeholder='Description'
 												required
 											/>
 										</label>
+										<div className={styles.remainingCharsWrapper}>
+											<small className={styles.remainingChars}>
+												{remainingContent.content_en} {t('символів залишилось')}
+											</small>
+										</div>
 									</div>
 								</div>
 							</div>
