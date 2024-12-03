@@ -81,10 +81,9 @@ function UserProfilePosts() {
 		};
 		setFormData(initialFormData);
 
-		// Устанавливаем количество оставшихся символов для заголовков
-		setRemainingTitle(50 - (post.title_en?.length || 0));
-
-		// Устанавливаем количество оставшихся символов для описаний
+		// Устанавливаем количество оставшихся символов для заголовков и контента
+		setRemainingTitleUk(50 - (post.title_uk?.length || 0));
+		setRemainingTitleEn(50 - (post.title_en?.length || 0));
 		setRemainingContent({
 			content_en: 500 - (post.content_en?.length || 0),
 			content_uk: 500 - (post.content_uk?.length || 0),
@@ -119,21 +118,14 @@ function UserProfilePosts() {
 		if (name === 'images') {
 			setFormData({ ...formData, images: files[0] });
 		} else {
-			// Проверяем длину описания
-			if ((name === 'content_en' || name === 'content_uk') && value.length > 500) {
-				return; // Блокируем изменение, если больше 500 символов
-			}
-
 			setFormData({ ...formData, [name]: value });
 
-			// Рассчитываем оставшиеся символы
 			if (name === 'title_en') {
-				setRemainingTitleEn(50 - value.length); // Для заголовка на английском
+				setRemainingTitleEn(50 - value.length);
 			}
 			if (name === 'title_uk') {
-				setRemainingTitleUk(50 - value.length); // Для заголовка на украинском
+				setRemainingTitleUk(50 - value.length);
 			}
-
 			if (name === 'content_en' || name === 'content_uk') {
 				setRemainingContent((prev) => ({
 					...prev,
