@@ -108,28 +108,24 @@ function UserProfileAddPost() {
 							<div className={styles.profileAddPostField}>
 								<TextEditor label={t('Назва публікації українською')}
 									name='title_uk' value={formData.title_uk}
-									maxLength={50} required onChange={textEditorOnChange}
-									placeholder={t('Назва публікації українською')} />
+									maxLength={50} required onChange={textEditorOnChange}/>
 							</div>
 							<div className={styles.profileAddPostField}>
 								<TextAreaEditor label={t('Опис публікації українською')}
 									name='content_uk' value={formData.content_uk}
-									maxLength='500' required onChange={textEditorOnChange}
-									placeholder={t('Опис публікації українською')} />
+									maxLength='500' required onChange={textEditorOnChange}/>
 							</div>
 						</div>
 						<div className={styles.modalFieldEn}>
 							<div className={styles.profileAddPostField}>
 								<TextEditor label={t('Назва публікації англійською')}
 									name='title_en' value={formData.title_en}
-									maxLength='50' required onChange={textEditorOnChange}
-									placeholder={t('Назва публікації англійською')} />
+									maxLength='50' required onChange={textEditorOnChange}/>
 							</div>
 							<div className={styles.profileAddPostField}>
 								<TextAreaEditor label={t('Опис публікації англійською')}
 									name='content_en' value={formData.content_en}
-									maxLength='500' required onChange={textEditorOnChange}
-									placeholder={t('Опис публікації англійською')} />
+									maxLength='500' required onChange={textEditorOnChange}/>
 							</div>
 						</div>
 					</div>
