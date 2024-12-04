@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next'
 import styles from "@styles/components/Blocks/TextEditor.module.scss"
 
-function TextEditor({ className, name, label, value, maxLength, onChange, placeholder, required }) {
+function TextEditor({ className, type, name, label, value, maxLength, onChange, placeholder, required }) {
 	const { t } = useTranslation()
 	const [remaining, setRemaining] = useState(maxLength)
 	const handleChange = (e) => {
@@ -20,7 +20,7 @@ function TextEditor({ className, name, label, value, maxLength, onChange, placeh
 		<label className={`${styles.profileAddPostLabel} ${className ? className : ''}`}>
 			{label}
 			<input
-				type='text'
+				type={type ?? "text"}
 				name={name}
 				value={value}
 				onChange={handleChange}
@@ -40,6 +40,7 @@ function TextEditor({ className, name, label, value, maxLength, onChange, placeh
 TextEditor.propTypes = {
     maxLength: PropTypes.number,
 	className: PropTypes.string,
+	type: PropTypes.string,
 	name: PropTypes.string,
 	label: PropTypes.string,
 	value: PropTypes.string,
