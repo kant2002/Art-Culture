@@ -6,6 +6,8 @@ import { useAuth } from '../../../Context/AuthContext'
 import styles from '../../../styles/components/ExhibitionCard/ExhibitionCardCreate.module.scss'
 import API from '../../../utils/api'
 import Sidebar from '@components/Blocks/Sidebar'
+import TextEditor from '@components/Blocks/TextEditor'
+import TextAreaEditor from '@components/Blocks/TextAreaEditor'
 
 function ExhibitionForm() {
 	const [formData, setFormData] = useState({
@@ -393,6 +395,11 @@ function ExhibitionForm() {
 		return `${process.env.REACT_APP_BASE_URL}${normalizedPath}`
 	}
 
+	const textEditorOnChange = ({name, value}) => {
+		const newFormData = { ...formData, [name]: value }
+		setFormData(newFormData)
+	};
+
 	const defaultAuthorImageUrl = '/Img/ArtistPhoto.jpg'
 	const defaultPaintingImageUrl = '/Img/ArtistPhoto.jpg'
 
@@ -454,17 +461,9 @@ function ExhibitionForm() {
 
 							{/* Location in Ukrainian */}
 							<div className={styles.formGroup}>
-								<label className={styles.formLabel}>
-									{t('Місце проведення українською')}
-								</label>
-								<input
-									type='text'
-									name='location_uk'
-									value={formData.location_uk}
-									onChange={handleInputChange}
-									required
-									className={styles.formInput}
-								/>
+								<TextEditor label={t('Місце проведення українською')}
+									name='location_uk' value={formData.location_uk}
+									maxLength={50} required onChange={textEditorOnChange} />
 							</div>
 
 							{/* Start Date */}
