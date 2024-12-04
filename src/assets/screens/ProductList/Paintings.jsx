@@ -316,7 +316,7 @@ const Paintings = () => {
 								</div>
 								<div className={styles.modalFieldEn}>
 									<div className={styles.formGroup}>
-										<TextEditor label={t('Заголовок англійською')}
+										<TextEditor label={t('Назва англійською')}
 											name='title_en' value={formData.title_en}
 											maxLength={50} required onChange={textEditorOnChange} />
 									</div>
