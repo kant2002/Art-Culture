@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next'
 import styles from '/src/styles/screen/ProductList/Paintings.module.scss'
 import API from '/src/utils/api.js'
 import Sidebar from '@components/Blocks/Sidebar'
+import TextEditor from '@components/Blocks/TextEditor'
+import TextAreaEditor from '@components/Blocks/TextAreaEditor'
 
 const Paintings = () => {
 	const { t, i18n } = useTranslation()
@@ -157,7 +159,7 @@ const Paintings = () => {
 			console.error('Error updating product', error)
 			setMessage(
 				error.response?.data?.error ||
-					'Failed to update product. Please try again.'
+				'Failed to update product. Please try again.'
 			)
 		}
 	}
@@ -179,6 +181,11 @@ const Paintings = () => {
 			}
 		}
 	}
+
+	const textEditorOnChange = ({ name, value }) => {
+		const newFormData = { ...formData, [name]: value }
+		setFormData(newFormData)
+	};
 
 	return (
 		<div className={styles.profile}>
@@ -291,69 +298,37 @@ const Paintings = () => {
 							</div>
 							<div className={styles.modalTextWrapper}>
 								<div className={styles.modalFieldUk}>
-									<div>
-										<label className={styles.profileLabel}>
-											{t('Заголовок українською')}
-										</label>
-										<input
-											type='text'
-											name='title_uk'
-											value={formData.title_uk}
-											onChange={handleChange}
-										/>
+									<div className={styles.formGroup}>
+										<TextEditor label={t('Назва українською')}
+											name='title_uk' value={formData.title_uk}
+											maxLength={50} required onChange={textEditorOnChange} />
 									</div>
-									<div>
-										<label className={styles.profileLabel}>
-											{t('Опис українською')}
-										</label>
-										<textarea
-											name='description_uk'
-											value={formData.description_uk}
-											onChange={handleChange}
-										/>
+									<div className={styles.formGroup}>
+										<TextAreaEditor label={t('Опис українською')}
+											name='description_uk' value={formData.description_uk}
+											maxLength={500} required onChange={textEditorOnChange} />
 									</div>
-									<div>
-										<label className={styles.profileLabel}>
-											{t('Специфікація українською')}
-										</label>
-										<textarea
-											name='specs_uk'
-											value={formData.specs_uk}
-											onChange={handleChange}
-										/>
+									<div className={styles.formGroup}>
+										<TextAreaEditor label={t('Специфікація українською')}
+											name='specs_uk' value={formData.specs_uk}
+											maxLength={500} required onChange={textEditorOnChange} />
 									</div>
 								</div>
 								<div className={styles.modalFieldEn}>
-									<div>
-										<label className={styles.profileLabel}>
-											{t('Заголовок англійською')}
-										</label>
-										<input
-											type='text'
-											name='title_en'
-											value={formData.title_en}
-											onChange={handleChange}
-										/>
+									<div className={styles.formGroup}>
+										<TextEditor label={t('Назва англійською')}
+											name='title_en' value={formData.title_en}
+											maxLength={50} required onChange={textEditorOnChange} />
 									</div>
-									<div>
-										<label className={styles.profileLabel}>
-											{t('Опис англійською')}
-										</label>
-										<textarea
-											name='description_en'
-											value={formData.description_en}
-											onChange={handleChange}
-										/>
+									<div className={styles.formGroup}>
+										<TextAreaEditor label={t('Опис англійською')}
+											name='description_en' value={formData.description_en}
+											maxLength={500} required onChange={textEditorOnChange} />
 									</div>
-									<div>
-										<label className={styles.profileLabel}>
-											{t('Специфікація англійською')}
-										</label>
-										<textarea
-											name='specs_en'
-											value={formData.specs_en}
-											onChange={handleChange}
-										/>
+									<div className={styles.formGroup}>
+										<TextAreaEditor label={t('Специфікація англійською')}
+											name='specs_en' value={formData.specs_en}
+											maxLength={500} required onChange={textEditorOnChange} />
 									</div>
 								</div>
 							</div>

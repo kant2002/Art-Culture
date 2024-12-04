@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
@@ -34,11 +34,7 @@ function ExhibitionForm() {
 
 	const navigate = useNavigate()
 	const { t } = useTranslation()
-	const { user, logout } = useAuth()
-	const isUser = user && user.role === 'USER'
-	const isCreator = user && user.role === 'CREATOR'
-	const isMuseum = user && user.role === 'MUSEUM'
-	const isAdmin = user && user.role === 'ADMIN'
+	const { user } = useAuth()
 
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [modalData, setModalData] = useState({
@@ -395,7 +391,7 @@ function ExhibitionForm() {
 		return `${process.env.REACT_APP_BASE_URL}${normalizedPath}`
 	}
 
-	const textEditorOnChange = ({name, value}) => {
+	const textEditorOnChange = ({ name, value }) => {
 		const newFormData = { ...formData, [name]: value }
 		setFormData(newFormData)
 	};
@@ -432,38 +428,23 @@ function ExhibitionForm() {
 						<div className={styles.modalFieldUk}>
 							{/* Title in Ukrainian */}
 							<div className={styles.formGroup}>
-								<label className={styles.formLabel}>
-									{t('Назва виставки українською')}
-								</label>
-								<input
-									type='text'
-									name='title_uk'
-									value={formData.title_uk}
-									onChange={handleInputChange}
-									required
-									className={styles.formInput}
-								/>
+								<TextEditor label={t('Назва виставки українською')}
+									name='title_uk' value={formData.title_uk}
+									maxLength={50} required onChange={textEditorOnChange} />								
 							</div>
 
 							{/* Description in Ukrainian */}
 							<div className={styles.formGroup}>
-								<label className={styles.formLabel}>
-									{t('Опис виставки українською')}
-								</label>
-								<textarea
-									name='description_uk'
-									value={formData.description_uk}
-									onChange={handleInputChange}
-									required
-									className={styles.formTextarea}
-								></textarea>
+								<TextAreaEditor label={t('Опис виставки українською')}
+									name='description_uk' value={formData.description_uk}
+									maxLength={500} required onChange={textEditorOnChange} />
 							</div>
 
 							{/* Location in Ukrainian */}
 							<div className={styles.formGroup}>
 								<TextEditor label={t('Місце проведення українською')}
 									name='location_uk' value={formData.location_uk}
-									maxLength={50} required onChange={textEditorOnChange} />
+									maxLength={500} required onChange={textEditorOnChange} />
 							</div>
 
 							{/* Start Date */}
@@ -496,46 +477,23 @@ function ExhibitionForm() {
 						<div className={styles.modalFieldEn}>
 							{/* Title in English */}
 							<div className={styles.formGroup}>
-								<label className={styles.formLabel}>
-									{t('Назва виставки англійською')}
-								</label>
-								<input
-									type='text'
-									name='title_en'
-									value={formData.title_en}
-									onChange={handleInputChange}
-									required
-									className={styles.formInput}
-								/>
+								<TextEditor label={t('Назва виставки англійською')}
+									name='title_en' value={formData.title_en}
+									maxLength={50} required onChange={textEditorOnChange} />
 							</div>
 
 							{/* Description in English */}
 							<div className={styles.formGroup}>
-								<label className={styles.formLabel}>
-									{t('Опис виставки англійською')}
-								</label>
-								<textarea
-									name='description_en'
-									value={formData.description_en}
-									onChange={handleInputChange}
-									required
-									className={styles.formTextarea}
-								></textarea>
+								<TextAreaEditor label={t('Опис виставки англійською')}
+									name='description_en' value={formData.description_en}
+									maxLength={500} required onChange={textEditorOnChange} />
 							</div>
 
 							{/* Location in English */}
 							<div className={styles.formGroup}>
-								<label className={styles.formLabel}>
-									{t('Місце проведення англійською')}
-								</label>
-								<input
-									type='text'
-									name='location_en'
-									value={formData.location_en}
-									onChange={handleInputChange}
-									required
-									className={styles.formInput}
-								/>
+								<TextEditor label={t('Місце проведення англійською')}
+									name='location_en' value={formData.location_en}
+									maxLength={500} required onChange={textEditorOnChange} />
 							</div>
 							{/* End Date */}
 							<div className={styles.formGroup}>
@@ -643,7 +601,8 @@ function ExhibitionForm() {
 											</>
 										)}
 									</div>
-								)})}
+									)
+								})}
 							</div>
 						)}
 					</div>

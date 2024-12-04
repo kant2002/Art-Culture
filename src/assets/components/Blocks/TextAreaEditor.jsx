@@ -5,7 +5,7 @@ import styles from "@styles/components/Blocks/TextEditor.module.scss"
 
 function TextAreaEditor({ className, name, label, value, maxLength, onChange, placeholder, required }) {
 	const { t } = useTranslation()
-	const [remaining, setRemaining] = useState(maxLength)
+	const [remaining, setRemaining] = useState(maxLength - (value ?? "").length)
 	const handleChange = (e) => {
 		if (e.target.value.length > maxLength) {
 			return; // Блокируем изменение, если больше maxLength символов

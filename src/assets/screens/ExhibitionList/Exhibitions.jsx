@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next'
 import styles from '/src/styles/screen/ExhibitionList/Exhibitions.module.scss'
 import API from '/src/utils/api.js'
 import Sidebar from '@components/Blocks/Sidebar'
+import TextEditor from '@components/Blocks/TextEditor'
+import TextAreaEditor from '@components/Blocks/TextAreaEditor'
 
 function MuseumExhibitions() {
 	const { t, i18n } = useTranslation()
@@ -30,8 +32,6 @@ function MuseumExhibitions() {
 	})
 	const [message, setMessage] = useState('')
 	const [formErrors, setFormErrors] = useState({})
-	const [remainingTitle, setRemainingTitle] = useState(500)
-	const [remainingDescription, setRemainingDescription] = useState(5000)
 	const [error, setError] = useState('')
 
 	useEffect(() => {
@@ -110,15 +110,6 @@ function MuseumExhibitions() {
 				? exhibition.exhibitionArtists.map(ea => ea.artist.id)
 				: [],
 		})
-		setRemainingTitle(
-			500 - (exhibition.title_en?.length || exhibition.title_uk?.length || 0)
-		)
-		setRemainingDescription(
-			5000 -
-				(exhibition.description_en?.length ||
-					exhibition.description_uk?.length ||
-					0)
-		)
 		setIsModalOpen(true)
 	}
 
@@ -150,20 +141,7 @@ function MuseumExhibitions() {
 		} else if (name === 'artists') {
 			// Handled in handleArtistSelection
 		} else {
-			setFormData({ ...formData, [name]: value })
-
-			if (name === 'title_uk' || name === 'title_uk') {
-				setRemainingTitle(500 - value.length)
-			}
-
-			if (name === 'description_en' || name === 'description_uk') {
-				setRemainingDescription(5000 - value.length)
-			}
-
-			if (e.target.tagName.toLowerCase() === 'textarea') {
-				e.target.style.height = 'auto'
-				e.target.style.height = `${e.target.scrollHeight}px`
-			}
+			setFormData({ ...formData, [name]: value })			
 		}
 	}
 
@@ -280,6 +258,9 @@ function MuseumExhibitions() {
 			}))
 		}
 	}
+	const textEditorOnChange = ({ name, value }) => {
+		setFormData(prevState => ({ ...prevState, [name]: value }));
+	};
 
 	return (
 		<div className={styles.profile}>
@@ -308,13 +289,13 @@ function MuseumExhibitions() {
 
 							const artistNames =
 								exhibition.exhibitionArtists &&
-								exhibition.exhibitionArtists.length > 0
+									exhibition.exhibitionArtists.length > 0
 									? exhibition.exhibitionArtists
-											.map(ea => {
-												const artist = ea.artist
-												return artist.name || artist.title || artist.email
-											})
-											.join(',')
+										.map(ea => {
+											const artist = ea.artist
+											return artist.name || artist.title || artist.email
+										})
+										.join(',')
 									: t('Немає митців')
 							return (
 								<div key={exhibition.id} className={styles.exhibitionCard}>
@@ -460,35 +441,19 @@ function MuseumExhibitions() {
 								<div className={styles.modalTextWrapper}>
 									<div className={styles.modalFieldUk}>
 										<div className={styles.formGroup}>
-											<label className={styles.formLabel}>
-												{t('Назва виставки українською')}
-											</label>
-											<input
-												type='text'
-												name='title_uk'
-												value={formData.title_uk}
-												onChange={handleChange}
-											/>
+											<TextEditor label={t('Назва виставки українською')}
+												name='title_uk' value={formData.title_uk}
+												maxLength={50} required onChange={textEditorOnChange} />
 										</div>
 										<div className={styles.formGroup}>
-											<label className={styles.formLabel}>
-												{t('Опис виставки українською')}
-											</label>
-											<textarea
-												name='description_uk'
-												value={formData.description_uk}
-												onChange={handleChange}
-											/>
+											<TextAreaEditor label={t('Опис виставки українською')}
+												name='description_uk' value={formData.description_uk}
+												maxLength={500} required onChange={textEditorOnChange} />
 										</div>
 										<div className={styles.formGroup}>
-											<label className={styles.formLabel}>
-												{t('Місце проведення українською')}
-											</label>
-											<textarea
-												name='location_uk'
-												value={formData.location_uk}
-												onChange={handleChange}
-											/>
+											<TextEditor label={t('Місце проведення українською')}
+												name='location_uk' value={formData.location_uk}
+												maxLength={500} required onChange={textEditorOnChange} />
 										</div>
 										{/* Start Date Field */}
 										<div className={styles.formGroup}>
@@ -518,35 +483,19 @@ function MuseumExhibitions() {
 
 									<div className={styles.modalFieldEn}>
 										<div className={styles.formGroup}>
-											<label className={styles.formLabel}>
-												{t('Назва виставки англійською')}
-											</label>
-											<input
-												type='text'
-												name='title_en'
-												value={formData.title_en}
-												onChange={handleChange}
-											/>
+											<TextEditor label={t('Назва виставки англійською')}
+												name='title_en' value={formData.title_en}
+												maxLength={50} required onChange={textEditorOnChange} />
 										</div>
 										<div className={styles.formGroup}>
-											<label className={styles.formLabel}>
-												{t('Опис виставки англійською')}
-											</label>
-											<textarea
-												name='description_en'
-												value={formData.description_en}
-												onChange={handleChange}
-											/>
+											<TextAreaEditor label={t('Опис виставки англійською')}
+												name='description_en' value={formData.description_en}
+												maxLength={500} required onChange={textEditorOnChange} />
 										</div>
 										<div className={styles.formGroup}>
-											<label className={styles.formLabel}>
-												{t('Місце проведення англійською')}
-											</label>
-											<textarea
-												name='location_en'
-												value={formData.location_en}
-												onChange={handleChange}
-											/>
+											<TextEditor label={t('Місце проведення англійською')}
+												name='location_en' value={formData.location_en}
+												maxLength={500} required onChange={textEditorOnChange} />
 										</div>
 										{/* End Date Field */}
 										<div className={styles.formGroup}>
