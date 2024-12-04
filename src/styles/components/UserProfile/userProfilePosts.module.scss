@@ -248,24 +248,6 @@
 		font-family: $default-font;
 		resize: none;
 	}
-
-	// .modalCancelButton {
-	// 	//кнопка закрытия модального окна
-	// 	position: absolute;
-	// 	top: $responsiveSmallPadding;
-	// 	right: $responsiveSmallPadding;
-	// 	display: flex;
-	// 	margin: 0 0 0 auto;
-	// 	padding: 0;
-	// 	width: 30px;
-	// 	height: 30px;
-	// 	background: none;
-	// 	border: none;
-	// 	font-size: 51px;
-	// 	line-height: 30px;
-	// 	font-weight: 900;
-	// 	cursor: pointer;
-	// }
 }
 
 .modalTitleAndCloseButtonWrapper {
@@ -320,6 +302,8 @@
 
 .modalField {
 	/* Обертка для полей формы */
+	display: flex;
+	flex-direction: column;
 	width: 100%;
 }
 
@@ -365,20 +349,6 @@
 	align-items: start;
 	font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
 	font-weight: 700;
-}
-
-.remainingCharsWrapper {
-	/* Обертка для оставшихся символов */
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-}
-
-.remainingChars {
-	/* Стили для оставшихся символов */
-	margin: $responsiveSmallPadding 0 0 auto;
-	font-size: calc(14px - (4 * ((1440px - 100vw) / (1440 - 375))));
-	color: $secondary-color;
 }
 
 .modalButtons {
@@ -545,12 +515,6 @@
 		/* Стили для подписей полей формы */
 		margin: $staticPcSmallPadding 0 0 0;
 		font-size: 16px;
-	}
-
-	.remainingChars {
-		/* Стили для оставшихся символов */
-		margin: $staticPcSmallPadding 0 0 auto;
-		font-size: 14px;
 	}
 
 	.modalButtons {

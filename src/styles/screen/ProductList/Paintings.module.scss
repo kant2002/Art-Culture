@@ -58,6 +58,7 @@
 				aspect-ratio: 1 / 1;
 				object-fit: cover;
 				border-radius: 10px;
+				cursor: pointer;
 			}
 
 			h3 {
@@ -202,6 +203,17 @@
 	font-size: calc(28px - (4 * ((1440px - 100vw) / (1440 - 375))));
 	font-weight: 700;
 	text-transform: uppercase;
+}
+
+.formGroup {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	input {
+		margin: $responsiveSmallPadding 0 0 0;
+	}
 }
 
 .closeButton {

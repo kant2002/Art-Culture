@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { debounce } from 'lodash'
 import { useTranslation } from 'react-i18next'
 import { useCallback, useEffect } from 'react'

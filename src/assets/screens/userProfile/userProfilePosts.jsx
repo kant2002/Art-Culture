@@ -1,5 +1,3 @@
-// src/components/UserProfile/UserProfilePosts.jsx
-
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
@@ -7,6 +5,8 @@ import { useAuth } from '../../../Context/AuthContext.jsx'
 import API from '../../../utils/api.js'
 import styles from '/src/styles/components/UserProfile/userProfilePosts.module.scss'
 import Sidebar from '@components/Blocks/Sidebar'
+import TextEditor from '@components/Blocks/TextEditor'
+import TextAreaEditor from '@components/Blocks/TextAreaEditor'
 
 function UserProfilePosts() {
 	const { t, i18n } = useTranslation()
@@ -27,7 +27,6 @@ function UserProfilePosts() {
 		content_uk: '',
 		images: null,
 	})
-	const [remainingTitle, setRemainingTitle] = useState(50)
 	const [message, setMessage] = useState('')
 	const [formErrors, setFormErrors] = useState([])
 
@@ -81,29 +80,8 @@ function UserProfilePosts() {
 		};
 		setFormData(initialFormData);
 
-		// Устанавливаем количество оставшихся символов для заголовков и контента
-		setRemainingTitleUk(50 - (post.title_uk?.length || 0));
-		setRemainingTitleEn(50 - (post.title_en?.length || 0));
-		setRemainingContent({
-			content_en: 500 - (post.content_en?.length || 0),
-			content_uk: 500 - (post.content_uk?.length || 0),
-		});
-
 		setIsModalOpen(true);
 	};
-
-	// const openEditModal = post => {
-	// 	setEditingPost(post)
-	// 	setFormData({
-	// 		title_en: post.title_en || '',
-	// 		content_en: post.content_en || '',
-	// 		title_uk: post.title_uk || '',
-	// 		content_uk: post.content_uk || '',
-	// 		images: null,
-	// 	})
-	// 	setRemainingTitle(50 - post.title_en.length || post.title_uk.length)
-	// 	setIsModalOpen(true)
-	// }
 
 	const closeEditModal = () => {
 		setIsModalOpen(false)
@@ -118,20 +96,7 @@ function UserProfilePosts() {
 		if (name === 'images') {
 			setFormData({ ...formData, images: files[0] });
 		} else {
-			setFormData({ ...formData, [name]: value });
-
-			if (name === 'title_en') {
-				setRemainingTitleEn(50 - value.length);
-			}
-			if (name === 'title_uk') {
-				setRemainingTitleUk(50 - value.length);
-			}
-			if (name === 'content_en' || name === 'content_uk') {
-				setRemainingContent((prev) => ({
-					...prev,
-					[name]: 500 - value.length,
-				}));
-			}
+			setFormData({ ...formData, [name]: value });			
 
 			// Автоматическая регулировка высоты текстового поля
 			if (e.target.tagName.toLowerCase() === 'textarea') {
@@ -207,14 +172,11 @@ function UserProfilePosts() {
 		}
 	}
 
-	const [remainingContent, setRemainingContent] = useState({
-		content_uk: 500,
-		content_en: 500,
-	})
-
-	const [remainingTitleUk, setRemainingTitleUk] = useState(50);
-	const [remainingTitleEn, setRemainingTitleEn] = useState(50);
-
+	const textEditorOnChange = ({ name, value }) => {
+		const newFormData = { ...formData, [name]: value }
+		setFormData(newFormData)
+	};
+	console.log(formData);
 
 	return (
 		<div className={styles.profile}>
@@ -327,81 +289,27 @@ function UserProfilePosts() {
 							<div className={styles.modalFormWrapper}>
 								<div className={styles.modalFieldUk}>
 									<div className={styles.modalField}>
-										<label className={styles.modalLabel}>
-											{t('Назва публікації українською')}
-											<input
-												type='text'
-												name='title_uk'
-												value={formData.title_uk}
-												onChange={handleChange}
-												maxLength='50'
-												className={styles.modalInput}
-												required
-											/>
-										</label>
-										<div className={styles.remainingCharsWrapper}>
-											<small className={styles.remainingChars}>
-												{remainingTitleUk} {t('символів залишилось')}
-											</small>
-										</div>
+										<TextEditor label={t('Назва публікації українською')}
+											name='title_uk' value={formData.title_uk}
+											maxLength={50} required onChange={textEditorOnChange} />
 									</div>
 									<div className={styles.modalField}>
-										<label className={styles.modalLabel}>
-											{t('Опис публікації українською')}
-											<textarea
-												name='content_uk'
-												value={formData.content_uk}
-												onChange={handleChange}
-												maxLength="500"
-												className={styles.modalTextarea}
-												required
-											/>
-										</label>
-										<div className={styles.remainingCharsWrapper}>
-											<small className={styles.remainingChars}>
-												{remainingContent.content_uk} {t('символів залишилось')}
-											</small>
-										</div>
+										<TextAreaEditor label={t('Опис публікації українською')}
+											name='content_uk' value={formData.content_uk}
+											maxLength={500} required onChange={textEditorOnChange} />
 									</div>
 								</div>
 
 								<div className={styles.modalFieldEn}>
 									<div className={styles.modalField}>
-										<label className={styles.modalLabel}>
-											{t('Назва публікації англійською')}
-											<input
-												type='text'
-												name='title_en'
-												value={formData.title_en}
-												onChange={handleChange}
-												maxLength='50'
-												className={styles.modalInput}
-												required
-											/>
-										</label>
-										<div className={styles.remainingCharsWrapper}>
-											<small className={styles.remainingChars}>
-												{remainingTitleEn} {t('символів залишилось')}
-											</small>
-										</div>
+										<TextEditor label={t('Назва публікації англійською')}
+											name='title_en' value={formData.title_en}
+											maxLength={50} required onChange={textEditorOnChange} />
 									</div>
 									<div className={styles.modalField}>
-										<label className={styles.modalLabel}>
-											{t('Опис публікації англійською')}
-											<textarea
-												name='content_en'
-												value={formData.content_en}
-												onChange={handleChange}
-												maxLength="500"
-												className={styles.modalTextarea}
-												required
-											/>
-										</label>
-										<div className={styles.remainingCharsWrapper}>
-											<small className={styles.remainingChars}>
-												{remainingContent.content_en} {t('символів залишилось')}
-											</small>
-										</div>
+										<TextAreaEditor label={t('Опис публікації англійською')}
+											name='content_en' value={formData.content_en}
+											maxLength={500} required onChange={textEditorOnChange} />
 									</div>
 								</div>
 							</div>
