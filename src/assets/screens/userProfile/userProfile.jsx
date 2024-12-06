@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
 import API from '../../../utils/api.js'
+import { getFormattedDate } from "@utils/helper"
 import styles from '/src/styles/components/UserProfile/userProfile.module.scss'
 import Sidebar from '@components/Blocks/Sidebar'
 
@@ -26,9 +27,7 @@ const UserProfile = () => {
 		if (user) {
 			console.log('User is logged in:', user)
 			setEmail(user.email || '')
-			setRegDate(
-				user.createdAt ? new Date(user.createdAt).toLocaleDateString() : ''
-			)
+			setRegDate(getFormattedDate(user.createdAt))
 			setPageText(`${user.username || 'User'}'s User Profile`)
 			setTitle(user.title || '')
 			setBio(user.bio || '')
