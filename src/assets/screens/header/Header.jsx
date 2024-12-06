@@ -302,7 +302,7 @@ function Header() {
 										</div>
 									)}
 								</div>
-								<h1>Ukrainian art & culture online</h1>
+								<div className='headerTitle'>Ukrainian art & culture online</div>
 							</div>
 							<nav className='mainMenuContainer'>
 								<ul className='mainMenu__ul'>

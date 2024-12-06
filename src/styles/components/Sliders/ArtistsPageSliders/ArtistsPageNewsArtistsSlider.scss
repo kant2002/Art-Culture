@@ -26,15 +26,6 @@
 	align-items: center;
 }
 
-.ArtistsPageNewsArtistsSliderTitle {
-	// Заголовок
-	font-family: $default-font;
-	font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
-	font-weight: 600;
-	color: black;
-	text-transform: uppercase;
-}
-
 .ArtistsPageNewsArtistsSliderBottomInnerWrapper {
 	// Нижняя часть слайдера
 	display: flex;
@@ -235,11 +226,6 @@
 			// bottom: calc(calc(14px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 2.5);
 			top: calc(539px - calc(var(--swiper-navigation-size) / 1.4));
 		}
-	}
-
-	.ArtistsPageNewsArtistsSliderContainer {
-		// Контейнер слайдера
-		margin: 87px $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
 	}
 
 	.ArtistsPageNewsArtistsSliderCardContainer {
