@@ -22,6 +22,8 @@ export function getImageUrl(imagePath, defaultImage) {
 }
 
 export function getFormattedDate(date) {
+    if (!date) return "";
+
     const formattedDate = new Date(date).toLocaleDateString(
         'uk-UA',
         {
