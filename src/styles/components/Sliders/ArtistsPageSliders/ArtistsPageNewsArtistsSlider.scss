@@ -3,7 +3,7 @@
 .ArtistsPageNewsArtistsSliderContainer {
 	// Контейнер слайдера
 	display: flex;
-	margin: calc(87px - (43 * ((1440px - 100vw) / (1440 - 375)))) $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+	margin: $responsiveBigPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
 }
 
 .ArtistsPageNewsArtistsSliderWrapper {
@@ -17,7 +17,7 @@
 	// Верхняя часть слайдера
 	display: flex;
 	justify-content: space-between;
-	padding: 0 0 calc(51px - (17 * ((1440px - 100vw) / (1440 - 375)))) 0;
+	padding: 0 0 $responsiveMediumPadding 0;
 }
 
 .ArtistsPageNewsArtistsSliderTitleWrapper {
@@ -31,22 +31,8 @@
 	font-family: $default-font;
 	font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
 	font-weight: 600;
-	color: rgb(0, 0, 0);
+	color: black;
 	text-transform: uppercase;
-}
-
-.ArtistsPageNewsArtistsSliderShareButtonButton::before {
-	content: 'Share';
-	position: absolute;
-	top: 6px;
-	right: 38px;
-	font-size: 18px;
-	user-select: none;
-	color: #000000;
-}
-
-.ArtistsPageNewsArtistsSliderShareButtonImg {
-	// Изображение кнопки Share
 }
 
 .ArtistsPageNewsArtistsSliderBottomInnerWrapper {
@@ -63,7 +49,7 @@
 
 	.swiper-wrapper {
 		position: relative;
-		margin: 0 0 0 calc(-29px - (-20 * ((1440px - 100vw) / (1440 - 375))));
+		margin: 0 0 0 calc(-1 * $responsiveSmallPadding);
 		width: 100%;
 		height: 100%;
 		z-index: 1;
@@ -89,7 +75,6 @@
 		top: calc(calc(539px - (75 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 2));
 		width: var(--swiper-navigation-size);
 		height: var(--swiper-navigation-size);
-		// margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
 		z-index: 11;
 		cursor: pointer;
 		display: flex;
@@ -102,7 +87,6 @@
 
 	.swiper-button-prev,
 	.swiper-rtl .swiper-button-next {
-		// left: calc(638px - (505 * ((1440px - 100vw) / (1440 - 375))));
 		left: calc(50% - calc(var(--swiper-navigation-size) * 1.14) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
 		right: auto;
 	}
@@ -155,7 +139,7 @@
 	min-width: 250px;
 	max-width: 282px;
 	height: auto;
-	margin: 0 calc(29px - (20 * ((1440px - 100vw) / (1440 - 375))));
+	margin: 0 $responsiveSmallPadding;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
@@ -192,7 +176,7 @@
 .ArtistsPageNewsArtistsSliderCardTitleWrapper {
 	// Обёртка заголовка карточки
 	display: flex;
-	margin: calc(20px - (2 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+	margin: $responsiveSmallPadding 0 0 0;
 }
 
 .ArtistsPageNewsArtistsSliderCardTitle {
@@ -207,8 +191,8 @@
 .ArtistsPageNewsArtistsSliderCardDescriptionWrapper {
 	// Обёртка описания карточки
 	color: #000000;
-	margin: 12px 0 0 0;
-	height: calc(calc(16px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 5); // Делаем ограничение вывода текста построчечно
+	margin: $responsiveSmallPadding 0 0 0;
+	height: calc(calc(16px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 8); // Делаем ограничение вывода текста построчечно
 	overflow: hidden;
 }
 
@@ -221,9 +205,14 @@
 }
 
 @media screen and (min-width: 1441px) {
+	.ArtistsPageNewsArtistsSliderContainer {
+		// Контейнер слайдера
+		margin: $staticPcBigPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+	}
+
 	.ArtistsPageNewsArtistsSliderTopInnerWrapper {
 		// Верхняя часть слайдера
-		padding: 0 0 51px 0;
+		padding: 0 0 $staticPcMediumPadding 0;
 	}
 
 	.ArtistsPageNewsArtistsSliderBottomInnerWrapper {
@@ -231,7 +220,7 @@
 		height: 561px;
 
 		.swiper-wrapper {
-			margin: 0 0 0 -29px;
+			margin: 0 0 0 calc(-1 * $staticPcSmallPadding);
 		}
 
 		.swiper-button-prev,
@@ -255,17 +244,12 @@
 
 	.ArtistsPageNewsArtistsSliderCardContainer {
 		// Обёртка карточки слайдера
-		margin: 0 29px;
+		margin: 0 $staticPcSmallPadding;
 	}
 
 	.ArtistsPageNewsArtistsSliderCardTitleWrapper {
 		// Обёртка заголовка карточки
-		margin: 20px 0 0 0;
-	}
-
-	.ArtistsPageNewsArtistsSliderCardTitleWrapper {
-		// Обёртка заголовка карточки
-		margin: 20px 0 0 0;
+		margin: $staticPcSmallPadding 0 0 0;
 	}
 
 	.ArtistsPageNewsArtistsSliderCardTitle {
@@ -275,7 +259,8 @@
 
 	.ArtistsPageNewsArtistsSliderCardDescriptionWrapper {
 		// Обёртка описания карточки
-		height: calc(16px * 5); // Делаем ограничение вывода текста построчечно
+		margin: $staticPcSmallPadding 0 0 0;
+		height: calc(16px * 8); // Делаем ограничение вывода текста построчечно
 	}
 
 	.ArtistsPageNewsArtistsSliderCardDescription {
