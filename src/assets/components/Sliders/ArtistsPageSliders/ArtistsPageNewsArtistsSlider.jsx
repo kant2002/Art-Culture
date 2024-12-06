@@ -53,7 +53,7 @@ const Slide = ({ post, baseUrl }) => {
 				</div>
 
 				<div className="ArtistsPageNewsArtistsSliderCardTitleWrapper">
-					<h3 className="ArtistsPageNewsArtistsSliderCardTitl">
+					<h3 className="ArtistsPageNewsArtistsSliderCardTitle">
 						{title.length > 50 ? `${title.substring(0, 50)}...` : title}
 					</h3>
 				</div>
@@ -62,7 +62,7 @@ const Slide = ({ post, baseUrl }) => {
 					className="ArtistsPageNewsArtistsSliderCardDescriptionWrapper"
 				>
 					<p className="ArtistsPageNewsArtistsSliderCardDescription">
-						{content.length > 100 ? `${content.substring(0, 100)}...` : content}
+						{content.length > 230 ? `${content.substring(0, 230)}...` : content}
 					</p>
 				</div>
 			</a>
@@ -112,7 +112,7 @@ const ArtistsPageNewsArtistsSlider = () => {
 					<Swiper
 						modules={[Navigation, Pagination]}
 						spaceBetween={0}
-						slidesPerView={'4'}
+						slidesPerView={'auto'}
 						navigation
 						pagination={{ clickable: false, type: 'fraction' }}
 						onSlideChange={() => console.log('slide change')}
