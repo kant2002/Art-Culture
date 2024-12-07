@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -11,7 +11,7 @@ import 'swiper/css/pagination'
 import { Navigation, Pagination } from 'swiper/modules'
 
 import { useNavigate } from 'react-router-dom'
-import styles from '/src/styles/components/Sliders/ArtistPageSliders/ArtistPageNewsArtistsSlider.module.scss'
+import '@styles/components/Sliders/Base/NewsSlider.scss'
 import { getBaseUrl } from '../../../../utils/helper'
 import LikeAndShare from '@components/Blocks/LikeAndShare'
 import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
@@ -34,10 +34,10 @@ const Slide = ({ post, baseUrl }) => {
 		? `${baseUrl}${post.images.replace('../../', '/')}`
 		: '/Img/halfNewsCard.jpg'
 	return (
-		<div className={styles.artistPageNewsArtistsSliderCardContainer}>
-			<div className={styles.artistPageNewsArtistsSliderCardImgWrapper}>
+		<div className="NewsSliderCardContainer">
+			<div className="NewsSliderCardImgWrapper">
 				<img
-					className={styles.artistPageNewsArtistsSliderCardImg}
+					className="NewsSliderCardImg"
 					src={featuredMediaUrl}
 					alt={t('Світлина мистецтва')}
 					onError={e => {
@@ -47,15 +47,15 @@ const Slide = ({ post, baseUrl }) => {
 				/>
 			</div>
 
-			<div className={styles.artistPageNewsArtistsSliderCardTitleWrapper}>
-				<h3 className={styles.artistPageNewsArtistsSliderCardTitle}>
+			<div className="NewsSliderCardTitleWrapper">
+				<h3 className="NewsSliderCardTitle">
 					{title.length > 50 ? `${title.substring(0, 50)}...` : title}
 				</h3>
 			</div>
 
-			<div className={styles.artistPageNewsArtistsSliderCardDescriptionWrapper}>
-				<p className={styles.artistPageNewsArtistsSliderCardDescription}>
-					{content.length > 100 ? `${content.substring(0, 100)}...` : content}
+			<div className="NewsSliderCardDescriptionWrapper">
+				<p className="NewsSliderCardDescription">
+					{content.length > 230 ? `${content.substring(0, 230)}...` : content}
 				</p>
 			</div>
 		</div>
@@ -90,17 +90,17 @@ const ArtistPageNewsArtistsSlider = () => {
 	}, [t])
 
 	return (
-		<div className={styles.artistPageNewsArtistsSliderContainer}>
-			<div className={styles.artistPageNewsArtistsSliderWrapper}>
-				<div className={styles.artistPageNewsArtistsSliderTopInnerWrapper}>
-					<div className={styles.artistPageNewsArtistsSliderTitleWrapper}>
-						<p className={styles.artistPageNewsArtistsSliderTitle}>
+		<div className="NewsSliderContainer">
+			<div className="NewsSliderWrapper">
+				<div className="NewsSliderTopInnerWrapper">
+					<div className="NewsSliderTitleWrapper">
+						<h2 className="NewsSliderTitle">
 							{t('Новини.')} &#8243;{t('Митці')}&#8243;
-						</p>
+						</h2>
 					</div>
 					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 				</div>
-				<div className={styles.artistPageNewsArtistsSliderBottomInnerWrapper}>
+				<div className="NewsSliderBottomInnerWrapper">
 					<Swiper
 						modules={[Navigation, Pagination]}
 						spaceBetween={20}
@@ -112,15 +112,15 @@ const ArtistPageNewsArtistsSlider = () => {
 					>
 						{loading ? (
 							<SwiperSlide>
-								<div className={styles.loading}>{t('Завантаження...')}</div>
+								<div className="loading">{t('Завантаження...')}</div>
 							</SwiperSlide>
 						) : error ? (
 							<SwiperSlide>
-								<div className={styles.error}>{error}</div>
+								<div className="error">{error}</div>
 							</SwiperSlide>
 						) : creatorPosts.length === 0 ? (
 							<SwiperSlide>
-								<div className={styles.noPosts}>
+								<div className="noPosts">
 									{t('Немає публікацій від митців.')}
 								</div>
 							</SwiperSlide>

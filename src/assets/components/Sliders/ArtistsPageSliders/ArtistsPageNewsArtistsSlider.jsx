@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 // Import Swiper React components
@@ -12,7 +12,7 @@ import 'swiper/css/pagination'
 // Import Swiper modules
 import { Navigation, Pagination } from 'swiper/modules'
 
-import '/src/styles/components/Sliders/ArtistsPageSliders/ArtistsPageNewsArtistsSlider.scss'
+import '/src/styles/components/Sliders/Base/NewsSlider.scss'
 import { getBaseUrl } from '../../../../utils/helper'
 import LikeAndShare from '@components/Blocks/LikeAndShare'
 import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
@@ -35,14 +35,14 @@ const Slide = ({ post, baseUrl }) => {
 		: '/Img/halfNewsCard.jpg'
 
 	return (
-		<div className="ArtistsPageNewsArtistsSliderCardContainer">
+		<div className="NewsSliderCardContainer">
 			<a
-				className="ArtistsPageNewsArtistsSliderCardLink"
+				className="NewsSliderCardLink"
 				// TODO:Rewrite component to use navigate for post	onClick={handleArtistPageClick}
 			>
-				<div className="ArtistsPageNewsArtistsSliderCardImgWrapper">
+				<div className="NewsSliderCardImgWrapper">
 					<img
-						className="ArtistsPageNewsArtistsSliderCardImg"
+						className="NewsSliderCardImg"
 						src={featuredMediaUrl}
 						alt={t('Світлина мистецтва')}
 						onError={e => {
@@ -52,16 +52,16 @@ const Slide = ({ post, baseUrl }) => {
 					/>
 				</div>
 
-				<div className="ArtistsPageNewsArtistsSliderCardTitleWrapper">
-					<h3 className="ArtistsPageNewsArtistsSliderCardTitle">
+				<div className="NewsSliderCardTitleWrapper">
+					<h3 className="NewsSliderCardTitle">
 						{title.length > 50 ? `${title.substring(0, 50)}...` : title}
 					</h3>
 				</div>
 
 				<div
-					className="ArtistsPageNewsArtistsSliderCardDescriptionWrapper"
+					className="NewsSliderCardDescriptionWrapper"
 				>
-					<p className="ArtistsPageNewsArtistsSliderCardDescription">
+					<p className="NewsSliderCardDescription">
 						{content.length > 230 ? `${content.substring(0, 230)}...` : content}
 					</p>
 				</div>
@@ -98,17 +98,17 @@ const ArtistsPageNewsArtistsSlider = () => {
 	}, [t])
 
 	return (
-		<div className="ArtistsPageNewsArtistsSliderContainer">
-			<div className="ArtistsPageNewsArtistsSliderWrapper">
-				<div className="ArtistsPageNewsArtistsSliderTopInnerWrapper">
-					<div className="ArtistsPageNewsArtistsSliderTitleWrapper">
-						<h2 className="ArtistsPageNewsArtistsSliderTitle">
+		<div className="NewsSliderContainer">
+			<div className="NewsSliderWrapper">
+				<div className="NewsSliderTopInnerWrapper">
+					<div className="NewsSliderTitleWrapper">
+						<h2 className="NewsSliderTitle">
 							{t('Новини.')} &#8243;{t('Митці')}&#8243;
 						</h2>
 					</div>
 					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 				</div>
-				<div className="ArtistsPageNewsArtistsSliderBottomInnerWrapper">
+				<div className="NewsSliderBottomInnerWrapper">
 					<Swiper
 						modules={[Navigation, Pagination]}
 						spaceBetween={0}
