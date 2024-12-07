@@ -1,32 +1,32 @@
 @import '/src/styles/utilities/variables.scss';
 
-.PopularArtsSliderContainer {
+.PopularSliderContainer {
     // Контейнер слайдера
     display: flex;
     margin: calc(79px - (12 * ((1440px - 100vw) / (1440 - 375)))) calc(70px - (48 * ((1440px - 100vw) / (1440 - 375)))) calc(40px - (17 * ((1440px - 100vw) / (1440 - 375))));
 }
 
-.PopularArtsSliderWrapper {
+.PopularSliderWrapper {
     // Обёртка слайдера
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-.PopularArtsSliderTopInnerWrapper {
+.PopularSliderTopInnerWrapper {
     // Верхняя часть слайдера
     display: flex;
     justify-content: space-between;
     padding: 0 0 calc(51px - (17 * ((1440px - 100vw) / (1440 - 375)))) 0;
 }
 
-.PopularArtsSliderTitleWrapper {
+.PopularSliderTitleWrapper {
     // Обёртка заголовка
     display: flex;
     align-items: center;
 }
 
-.PopularArtsSliderTitle {
+.PopularSliderTitle {
     // Заголовок    
     font-family: $default-font;
     font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
@@ -35,7 +35,7 @@
     text-transform: uppercase;
 }
 
-.PopularArtsSliderLikeAndShareWrapper {
+.PopularSliderLikeAndShareWrapper {
     // Обёртка кнопок Like и Share
     display: flex;
     justify-content: space-between;
@@ -44,19 +44,19 @@
     width: 177px;
 }
 
-.PopularArtsSliderLikeInnerWrapper {
+.PopularSliderLikeInnerWrapper {
     // Обёртка кнопки Like
     cursor: pointer;
 }
 
-.PopularArtsSliderLikeButton {
+.PopularSliderLikeButton {
     // Кнопка Like
     position: relative;
     display: flex;
     border-radius: 50%;
 }
 
-.PopularArtsSliderLikeButton::after {
+.PopularSliderLikeButton::after {
     content: "Like";
     position: absolute;
     top: 6px;
@@ -66,19 +66,19 @@
     color: #000000;
 }
 
-.PopularArtsSliderShareInnerWrapper {
+.PopularSliderShareInnerWrapper {
     // Обёртка кнопки Share
     cursor: pointer;
 }
 
-.PopularArtsSliderShareButtonButton {
+.PopularSliderShareButtonButton {
     // Кнопка Share
     position: relative;
     display: flex;
     border-radius: 50%;
 }
 
-.PopularArtsSliderShareButtonButton::before {
+.PopularSliderShareButtonButton::before {
     content: "Share";
     position: absolute;
     top: 6px;
@@ -88,7 +88,7 @@
     color: #000000;
 }
 
-.PopularArtsSliderBottomInnerWrapper {
+.PopularSliderBottomInnerWrapper {
     // Нижняя часть слайдера
     display: flex;
     width: 100%;
@@ -188,7 +188,7 @@
     }
 }
 
-.PopularArtsSliderCardWrapper {
+.PopularSliderCardWrapper {
     // Обёртка карточки слайдера
     width: calc(295px - (21 * ((1440px - 100vw) / (1440 - 375))));
     height: calc(430px - (50 * ((1440px - 100vw) / (1440 - 375))));
@@ -199,7 +199,7 @@
     position: relative;
 }
 
-.PopularArtsSliderCardInnerWrapper {
+.PopularSliderCardInnerWrapper {
     // Внутренняя обёртка карточки
     position: relative;
     display: flex;
@@ -207,7 +207,7 @@
     height: 100%;
 }
 
-.PopularArtsSliderCardImg {
+.PopularSliderCardImg {
     // Изображение карточки
     // aspect-ratio: 630 / 330; // например, соотношение сторон 21:11
     position: absolute;
@@ -218,7 +218,7 @@
     border-radius: 3px;
 }
 
-.PopularArtsSliderCardAbsoluteWrapper {
+.PopularSliderCardAbsoluteWrapper {
     // Абсолютная обёртка карточки
     position: absolute;
     padding: 27px calc(21px - (3 * ((1440px - 100vw) / (1440 - 375)))) 28px 21px;
@@ -231,14 +231,14 @@
     height: 100%;
 }
 
-.PopularArtsSliderCardButtonWrapper {
+.PopularSliderCardButtonWrapper {
     // Обёртка кнопки карточки
     display: flex;
     justify-content: end;
     margin: 0 0 auto 0;
 }
 
-.PopularArtsSliderCardButton {
+.PopularSliderCardButton {
     // Кнопка карточки
     width: calc(129px - (18 * ((1440px - 100vw) / (1440 - 375))));    
     height: calc(51px - (7 * ((1440px - 100vw) / (1440 - 375))));
@@ -253,13 +253,13 @@
     cursor: pointer;
 }
 
-.PopularArtsSliderCardTitleWrapper {
+.PopularSliderCardTitleWrapper {
     // Обёртка заголовка карточки
     display: flex;
     margin: auto 0 0 0;
 }
 
-.PopularArtsSliderCardTitle {
+.PopularSliderCardTitle {
     // Заголовок карточки
     color: #fff;
     font-family: $default-font;
@@ -268,14 +268,14 @@
     text-transform: uppercase;
 }
 
-.PopularArtsSliderCardDescriptionWrapper {
+.PopularSliderCardDescriptionWrapper {
     // Обёртка описания карточки
     margin: calc(15px - (5 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
 	height: calc(calc(16px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 2); // Делаем ограничение вывода текста построчечно
 	overflow: hidden;
 }
 
-.PopularArtsSliderCardDescription {
+.PopularSliderCardDescription {
     // Описание карточки
     color: #fff;
     font-family: $default-font;
@@ -284,14 +284,14 @@
 }
 
 @media screen and (max-width: 569px) {
-    .PopularArtsSliderLikeAndShareWrapper {
+    .PopularSliderLikeAndShareWrapper {
         // Обёртка кнопок Like и Share
         width: 80px;
     }
-    .PopularArtsSliderLikeButton::after {
+    .PopularSliderLikeButton::after {
         display: none;
     }
-    .PopularArtsSliderShareButtonButton::before {
+    .PopularSliderShareButtonButton::before {
         display: none;
     }
 }
