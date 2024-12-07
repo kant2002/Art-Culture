@@ -149,4 +149,4 @@ const ArtistsPageNewsArtistsSlider = () => {
 	)
 }
 
-export default NewsSlider
+export default ArtistsPageNewsArtistsSlider

@@ -1,32 +1,32 @@
 @import '/src/styles/utilities/variables.scss';
 
-.SliderContainer {
+.NewsSliderContainer {
 	// Контейнер слайдера
 	display: flex;
 	margin: $responsiveBigPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
 }
 
-.SliderWrapper {
+.NewsSliderWrapper {
 	// Обёртка слайдера
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 }
 
-.SliderTopInnerWrapper {
+.NewsSliderTopInnerWrapper {
 	// Верхняя часть слайдера
 	display: flex;
 	justify-content: space-between;
 	padding: 0 0 $responsiveMediumPadding 0;
 }
 
-.SliderTitleWrapper {
+.NewsSliderTitleWrapper {
 	// Обёртка заголовка
 	display: flex;
 	align-items: center;
 }
 
-.SliderBottomInnerWrapper {
+.NewsSliderBottomInnerWrapper {
 	// Нижняя часть слайдера
 	display: flex;
 	width: 100%;
@@ -124,7 +124,7 @@
 	}
 }
 
-.SliderCardContainer {
+.NewsSliderCardContainer {
 	// Обёртка карточки слайдера
 	width: calc(282px - (32 * ((1440px - 100vw) / (1440 - 375))));
 	min-width: 250px;
@@ -137,12 +137,12 @@
 	position: relative;
 }
 
-.SliderCardLink {
+.NewsSliderCardLink {
 	// Ссылка на карточку
 	cursor: pointer;
 }
 
-.SliderCardImgWrapper {
+.NewsSliderCardImgWrapper {
 	// Внутренняя обёртка карточки
 	position: relative;
 	display: flex;
@@ -154,7 +154,7 @@
 	max-height: 282px;
 }
 
-.SliderCardImg {
+.NewsSliderCardImg {
 	// Изображение карточки
 	// aspect-ratio: 630 / 330; // например, соотношение сторон 21:11
 	object-fit: cover;
@@ -164,13 +164,13 @@
 	border-radius: 3px;
 }
 
-.SliderCardTitleWrapper {
+.NewsSliderCardTitleWrapper {
 	// Обёртка заголовка карточки
 	display: flex;
 	margin: $responsiveSmallPadding 0 0 0;
 }
 
-.SliderCardTitle {
+.NewsSliderCardTitle {
 	// Заголовок карточки
 	color: #000000;
 	font-family: $default-font;
@@ -179,7 +179,7 @@
 	text-transform: uppercase;
 }
 
-.SliderCardDescriptionWrapper {
+.NewsSliderCardDescriptionWrapper {
 	// Обёртка описания карточки
 	color: #000000;
 	margin: $responsiveSmallPadding 0 0 0;
@@ -187,7 +187,7 @@
 	overflow: hidden;
 }
 
-.SliderCardDescription {
+.NewsSliderCardDescription {
 	// Описание карточки
 	color: #000000;
 	font-family: $default-font;
@@ -196,17 +196,17 @@
 }
 
 @media screen and (min-width: 1441px) {
-	.SliderContainer {
+	.NewsSliderContainer {
 		// Контейнер слайдера
 		margin: $staticPcBigPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
 	}
 
-	.SliderTopInnerWrapper {
+	.NewsSliderTopInnerWrapper {
 		// Верхняя часть слайдера
 		padding: 0 0 $staticPcMediumPadding 0;
 	}
 
-	.SliderBottomInnerWrapper {
+	.NewsSliderBottomInnerWrapper {
 		// Нижняя часть слайдера
 		height: 561px;
 
@@ -228,28 +228,28 @@
 		}
 	}
 
-	.SliderCardContainer {
+	.NewsSliderCardContainer {
 		// Обёртка карточки слайдера
 		margin: 0 $staticPcSmallPadding;
 	}
 
-	.SliderCardTitleWrapper {
+	.NewsSliderCardTitleWrapper {
 		// Обёртка заголовка карточки
 		margin: $staticPcSmallPadding 0 0 0;
 	}
 
-	.SliderCardTitle {
+	.NewsSliderCardTitle {
 		// Заголовок карточки
 		font-size: 22px;
 	}
 
-	.SliderCardDescriptionWrapper {
+	.NewsSliderCardDescriptionWrapper {
 		// Обёртка описания карточки
 		margin: $staticPcSmallPadding 0 0 0;
 		height: calc(16px * 8); // Делаем ограничение вывода текста построчечно
 	}
 
-	.SliderCardDescription {
+	.NewsSliderCardDescription {
 		// Описание карточки
 		font-size: 16px;
 	}
