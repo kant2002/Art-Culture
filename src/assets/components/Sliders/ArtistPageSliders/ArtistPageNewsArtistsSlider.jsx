@@ -103,8 +103,8 @@ const ArtistPageNewsArtistsSlider = () => {
 				<div className="NewsSliderBottomInnerWrapper">
 					<Swiper
 						modules={[Navigation, Pagination]}
-						spaceBetween={20}
-						slidesPerView={'4'}
+						spaceBetween={0}
+						slidesPerView={'auto'}
 						navigation
 						pagination={{ clickable: false, type: 'fraction' }}
 						onSlideChange={() => console.log('slide change')}

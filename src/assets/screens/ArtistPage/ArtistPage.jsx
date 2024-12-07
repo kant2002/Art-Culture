@@ -148,7 +148,6 @@ function ArtistPage() {
 					</button>
 				</div>
 			</div>
-
 			<MainPopularArtsSlider />
 		</div>
 	)

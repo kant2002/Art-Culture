@@ -38,7 +38,7 @@ const Slide = ({ post, baseUrl }) => {
 		<div className="NewsSliderCardContainer">
 			<a
 				className="NewsSliderCardLink"
-				// TODO:Rewrite component to use navigate for post	onClick={handleArtistPageClick}
+			// TODO:Rewrite component to use navigate for post	onClick={handleArtistPageClick}
 			>
 				<div className="NewsSliderCardImgWrapper">
 					<img
@@ -53,17 +53,29 @@ const Slide = ({ post, baseUrl }) => {
 				</div>
 
 				<div className="NewsSliderCardTitleWrapper">
-					<h3 className="NewsSliderCardTitle">
+					{/* <h3 className="NewsSliderCardTitle">
 						{title.length > 50 ? `${title.substring(0, 50)}...` : title}
+					</h3> */}
+					<h3 className="NewsSliderCardTitle">
+						{title.length > 50
+							? `${title.substring(0, title.substring(0, 50).lastIndexOf(' ') || 50)}...`
+							: title}
 					</h3>
+
 				</div>
 
 				<div
 					className="NewsSliderCardDescriptionWrapper"
 				>
-					<p className="NewsSliderCardDescription">
+					{/* <p className="NewsSliderCardDescription">
 						{content.length > 230 ? `${content.substring(0, 230)}...` : content}
+					</p> */}
+					<p className="NewsSliderCardDescription">
+						{content.length > 230
+							? `${content.substring(0, content.substring(0, 230).lastIndexOf(' ') || 230)}...`
+							: content}
 					</p>
+
 				</div>
 			</a>
 		</div>

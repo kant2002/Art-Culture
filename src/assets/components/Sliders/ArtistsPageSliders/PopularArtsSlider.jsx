@@ -28,7 +28,7 @@ const Slide = ({ product, baseUrl }) => {
 	}
 
 	const title =
-		currentLanguage === 'en' ? product.title_en : product.title_ru || ''
+		currentLanguage === 'en' ? product.title_en : product.title_uk || ''
 	const description =
 		currentLanguage === 'en'
 			? product.description_en
@@ -59,15 +59,25 @@ const Slide = ({ product, baseUrl }) => {
 					<button className='PopularSliderCardButton'>{t('Огляд')}</button>
 				</div>
 				<div className='PopularSliderCardTitleWrapper'>
-					<h3 className='PopularSliderCardTitle'>
+					{/* <h3 className='PopularSliderCardTitle'>
 						{' '}
 						{title.length > 50 ? `${title.substring(0, 50)}...` : title}
+					</h3> */}
+					<h3 className='PopularSliderCardTitle'>
+						{title.length > 50
+							? `${title.substring(0, title.substring(0, 50).lastIndexOf(' '))}...`
+							: title}
 					</h3>
 				</div>
 				<div className='PopularSliderCardDescriptionWrapper'>
+					{/* <p className='PopularSliderCardDescription'>
+						{description.length > 50
+							? `${description.substring(0, 50)}...`
+							: description}
+					</p> */}
 					<p className='PopularSliderCardDescription'>
-						{description.length > 100
-							? `${description.substring(0, 100)}...`
+						{description.length > 60
+							? `${description.substring(0, description.substring(0, 60).lastIndexOf(' ') || 60)}...`
 							: description}
 					</p>
 				</div>
@@ -113,9 +123,9 @@ const PopularArtsSlider = () => {
 			<div className='PopularSliderWrapper'>
 				<div className='PopularSliderTopInnerWrapper'>
 					<div className='PopularSliderTitleWrapper'>
-						<p className='PopularSliderTitle'>
+						<h2 className='PopularSliderTitle'>
 							{t('Популярне.')} &#8243;{t('Мистецтво')}&#8243;
-						</p>
+						</h2>
 					</div>
 					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 				</div>
