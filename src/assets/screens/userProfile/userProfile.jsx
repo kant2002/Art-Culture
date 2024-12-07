@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
 import API from '../../../utils/api.js'
-import { getFormattedDate } from "@utils/helper"
+import { getFormattedDate } from "@/utils/helper"
 import styles from '/src/styles/components/UserProfile/userProfile.module.scss'
 import Sidebar from '@components/Blocks/Sidebar'
 

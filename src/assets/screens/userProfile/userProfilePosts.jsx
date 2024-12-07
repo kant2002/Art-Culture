@@ -34,7 +34,7 @@ function UserProfilePosts() {
 		const fetchUserPosts = async () => {
 			try {
 				if (!user) {
-					setError('User not authenticated')
+					setError(t("Користувач не авторізован"))
 					navigate('/login')
 					return
 				}

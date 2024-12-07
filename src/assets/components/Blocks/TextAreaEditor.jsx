@@ -8,13 +8,13 @@ import styles from "@styles/components/Blocks/TextEditor.module.scss"
 const TextAreaEditor = forwardRef(({ className, name, label, value, maxLength, onChange, placeholder, required }, ref) => {
 	const { t } = useTranslation()
 	const [remaining, setRemaining] = useState(maxLength - (value ?? "").length)
-	const handleChange = (e) => {
-		if (e.target.value.length > maxLength) {
+	const handleChange = (html) => {
+		if (html.length > maxLength) {
 			return; // Блокируем изменение, если больше maxLength символов
 		}
 
-		setRemaining(maxLength - e.length);
-		onChange({ name, value: e });
+		setRemaining(maxLength - html.length);
+		onChange({ name, value: html });
 	};
 	return (
 		<>

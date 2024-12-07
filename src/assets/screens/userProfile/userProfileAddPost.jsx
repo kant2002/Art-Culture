@@ -23,7 +23,7 @@ function UserProfileAddPost() {
 		images: null,
 	})
 	const [message, setMessage] = useState('')
-	const [errors, setErrors] = useState({})
+	const [errors, setErrors] = useState("")
 
 	const handleChange = (e) => {
 		const { name, files } = e.target;
@@ -33,7 +33,7 @@ function UserProfileAddPost() {
 	const handleSubmit = async e => {
 		e.preventDefault()
 		setMessage('')
-		setErrors({})
+		setErrors("")
 
 		// Frontend Validation
 		if (
@@ -42,19 +42,19 @@ function UserProfileAddPost() {
 			!formData.title_uk ||
 			!formData.content_uk
 		) {
-			setErrors({ form: 'Title and content are required.' })
+			setErrors(t("Заголовок та опис обов'язкові"))
 			return
 		}
 
 		if (!user) {
-			setErrors('User not authenticated. Please log in.')
+			setErrors(t("Користувач не авторізован"))
 			navigate('/login')
 			return
 		}
 
 		const token = localStorage.getItem('token')
 		if (!token) {
-			setErrors('Authentication token missing. Please log in again.')
+			setErrors(t("Користувач не авторізован"))
 			navigate('/login')
 			return
 		}
@@ -76,18 +76,21 @@ function UserProfileAddPost() {
 			})
 
 			if (response.status === 201) {
-				setMessage('Post added successfully!')
+				setMessage(t("Публікація успішно створена"))
 				navigate('/userProfilePosts')
 			}
 		} catch (error) {
 			console.error('Error adding post:', error)
-			setMessage(
-				error.response?.data?.error || 'Failed to add post. Please try again.'
+			setErrors(
+				error.response?.data?.error 
+					? t(error.response?.data?.error)
+					: t("Неможливо створити публікацію")
 			)
 		}
 	}
 
 	const textEditorOnChange = ({name, value}) => {
+		console.log(name, value)
 		const newFormData = { ...formData, [name]: value }
 		setFormData(newFormData)
 	};
@@ -101,7 +104,7 @@ function UserProfileAddPost() {
 					{t('Додати нову публікацію')}
 				</h2>
 				{message && <p className={styles.message}>{message}</p>}
-				{errors.form && <p className={styles.error}>{errors.form}</p>}
+				{errors && <p className={styles.error}>{errors}</p>}
 				<form onSubmit={handleSubmit} className={styles.profileAddPostForm}>
 					<div className={styles.modalTextField}>
 						<div className={styles.modalFieldUk}>
