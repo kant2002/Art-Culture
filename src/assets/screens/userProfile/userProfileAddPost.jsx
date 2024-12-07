@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext.jsx'
 import API from '../../../utils/api.js'
 import styles from '/src/styles/components/UserProfile/userProfileAddPost.module.scss'
-import Sidebar from '@components/Blocks/Sidebar'
+import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
 import TextEditor from '@components/Blocks/TextEditor'
 import TextAreaEditor from '@components/Blocks/TextAreaEditor'
 
@@ -96,9 +96,7 @@ function UserProfileAddPost() {
 	};
 	console.log(formData);
 	return (
-		<div className={styles.profile}>
-			<Sidebar />
-
+		<ProfilePageContainer>
 			<div className={styles.profileAddPostContainer}>
 				<h2 className={styles.profileAddPostTitle}>
 					{t('Додати нову публікацію')}
@@ -176,7 +174,7 @@ function UserProfileAddPost() {
 					</button>
 				</form>
 			</div>
-		</div>
+		</ProfilePageContainer>
 	)
 }
 

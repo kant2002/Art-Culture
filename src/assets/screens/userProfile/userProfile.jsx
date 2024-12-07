@@ -5,7 +5,7 @@ import { useAuth } from '../../../Context/AuthContext'
 import API from '../../../utils/api.js'
 import { getFormattedDate } from "@/utils/helper"
 import styles from '/src/styles/components/UserProfile/userProfile.module.scss'
-import Sidebar from '@components/Blocks/Sidebar'
+import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
 
 const UserProfile = () => {
 	const { user, updateUser, loading, error } = useAuth() // Access user and logout from context
@@ -91,9 +91,7 @@ const UserProfile = () => {
 	}
 
 	return (
-		<div className={styles.profile}>
-			<Sidebar />
-
+		<ProfilePageContainer>
 			<div className={styles.profileInfo}>
 				<div className={styles.profileTitleWrapper}>
 					<h3 className={styles.profileTitle}>{t('Інформація профілю')}</h3>
@@ -236,7 +234,7 @@ const UserProfile = () => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</ProfilePageContainer>
 	)
 }
 

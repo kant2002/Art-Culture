@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext.jsx'
 import API from '../../../utils/api.js'
 import styles from '/src/styles/components/UserProfile/userProfilePosts.module.scss'
-import Sidebar from '@components/Blocks/Sidebar'
+import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
 import TextEditor from '@components/Blocks/TextEditor'
 import TextAreaEditor from '@components/Blocks/TextAreaEditor'
 import TranslatedContent from '@components/Blocks/TranslatedContent.jsx'
@@ -171,9 +171,7 @@ function UserProfilePosts() {
 	console.log(formData);
 
 	return (
-		<div className={styles.profile}>
-			<Sidebar />
-
+		<ProfilePageContainer>
 			<div className={styles.userProfilePostsContainer}>
 				<div className={styles.profileTitleWrapper}>
 					<h3 className={styles.profileTitle}>{t('Публікації')}</h3>
@@ -332,7 +330,7 @@ function UserProfilePosts() {
 					</div>
 				</div>
 			)}
-		</div>
+		</ProfilePageContainer>
 	)
 }
 

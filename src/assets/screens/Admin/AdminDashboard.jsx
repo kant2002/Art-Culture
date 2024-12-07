@@ -1,25 +1,25 @@
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import styles from '@styles/screen/Admin/AdminDashboard.module.scss'
+import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
 
 const AdminDashboard = () => {
 	const { t } = useTranslation()
 	const navigate = useNavigate()
 
 	return (
-		<div className={styles.adminDashboard}>
+		<ProfilePageContainer>
 			<h2>{t('Панель керування')}</h2>
 			{/* Admin functionalities like managing users, posts, etc. */}
-			<button onClick={() => navigate('/admin/users')}>
+			<button onClick={() => navigate('/admin/users')} className="button button-default">
 				{t('Manage Users')}
 			</button>
-			<button onClick={() => navigate('/admin/posts')}>
+			<button onClick={() => navigate('/admin/posts')} className="button button-default">
 				{t('Manage Posts')}
 			</button>
-			<button onClick={() => navigate('/admin/artterms')}>
+			<button onClick={() => navigate('/admin/artterms')} className="button button-default">
 				{t('Керування термінами')}
 			</button>
-		</div>
+		</ProfilePageContainer>
 	)
 }
 
