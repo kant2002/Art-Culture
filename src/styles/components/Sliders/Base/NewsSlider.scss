@@ -1,32 +1,32 @@
 @import '/src/styles/utilities/variables.scss';
 
-.ArtistsPageNewsArtistsSliderContainer {
+.SliderContainer {
 	// Контейнер слайдера
 	display: flex;
 	margin: $responsiveBigPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
 }
 
-.ArtistsPageNewsArtistsSliderWrapper {
+.SliderWrapper {
 	// Обёртка слайдера
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 }
 
-.ArtistsPageNewsArtistsSliderTopInnerWrapper {
+.SliderTopInnerWrapper {
 	// Верхняя часть слайдера
 	display: flex;
 	justify-content: space-between;
 	padding: 0 0 $responsiveMediumPadding 0;
 }
 
-.ArtistsPageNewsArtistsSliderTitleWrapper {
+.SliderTitleWrapper {
 	// Обёртка заголовка
 	display: flex;
 	align-items: center;
 }
 
-.ArtistsPageNewsArtistsSliderBottomInnerWrapper {
+.SliderBottomInnerWrapper {
 	// Нижняя часть слайдера
 	display: flex;
 	width: 100%;
@@ -124,7 +124,7 @@
 	}
 }
 
-.ArtistsPageNewsArtistsSliderCardContainer {
+.SliderCardContainer {
 	// Обёртка карточки слайдера
 	width: calc(282px - (32 * ((1440px - 100vw) / (1440 - 375))));
 	min-width: 250px;
@@ -137,12 +137,12 @@
 	position: relative;
 }
 
-.ArtistsPageNewsArtistsSliderCardLink {
+.SliderCardLink {
 	// Ссылка на карточку
 	cursor: pointer;
 }
 
-.ArtistsPageNewsArtistsSliderCardImgWrapper {
+.SliderCardImgWrapper {
 	// Внутренняя обёртка карточки
 	position: relative;
 	display: flex;
@@ -154,7 +154,7 @@
 	max-height: 282px;
 }
 
-.ArtistsPageNewsArtistsSliderCardImg {
+.SliderCardImg {
 	// Изображение карточки
 	// aspect-ratio: 630 / 330; // например, соотношение сторон 21:11
 	object-fit: cover;
@@ -164,13 +164,13 @@
 	border-radius: 3px;
 }
 
-.ArtistsPageNewsArtistsSliderCardTitleWrapper {
+.SliderCardTitleWrapper {
 	// Обёртка заголовка карточки
 	display: flex;
 	margin: $responsiveSmallPadding 0 0 0;
 }
 
-.ArtistsPageNewsArtistsSliderCardTitle {
+.SliderCardTitle {
 	// Заголовок карточки
 	color: #000000;
 	font-family: $default-font;
@@ -179,7 +179,7 @@
 	text-transform: uppercase;
 }
 
-.ArtistsPageNewsArtistsSliderCardDescriptionWrapper {
+.SliderCardDescriptionWrapper {
 	// Обёртка описания карточки
 	color: #000000;
 	margin: $responsiveSmallPadding 0 0 0;
@@ -187,7 +187,7 @@
 	overflow: hidden;
 }
 
-.ArtistsPageNewsArtistsSliderCardDescription {
+.SliderCardDescription {
 	// Описание карточки
 	color: #000000;
 	font-family: $default-font;
@@ -196,17 +196,17 @@
 }
 
 @media screen and (min-width: 1441px) {
-	.ArtistsPageNewsArtistsSliderContainer {
+	.SliderContainer {
 		// Контейнер слайдера
 		margin: $staticPcBigPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
 	}
 
-	.ArtistsPageNewsArtistsSliderTopInnerWrapper {
+	.SliderTopInnerWrapper {
 		// Верхняя часть слайдера
 		padding: 0 0 $staticPcMediumPadding 0;
 	}
 
-	.ArtistsPageNewsArtistsSliderBottomInnerWrapper {
+	.SliderBottomInnerWrapper {
 		// Нижняя часть слайдера
 		height: 561px;
 
@@ -228,28 +228,28 @@
 		}
 	}
 
-	.ArtistsPageNewsArtistsSliderCardContainer {
+	.SliderCardContainer {
 		// Обёртка карточки слайдера
 		margin: 0 $staticPcSmallPadding;
 	}
 
-	.ArtistsPageNewsArtistsSliderCardTitleWrapper {
+	.SliderCardTitleWrapper {
 		// Обёртка заголовка карточки
 		margin: $staticPcSmallPadding 0 0 0;
 	}
 
-	.ArtistsPageNewsArtistsSliderCardTitle {
+	.SliderCardTitle {
 		// Заголовок карточки
 		font-size: 22px;
 	}
 
-	.ArtistsPageNewsArtistsSliderCardDescriptionWrapper {
+	.SliderCardDescriptionWrapper {
 		// Обёртка описания карточки
 		margin: $staticPcSmallPadding 0 0 0;
 		height: calc(16px * 8); // Делаем ограничение вывода текста построчечно
 	}
 
-	.ArtistsPageNewsArtistsSliderCardDescription {
+	.SliderCardDescription {
 		// Описание карточки
 		font-size: 16px;
 	}
