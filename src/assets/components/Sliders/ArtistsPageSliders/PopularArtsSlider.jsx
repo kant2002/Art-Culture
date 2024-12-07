@@ -13,10 +13,10 @@ import 'swiper/css/pagination'
 import { useNavigate } from 'react-router-dom'
 import { Navigation, Pagination } from 'swiper/modules'
 
-import '/src/styles/components/Sliders/ArtistsPageSliders/PopularArtsSlider.scss'
-import styles from '/src/styles/components/Sliders/ArtistsPageSliders/PopularArtsSlider.module.scss'
+import '@styles/components/Sliders/Base/PopularSlider.scss'
 import { getBaseUrl, getImageUrl } from '../../../../utils/helper'
 import LikeAndShare from '../../Blocks/LikeAndShare'
+import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 
 const Slide = ({ product, baseUrl }) => {
 	const { t, i18n } = useTranslation()
@@ -42,10 +42,10 @@ const Slide = ({ product, baseUrl }) => {
 			: '/Img/defaultProductImage.jpg' // Fallback image
 
 	return (
-		<div className='PopularArtsSliderCardWrapper'>
-			<div className='PopularArtsSliderCardInnerWrapper'>
+		<div className='PopularSliderCardWrapper'>
+			<div className='PopularSliderCardInnerWrapper'>
 				<img
-					className='PopularArtsSliderCardImg'
+					className='PopularSliderCardImg'
 					src={imageUrl}
 					alt={t('Світлина мистецтва')}
 					onError={e => {
@@ -54,18 +54,18 @@ const Slide = ({ product, baseUrl }) => {
 					}}
 				/>
 			</div>
-			<div className='PopularArtsSliderCardAbsoluteWrapper'>
-				<div className='PopularArtsSliderCardButtonWrapper'>
-					<button className='PopularArtsSliderCardButton'>{t('Огляд')}</button>
+			<div className='PopularSliderCardAbsoluteWrapper'>
+				<div className='PopularSliderCardButtonWrapper'>
+					<button className='PopularSliderCardButton'>{t('Огляд')}</button>
 				</div>
-				<div className='PopularArtsSliderCardTitleWrapper'>
-					<h3 className='PopularArtsSliderCardTitle'>
+				<div className='PopularSliderCardTitleWrapper'>
+					<h3 className='PopularSliderCardTitle'>
 						{' '}
 						{title.length > 50 ? `${title.substring(0, 50)}...` : title}
 					</h3>
 				</div>
-				<div className='PopularArtsSliderCardDescriptionWrapper'>
-					<p className='PopularArtsSliderCardDescription'>
+				<div className='PopularSliderCardDescriptionWrapper'>
+					<p className='PopularSliderCardDescription'>
 						{description.length > 100
 							? `${description.substring(0, 100)}...`
 							: description}
@@ -109,17 +109,17 @@ const PopularArtsSlider = () => {
 		fetchCreatorProducts()
 	}, [t])
 	return (
-		<div className='PopularArtsSliderContainer'>
-			<div className='PopularArtsSliderWrapper'>
-				<div className='PopularArtsSliderTopInnerWrapper'>
-					<div className='PopularArtsSliderTitleWrapper'>
-						<p className='PopularArtsSliderTitle'>
+		<div className='PopularSliderContainer'>
+			<div className='PopularSliderWrapper'>
+				<div className='PopularSliderTopInnerWrapper'>
+					<div className='PopularSliderTitleWrapper'>
+						<p className='PopularSliderTitle'>
 							{t('Популярне.')} &#8243;{t('Мистецтво')}&#8243;
 						</p>
 					</div>
-					<LikeAndShare className={styles.PopularArtsSliderLikeAndShareWrapper} />
+					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 				</div>
-				<div className='PopularArtsSliderBottomInnerWrapper'>
+				<div className='PopularSliderBottomInnerWrapper'>
 					<Swiper
 						modules={[Navigation, Pagination]}
 						spaceBetween={0}
