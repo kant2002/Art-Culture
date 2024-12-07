@@ -5,6 +5,7 @@ import API from '/src/utils/api.js'
 import Sidebar from '@components/Blocks/Sidebar'
 import TextEditor from '@components/Blocks/TextEditor'
 import TextAreaEditor from '@components/Blocks/TextAreaEditor'
+import TranslatedContent from '../../components/Blocks/TranslatedContent'
 
 const Paintings = () => {
 	const { t, i18n } = useTranslation()
@@ -198,19 +199,10 @@ const Paintings = () => {
 				<div className={styles.products}>
 					{products.map(product => {
 						const title =
-							currentLanguage === 'en'
-								? product.title_en || product.title_uk
-								: product.title_uk || product.title_en
+						currentLanguage === 'en'
+							? product.title_en || product.title_uk
+							: product.title_uk || product.title_en
 
-						const description =
-							currentLanguage === 'en'
-								? product.description_en || product.description_uk
-								: product.description_uk || product.description_en
-
-						const specs =
-							currentLanguage === 'en'
-								? product.specs_en || product.specs_uk
-								: product.specs_uk || product.specs_en
 						return (
 							<div key={product.id} className={styles.productCard}>
 								{product.images.length > 0 && (
@@ -224,15 +216,21 @@ const Paintings = () => {
 								)}
 								<h3>
 									{t('Назва картини')}
-									<p className={styles.productCardSubTitle}>{title}</p>
+									<p className={styles.productCardSubTitle}>
+										<TranslatedContent en={product.title_en} uk={product.title_uk} />
+									</p>
 								</h3>
 								<h4>
 									{t('Про картину')}
-									<p className={styles.productCardSubTitle}>{description}</p>
+									<p className={styles.productCardSubTitle}>
+										<TranslatedContent en={product.description_en} uk={product.description_uk} html />
+									</p>
 								</h4>
 								<h4>
 									{t('Використані матеріали')}
-									<p className={styles.productCardSubTitle}>{specs}</p>
+									<p className={styles.productCardSubTitle}>
+										<TranslatedContent en={product.specs_en} uk={product.specs_uk} html />
+									</p>
 								</h4>
 								<div className={styles.paintingsDelEditWrapper}>
 									<button
