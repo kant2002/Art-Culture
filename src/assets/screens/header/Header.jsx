@@ -1,10 +1,10 @@
 import i18n from 'i18next'
 import Cookies from 'js-cookie'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import '../../../styles/layout/Header.module.scss'
-import LikeAndShare from '../../components/Blocks/LikeAndShare'
+import '@styles/layout/Header.module.scss'
+import LikeAndShare from '@components/Blocks/LikeAndShare'
 
 function Header() {
 	const { t } = useTranslation()
@@ -88,26 +88,32 @@ function Header() {
 	const navigate = useNavigate()
 
 	const handleProfileClick = () => {
-		navigate('/userProfile')
+		closeBurgerMenu();
+		navigate('/profile')
 	}
 
 	const handleMainPageClick = () => {
+		closeBurgerMenu();
 		navigate('/MainPage')
 	}
 
 	const handleNewsPageClick = () => {
+		closeBurgerMenu();
 		navigate('/NewsPage')
 	}
 
 	const handleArtistsPageClick = () => {
+		closeBurgerMenu();
 		navigate('/ArtistsPage')
 	}
 
 	const handleMuseumsPageClick = () => {
+		closeBurgerMenu();
 		navigate('/MuseumsPage')
 	}
 
 	const handleArtTermsPageClick = () => {
+		closeBurgerMenu();
 		navigate('/art-terms')
 	}
 
@@ -302,7 +308,7 @@ function Header() {
 										</div>
 									)}
 								</div>
-								<h1>Ukrainian art & culture online</h1>
+								<div className='headerTitle'>Ukrainian art & culture online</div>
 							</div>
 							<nav className='mainMenuContainer'>
 								<ul className='mainMenu__ul'>
@@ -421,6 +427,7 @@ function Header() {
 					</div>
 				</div>
 			</header>
+			{burgerMenuVisible && <div className="burgerMenuBackdrop" onClick={closeBurgerMenu}></div>}	
 			{burgerMenuVisible && burgerMenu}
 		</>
 	)

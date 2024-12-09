@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import ArtistsPageNewsArtistsSlider from '@components/Sliders/ArtistsPageSliders/ArtistsPageNewsArtistsSlider.jsx'
 import PopularArtsSlider from '@components/Sliders/ArtistsPageSliders/PopularArtsSlider.jsx'
-// import MainPopularArtsSlider from '@/components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.jsx'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import styles from '@/styles/layout/ArtistsPage.module.scss'
@@ -25,16 +24,16 @@ function ArtistsPage() {
 			throw new Error('Width must be a number')
 		}
 		if (width >= 1920) {
+			return 16
+		}
+		if (width >= 1441 && width < 1920) {
+			return 12
+		}
+		if (width > 570 && width < 1440) {
+			return 8
+		}
+		if (width <= 569) {
 			return 4
-		}
-		if (width >= 1600 && width < 1920) {
-			return 3
-		}
-		if (width > 1440 && width < 1600) {
-			return 2
-		}
-		if (width <= 1440) {
-			return 2
 		}
 	}
 
@@ -82,7 +81,7 @@ function ArtistsPage() {
 	return (
 		<div className={`${styles.ArtistsPageContainer}`}>
 			<div className={`${styles.ArtistsPageTitleWrapper}`}>
-				<h2 className={`${styles.ArtistsPageTitle}`}>{t('Митці')}</h2>
+				<h1 className={`${styles.ArtistsPageTitle}`}>{t('Митці')}</h1>
 			</div>
 
 			<div className={`${styles.ArtistsPageSeparatorWrapper}`}>
@@ -90,9 +89,9 @@ function ArtistsPage() {
 			</div>
 
 			<div className={`${styles.ArtistsPageSubTitleWrapper}`}>
-				<p className={`${styles.ArtistsPageSubTitle}`}>
+				<h3 className={`${styles.ArtistsPageSubTitle}`}>
 					{t('Слідкуйте за мистецтвом!')}
-				</p>
+				</h3>
 			</div>
 
 			<div className={`${styles.ArtistsPageArtistsDescriptionWrapper}`}>
@@ -122,32 +121,32 @@ function ArtistsPage() {
 
 			<div className={`${styles.ArtistsPageGalleryContainer}`}>
 				<div className={`${styles.ArtistsPageGalleryTitleWrapper}`}>
-					<h3 className={`${styles.ArtistsPageGalleryTitle}`}>
+					<h2 className={`${styles.ArtistsPageGalleryTitle}`}>
 						{t('Перегляд.')} &#8243;{t('Митці')}&#8243;
-					</h3>
+					</h2>
 				</div>
 
 				<div className={`${styles.ArtistsPageGalleryButtonsWrapper}`}>
 					<button className={`${styles.ArtistsPageGalleryButton}`}>
-						<p className={`${styles.ArtistsPageGalleryButtonTitle}`}>
+						<h3 className={`${styles.ArtistsPageGalleryButtonTitle}`}>
 							{t('Усі')}
-						</p>
+						</h3>
 					</button>
 
 					<p className={`${styles.ArtistsPageGalleryButtonSeparator}`}>|</p>
 
 					<button className={`${styles.ArtistsPageGalleryButton}`}>
-						<p className={`${styles.ArtistsPageGalleryButtonTitle}`}>
+						<h3 className={`${styles.ArtistsPageGalleryButtonTitle}`}>
 							{t('А-Я')}
-						</p>
+						</h3>
 					</button>
 
 					<p className={`${styles.ArtistsPageGalleryButtonSeparator}`}>|</p>
 
 					<button className={`${styles.ArtistsPageGalleryButtonWhithClock}`}>
-						<p className={`${styles.ArtistsPageGalleryButtonTitle}`}>
+						<h3 className={`${styles.ArtistsPageGalleryButtonTitle}`}>
 							{t('Час')}
-						</p>
+						</h3>
 
 						<img
 							className={`${styles.ArtistsPageGalleryButtonClock}`}
@@ -160,55 +159,6 @@ function ArtistsPage() {
 						/>
 					</button>
 				</div>
-
-				{/* <div className={`${styles.ArtistsPageGalleryCardsWrapper}`}>
-					{loading ? (
-						<div className={styles.loading}>{t('Завантаження...')}</div>
-					) : error ? (
-						<div className={styles.error}>{error}</div>
-					) : creators.length === 0 ? (
-						<div className={styles.noCreators}>
-							{t('Немає митців для відображення.')}
-						</div>
-					) : (
-						creators.slice(0, visibleCreatorsCount).map(creator => {
-							const featuredMediaUrl = getImageUrl(creator.images, '/Img/ArtistPhoto.jpg')
-
-							return (
-								<div key={creator.id} className={`${styles.ArtistsPageGalleryInnerWrapper}`}>
-									<div className={`${styles.ArtistsPageGalleryCardWrapper}`}>
-										<div
-											className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}
-											onClick={() => handleAuthorPreviewClick(creator.id)}
-											style={{ cursor: 'pointer' }}
-										>
-											<img
-												className={`${styles.ArtistsPageGalleryCardPicture}`}
-												src={featuredMediaUrl}
-												alt='Слідкуйте за мистецтвом!'
-												loading='lazy'
-												onError={e => {
-													e.target.onerror = null
-													e.target.src = '/Img/ArtistPhoto.jpg'
-												}}
-											/>
-										</div>
-
-										<div
-											className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}
-										>
-											<p
-												className={`${styles.ArtistsPageGalleryCardDescription}`}
-											>
-												{creator.title}
-											</p>
-										</div>
-									</div>
-								</div>
-							)
-						})
-					)}
-				</div> */}
 
 				<div className={`${styles.ArtistsPageGalleryCardsWrapper}`}>
 					{loading ? (
@@ -252,14 +202,11 @@ function ArtistsPage() {
 					)}
 				</div>
 
-
-
 				<div className={`${styles.ArtistsPageGalleryAllArtistsButtonWrapper}`}>
 					<button className={`${styles.ArtistsPageGalleryAllArtistsButton}`}>
 						<p className={`${styles.ArtistsPageGalleryAllArtistsButtonText}`}>
 							{t('Всі митці')}
 						</p>
-
 						<img
 							className={`${styles.ArtistsPageGalleryAllArtistsButtonArrow}`}
 							src={'/Img/buttonArrow.svg'}
@@ -272,7 +219,6 @@ function ArtistsPage() {
 					</button>
 				</div>
 			</div>
-
 			<PopularArtsSlider />
 		</div>
 	)

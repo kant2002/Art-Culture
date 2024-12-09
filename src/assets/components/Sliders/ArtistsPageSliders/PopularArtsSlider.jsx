@@ -1,6 +1,6 @@
 import axios from 'axios'
 import PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -13,10 +13,11 @@ import 'swiper/css/pagination'
 import { useNavigate } from 'react-router-dom'
 import { Navigation, Pagination } from 'swiper/modules'
 
+import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
+import '@styles/components/Sliders/Base/PopularSlider.scss'
 import { getBaseUrl, getImageUrl } from '../../../../utils/helper'
 import LikeAndShare from '../../Blocks/LikeAndShare'
-import styles from '/src/styles/components/Sliders/ArtistsPageSliders/PopularArtsSlider.module.scss'
-import '/src/styles/components/Sliders/ArtistsPageSliders/PopularArtsSlider.scss'
+import TranslatedContent from '../../Blocks/TranslatedContent'
 
 const Slide = ({ product, baseUrl }) => {
 	const { t, i18n } = useTranslation()
@@ -27,25 +28,16 @@ const Slide = ({ product, baseUrl }) => {
 		navigate(`/products/${product.id}`) // Adjust the route as per your application
 	}
 
-	const title =
-		currentLanguage === 'en' ? product.title_en : product.title_ru || ''
-	const description =
-		currentLanguage === 'en'
-			? product.description_en
-			: product.description_uk || ''
-	const specs =
-		currentLanguage === 'en' ? product.specs_en : product.specs_uk || ''
-
 	const imageUrl =
 		product.images && product.images.length > 0
 			? getImageUrl(product.images[0].imageUrl, '/Img/newsCardERROR.jpg')
 			: '/Img/newsCardERROR.jpg' // Fallback image
 
 	return (
-		<div className='PopularArtsSliderCardWrapper'>
-			<div className='PopularArtsSliderCardInnerWrapper'>
+		<div className='PopularSliderCardWrapper'>
+			<div className='PopularSliderCardInnerWrapper'>
 				<img
-					className='PopularArtsSliderCardImg'
+					className='PopularSliderCardImg'
 					src={imageUrl}
 					alt={t('Світлина мистецтва')}
 					onError={e => {
@@ -54,21 +46,26 @@ const Slide = ({ product, baseUrl }) => {
 					}}
 				/>
 			</div>
-			<div className='PopularArtsSliderCardAbsoluteWrapper'>
-				<div className='PopularArtsSliderCardButtonWrapper'>
-					<button className='PopularArtsSliderCardButton'>{t('Огляд')}</button>
+			<div className='PopularSliderCardAbsoluteWrapper'>
+				<div className='PopularSliderCardButtonWrapper'>
+					<button className='PopularSliderCardButton'>{t('Огляд')}</button>
 				</div>
-				<div className='PopularArtsSliderCardTitleWrapper'>
-					<h3 className='PopularArtsSliderCardTitle'>
-						{' '}
-						{title.length > 50 ? `${title.substring(0, 50)}...` : title}
+				<div className='PopularSliderCardTitleWrapper'>
+					<h3 className='PopularSliderCardTitle'>
+						<TranslatedContent
+							en={product.title_en}
+							uk={product.title_uk}
+							maxLength={50}
+						/>
 					</h3>
 				</div>
-				<div className='PopularArtsSliderCardDescriptionWrapper'>
-					<p className='PopularArtsSliderCardDescription'>
-						{description.length > 100
-							? `${description.substring(0, 100)}...`
-							: description}
+				<div className='PopularSliderCardDescriptionWrapper'>
+					<p className='PopularSliderCardDescription'>
+						<TranslatedContent
+							en={product.description_en}
+							uk={product.description_uk}
+							maxLength={60}
+						/>
 					</p>
 				</div>
 			</div>
@@ -82,9 +79,7 @@ Slide.propTypes = {
 }
 
 const PopularArtsSlider = () => {
-	const { t, i18n } = useTranslation()
-	const currentLanguage = i18n.language
-	const navigate = useNavigate()
+	const { t } = useTranslation()
 
 	const [products, setProducts] = useState([])
 	const [loading, setLoading] = useState(true)
@@ -109,19 +104,17 @@ const PopularArtsSlider = () => {
 		fetchCreatorProducts()
 	}, [t])
 	return (
-		<div className='PopularArtsSliderContainer'>
-			<div className='PopularArtsSliderWrapper'>
-				<div className='PopularArtsSliderTopInnerWrapper'>
-					<div className='PopularArtsSliderTitleWrapper'>
-						<p className='PopularArtsSliderTitle'>
+		<div className='PopularSliderContainer'>
+			<div className='PopularSliderWrapper'>
+				<div className='PopularSliderTopInnerWrapper'>
+					<div className='PopularSliderTitleWrapper'>
+						<h2 className='PopularSliderTitle'>
 							{t('Популярне.')} &#8243;{t('Мистецтво')}&#8243;
-						</p>
+						</h2>
 					</div>
-					<LikeAndShare
-						className={styles.PopularArtsSliderLikeAndShareWrapper}
-					/>
+					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 				</div>
-				<div className='PopularArtsSliderBottomInnerWrapper'>
+				<div className='PopularSliderBottomInnerWrapper'>
 					<Swiper
 						modules={[Navigation, Pagination]}
 						spaceBetween={0}

@@ -1,20 +1,19 @@
-// src/components/UserProfile/UserProfilePosts.jsx
-
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext.jsx'
 import API from '../../../utils/api.js'
 import styles from '/src/styles/components/UserProfile/userProfilePosts.module.scss'
+import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
+import TextEditor from '@components/Blocks/TextEditor'
+import TextAreaEditor from '@components/Blocks/TextAreaEditor'
+import TranslatedContent from '@components/Blocks/TranslatedContent.jsx'
+import { getFormattedDate } from '@/utils/helper.js'
 
 function UserProfilePosts() {
 	const { t, i18n } = useTranslation()
 	const navigate = useNavigate()
 	const { user } = useAuth()
-	const isUser = user && user.role === 'USER'
-	const isCreator = user && user.role === 'CREATOR'
-	const isMuseum = user && user.role === 'MUSEUM'
-	const isAdmin = user && user.role === 'ADMIN'
 	const [currentLanguage, setCurrentLanguage] = useState(i18n.language)
 
 	const [posts, setPosts] = useState([]) // User's posts
@@ -30,7 +29,6 @@ function UserProfilePosts() {
 		content_uk: '',
 		images: null,
 	})
-	const [remainingTitle, setRemainingTitle] = useState(50)
 	const [message, setMessage] = useState('')
 	const [formErrors, setFormErrors] = useState([])
 
@@ -38,7 +36,7 @@ function UserProfilePosts() {
 		const fetchUserPosts = async () => {
 			try {
 				if (!user) {
-					setError('User not authenticated')
+					setError(t("Користувач не авторізован"))
 					navigate('/login')
 					return
 				}
@@ -72,54 +70,20 @@ function UserProfilePosts() {
 		}
 	}, [i18n])
 
-	// Handlers for navigation
-
-	const handleProfilePageClick = () => {
-		navigate('/userProfile')
-	}
-
-	const handlePostsClick = () => {
-		navigate('/userProfilePosts')
-	}
-
-	const handleAddPostClick = () => {
-		navigate('/userProfileAddPost')
-	}
-
-	const handleLogout = () => {
-		logout()
-		navigate('/login')
-	}
-
-	const handleProductCartCreateClick = () => {
-		navigate('/ProductCardCreate')
-	}
-
-	const handlePaintingCardListClick = () => {
-		navigate('/Paintings')
-	}
-
-	const handleExhibitionCardCreateClick = () => {
-		navigate('/ExhibitionCardCreate')
-	}
-
-	const handleExhibitionListClick = () => {
-		navigate('/Exhibitions')
-	}
-
 	// Modal Handlers
-	const openEditModal = post => {
-		setEditingPost(post)
-		setFormData({
+	const openEditModal = (post) => {
+		setEditingPost(post);
+		const initialFormData = {
 			title_en: post.title_en || '',
 			content_en: post.content_en || '',
 			title_uk: post.title_uk || '',
 			content_uk: post.content_uk || '',
 			images: null,
-		})
-		setRemainingTitle(50 - post.title_en.length || post.title_uk.length)
-		setIsModalOpen(true)
-	}
+		};
+		setFormData(initialFormData);
+
+		setIsModalOpen(true);
+	};
 
 	const closeEditModal = () => {
 		setIsModalOpen(false)
@@ -128,24 +92,12 @@ function UserProfilePosts() {
 		setMessage('')
 	}
 
-	const handleChange = e => {
-		const { name, value, files } = e.target
+	const handleChange = (e) => {
+		const { name, value, files } = e.target;
 
-		if (name === 'images') {
-			setFormData({ ...formData, images: files[0] })
-		} else {
-			setFormData({ ...formData, [name]: value })
+		setFormData({ ...formData, images: files[0] });
+	};
 
-			if (name === 'title_en' || name === 'title_uk') {
-				setRemainingTitle(50 - value.length)
-			}
-
-			if (e.target.tagName.toLowerCase() === 'textarea') {
-				e.target.style.height = 'auto'
-				e.target.style.height = `${e.target.scrollHeight}px`
-			}
-		}
-	}
 
 	const handleEditSubmit = async e => {
 		e.preventDefault()
@@ -193,7 +145,7 @@ function UserProfilePosts() {
 			console.error('Error updating post', error)
 			setMessage(
 				error.response?.data?.error ||
-					'Failed to update post. Please try again.'
+				'Failed to update post. Please try again.'
 			)
 		}
 	}
@@ -212,144 +164,92 @@ function UserProfilePosts() {
 		}
 	}
 
-	return (
-		<div className={styles.profile}>
-			<div className={styles.profileActions}>
-				<button
-					className={`${styles.profileAction} ${styles.profileActionActive}`}
-					onClick={handleProfilePageClick}
-				>
-					{t('Профіль')}
-				</button>
-				{!isUser && !isMuseum && (
-					<>
-						<button
-							className={styles.profileAction}
-							onClick={handleAddPostClick}
-						>
-							{t('Додати публікацію')}
-						</button>
-						<button className={styles.profileAction} onClick={handlePostsClick}>
-							{t('Публікації')}
-						</button>
-						<button
-							className={styles.profileAction}
-							onClick={handleProductCartCreateClick}
-						>
-							{t('Додати картину')}
-						</button>
-						<button
-							className={styles.profileAction}
-							onClick={handlePaintingCardListClick}
-						>
-							{t('Переглянути вироби/картини')}
-						</button>
-					</>
-				)}
-				{isMuseum && (
-					<>
-						<button
-							className={styles.profileAction}
-							onClick={handleExhibitionCardCreateClick}
-						>
-							{t('Додати виставку')}
-						</button>
-						<button
-							className={styles.profileAction}
-							onClick={handleExhibitionListClick}
-						>
-							{t('Переглянути виставки')}
-						</button>
-					</>
-				)}
-				<button className={styles.profileAction} onClick={handleLogout}>
-					{t('Вийти')}
-				</button>
-			</div>
+	const textEditorOnChange = ({ name, value }) => {
+		const newFormData = { ...formData, [name]: value }
+		setFormData(newFormData)
+	};
+	console.log(formData);
 
-			<div className={styles.userProfilePostsContainer}>
-				<div className={styles.profileTitleWrapper}>
-					<h3 className={styles.profileTitle}>{t('Публікації')}</h3>
-				</div>
-				{loading ? (
-					<p className={styles.userPageLoadingMessage}>
-						{t('Завантаження...')}
-					</p>
-				) : error ? (
-					<p className={styles.userPageErrorMessage}>{error}</p>
-				) : posts.length === 0 ? (
-					<p>{t('Публікацій немає')}</p>
-				) : (
-					posts.map(post => (
-						<div key={post.id} className={styles.userProfilePostsWrapper}>
-							<div className={styles.userProfilePostsPicAndTextWrapper}>
-								<div className={styles.userProfilePostsPicWrapper}>
-									{post.images ? (
-										<img
-											className={styles.userProfilePostsPic}
-											src={post.images}
-											alt={t('Світлина публікації')}
-											onError={e => {
-												e.target.onerror = null
-												e.target.src = '/Img/defaultPostImage.jpg' // Default image path
-											}}
-										/>
-									) : (
-										<img
-											className={styles.userProfilePostsPic}
-											src='/Img/defaultPostImage.jpg'
-											alt={t('Світлина публікації')}
-										/>
-									)}
+	return (
+		<ProfilePageContainer>
+			<div className={styles.profileTitleWrapper}>
+				<h3 className={styles.profileTitle}>{t('Публікації')}</h3>
+			</div>
+			{loading ? (
+				<p className={styles.userPageLoadingMessage}>
+					{t('Завантаження...')}
+				</p>
+			) : error ? (
+				<p className={styles.userPageErrorMessage}>{error}</p>
+			) : posts.length === 0 ? (
+				<p>{t('Публікацій немає')}</p>
+			) : (
+				posts.map(post => (
+					<div key={post.id} className={styles.userProfilePostsWrapper}>
+						<div className={styles.userProfilePostsPicAndTextWrapper}>
+							<div className={styles.userProfilePostsPicWrapper}>
+								{post.images ? (
+									<img
+										className={styles.userProfilePostsPic}
+										src={post.images}
+										alt={t('Світлина публікації')}
+										onError={e => {
+											e.target.onerror = null
+											e.target.src = '/Img/defaultPostImage.jpg' // Default image path
+										}}
+									/>
+								) : (
+									<img
+										className={styles.userProfilePostsPic}
+										src='/Img/defaultPostImage.jpg'
+										alt={t('Світлина публікації')}
+									/>
+								)}
+							</div>
+							<div className={styles.userProfilePostsTextWrapper}>
+								<h3 className={styles.userProfilePostsTitle}>
+									<TranslatedContent en={post.title_en} uk={post.title_uk} />
+								</h3>
+								<div className={styles.userProfilePostsDescriptionWrapper}>
+									<p className={styles.userProfilePostsDescription}>
+										<TranslatedContent en={post.content_en} uk={post.content_uk} maxLength={100} html />											
+									</p>
 								</div>
-								<div className={styles.userProfilePostsTextWrapper}>
-									<h3 className={styles.userProfilePostsTitle}>
-										{currentLanguage === 'en' ? post.title_en : post.title_uk}
-									</h3>
-									<div className={styles.userProfilePostsDescriptionWrapper}>
-										<p className={styles.userProfilePostsDescription}>
-											{currentLanguage === 'en'
-												? post.content_en.substring(0, 100)
-												: post.content_uk.substring(0, 100)}
-											...
-										</p>
-									</div>
-									<div className={styles.userProfilePostsClockAndDateWrapper}>
-										<img
-											className={styles.userProfilePostsClock}
-											src='/Img/clock.svg'
-											alt={t('Дата')}
-										/>
-										<p className={styles.userProfilePostsDate}>
-											{new Date(post.createdAt).toLocaleDateString()}
-										</p>
-										<button
-											className={styles.userProfilePostsButton}
-											onClick={() => navigate(`/posts/${post.id}`)} // Navigate to post detail page
-										>
-											{t('До публікації')}&#8194;&#187;
-										</button>
-									</div>
-									<div className={styles.userProfileDelEditWrapper}>
-										<button
-											className={styles.userProfileEditButton}
-											onClick={() => openEditModal(post)}
-										>
-											{t('Редагувати')}
-										</button>
-										<button
-											className={styles.userProfileDeleteButton}
-											onClick={() => handleDeletePost(post.id)}
-										>
-											{t('Видалити')}
-										</button>
-									</div>
+								<div className={styles.userProfilePostsClockAndDateWrapper}>
+									<img
+										className={styles.userProfilePostsClock}
+										src='/Img/clock.svg'
+										alt={t('Дата')}
+									/>
+									<p className={styles.userProfilePostsDate}>
+										{getFormattedDate(post.createdAt)}
+									</p>
+									<button
+										className={styles.userProfilePostsButton}
+										onClick={() => navigate(`/posts/${post.id}`)} // Navigate to post detail page
+									>
+										{t('До публікації')}&#8194;&#187;
+									</button>
+								</div>
+								<div className={styles.userProfileDelEditWrapper}>
+									<button
+										className="button button-default"
+										onClick={() => openEditModal(post)}
+									>
+										{t('Редагувати')}
+									</button>
+									<button
+										className={styles.userProfileDeleteButton}
+										onClick={() => handleDeletePost(post.id)}
+									>
+										{t('Видалити')}
+									</button>
 								</div>
 							</div>
 						</div>
-					))
-				)}
-			</div>
+					</div>
+				))
+			)}
 			{/* Modal Window */}
 			{isModalOpen && (
 				<div className={styles.modalOverlay}>
@@ -374,73 +274,27 @@ function UserProfilePosts() {
 							<div className={styles.modalFormWrapper}>
 								<div className={styles.modalFieldUk}>
 									<div className={styles.modalField}>
-										<label className={styles.modalLabel}>
-											{t('Назва публікації українською')}
-											<input
-												type='text'
-												name='title_uk'
-												value={formData.title_uk}
-												onChange={handleChange}
-												maxLength='50'
-												className={styles.modalInput}
-												// placeholder='Наприклад: Моя перша публікація'
-												required
-											/>
-										</label>
-										<div className={styles.remainingCharsWrapper}>
-											<small className={styles.remainingChars}>
-												{remainingTitle} {t('символів залишилось')}
-											</small>
-										</div>
+										<TextEditor label={t('Назва публікації українською')}
+											name='title_uk' value={formData.title_uk}
+											maxLength={50} required onChange={textEditorOnChange} />
 									</div>
 									<div className={styles.modalField}>
-										<label className={styles.modalLabel}>
-											{t('Опис публікації українською')}
-											<textarea
-												name='content_uk'
-												value={formData.content_uk}
-												onChange={handleChange}
-												className={styles.modalTextarea}
-												// placeholder='Введіть детальний опис публікації'
-												required
-											/>
-										</label>
+										<TextAreaEditor label={t('Опис публікації українською')}
+											name='content_uk' value={formData.content_uk}
+											maxLength={500} required onChange={textEditorOnChange} />
 									</div>
 								</div>
 
 								<div className={styles.modalFieldEn}>
 									<div className={styles.modalField}>
-										<label className={styles.modalLabel}>
-											{t('Назва публікації англійською')}
-											<input
-												type='text'
-												name='title_en'
-												value={formData.title_en}
-												onChange={handleChange}
-												maxLength='50'
-												className={styles.modalInput}
-												// placeholder='Title'
-												required
-											/>
-										</label>
-										<div className={styles.remainingCharsWrapper}>
-											<small className={styles.remainingChars}>
-												{remainingTitle} {t('символів залишилось')}
-											</small>
-										</div>
+										<TextEditor label={t('Назва публікації англійською')}
+											name='title_en' value={formData.title_en}
+											maxLength={50} required onChange={textEditorOnChange} />
 									</div>
 									<div className={styles.modalField}>
-										<label className={styles.modalLabel}>
-											{t('Опис публікації англійською')}
-											<textarea
-												name='content_en'
-												value={formData.content_en}
-												onChange={handleChange}
-												className={styles.modalTextarea}
-												// placeholder='Description'
-												required
-											/>
-										</label>
+										<TextAreaEditor label={t('Опис публікації англійською')}
+											name='content_en' value={formData.content_en}
+											maxLength={500} required onChange={textEditorOnChange} />
 									</div>
 								</div>
 							</div>
@@ -474,7 +328,7 @@ function UserProfilePosts() {
 					</div>
 				</div>
 			)}
-		</div>
+		</ProfilePageContainer>
 	)
 }
 

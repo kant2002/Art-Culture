@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -10,34 +10,24 @@ import 'swiper/css/pagination'
 // Import Swiper modules
 import { Navigation, Pagination } from 'swiper/modules'
 
+import { useNavigate } from 'react-router-dom'
+import '@styles/components/Sliders/Base/NewsSlider.scss'
+import { getBaseUrl } from '../../../../utils/helper'
 import LikeAndShare from '@components/Blocks/LikeAndShare'
 import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
-import { useNavigate } from 'react-router-dom'
-import { getBaseUrl } from '../../../../utils/helper'
-import styles from '/src/styles/components/Sliders/ArtistPageSliders/ArtistPageNewsArtistsSlider.module.scss'
+import TranslatedContent from '../../Blocks/TranslatedContent'
 
 const Slide = ({ post, baseUrl }) => {
-	const { t, i18n } = useTranslation()
-	const currentLanguage = i18n.language
-	const navigate = useNavigate()
-
-	// TODO:Rewrite component to use navigate for post
-	// const handleArtistPageClick = () => {
-	// 	navigate('/ArtistPage')
-	// }
-
-	const title = currentLanguage === 'en' ? post.title_en : post.title_uk
-	const content =
-		(currentLanguage === 'en' ? post.content_en : post.content_uk) || ''
+	const { t } = useTranslation()
 
 	const featuredMediaUrl = post.images
 		? `${baseUrl}${post.images.replace('../../', '/')}`
 		: '/Img/halfNewsCard.jpg'
 	return (
-		<div className={styles.artistPageNewsArtistsSliderCardContainer}>
-			<div className={styles.artistPageNewsArtistsSliderCardImgWrapper}>
+		<div className='NewsSliderCardContainer'>
+			<div className='NewsSliderCardImgWrapper'>
 				<img
-					className={styles.artistPageNewsArtistsSliderCardImg}
+					className='NewsSliderCardImg'
 					src={featuredMediaUrl}
 					alt={t('Світлина мистецтва')}
 					onError={e => {
@@ -47,24 +37,31 @@ const Slide = ({ post, baseUrl }) => {
 				/>
 			</div>
 
-			<div className={styles.artistPageNewsArtistsSliderCardTitleWrapper}>
-				<h3 className={styles.artistPageNewsArtistsSliderCardTitle}>
-					{title.length > 50 ? `${title.substring(0, 50)}...` : title}
+			<div className='NewsSliderCardTitleWrapper'>
+				<h3 className='NewsSliderCardTitle'>
+					<TranslatedContent
+						en={post.title_en}
+						uk={post.title_uk}
+						maxLength={50}
+					/>
 				</h3>
 			</div>
 
-			<div className={styles.artistPageNewsArtistsSliderCardDescriptionWrapper}>
-				<p className={styles.artistPageNewsArtistsSliderCardDescription}>
-					{content.length > 100 ? `${content.substring(0, 100)}...` : content}
+			<div className='NewsSliderCardDescriptionWrapper'>
+				<p className='NewsSliderCardDescription'>
+					<TranslatedContent
+						en={post.content_en}
+						uk={post.content_uk}
+						maxLength={230}
+					/>
 				</p>
 			</div>
 		</div>
 	)
 }
+
 const ArtistPageNewsArtistsSlider = () => {
-	const { t, i18n } = useTranslation()
-	const currentLanguage = i18n.language
-	const navigate = useNavigate()
+	const { t } = useTranslation()
 	const [creatorPosts, setCreatorPosts] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
@@ -89,21 +86,21 @@ const ArtistPageNewsArtistsSlider = () => {
 	}, [t])
 
 	return (
-		<div className={styles.artistPageNewsArtistsSliderContainer}>
-			<div className={styles.artistPageNewsArtistsSliderWrapper}>
-				<div className={styles.artistPageNewsArtistsSliderTopInnerWrapper}>
-					<div className={styles.artistPageNewsArtistsSliderTitleWrapper}>
-						<p className={styles.artistPageNewsArtistsSliderTitle}>
+		<div className='NewsSliderContainer'>
+			<div className='NewsSliderWrapper'>
+				<div className='NewsSliderTopInnerWrapper'>
+					<div className='NewsSliderTitleWrapper'>
+						<h2 className='NewsSliderTitle'>
 							{t('Новини.')} &#8243;{t('Митці')}&#8243;
-						</p>
+						</h2>
 					</div>
 					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 				</div>
-				<div className={styles.artistPageNewsArtistsSliderBottomInnerWrapper}>
+				<div className='NewsSliderBottomInnerWrapper'>
 					<Swiper
 						modules={[Navigation, Pagination]}
-						spaceBetween={20}
-						slidesPerView={'4'}
+						spaceBetween={0}
+						slidesPerView={'auto'}
 						navigation
 						pagination={{ clickable: false, type: 'fraction' }}
 						onSlideChange={() => console.log('slide change')}
@@ -111,15 +108,15 @@ const ArtistPageNewsArtistsSlider = () => {
 					>
 						{loading ? (
 							<SwiperSlide>
-								<div className={styles.loading}>{t('Завантаження...')}</div>
+								<div className='loading'>{t('Завантаження...')}</div>
 							</SwiperSlide>
 						) : error ? (
 							<SwiperSlide>
-								<div className={styles.error}>{error}</div>
+								<div className='error'>{error}</div>
 							</SwiperSlide>
 						) : creatorPosts.length === 0 ? (
 							<SwiperSlide>
-								<div className={styles.noPosts}>
+								<div className='noPosts'>
 									{t('Немає публікацій від митців.')}
 								</div>
 							</SwiperSlide>

@@ -1,6 +1,5 @@
-import ExhibitionCardCreate from '../assets/components/ExhibitionCard/ExhibitionCardCreate'
-import PostDetail from '../assets/components/Post/PostDetail'
-import ProductCartCreate from '../assets/components/ProductCard/ProductCardCreate'
+import PostDetail from '../assets/screens/Post/PostDetail'
+import ProductCartCreate from '../assets/screens/userProfile/ProductCardCreate'
 import Login from '../assets/components/VerificationPages/LoginPage'
 import SignUp from '../assets/components/VerificationPages/SignUpPage'
 import AdminDashboard from '../assets/screens/Admin/AdminDashboard'
@@ -17,8 +16,6 @@ import NewsPage from '../assets/screens/newsPage/NewsPage'
 import UserProfile from '../assets/screens/userProfile/userProfile'
 import UserProfileAddPost from '../assets/screens/userProfile/userProfileAddPost'
 import UserProfilePosts from '../assets/screens/userProfile/userProfilePosts'
-import ArtTermsPage from '../assets/screens/ArtTerms/ArtTermsPage'
-import ArtTermsFilteredPage from '../assets/screens/ArtTerms/ArtTermsFilteredPage'
 
 export const routes = [
 	{
@@ -39,7 +36,7 @@ export const routes = [
 	},
 
 	{
-		path: '/userProfile',
+		path: '/profile',
 		element: UserProfile,
 		isAuth: true,
 	},
@@ -57,13 +54,13 @@ export const routes = [
 	},
 
 	{
-		path: '/userProfileAddPost',
+		path: '/profile/posts/create',
 		element: UserProfileAddPost,
 		isAuth: true,
 	},
 
 	{
-		path: '/userProfilePosts',
+		path: '/profile/posts',
 		element: UserProfilePosts,
 		isAuth: true,
 	},
@@ -104,14 +101,8 @@ export const routes = [
 		isAuth: true,
 	},
 	{
-		path: '/ProductCardCreate',
+		path: '/profile/products/create',
 		element: ProductCartCreate,
-		isAuth: true,
-	},
-
-	{
-		path: '/ExhibitionCardCreate',
-		element: ExhibitionCardCreate,
 		isAuth: true,
 	},
 
@@ -122,7 +113,7 @@ export const routes = [
 	},
 
 	{
-		path: '/Paintings',
+		path: '/profile/products',
 		element: Paintings,
 		isAuth: true,
 	},

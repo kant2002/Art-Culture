@@ -1,9 +1,10 @@
 import cn from 'clsx'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import PropTypes from 'prop-types';
 import ProtectedRoute from '../../../routes/ProtectedRoute'
-import ExhibitionCardCreate from '../../components/ExhibitionCard/ExhibitionCardCreate'
-import PostDetail from '../../components/Post/PostDetail'
+import ExhibitionCardCreate from '../userProfile/ExhibitionCardCreate'
+import PostDetail from '../Post/PostDetail'
 import Login from '../../components/VerificationPages/LoginPage'
 import SignUp from '../../components/VerificationPages/SignUpPage'
 import AdminDashboard from '../Admin/AdminDashboard'
@@ -20,12 +21,14 @@ import NewsPage from '../newsPage/NewsPage'
 import UserProfile from '../userProfile/userProfile'
 import UserProfileAddPost from '../userProfile/userProfileAddPost'
 import UserProfilePosts from '../userProfile/userProfilePosts'
-import ProductCardCreate from '/src/assets/components/ProductCard/ProductCardCreate'
+import ProductCardCreate from '../userProfile/ProductCardCreate'
 import styles from '/src/styles/layout/Layout.module.scss'
 import ArtTermsPage from '../ArtTerms/ArtTermsPage'
 import ArtTermsFilteredPage from '../ArtTerms/ArtTermsFilteredPage'
+import ArtTermPage from '../ArtTerms/ArtTermPage'
+import AdminArtTermsList from '../Admin/ArtTermsList';
 
-const Layout = ({ children, heading = '', backLink = '/' }) => {
+const Layout = ({ heading = '' }) => {
 	const [username, setUsername] = useState('')
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
 	const [serverMessage, setServerMessage] = useState('')
@@ -46,8 +49,9 @@ const Layout = ({ children, heading = '', backLink = '/' }) => {
 					<Route path='/MuseumPage' element={<MuseumPage />} />
 					<Route path='/art-terms' element={<ArtTermsPage />} />
 					<Route path='/art-terms/letters/:letter' element={<ArtTermsFilteredPage />} />
+					<Route path='/art-terms/:id' element={<ArtTermPage />} />
 					<Route
-						path='/userProfile'
+						path='/profile'
 						element={
 							<UserProfile
 								isLoggedIn={isLoggedIn}
@@ -60,19 +64,21 @@ const Layout = ({ children, heading = '', backLink = '/' }) => {
 						}
 					/>
 					<Route
-						path='/AdminDashboard'
+						path='/admin/dashboard'
 						element={
 							<ProtectedRoute roles={['ADMIN']}>
 								<AdminDashboard />
 							</ProtectedRoute>
 						}
 					/>
-					<Route path='/userProfileAddPost' element={<UserProfileAddPost />} />
-					<Route path='/userProfilePosts' element={<UserProfilePosts />} />
-					<Route path='/Paintings' element={<Paintings />} />
-					<Route path='/ProductCardCreate' element={<ProductCardCreate />} />
+					<Route path='/admin/art-terms'
+						element={<ProtectedRoute roles={['ADMIN']}><AdminArtTermsList /></ProtectedRoute>} />
+					<Route path='/profile/posts/create' element={<UserProfileAddPost />} />
+					<Route path='/profile/posts' element={<UserProfilePosts />} />
+					<Route path='/profile/products' element={<Paintings />} />
+					<Route path='/profile/products/create' element={<ProductCardCreate />} />
 					<Route
-						path='/ExhibitionCardCreate'
+						path='/exhibitions/create'
 						element={<ExhibitionCardCreate />}
 					/>
 					<Route path='/Exhibitions' element={<MuseumExhibitions />} />
@@ -105,5 +111,8 @@ const Layout = ({ children, heading = '', backLink = '/' }) => {
 			</section>
 		</BrowserRouter>
 	)
+}
+Layout.propTypes = {
+	heading: PropTypes.string,
 }
 export default Layout

@@ -1,23 +1,17 @@
-// src/components/ProductList/ProductList.jsx
-
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '/src/Context/AuthContext'
 import styles from '/src/styles/screen/ProductList/Paintings.module.scss'
 import API from '/src/utils/api.js'
+import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
+import TextEditor from '@components/Blocks/TextEditor'
+import TextAreaEditor from '@components/Blocks/TextAreaEditor'
+import TranslatedContent from '@components/Blocks/TranslatedContent'
 
 const Paintings = () => {
 	const { t, i18n } = useTranslation()
 	const currentLanguage = i18n.language
 	const [products, setProducts] = useState([])
 	const [serverMessage, setServerMessage] = useState('')
-	const navigate = useNavigate()
-	const { logout, user } = useAuth()
-	const isUser = user && user.role === 'USER'
-	const isCreator = user && user.role === 'CREATOR'
-	const isMuseum = user && user.role === 'MUSEUM'
-	const isAdmin = user && user.role === 'ADMIN'
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [selectedProductImages, setSelectedProductImages] = useState([])
 	const [editingProduct, setEditingProduct] = useState(null)
@@ -53,39 +47,6 @@ const Paintings = () => {
 
 		fetchProducts()
 	}, [])
-
-	const handleProfilePageClick = () => {
-		navigate('/userProfile')
-	}
-
-	const handlePostsClick = () => {
-		navigate('/userProfilePosts')
-	}
-
-	const handleAddPostClick = () => {
-		navigate('/userProfileAddPost')
-	}
-
-	const handleProductCartCreateClick = () => {
-		navigate('/ProductCardCreate')
-	}
-
-	const handlePaintingCardListClick = () => {
-		navigate('/Paintings')
-	}
-
-	const handleExhibitionCardCreateClick = () => {
-		navigate('/ExhibitionCardCreate')
-	}
-
-	const handleExhibitionListClick = () => {
-		navigate('/Exhibitions')
-	}
-
-	const handleLogout = () => {
-		logout()
-		navigate('/login')
-	}
 
 	const handleImageClick = images => {
 		setSelectedProductImages(images)
@@ -199,7 +160,7 @@ const Paintings = () => {
 			console.error('Error updating product', error)
 			setMessage(
 				error.response?.data?.error ||
-					'Failed to update product. Please try again.'
+				'Failed to update product. Please try again.'
 			)
 		}
 	}
@@ -222,60 +183,13 @@ const Paintings = () => {
 		}
 	}
 
+	const textEditorOnChange = ({ name, value }) => {
+		const newFormData = { ...formData, [name]: value }
+		setFormData(newFormData)
+	};
+
 	return (
-		<div className={styles.profile}>
-			<div className={styles.profileActions}>
-				<button
-					className={`${styles.profileAction} ${styles.profileActionActive}`}
-					onClick={handleProfilePageClick}
-				>
-					{t('Профіль')}
-				</button>
-				{!isUser && !isMuseum && (
-					<>
-						<button
-							className={styles.profileAction}
-							onClick={handleAddPostClick}
-						>
-							{t('Додати публікацію')}
-						</button>
-						<button className={styles.profileAction} onClick={handlePostsClick}>
-							{t('Публікації')}
-						</button>
-						<button
-							className={styles.profileAction}
-							onClick={handleProductCartCreateClick}
-						>
-							{t('Додати картину')}
-						</button>
-						<button
-							className={styles.profileAction}
-							onClick={handlePaintingCardListClick}
-						>
-							{t('Переглянути вироби/картини')}
-						</button>
-					</>
-				)}
-				{isMuseum && (
-					<>
-						<button
-							className={styles.profileAction}
-							onClick={handleExhibitionCardCreateClick}
-						>
-							{t('Додати виставку')}
-						</button>
-						<button
-							className={styles.profileAction}
-							onClick={handleExhibitionListClick}
-						>
-							{t('Переглянути виставки')}
-						</button>
-					</>
-				)}
-				<button className={styles.profileAction} onClick={handleLogout}>
-					{t('Вийти')}
-				</button>
-			</div>
+		<ProfilePageContainer>
 			<div className={styles.productList}>
 				<h2>{t('Картини')}</h2>
 				{serverMessage && (
@@ -284,24 +198,15 @@ const Paintings = () => {
 				<div className={styles.products}>
 					{products.map(product => {
 						const title =
-							currentLanguage === 'en'
-								? product.title_en || product.title_uk
-								: product.title_uk || product.title_en
+						currentLanguage === 'en'
+							? product.title_en || product.title_uk
+							: product.title_uk || product.title_en
 
-						const description =
-							currentLanguage === 'en'
-								? product.description_en || product.description_uk
-								: product.description_uk || product.description_en
-
-						const specs =
-							currentLanguage === 'en'
-								? product.specs_en || product.specs_uk
-								: product.specs_uk || product.specs_en
 						return (
 							<div key={product.id} className={styles.productCard}>
 								{product.images.length > 0 && (
 									<img
-										src={`${process.env.REACT_APP_API_URL}${product.images[0].imageUrl}`}
+										src={`${product.images[0].imageUrl}`}
 										alt={title}
 										className={styles.productImage}
 										onClick={() => handleImageClick(product.images)}
@@ -310,19 +215,25 @@ const Paintings = () => {
 								)}
 								<h3>
 									{t('Назва картини')}
-									<p className={styles.productCardSubTitle}>{title}</p>
+									<p className={styles.productCardSubTitle}>
+										<TranslatedContent en={product.title_en} uk={product.title_uk} />
+									</p>
 								</h3>
 								<h4>
 									{t('Про картину')}
-									<p className={styles.productCardSubTitle}>{description}</p>
+									<p className={styles.productCardSubTitle}>
+										<TranslatedContent en={product.description_en} uk={product.description_uk} html />
+									</p>
 								</h4>
 								<h4>
 									{t('Використані матеріали')}
-									<p className={styles.productCardSubTitle}>{specs}</p>
+									<p className={styles.productCardSubTitle}>
+										<TranslatedContent en={product.specs_en} uk={product.specs_uk} html />
+									</p>
 								</h4>
 								<div className={styles.paintingsDelEditWrapper}>
 									<button
-										className={styles.paintingsEditButton}
+										className="button button-default"
 										onClick={() => openEditModal(product)}
 									>
 										{t('Редагувати')}
@@ -353,10 +264,10 @@ const Paintings = () => {
 							{selectedProductImages.map((image, index) => (
 								<img
 									key={index}
-									src={`${process.env.REACT_APP_API_URL}${image.imageUrl}`}
+									src={`${image.imageUrl}`}
 									alt={`Product Image ${index + 1}`}
 									className={styles.modalImage}
-								/>
+								/>	
 							))}
 						</div>
 					</div>
@@ -384,69 +295,37 @@ const Paintings = () => {
 							</div>
 							<div className={styles.modalTextWrapper}>
 								<div className={styles.modalFieldUk}>
-									<div>
-										<label className={styles.profileLabel}>
-											{t('Заголовок українською')}
-										</label>
-										<input
-											type='text'
-											name='title_uk'
-											value={formData.title_uk}
-											onChange={handleChange}
-										/>
+									<div className={styles.formGroup}>
+										<TextEditor label={t('Назва українською')}
+											name='title_uk' value={formData.title_uk}
+											maxLength={50} required onChange={textEditorOnChange} />
 									</div>
-									<div>
-										<label className={styles.profileLabel}>
-											{t('Опис українською')}
-										</label>
-										<textarea
-											name='description_uk'
-											value={formData.description_uk}
-											onChange={handleChange}
-										/>
+									<div className={styles.formGroup}>
+										<TextAreaEditor label={t('Опис українською')}
+											name='description_uk' value={formData.description_uk}
+											maxLength={500} required onChange={textEditorOnChange} />
 									</div>
-									<div>
-										<label className={styles.profileLabel}>
-											{t('Специфікація українською')}
-										</label>
-										<textarea
-											name='specs_uk'
-											value={formData.specs_uk}
-											onChange={handleChange}
-										/>
+									<div className={styles.formGroup}>
+										<TextAreaEditor label={t('Специфікація українською')}
+											name='specs_uk' value={formData.specs_uk}
+											maxLength={500} required onChange={textEditorOnChange} />
 									</div>
 								</div>
 								<div className={styles.modalFieldEn}>
-									<div>
-										<label className={styles.profileLabel}>
-											{t('Заголовок англійською')}
-										</label>
-										<input
-											type='text'
-											name='title_en'
-											value={formData.title_en}
-											onChange={handleChange}
-										/>
+									<div className={styles.formGroup}>
+										<TextEditor label={t('Назва англійською')}
+											name='title_en' value={formData.title_en}
+											maxLength={50} required onChange={textEditorOnChange} />
 									</div>
-									<div>
-										<label className={styles.profileLabel}>
-											{t('Опис англійською')}
-										</label>
-										<textarea
-											name='description_en'
-											value={formData.description_en}
-											onChange={handleChange}
-										/>
+									<div className={styles.formGroup}>
+										<TextAreaEditor label={t('Опис англійською')}
+											name='description_en' value={formData.description_en}
+											maxLength={500} required onChange={textEditorOnChange} />
 									</div>
-									<div>
-										<label className={styles.profileLabel}>
-											{t('Специфікація англійською')}
-										</label>
-										<textarea
-											name='specs_en'
-											value={formData.specs_en}
-											onChange={handleChange}
-										/>
+									<div className={styles.formGroup}>
+										<TextAreaEditor label={t('Специфікація англійською')}
+											name='specs_en' value={formData.specs_en}
+											maxLength={500} required onChange={textEditorOnChange} />
 									</div>
 								</div>
 							</div>
@@ -465,7 +344,7 @@ const Paintings = () => {
 					</div>
 				</div>
 			)}
-		</div>
+		</ProfilePageContainer>
 	)
 }
 
