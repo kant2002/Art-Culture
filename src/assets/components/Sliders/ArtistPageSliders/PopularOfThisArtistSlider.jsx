@@ -7,12 +7,12 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 // Import Swiper modules
+import LikeAndShare from '@components/Blocks/LikeAndShare'
+import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 import { Navigation, Pagination } from 'swiper/modules'
 import '/src/styles/components/Sliders/ArtistPageSliders/PopularOfThisArtistSlider.scss'
-import LikeAndShare from '@components/Blocks/LikeAndShare'
-import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 
 const PopularOfThisArtistSlider = ({ products, baseUrl }) => {
 	const { t, i18n } = useTranslation()
@@ -65,7 +65,7 @@ const PopularOfThisArtistSlider = ({ products, baseUrl }) => {
 							const imageUrl =
 								product.images && product.images.length > 0
 									? `${baseUrl}${product.images[0].imageUrl.replace('../../', '/')}`
-									: '/Img/defaultProductImage.jpg' // Fallback imageide>
+									: '/Img/newsCardERROR.jpg' // Fallback imageide>
 							return (
 								<SwiperSlide key={product.id}>
 									<div className='product-slide-card-wrapper'>
@@ -77,7 +77,7 @@ const PopularOfThisArtistSlider = ({ products, baseUrl }) => {
 												onClick={() => handleProductPreviewClick(product.id)}
 												onError={e => {
 													e.target.onerror = null
-													e.target.src = '/Img/defaultProductImage.jpg'
+													e.target.src = '/Img/newsCardERROR.jpg'
 												}}
 											/>
 										</div>

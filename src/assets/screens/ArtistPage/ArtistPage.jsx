@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import styles from '../../../styles/layout/ArtistPage.module.scss'
+import { getBaseUrl, getImageUrl } from '../../../utils/helper.js'
 import ArtistPageMasonryGallery from '../../components/Sliders/ArtistPageSliders/ArtistPageMasonryGallery.jsx'
 import ArtistPageNewsArtistsSlider from '../../components/Sliders/ArtistPageSliders/ArtistPageNewsArtistsSlider.jsx'
 import PopularOfThisArtistSlider from '../../components/Sliders/ArtistPageSliders/PopularOfThisArtistSlider.jsx'
 import MainPopularArtsSlider from '../../components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.jsx'
-import { getBaseUrl, getImageUrl } from '../../../utils/helper.js'
 
 function ArtistPage() {
 	const { t, i18n } = useTranslation()
@@ -26,19 +26,29 @@ function ArtistPage() {
 				const response = await axios.get(`/api/users/creators/${id}`)
 				console.log('Fetched creator', response.data)
 				setCreator(response.data.creator)
-				// Fetch creator's products
-				const productsResponse = await axios.get(`/api/products/author/${id}`)
-				console.log('Fetched products:', productsResponse.data)
-				setProducts(productsResponse.data.products)
-
-				setLoading(false)
 			} catch (error) {
 				console.error('Error fetch creator', error)
 				setError(t('Не вдалося завантажити дані митця.'))
 				setLoading(false)
+				return
 			}
+			try {
+				// Fetch creator's products
+				const productsResponse = await axios.get(`/api/products/author/${id}`)
+				console.log('Fetched products:', productsResponse.data)
+				setProducts(productsResponse.data.products)
+			} catch (error) {
+				if (error.response && error.response.status === 404) {
+					console.log('No product found for this author')
+					setProducts([])
+				} else {
+					console.error('Error fetch creator', error)
+					setError(t('Не вдалося завантажити дані митця.'))
+					setProducts([])
+				}
+			}
+			setLoading(false)
 		}
-
 		fetchCreatorAndProduct()
 	}, [id, t])
 
@@ -63,7 +73,7 @@ function ArtistPage() {
 		currentLanguage === 'en'
 			? creator.bio_en || creator.bio
 			: creator.bio_uk || creator.bio
-	const images = getImageUrl(creator.images, '/Img/defaultArtistPhoto.jpg')
+	const images = getImageUrl(creator.images, '/Img/newsCardERROR.jpg')
 
 	return (
 		<div className={`${styles.artistPage}`}>
@@ -125,13 +135,20 @@ function ArtistPage() {
 
 			<ArtistPageNewsArtistsSlider />
 
-			<PopularOfThisArtistSlider products={products} baseUrl={baseUrl} />
-
-			<ArtistPageMasonryGallery
-				products={products}
-				baseUrl={baseUrl}
-				creator={creator}
-			/>
+			{products && products.length > 0 ? (
+				<>
+					<PopularOfThisArtistSlider products={products} baseUrl={baseUrl} />
+					<ArtistPageMasonryGallery
+						products={products}
+						baseUrl={baseUrl}
+						creator={creator}
+					/>
+				</>
+			) : (
+				<div className={styles.noProductsMessage}>
+					{t('Автор ще не додав нічого')}
+				</div>
+			)}
 
 			<div className={`${styles.artistPageFollowContainer}`}>
 				<p className={`${styles.artistPageFollowTitle}`}>

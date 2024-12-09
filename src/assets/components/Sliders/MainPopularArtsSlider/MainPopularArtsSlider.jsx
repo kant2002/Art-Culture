@@ -9,12 +9,12 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 // Import Swiper modules
-import { useNavigate } from 'react-router-dom'
-import { Navigation, Pagination } from 'swiper/modules'
-import '@styles/components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.scss'
-import { getBaseUrl } from '../../../../utils/helper'
 import LikeAndShare from '@components/Blocks/LikeAndShare'
 import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
+import '@styles/components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.scss'
+import { useNavigate } from 'react-router-dom'
+import { Navigation, Pagination } from 'swiper/modules'
+import { getBaseUrl } from '../../../../utils/helper'
 
 const Slide = ({ product, baseUrl }) => {
 	const { t, i18n } = useTranslation()
@@ -37,7 +37,7 @@ const Slide = ({ product, baseUrl }) => {
 	const imageUrl =
 		product.images && product.images.length > 0
 			? `${baseUrl}${product.images[0].imageUrl.replace('../../', '/')}`
-			: '/Img/defaultProductImage.jpg' // Fallback image
+			: '/Img/newsCardERROR.jpg' // Fallback image
 
 	return (
 		<div className='mainPopularArtistsSliderCardWrapper'>
@@ -113,7 +113,7 @@ const MainPopularArtistsSlider = () => {
 							{t('Популярне.')} &#8243;{t('Мистецтво')}&#8243;
 						</p>
 					</div>
-					
+
 					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 				</div>
 				<div className='mainPopularArtistsSliderBottomInnerWrapper'>

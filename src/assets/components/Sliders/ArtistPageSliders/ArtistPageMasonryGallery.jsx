@@ -4,6 +4,9 @@ import { useTranslation } from 'react-i18next'
 import style from '../../../../styles/components/Sliders/ArtistPageSliders/ArtistPageMasonryGallery.module.scss'
 
 const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
+	if (!products || products.length === 0) {
+		return null // Or display a message if you prefer
+	}
 	const { t, i18n } = useTranslation()
 	const currentLanguage = i18n.language
 	const containerRef = useRef(null)
@@ -32,7 +35,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 		const mainImageSrc =
 			product.images && product.images.length > 0
 				? `${baseUrl}${product.images[0].imageUrl.replace('../../', '/')}`
-				: '/Img/defaultProductImage.jpg' // Fallback image
+				: '/Img/newsCardERROR.jpg' // Fallback image
 
 		return {
 			src: mainImageSrc,
@@ -575,7 +578,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 													}}
 													onError={e => {
 														e.target.onerror = null
-														e.target.src = '/Img/defaultProductImage.jpg'
+														e.target.src = '/Img/newsCardERROR.jpg'
 														console.error(
 															'Error loading modal image:',
 															e.target.src
@@ -683,7 +686,7 @@ ArtistPageMasonryGallery.propTypes = {
 		title_en: PropTypes.string,
 		title_uk: PropTypes.string,
 		// ... other fields
-	}), // Ensure creator has the necessary fields
+	}).isRequired, // Ensure creator has the necessary fields
 }
 
 export default ArtistPageMasonryGallery
