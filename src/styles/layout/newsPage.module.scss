@@ -80,66 +80,6 @@
     font-size: 18px;
 }
 
-.newsPageLikeWrapper {
-    /* Обертка для кнопки лайка */
-    display: flex;
-    align-items: center;
-}
-
-.newsPageLikeButton {
-    /* Кнопка лайка */
-    display: flex;
-    align-self: center;
-    cursor: pointer;
-}
-
-.newsPageLikeButtonImg {
-    /* Изображение на кнопке лайка */
-    display: flex;
-    align-self: center;
-    object-fit: contain;
-    object-position: center;
-    width: 32px;
-    height: 32px;
-}
-
-.newsPageLikeButtonText {
-    /* Текст на кнопке лайка */
-    display: flex;
-    align-self: center;
-    padding: 0 11.5px 0 5px;
-}
-
-.newsPageShareWrapper {
-    /* Обертка для кнопки шаринга */
-    display: flex;
-    align-items: center;
-}
-
-.newsPageShareButton {
-    /* Кнопка шаринга */
-    display: flex;
-    align-self: center;
-    cursor: pointer;
-}
-
-.newsPageShareButtonText {
-    /* Текст на кнопке шаринга */
-    display: flex;
-    align-self: center;
-    padding: 0 5px 0 11.5px;
-}
-
-.newsPageShareButtonImg {
-    /* Изображение на кнопке шаринга */
-    display: flex;
-    align-self: center;
-    object-fit: contain;
-    object-position: center;
-    width: 32px;
-    height: 32px;
-}
-
 .newsPageTopCardsContainer, .newsPageBottomCardsContainer{
     /* Контейнер для верхних карточек */
     display: flex;
@@ -340,7 +280,6 @@
     color: #000;
     text-align: center;
     text-transform: uppercase;
-
 }
 
 .newsPageInputMail {
@@ -356,7 +295,6 @@
     justify-content: center;
     margin: 20px 0 !important;
     padding: 0 $responsiveLeftAndRightPadding;
-
 }
 
 .newsPageSignUpButton {
