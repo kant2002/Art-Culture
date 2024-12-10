@@ -149,17 +149,17 @@ li,
 	text-decoration: none; // Убираем подчеркивание у ссылок
 	color: inherit; // Наследуем цвет текста
 
-	&:hover {
-		background-color: initial; // Убираем фон при наведении
-	}
+	// &:hover {
+	// 	background-color: initial; // Убираем фон при наведении
+	// }
 
-	&:focus {
-		outline: none; // Убираем обводку при фокусе
-	}
+	// &:focus {
+	// 	outline: none; // Убираем обводку при фокусе
+	// }
 
-	&:active {
-		background-color: initial; // Убираем фон при нажатии
-	}
+	// &:active {
+	// 	background-color: initial; // Убираем фон при нажатии
+	// }
 
 	// Специальный стиль для мобильных устройств
 	-webkit-tap-highlight-color: transparent; // Убираем выделение при нажатии на мобильных устройствах
