@@ -3,7 +3,7 @@
 .PopularSliderContainer {
     // Контейнер слайдера
     display: flex;
-	margin: $responsiveBigPadding $responsiveLeftAndRightPadding;
+    margin: $responsiveBigPadding $responsiveLeftAndRightPadding;
 }
 
 .PopularSliderWrapper {
@@ -36,6 +36,8 @@
     display: flex;
     width: 100%;
     height: calc(514px - (75 * ((1440px - 100vw) / (1440 - 375))));
+    min-height: 439px;
+    max-height: 514px;
 
     @at-root {
         :root {
@@ -45,7 +47,7 @@
 
     .swiper-wrapper {
         position: relative;
-		margin: 0 0 0 calc(-1 * $responsiveSmallPadding);
+        margin: 0 0 0 calc(-1 * $responsiveSmallPadding);
         width: 100%;
         height: 100%;
         z-index: 1;
@@ -184,7 +186,7 @@
 
 .PopularSliderCardButton {
     // Кнопка карточки 
-    padding: 0 20px;
+    padding: 0 $staticButtonLeftAndRightPadding;
     position: relative;
     display: flex;
     justify-content: center;
@@ -197,6 +199,7 @@
     font-family: $default-font;
     font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
     font-weight: normal;
+    background: white;
     cursor: pointer;
 }
 
@@ -214,27 +217,148 @@
 .PopularSliderCardDescriptionWrapper {
     // Обёртка описания карточки
     margin: $responsiveSmallPadding 0 0 0;
-	height: calc(calc(16px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 2); // Делаем ограничение вывода текста построчечно
-	overflow: hidden;
+    height: calc(calc(16px - (2 * ((1440px - 100vw) / (1440 - 375)))) * 2); // Делаем ограничение вывода текста построчечно
+    overflow: hidden;
 }
 
 .PopularSliderCardDescription {
     // Описание карточки
     color: #fff;
     font-family: $default-font;
-    font-weight: 300;    
+    font-weight: 300;
     font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
 }
 
+@media (min-width: 1441px) {
+    .PopularSliderContainer {
+        // Контейнер слайдера
+        margin: $staticPcBigPadding $responsiveLeftAndRightPadding;
+    }
+
+    .PopularSliderTopInnerWrapper {
+        // Верхняя часть слайдера
+        padding: 0 0 $staticPcMediumPadding 0;
+    }
+
+    .PopularSliderBottomInnerWrapper {
+        // Нижняя часть слайдера
+
+        @at-root {
+            :root {
+                --swiper-navigation-size: 42px;
+            }
+        }
+
+        .swiper-wrapper {
+            position: relative;
+            margin: 0 0 0 calc(-1 * $staticPcSmallPadding);
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            position: absolute;
+            top: calc(514px - calc(var(--swiper-navigation-size) / 2));
+        }
+
+        /* Common Styles */
+        .swiper-pagination-fraction,
+        .swiper-pagination-custom,
+        .swiper-horizontal>.swiper-pagination-bullets,
+        .swiper-pagination-bullets.swiper-pagination-horizontal {
+            top: calc(514px - calc(var(--swiper-navigation-size) / 1.4));
+        }
+    }
+
+    .PopularSliderCardWrapper {
+        // Обёртка карточки слайдера
+        margin: 0 $staticPcSmallPadding;
+    }
+
+    .PopularSliderCardAbsoluteWrapper {
+        // Абсолютная обёртка карточки
+        padding: $staticPcSmallPadding;
+    }
+
+    .PopularSliderCardButton {
+        // Кнопка карточки 
+        font-size: 16px;
+    }
+
+    .PopularSliderCardDescriptionWrapper {
+        // Обёртка описания карточки
+        margin: $staticPcSmallPadding 0 0 0;
+        height: calc(16px * 2); // Делаем ограничение вывода текста построчечно
+    }
+
+    .PopularSliderCardDescription {
+        // Описание карточки
+        font-size: 16px;
+    }
+}
+
 @media screen and (max-width: 569px) {
-    .PopularSliderLikeAndShareWrapper {
-        // Обёртка кнопок Like и Share
-        width: 80px;
+
+    .PopularSliderContainer {
+        // Контейнер слайдера
+        margin: $staticMobileBigPadding $responsiveLeftAndRightPadding;
     }
-    .PopularSliderLikeButton::after {
-        display: none;
+
+    .PopularSliderTopInnerWrapper {
+        // Верхняя часть слайдера
+        padding: 0 0 $staticMobileMediumPadding 0;
     }
-    .PopularSliderShareButtonButton::before {
-        display: none;
+
+    .PopularSliderBottomInnerWrapper {
+        // Нижняя часть слайдера
+
+        @at-root {
+            :root {
+                --swiper-navigation-size: 32px;
+            }
+        }
+
+        .swiper-wrapper {
+            position: relative;
+            margin: 0 0 0 calc(-1 * $staticMobileSmallPadding);
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            top: calc(439px - calc(var(--swiper-navigation-size) / 2));
+        }
+
+        /* Common Styles */
+        .swiper-pagination-fraction,
+        .swiper-pagination-custom,
+        .swiper-horizontal>.swiper-pagination-bullets,
+        .swiper-pagination-bullets.swiper-pagination-horizontal {
+            top: calc(439px - calc(var(--swiper-navigation-size) / 1.4));
+        }
+    }
+
+    .PopularSliderCardWrapper {
+        // Обёртка карточки слайдера
+        margin: 0 $staticMobileSmallPadding;
+    }
+
+    .PopularSliderCardAbsoluteWrapper {
+        // Абсолютная обёртка карточки
+        padding: $staticMobileSmallPadding;
+    }
+
+    .PopularSliderCardButton {
+        // Кнопка карточки 
+        font-size: 14px;
+    }
+
+    .PopularSliderCardDescriptionWrapper {
+        // Обёртка описания карточки
+        margin: $staticMobileSmallPadding 0 0 0;
+        height: calc(14px * 2); // Делаем ограничение вывода текста построчечно
+    }
+
+    .PopularSliderCardDescription {
+        // Описание карточки
+        font-size: 14px;
     }
 }
