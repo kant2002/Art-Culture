@@ -7,6 +7,8 @@ import TextEditor from '@components/Blocks/TextEditor'
 import TextAreaEditor from '@components/Blocks/TextAreaEditor'
 import TranslatedContent from '@components/Blocks/TranslatedContent'
 import ImageEditor from '../../components/Blocks/ImageEditor'
+import Loading from "@components/Blocks/Loading.jsx";
+import LoadingError from "@components/Blocks/LoadingError.jsx";
 
 const Paintings = () => {
 	const { t, i18n } = useTranslation()
@@ -27,6 +29,7 @@ const Paintings = () => {
 	})
 	const [message, setMessage] = useState('')
 	const [formErrors, setFormErrors] = useState({})
+	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState('')
 
 	useEffect(() => {
@@ -41,6 +44,8 @@ const Paintings = () => {
 			} catch (error) {
 				console.error('Error fetching products:', error)
 				setServerMessage('Failed to load products.')
+			} finally {
+				setLoading(false)
 			}
 		}
 
@@ -164,63 +169,67 @@ const Paintings = () => {
 		<ProfilePageContainer>
 			<div className={styles.productList}>
 				<h2>{t('Картини')}</h2>
-				{serverMessage && (
-					<p className={styles.serverMessage}>{serverMessage}</p>
-				)}
-				<div className={styles.products}>
-					{products.map(product => {
-						const title =
-						currentLanguage === 'en'
-							? product.title_en || product.title_uk
-							: product.title_uk || product.title_en
+				{loading ? <Loading /> : error ? <LoadingError />
+					: products.length === 0 ? (
+						<p>{t('Публікацій немає')}</p>
+					) : (<>
+						{serverMessage && (
+							<p className={styles.serverMessage}>{serverMessage}</p>
+						)}
+						<div className={styles.products}>
+							{products.map(product => {
+								const title =
+									currentLanguage === 'en'
+										? product.title_en || product.title_uk
+										: product.title_uk || product.title_en
 
-						return (
-							<div key={product.id} className={styles.productCard}>
-								{product.images.length > 0 && (
-									<img
-										src={`${product.images[0].imageUrl}`}
-										alt={title}
-										className={styles.productImage}
-										onClick={() => handleImageClick(product.images)}
-										loading='lazy'
-									/>
-								)}
-								<h3>
-									{t('Назва картини')}
-									<p className={styles.productCardSubTitle}>
-										<TranslatedContent en={product.title_en} uk={product.title_uk} />
-									</p>
-								</h3>
-								<h4>
-									{t('Про картину')}
-									<p className={styles.productCardSubTitle}>
-										<TranslatedContent en={product.description_en} uk={product.description_uk} html />
-									</p>
-								</h4>
-								<h4>
-									{t('Використані матеріали')}
-									<p className={styles.productCardSubTitle}>
-										<TranslatedContent en={product.specs_en} uk={product.specs_uk} html />
-									</p>
-								</h4>
-								<div className={styles.paintingsDelEditWrapper}>
-									<button
-										className="button button-default"
-										onClick={() => openEditModal(product)}
-									>
-										{t('Редагувати')}
-									</button>
-									<button
-										className={styles.paintingsDeleteButton}
-										onClick={() => handleDeleteProduct(product.id)}
-									>
-										{t('Видалити')}
-									</button>
-								</div>
-							</div>
-						)
-					})}
-				</div>
+								return (
+									<div key={product.id} className={styles.productCard}>
+										{product.images.length > 0 && (
+											<img
+												src={`${product.images[0].imageUrl}`}
+												alt={title}
+												className={styles.productImage}
+												onClick={() => handleImageClick(product.images)}
+												loading='lazy'
+											/>
+										)}
+										<p className={styles.productCardTitle}>
+											{t('Назва картини')}</p>
+										<p className={styles.productCardSubTitle}>
+											<TranslatedContent en={product.title_en} uk={product.title_uk} />
+										</p>
+
+										<p className={styles.productCardTitle}>
+											{t('Про картину')}</p>
+										<p className={styles.productCardSubTitle}>
+											<TranslatedContent en={product.description_en} uk={product.description_uk} html />
+										</p>
+
+										<p className={styles.productCardTitle}>
+											{t('Використані матеріали')}</p>
+										<p className={styles.productCardSubTitle}>
+											<TranslatedContent en={product.specs_en} uk={product.specs_uk} html />
+										</p>
+
+										<div className={styles.paintingsDelEditWrapper}>
+											<button
+												className="button button-default"
+												onClick={() => openEditModal(product)}
+											>
+												{t('Редагувати')}
+											</button>
+											<button
+												className={styles.paintingsDeleteButton}
+												onClick={() => handleDeleteProduct(product.id)}
+											>
+												{t('Видалити')}
+											</button>
+										</div>
+									</div>
+								)
+							})}
+						</div></>)}
 			</div>
 			{/* Image Modal Component */}
 			{isModalOpen && !editingProduct && (

@@ -95,7 +95,6 @@ function UserProfilePosts() {
 		setMessage('')
 	}
 
-
 	const handleEditSubmit = async e => {
 		e.preventDefault()
 		setMessage('')

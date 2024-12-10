@@ -3,24 +3,21 @@
 
 .productList {
 
-	h2 {
-		font-weight: 600;
-		font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
-		text-transform: uppercase;
-	}
-
-	h3,
-	h4 {
-		font-weight: 300;
-		font-size: calc(14px - (4 * ((1440px - 100vw) / (1440 - 375))));
-		color: $secondary-color;
+	.productCardTitle {
 		margin: $responsiveSmallPadding 0 0 0;
+		font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+		font-weight: 600;
 	}
 
 	.productCardSubTitle {
+		margin: 0;
 		font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
 		font-weight: 400 !important;
 		text-transform: none !important;
+	}
+
+	.productCardSubTitle:last-of-type {
+		margin: 0 0 auto 0;
 	}
 
 	.products {
@@ -33,7 +30,6 @@
 		.productCard {
 			display: flex;
 			flex-direction: column;
-			justify-content: space-between;
 			align-items: start;
 			// width: 100%;
 			background-color: #fff;
@@ -53,20 +49,6 @@
 				object-fit: cover;
 				border-radius: 10px;
 				cursor: pointer;
-			}
-
-			h3 {
-				margin: $responsiveSmallPadding 0 0 0;
-				font-size: calc(14px - (4 * ((1440px - 100vw) / (1440 - 375))));
-				color: $secondary-color;
-			}
-
-			p {
-				font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
-				color: #666;
-				line-height: 1.5;
-				text-transform: uppercase;
-				font-weight: 700;
 			}
 		}
 	}
@@ -158,14 +140,10 @@
 
 @media (min-width: 1441px) {
 	.productList {
-		h2 {
-			font-size: 28px;
-		}
 
-		h3,
-		h4 {
-			font-size: 14px;
+		.productCardTitle {
 			margin: $staticPcSmallPadding 0 0 0;
+			font-size: 16px;
 		}
 
 		.productCardSubTitle {
@@ -178,15 +156,6 @@
 
 			.productCard {
 				padding: $staticPcSmallPadding;
-
-				h3 {
-					margin: $staticPcSmallPadding 0 0 0;
-					font-size: 14px;
-				}
-
-				p {
-					font-size: 16px;
-				}
 			}
 		}
 	}
