@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from '/src/styles/screen/ExhibitionList/Exhibitions.module.scss'
 import API from '/src/utils/api.js'
-import Sidebar from '@components/Blocks/Sidebar'
+import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
 import TextEditor from '@components/Blocks/TextEditor'
 import TextAreaEditor from '@components/Blocks/TextAreaEditor'
+import ImageEditor from '../../components/Blocks/ImageEditor'
 
 function MuseumExhibitions() {
 	const { t, i18n } = useTranslation()
@@ -27,6 +28,7 @@ function MuseumExhibitions() {
 		startDate: '',
 		endDate: '',
 		time: '',
+		finishTime: '',
 		artists: [],
 		images: null,
 	})
@@ -141,7 +143,7 @@ function MuseumExhibitions() {
 		} else if (name === 'artists') {
 			// Handled in handleArtistSelection
 		} else {
-			setFormData({ ...formData, [name]: value })			
+			setFormData({ ...formData, [name]: value })
 		}
 	}
 
@@ -263,144 +265,141 @@ function MuseumExhibitions() {
 	};
 
 	return (
-		<div className={styles.profile}>
-			<Sidebar />
-			<div className={styles.exhibitionsContainer}>
-				<h2>{t('Ваші виставки')}</h2>
-				{exhibitions.length === 0 ? (
-					<p>{t('Ви не створили жодної виставки')}</p>
-				) : (
-					<div className={styles.exhibitionList}>
-						{exhibitions.map(exhibition => {
-							const title =
-								currentLanguage === 'en'
-									? exhibition.title_en || exhibition.title_uk
-									: exhibition.title_uk || exhibition.title_en
+		<ProfilePageContainer>
+			<h2>{t('Ваші виставки')}</h2>
+			{exhibitions.length === 0 ? (
+				<p>{t('Ви не створили жодної виставки')}</p>
+			) : (
+				<div className={styles.exhibitionList}>
+					{exhibitions.map(exhibition => {
+						const title =
+							currentLanguage === 'en'
+								? exhibition.title_en || exhibition.title_uk
+								: exhibition.title_uk || exhibition.title_en
 
-							const description =
-								currentLanguage === 'en'
-									? exhibition.description_en || exhibition.description_uk
-									: exhibition.description_uk || exhibition.description_en
+						const description =
+							currentLanguage === 'en'
+								? exhibition.description_en || exhibition.description_uk
+								: exhibition.description_uk || exhibition.description_en
 
-							const location =
-								currentLanguage === 'en'
-									? exhibition.location_en || exhibition.location_uk
-									: exhibition.location_uk || exhibition.location_en
+						const location =
+							currentLanguage === 'en'
+								? exhibition.location_en || exhibition.location_uk
+								: exhibition.location_uk || exhibition.location_en
 
-							const artistNames =
-								exhibition.exhibitionArtists &&
-									exhibition.exhibitionArtists.length > 0
-									? exhibition.exhibitionArtists
-										.map(ea => {
-											const artist = ea.artist
-											return artist.name || artist.title || artist.email
-										})
-										.join(',')
-									: t('Немає митців')
-							return (
-								<div key={exhibition.id} className={styles.exhibitionCard}>
-									{/* {exhibition.images && exhibition.images.length > 0 && (
-									<div className={styles.imagesContainer}>
-										{exhibition.images.map(image => (
-											<img
-												key={image.id}
-												src={`${process.env.REACT_APP_API_URL}${image.imageUrl}`}
-												alt={title}
-												className={styles.exhibitionImage}
-												loading='lazy'
-											/>
-										))}
-									</div>
-									)} */}
-
-									{exhibition.images && exhibition.images.length > 0 && (
-										<div className={styles.imagesContainer}>
-											<img
-												src={`${process.env.REACT_APP_API_URL}${exhibition.images[0].imageUrl}`}
-												alt={title}
-												className={styles.exhibitionImage}
-												loading='lazy'
-											/>
-										</div>
-									)}
-									<h3>
-										{t('Назва виставки')}
-										<p className={styles.productCardSubTitle}>{title}</p>
-									</h3>
-									<h4>
-										{t('Опис виставки')}
-										<p className={styles.productCardSubTitle}>{description}</p>
-									</h4>
-									<h4>
-										{t('Митці')}
-										<p className={styles.productCardSubTitle}>{artistNames}</p>
-									</h4>
-									<h4>
-										{t('Дата проведення')}
-										<p className={styles.productCardSubTitle}> </p>
-										<p className={styles.productCardSubTitle}>
-											{new Date(exhibition.startDate).toLocaleDateString()} -{' '}
-											{new Date(exhibition.endDate).toLocaleDateString()}
-										</p>
-									</h4>
-									<h4>
-										{t('Час початку')}
-										<p className={styles.productCardSubTitle}>
-											{exhibition.time}
-										</p>
-									</h4>
-									<h4>
-										{t('Місце проведення')}
-										<p className={styles.productCardSubTitle}>{location}</p>
-									</h4>
-									{console.log('type data artists:', artistNames)}
-									<div className={styles.exhibitionDelEditWrapper}>
-										<button
-											className="button button-default"
-											onClick={() => openEditModal(exhibition)}
-										>
-											{t('Редагувати')}
-										</button>
-										<button
-											className={styles.exhibitionDeleteButton}
-											onClick={() => handleDeleteExhibition(exhibition.id)}
-										>
-											{t('Видалити')}
-										</button>
-									</div>
+						const artistNames =
+							exhibition.exhibitionArtists &&
+								exhibition.exhibitionArtists.length > 0
+								? exhibition.exhibitionArtists
+									.map(ea => {
+										const artist = ea.artist
+										return artist.name || artist.title || artist.email
+									})
+									.join(',')
+								: t('Немає митців')
+						return (
+							<div key={exhibition.id} className={styles.exhibitionCard}>
+								{/* {exhibition.images && exhibition.images.length > 0 && (
+								<div className={styles.imagesContainer}>
+									{exhibition.images.map(image => (
+										<img
+											key={image.id}
+											src={`${process.env.REACT_APP_API_URL}${image.imageUrl}`}
+											alt={title}
+											className={styles.exhibitionImage}
+											loading='lazy'
+										/>
+									))}
 								</div>
-							)
-						})}
-					</div>
-				)}
-				<div className={styles.pagination}>
-					<button
-						onClick={() => setPage(prev => Math.max(prev - 1, 1))}
-						disabled={page === 1}
-					>
-						{/* {t('Попередня')} */}
-						&#8592;
-					</button>
-					<p>
-						{t('Сторінка')} {page} {t('з')} {totalPages}
-					</p>
-					<button
-						onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
-						disabled={page === totalPages}
-					>
-						{/* {t('Наступна')} */}
-						&#8594;
-					</button>
+								)} */}
+
+								{exhibition.images && exhibition.images.length > 0 && (
+									<div className={styles.imagesContainer}>
+										<img
+											src={`${process.env.REACT_APP_API_URL}${exhibition.images[0].imageUrl}`}
+											alt={title}
+											className={styles.exhibitionImage}
+											loading='lazy'
+										/>
+									</div>
+								)}
+								<h3>
+									{t('Назва виставки')}
+									<p className={styles.productCardSubTitle}>{title}</p>
+								</h3>
+								<h4>
+									{t('Опис виставки')}
+									<p className={styles.productCardSubTitle}>{description}</p>
+								</h4>
+								<h4>
+									{t('Митці')}
+									<p className={styles.productCardSubTitle}>{artistNames}</p>
+								</h4>
+								<h4>
+									{t('Дата проведення')}
+									<p className={styles.productCardSubTitle}> </p>
+									<p className={styles.productCardSubTitle}>
+										{new Date(exhibition.startDate).toLocaleDateString()} -{' '}
+										{new Date(exhibition.endDate).toLocaleDateString()}
+									</p>
+								</h4>
+								<h4>
+									{t('Час початку')}
+									<p className={styles.productCardSubTitle}>
+										{exhibition.time}
+									</p>
+								</h4>
+								<h4>
+									{t('Місце проведення')}
+									<p className={styles.productCardSubTitle}>{location}</p>
+								</h4>
+								{console.log('type data artists:', artistNames)}
+								<div className={styles.exhibitionDelEditWrapper}>
+									<button
+										className="button button-default"
+										onClick={() => openEditModal(exhibition)}
+									>
+										{t('Редагувати')}
+									</button>
+									<button
+										className={styles.exhibitionDeleteButton}
+										onClick={() => handleDeleteExhibition(exhibition.id)}
+									>
+										{t('Видалити')}
+									</button>
+								</div>
+							</div>
+						)
+					})}
 				</div>
+			)}
+			<div className={styles.pagination}>
+				<button
+					onClick={() => setPage(prev => Math.max(prev - 1, 1))}
+					disabled={page === 1}
+				>
+					{/* {t('Попередня')} */}
+					&#8592;
+				</button>
+				<p>
+					{t('Сторінка')} {page} {t('з')} {totalPages}
+				</p>
+				<button
+					onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
+					disabled={page === totalPages}
+				>
+					{/* {t('Наступна')} */}
+					&#8594;
+				</button>
 			</div>
 			{/* Image Modal Component */}
 			{isModalOpen && !editingExhibition && (
-				<div className={styles.modalOverlay} onClick={handleCloseModal}>
+				<div className="modal-overlay" onClick={handleCloseModal}>
 					<div
-						className={styles.modalContent}
+						className="modal-content"
 						onClick={e => e.stopPropagation()}
 					>
-						<button className={styles.closeButton} onClick={handleCloseModal}>
+						<button className="modal-close-button" onClick={handleCloseModal}>
 							&times;
 						</button>
 						<div className={styles.modalImages}>
@@ -419,13 +418,13 @@ function MuseumExhibitions() {
 			)}
 			{/* Modal Edit Component */}
 			{isModalOpen && editingExhibition && (
-				<div className={styles.modalOverlay} onClick={handleCloseModal}>
+				<div className="modal-overlay" onClick={handleCloseModal}>
 					<div
-						className={styles.modalContent}
+						className="modal-content"
 						onClick={e => e.stopPropagation()}
 					>
-						<div className={styles.modalFormWrapper}>
-							<button className={styles.closeButton} onClick={closeEditModal}>
+						<div>
+							<button className="modal-close-button" onClick={closeEditModal}>
 								&times;
 							</button>
 							<form onSubmit={handleEditSubmit}>
@@ -438,94 +437,74 @@ function MuseumExhibitions() {
 										{t('Редагування виставки')}
 									</h2>
 								</div>
-								<div className={styles.modalTextWrapper}>
-									<div className={styles.modalFieldUk}>
-										<div className={styles.formGroup}>
+								<div className="flex gap-8 form-wrapper">
+									<div className="form-group">
+										<div className="field-group">
 											<TextEditor label={t('Назва виставки українською')}
 												name='title_uk' value={formData.title_uk}
 												maxLength={50} required onChange={textEditorOnChange} />
 										</div>
-										<div className={styles.formGroup}>
+										<div className="field-group">
 											<TextAreaEditor label={t('Опис виставки українською')}
 												name='description_uk' value={formData.description_uk}
 												maxLength={500} required onChange={textEditorOnChange} />
 										</div>
-										<div className={styles.formGroup}>
+										<div className="field-group">
 											<TextEditor label={t('Місце проведення українською')}
 												name='location_uk' value={formData.location_uk}
 												maxLength={500} required onChange={textEditorOnChange} />
 										</div>
 										{/* Start Date Field */}
-										<div className={styles.formGroup}>
-											<label className={styles.formLabel}>
-												{t('Дата початку')}
-											</label>
-											<input
+										<div className="field-group">
+											<TextEditor label={t('Дата початку')}
 												type='date'
-												name='startDate'
-												value={formData.startDate}
-												onChange={handleChange}
-											/>
+												name='startDate' value={formData.startDate}
+												required onChange={textEditorOnChange} />
 										</div>
 										{/* Time Field */}
-										<div className={styles.formGroup}>
-											<label className={styles.formLabel}>
-												{t('Час початку')}
-											</label>
-											<input
+										<div className="field-group">
+											<TextEditor label={t('Час початку')}
 												type='text'
-												name='time'
-												value={formData.time}
-												onChange={handleChange}
-											/>
+												name='time' value={formData.time}
+												required onChange={textEditorOnChange} />
 										</div>
 									</div>
 
-									<div className={styles.modalFieldEn}>
-										<div className={styles.formGroup}>
+									<div className="form-group">
+										<div className="field-group">
 											<TextEditor label={t('Назва виставки англійською')}
 												name='title_en' value={formData.title_en}
 												maxLength={50} required onChange={textEditorOnChange} />
 										</div>
-										<div className={styles.formGroup}>
+										<div className="field-group">
 											<TextAreaEditor label={t('Опис виставки англійською')}
 												name='description_en' value={formData.description_en}
 												maxLength={500} required onChange={textEditorOnChange} />
 										</div>
-										<div className={styles.formGroup}>
+										<div className="field-group">
 											<TextEditor label={t('Місце проведення англійською')}
 												name='location_en' value={formData.location_en}
 												maxLength={500} required onChange={textEditorOnChange} />
 										</div>
 										{/* End Date Field */}
-										<div className={styles.formGroup}>
-											<label className={styles.formLabel}>
-												{t('Дата завершення')}
-											</label>
-											<input
+										<div className="field-group">
+											<TextEditor label={t('Дата завершення')}
 												type='date'
-												name='endDate'
-												value={formData.endDate}
-												onChange={handleChange}
-											/>
+												name='endDate' value={formData.endDate}
+												required onChange={textEditorOnChange} />
 										</div>
 										{/* Time Field */}
-										<div className={styles.formGroup}>
-											<label className={styles.formLabel}>
-												{t('Час завершення')}
-											</label>
-											<input
+										<div className="field-group">
+											<TextEditor label={t('Час завершення')}
 												type='text'
-												name='time'
-												value={formData.time}
-												onChange={handleChange}
-											/>
+												name='finishTime' value={formData.finishTime}
+												required onChange={textEditorOnChange} />
 										</div>
 									</div>
 								</div>
 								{/* Artists Field */}
-								<div className={styles.formGroup}>
-									<label className={styles.formLabel}>{t('Митці')}</label>
+								<div className="field-group">
+									<label className="field-label">{t('Митці')}</label>
 									<div className={styles.checkArtistWrapper}>
 										{artists.map(artist => (
 											<div className={styles.checkArtistItem} key={artist.id}>
@@ -546,16 +525,13 @@ function MuseumExhibitions() {
 										))}
 									</div>
 								</div>
-								{/* Image Upload */}
-								<label className={styles.formLabel}>
-									{t('Додати зображення')}
-								</label>
-								<input
-									type='file'
-									name='exhibitionImages'
-									accept='image/*'
-									onChange={handleChange}
+								<ImageEditor
+									label={t('Додати зображення')}
+									required
+									name="exhibitionImages"
+									value={formData.images}
 									multiple
+									onChange={textEditorOnChange}
 								/>
 								<button type='submit'>{t('Зберегти')}</button>
 							</form>
@@ -563,7 +539,7 @@ function MuseumExhibitions() {
 					</div>
 				</div>
 			)}
-		</div>
+		</ProfilePageContainer>
 	)
 }
 

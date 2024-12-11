@@ -127,34 +127,7 @@ function NewsPage() {
 
 			{/* Like and Share Buttons */}
 			<div className={`${styles.newsPageLikeAndShareContainer}`}>
-				<div className={`${styles.newsPageLikeWrapper}`}>
-					<button className={`${styles.newsPageLikeButton}`}>
-						<img
-							className={`${styles.newsPageLikeButtonImg}`}
-							src={'/Img/likeHeart.svg'}
-							alt={t('Світлина вподобайки')}
-							onError={e => {
-								e.target.onerror = null
-								e.target.src = '/Img/likeHeart.svg' // Fallback image
-							}}
-						/>
-						<p className={`${styles.newsPageLikeButtonText}`}>Like</p>
-					</button>
-				</div>
-				<div className={`${styles.newsPageShareWrapper}`}>
-					<button className={`${styles.newsPageShareButton}`}>
-						<p className={`${styles.newsPageShareButtonText}`}>Share</p>
-						<img
-							className={`${styles.newsPageShareButtonImg}`}
-							src={'/Img/shareArrow.svg'}
-							alt={t('Світлина поширити')}
-							onError={e => {
-								e.target.onerror = null
-								e.target.src = '/Img/shareArrow.svg' // Fallback image
-							}}
-						/>
-					</button>
-				</div>
+				<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 			</div>
 
 			{/* Top Cards Section */}
@@ -191,7 +164,7 @@ function NewsPage() {
 												alt={t('Зображення')}
 												onError={e => {
 													e.target.onerror = null
-													e.target.src = '/Img/newsPageImg.jpeg' // Fallback image
+													e.target.src = '/Img/newsCardERROR.jpg' // Fallback image
 												}}
 											/>
 										</div>
@@ -286,7 +259,7 @@ function NewsPage() {
 												alt={t('Зображення')}
 												onError={e => {
 													e.target.onerror = null
-													e.target.src = '/Img/newsPageImg.jpeg' // Fallback image
+													e.target.src = '/Img/newsCardERROR.jpg' // Fallback image
 												}}
 											/>
 										</div>
@@ -365,7 +338,7 @@ function NewsPage() {
 						/>
 					</button>
 				</div>
-				
+
 				<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 			</div>
 
@@ -378,7 +351,7 @@ function NewsPage() {
 					className={`${styles.newsPageInputMail}`}
 					type='email'
 					placeholder={t('Введіть ваш email')}
-					// You can add value and onChange handlers if needed
+				// You can add value and onChange handlers if needed
 				/>
 			</div>
 

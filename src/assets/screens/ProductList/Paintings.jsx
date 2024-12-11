@@ -6,6 +6,9 @@ import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
 import TextEditor from '@components/Blocks/TextEditor'
 import TextAreaEditor from '@components/Blocks/TextAreaEditor'
 import TranslatedContent from '@components/Blocks/TranslatedContent'
+import ImageEditor from '../../components/Blocks/ImageEditor'
+import Loading from "@components/Blocks/Loading.jsx";
+import LoadingError from "@components/Blocks/LoadingError.jsx";
 
 const Paintings = () => {
 	const { t, i18n } = useTranslation()
@@ -26,8 +29,7 @@ const Paintings = () => {
 	})
 	const [message, setMessage] = useState('')
 	const [formErrors, setFormErrors] = useState({})
-	const [remainingTitle, setRemainingTitle] = useState(500)
-	const [remainingDescription, setRemainingDescription] = useState(5000)
+	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState('')
 
 	useEffect(() => {
@@ -42,6 +44,8 @@ const Paintings = () => {
 			} catch (error) {
 				console.error('Error fetching products:', error)
 				setServerMessage('Failed to load products.')
+			} finally {
+				setLoading(false)
 			}
 		}
 
@@ -69,10 +73,6 @@ const Paintings = () => {
 			specs_uk: product.specs_uk || '',
 			images: null,
 		})
-		setRemainingTitle(500 - product.title_en.length || product.title_uk.length)
-		setRemainingDescription(
-			5000 - product.description_en.length || product.description_uk.length
-		)
 		setIsModalOpen(true)
 	}
 
@@ -81,29 +81,6 @@ const Paintings = () => {
 		setEditingProduct(null)
 		setFormErrors({})
 		setMessage('')
-	}
-
-	const handleChange = e => {
-		const { name, value, files } = e.target
-
-		if (name === 'images' || name === 'productImages') {
-			setFormData({ ...formData, images: files })
-		} else {
-			setFormData({ ...formData, [name]: value })
-
-			if (name === 'title_en' || name === 'title_uk') {
-				setRemainingTitle(500 - value.length)
-			}
-
-			if (name === 'description_en' || name === 'description_uk') {
-				setRemainingDescription(5000 - value.length)
-			}
-
-			if (e.target.tagName.toLowerCase() === 'textarea') {
-				e.target.style.height = 'auto'
-				e.target.style.height = `${e.target.scrollHeight}px`
-			}
-		}
 	}
 
 	const handleEditSubmit = async e => {
@@ -192,69 +169,73 @@ const Paintings = () => {
 		<ProfilePageContainer>
 			<div className={styles.productList}>
 				<h2>{t('Картини')}</h2>
-				{serverMessage && (
-					<p className={styles.serverMessage}>{serverMessage}</p>
-				)}
-				<div className={styles.products}>
-					{products.map(product => {
-						const title =
-						currentLanguage === 'en'
-							? product.title_en || product.title_uk
-							: product.title_uk || product.title_en
+				{loading ? <Loading /> : error ? <LoadingError />
+					: products.length === 0 ? (
+						<p>{t('Публікацій немає')}</p>
+					) : (<>
+						{serverMessage && (
+							<p className={styles.serverMessage}>{serverMessage}</p>
+						)}
+						<div className={styles.products}>
+							{products.map(product => {
+								const title =
+									currentLanguage === 'en'
+										? product.title_en || product.title_uk
+										: product.title_uk || product.title_en
 
-						return (
-							<div key={product.id} className={styles.productCard}>
-								{product.images.length > 0 && (
-									<img
-										src={`${product.images[0].imageUrl}`}
-										alt={title}
-										className={styles.productImage}
-										onClick={() => handleImageClick(product.images)}
-										loading='lazy'
-									/>
-								)}
-								<h3>
-									{t('Назва картини')}
-									<p className={styles.productCardSubTitle}>
-										<TranslatedContent en={product.title_en} uk={product.title_uk} />
-									</p>
-								</h3>
-								<h4>
-									{t('Про картину')}
-									<p className={styles.productCardSubTitle}>
-										<TranslatedContent en={product.description_en} uk={product.description_uk} html />
-									</p>
-								</h4>
-								<h4>
-									{t('Використані матеріали')}
-									<p className={styles.productCardSubTitle}>
-										<TranslatedContent en={product.specs_en} uk={product.specs_uk} html />
-									</p>
-								</h4>
-								<div className={styles.paintingsDelEditWrapper}>
-									<button
-										className="button button-default"
-										onClick={() => openEditModal(product)}
-									>
-										{t('Редагувати')}
-									</button>
-									<button
-										className={styles.paintingsDeleteButton}
-										onClick={() => handleDeleteProduct(product.id)}
-									>
-										{t('Видалити')}
-									</button>
-								</div>
-							</div>
-						)
-					})}
-				</div>
+								return (
+									<div key={product.id} className={styles.productCard}>
+										{product.images.length > 0 && (
+											<img
+												src={`${product.images[0].imageUrl}`}
+												alt={title}
+												className={styles.productImage}
+												onClick={() => handleImageClick(product.images)}
+												loading='lazy'
+											/>
+										)}
+										<p className={styles.productCardTitle}>
+											{t('Назва картини')}</p>
+										<p className={styles.productCardSubTitle}>
+											<TranslatedContent en={product.title_en} uk={product.title_uk} />
+										</p>
+
+										<p className={styles.productCardTitle}>
+											{t('Про картину')}</p>
+										<p className={styles.productCardSubTitle}>
+											<TranslatedContent en={product.description_en} uk={product.description_uk} html />
+										</p>
+
+										<p className={styles.productCardTitle}>
+											{t('Використані матеріали')}</p>
+										<p className={styles.productCardSubTitle}>
+											<TranslatedContent en={product.specs_en} uk={product.specs_uk} html />
+										</p>
+
+										<div className={styles.paintingsDelEditWrapper}>
+											<button
+												className="button button-default"
+												onClick={() => openEditModal(product)}
+											>
+												{t('Редагувати')}
+											</button>
+											<button
+												className={styles.paintingsDeleteButton}
+												onClick={() => handleDeleteProduct(product.id)}
+											>
+												{t('Видалити')}
+											</button>
+										</div>
+									</div>
+								)
+							})}
+						</div></>)}
 			</div>
 			{/* Image Modal Component */}
 			{isModalOpen && !editingProduct && (
-				<div className={styles.modalOverlay} onClick={handleCloseModal}>
+				<div className="modal-overlay" onClick={handleCloseModal}>
 					<div
-						className={styles.modalContent}
+						className="modal-content"
 						onClick={e => e.stopPropagation()}
 					>
 						<button className={styles.closeButton} onClick={handleCloseModal}>
@@ -267,7 +248,7 @@ const Paintings = () => {
 									src={`${image.imageUrl}`}
 									alt={`Product Image ${index + 1}`}
 									className={styles.modalImage}
-								/>	
+								/>
 							))}
 						</div>
 					</div>
@@ -275,12 +256,12 @@ const Paintings = () => {
 			)}
 			{/* Modal edit component */}
 			{isModalOpen && editingProduct && (
-				<div className={styles.modalOverlay} onClick={closeEditModal}>
+				<div className="modal-overlay" onClick={closeEditModal}>
 					<div
-						className={styles.modalContent}
+						className="modal-content"
 						onClick={e => e.stopPropagation()}
 					>
-						<button className={styles.closeButton} onClick={closeEditModal}>
+						<button className="modal-close-button" onClick={closeEditModal}>
 							&times;
 						</button>
 						<form onSubmit={handleEditSubmit}>
@@ -293,51 +274,49 @@ const Paintings = () => {
 									{t('Редагування картини/виробу')}
 								</h2>
 							</div>
-							<div className={styles.modalTextWrapper}>
-								<div className={styles.modalFieldUk}>
-									<div className={styles.formGroup}>
+							<div className="flex gap-8 form-wrapper">
+								<div className="form-group">
+									<div className="field-group">
 										<TextEditor label={t('Назва українською')}
 											name='title_uk' value={formData.title_uk}
 											maxLength={50} required onChange={textEditorOnChange} />
 									</div>
-									<div className={styles.formGroup}>
+									<div className="field-group">
 										<TextAreaEditor label={t('Опис українською')}
 											name='description_uk' value={formData.description_uk}
 											maxLength={500} required onChange={textEditorOnChange} />
 									</div>
-									<div className={styles.formGroup}>
+									<div className="field-group">
 										<TextAreaEditor label={t('Специфікація українською')}
 											name='specs_uk' value={formData.specs_uk}
 											maxLength={500} required onChange={textEditorOnChange} />
 									</div>
 								</div>
-								<div className={styles.modalFieldEn}>
-									<div className={styles.formGroup}>
+								<div className="form-group">
+									<div className="field-group">
 										<TextEditor label={t('Назва англійською')}
 											name='title_en' value={formData.title_en}
 											maxLength={50} required onChange={textEditorOnChange} />
 									</div>
-									<div className={styles.formGroup}>
+									<div className="field-group">
 										<TextAreaEditor label={t('Опис англійською')}
 											name='description_en' value={formData.description_en}
 											maxLength={500} required onChange={textEditorOnChange} />
 									</div>
-									<div className={styles.formGroup}>
+									<div className="field-group">
 										<TextAreaEditor label={t('Специфікація англійською')}
 											name='specs_en' value={formData.specs_en}
 											maxLength={500} required onChange={textEditorOnChange} />
 									</div>
 								</div>
 							</div>
-							<label className={styles.profileLabel}>
-								{t('Додати зображення')}
-							</label>
-							<input
-								type='file'
-								name='productImages'
-								accept='image/*'
-								onChange={handleChange}
+							<ImageEditor
+								label={t('Додати зображення')}
+								required
+								name="productImages"
+								value={formData.images}
 								multiple
+								onChange={textEditorOnChange}
 							/>
 							<button type='submit'>{t('Зберегти')}</button>
 						</form>

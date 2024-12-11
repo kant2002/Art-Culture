@@ -9,6 +9,9 @@ import TextEditor from '@components/Blocks/TextEditor'
 import TextAreaEditor from '@components/Blocks/TextAreaEditor'
 import TranslatedContent from '@components/Blocks/TranslatedContent.jsx'
 import { getFormattedDate } from '@/utils/helper.js'
+import ImageEditor from '../../components/Blocks/ImageEditor.jsx'
+import Loading from "@components/Blocks/Loading.jsx";
+import LoadingError from "@components/Blocks/LoadingError.jsx";
 
 function UserProfilePosts() {
 	const { t, i18n } = useTranslation()
@@ -92,13 +95,6 @@ function UserProfilePosts() {
 		setMessage('')
 	}
 
-	const handleChange = (e) => {
-		const { name, value, files } = e.target;
-
-		setFormData({ ...formData, images: files[0] });
-	};
-
-
 	const handleEditSubmit = async e => {
 		e.preventDefault()
 		setMessage('')
@@ -120,8 +116,8 @@ function UserProfilePosts() {
 			postData.append('content_en', formData.content_en)
 			postData.append('title_uk', formData.title_uk)
 			postData.append('content_uk', formData.content_uk)
-			if (formData.images instanceof File) {
-				postData.append('images', formData.images)
+			if (formData.images && formData.images[0] instanceof File) {
+				postData.append('images', formData.images[0])
 			}
 
 			const response = await API.put(`/posts/${editingPost.id}`, postData, {
@@ -172,16 +168,9 @@ function UserProfilePosts() {
 
 	return (
 		<ProfilePageContainer>
-			<div className={styles.profileTitleWrapper}>
-				<h3 className={styles.profileTitle}>{t('Публікації')}</h3>
-			</div>
-			{loading ? (
-				<p className={styles.userPageLoadingMessage}>
-					{t('Завантаження...')}
-				</p>
-			) : error ? (
-				<p className={styles.userPageErrorMessage}>{error}</p>
-			) : posts.length === 0 ? (
+			<h2>{t('Публікації')}</h2>
+			{loading ? <Loading /> : error ? <LoadingError />
+				: posts.length === 0 ? (
 				<p>{t('Публікацій немає')}</p>
 			) : (
 				posts.map(post => (
@@ -195,13 +184,13 @@ function UserProfilePosts() {
 										alt={t('Світлина публікації')}
 										onError={e => {
 											e.target.onerror = null
-											e.target.src = '/Img/defaultPostImage.jpg' // Default image path
+											e.target.src = '/Img/newsCardERROR.jpg' // Default image path
 										}}
 									/>
 								) : (
 									<img
 										className={styles.userProfilePostsPic}
-										src='/Img/defaultPostImage.jpg'
+										src='/Img/newsCardERROR.jpg'
 										alt={t('Світлина публікації')}
 									/>
 								)}
@@ -212,7 +201,7 @@ function UserProfilePosts() {
 								</h3>
 								<div className={styles.userProfilePostsDescriptionWrapper}>
 									<p className={styles.userProfilePostsDescription}>
-										<TranslatedContent en={post.content_en} uk={post.content_uk} maxLength={100} html />											
+										<TranslatedContent en={post.content_en} uk={post.content_uk} maxLength={100} html />
 									</p>
 								</div>
 								<div className={styles.userProfilePostsClockAndDateWrapper}>
@@ -252,46 +241,41 @@ function UserProfilePosts() {
 			)}
 			{/* Modal Window */}
 			{isModalOpen && (
-				<div className={styles.modalOverlay}>
-					<div className={styles.modalContent}>
+				<div className="modal-overlay">
+					<div className="modal-content">
 						<button
 							type='button'
-							className={styles.modalCancelButton}
 							onClick={closeEditModal}
 						>
-							<span className={styles.close}>&times;</span>
+							<span className="modal-close-button">&times;</span>
 						</button>
-						<div className={styles.modalTitleAndCloseButtonWrapper}>
-							<h2 className={styles.modalTitle}>
-								{t('Редагування публікації')}
-							</h2>
-						</div>
+						<h2>{t('Редагування публікації')}</h2>
 						{message && <p className={styles.message}>{message}</p>}
 						{formErrors.form && (
 							<p className={styles.error}>{formErrors.form}</p>
 						)}
 						<form onSubmit={handleEditSubmit} className={styles.modalForm}>
-							<div className={styles.modalFormWrapper}>
-								<div className={styles.modalFieldUk}>
-									<div className={styles.modalField}>
+							<div className="flex gap-8 form-wrapper">
+								<div className="form-group">
+									<div className="field-group">
 										<TextEditor label={t('Назва публікації українською')}
 											name='title_uk' value={formData.title_uk}
 											maxLength={50} required onChange={textEditorOnChange} />
 									</div>
-									<div className={styles.modalField}>
+									<div className="field-group">
 										<TextAreaEditor label={t('Опис публікації українською')}
 											name='content_uk' value={formData.content_uk}
 											maxLength={500} required onChange={textEditorOnChange} />
 									</div>
 								</div>
 
-								<div className={styles.modalFieldEn}>
-									<div className={styles.modalField}>
+								<div className="form-group">
+									<div className="field-group">
 										<TextEditor label={t('Назва публікації англійською')}
 											name='title_en' value={formData.title_en}
 											maxLength={50} required onChange={textEditorOnChange} />
 									</div>
-									<div className={styles.modalField}>
+									<div className="field-group">
 										<TextAreaEditor label={t('Опис публікації англійською')}
 											name='content_en' value={formData.content_en}
 											maxLength={500} required onChange={textEditorOnChange} />
@@ -300,17 +284,9 @@ function UserProfilePosts() {
 							</div>
 							<div className={styles.modalFieldImageUploadWrapper}>
 								<div className={styles.modalFieldImage}>
-									<label className={styles.modalLabelUploadContainer}>
-										{t('Змінити зображення (опційно):')}
-										<input
-											type='file'
-											name='images'
-											accept='image/*'
-											onChange={handleChange}
-											className={styles.modalInputImageField}
-										/>
-									</label>
-									{editingPost.images && !(formData.images instanceof File) && (
+									<ImageEditor label={t('Додати зображення')} required
+										name='images' value={formData.images} onChange={textEditorOnChange} />
+									{editingPost.images && !(formData.images && formData.images[0] instanceof File) && (
 										<img
 											src={editingPost.images}
 											alt={t('Поточне зображення')}

@@ -96,22 +96,6 @@
 	text-transform: uppercase;
 }
 
-.profileTitleWrapper {
-	/* Обертка для заголовка профиля */
-	width: 100%;
-	display: flex;
-	flex-direction: row;
-	justify-content: start;
-	align-items: center;
-}
-
-.profileTitle {
-	/* Заголовок профиля */
-	font-size: calc(28px - (4 * ((1440px - 100vw) / (1440 - 375))));
-	font-weight: 700;
-	text-transform: uppercase;
-}
-
 .profileDetails {
 	/* Контейнер для деталей профиля */
 	margin: $responsiveMediumPadding 0 0 0;
@@ -249,23 +233,6 @@
 	}
 }
 
-.modalContent {
-	// контент модального окна
-	position: relative;
-	margin: auto auto;
-	background-color: #fff;
-	padding: $responsiveBigPadding $responsiveLeftAndRightPadding;
-	border-radius: 10px;
-	width: 50%;
-	height: fit-content;
-	max-height: 90%;
-	text-align: center;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: start;
-}
-
 .editProfileForm {
 	// форма редактирования профиля
 	display: flex;
@@ -397,11 +364,6 @@
 		}
 	}
 
-	.profileTitle {
-		/* Заголовок профиля */
-		font-size: 28px;
-	}
-
 	.profileDetails {
 		/* Контейнер для деталей профиля */
 		margin: $staticPcMediumPadding 0 0 0;
@@ -445,11 +407,6 @@
 			// метка имени пользователя
 			font-size: 16px;
 		}
-	}
-
-	.modalContent {
-		// контент модального окна
-		padding: $staticPcBigPadding $responsiveLeftAndRightPadding;
 	}
 
 	.profileModalNameWrapper {

@@ -3,24 +3,21 @@
 
 .productList {
 
-	h2 {
-		font-weight: 600;
-		font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
-		text-transform: uppercase;
-	}
-
-	h3,
-	h4 {
-		font-weight: 300;
-		font-size: calc(14px - (4 * ((1440px - 100vw) / (1440 - 375))));
-		color: $secondary-color;
+	.productCardTitle {
 		margin: $responsiveSmallPadding 0 0 0;
+		font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+		font-weight: 600;
 	}
 
 	.productCardSubTitle {
+		margin: 0;
 		font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
 		font-weight: 400 !important;
 		text-transform: none !important;
+	}
+
+	.productCardSubTitle:last-of-type {
+		margin: 0 0 auto 0;
 	}
 
 	.products {
@@ -33,7 +30,6 @@
 		.productCard {
 			display: flex;
 			flex-direction: column;
-			justify-content: center;
 			align-items: start;
 			// width: 100%;
 			background-color: #fff;
@@ -53,20 +49,6 @@
 				object-fit: cover;
 				border-radius: 10px;
 				cursor: pointer;
-			}
-
-			h3 {
-				margin: $responsiveSmallPadding 0 0 0;
-				font-size: calc(14px - (4 * ((1440px - 100vw) / (1440 - 375))));
-				color: $secondary-color;
-			}
-
-			p {
-				font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
-				color: #666;
-				line-height: 1.5;
-				text-transform: uppercase;
-				font-weight: 700;
 			}
 		}
 	}
@@ -98,72 +80,6 @@
 }
 
 /* Modal Styles */
-.modalOverlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.8);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	z-index: 1000;
-}
-
-.modalContent {
-	position: relative;
-	margin: auto auto;
-	background-color: #fff;
-	padding: $responsiveBigPadding $responsiveLeftAndRightPadding;
-	border-radius: 10px;
-	width: 90%;
-	height: auto;
-	max-height: 90%;
-	text-align: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-
-	form {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-
-	.modalTextWrapper {
-		width: 100%;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-	}
-
-	.modalFieldUk {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-	}
-
-	.modalFieldEn {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		margin: 0 0 0 $responsiveBigPadding;
-	}
-
-	.profileLabel {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: start;
-		font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
-		font-weight: 700;
-		margin: $responsiveMediumPadding 0 0 0;
-	}
-}
 
 .modalTitleWrapper {
 	/* Обертка для заголовка модального окна */
@@ -179,16 +95,6 @@
 	font-size: calc(28px - (4 * ((1440px - 100vw) / (1440 - 375))));
 	font-weight: 700;
 	text-transform: uppercase;
-}
-
-.formGroup {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-
-	input {
-		margin: $responsiveSmallPadding 0 0 0;
-	}
 }
 
 .closeButton {
@@ -234,14 +140,10 @@
 
 @media (min-width: 1441px) {
 	.productList {
-		h2 {
-			font-size: 28px;
-		}
 
-		h3,
-		h4 {
-			font-size: 14px;
+		.productCardTitle {
 			margin: $staticPcSmallPadding 0 0 0;
+			font-size: 16px;
 		}
 
 		.productCardSubTitle {
@@ -254,15 +156,6 @@
 
 			.productCard {
 				padding: $staticPcSmallPadding;
-
-				h3 {
-					margin: $staticPcSmallPadding 0 0 0;
-					font-size: 14px;
-				}
-
-				p {
-					font-size: 16px;
-				}
 			}
 		}
 	}
@@ -277,15 +170,6 @@
 
 	.modalContent {
 		padding: $responsiveBigPadding $responsiveLeftAndRightPadding;
-
-		.modalFieldEn {
-			margin: 0 0 0 $staticPcBigPadding;
-		}
-
-		.profileLabel {
-			font-size: 16px;
-			margin: $staticPcMediumPadding 0 0 0;
-		}
 	}
 
 	.modalTitle {
