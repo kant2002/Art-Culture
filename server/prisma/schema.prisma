@@ -41,34 +41,34 @@ model User {
 model Post {
   id Int @id @default(autoincrement())
 
-  title_en    String @db.VarChar(50)
-  title_uk    String @db.VarChar(50)
-  content_en  String @db.VarChar(500)
-  content_uk  String @db.VarChar(500) 
+  title_en   String @db.VarChar(50)
+  title_uk   String @db.VarChar(50)
+  content_en String @db.VarChar(500)
+  content_uk String @db.VarChar(500)
 
-  author     User     @relation(fields: [authorId], references: [id])
-  authorId   Int      @map("author_id")
-  images     String?
-  createdAt  DateTime @default(now()) @map("created_at")
-  updatedAt  DateTime @updatedAt @map("updated_at")
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int      @map("author_id")
+  images    String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 }
 
 model Product {
   id Int @id @default(autoincrement())
 
-  title_en        String @db.VarChar(50)
-  title_uk        String @db.VarChar(50)
-  description_en  String @db.VarChar(500)
-  description_uk  String @db.VarChar(500)
-  specs_en        String? @db.VarChar(500)
-  specs_uk        String? @db.VarChar(500)
+  title_en       String  @db.VarChar(50)
+  title_uk       String  @db.VarChar(50)
+  description_en String  @db.VarChar(500)
+  description_uk String  @db.VarChar(500)
+  specs_en       String? @db.VarChar(500)
+  specs_uk       String? @db.VarChar(500)
 
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
-  author         User           @relation(fields: [authorId], references: [id])
-  authorId       Int
-  images         ProductImage[] @relation("ProductImages")
-  artTerms       ArtTerm[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  author    User           @relation(fields: [authorId], references: [id])
+  authorId  Int
+  images    ProductImage[] @relation("ProductImages")
+  artTerms  ArtTerm[]
 }
 
 model ProductImage {
@@ -82,15 +82,18 @@ model ProductImage {
 
 model Exhibition {
   id                Int                @id @default(autoincrement())
-  title_en          String? @db.VarChar(50)
-  description_en    String? @db.VarChar(500)
-  title_uk          String? @db.VarChar(50)
-  description_uk    String? @db.VarChar(500)
+  title_en          String?            @db.VarChar(50)
+  description_en    String?            @db.VarChar(500)
+  title_uk          String?            @db.VarChar(50)
+  description_uk    String?            @db.VarChar(500)
   startDate         DateTime
   endDate           DateTime
-  time              String? @db.VarChar(200)
-  location_en       String? @db.VarChar(500)
-  location_uk       String? @db.VarChar(500)
+  time              String?            @db.VarChar(200)
+  location_en       String?            @db.VarChar(500)
+  location_uk       String?            @db.VarChar(500)
+  latitude          Float?
+  longitude         Float?
+  address           String?
   createdById       Int
   createdBy         User               @relation("UserCreatedExhibitions", fields: [createdById], references: [id])
   exhibitionArtists ExhibitionArtist[]
