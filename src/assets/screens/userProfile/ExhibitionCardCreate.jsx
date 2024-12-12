@@ -1,3 +1,6 @@
+import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
+import TextAreaEditor from '@components/Blocks/TextAreaEditor'
+import TextEditor from '@components/Blocks/TextEditor'
 import axios from 'axios'
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -5,9 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
 import styles from '../../../styles/components/ExhibitionCard/ExhibitionCardCreate.module.scss'
 import API from '../../../utils/api'
-import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
-import TextEditor from '@components/Blocks/TextEditor'
-import TextAreaEditor from '@components/Blocks/TextAreaEditor'
+import AddressSearch from '../../components/Blocks/AddressSearchInput'
 import ImageEditor from '../../components/Blocks/ImageEditor'
 
 function ExhibitionForm() {
@@ -19,9 +20,12 @@ function ExhibitionForm() {
 		startDate: '',
 		endDate: '',
 		time: '',
-		finishTime: '',
+		endTime: '',
 		location_en: '',
 		location_uk: '',
+		latitude: '',
+		longitude: '',
+		address: '',
 		artists: [],
 		images: [],
 	})
@@ -60,7 +64,10 @@ function ExhibitionForm() {
 				setArtists(response.data.creators)
 			} catch (error) {
 				console.error('Error fetching artists:', error)
-				setErrors(prevErrors => [...prevErrors, 'Failed to load artists.'])
+				setErrors((prevErrors) => [
+					...prevErrors,
+					'Failed to load artists.',
+				])
 				setArtists([])
 			}
 		}
@@ -68,7 +75,7 @@ function ExhibitionForm() {
 		fetchArtists()
 	}, [])
 
-	const handleSearchChange = async e => {
+	const handleSearchChange = async (e) => {
 		const query = e.target.value
 		setSearchQuery(query)
 
@@ -83,10 +90,13 @@ function ExhibitionForm() {
 			const authorsToProcess = authors.slice(0, 5)
 
 			const authorsWithPaintingsInfo = await Promise.all(
-				authorsToProcess.map(async author => {
+				authorsToProcess.map(async (author) => {
 					try {
-						const paintingsRes = await API.get(`/products/author/${author.id}`)
-						const hasPaintings = paintingsRes.data.products.length > 0
+						const paintingsRes = await API.get(
+							`/products/author/${author.id}`,
+						)
+						const hasPaintings =
+							paintingsRes.data.products.length > 0
 						return {
 							...author,
 							type: 'author',
@@ -95,7 +105,7 @@ function ExhibitionForm() {
 					} catch (error) {
 						console.error(
 							`Error fetching paintings for author ${author.id}:`,
-							error
+							error,
 						)
 						return {
 							...author,
@@ -103,15 +113,14 @@ function ExhibitionForm() {
 							hasPaintings: false,
 						}
 					}
-				})
+				}),
 			)
 			// Combine with paintings results
-			const updatedPaintingsResults = paintingsResponse.data.paintings.map(
-				painting => ({
+			const updatedPaintingsResults =
+				paintingsResponse.data.paintings.map((painting) => ({
 					...painting,
 					type: 'painting',
-				})
-			)
+				}))
 
 			setSearchResults([
 				...authorsWithPaintingsInfo,
@@ -122,21 +131,32 @@ function ExhibitionForm() {
 		}
 	}
 
-	const handleSelectedResult = result => {
+	const handleSelectedResult = (result) => {
 		if (result.type === 'author') {
 			const authorId = Number(result.id)
-			if (!selectedAuthors.find(author => Number(author.id) === authorId)) {
+			if (
+				!selectedAuthors.find(
+					(author) => Number(author.id) === authorId,
+				)
+			) {
 				setSelectedAuthors([...selectedAuthors, result])
 			}
 		} else if (result.type === 'painting') {
 			const paintingId = Number(result.id)
 			const authorId = Number(result.author.id)
-			if (!selectedAuthors.find(author => Number(author.id) === authorId)) {
-				setSelectedAuthors(prevAuthors => [...prevAuthors, result.author])
+			if (
+				!selectedAuthors.find(
+					(author) => Number(author.id) === authorId,
+				)
+			) {
+				setSelectedAuthors((prevAuthors) => [
+					...prevAuthors,
+					result.author,
+				])
 			}
-			setSelectedAuthorPaintings(prevState => {
+			setSelectedAuthorPaintings((prevState) => {
 				const prevPaintings = prevState[authorId] || []
-				if (!prevPaintings.find(p => Number(p.id) === paintingId)) {
+				if (!prevPaintings.find((p) => Number(p.id) === paintingId)) {
 					return {
 						...prevState,
 						[authorId]: [...prevPaintings, result],
@@ -149,7 +169,7 @@ function ExhibitionForm() {
 		setSearchResults([])
 	}
 
-	const handleSelectAuthorPaintings = async authorId => {
+	const handleSelectAuthorPaintings = async (authorId) => {
 		try {
 			// Fetch paintings by the author
 			const response = await API.get(`/products/author/${authorId}`)
@@ -166,35 +186,38 @@ function ExhibitionForm() {
 		}
 	}
 
-	const handleTogglePaintingSelection = painting => {
-		setModalData(prevData => {
+	const handleTogglePaintingSelection = (painting) => {
+		setModalData((prevData) => {
 			const isSelected = prevData.selectedPaintings.find(
-				p => p.id === painting.id
+				(p) => p.id === painting.id,
 			)
 			if (isSelected) {
 				return {
 					...prevData,
 					selectedPaintings: prevData.selectedPaintings.filter(
-						p => p.id !== painting.id
+						(p) => p.id !== painting.id,
 					),
 				}
 			} else {
 				return {
 					...prevData,
-					selectedPaintings: [...prevData.selectedPaintings, painting],
+					selectedPaintings: [
+						...prevData.selectedPaintings,
+						painting,
+					],
 				}
 			}
 		})
 	}
 
 	const handleSaveSelectedPaintings = () => {
-		setSelectedAuthorPaintings(prevState => {
+		setSelectedAuthorPaintings((prevState) => {
 			const prevPaintings = prevState[modalData.authorId] || []
 			const modalPaintings = modalData.selectedPaintings
 			const allPaintings = [...prevPaintings, ...modalPaintings]
 			const uniquePaintings = allPaintings.filter(
 				(painting, index, self) =>
-					index === self.findIndex(p => p.id === painting.id)
+					index === self.findIndex((p) => p.id === painting.id),
 			)
 			return {
 				...prevState,
@@ -204,26 +227,26 @@ function ExhibitionForm() {
 		setIsModalOpen(false)
 	}
 
-	const handleArtistSelection = useCallback(e => {
+	const handleArtistSelection = useCallback((e) => {
 		const artistId = parseInt(e.target.value, 10)
 		if (e.target.checked) {
-			setFormData(prevState => ({
+			setFormData((prevState) => ({
 				...prevState,
 				artists: [...prevState.artists, artistId],
 			}))
 		} else {
-			setFormData(prevState => ({
+			setFormData((prevState) => ({
 				...prevState,
-				artists: prevState.artists.filter(id => id !== artistId),
+				artists: prevState.artists.filter((id) => id !== artistId),
 			}))
 		}
 	}, [])
 
-	const handleRemoveAuthor = authorId => {
-		setSelectedAuthors(prevAuthors =>
-			prevAuthors.filter(author => author.id !== authorId)
+	const handleRemoveAuthor = (authorId) => {
+		setSelectedAuthors((prevAuthors) =>
+			prevAuthors.filter((author) => author.id !== authorId),
 		)
-		setSelectedAuthorPaintings(prevState => {
+		setSelectedAuthorPaintings((prevState) => {
 			const newState = { ...prevState }
 			delete newState[authorId]
 			return newState
@@ -231,9 +254,9 @@ function ExhibitionForm() {
 	}
 
 	const handleRemovePainting = (authorId, paintingId) => {
-		setSelectedAuthorPaintings(prevState => {
+		setSelectedAuthorPaintings((prevState) => {
 			const updatePaintings = prevState[authorId].filter(
-				p => p.id !== paintingId
+				(p) => p.id !== paintingId,
 			)
 			if (updatePaintings.length > 0) {
 				return {
@@ -243,25 +266,25 @@ function ExhibitionForm() {
 			} else {
 				const newState = { ...prevState }
 				delete newState[authorId]
-				setSelectedAuthors(prevAuthors =>
-					prevAuthors.filter(author => author.id !== authorId)
+				setSelectedAuthors((prevAuthors) =>
+					prevAuthors.filter((author) => author.id !== authorId),
 				)
 				return newState
 			}
 		})
 	}
 
-	const handleSubmit = async e => {
+	const handleSubmit = async (e) => {
 		e.preventDefault()
 		setErrors([])
 		setServerMessage('')
 		setIsSubmitting(true)
 
 		// Prepare artistIds and paintingIds
-		const artistIds = selectedAuthors.map(author => Number(author.id))
+		const artistIds = selectedAuthors.map((author) => Number(author.id))
 		const paintingIds = Object.values(selectedAuthorPaintings)
 			.flat()
-			.map(p => Number(p.id))
+			.map((p) => Number(p.id))
 
 		const uniqueArtistIds = [...new Set(artistIds)]
 		const uniquePaintingIds = [...new Set(paintingIds)]
@@ -282,8 +305,12 @@ function ExhibitionForm() {
 			startDate,
 			endDate,
 			time,
-			location_en,
-			location_uk,
+			endTime,
+			//location_uk,
+			//location_en,
+			longitude,
+			latitude,
+			address,
 			images,
 		} = formData
 
@@ -296,8 +323,12 @@ function ExhibitionForm() {
 			!startDate ||
 			!endDate ||
 			!time ||
-			!location_en ||
-			!location_uk
+			!endTime ||
+			//!location_en ||
+			//!location_uk
+			!longitude ||
+			!latitude ||
+			!address
 		) {
 			setErrors(['All fields are required.'])
 			setIsSubmitting(false)
@@ -316,25 +347,30 @@ function ExhibitionForm() {
 		submissionData.append('description_uk', description_uk)
 
 		// Append multilingual location
-		submissionData.append('location_en', location_en)
-		submissionData.append('location_uk', location_uk)
+		//submissionData.append('location_en', location_en)
+		//submissionData.append('location_uk', location_uk)
 
 		// Append dates and time
 		submissionData.append('startDate', startDate)
 		submissionData.append('endDate', endDate)
 		submissionData.append('time', time)
+		submissionData.append('endTime', endTime)
+		// Append lat, lon, address for search
+		submissionData.append('latitude', formData.latitude)
+		submissionData.append('longitude', formData.longitude)
+		submissionData.append('address', formData.address)
 
 		// Append images
-		images.forEach(image => {
+		Array.from(images).forEach((image) => {
 			submissionData.append('exhibitionImages', image)
 		})
 
 		// Use uniqueArtistIds and uniquePaintingIds in the submission
-		uniqueArtistIds.forEach(artistId => {
+		uniqueArtistIds.forEach((artistId) => {
 			submissionData.append('artistIds', artistId)
 		})
 
-		uniquePaintingIds.forEach(paintingIds => {
+		uniquePaintingIds.forEach((paintingIds) => {
 			submissionData.append('paintingIds', paintingIds)
 		})
 
@@ -356,8 +392,12 @@ function ExhibitionForm() {
 			navigate(`/Exhibitions/${response.data.exhibition.id}`)
 		} catch (error) {
 			console.error('Error creating exhibition:', error.response)
-			if (error.response && error.response.data && error.response.data.errors) {
-				setErrors(error.response.data.errors.map(err => err.msg))
+			if (
+				error.response &&
+				error.response.data &&
+				error.response.data.errors
+			) {
+				setErrors(error.response.data.errors.map((err) => err.msg))
 			} else if (
 				error.response &&
 				error.response.data &&
@@ -372,7 +412,7 @@ function ExhibitionForm() {
 		}
 	}
 
-	const getImageUrl = path => {
+	const getImageUrl = (path) => {
 		// Remove any leading '../' or './' from the path
 		const normalizedPath = path.startsWith('/') ? path : `/${path}`
 		return `${process.env.REACT_APP_BASE_URL}${normalizedPath}`
@@ -381,7 +421,16 @@ function ExhibitionForm() {
 	const textEditorOnChange = ({ name, value }) => {
 		const newFormData = { ...formData, [name]: value }
 		setFormData(newFormData)
-	};
+	}
+
+	const handleAddressSelect = ({ lat, lon, address }) => {
+		setFormData((prevState) => ({
+			...prevState,
+			latitude: lat,
+			longitude: lon,
+			address: address,
+		}))
+	}
 
 	const defaultAuthorImageUrl = '/Img/ArtistPhoto.jpg'
 	const defaultPaintingImageUrl = '/Img/ArtistPhoto.jpg'
@@ -405,84 +454,130 @@ function ExhibitionForm() {
 			)}
 			<form
 				onSubmit={handleSubmit}
-				encType='multipart/form-data'
+				encType="multipart/form-data"
 				className="form-wrapper"
 			>
 				<div className="flex gap-8 form-wrapper">
 					<div className="form-group">
 						{/* Title in Ukrainian */}
 						<div className="field-group">
-							<TextEditor label={t('Назва виставки українською')}
-								name='title_uk' value={formData.title_uk}
-								maxLength={50} required onChange={textEditorOnChange} />
+							<TextEditor
+								label={t('Назва виставки українською')}
+								name="title_uk"
+								value={formData.title_uk}
+								maxLength={50}
+								required
+								onChange={textEditorOnChange}
+							/>
 						</div>
 
 						{/* Description in Ukrainian */}
 						<div className="field-group">
-							<TextAreaEditor label={t('Опис виставки українською')}
-								name='description_uk' value={formData.description_uk}
-								maxLength={500} required onChange={textEditorOnChange} />
+							<TextAreaEditor
+								label={t('Опис виставки українською')}
+								name="description_uk"
+								value={formData.description_uk}
+								maxLength={500}
+								required
+								onChange={textEditorOnChange}
+							/>
 						</div>
 
-						{/* Location in Ukrainian */}
+						{/* Location in Ukrainian 
 						<div className="field-group">
-							<TextEditor label={t('Місце проведення українською')}
-								name='location_uk' value={formData.location_uk}
-								maxLength={500} required onChange={textEditorOnChange} />
-						</div>
+							<TextEditor
+								label={t('Місце проведення українською')}
+								name="location_uk"
+								value={formData.location_uk}
+								maxLength={500}
+								required
+								onChange={textEditorOnChange}
+							/>
+						</div> */}
 
 						{/* Start Date */}
 						<div className="field-group">
-							<TextEditor label={t('Дата початку')}
-								type='date'
-								name='startDate' value={formData.startDate}
-								required onChange={textEditorOnChange} />
+							<TextEditor
+								label={t('Дата початку')}
+								type="date"
+								name="startDate"
+								value={formData.startDate}
+								required
+								onChange={textEditorOnChange}
+							/>
 						</div>
 
 						{/* Start time */}
 						<div className="field-group">
-							<TextEditor label={t('Час початку')}
-								type='text'
-								name='time' value={formData.time}
-								required onChange={textEditorOnChange} />
+							<TextEditor
+								label={t('Час початку')}
+								type="text"
+								name="time"
+								value={formData.time}
+								required
+								onChange={textEditorOnChange}
+							/>
 						</div>
 					</div>
 
 					<div className="form-group">
 						{/* Title in English */}
 						<div className="field-group">
-							<TextEditor label={t('Назва виставки англійською')}
-								name='title_en' value={formData.title_en}
-								maxLength={50} required onChange={textEditorOnChange} />
+							<TextEditor
+								label={t('Назва виставки англійською')}
+								name="title_en"
+								value={formData.title_en}
+								maxLength={50}
+								required
+								onChange={textEditorOnChange}
+							/>
 						</div>
 
 						{/* Description in English */}
 						<div className="field-group">
-							<TextAreaEditor label={t('Опис виставки англійською')}
-								name='description_en' value={formData.description_en}
-								maxLength={500} required onChange={textEditorOnChange} />
+							<TextAreaEditor
+								label={t('Опис виставки англійською')}
+								name="description_en"
+								value={formData.description_en}
+								maxLength={500}
+								required
+								onChange={textEditorOnChange}
+							/>
 						</div>
-
-						{/* Location in English */}
+						{/* Location in English 
 						<div className="field-group">
-							<TextEditor label={t('Місце проведення англійською')}
-								name='location_en' value={formData.location_en}
-								maxLength={500} required onChange={textEditorOnChange} />
-						</div>
+							<TextEditor
+								label={t('Місце проведення англійською')}
+								name="location_en"
+								value={formData.location_en}
+								maxLength={500}
+								required
+								onChange={textEditorOnChange}
+							/>
+						</div>  */}
+
 						{/* End Date */}
 						<div className="field-group">
-							<TextEditor label={t('Дата завершення')}
-								type='date'
-								name='endDate' value={formData.endDate}
-								required onChange={textEditorOnChange} />
+							<TextEditor
+								label={t('Дата завершення')}
+								type="date"
+								name="endDate"
+								value={formData.endDate}
+								required
+								onChange={textEditorOnChange}
+							/>
 						</div>
 
 						{/* End time */}
 						<div className="field-group">
-							<TextEditor label={t('Час завершення')}
-								type='text'
-								name='finishTime' value={formData.finishTime}
-								required onChange={textEditorOnChange} />
+							<TextEditor
+								label={t('Час завершення')}
+								type="text"
+								name="endTime"
+								value={formData.endTime}
+								required
+								onChange={textEditorOnChange}
+							/>
 						</div>
 					</div>
 				</div>
@@ -491,8 +586,8 @@ function ExhibitionForm() {
 				<div className="field-group">
 					<label className="field-label">{t('Пошук')}</label>
 					<input
-						type='text'
-						name='search'
+						type="text"
+						name="search"
 						value={searchQuery}
 						onChange={handleSearchChange}
 						placeholder={t("Введіть ім'я митця або картини")}
@@ -500,67 +595,112 @@ function ExhibitionForm() {
 					/>
 					{searchResults.length > 0 && (
 						<div className={styles.searchResults}>
-							{searchResults.map(result => {
+							{searchResults.map((result) => {
 								//const isDisabled = result.type === 'author' && !result.paintings;
-								const isDisabled = false;
-								return (<div
-									key={`${result.type}-${result.id}`}
-									className={`${styles.searchResultItem} ${isDisabled ? styles.disabled : ''}`}
-									onClick={() => {
-										if (result.type === 'author') {
-											if (!result.paintings) {
+								const isDisabled = false
+								return (
+									<div
+										key={`${result.type}-${result.id}`}
+										className={`${styles.searchResultItem} ${isDisabled ? styles.disabled : ''}`}
+										onClick={() => {
+											if (result.type === 'author') {
+												if (!result.paintings) {
+													handleSelectedResult(result)
+												}
+											} else {
 												handleSelectedResult(result)
 											}
-										} else {
-											handleSelectedResult(result)
-										}
-									}}
-								>
-									{result.type === 'author' ? (
-										<>
-											<div className={styles.resultAuthorWrapper}>
-												{result.images ? (
-													<img
-														src={getImageUrl(result.images)}
-														alt={result.title || result.email}
-														className={styles.resultAuthorImage}
-													/>
-												) : (
-													<img
-														src={defaultAuthorImageUrl}
-														alt='Default author'
-														className={styles.resultImage}
-													/>
-												)}
-												<p>{result.title || result.email}</p>
-												{!result.hasPaintings && (
-													<p className={styles.noPaintingsMessage}>
-														{t('Цей автор не має картин')}
+										}}
+									>
+										{result.type === 'author' ? (
+											<>
+												<div
+													className={
+														styles.resultAuthorWrapper
+													}
+												>
+													{result.images ? (
+														<img
+															src={getImageUrl(
+																result.images,
+															)}
+															alt={
+																result.title ||
+																result.email
+															}
+															className={
+																styles.resultAuthorImage
+															}
+														/>
+													) : (
+														<img
+															src={
+																defaultAuthorImageUrl
+															}
+															alt="Default author"
+															className={
+																styles.resultImage
+															}
+														/>
+													)}
+													<p>
+														{result.title ||
+															result.email}
 													</p>
-												)}
-											</div>
-										</>
-									) : (
-										<>
-											<div className={styles.resultPaintingsWrapper}>
-												{result.images && result.images.length > 0 ? (
-													<img
-														src={getImageUrl(result.images[0].imageUrl)}
-														alt={result.title_en || result.title_uk}
-														className={styles.resultPaintingsImage}
-													/>
-												) : (
-													<img
-														src={defaultPaintingImageUrl}
-														alt='Default painting'
-														className={styles.resultImage}
-													/>
-												)}
-												<p>{result.title_en || result.title_uk}</p>
-											</div>
-										</>
-									)}
-								</div>
+													{!result.hasPaintings && (
+														<p
+															className={
+																styles.noPaintingsMessage
+															}
+														>
+															{t(
+																'Цей автор не має картин',
+															)}
+														</p>
+													)}
+												</div>
+											</>
+										) : (
+											<>
+												<div
+													className={
+														styles.resultPaintingsWrapper
+													}
+												>
+													{result.images &&
+													result.images.length > 0 ? (
+														<img
+															src={getImageUrl(
+																result.images[0]
+																	.imageUrl,
+															)}
+															alt={
+																result.title_en ||
+																result.title_uk
+															}
+															className={
+																styles.resultPaintingsImage
+															}
+														/>
+													) : (
+														<img
+															src={
+																defaultPaintingImageUrl
+															}
+															alt="Default painting"
+															className={
+																styles.resultImage
+															}
+														/>
+													)}
+													<p>
+														{result.title_en ||
+															result.title_uk}
+													</p>
+												</div>
+											</>
+										)}
+									</div>
 								)
 							})}
 						</div>
@@ -568,8 +708,11 @@ function ExhibitionForm() {
 				</div>
 				{/* Selected items search */}
 				<div className={styles.selectedObjectWrapper}>
-					{selectedAuthors.map(author => (
-						<div key={`author-${author.id}`} className={styles.chipContainer}>
+					{selectedAuthors.map((author) => (
+						<div
+							key={`author-${author.id}`}
+							className={styles.chipContainer}
+						>
 							{author.images ? (
 								<img
 									src={getImageUrl(author.images)}
@@ -579,50 +722,91 @@ function ExhibitionForm() {
 							) : (
 								<img
 									src={defaultAuthorImageUrl}
-									alt='Default author'
+									alt="Default author"
 									className={styles.chipImage}
 								/>
 							)}
 							<p>{author.title || author.email}</p>
-							<button onClick={() => handleSelectAuthorPaintings(author.id)}>
+							<button
+								onClick={() =>
+									handleSelectAuthorPaintings(author.id)
+								}
+							>
 								{t('Обрати картини')}
 							</button>
-							<button onClick={() => handleRemoveAuthor(author.id)}>×</button>
+							<button
+								onClick={() => handleRemoveAuthor(author.id)}
+							>
+								×
+							</button>
 							{/* Render selected paintings for this author */}
 							{selectedAuthorPaintings[author.id] && (
 								<div className={styles.authorPaintings}>
-									{selectedAuthorPaintings[author.id].map(painting => (
-										<div
-											key={`painting-${painting.id}`}
-											className={styles.chip}
-										>
-											{painting.images && painting.images.length > 0 ? (
-												<img
-													src={getImageUrl(painting.images[0].imageUrl)}
-													alt={painting.title_en || painting.title_uk}
-													className={styles.chipImage}
-												/>
-											) : (
-												<img
-													src={defaultPaintingImageUrl}
-													alt='Default painting'
-													className={styles.chipImage}
-												/>
-											)}
-											<span>{painting.title_en || painting.title_uk}</span>
-											<button
-												onClick={() =>
-													handleRemovePainting(author.id, painting.id)
-												}
+									{selectedAuthorPaintings[author.id].map(
+										(painting) => (
+											<div
+												key={`painting-${painting.id}`}
+												className={styles.chip}
 											>
-												×
-											</button>
-										</div>
-									))}
+												{painting.images &&
+												painting.images.length > 0 ? (
+													<img
+														src={getImageUrl(
+															painting.images[0]
+																.imageUrl,
+														)}
+														alt={
+															painting.title_en ||
+															painting.title_uk
+														}
+														className={
+															styles.chipImage
+														}
+													/>
+												) : (
+													<img
+														src={
+															defaultPaintingImageUrl
+														}
+														alt="Default painting"
+														className={
+															styles.chipImage
+														}
+													/>
+												)}
+												<span>
+													{painting.title_en ||
+														painting.title_uk}
+												</span>
+												<button
+													onClick={() =>
+														handleRemovePainting(
+															author.id,
+															painting.id,
+														)
+													}
+												>
+													×
+												</button>
+											</div>
+										),
+									)}
 								</div>
 							)}
 						</div>
 					))}
+				</div>
+
+				{/* Address Search block */}
+				<div className="field-group">
+					<label className="field-label">{t('Пошук адреси')}</label>
+					<AddressSearch onSelect={handleAddressSelect} />
+					{formData.address && (
+						<p>
+							{t('Обрана адреса')}: {formData.address} (Lat:{' '}
+							{formData.latitude}, Lng: {formData.longitude})
+						</p>
+					)}
 				</div>
 
 				{/* Images */}
@@ -639,11 +823,13 @@ function ExhibitionForm() {
 
 				{/* Submit Button */}
 				<button
-					type='submit'
+					type="submit"
 					className={styles.submitButton}
 					disabled={isSubmitting}
 				>
-					{isSubmitting ? t('Створюється...') : t('Створити виставку')}
+					{isSubmitting
+						? t('Створюється...')
+						: t('Створити виставку')}
 				</button>
 			</form>
 
@@ -654,7 +840,7 @@ function ExhibitionForm() {
 				>
 					<div
 						className="modal-content"
-						onClick={e => e.stopPropagation()}
+						onClick={(e) => e.stopPropagation()}
 					>
 						<button
 							className="modal-close-button"
@@ -664,30 +850,45 @@ function ExhibitionForm() {
 						</button>
 						<h2>{t('Обрати картини митця')}</h2>
 						<div className={styles.paintingsList}>
-							{modalData.paintings.map(painting => (
-								<div key={painting.id} className={styles.paintingItem}>
-									{painting.images && painting.images.length > 0 ? (
+							{modalData.paintings.map((painting) => (
+								<div
+									key={painting.id}
+									className={styles.paintingItem}
+								>
+									{painting.images &&
+									painting.images.length > 0 ? (
 										<img
-											src={getImageUrl(painting.images[0].imageUrl)}
-											alt={painting.title_en || painting.title_uk}
+											src={getImageUrl(
+												painting.images[0].imageUrl,
+											)}
+											alt={
+												painting.title_en ||
+												painting.title_uk
+											}
 											className={styles.paintingImage}
 										/>
 									) : (
 										<img
 											src={defaultPaintingImageUrl}
-											alt='Default painting'
+											alt="Default painting"
 											className={styles.paintingImage}
 										/>
 									)}
-									<span>{painting.title_en || painting.title_uk}</span>
+									<span>
+										{painting.title_en || painting.title_uk}
+									</span>
 									<input
-										type='checkbox'
+										type="checkbox"
 										checked={
 											!!modalData.selectedPaintings.find(
-												p => p.id === painting.id
+												(p) => p.id === painting.id,
 											)
 										}
-										onChange={() => handleTogglePaintingSelection(painting)}
+										onChange={() =>
+											handleTogglePaintingSelection(
+												painting,
+											)
+										}
 									/>
 								</div>
 							))}
