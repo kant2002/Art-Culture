@@ -89,6 +89,7 @@ model Exhibition {
   startDate         DateTime
   endDate           DateTime
   time              String?            @db.VarChar(200)
+  endTime           String?            @db.VarChar(200)
   location_en       String?            @db.VarChar(500)
   location_uk       String?            @db.VarChar(500)
   latitude          Float?

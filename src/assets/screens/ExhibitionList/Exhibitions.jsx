@@ -1,11 +1,11 @@
+import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
+import TextAreaEditor from '@components/Blocks/TextAreaEditor'
+import TextEditor from '@components/Blocks/TextEditor'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import ImageEditor from '../../components/Blocks/ImageEditor'
 import styles from '/src/styles/screen/ExhibitionList/Exhibitions.module.scss'
 import API from '/src/utils/api.js'
-import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
-import TextEditor from '@components/Blocks/TextEditor'
-import TextAreaEditor from '@components/Blocks/TextAreaEditor'
-import ImageEditor from '../../components/Blocks/ImageEditor'
 
 function MuseumExhibitions() {
 	const { t, i18n } = useTranslation()
@@ -25,10 +25,13 @@ function MuseumExhibitions() {
 		title_uk: '',
 		description_uk: '',
 		location_uk: '',
+		latitude: '',
+		longitude: '',
+		address: '',
 		startDate: '',
 		endDate: '',
 		time: '',
-		finishTime: '',
+		endTime: '',
 		artists: [],
 		images: null,
 	})
@@ -71,7 +74,10 @@ function MuseumExhibitions() {
 				setArtists(response.data.creators)
 			} catch (error) {
 				console.error('Error fetching artists:', error)
-				setFormErrors(prevErrors => [...prevErrors, 'Failed to load artists.'])
+				setFormErrors((prevErrors) => [
+					...prevErrors,
+					'Failed to load artists.',
+				])
 				setArtists([])
 			}
 		}
@@ -91,7 +97,7 @@ function MuseumExhibitions() {
 		setSelectedExhibitionImages([])
 	}
 
-	const openEditModal = exhibition => {
+	const openEditModal = (exhibition) => {
 		setEditingExhibition(exhibition)
 		setFormData({
 			title_en: exhibition.title_en || '',
@@ -100,8 +106,12 @@ function MuseumExhibitions() {
 			title_uk: exhibition.title_uk || '',
 			description_uk: exhibition.description_uk || '',
 			location_uk: exhibition.location_uk || '',
+			latitude: exhibition.latitude || '',
+			longitude: exhibition.longitude || '',
+			address: exhibition.address || '',
 			images: exhibition.images || null,
 			time: exhibition.time || '',
+			endTime: exhibition.endTime || '',
 			startDate: exhibition.startDate
 				? new Date(exhibition.startDate).toISOString().split('T')[0]
 				: '',
@@ -109,7 +119,7 @@ function MuseumExhibitions() {
 				? new Date(exhibition.endDate).toISOString().split('T')[0]
 				: '',
 			artists: exhibition.exhibitionArtists
-				? exhibition.exhibitionArtists.map(ea => ea.artist.id)
+				? exhibition.exhibitionArtists.map((ea) => ea.artist.id)
 				: [],
 		})
 		setIsModalOpen(true)
@@ -127,15 +137,19 @@ function MuseumExhibitions() {
 			title_uk: '',
 			description_uk: '',
 			location_uk: '',
+			latitude: '',
+			longitude: '',
+			address: '',
 			startDate: '',
 			endDate: '',
 			time: '',
+			endTime: '',
 			artists: [],
 			images: null,
 		})
 	}
 
-	const handleChange = e => {
+	const handleChange = (e) => {
 		const { name, value, files } = e.target
 
 		if (name === 'images' || name === 'exhibitionImages') {
@@ -147,7 +161,7 @@ function MuseumExhibitions() {
 		}
 	}
 
-	const handleEditSubmit = async e => {
+	const handleEditSubmit = async (e) => {
 		e.preventDefault()
 		setMessage('')
 		setFormErrors({})
@@ -162,7 +176,11 @@ function MuseumExhibitions() {
 			formData.artists.length === 0 ||
 			!formData.startDate ||
 			!formData.endDate ||
-			!formData.time
+			!formData.longitude ||
+			!formData.latitude ||
+			!formData.address ||
+			!formData.time ||
+			!formData.endTime
 		) {
 			setFormErrors({ form: 'Потрібно заповнити поля' })
 			return
@@ -177,16 +195,22 @@ function MuseumExhibitions() {
 			exhibitionData.append('location_en', formData.location_en)
 			exhibitionData.append('location_uk', formData.location_uk)
 			exhibitionData.append('time', formData.time)
+			exhibitionData.append('endTime', formData.endTime)
 			exhibitionData.append('startDate', formData.startDate)
 			exhibitionData.append('endDate', formData.endDate)
-
+			exhibitionData.append('latitude', formData.latitude)
+			exhibitionData.append('longitude', formData.longitude)
+			exhibitionData.append('address', formData.address)
 			// Append artistIds as a JSON string
 			exhibitionData.append('artistIds', JSON.stringify(formData.artists))
 
 			// Append images
 			if (formData.images && formData.images.length > 0) {
 				for (let i = 0; i < formData.images.length; i++) {
-					exhibitionData.append('exhibitionImages', formData.images[i])
+					exhibitionData.append(
+						'exhibitionImages',
+						formData.images[i],
+					)
 				}
 			}
 
@@ -204,15 +228,17 @@ function MuseumExhibitions() {
 						'Content-Type': 'multipart/form-data',
 						Authorization: `Bearer ${localStorage.getItem('token')}`,
 					},
-				}
+				},
 			)
 			if (response.status === 200) {
 				setMessage('Публікацію оновлено')
 
-				setExhibitions(prevExhibitions =>
-					prevExhibitions.map(exhibition =>
-						exhibition.id === editingExhibition.id ? response.data : exhibition
-					)
+				setExhibitions((prevExhibitions) =>
+					prevExhibitions.map((exhibition) =>
+						exhibition.id === editingExhibition.id
+							? response.data
+							: exhibition,
+					),
 				)
 
 				closeEditModal()
@@ -221,22 +247,30 @@ function MuseumExhibitions() {
 		} catch (error) {
 			console.error('Error updating exhibition:', error)
 			setMessage(
-				error.response?.data?.error || 'Помилка при оновленні публікації'
+				error.response?.data?.error ||
+					'Помилка при оновленні публікації',
 			)
 		}
 	}
 
-	const handleDeleteExhibition = async exhibitionId => {
-		if (window.confirm(t('Ви впевнені, що хочете видалити цю публікацію?'))) {
+	const handleDeleteExhibition = async (exhibitionId) => {
+		if (
+			window.confirm(t('Ви впевнені, що хочете видалити цю публікацію?'))
+		) {
 			try {
-				const response = await API.delete(`/exhibitions/${exhibitionId}`, {
-					headers: {
-						Authorization: `Bearer ${localStorage.getItem('token')}`,
+				const response = await API.delete(
+					`/exhibitions/${exhibitionId}`,
+					{
+						headers: {
+							Authorization: `Bearer ${localStorage.getItem('token')}`,
+						},
 					},
-				})
+				)
 				if (response.status === 200) {
 					setExhibitions(
-						exhibitions.filter(exhibition => exhibition.id !== exhibitionId)
+						exhibitions.filter(
+							(exhibition) => exhibition.id !== exhibitionId,
+						),
 					)
 				}
 			} catch (err) {
@@ -246,23 +280,23 @@ function MuseumExhibitions() {
 		}
 	}
 
-	const handleArtistSelection = e => {
+	const handleArtistSelection = (e) => {
 		const artistId = parseInt(e.target.value, 12)
 		if (e.target.checked) {
-			setFormData(prevState => ({
+			setFormData((prevState) => ({
 				...prevState,
 				artists: [...prevState.artists, artistId],
 			}))
 		} else {
-			setFormData(prevState => ({
+			setFormData((prevState) => ({
 				...prevState,
-				artists: prevState.artists.filter(id => id !== artistId),
+				artists: prevState.artists.filter((id) => id !== artistId),
 			}))
 		}
 	}
 	const textEditorOnChange = ({ name, value }) => {
-		setFormData(prevState => ({ ...prevState, [name]: value }));
-	};
+		setFormData((prevState) => ({ ...prevState, [name]: value }))
+	}
 
 	return (
 		<ProfilePageContainer>
@@ -271,7 +305,7 @@ function MuseumExhibitions() {
 				<p>{t('Ви не створили жодної виставки')}</p>
 			) : (
 				<div className={styles.exhibitionList}>
-					{exhibitions.map(exhibition => {
+					{exhibitions.map((exhibition) => {
 						const title =
 							currentLanguage === 'en'
 								? exhibition.title_en || exhibition.title_uk
@@ -279,26 +313,37 @@ function MuseumExhibitions() {
 
 						const description =
 							currentLanguage === 'en'
-								? exhibition.description_en || exhibition.description_uk
-								: exhibition.description_uk || exhibition.description_en
+								? exhibition.description_en ||
+									exhibition.description_uk
+								: exhibition.description_uk ||
+									exhibition.description_en
 
 						const location =
 							currentLanguage === 'en'
-								? exhibition.location_en || exhibition.location_uk
-								: exhibition.location_uk || exhibition.location_en
+								? exhibition.location_en ||
+									exhibition.location_uk
+								: exhibition.location_uk ||
+									exhibition.location_en
 
 						const artistNames =
 							exhibition.exhibitionArtists &&
-								exhibition.exhibitionArtists.length > 0
+							exhibition.exhibitionArtists.length > 0
 								? exhibition.exhibitionArtists
-									.map(ea => {
-										const artist = ea.artist
-										return artist.name || artist.title || artist.email
-									})
-									.join(',')
+										.map((ea) => {
+											const artist = ea.artist
+											return (
+												artist.name ||
+												artist.title ||
+												artist.email
+											)
+										})
+										.join(',')
 								: t('Немає митців')
 						return (
-							<div key={exhibition.id} className={styles.exhibitionCard}>
+							<div
+								key={exhibition.id}
+								className={styles.exhibitionCard}
+							>
 								{/* {exhibition.images && exhibition.images.length > 0 && (
 								<div className={styles.imagesContainer}>
 									{exhibition.images.map(image => (
@@ -313,57 +358,85 @@ function MuseumExhibitions() {
 								</div>
 								)} */}
 
-								{exhibition.images && exhibition.images.length > 0 && (
-									<div className={styles.imagesContainer}>
-										<img
-											src={`${process.env.REACT_APP_API_URL}${exhibition.images[0].imageUrl}`}
-											alt={title}
-											className={styles.exhibitionImage}
-											loading='lazy'
-										/>
-									</div>
-								)}
+								{exhibition.images &&
+									exhibition.images.length > 0 && (
+										<div className={styles.imagesContainer}>
+											<img
+												src={`${process.env.REACT_APP_API_URL}${exhibition.images[0].imageUrl}`}
+												alt={title}
+												className={
+													styles.exhibitionImage
+												}
+												loading="lazy"
+											/>
+										</div>
+									)}
 								<h3>
 									{t('Назва виставки')}
-									<p className={styles.productCardSubTitle}>{title}</p>
+									<p className={styles.productCardSubTitle}>
+										{title}
+									</p>
 								</h3>
 								<h4>
 									{t('Опис виставки')}
-									<p className={styles.productCardSubTitle}>{description}</p>
-								</h4>
-								<h4>
-									{t('Митці')}
-									<p className={styles.productCardSubTitle}>{artistNames}</p>
-								</h4>
-								<h4>
-									{t('Дата проведення')}
-									<p className={styles.productCardSubTitle}> </p>
 									<p className={styles.productCardSubTitle}>
-										{new Date(exhibition.startDate).toLocaleDateString()} -{' '}
-										{new Date(exhibition.endDate).toLocaleDateString()}
+										{description}
 									</p>
 								</h4>
 								<h4>
-									{t('Час початку')}
+									{t('Митці')}
 									<p className={styles.productCardSubTitle}>
-										{exhibition.time}
+										{artistNames}
+									</p>
+								</h4>
+								<h4>
+									{t('Дата проведення')}
+									<p className={styles.productCardSubTitle}>
+										{' '}
+									</p>
+									<p className={styles.productCardSubTitle}>
+										{new Date(
+											exhibition.startDate,
+										).toLocaleDateString()}{' '}
+										-{' '}
+										{new Date(
+											exhibition.endDate,
+										).toLocaleDateString()}
+									</p>
+								</h4>
+								<h4>
+									{t('Час проведення виставки ')}
+									<p className={styles.productCardSubTitle}>
+										{exhibition.time} - {exhibition.endTime}
 									</p>
 								</h4>
 								<h4>
 									{t('Місце проведення')}
-									<p className={styles.productCardSubTitle}>{location}</p>
+									<p className={styles.productCardSubTitle}>
+										{exhibition.address}
+									</p>
 								</h4>
 								{console.log('type data artists:', artistNames)}
-								<div className={styles.exhibitionDelEditWrapper}>
+								<div
+									className={styles.exhibitionDelEditWrapper}
+								>
 									<button
 										className="button button-default"
-										onClick={() => openEditModal(exhibition)}
+										onClick={() =>
+											openEditModal(exhibition)
+										}
 									>
 										{t('Редагувати')}
 									</button>
 									<button
-										className={styles.exhibitionDeleteButton}
-										onClick={() => handleDeleteExhibition(exhibition.id)}
+										className={
+											styles.exhibitionDeleteButton
+										}
+										onClick={() =>
+											handleDeleteExhibition(
+												exhibition.id,
+											)
+										}
 									>
 										{t('Видалити')}
 									</button>
@@ -375,7 +448,7 @@ function MuseumExhibitions() {
 			)}
 			<div className={styles.pagination}>
 				<button
-					onClick={() => setPage(prev => Math.max(prev - 1, 1))}
+					onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
 					disabled={page === 1}
 				>
 					{/* {t('Попередня')} */}
@@ -385,7 +458,9 @@ function MuseumExhibitions() {
 					{t('Сторінка')} {page} {t('з')} {totalPages}
 				</p>
 				<button
-					onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
+					onClick={() =>
+						setPage((prev) => Math.min(prev + 1, totalPages))
+					}
 					disabled={page === totalPages}
 				>
 					{/* {t('Наступна')} */}
@@ -397,9 +472,12 @@ function MuseumExhibitions() {
 				<div className="modal-overlay" onClick={handleCloseModal}>
 					<div
 						className="modal-content"
-						onClick={e => e.stopPropagation()}
+						onClick={(e) => e.stopPropagation()}
 					>
-						<button className="modal-close-button" onClick={handleCloseModal}>
+						<button
+							className="modal-close-button"
+							onClick={handleCloseModal}
+						>
 							&times;
 						</button>
 						<div className={styles.modalImages}>
@@ -409,7 +487,7 @@ function MuseumExhibitions() {
 									src={`${process.env.REACT_APP_API_URL}${image.imageUrl}`}
 									alt={`Exhibition Image ${index + 1}`}
 									className={styles.modalImage}
-									loading='lazy'
+									loading="lazy"
 								/>
 							))}
 						</div>
@@ -421,17 +499,24 @@ function MuseumExhibitions() {
 				<div className="modal-overlay" onClick={handleCloseModal}>
 					<div
 						className="modal-content"
-						onClick={e => e.stopPropagation()}
+						onClick={(e) => e.stopPropagation()}
 					>
 						<div>
-							<button className="modal-close-button" onClick={closeEditModal}>
+							<button
+								className="modal-close-button"
+								onClick={closeEditModal}
+							>
 								&times;
 							</button>
 							<form onSubmit={handleEditSubmit}>
 								{formErrors.form && (
-									<p className={styles.error}>{formErrors.form}</p>
+									<p className={styles.error}>
+										{formErrors.form}
+									</p>
 								)}
-								{message && <p className={styles.success}>{message}</p>}
+								{message && (
+									<p className={styles.success}>{message}</p>
+								)}
 								<div className={styles.modalTitleWrapper}>
 									<h2 className={styles.modalTitle}>
 										{t('Редагування виставки')}
@@ -440,86 +525,159 @@ function MuseumExhibitions() {
 								<div className="flex gap-8 form-wrapper">
 									<div className="form-group">
 										<div className="field-group">
-											<TextEditor label={t('Назва виставки українською')}
-												name='title_uk' value={formData.title_uk}
-												maxLength={50} required onChange={textEditorOnChange} />
+											<TextEditor
+												label={t(
+													'Назва виставки українською',
+												)}
+												name="title_uk"
+												value={formData.title_uk}
+												maxLength={50}
+												required
+												onChange={textEditorOnChange}
+											/>
 										</div>
 										<div className="field-group">
-											<TextAreaEditor label={t('Опис виставки українською')}
-												name='description_uk' value={formData.description_uk}
-												maxLength={500} required onChange={textEditorOnChange} />
+											<TextAreaEditor
+												label={t(
+													'Опис виставки українською',
+												)}
+												name="description_uk"
+												value={formData.description_uk}
+												maxLength={500}
+												required
+												onChange={textEditorOnChange}
+											/>
 										</div>
 										<div className="field-group">
-											<TextEditor label={t('Місце проведення українською')}
-												name='location_uk' value={formData.location_uk}
-												maxLength={500} required onChange={textEditorOnChange} />
+											<TextEditor
+												label={t(
+													'Місце проведення українською',
+												)}
+												name="location_uk"
+												value={formData.location_uk}
+												maxLength={500}
+												required
+												onChange={textEditorOnChange}
+											/>
 										</div>
 										{/* Start Date Field */}
 										<div className="field-group">
-											<TextEditor label={t('Дата початку')}
-												type='date'
-												name='startDate' value={formData.startDate}
-												required onChange={textEditorOnChange} />
+											<TextEditor
+												label={t('Дата початку')}
+												type="date"
+												name="startDate"
+												value={formData.startDate}
+												required
+												onChange={textEditorOnChange}
+											/>
 										</div>
 										{/* Time Field */}
 										<div className="field-group">
-											<TextEditor label={t('Час початку')}
-												type='text'
-												name='time' value={formData.time}
-												required onChange={textEditorOnChange} />
+											<TextEditor
+												label={t('Час початку')}
+												type="text"
+												name="time"
+												value={formData.time}
+												required
+												onChange={textEditorOnChange}
+											/>
 										</div>
 									</div>
 
 									<div className="form-group">
 										<div className="field-group">
-											<TextEditor label={t('Назва виставки англійською')}
-												name='title_en' value={formData.title_en}
-												maxLength={50} required onChange={textEditorOnChange} />
+											<TextEditor
+												label={t(
+													'Назва виставки англійською',
+												)}
+												name="title_en"
+												value={formData.title_en}
+												maxLength={50}
+												required
+												onChange={textEditorOnChange}
+											/>
 										</div>
 										<div className="field-group">
-											<TextAreaEditor label={t('Опис виставки англійською')}
-												name='description_en' value={formData.description_en}
-												maxLength={500} required onChange={textEditorOnChange} />
+											<TextAreaEditor
+												label={t(
+													'Опис виставки англійською',
+												)}
+												name="description_en"
+												value={formData.description_en}
+												maxLength={500}
+												required
+												onChange={textEditorOnChange}
+											/>
 										</div>
 										<div className="field-group">
-											<TextEditor label={t('Місце проведення англійською')}
-												name='location_en' value={formData.location_en}
-												maxLength={500} required onChange={textEditorOnChange} />
+											<TextEditor
+												label={t(
+													'Місце проведення англійською',
+												)}
+												name="location_en"
+												value={formData.location_en}
+												maxLength={500}
+												required
+												onChange={textEditorOnChange}
+											/>
 										</div>
 										{/* End Date Field */}
 										<div className="field-group">
-											<TextEditor label={t('Дата завершення')}
-												type='date'
-												name='endDate' value={formData.endDate}
-												required onChange={textEditorOnChange} />
+											<TextEditor
+												label={t('Дата завершення')}
+												type="date"
+												name="endDate"
+												value={formData.endDate}
+												required
+												onChange={textEditorOnChange}
+											/>
 										</div>
 										{/* Time Field */}
 										<div className="field-group">
-											<TextEditor label={t('Час завершення')}
-												type='text'
-												name='finishTime' value={formData.finishTime}
-												required onChange={textEditorOnChange} />
+											<TextEditor
+												label={t('Час завершення')}
+												type="text"
+												name="endTime"
+												value={formData.endTime}
+												required
+												onChange={textEditorOnChange}
+											/>
 										</div>
 									</div>
 								</div>
 								{/* Artists Field */}
 								<div className="field-group">
-									<label className="field-label">{t('Митці')}</label>
+									<label className="field-label">
+										{t('Митці')}
+									</label>
 									<div className={styles.checkArtistWrapper}>
-										{artists.map(artist => (
-											<div className={styles.checkArtistItem} key={artist.id}>
+										{artists.map((artist) => (
+											<div
+												className={
+													styles.checkArtistItem
+												}
+												key={artist.id}
+											>
 												<input
-													type='checkbox'
-													name='artists'
+													type="checkbox"
+													name="artists"
 													value={artist.id}
-													checked={formData.artists.includes(artist.id)}
-													onChange={handleArtistSelection}
+													checked={formData.artists.includes(
+														artist.id,
+													)}
+													onChange={
+														handleArtistSelection
+													}
 												/>
 												<label
 													htmlFor={`artist-${artist.id}`}
-													className={styles.checkboxLabel}
+													className={
+														styles.checkboxLabel
+													}
 												>
-													{artist.name || artist.title || artist.email}
+													{artist.name ||
+														artist.title ||
+														artist.email}
 												</label>
 											</div>
 										))}
@@ -533,7 +691,7 @@ function MuseumExhibitions() {
 									multiple
 									onChange={textEditorOnChange}
 								/>
-								<button type='submit'>{t('Зберегти')}</button>
+								<button type="submit">{t('Зберегти')}</button>
 							</form>
 						</div>
 					</div>
