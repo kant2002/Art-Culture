@@ -1,17 +1,19 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext.jsx'
-import styles from '../../../styles/components/VerificationPage/LoginPage.module.scss'
 import API from '../../../utils/api.js'
+import { useTranslation } from 'react-i18next'
+import TextEditor from '@components/Blocks/TextEditor'
+import styles from '@styles/components/VerificationPage/LoginPage.module.scss'
 
 const Login = () => {
+	const { t } = useTranslation()
 	const [loginDetails, setLoginDetails] = useState({ email: '', password: '' }) // Descriptive names
 	const [serverMessage, setServerMessage] = useState('')
 	const navigate = useNavigate()
 	const { login } = useAuth() // Access login function from context
 
-	const handleChange = e => {
-		const { name, value } = e.target
+	const textEditorOnChange = ({name, value}) => {
 		setLoginDetails(prev => ({ ...prev, [name]: value }))
 	}
 
@@ -51,38 +53,37 @@ const Login = () => {
 	return (
 		<div className={styles.LoginContainer}>
 			<header className={styles.LoginWrapper}>
-				<h2>Login</h2>
+				<h1>{t('Вхід')}</h1>
 				{/* Render serverMessage here */}
 				{serverMessage && (
 					<p className={styles.ErrorMessage}>{serverMessage}</p>
 				)}
 				<form className={styles.LoginForm} onSubmit={handleSubmit}>
-					<input
+					<TextEditor 
+						label='Email'
 						type='email'
-						placeholder='Email'
 						name='email'
 						value={loginDetails.email}
-						onChange={handleChange}
-						required
+						maxLength='100'
+						onChange={textEditorOnChange}
+						required 
 					/>
-					<input
+					<TextEditor
+						label={t('Пароль')}
 						type='password'
-						placeholder='Password'
 						name='password'
 						value={loginDetails.password}
-						onChange={handleChange}
+						maxLength='100'
+						onChange={textEditorOnChange}
 						required
 					/>
-					<button type='submit'>Увійти</button>
+					<button type='submit'>{t('Увійти')}</button>
 				</form>
 				<p
 					className={styles.SignUp}
-					style={{
-						cursor: 'pointer',
-					}}
 					onClick={handleSignUPLinkClick}
 				>
-					Зареєструватись
+					{t('Реєстрація')}
 				</p>
 			</header>
 		</div>
