@@ -8,7 +8,10 @@
 	align-items: start;
 	font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
 	font-weight: 700;
-	margin: variables.$responsiveMediumPadding 0 0 0;
+	margin: variables.$responsiveSmallPadding 0 0 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: black;
 }
 
 .profileAddPostTextarea {
@@ -88,7 +91,7 @@ input[type='file'] {
 
     .profileAddPostLabel {
 		font-size: 16px;
-		margin: variables.$staticPcMediumPadding 0 0 0;
+		margin: variables.$staticPcSmallPadding 0 0 0;
     }
 
     .profileAddPostTextarea {

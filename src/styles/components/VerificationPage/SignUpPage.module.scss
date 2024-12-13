@@ -3,12 +3,6 @@
 	height: 100dvh;
 	justify-content: center;
 	display: flex;
-
-	h2 {
-		margin: 0 0 20px 0;
-		font-size: 2rem;
-		color: #61dafb;
-	}
 }
 
 .SignUpWrapper {
@@ -29,32 +23,32 @@
 	align-items: center;
 }
 
-input[type='text'],
-input[type='email'],
-input[type='password'] {
-	padding: 10px;
-	margin: 10px 0;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	font-size: 1rem;
-}
+// input[type='text'],
+// input[type='email'],
+// input[type='password'] {
+// 	padding: 10px;
+// 	margin: 10px 0;
+// 	border: 1px solid #ddd;
+// 	border-radius: 4px;
+// 	font-size: 1rem;
+// }
 
-button[type='submit'] {
-	width: 80%;
-	max-width: 300px;
-	padding: 10px;
-	margin: 20px 0;
-	background-color: #61dafb;
-	border: none;
-	border-radius: 4px;
-	color: white;
-	font-size: 1rem;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
-}
+// button[type='submit'] {
+// 	width: 80%;
+// 	max-width: 300px;
+// 	padding: 10px;
+// 	margin: 20px 0;
+// 	background-color: #61dafb;
+// 	border: none;
+// 	border-radius: 4px;
+// 	color: white;
+// 	font-size: 1rem;
+// 	cursor: pointer;
+// 	transition: background-color 0.3s ease;
+// }
 
-button[type='submit']:hover {
-	background-color: #21a1f1;
-}
+// button[type='submit']:hover {
+// 	background-color: #21a1f1;
+// }
 
 // Error/Success Messages
