@@ -129,7 +129,7 @@ function MainNews() {
 										<p
 											className={`${styles.cardDescription} ${index === 0 ? styles.firstCardDescription : index === 1 ? styles.secondCardDescription : styles.thirdCardDescription}`}
 										>
-											<TranslatedContent en={post.content_en} uk={post.content_uk} maxLength={100} />
+											<TranslatedContent en={post.content_en} uk={post.content_uk} maxLength={100} html />
 										</p>
 									</div>
 								</div>

@@ -1,10 +1,15 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext.jsx'
-import styles from '../../../styles/components/VerificationPage/SignUpPage.module.scss'
+import styles from '@styles/components/VerificationPage/LoginPage.module.scss'
 import API from '../../../utils/api.js'
+import { useTranslation } from 'react-i18next'
+import TextEditor from '@components/Blocks/TextEditor'
+import TextAreaEditor from '@components/Blocks/TextAreaEditor'
+import ImageEditor from '../../components/Blocks/ImageEditor.jsx'
 
 const SignUp = () => {
+	const { t } = useTranslation()
 	const [signUpDetails, setSignUpDetails] = useState({
 		email: '',
 		password: '',
@@ -15,8 +20,15 @@ const SignUp = () => {
 	})
 	const [serverMessage, setServerMessage] = useState('')
 	const { login } = useAuth() // Utilize login from AuthContext
-	const [profileImage, setProfileImage] = useState(null)
 	const navigate = useNavigate()
+
+	const textEditorOnChange = ({ name, value }) => {
+
+		setSignUpDetails(prev => ({
+			...prev,
+			[name]: value,
+		}))
+	}
 
 	const handleChange = e => {
 		const { name, value, files } = e.target
@@ -46,7 +58,7 @@ const SignUp = () => {
 		formData.append('title', signUpDetails.title)
 		formData.append('bio', signUpDetails.bio)
 		if (signUpDetails.profileImage) {
-			formData.append('profileImage', signUpDetails.profileImage)
+			formData.append('profileImage', signUpDetails.profileImage[0])
 		}
 
 		// Log formData entries for debugging
@@ -81,61 +93,70 @@ const SignUp = () => {
 	}
 
 	return (
-		<div className={styles.SignUpContainer}>
-			<header className={styles.SignUpWrapper}>
-				<h2>Sign Up</h2>
+		<div className={styles.LoginContainer}>
+			<header className={styles.LoginWrapper}>
+				<h1>{t('Реєстрація')}</h1>
 				{serverMessage && (
 					<p className={styles.ErrorMessage}>{serverMessage}</p>
 				)}
 				<form className={styles.SignUpForm} onSubmit={handleSubmit}>
-					<input
+					<TextEditor
+						label='Email'
 						type='email'
-						placeholder='Email'
 						name='email'
 						value={signUpDetails.email}
-						onChange={handleChange}
+						onChange={textEditorOnChange}
+						maxLength='191'
 						required
 					/>
-					<input
+					<TextEditor
+						label={t('Пароль')}
 						type='password'
-						placeholder='Password'
 						name='password'
 						value={signUpDetails.password}
-						onChange={handleChange}
+						onChange={textEditorOnChange}
+						maxLength='191'
 						required
 					/>
-					<input
+					<TextEditor
+						label={t('П.І.Б.')}
 						type='text'
-						placeholder='Title'
 						name='title'
 						value={signUpDetails.title}
-						onChange={handleChange}
+						onChange={textEditorOnChange}
+						maxLength='191'
+						required 
 					/>
-					<textarea
+					<TextAreaEditor
+						label={t('Про себе')}
 						placeholder='Bio'
 						name='bio'
 						value={signUpDetails.bio}
-						onChange={handleChange}
+						onChange={textEditorOnChange}
+						maxLength='191'
+						required 
 					/>
-					<input
+					<ImageEditor
+						label={t('Додати зображення')}
 						type='file'
 						name='profileImage'
 						accept='image/*'
-						onChange={handleChange}
+						onChange={textEditorOnChange}
+						maxLength='191'
+						required 
 					/>
 					<select
 						name='role'
 						value={signUpDetails.role}
 						onChange={handleChange}
 						className={styles.roleSelect}
-					>
+						required 					>
 						<option value='USER'>User</option>
-
 						<option value='MUSEUM'>Museum</option>
 						<option value='CREATOR'>Creator</option>
 						<option value='EDITOR'>Editor</option>
 					</select>
-					<button type='submit'>Sign Up</button>
+					<button type='submit'>{t('Реєстрація')}</button>
 				</form>
 			</header>
 		</div>

@@ -1,14 +1,15 @@
 @use '../../../styles/utilities/variables.scss';
 
 .profileAddPostInput {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: start;
-	font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
-	font-weight: 700;
-	margin: variables.$responsiveSmallPadding 0 0 0;
+    padding: 3px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 700;
+    margin: variables.$responsiveSmallPadding 0 0 0;
     border: 1px solid #ddd;
     border-radius: 4px;
     color: black;
@@ -49,6 +50,11 @@
     resize: none;
 }
 
+.textAreaQuillWrapper {
+    width: 100%;
+    margin: variables.$responsiveSmallPadding 0 0 0;
+}
+
 .remainingChars {
     /* Стиль для оставшихся символов */
     margin: variables.$responsiveSmallPadding 5px 0 auto;
@@ -57,29 +63,29 @@
 }
 
 input[type='file'] {
-	width: 100%;
-	max-width: none;
-	height: 1en;
-	padding: 0;
-	font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
-	font-weight: normal;
-	border: 1px solid #ddd;
-	margin: variables.$responsiveSmallPadding 0 0 0 !important;
+    width: 100%;
+    max-width: none;
+    height: 1en;
+    padding: 0;
+    font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: normal;
+    border: 1px solid #ddd;
+    margin: variables.$responsiveSmallPadding 0 0 0 !important;
 }
 
 .imagePreviews {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	margin: variables.$responsiveSmallPadding 0 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: variables.$responsiveSmallPadding 0 0 0;
 
-	.previewImage {
-		width: 20%;
-		object-fit: cover;
-		border-radius: 10px;
-	}
+    .previewImage {
+        width: 300px;
+        object-fit: contain;
+        border-radius: 8px;
+    }
 }
 
 @media (min-width: 1441px) {
@@ -90,8 +96,8 @@ input[type='file'] {
     }
 
     .profileAddPostLabel {
-		font-size: 16px;
-		margin: variables.$staticPcSmallPadding 0 0 0;
+        font-size: 16px;
+        margin: variables.$staticPcSmallPadding 0 0 0;
     }
 
     .profileAddPostTextarea {
@@ -102,12 +108,12 @@ input[type='file'] {
         font-size: 16px;
     }
 
-	input[type='file'] {
-		font-size: 16px;
-		margin: variables.$staticPcSmallPadding 0 0 0 !important;
-	}
+    input[type='file'] {
+        font-size: 16px;
+        margin: variables.$staticPcSmallPadding 0 0 0 !important;
+    }
 
-	.imagePreviews {
-		margin: variables.$staticPcSmallPadding 0 0 0;
-	}
+    .imagePreviews {
+        margin: variables.$staticPcSmallPadding 0 0 0;
+    }
 }
