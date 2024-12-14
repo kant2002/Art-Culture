@@ -1,18 +1,19 @@
-import PostDetail from '../assets/screens/Post/PostDetail'
-import ProductCartCreate from '../assets/screens/userProfile/ProductCardCreate'
 import Login from '../assets/components/VerificationPages/LoginPage'
 import SignUp from '../assets/components/VerificationPages/SignUpPage'
 import AdminDashboard from '../assets/screens/Admin/AdminDashboard'
-import ArtistsPage from '../assets/screens/ArtistsPage/ArtistsPage'
 import ArtistPage from '../assets/screens/ArtistPage/ArtistPage'
+import ArtistsPage from '../assets/screens/ArtistsPage/ArtistsPage'
 import MuseumExhibitions from '../assets/screens/ExhibitionList/Exhibitions'
+import ExhibitionPage from '../assets/screens/ExhibitionPage/ExhibitionPage'
 import MuseumPage from '../assets/screens/MuseumPage/MuseumPage'
 import MuseumsPage from '../assets/screens/MuseumsPage/MuseumsPage'
+import PostDetail from '../assets/screens/Post/PostDetail'
 import Paintings from '../assets/screens/ProductList/Paintings'
 import Home from '../assets/screens/home/Home'
 import Layout from '../assets/screens/layout/Layout'
 import MainPage from '../assets/screens/mainPage/MainPage'
 import NewsPage from '../assets/screens/newsPage/NewsPage'
+import ProductCartCreate from '../assets/screens/userProfile/ProductCardCreate'
 import UserProfile from '../assets/screens/userProfile/userProfile'
 import UserProfileAddPost from '../assets/screens/userProfile/userProfileAddPost'
 import UserProfilePosts from '../assets/screens/userProfile/userProfilePosts'
@@ -121,6 +122,11 @@ export const routes = [
 	{
 		path: '/post/:id',
 		element: PostDetail,
+		isAuth: false,
+	},
+	{
+		path: '/exhibition/:id',
+		element: ExhibitionPage,
 		isAuth: false,
 	},
 ]

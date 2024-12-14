@@ -1,0 +1,37 @@
+/* src/styles/components/ExhibitionDetails/ExhibitionDetails.module.scss */
+.exhibitionDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.imagesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.exhibitionImage {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.infoText {
+  margin: 5px 0 0 0;
+  font-size: 1rem;
+}
+
+.mapContainer {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
