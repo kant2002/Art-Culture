@@ -1,10 +1,10 @@
+import L from 'leaflet'
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png'
 import iconUrl from 'leaflet/dist/images/marker-icon.png'
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png'
 import 'leaflet/dist/leaflet.css'
 import React from 'react'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
-
 delete L.Icon.Default.prototype._getIconUrl
 
 L.Icon.Default.mergeOptions({
@@ -28,7 +28,10 @@ function Map({ exhibitions }) {
 			/>
 			{exhibitions.map((ex) => {
 				if (!ex.latitude || !ex.longitude) return null
-				position = [ex.latitude, ex.longitude]
+				const position = [
+					parseFloat(ex.latitude),
+					parseFloat(ex.longitude),
+				]
 				return (
 					<Marker key={ex.id} position={position}>
 						<Popup>

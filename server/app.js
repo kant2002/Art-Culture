@@ -35,7 +35,12 @@ app.use(
         defaultSrc: ["'self'"],
         scriptSrc: ["'unsafe-inline'", "'self'"],
         //styleSrc: ["''"],
-        imgSrc: ["'self'", "data:", "blob:"], // Added 'blob:' here
+        imgSrc: [
+          "'self'",
+          "data:",
+          "blob:",
+          "https://*.tile.openstreetmap.org",
+        ], // Added 'blob:' here
         connectSrc: ["'self'"],
         //fontSrc: ["'self'"],
         objectSrc: ["'none'"],

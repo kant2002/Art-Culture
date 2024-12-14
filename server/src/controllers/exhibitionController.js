@@ -157,7 +157,7 @@ export const getExhibitionById = async (req, res, next) => {
         createdBy: {
           select: {
             id: true,
-            name: true,
+            // name: true,
             email: true,
           },
         },

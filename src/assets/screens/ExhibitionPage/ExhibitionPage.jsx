@@ -1,11 +1,11 @@
-// src/components/ExhibitionDetails.jsx
+// src/assets/components/ExhibitionDetails.jsx
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import Map from '/src/assets/components/Blocks/Maps'
-import ProfilePageContainer from '/src/assets/components/Blocks/ProfilePageContainer'
-import styles from '/src/styles/layout/ExhibitionPage.module.scss'
-import API from '/src/utils/api.js'
+import styles from '../../../styles/layout/ExhibitionPage.module.scss'
+import API from '../../../utils/api.js'
+import { getImageUrl } from '../../../utils/helper.js'
+import Map from '../../components/Blocks/Maps'
 
 function ExhibitionDetails() {
 	const { t, i18n } = useTranslation()
@@ -24,6 +24,7 @@ function ExhibitionDetails() {
 						Authorization: `Bearer ${localStorage.getItem('token')}`,
 					},
 				})
+				console.log('Fetched Exhibition Data:', response.data) // Debug log
 				setExhibition(response.data)
 				setLoading(false)
 			} catch (err) {
@@ -48,7 +49,7 @@ function ExhibitionDetails() {
 		return <div>No exhibition found.</div>
 	}
 
-	// Extract necessary data
+	// Destructure exhibition data
 	const {
 		title_en,
 		title_uk,
@@ -62,8 +63,7 @@ function ExhibitionDetails() {
 		latitude,
 		longitude,
 		images,
-		artists: [], // Assuming this is an array of artist objects
-		// Add other fields if necessary
+		exhibitionArtists,
 	} = exhibition
 
 	// Prepare artist names
@@ -80,21 +80,30 @@ function ExhibitionDetails() {
 			: t('Немає митців')
 
 	return (
-		<ProfilePageContainer>
-			<h2>{t('Деталі виставки')}</h2>
-			<div className={styles.exhibitionDetails}>
+		<div className={styles.exhibitionDetailsContainer}>
+			<div className={styles.exhibitionDetailsWrapper}>
+				<div className={styles.exhibitionHeadTitleWrapper}>
+					<h2>{t('Деталі виставки')}</h2>
+				</div>
 				{/* Exhibition Images */}
-				{images && images.length > 0 && (
-					<div className={styles.imagesContainer}>
+				{images && images.length > 0 ? (
+					<div className={styles.exhibitionImageWrapper}>
 						{images.map((image) => (
 							<img
 								key={image.id}
-								src={`${process.env.REACT_APP_API_URL}${image.imageUrl}`}
+								src={getImageUrl(
+									image.imageUrl,
+									'/Img/halfNewsCard.jpg',
+								)}
 								alt={title_en || title_uk || 'Exhibition Image'}
 								className={styles.exhibitionImage}
 								loading="lazy"
 							/>
 						))}
+					</div>
+				) : (
+					<div className={styles.noImages}>
+						{t('No images available')}
 					</div>
 				)}
 
@@ -141,7 +150,7 @@ function ExhibitionDetails() {
 					<h4>
 						{t('Місце проведення')}:
 						<p className={styles.infoText}>
-							{address || 'Немає даних'}
+							{address || t('Немає даних')}
 						</p>
 					</h4>
 				</div>
@@ -162,7 +171,7 @@ function ExhibitionDetails() {
 					/>
 				</div>
 			</div>
-		</ProfilePageContainer>
+		</div>
 	)
 }
 
