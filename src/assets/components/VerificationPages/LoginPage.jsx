@@ -64,7 +64,7 @@ const Login = () => {
 						type='email'
 						name='email'
 						value={loginDetails.email}
-						maxLength='100'
+						maxLength='191'
 						onChange={textEditorOnChange}
 						required 
 					/>
@@ -73,7 +73,7 @@ const Login = () => {
 						type='password'
 						name='password'
 						value={loginDetails.password}
-						maxLength='100'
+						maxLength='191'
 						onChange={textEditorOnChange}
 						required
 					/>

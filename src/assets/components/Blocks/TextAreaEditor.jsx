@@ -18,19 +18,21 @@ function TextAreaEditor({ className, name, label, value, maxLength, onChange, pl
 	};
 	return (
 		<>
-		<label className={`field-label ${className ? className : ''}`}>
-		<span>{label} {required ? <span className="required-field" title={t("Це поле обов'язково")}>*</span> : null}</span>
-		</label>
-		<ReactQuill theme="snow" value={value} onChange={handleChange} modules={{ toolbar: true }} />
-		<small className={styles.remainingChars}>
-			{remaining} {t('символів залишилось')}
-		</small>
+			<label className={`field-label ${className ? className : ''}`}>
+				<span>{label} {required ? <span className="required-field" title={t("Це поле обов'язково")}>*</span> : null}</span>
+			</label>
+			<div className={styles.textAreaQuillWrapper}>
+				<ReactQuill theme="snow" value={value} onChange={handleChange} modules={{ toolbar: true }} />
+			</div>
+			<small className={styles.remainingChars}>
+				{remaining} {t('символів залишилось')}
+			</small>
 		</>
 	)
 }
 
 TextAreaEditor.propTypes = {
-    maxLength: PropTypes.number,
+	maxLength: PropTypes.number,
 	className: PropTypes.string,
 	name: PropTypes.string,
 	label: PropTypes.string,
