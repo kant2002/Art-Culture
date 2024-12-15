@@ -13,13 +13,24 @@ L.Icon.Default.mergeOptions({
 	shadowUrl,
 })
 function Map({ exhibitions }) {
-	const defaultPosition = [50, 10]
-	const defaultZoom = 4
+	// If there is at least one exhibition with coordinates, use it for center
+	const firstExhibitionWithCoordinates = exhibitions.find(
+		(ex) => ex.latitude && ex.longitude,
+	)
+
+	const defaultPosition = firstExhibitionWithCoordinates
+		? [
+				parseFloat(firstExhibitionWithCoordinates.latitude),
+				parseFloat(firstExhibitionWithCoordinates.longitude),
+			]
+		: [50, 10] // fallback if no coordinates
+
+	const closeZoom = 14 // A closer zoom level
 
 	return (
 		<MapContainer
 			center={defaultPosition}
-			zoom={defaultZoom}
+			zoom={closeZoom}
 			style={{ height: '500px', width: '100%' }}
 		>
 			<TileLayer

@@ -23,6 +23,41 @@ export const searchAddress = async (req, res, next) => {
       },
     )
 
+    const processedData = response.data.map((item) => {
+      // Safely access item.address
+      const address = item.address || {}
+      // Extract fields with defaults if undefined
+      const road = address.road || ""
+      const house_number = address.house_number || ""
+      const city = address.city || address.town || address.village || ""
+      const state = address.state || ""
+      const postcode = address.postcode || ""
+
+      // Format the road name
+      // Use startsWith (not startWith)
+      const roadFormatted = road
+        ? road.toLowerCase().startsWith("вулиця")
+          ? road
+          : `вулиця ${road}`
+        : ""
+
+      const formattedAddress = [
+        roadFormatted,
+        house_number ? house_number.toUpperCase() : "",
+        city,
+        state,
+        postcode || "Нема індекса",
+      ]
+        .filter((part) => part)
+        .join(", ")
+
+      return {
+        display_name: formattedAddress,
+        lat: item.lat,
+        lon: item.lon,
+      }
+    })
+
     // Return the data from Nominatim directly to the client
     res.json(response.data)
   } catch (error) {
