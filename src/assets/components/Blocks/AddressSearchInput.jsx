@@ -5,9 +5,12 @@ function AddressSearch({ onSelect }) {
 	const [query, setQuery] = useState('')
 	const [results, setResults] = useState([])
 	const [loading, setLoading] = useState(false)
+	const [selected, setSelected] = useState(false)
 	const debounceRef = useRef(null)
 
 	useEffect(() => {
+		if (selected) return
+
 		if (debounceRef.current) {
 			clearTimeout(debounceRef.current)
 		}
@@ -24,7 +27,7 @@ function AddressSearch({ onSelect }) {
 		return () => {
 			if (debounceRef.current) clearTimeout(debounceRef.current)
 		}
-	}, [query])
+	}, [query, selected])
 	const fetchData = async () => {
 		setLoading(true)
 		try {
@@ -49,6 +52,13 @@ function AddressSearch({ onSelect }) {
 		}
 		setQuery(displayName)
 		setResults([])
+		setSelected(true)
+	}
+
+	const handleChange = (e) => {
+		const newValue = e.target.value
+		setQuery(newValue)
+		setSelected(false)
 	}
 
 	return (
@@ -56,7 +66,7 @@ function AddressSearch({ onSelect }) {
 			<input
 				type="text"
 				value={query}
-				onChange={(e) => setQuery(e.target.value)}
+				onChange={handleChange}
 				placeholder="Пошук Адреси"
 				style={{ width: '100%', padding: '8px' }}
 			/>
