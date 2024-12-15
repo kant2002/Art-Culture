@@ -1,44 +1,43 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 function AddressSearch({ onSelect }) {
 	const [query, setQuery] = useState('')
 	const [results, setResults] = useState([])
 	const [loading, setLoading] = useState(false)
+	const debounceRef = useRef(null)
 
 	useEffect(() => {
-		let cancelTokenSource
-
-		const fetchData = async () => {
-			if (query.length < 3) {
-				setResults([])
-				return
-			}
-			setLoading(true)
-			cancelTokenSource = axios.CancelToken.source()
-			try {
-				const response = await axios.get('/api/geo', {
-					params: { q: query },
-					cancelToken: cancelTokenSource.token,
-				})
-				setResults(response.data || [])
-			} catch (error) {
-				if (!axios.isCancel(error)) {
-					console.error('Error fetching data:', error)
-				}
-			} finally {
-				setLoading(false)
-			}
+		if (debounceRef.current) {
+			clearTimeout(debounceRef.current)
 		}
 
-		fetchData()
+		debounceRef.current = setTimeout(() => {
+			if (query.length >= 3) {
+				fetchData()
+			} else {
+				setResults([])
+			}
+			setQuery(query)
+		}, 500)
 
 		return () => {
-			if (cancelTokenSource) {
-				cancelTokenSource.cancel()
-			}
+			if (debounceRef.current) clearTimeout(debounceRef.current)
 		}
 	}, [query])
+	const fetchData = async () => {
+		setLoading(true)
+		try {
+			const response = await axios.get('/api/geo', {
+				params: { q: query },
+			})
+			setResults(response.data || [])
+		} catch (error) {
+			console.error('Error fetching data:', error)
+		} finally {
+			setLoading(false)
+		}
+	}
 
 	const handleSelect = (item) => {
 		const lat = item.lat
@@ -61,7 +60,7 @@ function AddressSearch({ onSelect }) {
 				placeholder="Пошук Адреси"
 				style={{ width: '100%', padding: '8px' }}
 			/>
-			{loading && <div>Loading...</div>}
+			{loading && <div>Пошук...</div>}
 			{results.length > 0 && (
 				<ul
 					style={{
