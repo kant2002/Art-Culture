@@ -87,7 +87,15 @@ export const getArtTermById = async (req, res, next) => {
 		const artTerm = await prisma.artTerm.findFirstOrThrow({
             where: {
                 id: id
-            }
+            },
+            include: {
+                highlightedProduct: {
+                    include: {
+                        author: true,
+                        images: true,
+                    }
+                },
+            },
         });
 
 		res.json({ artTerm })
