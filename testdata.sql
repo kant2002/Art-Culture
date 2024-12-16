@@ -269,7 +269,7 @@ INSERT INTO ProductImage(
     productId
   )
 VALUES (
-    '/Img/testdata/artterms/100.png',
+    '/Img/testdata/artterms/100.jpg',
     100
   );
 
