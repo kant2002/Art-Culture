@@ -81,7 +81,6 @@ form {
 @media (max-width: 569px) {
 	.LoginContainer {
 		padding: $staticMobileTopPadding 0 0 0;
-		min-height: calc(100dvh - 234px);
 	}
 
 	.LoginWrapper {
