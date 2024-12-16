@@ -48,7 +48,7 @@ const Layout = ({ heading = '' }) => {
 					<Route path="/ArtistsPage" element={<ArtistsPage />} />
 					<Route path="/artist/:id" element={<ArtistPage />} />
 					<Route path="/MuseumsPage" element={<MuseumsPage />} />
-					<Route path="/MuseumPage" element={<MuseumPage />} />
+					<Route path="/museumpage/:id" element={<MuseumPage />} />
 					<Route path="/art-terms" element={<ArtTermsPage />} />
 					<Route
 						path="/art-terms/letters/:letter"

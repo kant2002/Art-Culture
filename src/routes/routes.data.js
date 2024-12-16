@@ -91,7 +91,7 @@ export const routes = [
 	},
 
 	{
-		path: '/MuseumPage',
+		path: '/museumpage/:id',
 		element: MuseumPage,
 		isAuth: false,
 	},
