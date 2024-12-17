@@ -135,6 +135,7 @@ const SignUp = () => {
 						onChange={textEditorOnChange}
 						maxLength='191'
 						required 
+						html
 					/>
 					<ImageEditor
 						label={t('Додати зображення')}

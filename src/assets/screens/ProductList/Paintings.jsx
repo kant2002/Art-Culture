@@ -284,12 +284,14 @@ const Paintings = () => {
 									<div className="field-group">
 										<TextAreaEditor label={t('Опис українською')}
 											name='description_uk' value={formData.description_uk}
-											maxLength={500} required onChange={textEditorOnChange} />
+											maxLength={500} required onChange={textEditorOnChange} 
+											html/>
 									</div>
 									<div className="field-group">
 										<TextAreaEditor label={t('Специфікація українською')}
 											name='specs_uk' value={formData.specs_uk}
-											maxLength={500} required onChange={textEditorOnChange} />
+											maxLength={500} required onChange={textEditorOnChange}
+											html />
 									</div>
 								</div>
 								<div className="form-group">
@@ -301,12 +303,14 @@ const Paintings = () => {
 									<div className="field-group">
 										<TextAreaEditor label={t('Опис англійською')}
 											name='description_en' value={formData.description_en}
-											maxLength={500} required onChange={textEditorOnChange} />
+											maxLength={500} required onChange={textEditorOnChange}
+											html />
 									</div>
 									<div className="field-group">
 										<TextAreaEditor label={t('Специфікація англійською')}
 											name='specs_en' value={formData.specs_en}
-											maxLength={500} required onChange={textEditorOnChange} />
+											maxLength={500} required onChange={textEditorOnChange}
+											html />
 									</div>
 								</div>
 							</div>

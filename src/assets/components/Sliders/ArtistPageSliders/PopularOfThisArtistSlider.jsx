@@ -101,6 +101,7 @@ const PopularOfThisArtistSlider = ({ products, baseUrl }) => {
 														en={product.description_en}
 														uk={product.description_uk}
 														maxLength={100}
+														html
 													/>
 												</p>
 											</div>

@@ -179,7 +179,8 @@ function NewsPage() {
 										{/* Description */}
 										<div className={`${styles.newsPageCardDescriptionWrapper}`}>
 											<p className={`${styles.newsPageCardDescription}`}>
-												<TranslatedContent en={post.content_en} uk={post.content_uk} maxLength={100} />
+												<TranslatedContent en={post.content_en} uk={post.content_uk} maxLength={100}
+												html />
 											</p>
 										</div>
 
@@ -274,7 +275,8 @@ function NewsPage() {
 										{/* Description */}
 										<div className={`${styles.newsPageCardDescriptionWrapper}`}>
 											<p className={`${styles.newsPageCardDescription}`}>
-												<TranslatedContent en={post.content_en} uk={post.content_uk} maxLength={100} />
+												<TranslatedContent en={post.content_en} uk={post.content_uk} maxLength={100}
+												html />
 											</p>
 										</div>
 
