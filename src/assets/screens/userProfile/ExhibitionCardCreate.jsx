@@ -480,6 +480,7 @@ function ExhibitionForm() {
 								maxLength={500}
 								required
 								onChange={textEditorOnChange}
+								html
 							/>
 						</div>
 
@@ -542,6 +543,7 @@ function ExhibitionForm() {
 								maxLength={500}
 								required
 								onChange={textEditorOnChange}
+								html
 							/>
 						</div>
 						{/* Location in English 

@@ -546,6 +546,7 @@ function MuseumExhibitions() {
 												maxLength={500}
 												required
 												onChange={textEditorOnChange}
+												html
 											/>
 										</div>
 										<div className="field-group">
@@ -607,6 +608,7 @@ function MuseumExhibitions() {
 												maxLength={500}
 												required
 												onChange={textEditorOnChange}
+												html
 											/>
 										</div>
 										<div className="field-group">

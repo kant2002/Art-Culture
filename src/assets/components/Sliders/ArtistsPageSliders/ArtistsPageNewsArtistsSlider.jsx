@@ -52,7 +52,8 @@ const Slide = ({ post, baseUrl }) => {
 					className="NewsSliderCardDescriptionWrapper"
 				>
 					<p className="NewsSliderCardDescription">
-						<TranslatedContent en={post.content_en} uk={post.content_uk} maxLength={230} />
+						<TranslatedContent en={post.content_en} uk={post.content_uk} maxLength={230}
+						html />
 					</p>
 				</div>
 			</a>

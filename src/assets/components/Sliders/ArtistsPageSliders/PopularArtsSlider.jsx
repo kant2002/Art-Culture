@@ -65,6 +65,7 @@ const Slide = ({ product, baseUrl }) => {
 							en={product.description_en}
 							uk={product.description_uk}
 							maxLength={60}
+							html
 						/>
 					</p>
 				</div>

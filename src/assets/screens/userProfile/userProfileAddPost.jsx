@@ -107,7 +107,8 @@ function UserProfileAddPost() {
 						<div className="field-group">
 							<TextAreaEditor label={t('Опис публікації українською')}
 								name='content_uk' value={formData.content_uk}
-								maxLength='500' required onChange={textEditorOnChange}/>
+								maxLength='500' required onChange={textEditorOnChange}
+								html/>
 						</div>
 					</div>
 					<div className="form-group">
@@ -119,7 +120,8 @@ function UserProfileAddPost() {
 						<div className="field-group">
 							<TextAreaEditor label={t('Опис публікації англійською')}
 								name='content_en' value={formData.content_en}
-								maxLength='500' required onChange={textEditorOnChange}/>
+								maxLength='500' required onChange={textEditorOnChange}
+								html/>
 						</div>
 					</div>
 				</div>
