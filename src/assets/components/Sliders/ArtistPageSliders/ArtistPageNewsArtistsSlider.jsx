@@ -53,6 +53,7 @@ const Slide = ({ post, baseUrl }) => {
 						en={post.content_en}
 						uk={post.content_uk}
 						maxLength={230}
+						html
 					/>
 				</p>
 			</div>

@@ -215,7 +215,8 @@ const UserProfile = () => {
 											<TextAreaEditor label={t('Про себе')}
 												placeholder="Bio"
 												name='bio' value={bio}
-												maxLength={500} required onChange={({ value }) => setBio(value) } />
+												maxLength={500} required onChange={({ value }) => setBio(value) }
+												html />
 										</div>
 
 										<div

@@ -94,6 +94,7 @@ const ProductCardCreate = () => {
 								maxLength={500}
 								required
 								onChange={textEditorOnChange}
+								html
 							/>
 						</div>
 						<div className="field-group">
@@ -104,6 +105,7 @@ const ProductCardCreate = () => {
 								maxLength={500}
 								required
 								onChange={textEditorOnChange}
+								html
 							/>
 						</div>
 					</div>
@@ -126,6 +128,7 @@ const ProductCardCreate = () => {
 								maxLength={500}
 								required
 								onChange={textEditorOnChange}
+								html
 							/>
 						</div>
 						<div className="field-group">
@@ -136,6 +139,7 @@ const ProductCardCreate = () => {
 								maxLength={500}
 								required
 								onChange={textEditorOnChange}
+								html
 							/>
 						</div>
 					</div>
