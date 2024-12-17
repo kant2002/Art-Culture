@@ -261,6 +261,14 @@ export const getCurrentUser = async (req, res, next) => {
         title: true,
         bio: true,
         images: true,
+        country: true,
+        state: true,
+        city: true,
+        street: true,
+        house_number: true,
+        postcode: true,
+        lat: true,
+        lon: true,
         createdAt: true,
         updatedAt: true,
       },
@@ -288,6 +296,19 @@ export const updateUserProfile = async (req, res, next) => {
       lat,
       lon,
     } = req.body
+
+    console.log("Received update data:", {
+      title,
+      bio,
+      country,
+
+      city,
+      street,
+      house_number,
+      postcode,
+      lat,
+      lon,
+    })
     const user = req.user
     let profileImage = user.images
     if (req.file) {
