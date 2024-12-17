@@ -6,9 +6,9 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
 import API from '../../../utils/api.js'
 import ImageEditor from '../../components/Blocks/ImageEditor.jsx'
+import TextAreaEditor from '../../components/Blocks/TextAreaEditor.jsx'
 import TextEditor from '../../components/Blocks/TextEditor.jsx'
 import styles from '/src/styles/components/UserProfile/userProfile.module.scss'
-import TextAreaEditor from '../../components/Blocks/TextAreaEditor.jsx'
 
 const UserProfile = () => {
 	const { user, updateUser, loading, error } = useAuth() // Access user and logout from context
@@ -23,6 +23,15 @@ const UserProfile = () => {
 	const { t } = useTranslation()
 	const navigate = useNavigate()
 
+	// Address fields
+	const [country, setCountry] = useState('')
+	const [city, setCity] = useState('')
+	const [street, setStreet] = useState('')
+	const [houseNumber, setHouseNumber] = useState('')
+	const [postcode, setPostcode] = useState('')
+	const [latitude, setLatitude] = useState('')
+	const [longitude, setLongitude] = useState('')
+
 	useEffect(() => {
 		if (loading) return
 
@@ -33,6 +42,16 @@ const UserProfile = () => {
 			setTitle(user.title || '')
 			setBio(user.bio || '')
 			setProfileImage(user.images || null)
+
+			if (user.role === 'MUSEUM') {
+				setCountry(user.country || '')
+				setCity(user.city || '')
+				setStreet(user.street || '')
+				setHouseNumber(user.house_number || '')
+				setPostcode(user.postcode || '')
+				setLatitude(user.lat ? user.lat.toString() : '')
+				setLongitude(user.lon ? user.lon.toString() : '')
+			}
 		} else {
 			if (error) {
 				setServerMessage('No valid session found. Please login.')
@@ -56,6 +75,22 @@ const UserProfile = () => {
 		formData.append('bio', bio)
 		if (profileImage instanceof File) {
 			formData.append('profileImage', profileImage)
+		}
+
+		// If the user is a Museum, append address fields
+		if (user && user.role === 'MUSEUM') {
+			formData.append('country', country)
+			formData.append('city', city)
+			formData.append('street', street)
+			formData.append('house_number', houseNumber)
+			formData.append('postcode', postcode)
+			formData.append('lat', latitude)
+			formData.append('lon', longitude)
+		}
+
+		// Log formData entries for debugging
+		for (let [key, value] of formData.entries()) {
+			console.log(`${key}:`, value)
 		}
 
 		try {
@@ -133,6 +168,36 @@ const UserProfile = () => {
 							<strong>{t('Дата реєстрації')}:&#8194;</strong>
 							{regDate}
 						</p>
+
+						{/* Conditionally render address information for Museum users */}
+						{user && user.role === 'MUSEUM' && (
+							<div className={styles.addressDetails}>
+								<h3>{t('Адреса')}</h3>
+								<p>
+									<strong>{t('Країна')}:&#8194;</strong>{' '}
+									{country}
+								</p>
+								<p>
+									<strong>{t('Місто')}:&#8194;</strong> {city}
+								</p>
+								<p>
+									<strong>{t('Вулиця')}:&#8194;</strong>{' '}
+									{street}
+								</p>
+								<p>
+									<strong>
+										{t('Номер будинку')}:&#8194;
+									</strong>{' '}
+									{houseNumber}
+								</p>
+								<p>
+									<strong>
+										{t('Поштовий індекс')}:&#8194;
+									</strong>{' '}
+									{postcode}
+								</p>
+							</div>
+						)}
 
 						{serverMessage && (
 							<p className={styles.ErrorMessage}>
@@ -212,12 +277,80 @@ const UserProfile = () => {
 												styles.profileModalBioWrapper
 											}
 										>
-											<TextAreaEditor label={t('Про себе')}
+											<TextAreaEditor
+												label={t('Про себе')}
 												placeholder="Bio"
-												name='bio' value={bio}
-												maxLength={500} required onChange={({ value }) => setBio(value) }
-												html />
+												name="bio"
+												value={bio}
+												maxLength={500}
+												required
+												onChange={({ value }) =>
+													setBio(value)
+												}
+												html
+											/>
 										</div>
+
+										{/* Conditionally render address fields if the user is a Museum */}
+										{user && user.role === 'MUSEUM' && (
+											<div
+												className={
+													styles.addressEditWrapper
+												}
+												style={{ display: 'flex' }}
+											>
+												<TextEditor
+													name="country"
+													value={country}
+													label={t('Країна')}
+													onChange={({ value }) =>
+														setCountry(value)
+													}
+													maxLength={100}
+													required
+												/>
+												<TextEditor
+													name="city"
+													value={city}
+													label={t('Місто')}
+													onChange={({ value }) =>
+														setCity(value)
+													}
+													maxLength={100}
+													required
+												/>
+												<TextEditor
+													name="street"
+													value={street}
+													label={t('Вулиця')}
+													onChange={({ value }) =>
+														setStreet(value)
+													}
+													maxLength={100}
+													required
+												/>
+												<TextEditor
+													name="houseNumber"
+													value={houseNumber}
+													label={t('Номер будинку')}
+													onChange={({ value }) =>
+														setHouseNumber(value)
+													}
+													maxLength={50}
+													required
+												/>
+												<TextEditor
+													name="postcode"
+													value={postcode}
+													label={t('Поштовий індекс')}
+													onChange={({ value }) =>
+														setPostcode(value)
+													}
+													maxLength={20}
+													required
+												/>
+											</div>
+										)}
 
 										<div
 											className={

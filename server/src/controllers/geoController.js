@@ -59,7 +59,7 @@ export const searchAddress = async (req, res, next) => {
     })
 
     // Return the data from Nominatim directly to the client
-    res.json(response.data)
+    res.json(processedData)
   } catch (error) {
     console.error("Error fetching address:", error)
     next(error)
@@ -97,6 +97,7 @@ export const searchMuseumAddress = async (req, res, next) => {
       const city = address.city || address.town || address.village || ""
       const state = address.state || ""
       const postcode = address.postcode || ""
+      const country = address.country || ""
 
       // Format the road name
       // Use startsWith (not startWith)
@@ -106,25 +107,20 @@ export const searchMuseumAddress = async (req, res, next) => {
           : `вулиця ${road}`
         : ""
 
-      const formattedAddress = [
-        roadFormatted,
-        house_number ? house_number.toUpperCase() : "",
-        city,
-        state,
-        postcode || "Нема індекса",
-      ]
-        .filter((part) => part)
-        .join(", ")
-
       return {
-        display_name: formattedAddress,
+        country,
+        state,
+        city,
+        road: roadFormatted,
+        house_number: house_number.toUpperCase(),
+        postcode,
         lat: item.lat,
         lon: item.lon,
       }
     })
 
     // Return the data from Nominatim directly to the client
-    res.json(response.data)
+    res.json(processedData)
   } catch (error) {
     console.error("Error fetching address:", error)
     next(error)
