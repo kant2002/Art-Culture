@@ -9,15 +9,15 @@ datasource db {
 }
 
 model User {
-  id                 Int                  @id @default(autoincrement())
-  email              String               @unique
+  id                 Int                 @id @default(autoincrement())
+  email              String              @unique
   password           String
-  role               Role                 @default(USER)
+  role               Role                @default(USER)
   images             String?
   title              String?
   bio                String?
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
   country            String?
   house_number       String?
   lat                Float?
@@ -27,11 +27,11 @@ model User {
   street             String?
   city               String?
   artTerms           ArtTerm[]
-  createdExhibitions Exhibition[]         @relation("UserCreatedExhibitions")
+  createdExhibitions Exhibition[]        @relation("UserCreatedExhibitions")
   exhibitionArtists  ExhibitionArtist[]
   posts              Post[]
   products           Product[]
-  museum_logo_images museum_logo_images[]
+  museum_logo_image  museum_logo_images? @relation("UserMuseumLogo")
 
   @@map("user")
 }
@@ -144,10 +144,10 @@ model ArtTerm {
 model museum_logo_images {
   id       Int    @id @default(autoincrement())
   imageUrl String
-  userId   Int
-  user     User   @relation(fields: [userId], references: [id])
+  userId   Int    @unique
+  user     User   @relation("UserMuseumLogo", fields: [userId], references: [id])
 
-  @@index([userId], map: "museum_logo_images_userId_fkey")
+  @@index([userId], map: "Museum_logo_images_userId_fkey")
 }
 
 enum Role {
