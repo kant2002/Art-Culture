@@ -64,7 +64,7 @@ function MainMuseums() {
 	return (
 		<div className={`${styles.mainPageNewsContainer}`}>
 			<div className={`${styles.mainPageNewsTitleWithButton}`}>
-				<h3 className={`${styles.mainPageNewsTitle}`}>{t('Музеї')}</h3>
+				<h2 className={`${styles.mainPageNewsTitle}`}>{t('Музеї')}</h2>
 				<div
 					className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}
 				>

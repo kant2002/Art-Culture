@@ -84,7 +84,7 @@ const MainInstagramSlider = () => {
 			<div className='mainInstagramSliderWrapper'>
 				<div className='mainInstagramSliderTopInnerWrapper'>
 					<div className='mainInstagramSliderTitleWrapper'>
-						<p className='mainInstagramSliderTitle'>{t('on instagram')}</p>
+						<h2 className='mainInstagramSliderTitle'>{t('on instagram')}</h2>
 					</div>
 					<div className='mainInstagramSliderFollowUsWrapper'>
 						<div className='mainInstagramSliderFollowUsButtonWrapper'>

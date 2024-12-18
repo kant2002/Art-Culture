@@ -76,7 +76,7 @@ function MainArtists() {
 	return (
 		<div className={styles.mainPageNewsContainer}>
 			<div className={styles.mainPageNewsTitleWithButton}>
-				<h3 className={styles.mainPageNewsTitle}>{t('Митці')}</h3>
+				<h2 className={styles.mainPageNewsTitle}>{t('Митці')}</h2>
 				<div
 					className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}
 				>

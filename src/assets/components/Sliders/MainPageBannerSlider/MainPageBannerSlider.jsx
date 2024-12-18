@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 // Import Swiper React components
@@ -38,9 +38,9 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 				</div>
 
 				<div className="MainPageBannerSliderCardTitleWrapper">
-					<p className="MainPageBannerSliderCardTitle">
+					<h2 className="MainPageBannerSliderCardTitle">
 						{museum.title}
-					</p>
+					</h2>
 				</div>
 
 				<div className="MainPageBannerSliderCardDescriptionWrapper">

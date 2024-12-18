@@ -65,14 +65,9 @@ function MainNews() {
 	return (
 		<div className={`${styles.mainPageNewsContainer}`}>
 			<div className={`${styles.mainPageNewsTitleWithButton}`}>
-				<h3 className={`${styles.mainPageNewsTitle}`}>{t('Новини')}</h3>
-				<div
-					className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}
-				>
-					<button
-						className={`${styles.mainPageNewsButton}`}
-						onClick={handleNewsPageClick}
-					>
+				<h2 className={`${styles.mainPageNewsTitle}`}>{t('Новини')}</h2>
+				<div className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}>
+					<button	className={`${styles.mainPageNewsButton}`} onClick={handleNewsPageClick}>
 						<p className={`${styles.mainPageNewsButtonTitle}`}>
 							{t('Усі новини')}
 						</p>
@@ -119,9 +114,7 @@ function MainNews() {
 								</div>
 								<div className={`${styles.cardTextWrapper}`}>
 									<div className={`${styles.cardTitleWrapper}`}>
-										<h3
-											className={`${styles.cardTitle} ${index === 0 ? styles.firstCardTitle : index === 1 ? styles.secondCardTitle : index === 2 ? styles.thirdCardTitle : styles.fourthCardTitle}`}
-										>
+										<h3	className={`${styles.cardTitle} ${index === 0 ? styles.firstCardTitle : index === 1 ? styles.secondCardTitle : index === 2 ? styles.thirdCardTitle : styles.fourthCardTitle}`}>
 											<TranslatedContent en={post.title_en} uk={post.title_uk} maxLength={50} />
 										</h3>
 									</div>
