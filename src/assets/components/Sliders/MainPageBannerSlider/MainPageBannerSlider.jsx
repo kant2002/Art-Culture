@@ -25,37 +25,39 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 	return (
 		<div className="MainPageBannerSliderCardContainer">
 			<div className="MainPageBannerSliderCardWrapper">
-				<div className="MainPageBannerSliderCardLogoWrapper">
-					<img
-						className="MainPageBannerSliderCardLogo"
-						src={'/Img/logoMuseum_3.png'}
-						alt={t('Фото музея')}
-						onError={(e) => {
-							e.target.onerror = null
-							e.target.src = '/Img/newsCardERROR.jpg'
-						}}
-					/>
-				</div>
+				<div className="MainPageBannerSliderCardInnerWrapper">
+					<div className="MainPageBannerSliderCardLogoWrapper">
+						<img
+							className="MainPageBannerSliderCardLogo"
+							src={'/Img/logoMuseum_3.png'}
+							alt={t('Фото музея')}
+							onError={(e) => {
+								e.target.onerror = null
+								e.target.src = '/Img/newsCardERROR.jpg'
+							}}
+						/>
+					</div>
 
-				<div className="MainPageBannerSliderCardTitleWrapper">
-					<h2 className="MainPageBannerSliderCardTitle">
-						{museum.title}
-					</h2>
-				</div>
+					<div className="MainPageBannerSliderCardTitleWrapper">
+						<h2 className="MainPageBannerSliderCardTitle">
+							{museum.title}
+						</h2>
+					</div>
 
-				<div className="MainPageBannerSliderCardDescriptionWrapper">
-					<p className="MainPageBannerSliderCardDescription">
-						{museum.bio}
-					</p>
-				</div>
+					<div className="MainPageBannerSliderCardDescriptionWrapper">
+						<p className="MainPageBannerSliderCardDescription">
+							{museum.bio}
+						</p>
+					</div>
 
-				<div className="MainPageBannerSliderCardReadMoreButtonWrapper">
-					<button
-						className="MainPageBannerSliderCardReadMoreButton"
-						onClick={() => onClick(museum.id)}
-					>
-						{t('Читати далі')}
-					</button>
+					<div className="MainPageBannerSliderCardReadMoreButtonWrapper">
+						<button
+							className="MainPageBannerSliderCardReadMoreButton"
+							onClick={() => onClick(museum.id)}
+						>
+							{t('Читати далі')}
+						</button>
+					</div>
 				</div>
 
 				<div className="MainPageBannerSliderCardImgWrapper">
