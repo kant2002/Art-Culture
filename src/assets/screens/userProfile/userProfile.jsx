@@ -349,7 +349,7 @@ const UserProfile = () => {
 														setCountry(value)
 													}
 													maxLength={100}
-													required
+													//required
 												/>
 												<TextEditor
 													name="city"
@@ -359,7 +359,7 @@ const UserProfile = () => {
 														setCity(value)
 													}
 													maxLength={100}
-													required
+													//required
 												/>
 												<TextEditor
 													name="street"
@@ -369,7 +369,7 @@ const UserProfile = () => {
 														setStreet(value)
 													}
 													maxLength={100}
-													required
+													//required
 												/>
 												<TextEditor
 													name="houseNumber"
@@ -379,7 +379,7 @@ const UserProfile = () => {
 														setHouseNumber(value)
 													}
 													maxLength={50}
-													required
+													//required
 												/>
 												<TextEditor
 													name="postcode"
@@ -389,7 +389,7 @@ const UserProfile = () => {
 														setPostcode(value)
 													}
 													maxLength={20}
-													required
+													//required
 												/>
 											</div>
 										)}
@@ -401,7 +401,7 @@ const UserProfile = () => {
 										>
 											<ImageEditor
 												label={t('Додати зображення')}
-												required
+												//required
 												name="images"
 												value={profileImage}
 												onChange={({ value }) =>
