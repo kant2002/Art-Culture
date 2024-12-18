@@ -2,6 +2,7 @@
 
 .profileActions {
 	/* Контейнер для верхних кнопок */
+	margin: 0 0 calc(-1 * variables.$responsiveMediumPadding) 0;
 	padding: 0 variables.$responsiveLeftAndRightPadding;
 	display: flex;
 	flex-direction: column;
@@ -62,4 +63,19 @@
 	// background: #3a8374;
 	color: #fff;
 	border: none;
+}
+
+@media (min-width: 1441px) {
+	.profileActions {
+		/* Контейнер для верхних кнопок */
+		margin: 0 0 calc(-1 * variables.$staticPcMediumPadding) 0;
+	}
+}
+
+@media (max-width: 569px) {
+	.profileActions {
+		/* Контейнер для верхних кнопок */
+		margin: 0 0 calc(-1 * variables.$staticMobileMediumPadding) 0;
+	}
+
 }
