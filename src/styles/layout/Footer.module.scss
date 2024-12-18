@@ -2,6 +2,7 @@
 
 .footer {
 	// стили для тега footer
+	margin: $responsiveMediumPadding 0 0 0;
 	padding: 37px $responsiveLeftAndRightPadding;
 	display: flex;
 	height: 234px;
@@ -314,6 +315,11 @@
 }
 
 @media (min-width: 1441px) {
+	.footer {
+		// стили для тега footer
+		margin: $staticPcMediumPadding;
+	}
+
 	.footerLogoWrapper {
 		// стили для обёртки логотипа
 		margin: 0 56px 0 0;
@@ -444,7 +450,11 @@
 	}
 }
 
-@media (max-width: 569px) {	
+@media (max-width: 569px) {
+	.footer {
+		// стили для тега footer
+		margin: $staticMobileMediumPadding;
+	}	
 	.footerLogoTitleWrapper {
 		// стили для обёртки текста логотипа
 			margin: 0 0 -1.185px 0;

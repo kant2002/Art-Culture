@@ -80,6 +80,12 @@
   }
 }
 
+.profileAction {
+  /* Стиль для каждой кнопки действия */
+  margin: $responsiveMediumPadding 0 calc(-1 * $responsiveMediumPadding) 0;
+  font-size: 16px;
+}
+
 .modalTitleWrapper {
   /* Обертка для заголовка модального окна */
   display: flex;
@@ -353,13 +359,7 @@
 
   .profileAction {
     /* Стиль для каждой кнопки действия */
-    margin: $staticPcMediumPadding 0 0 0;
-    font-size: 16px;
-  }
-
-  .profileAction {
-    /* Стиль для каждой кнопки действия */
-    margin: $staticPcMediumPadding 0 0 0;
+    margin: $staticPcMediumPadding 0 calc(-1 * $staticPcMediumPadding) 0;
     font-size: 16px;
 
     &:last-child {
@@ -423,10 +423,19 @@
   }
 
   .profileModalImageDownloadWrapper {
+
     // обертка для загрузки аватара
     .profileLabel {
       font-size: 16px;
       margin: $staticPcMediumPadding 0 0 0;
     }
+  }
+}
+
+@media (max-width: 569px) {
+  .profileAction {
+    /* Стиль для каждой кнопки действия */
+    margin: $staticMobileMediumPadding 0 calc(-1 * $staticMobileMediumPadding) 0;
+    font-size: 16px;
   }
 }
