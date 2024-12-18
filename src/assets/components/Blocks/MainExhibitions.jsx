@@ -1,8 +1,9 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getFormattedDate, getImageUrl } from '../../../utils/helper'
 import styles from '/src/styles/components/Blocks/MainNews.module.scss'
+import TranslatedContent from './TranslatedContent'
 
 function MainExhibitions() {
 	const { t, i18n } = useTranslation()
@@ -104,9 +105,9 @@ function MainExhibitions() {
 						const featuredMediaUrl =
 							exhibition.images && exhibition.images.length > 0
 								? getImageUrl(
-										exhibition.images[0].imageUrl,
-										'/Img/halfNewsCard.jpg',
-									)
+									exhibition.images[0].imageUrl,
+									'/Img/halfNewsCard.jpg',
+								)
 								: '/Img/halfNewsCard.jpg'
 						console.log('Витягнуте медіа:', featuredMediaUrl)
 
@@ -118,9 +119,9 @@ function MainExhibitions() {
 						const description =
 							currentLanguage === 'en'
 								? exhibition.description_en ||
-									exhibition.description_uk
+								exhibition.description_uk
 								: exhibition.description_uk ||
-									exhibition.description_en
+								exhibition.description_en
 
 						const address = exhibition.address || ''
 
@@ -161,7 +162,7 @@ function MainExhibitions() {
 											<h3
 												className={`${styles.cardTitle} ${index === 0 ? styles.firstCardTitle : index === 1 ? styles.secondCardTitle : index === 2 ? styles.thirdCardTitle : styles.fourthCardTitle}`}
 											>
-												{title}
+												<TranslatedContent en={exhibition.title_en} uk={exhibition.title_uk} maxLength={50} />
 											</h3>
 										</div>
 										<div
@@ -170,7 +171,7 @@ function MainExhibitions() {
 											<p
 												className={`${styles.cardDescription} ${index === 0 ? styles.firstCardDescription : index === 1 ? styles.secondCardDescription : styles.thirdCardDescription}`}
 											>
-												{description}
+												<TranslatedContent en={exhibition.description_en} uk={exhibition.description_uk} maxLength={100} html />
 											</p>
 										</div>
 
@@ -192,18 +193,6 @@ function MainExhibitions() {
 											>
 												{time} - {endTime}
 											</p>
-										</div>
-
-										<div
-											className={`${styles.cardReadMoreWrapper}`}
-										>
-											{/*	TODO:write correct link */}
-											<a
-												href={`/exhibitions/${exhibition.id}`}
-												className={`${styles.cardReadMoreLink}`}
-											>
-												{t('Читати далі')}
-											</a>
 										</div>
 									</div>
 								</div>
@@ -242,6 +231,18 @@ function MainExhibitions() {
 												className={`${styles.cardTime}`}
 											></p>
 										</div>
+									</div>
+
+									<div
+										className={`${styles.cardReadMoreWrapper}`}
+									>
+										{/*	TODO:write correct link */}
+										<a
+											href={`/exhibitions/${exhibition.id}`}
+											className={`${styles.cardReadMoreLink}`}
+										>
+											{t('Читати далі')}
+										</a>
 									</div>
 								</div>
 							</div>

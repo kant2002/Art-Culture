@@ -161,14 +161,14 @@ function MainArtists() {
 									<div className={styles.cardTimeWrapper}>
 										<p className={styles.cardTime}>{formattedTime}</p>
 									</div>
-									<div className={styles.cardReadMoreWrapper}>
-										<a
-											onClick={() => handleArtistPageClick(creator.id)}
-											className={styles.cardReadMoreLink}
-										>
-											{t('Читати далі')}
-										</a>
-									</div>
+								</div>
+								<div className={styles.cardReadMoreWrapper}>
+									<a
+										onClick={() => handleArtistPageClick(creator.id)}
+										className={styles.cardReadMoreLink}
+									>
+										{t('Читати далі')}
+									</a>
 								</div>
 							</div>
 						</div>
