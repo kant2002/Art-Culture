@@ -130,7 +130,7 @@ function MainNews() {
 											className={`${styles.cardDescription} ${index === 0 ? styles.firstCardDescription : index === 1 ? styles.secondCardDescription : styles.thirdCardDescription}`}
 										>
 											<TranslatedContent en={post.content_en} uk={post.content_uk} maxLength={100}
-											html />
+												html />
 										</p>
 									</div>
 								</div>
@@ -154,14 +154,14 @@ function MainNews() {
 									<div className={`${styles.cardTimeWrapper}`}>
 										<p className={`${styles.cardTime}`}>{formattedTime}</p>
 									</div>
-									<div className={`${styles.cardReadMoreWrapper}`}>
-										<a
-											href={`/posts/${post.id}`}
-											className={`${styles.cardReadMoreLink}`}
-										>
-											{t('Читати далі')}
-										</a>
-									</div>
+								</div>
+								<div className={`${styles.cardReadMoreWrapper}`}>
+									<a
+										href={`/posts/${post.id}`}
+										className={`${styles.cardReadMoreLink}`}
+									>
+										{t('Читати далі')}
+									</a>
 								</div>
 							</div>
 						</div>

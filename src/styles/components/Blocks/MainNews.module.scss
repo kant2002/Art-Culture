@@ -17,13 +17,13 @@
   align-items: center;
 }
 
-.mainPageNewsTitle {
-  // Стили для заголовка
-  font-family: $default-font;
-  font-weight: 600;
-  font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
-  text-transform: uppercase;
-}
+// .mainPageNewsTitle {
+//   // Стили для заголовка
+//   font-family: $default-font;
+//   font-weight: 600;
+//   font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+//   text-transform: uppercase;
+// }
 
 .mobileButtonWrapper {
   // Дополнительные стили для обертки кнопки на мобильных устройствах
@@ -171,10 +171,13 @@
 
 .cardClockAndDateWrapper {
   // Стили для обертки даты и времени карточки
-  margin: auto 0 0 0;
+  margin: $responsiveSmallPadding 0 0 0;
+  display: flex;
+  align-items: center;
 }
 
 .cardClockAndDateInner {
+  // Стили для обертки даты и времени карточки
   display: flex;
   align-items: center;
 }
@@ -277,10 +280,10 @@
     margin: $staticPcBigPadding 0 0 0;
   }
 
-  .mainPageNewsTitle {
+  // .mainPageNewsTitle {
     // Стили для заголовка
     // font-size: 28px;
-  }
+  // }
 
   .mainPageNewsButton {
     // Стили для кнопки
@@ -303,40 +306,40 @@
     margin: $staticPcMediumPadding 0 0 0;
   }
 
-  .cardTitleWrapper {
+  // .cardTitleWrapper {
     // Стили для обертки заголовка карточки
     // font-size: 22px;
-  }
+  // }
 
   .cardDescriptioneWrapper {
     // Стили для обертки описания карточки
     margin: $staticPcSmallPadding 0 0 0;
   }
 
-  .cardDescription {
+  // .cardDescription {
     // Стили для описания карточки
     // font-size: 16px;
-  }
+  // }
 
   .cardAddressWrapper {
     // Стили для обертки описания карточки
     margin: $staticPcSmallPadding 0 0 0;
   }
 
-  .cardAddress {
+  // .cardAddress {
     // Стили для описания карточки
     // font-size: 16px;
-  }
+  // }
 
   .cardExhibDurTimeWrapper {
     // Стили для обертки описания карточки
     margin: $staticPcSmallPadding 0 0 0;
   }
 
-  .cardExhibDurTime {
+  // .cardExhibDurTime {
     // Стили для описания карточки
     // font-size: 16px;
-  }
+  // }
 
   .cardDateWrapper {
     // Стили для обертки даты
@@ -402,6 +405,12 @@
     margin: $staticMobileSmallPadding 0 0 0;
   }
 
+  .cardClockAndDateWrapper { 
+    // Стили для обертки даты и времени
+    margin: $staticMobileSmallPadding 0 0 0;
+    flex-direction: column;
+  }
+
   .cardExhibDurTimeWrapper {
     // Стили для обертки описания карточки
     margin: $staticMobileSmallPadding 0 0 0;
@@ -416,9 +425,10 @@
     // Стили для обертки даты
     margin: 0 0 0 $staticMobileSmallPadding;
   }
-
-  .cardClockAndDateInner {
-    // Стили для обертки даты
-    flex-direction: column;
+  
+  .cardReadMoreWrapper {
+    // Стили для обертки ссылки "Читати далi"
+    margin: $staticMobileSmallPadding 0 0 0;
+    justify-content: center;
   }
 }
