@@ -1,11 +1,12 @@
 import { getFormattedDate } from '@/utils/helper'
 import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
 import API from '../../../utils/api.js'
 import ImageEditor from '../../components/Blocks/ImageEditor.jsx'
+import MuseumAddressSearch from '../../components/Blocks/MuseumAddressSearch.jsx'
 import TextAreaEditor from '../../components/Blocks/TextAreaEditor.jsx'
 import TextEditor from '../../components/Blocks/TextEditor.jsx'
 import styles from '/src/styles/components/UserProfile/userProfile.module.scss'
@@ -22,7 +23,7 @@ const UserProfile = () => {
 	const [editMode, setEditMode] = useState(false)
 	const { t } = useTranslation()
 	const navigate = useNavigate()
-
+	const hidden = false
 	// Address fields
 	const [country, setCountry] = useState('')
 	const [city, setCity] = useState('')
@@ -65,6 +66,23 @@ const UserProfile = () => {
 		setEditMode(!editMode)
 		setServerMessage('')
 	}
+
+	const handleAddressSelect = useCallback(
+		({ country, state, city, road, house_number, postcode, lat, lon }) => {
+			updateUser((prev) => ({
+				...prev,
+				country,
+				state,
+				city,
+				street: road,
+				house_number,
+				postcode,
+				lat,
+				lon,
+			}))
+		},
+		[],
+	)
 
 	const handleUpdateProfile = async (e) => {
 		e.preventDefault()
@@ -171,8 +189,10 @@ const UserProfile = () => {
 
 						{/* Conditionally render address information for Museum users */}
 						{user && user.role === 'MUSEUM' && (
-							<div className={styles.addressDetails}>
-								<h3>{t('Адреса')}</h3>
+							<div
+								className={styles.addressDetails}
+								hidden={hidden}
+							>
 								<p>
 									<strong>{t('Країна')}:&#8194;</strong>{' '}
 									{country}
@@ -221,8 +241,14 @@ const UserProfile = () => {
 
 				<div className="App">
 					{isOpen && (
-						<div className="modal-overlay">
-							<div className="modal-content">
+						<div
+							className="modal-overlay"
+							style={{ overflow: 'hidden' }}
+						>
+							<div
+								className="modal-content"
+								style={{ overflowY: 'scroll' }}
+							>
 								{editMode && (
 									<form
 										className={styles.editProfileForm}
@@ -297,8 +323,24 @@ const UserProfile = () => {
 												className={
 													styles.addressEditWrapper
 												}
-												style={{ display: 'flex' }}
+												style={{
+													display: 'flex',
+													flexDirection: 'column',
+												}}
 											>
+												{/* Museum Address Search */}
+												<div className="field-group">
+													<label className="field-label">
+														{t(
+															'Пошук адреси для музею',
+														)}
+													</label>
+													<MuseumAddressSearch
+														onSelect={
+															handleAddressSelect
+														}
+													/>
+												</div>
 												<TextEditor
 													name="country"
 													value={country}

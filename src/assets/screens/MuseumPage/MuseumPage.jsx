@@ -1,9 +1,10 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import styles from '../../../styles/layout/MuseumPage.module.scss'
 import { getBaseUrl, getImageUrl } from '../../../utils/helper.js'
+import MuseumMaps from '../../components/Blocks/MuseumMaps'
 import MuseumPageMasonryGallery from '../../components/Sliders/MuseumPageSliders/MuseumPageMasonryGallery.jsx'
 function MuseumPage() {
 	const { t } = useTranslation()
@@ -14,6 +15,7 @@ function MuseumPage() {
 	const [museum, setMuseum] = useState(null)
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		const fetchMuseum = async () => {
@@ -49,12 +51,23 @@ function MuseumPage() {
 		setIsExpanded((prevState) => !prevState)
 	}
 
+	const handleMainPageClick = () => {
+		navigate('/MainPage')
+	}
+
+	const handleMuseumsPage = () => {
+		navigate('/MuseumsPage')
+	}
+
 	return (
 		<div className={`${styles.museumPage}`}>
 			<div className={`${styles.museumPageNavigationContainer}`}>
 				<nav className={`${styles.museumPageNavigation}`}>
 					<ul className={`${styles.museumPageNavigationList}`}>
-						<li className={`${styles.museumPageNavigationItem}`}>
+						<li
+							className={`${styles.museumPageNavigationItem}`}
+							onClick={handleMuseumsPage}
+						>
 							{t('Музеи')}
 						</li>
 						<p
@@ -112,13 +125,13 @@ function MuseumPage() {
 							<p
 								className={`${styles.museumPageMuseumLocationCity}`}
 							>
-								Київ
+								{museum.city}
 							</p>
 							<p>&#44;&#160;</p>
 							<p
 								className={`${styles.museumPageMuseumLocationCountry}`}
 							>
-								Україна
+								{museum.country}
 							</p>
 						</div>
 					</div>
@@ -148,12 +161,13 @@ function MuseumPage() {
             </div> */}
 
 			<div className={`${styles.underDevelopmentContainer}`}>
-				<p className={`${styles.underDevelopmentPreTitle}`}>
+				{/* <p className={`${styles.underDevelopmentPreTitle}`}>
 					{t('Цей контейнер')}
 				</p>
 				<p className={`${styles.underDevelopmentTitle}`}>
 					{t('В розробці')}
-				</p>
+				</p> */}
+				<MuseumMaps museum={museum} />
 			</div>
 
 			<div
@@ -184,20 +198,20 @@ function MuseumPage() {
 						<p
 							className={`${styles.museumPageMuseumLocationStreet}`}
 						>
-							вулиця Кирилівська, 41
+							{museum.street} {','} {museum.house_number}
 						</p>
 						<p className={`${styles.museumPageMuseumLocationCity}`}>
-							Київ
+							{museum.city}
 						</p>
 						<p
 							className={`${styles.museumPageMuseumLocationCountry}`}
 						>
-							Україна
+							{museum.country}
 						</p>
 						<p
 							className={`${styles.museumPageMuseumLocationIndex}`}
 						>
-							02000
+							{museum.postcode}
 						</p>
 					</div>
 
@@ -206,6 +220,7 @@ function MuseumPage() {
 					>
 						<button
 							className={`${styles.museumPageMuseumToTheSiteButton}`}
+							onClick={handleMainPageClick}
 						>
 							{t('Перейти до сайту')}
 						</button>
