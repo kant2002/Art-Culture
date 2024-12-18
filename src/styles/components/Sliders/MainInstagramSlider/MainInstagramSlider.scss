@@ -26,11 +26,7 @@
 
 .mainInstagramSliderTitle {
     // Заголовок слайдера
-    font-family: $default-font;
-    font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
-    font-weight: 600;
     color: white;
-    text-transform: uppercase;
 }
 
 .mainInstagramSliderFollowUsButton {

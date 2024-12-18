@@ -73,9 +73,9 @@ function MainExhibitions() {
 	return (
 		<div className={`${styles.mainPageNewsContainer}`}>
 			<div className={`${styles.mainPageNewsTitleWithButton}`}>
-				<h3 className={`${styles.mainPageNewsTitle}`}>
+				<h2 className={`${styles.mainPageNewsTitle}`}>
 					{t('Виставки')}
-				</h3>
+				</h2>
 				<div
 					className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}
 				>
