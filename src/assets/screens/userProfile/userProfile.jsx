@@ -20,6 +20,7 @@ const UserProfile = () => {
 	const [title, setTitle] = useState('')
 	const [bio, setBio] = useState('')
 	const [profileImage, setProfileImage] = useState(null) // Can hold File object or URL
+	const [museumLogo, setMuseumLogo] = useState(null)
 	const [editMode, setEditMode] = useState(false)
 	const { t } = useTranslation()
 	const navigate = useNavigate()
@@ -52,6 +53,7 @@ const UserProfile = () => {
 				setPostcode(user.postcode || '')
 				setLatitude(user.lat ? user.lat.toString() : '')
 				setLongitude(user.lon ? user.lon.toString() : '')
+				setMuseumLogo(user.museum_logo_image?.imageUrl || null)
 			}
 		} else {
 			if (error) {
@@ -104,6 +106,9 @@ const UserProfile = () => {
 			formData.append('postcode', postcode)
 			formData.append('lat', latitude)
 			formData.append('lon', longitude)
+			if (museumLogo instanceof File) {
+				formData.append('museumLogo', museumLogo)
+			}
 		}
 
 		// Log formData entries for debugging
@@ -159,6 +164,20 @@ const UserProfile = () => {
 									}
 									alt="Profile"
 									className={styles.profileImage}
+								/>
+							)}
+							{user && user.role === 'MUSEUM' && museumLogo && (
+								<img
+									src={
+										museumLogo.startsWith('http') ||
+										museumLogo.startsWith(
+											'/uploads/museumLogoImages',
+										)
+											? museumLogo
+											: `/uploads/museumLogoImages/${museumLogo}`
+									}
+									alt="Museum Logo"
+									className={styles.museumLogo}
 								/>
 							)}
 						</div>
@@ -409,6 +428,26 @@ const UserProfile = () => {
 												}
 											/>
 										</div>
+										{/* Conditionally render Museum Logo Editor */}
+										{user && user.role === 'MUSEUM' && (
+											<div
+												className={
+													styles.profileModalLogoUploadWrapper
+												}
+											>
+												<ImageEditor
+													label={t(
+														'Завантажити логотип музею',
+													)}
+													name="museumLogo"
+													value={museumLogo}
+													onChange={({ value }) =>
+														setMuseumLogo(value[0])
+													}
+													// Optional: add validation or constraints
+												/>
+											</div>
+										)}
 
 										<button
 											className={styles.submitButton}

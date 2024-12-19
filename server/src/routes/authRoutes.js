@@ -11,6 +11,7 @@ import {
   updateUserProfile,
 } from "../controllers/authController.js"
 import authenticateToken from "../middleware/authMiddleware.js"
+import museumLogoUploader from "../middleware/museumLogoUploader.js"
 import authorize from "../middleware/roleMIddleware.js"
 import upload from "../middleware/uploadUserProfileImages.js"
 
@@ -93,6 +94,8 @@ router.put(
   "/me",
   authenticateToken,
   upload.single("profileImage"),
+  museumLogoUploader.upload,
+  museumLogoUploader.processImages,
   [
     body("title")
       .optional()

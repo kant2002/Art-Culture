@@ -343,6 +343,48 @@ export const updateUserProfile = async (req, res, next) => {
       updateData.lon = lon ? parseFloat(lon) : req.user.lon
     }
 
+    if (req.file) {
+      // Check if user already has a logo
+      const existingLogo = await prisma.museum_logo_images.findUnique({
+        where: { userId: user.id },
+      })
+
+      if (req.file) {
+        if (existingLogo) {
+          // Update existing logo
+          await prisma.museum_logo_images.update({
+            where: { userId: user.id },
+            data: {
+              imageUrl: `../../uploads/museumLogos/${req.file.filename}`,
+            },
+          })
+
+          // Delete old logo file
+          const oldLogoPath = path.join(
+            __dirname,
+            "../../",
+            existingLogo.imageUrl,
+          )
+          try {
+            await fs.promises.unlink(oldLogoPath)
+            console.log(`Old museum logo deleted successfully: ${oldLogoPath}`)
+          } catch (err) {
+            if (err.code !== "ENOENT") {
+              console.error("Failed to delete old museum logo:", err)
+            }
+          }
+        } else {
+          // Create new logo entry
+          await prisma.museum_logo_images.create({
+            data: {
+              imageUrl: `../../uploads/museumLogos/${req.file.filename}`,
+              userId: user.id,
+            },
+          })
+        }
+      }
+    }
+
     const updateUserProfile = await prisma.user.update({
       where: {
         id: user.id,
@@ -360,6 +402,7 @@ export const updateUserProfile = async (req, res, next) => {
         street: true,
         house_number: true,
         postcode: true,
+        museum_logo_image: true,
         lat: true,
         lon: true,
         createdAt: true,
