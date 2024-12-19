@@ -169,12 +169,14 @@ const UserProfile = () => {
 							{user && user.role === 'MUSEUM' && museumLogo && (
 								<img
 									src={
-										museumLogo.startsWith('http') ||
-										museumLogo.startsWith(
-											'/uploads/museumLogoImages',
-										)
-											? museumLogo
-											: `/uploads/museumLogoImages/${museumLogo}`
+										museumLogo instanceof File
+											? URL.createObjectURL(museumLogo)
+											: museumLogo.startsWith('http') ||
+												  museumLogo.startsWith(
+														'/uploads/museumLogoImages',
+												  )
+												? `${museumLogo}`
+												: museumLogo
 									}
 									alt="Museum Logo"
 									className={styles.museumLogo}
