@@ -11,16 +11,16 @@ import {
   updateUserProfile,
 } from "../controllers/authController.js"
 import authenticateToken from "../middleware/authMiddleware.js"
-import museumLogoUploader from "../middleware/museumLogoUploader.js"
 import authorize from "../middleware/roleMIddleware.js"
-import upload from "../middleware/uploadUserProfileImages.js"
+import uploadProfileLogo from "../middleware/uploadProfileLogoImages.js"
 
 const router = express.Router()
 
 // Registration Route with Validation
 router.post(
   "/register",
-  upload.single("profileImage"),
+  uploadProfileLogo.upload,
+  uploadProfileLogo.processImages,
 
   [
     body("email").isEmail().withMessage("Enter a valid email"),
@@ -93,9 +93,9 @@ router.get("/me", authenticateToken, getCurrentUser)
 router.put(
   "/me",
   authenticateToken,
-  upload.single("profileImage"),
-  museumLogoUploader.upload,
-  museumLogoUploader.processImages,
+  uploadProfileLogo.upload,
+  uploadProfileLogo.processImages,
+
   [
     body("title")
       .optional()

@@ -138,6 +138,17 @@ const UserProfile = () => {
 		}
 	}
 
+	useEffect(() => {
+		return () => {
+			if (profileImage instanceof File) {
+				URL.revokeObjectURL(profileImage)
+			}
+			if (museumLogo instanceof File) {
+				URL.revokeObjectURL(museumLogo)
+			}
+		}
+	}, [profileImage, museumLogo])
+
 	const [isOpen, setIsOpen] = useState(false)
 
 	const openModal = () => setIsOpen(true)
@@ -430,7 +441,7 @@ const UserProfile = () => {
 												}
 											/>
 										</div>
-										{/* Conditionally render Museum Logo Editor */}
+
 										{user && user.role === 'MUSEUM' && (
 											<div
 												className={

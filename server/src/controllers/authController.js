@@ -11,6 +11,7 @@ import sendEmail from "../utils/sendEmails.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
+
 export const register = async (req, res, next) => {
   try {
     // Handle Validation Errors
@@ -34,10 +35,9 @@ export const register = async (req, res, next) => {
       lon,
     } = req.body
 
-    // Access the uploaded file
-    const profileImage = req.file
-      ? `../../uploads/profileImages/${req.file.filename}`
-      : null
+    // Access the uploaded files paths
+    const profileImage = req.body.profileImagePath || null
+    const museumLogo = req.body.museumLogoPath || null
 
     // Check if user exists
     const existingUser = await prisma.user.findUnique({ where: { email } })
@@ -79,6 +79,15 @@ export const register = async (req, res, next) => {
     const { password: pwd, ...userWithoutPassword } = user
     logger.debug("Request body:", req.body)
     logger.debug("Uploaded file:", req.file)
+
+    if (museumLogo && role === "MUSEUM") {
+      await prisma.museum_logo_images.create({
+        data: {
+          imageUrl: museumLogo,
+          userId: user.id,
+        },
+      })
+    }
 
     await sendEmail(
       user.email,
@@ -271,6 +280,11 @@ export const getCurrentUser = async (req, res, next) => {
         lon: true,
         createdAt: true,
         updatedAt: true,
+        museum_logo_image: {
+          select: {
+            imageUrl: true,
+          },
+        },
       },
     })
 
@@ -301,7 +315,6 @@ export const updateUserProfile = async (req, res, next) => {
       title,
       bio,
       country,
-
       city,
       street,
       house_number,
@@ -309,19 +322,23 @@ export const updateUserProfile = async (req, res, next) => {
       lat,
       lon,
     })
-    const user = req.user
+    const user = await prisma.user.findUnique({ where: { id: req.user.id } })
+    if (!user) {
+      return res.status(404).json({ error: "User not found" })
+    }
+
     let profileImage = user.images
-    if (req.file) {
-      profileImage = `../../uploads/profileImages/${req.file.filename}`
+    if (req.body.profileImagePath) {
+      profileImage = req.body.profileImagePath
 
       if (user.images) {
         const oldImagePath = path.join(__dirname, "../../", user.images)
         try {
           await fs.promises.unlink(oldImagePath)
-          console.log("Old image deleted successfully: ${oldImagePath}")
+          logger.log("Old image deleted successfully: ${oldImagePath}")
         } catch (err) {
           if (err.code !== "ENOENT") {
-            console.error("Failed to delete old image:", err)
+            logger.error("Failed to delete old image:", err)
           }
         }
       }
@@ -343,45 +360,42 @@ export const updateUserProfile = async (req, res, next) => {
       updateData.lon = lon ? parseFloat(lon) : req.user.lon
     }
 
-    if (req.file) {
-      // Check if user already has a logo
+    // Handle museum logo
+    if (req.body.museumLogoPath && user.role === "MUSEUM") {
       const existingLogo = await prisma.museum_logo_images.findUnique({
         where: { userId: user.id },
       })
 
-      if (req.file) {
-        if (existingLogo) {
-          // Update existing logo
-          await prisma.museum_logo_images.update({
-            where: { userId: user.id },
-            data: {
-              imageUrl: `../../uploads/museumLogos/${req.file.filename}`,
-            },
-          })
-
-          // Delete old logo file
-          const oldLogoPath = path.join(
-            __dirname,
-            "../../",
-            existingLogo.imageUrl,
-          )
-          try {
-            await fs.promises.unlink(oldLogoPath)
-            console.log(`Old museum logo deleted successfully: ${oldLogoPath}`)
-          } catch (err) {
-            if (err.code !== "ENOENT") {
-              console.error("Failed to delete old museum logo:", err)
-            }
+      if (existingLogo) {
+        // Update existing logo
+        await prisma.museum_logo_images.update({
+          where: { userId: user.id },
+          data: {
+            imageUrl: req.body.museumLogoPath,
+          },
+        })
+        // Delete old logo file
+        const oldLogoPath = path.join(
+          __dirname,
+          "../../",
+          existingLogo.imageUrl,
+        )
+        try {
+          await fs.promises.unlink(oldLogoPath)
+          console.log(`Old museum logo deleted successfully: ${oldLogoPath}`)
+        } catch (err) {
+          if (err.code !== "ENOENT") {
+            console.error("Failed to delete old museum logo:", err)
           }
-        } else {
-          // Create new logo entry
-          await prisma.museum_logo_images.create({
-            data: {
-              imageUrl: `../../uploads/museumLogos/${req.file.filename}`,
-              userId: user.id,
-            },
-          })
         }
+      } else {
+        // Create new logo entry
+        await prisma.museum_logo_images.create({
+          data: {
+            imageUrl: req.body.museumLogoPath,
+            userId: user.id,
+          },
+        })
       }
     }
 
@@ -402,7 +416,11 @@ export const updateUserProfile = async (req, res, next) => {
         street: true,
         house_number: true,
         postcode: true,
-        museum_logo_image: true,
+        museum_logo_image: {
+          select: {
+            imageUrl: true,
+          },
+        },
         lat: true,
         lon: true,
         createdAt: true,
@@ -415,7 +433,7 @@ export const updateUserProfile = async (req, res, next) => {
       message: "Profile updated successfully",
     })
   } catch (error) {
-    console.error("Error updating user profile:", error)
+    logger.error("Error updating user profile:", error)
     next(error)
   }
 }

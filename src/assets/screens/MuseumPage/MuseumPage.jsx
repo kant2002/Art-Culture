@@ -47,6 +47,13 @@ function MuseumPage() {
 		)
 	}
 	const images = getImageUrl(museum.images, '/Img/newsCardERROR.jpg')
+
+	const museumLogo = museum.museum_logo_image?.imageUrl
+		? getImageUrl(
+				museum.museum_logo_image.imageUrl,
+				'/Img/logoMuseum_3.png',
+			)
+		: '/Img/logoMuseum_3.png' // Fallback logo
 	const toggleText = () => {
 		setIsExpanded((prevState) => !prevState)
 	}
@@ -101,7 +108,7 @@ function MuseumPage() {
 					<div className={`${styles.museumPageMuseumLogoWrapper}`}>
 						<img
 							className={`${styles.museumPageMuseumLogo}`}
-							src={'/Img/MuseumLogo.png'}
+							src={museumLogo}
 							alt={t('Логотип музея')}
 							onError={(e) => {
 								e.target.onerror = null
@@ -177,7 +184,7 @@ function MuseumPage() {
 					<div className={`${styles.museumPageMuseumLogoWrapper}`}>
 						<img
 							className={`${styles.museumPageMuseumLogo}`}
-							src={'/Img/MuseumLogo.png'}
+							src={museumLogo}
 							alt={t('Логотип музея')}
 							onError={(e) => {
 								e.target.onerror = null
