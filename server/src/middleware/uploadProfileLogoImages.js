@@ -86,7 +86,7 @@ const processImages = async (req, res, next) => {
 
       // Resize to 400x400 and convert to WebP
       await sharp(file.buffer)
-        .resize(400, 400, {
+        .resize(1920, 1080, {
           fit: sharp.fit.cover,
           position: sharp.strategy.entropy,
         })
