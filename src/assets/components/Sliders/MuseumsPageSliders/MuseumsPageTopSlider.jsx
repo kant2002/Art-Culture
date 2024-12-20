@@ -14,7 +14,6 @@ import { getBaseUrl, getImageUrl } from '../../../../utils/helper'
 // Import Swiper modules
 import { Navigation, Pagination } from 'swiper/modules'
 
-// import '/src/styles/components/Sliders/MuseumsPageSliders/MuseumsPageTopSlider.scss'
 import '/src/styles/components/Sliders/MainPageBannerSlider/MainPageBannerSlider.scss'
 
 const Slide = ({ museum, baseUrl, onClick }) => {
