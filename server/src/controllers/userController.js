@@ -1,6 +1,7 @@
 // src/controllers/userController.js
 
 import prisma from "../../prismaClient.js"
+import logger from "../utils/logging.js"
 
 export const getCreators = async (req, res, next) => {
   try {
@@ -21,7 +22,7 @@ export const getCreators = async (req, res, next) => {
 
     res.json({ creators })
   } catch (error) {
-    console.error("Error fetching creators:", error)
+    logger.error("Error fetching creators:", error)
     next(error)
   }
 }
@@ -50,7 +51,7 @@ export const getCreatorById = async (req, res, next) => {
     }
     res.json({ creator })
   } catch (error) {
-    console.error("Error fetch data creator id", error)
+    logger.error("Error fetch data creator id", error)
     next(error)
   }
 }
@@ -79,7 +80,7 @@ export const getMuseums = async (req, res, next) => {
 
     res.json({ museums })
   } catch (error) {
-    console.error("Error fetching museums:", error)
+    logger.error("Error fetching museums:", error)
     next(error)
   }
 }
@@ -108,7 +109,7 @@ export const getMuseumById = async (req, res, next) => {
     }
     res.json({ museum })
   } catch (error) {
-    console.error("Error fetch data creator id", error)
+    logger.error("Error fetch data creator id", error)
     next(error)
   }
 }
