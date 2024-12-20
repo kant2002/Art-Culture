@@ -35,7 +35,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage,
   fileFilter,
-  limits: { fileSize: 10 * 1080 * 1920 }, // 20 MB limit
+  limits: { fileSize: 50 * 1080 * 1920 }, // 20 MB limit
 })
 
 const processImages = async (req, res, next) => {
@@ -87,7 +87,7 @@ const processImages = async (req, res, next) => {
       // Resize to 400x400 and convert to WebP
       await sharp(file.buffer)
         .resize(1920, 1080, {
-          fit: sharp.fit.cover,
+          fit: sharp.fit.contain,
           position: sharp.strategy.entropy,
         })
         .webp({ quality: 80 })
