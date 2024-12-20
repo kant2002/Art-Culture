@@ -31,12 +31,12 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 		: '/Img/logoMuseum_3.png' // Fallback logo
 
 	return (
-		<div className="MainPageBannerSliderCardContainer">
-			<div className="MainPageBannerSliderCardWrapper">
-				<div className="MainPageBannerSliderCardInnerWrapper">
-					<div className="MainPageBannerSliderCardLogoWrapper">
+		<div className="BannerSliderCardContainer">
+			<div className="BannerSliderCardWrapper">
+				<div className="BannerSliderCardInnerWrapper">
+					<div className="BannerSliderCardLogoWrapper">
 						<img
-							className="MainPageBannerSliderCardLogo"
+							className="BannerSliderCardLogo"
 							src={museumLogoUrl}
 							alt={t('Фото музея')}
 							onError={(e) => {
@@ -46,23 +46,23 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 						/>
 					</div>
 
-					<div className="MainPageBannerSliderCardSeparator"></div>
+					<div className="BannerSliderCardSeparator"></div>
 
-					<div className="MainPageBannerSliderCardTitleWrapper">
-						<h2 className="MainPageBannerSliderCardTitle">
+					<div className="BannerSliderCardTitleWrapper">
+						<h2 className="BannerSliderCardTitle">
 							{museum.title}
 						</h2>
 					</div>
 
-					<div className="MainPageBannerSliderCardDescriptionWrapper">
-						<p className="MainPageBannerSliderCardDescription">
+					<div className="BannerSliderCardDescriptionWrapper">
+						<p className="BannerSliderCardDescription">
 							<TranslatedContent en={museum.bio} uk={museum.bio} html />
 						</p>
 					</div>
 
-					<div className="MainPageBannerSliderCardReadMoreButtonWrapper">
+					<div className="BannerSliderCardReadMoreButtonWrapper">
 						<button
-							className="MainPageBannerSliderCardReadMoreButton"
+							className="BannerSliderCardReadMoreButton"
 							onClick={() => onClick(museum.id)}
 						>
 							{t('Читати далі')}
@@ -70,9 +70,9 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 					</div>
 				</div>
 
-				<div className="MainPageBannerSliderCardImgWrapper">
+				<div className="BannerSliderCardImgWrapper">
 					<img
-						className="MainPageBannerSliderCardImg"
+						className="BannerSliderCardImg"
 						src={featuredMediaUrl}
 						alt={t('Фото музея')}
 						onError={(e) => {
@@ -114,7 +114,7 @@ const MainPageBannerSlider = () => {
 		navigate(`/museumpage/${id}`)
 	}
 	return (
-		<div className="MainPageBannerSliderContainer">
+		<div className="BannerSliderContainer">
 			<Swiper
 				modules={[Navigation, Pagination]}
 				spaceBetween={0}
