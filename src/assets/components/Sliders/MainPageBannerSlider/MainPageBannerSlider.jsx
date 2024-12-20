@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import TranslatedContent from '../../Blocks/TranslatedContent'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 // Import Swiper styles
@@ -24,9 +25,9 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 
 	const museumLogoUrl = museum.museum_logo_image?.imageUrl
 		? getImageUrl(
-				museum.museum_logo_image.imageUrl,
-				'/Img/logoMuseum_3.png',
-			)
+			museum.museum_logo_image.imageUrl,
+			'/Img/logoMuseum_3.png',
+		)
 		: '/Img/logoMuseum_3.png' // Fallback logo
 
 	return (
@@ -45,6 +46,8 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 						/>
 					</div>
 
+					<div className="MainPageBannerSliderCardSeparator"></div>
+
 					<div className="MainPageBannerSliderCardTitleWrapper">
 						<h2 className="MainPageBannerSliderCardTitle">
 							{museum.title}
@@ -53,7 +56,7 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 
 					<div className="MainPageBannerSliderCardDescriptionWrapper">
 						<p className="MainPageBannerSliderCardDescription">
-							{museum.bio}
+							<TranslatedContent en={museum.bio} uk={museum.bio} html />
 						</p>
 					</div>
 
