@@ -137,7 +137,7 @@ const MainPopularArtistsSlider = () => {
 							</SwiperSlide>
 						) : (
 							posts.map((post) => (
-								<SwiperSlide key={posts.id}>
+								<SwiperSlide key={post.id}>
 									<Slide post={post} baseUrl={baseUrl} />
 								</SwiperSlide>
 							))

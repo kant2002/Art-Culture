@@ -60,9 +60,9 @@ const processImages = async (req, res, next) => {
 
         // Resize to 1920x1080
         await sharp(file.buffer)
-          .resize(1920, 1080, {
+          .resize(null, null, {
             fit: sharp.fit.cover,
-            position: sharp.strategy.entropy,
+            position: sharp.strategy.center,
           })
           .webp({ quality: 80 })
           .toFile(outputPath)
@@ -84,13 +84,12 @@ const processImages = async (req, res, next) => {
       // Ensure the directory exists
       await fs.mkdir(path.dirname(outputPath), { recursive: true })
 
-      // Resize to 400x400 and convert to WebP
       await sharp(file.buffer)
-        .resize(1920, 1080, {
-          //fit: sharp.fit.contain,
-          position: sharp.strategy.entropy,
+        .resize(null, null, {
+          fit: sharp.fit.outside,
+          position: sharp.strategy.center,
         })
-        .webp({ quality: 80 })
+        .webp({ quality: 100 })
         .toFile(outputPath)
 
       req.body.museumLogoPath = `/uploads/museumLogoImages/${filename}`

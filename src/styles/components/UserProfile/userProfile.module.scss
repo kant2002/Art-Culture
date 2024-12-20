@@ -114,6 +114,7 @@
 
 .profileAvatar {
   display: flex;
+  gap: 10px;
 }
 
 .profileImage {
@@ -454,7 +455,6 @@
   }
 
   .profileModalImageDownloadWrapper {
-
     // обертка для загрузки аватара
     .profileLabel {
       font-size: 16px;

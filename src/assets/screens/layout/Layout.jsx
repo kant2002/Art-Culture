@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { useState } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import ProtectedRoute from '../../../routes/ProtectedRoute'
+import ScrollToTop from '../../../utils/ScrollToTop'
 import Login from '../../components/VerificationPages/LoginPage'
 import SignUp from '../../components/VerificationPages/SignUpPage'
 import AdminDashboard from '../Admin/AdminDashboard'
@@ -42,6 +43,7 @@ const Layout = ({ heading = '' }) => {
 				})}
 			>
 				<Header />
+				<ScrollToTop />
 				<Routes>
 					<Route path="/" element={<Navigate to="/MainPage" />} />
 					<Route path="/MainPage" element={<MainPage />} />
