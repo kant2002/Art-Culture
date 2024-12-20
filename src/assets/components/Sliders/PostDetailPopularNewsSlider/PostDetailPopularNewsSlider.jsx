@@ -14,21 +14,18 @@ import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import '@styles/components/Sliders/Base/PopularSlider.scss'
 import { useNavigate } from 'react-router-dom'
 import { Navigation, Pagination } from 'swiper/modules'
-import { getBaseUrl } from '../../../../utils/helper'
+import { getBaseUrl, getImageUrl } from '../../../../utils/helper'
 import TranslatedContent from '../../Blocks/TranslatedContent'
 
-const Slide = ({ product, baseUrl }) => {
+const Slide = ({ post, baseUrl }) => {
 	const { t } = useTranslation()
 	const navigate = useNavigate()
 
-	const handleProductClick = () => {
-		navigate(`/products/${product.id}`) // Adjust the route as per your application
+	const handlePostClick = () => {
+		navigate(`/posts/${post.id}`) // Adjust the route as per your application
 	}
 
-	const imageUrl =
-		product.images && product.images.length > 0
-			? `${baseUrl}${product.images[0].imageUrl.replace('../../', '/')}`
-			: '/Img/newsCardERROR.jpg' // Fallback image
+	const imageUrl = getImageUrl(post.images, '/Img/halfNewsCard.jpg') // Fallback image
 
 	return (
 		<div className="PopularSliderCardWrapper">
@@ -45,15 +42,18 @@ const Slide = ({ product, baseUrl }) => {
 			</div>
 			<div className="PopularSliderCardAbsoluteWrapper">
 				<div className="PopularSliderCardButtonWrapper">
-					<button className="PopularSliderCardButton">
+					<button
+						className="PopularSliderCardButton"
+						onClick={handlePostClick}
+					>
 						{t('Огляд')}
 					</button>
 				</div>
 				<div className="PopularSliderCardTitleWrapper">
 					<h3 className="PopularSliderCardTitle">
 						<TranslatedContent
-							en={product.title_en}
-							uk={product.title_uk}
+							en={post.title_en}
+							uk={post.title_uk}
 							maxLength={50}
 						/>
 					</h3>
@@ -61,8 +61,8 @@ const Slide = ({ product, baseUrl }) => {
 				<div className="PopularSliderCardDescriptionWrapper">
 					<p className="PopularSliderCardDescription">
 						<TranslatedContent
-							en={product.description_en}
-							uk={product.description_uk}
+							en={post.content_en}
+							uk={post.content_uk}
 							maxLength={50}
 							html
 						/>
@@ -76,29 +76,27 @@ const Slide = ({ product, baseUrl }) => {
 const MainPopularArtistsSlider = () => {
 	const { t } = useTranslation()
 
-	const [products, setProducts] = useState([])
+	const [posts, setPosts] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 
 	const baseUrl = getBaseUrl()
 
 	useEffect(() => {
-		const fetchCreatorProducts = async () => {
+		const fetchPosts = async () => {
 			try {
-				const response = await axios.get(
-					'/api/products/creators-products',
-				)
+				const response = await axios.get('/api/posts')
 				console.log('Received creator products:', response.data)
-				setProducts(response.data.products || [])
+				setPosts(response.data || [])
 				setLoading(false)
 			} catch (err) {
-				console.error('Error fetching creator products:', err)
-				setError(t('Не вдалося завантажити продукти.'))
+				console.error('Error fetching posts:', err)
+				setError(t('Не вдалося завантажити новини.'))
 				setLoading(false)
 			}
 		}
 
-		fetchCreatorProducts()
+		fetchPosts()
 	}, [t])
 	return (
 		<div className="PopularSliderContainer">
@@ -106,7 +104,7 @@ const MainPopularArtistsSlider = () => {
 				<div className="PopularSliderTopInnerWrapper">
 					<div className="PopularSliderTitleWrapper">
 						<h2 className="PopularSliderTitle">
-							{t('Популярне.')} &#8243;{t('Мистецтво')}&#8243;
+							{t('Популярне.')} &#8243;{t('НОВИНИ')}&#8243;
 						</h2>
 					</div>
 					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
@@ -131,19 +129,16 @@ const MainPopularArtistsSlider = () => {
 							<SwiperSlide>
 								<div className="error">{error}</div>
 							</SwiperSlide>
-						) : products.length === 0 ? (
+						) : posts.length === 0 ? (
 							<SwiperSlide>
 								<div className="noProducts">
-									{t('Немає продуктів від митців.')}
+									{t('Немає новин.')}
 								</div>
 							</SwiperSlide>
 						) : (
-							products.map((product) => (
-								<SwiperSlide key={product.id}>
-									<Slide
-										product={product}
-										baseUrl={baseUrl}
-									/>
+							posts.map((post) => (
+								<SwiperSlide key={posts.id}>
+									<Slide post={post} baseUrl={baseUrl} />
 								</SwiperSlide>
 							))
 						)}
