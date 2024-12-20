@@ -106,7 +106,7 @@
   font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
   font-weight: 500;
   text-transform: uppercase;
-  color: white;
+  color: black;
   font-family: $default-font;
 }
 
@@ -133,7 +133,7 @@
   //   align-items: start;
   font-size: calc(20px - (6 * ((1440px - 100vw) / (1440 - 375))));
   font-weight: 400;
-  color: white;
+  color: black;
   font-family: $default-font;
 }
 
