@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import TranslatedContent from '../../Blocks/TranslatedContent'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 // Import Swiper styles
@@ -13,7 +14,8 @@ import { getBaseUrl, getImageUrl } from '../../../../utils/helper'
 // Import Swiper modules
 import { Navigation, Pagination } from 'swiper/modules'
 
-import '/src/styles/components/Sliders/MuseumsPageSliders/MuseumsPageTopSlider.scss'
+// import '/src/styles/components/Sliders/MuseumsPageSliders/MuseumsPageTopSlider.scss'
+import '/src/styles/components/Sliders/MainPageBannerSlider/MainPageBannerSlider.scss'
 
 const Slide = ({ museum, baseUrl, onClick }) => {
 	const { t } = useTranslation()
@@ -24,18 +26,18 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 
 	const museumLogoUrl = museum.museum_logo_image?.imageUrl
 		? getImageUrl(
-				museum.museum_logo_image.imageUrl,
-				'/Img/logoMuseum_3.png',
-			)
+			museum.museum_logo_image.imageUrl,
+			'/Img/logoMuseum_3.png',
+		)
 		: '/Img/logoMuseum_3.png' // Fallback logo
 
 	return (
-		<div className="MuseumsPageTopSliderCardContainer">
-			<div className="MuseumsPageTopSliderCardWrapper">
-				<div className="MuseumsPageTopSliderCardInnerWrapper">
-					<div className="MuseumsPageTopSliderCardLogoWrapper">
+		<div className="BannerSliderCardContainer">
+			<div className="BannerSliderCardWrapper">
+				<div className="BannerSliderCardInnerWrapper">
+					<div className="BannerSliderCardLogoWrapper">
 						<img
-							className="MuseumsPageTopSliderCardLogo"
+							className="BannerSliderCardLogo"
 							src={museumLogoUrl}
 							alt={t('Фото музея')}
 							onError={(e) => {
@@ -45,21 +47,21 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 						/>
 					</div>
 
-					<div className="MuseumsPageTopSliderCardTitleWrapper">
-						<p className="MuseumsPageTopSliderCardTitle">
+					<div className="BannerSliderCardTitleWrapper">
+						<p className="BannerSliderCardTitle">
 							{museum.title}
 						</p>
 					</div>
 
-					<div className="MuseumsPageTopSliderCardDescriptionWrapper">
-						<p className="MuseumsPageTopSliderCardDescription">
-							{museum.bio}
+					<div className="BannerSliderCardDescriptionWrapper">
+						<p className="BannerSliderCardDescription">
+							<TranslatedContent en={museum.bio} uk={museum.bio} html />
 						</p>
 					</div>
 
-					<div className="MuseumsPageTopSliderCardReadMoreButtonWrapper">
+					<div className="BannerSliderCardReadMoreButtonWrapper">
 						<button
-							className="MuseumsPageTopSliderCardReadMoreButton"
+							className="BannerSliderCardReadMoreButton"
 							onClick={() => onClick(museum.id)}
 						>
 							{t('Читати далі')}
@@ -67,9 +69,9 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 					</div>
 				</div>
 
-				<div className="MuseumsPageTopSliderCardImgWrapper">
+				<div className="BannerSliderCardImgWrapper">
 					<img
-						className="MuseumsPageTopSliderCardImg"
+						className="BannerSliderCardImg"
 						src={featuredMediaUrl}
 						alt={t('Фото музея')}
 						onError={(e) => {
@@ -112,7 +114,7 @@ const MuseumsPageTopSlider = () => {
 		navigate(`/museumpage/${id}`)
 	}
 	return (
-		<div className="MuseumsPageTopSliderContainer">
+		<div className="BannerSliderContainer">
 			<Swiper
 				modules={[Navigation, Pagination]}
 				spaceBetween={0}
