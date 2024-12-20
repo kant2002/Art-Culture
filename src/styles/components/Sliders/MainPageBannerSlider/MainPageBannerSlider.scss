@@ -2,7 +2,7 @@
 
 .MainPageBannerSliderCardContainer {
     // Обёртка карточки слайдера
-    margin: 0 0 0 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -15,7 +15,7 @@
     // Обёртка карточки слайдера
     position: relative;
     width: 100%;
-    height: 90%;
+    height: 88%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -25,7 +25,7 @@
 .MainPageBannerSliderCardInnerWrapper {
     // Внутренняя обёртка карточки слайдера
     position: absolute;
-    padding: $responsiveBigPadding $responsiveLeftAndRightPadding;
+    padding: $responsiveBigPadding $responsiveLeftAndRightPadding $responsiveMediumPadding $responsiveLeftAndRightPadding;
     top: 0;
     left: 0;
     display: flex;
@@ -40,15 +40,10 @@
 
 .MainPageBannerSliderCardLogoWrapper {
     // Обёртка логотипа
-    // width: auto;
-    // max-width: 50%;
-    width: 200px;
-    height: 200px;
     top: 0;
     left: 0;
     display: flex;
-    // min-height: 30%;
-    // max-height: 50%;
+    height: 40%;
     z-index: 1;
 }
 
@@ -57,7 +52,15 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    object-position: center center;
+    object-position: bottom center;
+}
+
+.MainPageBannerSliderCardSeparator {
+    // Разделитель
+    margin: $responsiveMediumPadding 0 0 0;
+    width: 70%;
+    height: 1px;
+    background-color: black;
 }
 
 .MainPageBannerSliderCardTitleWrapper {
@@ -116,7 +119,7 @@
 
 .MainPageBannerSliderCardReadMoreButton {
     // Кнопка "Читать далее"
-    padding: 0 20px;
+    padding: 0 $staticButtonLeftAndRightPadding;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -141,18 +144,6 @@
     display: flex;
     width: 100%;
     height: 100%;
-}
-
-.MainPageBannerSliderCardImgWrapper::after {
-    // Полупрозрачный фон
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: black;
-    opacity: 0.36;
 }
 
 .MainPageBannerSliderCardImg {
@@ -204,7 +195,6 @@
         top: calc(calc(590px - (140 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 2));
         width: var(--swiper-navigation-size);
         height: var(--swiper-navigation-size);
-        // margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
         z-index: 11;
         cursor: pointer;
         display: flex;
@@ -217,7 +207,6 @@
 
     .swiper-button-prev,
     .swiper-rtl .swiper-button-next {
-        // left: calc(638px - (505 * ((1440px - 100vw) / (1440 - 375))));
         left: calc(50% - calc(var(--swiper-navigation-size) * 1.14) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
         right: auto;
     }
@@ -265,16 +254,160 @@
 }
 
 @media screen and (min-width: 1441px) {
-    .MainPageBannerSliderCardContainer {
-        // Обёртка карточки слайдера
-        margin: 0 0 0 0;
+    .MainPageBannerSliderCardInnerWrapper {
+        // Внутренняя обёртка карточки слайдера
+        padding: $staticPcBigPadding $responsiveLeftAndRightPadding $staticPcMediumPadding $responsiveLeftAndRightPadding;
+    }
+
+    .MainPageBannerSliderCardSeparator {
+        // Разделитель
+        margin: $staticPcMediumPadding 0 0 0;
+    }
+
+    .MainPageBannerSliderCardTitleWrapper {
+        // Обёртка названия музея
+        margin: $staticPcMediumPadding 0 0 0;
+    }
+
+    .MainPageBannerSliderCardTitle {
+        //Название музея
+        font-size: 28px;
+    }
+
+    .MainPageBannerSliderCardDescriptionWrapper {
+        // Обёртка описания музея
+        margin: $staticPcSmallPadding 0 0 0;
+        max-height: calc(20px * 3);
+    }
+
+    .MainPageBannerSliderCardDescription {
+        // Описание музея
+        font-size: 20px;
+    }
+
+    .MainPageBannerSliderContainer {
+        // Основной стиль для блока слайдера
+
+        @at-root {
+            :root {
+                --swiper-navigation-size: 42px;
+            }
+        }
+
+        .swiper-wrapper {
+            height: 600px;
+        }
+
+        .swiper-slide {
+            height: 600px;
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            top: calc(590px - calc(var(--swiper-navigation-size) / 2));
+        }
+
+        .swiper-button-prev,
+        .swiper-rtl .swiper-button-next {
+            left: calc(50% - calc(var(--swiper-navigation-size) * 1.14) - 34.5px);
+        }
+
+        .swiper-button-next,
+        .swiper-rtl .swiper-button-prev {
+            right: calc(50% - calc(var(--swiper-navigation-size) * 1.14) - 34.5px);
+        }
+
+        .swiper-button-next,
+        .swiper-rtl .swiper-button-prev {
+            right: calc(50% - calc(var(--swiper-navigation-size) * 1.24) - 34.5px);
+        }
+
+        /* Common Styles */
+        .swiper-pagination-fraction,
+        .swiper-pagination-custom,
+        .swiper-horizontal>.swiper-pagination-bullets,
+        .swiper-pagination-bullets.swiper-pagination-horizontal {
+            top: calc(590px - calc(var(--swiper-navigation-size) / 1.4));
+        }
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 569px) {
+    .MainPageBannerSliderCardInnerWrapper {
+        // Внутренняя обёртка карточки слайдера
+        padding: $staticMobileBigPadding $responsiveLeftAndRightPadding $staticMobileMediumPadding $responsiveLeftAndRightPadding;
+        width: 100%;
+    }
 
-    .MainPageBannerSliderCardContainer {
-        // Обёртка карточки слайдера
-        margin: 0 0 0 0;
+    .MainPageBannerSliderCardSeparator {
+        // Разделитель
+        margin: $staticMobileMediumPadding 0 0 0;
+    }
+
+    .MainPageBannerSliderCardTitleWrapper {
+        // Обёртка названия музея
+        margin: $staticMobileMediumPadding 0 0 0;
+    }
+
+    .MainPageBannerSliderCardTitle {
+        //Название музея
+        font-size: 18px;
+    }
+
+    .MainPageBannerSliderCardDescriptionWrapper {
+        // Обёртка описания музея
+        margin: $staticMobileSmallPadding 0 0 0;
+        max-height: calc(14px * 3);
+    }
+
+    .MainPageBannerSliderCardDescription {
+        // Описание музея
+        font-size: 14px;
+    }
+
+    .MainPageBannerSliderContainer {
+        // Основной стиль для блока слайдера
+
+        @at-root {
+            :root {
+                --swiper-navigation-size: 35px;
+            }
+        }
+
+        .swiper-wrapper {
+            height: 460px;
+        }
+
+        .swiper-slide {
+            height: 460px;
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            top: calc(450px - calc(var(--swiper-navigation-size) / 2));
+        }
+
+        .swiper-button-prev,
+        .swiper-rtl .swiper-button-next {
+            left: calc(50% - calc(var(--swiper-navigation-size) * 1.14) - 29px);
+        }
+
+        .swiper-button-next,
+        .swiper-rtl .swiper-button-prev {
+            right: calc(50% - calc(var(--swiper-navigation-size) * 1.14) - 29px);
+        }
+
+        .swiper-button-next,
+        .swiper-rtl .swiper-button-prev {
+            right: calc(50% - calc(var(--swiper-navigation-size) * 1.24) - 29px);
+        }
+
+        /* Common Styles */
+        .swiper-pagination-fraction,
+        .swiper-pagination-custom,
+        .swiper-horizontal>.swiper-pagination-bullets,
+        .swiper-pagination-bullets.swiper-pagination-horizontal {
+            top: calc(450px - calc(var(--swiper-navigation-size) / 1.4));
+        }
     }
 }
