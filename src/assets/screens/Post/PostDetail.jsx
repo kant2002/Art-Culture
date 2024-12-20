@@ -4,19 +4,21 @@ import TranslatedContent from '@components/Blocks/TranslatedContent'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import styles from '../../../styles/components/Post/PostDetail.module.scss'
 import {
 	getFormattedDate,
 	getFormattedTime,
 	getImageUrl,
 } from '../../../utils/helper'
+import PostDetailPopularNewsSlider from '../../components/Sliders/PostDetailPopularNewsSlider/PostDetailPopularNewsSlider'
 
 function PostDetail() {
 	const { t } = useTranslation()
 	const { id } = useParams()
 	const [post, setPost] = useState(null)
 	const [error, setError] = useState(null)
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		axios
@@ -43,13 +45,19 @@ function PostDetail() {
 
 	const formattedDate = getFormattedDate(post.createdAt)
 	const formattedTime = getFormattedTime(post.createdAt)
+	const handleNewsPageClick = () => {
+		navigate('/NewsPage')
+	}
 
 	return (
 		<div className={styles.postDetailContainer}>
 			<div className={`${styles.postPageNavigationContainer}`}>
 				<nav className={`${styles.postPageNavigation}`}>
 					<ul className={`${styles.postPageNavigationList}`}>
-						<li className={`${styles.postPageNavigationItem}`}>
+						<li
+							className={`${styles.postPageNavigationItem}`}
+							onClick={handleNewsPageClick}
+						>
 							{t('Новини')}
 						</li>
 						<p
@@ -148,6 +156,8 @@ function PostDetail() {
 					</button>
 				</div>
 			</div>
+
+			<PostDetailPopularNewsSlider />
 		</div>
 	)
 }
