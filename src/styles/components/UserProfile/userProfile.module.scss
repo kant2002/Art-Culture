@@ -114,6 +114,7 @@
 
 .profileAvatar {
   display: flex;
+  gap: 10px;
 
   /* Контейнер для аватара */
   img {
@@ -271,6 +272,31 @@
 
 .profileModalImageDownloadWrapper {
   // обертка для загрузки аватара
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
+
+  .profileLabel {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 700;
+    margin: $responsiveMediumPadding 0 0 0;
+  }
+
+  input {
+    // поле для загрузки аватара
+    margin: 0;
+  }
+}
+
+.profileModalLogoUploadWrapper {
   width: 100%;
   display: flex;
   flex-direction: row;
