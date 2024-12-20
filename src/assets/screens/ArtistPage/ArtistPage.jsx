@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import styles from '../../../styles/layout/ArtistPage.module.scss'
 import { getBaseUrl, getImageUrl } from '../../../utils/helper.js'
 import ArtistPageMasonryGallery from '../../components/Sliders/ArtistPageSliders/ArtistPageMasonryGallery.jsx'
@@ -20,6 +20,8 @@ function ArtistPage() {
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 
+	const navigate = useNavigate()
+
 	useEffect(() => {
 		const fetchCreatorAndProduct = async () => {
 			try {
@@ -34,7 +36,9 @@ function ArtistPage() {
 			}
 			try {
 				// Fetch creator's products
-				const productsResponse = await axios.get(`/api/products/author/${id}`)
+				const productsResponse = await axios.get(
+					`/api/products/author/${id}`,
+				)
 				console.log('Fetched products:', productsResponse.data)
 				setProducts(productsResponse.data.products)
 			} catch (error) {
@@ -61,7 +65,9 @@ function ArtistPage() {
 	}
 
 	if (!creator) {
-		return <div className={styles.noCreator}>{t('Митець не знайдений.')}</div>
+		return (
+			<div className={styles.noCreator}>{t('Митець не знайдений.')}</div>
+		)
 	}
 
 	// Extract data based on current language
@@ -75,18 +81,29 @@ function ArtistPage() {
 			: creator.bio_uk || creator.bio
 	const images = getImageUrl(creator.images, '/Img/newsCardERROR.jpg')
 
+	const handleArtistsPageClick = () => {
+		navigate('/ArtistsPage')
+	}
+
 	return (
 		<div className={`${styles.artistPage}`}>
 			<div className={`${styles.artistPageNavigationContainer}`}>
 				<nav className={`${styles.artistPageNavigation}`}>
 					<ul className={`${styles.artistPageNavigationList}`}>
-						<li className={`${styles.artistPageNavigationItem}`}>
+						<li
+							className={`${styles.artistPageNavigationItem}`}
+							onClick={handleArtistsPageClick}
+						>
 							{t('Митці')}
 						</li>
-						<p className={`${styles.artistPageNavigationItemSeparator}`}>
+						<p
+							className={`${styles.artistPageNavigationItemSeparator}`}
+						>
 							&#8250;
 						</p>
-						<li className={`${styles.artistPageNavigationItem}`}>{title}</li>
+						<li className={`${styles.artistPageNavigationItem}`}>
+							{title}
+						</li>
 					</ul>
 				</nav>
 			</div>
@@ -98,10 +115,10 @@ function ArtistPage() {
 					<div className={`${styles.artistPageArtistPhotoWrapper}`}>
 						<img
 							className={`${styles.artistPageArtistPhoto}`}
-							loading='lazy'
+							loading="lazy"
 							src={images}
 							alt={t('Фото митця')}
-							onError={e => {
+							onError={(e) => {
 								e.target.onerror = null
 								e.target.src = '/Img/newsCardERROR.jpg'
 							}}
@@ -118,15 +135,25 @@ function ArtistPage() {
 				</div>
 
 				<div className={`${styles.artistPageArtisDescriptionWrapper}`}>
-					<p className={`${styles.artistPageArtisDescription}`}>{bio}</p>
+					<p className={`${styles.artistPageArtisDescription}`}>
+						{bio}
+					</p>
 				</div>
 
-				<div className={`${styles.artistPageArtisReadMoreButtonWrapper}`}>
-					<button className={`${styles.artistPageArtisReadMoreButton}`}>
-						<p className={`${styles.artistPageArtisReadMoreButtonText}`}>
+				<div
+					className={`${styles.artistPageArtisReadMoreButtonWrapper}`}
+				>
+					<button
+						className={`${styles.artistPageArtisReadMoreButton}`}
+					>
+						<p
+							className={`${styles.artistPageArtisReadMoreButtonText}`}
+						>
 							{t('Детальніше')}
 						</p>
-						<p className={`${styles.artistPageArtisReadMoreButtonArrow}`}>
+						<p
+							className={`${styles.artistPageArtisReadMoreButtonArrow}`}
+						>
 							&#160;&#10230;
 						</p>
 					</button>
@@ -137,7 +164,10 @@ function ArtistPage() {
 
 			{products && products.length > 0 ? (
 				<>
-					<PopularOfThisArtistSlider products={products} baseUrl={baseUrl} />
+					<PopularOfThisArtistSlider
+						products={products}
+						baseUrl={baseUrl}
+					/>
 					<ArtistPageMasonryGallery
 						products={products}
 						baseUrl={baseUrl}
@@ -156,7 +186,7 @@ function ArtistPage() {
 				</p>
 				<div className={`${styles.artistPageFollowEmailWrapper}`}>
 					<input
-						type='email'
+						type="email"
 						className={`${styles.artistPageFollowEmail}`}
 						placeholder={t('Введіть ваш email')}
 					/>
