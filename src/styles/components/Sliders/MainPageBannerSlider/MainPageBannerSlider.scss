@@ -13,7 +13,6 @@
 
 .MainPageBannerSliderCardWrapper {
     // Обёртка карточки слайдера
-    padding: calc(51px - (28 * ((1440px - 100vw) / (1440 - 375)))) $responsiveLeftAndRightPadding calc(102px - (28 * ((1440px - 100vw) / (1440 - 375))));
     position: relative;
     width: 100%;
     height: 90%;
@@ -64,7 +63,9 @@
 .MainPageBannerSliderCardTitleWrapper {
     // Обёртка названия музея
     display: flex;
-    // margin: 0 auto 0 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     width: 100%;
     height: auto;
     z-index: 1;
@@ -74,9 +75,6 @@
     //Название музея
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
     font-weight: 500;
     text-transform: uppercase;
@@ -88,6 +86,9 @@
     // Обёртка описания музея
     margin: 0;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     width: 100%;
     height: 100%;
     z-index: 1;
@@ -99,12 +100,8 @@
     // Описание музея
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: calc(20px - (6 * ((1440px - 100vw) / (1440 - 375))));
     font-weight: 400;
-    // color: white;
     font-family: $default-font;
 }
 
