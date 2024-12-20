@@ -114,17 +114,22 @@
 
 .profileAvatar {
   display: flex;
-  gap: 10px;
+}
 
-  /* Контейнер для аватара */
-  img {
-    display: block;
-    object-fit: cover;
-    object-position: center center;
-    border-radius: 10px;
-    width: 300px;
-    height: 300px;
-  }
+.profileImage {
+  object-fit: cover;
+  object-position: center center;
+  border-radius: 10px;
+  width: 300px;
+  height: 300px;
+}
+
+.museumLogo {
+  object-fit: contain !important;
+  object-position: center center;
+  border-radius: 10px;
+  width: 300px;
+  height: 300px;
 }
 
 .addressDetails {
@@ -449,6 +454,7 @@
   }
 
   .profileModalImageDownloadWrapper {
+
     // обертка для загрузки аватара
     .profileLabel {
       font-size: 16px;
