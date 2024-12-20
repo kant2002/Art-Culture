@@ -118,19 +118,23 @@
 }
 
 .profileImage {
-  object-fit: cover;
+  object-fit: contain;
   object-position: center center;
   border-radius: 10px;
-  width: 300px;
-  height: 300px;
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+  max-height: 300px;
 }
 
 .museumLogo {
   object-fit: contain;
   object-position: center center;
   border-radius: 10px;
-  width: 300px;
-  height: 300px;
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+  max-height: 300px;
 }
 
 .addressDetails {
@@ -455,6 +459,7 @@
   }
 
   .profileModalImageDownloadWrapper {
+
     // обертка для загрузки аватара
     .profileLabel {
       font-size: 16px;
