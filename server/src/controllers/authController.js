@@ -133,7 +133,7 @@ export const registerUser = async (req, res, next) => {
       data: { email, password: hashedPassword, role: "USER" },
     })
 
-    console.log("User object after self-registration:", user)
+    logger.log("User object after self-registration:", user)
     const token = generateToken(user)
 
     const { password: pwd, ...userWithoutPassword } = user
@@ -166,7 +166,7 @@ export const login = async (req, res, next) => {
     if (!validPassword)
       return res.status(401).json({ error: "Invalid credentials" })
 
-    console.log("User object before token generation:", user)
+    logger.log("User object before token generation:", user)
 
     // Generate token
     const token = generateToken(user)
@@ -174,7 +174,7 @@ export const login = async (req, res, next) => {
     const { password: pwd, ...userWithoutPassword } = user
     res.json({ token, user: userWithoutPassword })
   } catch (error) {
-    console.error("Login error:", error)
+    logger.error("Login error:", error)
     next(error)
   }
 }
@@ -311,7 +311,7 @@ export const updateUserProfile = async (req, res, next) => {
       lon,
     } = req.body
 
-    console.log("Received update data:", {
+    logger.log("Received update data:", {
       title,
       bio,
       country,
@@ -382,10 +382,10 @@ export const updateUserProfile = async (req, res, next) => {
         )
         try {
           await fs.promises.unlink(oldLogoPath)
-          console.log(`Old museum logo deleted successfully: ${oldLogoPath}`)
+          logger.log(`Old museum logo deleted successfully: ${oldLogoPath}`)
         } catch (err) {
           if (err.code !== "ENOENT") {
-            console.error("Failed to delete old museum logo:", err)
+            logger.error("Failed to delete old museum logo:", err)
           }
         }
       } else {

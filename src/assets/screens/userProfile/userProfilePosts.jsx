@@ -1,17 +1,17 @@
+import { getFormattedDate } from '@/utils/helper.js'
+import Loading from '@components/Blocks/Loading.jsx'
+import LoadingError from '@components/Blocks/LoadingError.jsx'
+import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
+import TextAreaEditor from '@components/Blocks/TextAreaEditor'
+import TextEditor from '@components/Blocks/TextEditor'
+import TranslatedContent from '@components/Blocks/TranslatedContent.jsx'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext.jsx'
 import API from '../../../utils/api.js'
-import styles from '/src/styles/components/UserProfile/userProfilePosts.module.scss'
-import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
-import TextEditor from '@components/Blocks/TextEditor'
-import TextAreaEditor from '@components/Blocks/TextAreaEditor'
-import TranslatedContent from '@components/Blocks/TranslatedContent.jsx'
-import { getFormattedDate } from '@/utils/helper.js'
 import ImageEditor from '../../components/Blocks/ImageEditor.jsx'
-import Loading from "@components/Blocks/Loading.jsx";
-import LoadingError from "@components/Blocks/LoadingError.jsx";
+import styles from '/src/styles/components/UserProfile/userProfilePosts.module.scss'
 
 function UserProfilePosts() {
 	const { t, i18n } = useTranslation()
@@ -39,7 +39,7 @@ function UserProfilePosts() {
 		const fetchUserPosts = async () => {
 			try {
 				if (!user) {
-					setError(t("Користувач не авторізован"))
+					setError(t('Користувач не авторізован'))
 					navigate('/login')
 					return
 				}
@@ -62,7 +62,7 @@ function UserProfilePosts() {
 	}, [user, navigate])
 
 	useEffect(() => {
-		const handleLanguageChange = lng => {
+		const handleLanguageChange = (lng) => {
 			setCurrentLanguage(lng)
 		}
 
@@ -75,18 +75,18 @@ function UserProfilePosts() {
 
 	// Modal Handlers
 	const openEditModal = (post) => {
-		setEditingPost(post);
+		setEditingPost(post)
 		const initialFormData = {
 			title_en: post.title_en || '',
 			content_en: post.content_en || '',
 			title_uk: post.title_uk || '',
 			content_uk: post.content_uk || '',
 			images: null,
-		};
-		setFormData(initialFormData);
+		}
+		setFormData(initialFormData)
 
-		setIsModalOpen(true);
-	};
+		setIsModalOpen(true)
+	}
 
 	const closeEditModal = () => {
 		setIsModalOpen(false)
@@ -95,7 +95,7 @@ function UserProfilePosts() {
 		setMessage('')
 	}
 
-	const handleEditSubmit = async e => {
+	const handleEditSubmit = async (e) => {
 		e.preventDefault()
 		setMessage('')
 		setFormErrors({})
@@ -120,20 +120,24 @@ function UserProfilePosts() {
 				postData.append('images', formData.images[0])
 			}
 
-			const response = await API.put(`/posts/${editingPost.id}`, postData, {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-					Authorization: `Bearer ${localStorage.getItem('token')}`,
+			const response = await API.put(
+				`/posts/${editingPost.id}`,
+				postData,
+				{
+					headers: {
+						'Content-Type': 'multipart/form-data',
+						Authorization: `Bearer ${localStorage.getItem('token')}`,
+					},
 				},
-			})
+			)
 
 			if (response.status === 200) {
 				setMessage('Post update successfully')
 
-				setPosts(prevPosts =>
-					prevPosts.map(post =>
-						post.id === editingPost.id ? response.data : post
-					)
+				setPosts((prevPosts) =>
+					prevPosts.map((post) =>
+						post.id === editingPost.id ? response.data : post,
+					),
 				)
 				closeEditModal()
 			}
@@ -141,17 +145,19 @@ function UserProfilePosts() {
 			console.error('Error updating post', error)
 			setMessage(
 				error.response?.data?.error ||
-				'Failed to update post. Please try again.'
+					'Failed to update post. Please try again.',
 			)
 		}
 	}
 
-	const handleDeletePost = async postId => {
-		if (window.confirm(t('Ви впевнені, що хочете видалити цю публікацію?'))) {
+	const handleDeletePost = async (postId) => {
+		if (
+			window.confirm(t('Ви впевнені, що хочете видалити цю публікацію?'))
+		) {
 			try {
 				const response = await API.delete(`/posts/${postId}`)
 				if (response.status === 200) {
-					setPosts(posts.filter(post => post.id !== postId))
+					setPosts(posts.filter((post) => post.id !== postId))
 				}
 			} catch (err) {
 				console.error('Error deleting post', err)
@@ -163,64 +169,99 @@ function UserProfilePosts() {
 	const textEditorOnChange = ({ name, value }) => {
 		const newFormData = { ...formData, [name]: value }
 		setFormData(newFormData)
-	};
-	console.log(formData);
+	}
+	console.log(formData)
 
 	return (
 		<ProfilePageContainer>
 			<h2>{t('Публікації')}</h2>
-			{loading ? <Loading /> : error ? <LoadingError />
-				: posts.length === 0 ? (
+			{loading ? (
+				<Loading />
+			) : error ? (
+				<LoadingError />
+			) : posts.length === 0 ? (
 				<p>{t('Публікацій немає')}</p>
 			) : (
-				posts.map(post => (
-					<div key={post.id} className={styles.userProfilePostsWrapper}>
-						<div className={styles.userProfilePostsPicAndTextWrapper}>
+				posts.map((post) => (
+					<div
+						key={post.id}
+						className={styles.userProfilePostsWrapper}
+					>
+						<div
+							className={styles.userProfilePostsPicAndTextWrapper}
+						>
 							<div className={styles.userProfilePostsPicWrapper}>
 								{post.images ? (
 									<img
 										className={styles.userProfilePostsPic}
 										src={post.images}
 										alt={t('Світлина публікації')}
-										onError={e => {
+										onError={(e) => {
 											e.target.onerror = null
-											e.target.src = '/Img/newsCardERROR.jpg' // Default image path
+											e.target.src =
+												'/Img/newsCardERROR.jpg' // Default image path
 										}}
 									/>
 								) : (
 									<img
 										className={styles.userProfilePostsPic}
-										src='/Img/newsCardERROR.jpg'
+										src="/Img/newsCardERROR.jpg"
 										alt={t('Світлина публікації')}
 									/>
 								)}
 							</div>
 							<div className={styles.userProfilePostsTextWrapper}>
 								<h3 className={styles.userProfilePostsTitle}>
-									<TranslatedContent en={post.title_en} uk={post.title_uk} />
+									<TranslatedContent
+										en={post.title_en}
+										uk={post.title_uk}
+									/>
 								</h3>
-								<div className={styles.userProfilePostsDescriptionWrapper}>
-									<p className={styles.userProfilePostsDescription}>
-										<TranslatedContent en={post.content_en} uk={post.content_uk} maxLength={100} html />
+								<div
+									className={
+										styles.userProfilePostsDescriptionWrapper
+									}
+								>
+									<p
+										className={
+											styles.userProfilePostsDescription
+										}
+									>
+										<TranslatedContent
+											en={post.content_en}
+											uk={post.content_uk}
+											maxLength={100}
+											html
+										/>
 									</p>
 								</div>
-								<div className={styles.userProfilePostsClockAndDateWrapper}>
+								<div
+									className={
+										styles.userProfilePostsClockAndDateWrapper
+									}
+								>
 									<img
 										className={styles.userProfilePostsClock}
-										src='/Img/clock.svg'
+										src="/Img/clock.svg"
 										alt={t('Дата')}
 									/>
 									<p className={styles.userProfilePostsDate}>
 										{getFormattedDate(post.createdAt)}
 									</p>
 									<button
-										className={styles.userProfilePostsButton}
-										onClick={() => navigate(`/posts/${post.id}`)} // Navigate to post detail page
+										className={
+											styles.userProfilePostsButton
+										}
+										onClick={() =>
+											navigate(`/posts/${post.id}`)
+										} // Navigate to post detail page
 									>
 										{t('До публікації')}&#8194;&#187;
 									</button>
 								</div>
-								<div className={styles.userProfileDelEditWrapper}>
+								<div
+									className={styles.userProfileDelEditWrapper}
+								>
 									<button
 										className="button button-default"
 										onClick={() => openEditModal(post)}
@@ -228,8 +269,12 @@ function UserProfilePosts() {
 										{t('Редагувати')}
 									</button>
 									<button
-										className={styles.userProfileDeleteButton}
-										onClick={() => handleDeletePost(post.id)}
+										className={
+											styles.userProfileDeleteButton
+										}
+										onClick={() =>
+											handleDeletePost(post.id)
+										}
 									>
 										{t('Видалити')}
 									</button>
@@ -243,10 +288,7 @@ function UserProfilePosts() {
 			{isModalOpen && (
 				<div className="modal-overlay">
 					<div className="modal-content">
-						<button
-							type='button'
-							onClick={closeEditModal}
-						>
+						<button type="button" onClick={closeEditModal}>
 							<span className="modal-close-button">&times;</span>
 						</button>
 						<h2>{t('Редагування публікації')}</h2>
@@ -254,51 +296,95 @@ function UserProfilePosts() {
 						{formErrors.form && (
 							<p className={styles.error}>{formErrors.form}</p>
 						)}
-						<form onSubmit={handleEditSubmit} className={styles.modalForm}>
+						<form
+							onSubmit={handleEditSubmit}
+							className={styles.modalForm}
+						>
 							<div className="flex gap-8 form-wrapper">
 								<div className="form-group">
 									<div className="field-group">
-										<TextEditor label={t('Назва публікації українською')}
-											name='title_uk' value={formData.title_uk}
-											maxLength={50} required onChange={textEditorOnChange} />
+										<TextEditor
+											label={t(
+												'Назва публікації українською',
+											)}
+											name="title_uk"
+											value={formData.title_uk}
+											maxLength={50}
+											required
+											onChange={textEditorOnChange}
+										/>
 									</div>
 									<div className="field-group">
-										<TextAreaEditor label={t('Опис публікації українською')}
-											name='content_uk' value={formData.content_uk}
-											maxLength={500} required onChange={textEditorOnChange}
-											html />
+										<TextAreaEditor
+											label={t(
+												'Опис публікації українською',
+											)}
+											name="content_uk"
+											value={formData.content_uk}
+											maxLength={500}
+											required
+											onChange={textEditorOnChange}
+											html
+										/>
 									</div>
 								</div>
 
 								<div className="form-group">
 									<div className="field-group">
-										<TextEditor label={t('Назва публікації англійською')}
-											name='title_en' value={formData.title_en}
-											maxLength={50} required onChange={textEditorOnChange} />
+										<TextEditor
+											label={t(
+												'Назва публікації англійською',
+											)}
+											name="title_en"
+											value={formData.title_en}
+											maxLength={50}
+											required
+											onChange={textEditorOnChange}
+										/>
 									</div>
 									<div className="field-group">
-										<TextAreaEditor label={t('Опис публікації англійською')}
-											name='content_en' value={formData.content_en}
-											maxLength={500} required onChange={textEditorOnChange}
-											html />
+										<TextAreaEditor
+											label={t(
+												'Опис публікації англійською',
+											)}
+											name="content_en"
+											value={formData.content_en}
+											maxLength={500}
+											required
+											onChange={textEditorOnChange}
+											html
+										/>
 									</div>
 								</div>
 							</div>
-							<div className={styles.modalFieldImageUploadWrapper}>
+							<div
+								className={styles.modalFieldImageUploadWrapper}
+							>
 								<div className={styles.modalFieldImage}>
-									<ImageEditor label={t('Додати зображення')} required
-										name='images' value={formData.images} onChange={textEditorOnChange} />
-									{editingPost.images && !(formData.images && formData.images[0] instanceof File) && (
-										<img
-											src={editingPost.images}
-											alt={t('Поточне зображення')}
-											className={styles.currentImage}
-										/>
-									)}
+									<ImageEditor
+										label={t('Додати зображення')}
+										name="images"
+										value={formData.images}
+										onChange={textEditorOnChange}
+									/>
+									{editingPost.images &&
+										!(
+											formData.images &&
+											formData.images[0] instanceof File
+										) && (
+											<img
+												src={editingPost.images}
+												alt={t('Поточне зображення')}
+												className={styles.currentImage}
+											/>
+										)}
 								</div>
 							</div>
 							<div className={styles.modalButtons}>
-								<button type='submit' className={styles.modalSaveButton}>
+								<button
+									type="submit"
+									className={styles.modalSaveButton}
+								>
 									{t('Зберегти')}
 								</button>
 							</div>
