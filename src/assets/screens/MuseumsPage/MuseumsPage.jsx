@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import styles from '../../../styles/layout/MuseumsPage.module.scss'
 import { getImageUrl } from '../../../utils/helper.js'
+import TranslatedContent from '../../components/Blocks/TranslatedContent.jsx'
 import MuseumsPageTopSlider from '../../components/Sliders/MuseumsPageSliders/MuseumsPageTopSlider.jsx'
 
 function MuseumsPage() {
@@ -12,12 +13,13 @@ function MuseumsPage() {
 	const navigate = useNavigate()
 	const [error, setError] = useState(null)
 	const [museums, setMuseums] = useState([])
+	const [exhibitions, setExhibitions] = useState(null)
 
-	const [visibleMuseumsCount, setVisibleMuseumsCount] = useState(
-		getMuseumsCount(window.innerWidth),
+	const [visibleExhibitionsCount, setVisibleExhibitionsCount] = useState(
+		getExhibitionsCount(window.innerWidth),
 	)
 
-	function getMuseumsCount(width) {
+	function getExhibitionsCount(width) {
 		if (width === null || width === undefined) {
 			throw new Error('Width must be a number')
 		}
@@ -37,13 +39,15 @@ function MuseumsPage() {
 
 	useEffect(() => {
 		const handleResize = () => {
-			const newMuseumCount = getMuseumsCount(window.innerWidth)
+			const newExhibitionCount = getExhibitionsCount(window.innerWidth)
 			console.log(
-				`Window width: ${window.innerWidth}, New museum count: ${newMuseumCount}`,
+				`Window width: ${window.innerWidth}, New exhibition count: ${newExhibitionCount}`,
 			)
-			if (newMuseumCount !== visibleMuseumsCount) {
-				setVisibleMuseumsCount(newMuseumCount)
-				console.log(`Updated visibleMuseumsCount to: ${newMuseumCount}`)
+			if (newExhibitionCount !== visibleExhibitionsCount) {
+				setVisibleExhibitionsCount(newExhibitionCount)
+				console.log(
+					`Updated visibleExhibitionCount to: ${newExhibitionCount}`,
+				)
 			}
 		}
 
@@ -55,26 +59,26 @@ function MuseumsPage() {
 		return () => {
 			window.removeEventListener('resize', handleResize)
 		}
-	}, [visibleMuseumsCount])
+	}, [visibleExhibitionsCount])
 
 	useEffect(() => {
-		const fetchMuseums = async () => {
+		const fetchExhibition = async () => {
 			try {
-				const response = await axios.get('/api/users/museums')
-				console.log('Fetch museums', response.data)
-				setMuseums(response.data.museums || [])
+				const response = await axios.get('/api/exhibitions')
+				console.log('Fetch exhibitions', response.data)
+				setExhibitions(response.data.exhibitions || [])
 				setLoading(false)
 			} catch (error) {
-				console.error('Error fetching museum:', error)
+				console.error('Error fetching exhibitions:', error)
 				setError(t('Не вдалося завантажити.'))
 				setLoading(false)
 			}
 		}
-		fetchMuseums()
+		fetchExhibition()
 	}, [])
 
-	const handleMuseumClick = (id) => {
-		navigate(`/museumpage/${id}`)
+	const handleExhibitionClick = (id) => {
+		navigate(`/exhibitions/${id}`)
 	}
 	return (
 		<div className={`${styles.MuseumsPageContainer}`}>
@@ -148,7 +152,7 @@ function MuseumsPage() {
 						</div>
 					) : error ? (
 						<div className={styles.error}>{error}</div>
-					) : museums.length === 0 ? (
+					) : exhibitions.length === 0 ? (
 						<div className={styles.noCreators}>
 							{t('Немає виставок для відображення.')}
 						</div>
@@ -156,30 +160,41 @@ function MuseumsPage() {
 						<div
 							className={`${styles.ArtistsPageGalleryInnerWrapper}`}
 						>
-							{museums
-								.slice(0, visibleMuseumsCount)
-								.map((museum) => {
-									const featuredMediaUrl = getImageUrl(
-										museum.images,
-										'/Img/ArtistPhoto.jpg',
+							{exhibitions
+								.slice(0, visibleExhibitionsCount)
+								.map((exhibition, index) => {
+									const featuredMediaUrl =
+										exhibition.images &&
+										exhibition.images.length > 0
+											? getImageUrl(
+													exhibition.images[0]
+														.imageUrl,
+													'/Img/halfNewsCard.jpg',
+												)
+											: '/Img/halfNewsCard.jpg'
+									console.log(
+										'Витягнуте медіа:',
+										featuredMediaUrl,
 									)
 
 									return (
 										<div
-											key={museum.id}
+											key={exhibition.id}
 											className={`${styles.ArtistsPageGalleryCardWrapper}`}
 										>
 											<div
 												className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}
 												onClick={() =>
-													handleMuseumClick(museum.id)
+													handleExhibitionClick(
+														exhibition.id,
+													)
 												}
 												style={{ cursor: 'pointer' }}
 											>
 												<img
 													className={`${styles.ArtistsPageGalleryCardPicture}`}
 													src={featuredMediaUrl}
-													alt={`Фото митця ${museum.title}`}
+													alt={`Фото митця ${(<TranslatedContent en={exhibition.title_en} uk={exhibition.title_uk} maxLength={50} />)}`}
 													loading="lazy"
 													onError={(e) => {
 														e.target.onerror = null
@@ -194,7 +209,11 @@ function MuseumsPage() {
 												<p
 													className={`${styles.ArtistsPageGalleryCardDescription}`}
 												>
-													{museum.title}
+													<TranslatedContent
+														en={exhibition.title_en}
+														uk={exhibition.title_uk}
+														maxLength={50}
+													/>
 												</p>
 											</div>
 										</div>

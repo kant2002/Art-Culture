@@ -2,36 +2,33 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getFormattedDate, getImageUrl } from '../../../utils/helper'
-import styles from '/src/styles/components/Blocks/MainNews.module.scss'
 import TranslatedContent from './TranslatedContent'
+import styles from '/src/styles/components/Blocks/MainNews.module.scss'
 
 function MainExhibitions() {
-	const { t, i18n } = useTranslation()
-	const currentLanguage = i18n.language
+	const { t } = useTranslation()
+
 	const [exhibitions, setExhibitions] = useState([])
 
 	const [visibleExhibitionsCount, setVisibleExhibitionsCount] = useState(
 		getPostsCount(window.innerWidth),
 	)
-	const [formData, setFormData] = useState({
-		title_en: '',
-		title_uk: '',
-		description_en: '',
-		description_uk: '',
-		address: '',
-		latitude: '',
-		longitude: '',
-		time: '',
-		endTime: '',
-	})
 
-	function getPostsCount(Width) {
-		if (Width >= 1600) {
+	function getPostsCount(width) {
+		if (width === null || width === undefined) {
+			throw new Error('Width must be a number')
+		}
+		if (width >= 1920) {
+			return 4
+		}
+		if (width >= 1441 && width < 1920) {
 			return 3
-		} else if (Width >= 1440) {
+		}
+		if (width > 570 && width < 1440) {
 			return 2
-		} else {
-			return 2 // Assuming you meant to return 1 for widths below 1440px
+		}
+		if (width <= 569) {
+			return 1
 		}
 	}
 
@@ -105,23 +102,11 @@ function MainExhibitions() {
 						const featuredMediaUrl =
 							exhibition.images && exhibition.images.length > 0
 								? getImageUrl(
-									exhibition.images[0].imageUrl,
-									'/Img/halfNewsCard.jpg',
-								)
+										exhibition.images[0].imageUrl,
+										'/Img/halfNewsCard.jpg',
+									)
 								: '/Img/halfNewsCard.jpg'
 						console.log('Витягнуте медіа:', featuredMediaUrl)
-
-						const title =
-							currentLanguage === 'en'
-								? exhibition.title_en || exhibition.title_uk
-								: exhibition.title_uk || exhibition.title_en
-
-						const description =
-							currentLanguage === 'en'
-								? exhibition.description_en ||
-								exhibition.description_uk
-								: exhibition.description_uk ||
-								exhibition.description_en
 
 						const address = exhibition.address || ''
 
@@ -162,7 +147,11 @@ function MainExhibitions() {
 											<h3
 												className={`${styles.cardTitle} ${index === 0 ? styles.firstCardTitle : index === 1 ? styles.secondCardTitle : index === 2 ? styles.thirdCardTitle : styles.fourthCardTitle}`}
 											>
-												<TranslatedContent en={exhibition.title_en} uk={exhibition.title_uk} maxLength={50} />
+												<TranslatedContent
+													en={exhibition.title_en}
+													uk={exhibition.title_uk}
+													maxLength={50}
+												/>
 											</h3>
 										</div>
 										<div
@@ -171,7 +160,16 @@ function MainExhibitions() {
 											<p
 												className={`${styles.cardDescription} ${index === 0 ? styles.firstCardDescription : index === 1 ? styles.secondCardDescription : styles.thirdCardDescription}`}
 											>
-												<TranslatedContent en={exhibition.description_en} uk={exhibition.description_uk} maxLength={100} html />
+												<TranslatedContent
+													en={
+														exhibition.description_en
+													}
+													uk={
+														exhibition.description_uk
+													}
+													maxLength={100}
+													html
+												/>
 											</p>
 										</div>
 
