@@ -1,25 +1,24 @@
-import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import styles from '@/styles/layout/ArtistsPage.module.scss'
 import ArtistsPageNewsArtistsSlider from '@components/Sliders/ArtistsPageSliders/ArtistsPageNewsArtistsSlider.jsx'
 import PopularArtsSlider from '@components/Sliders/ArtistsPageSliders/PopularArtsSlider.jsx'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import styles from '@/styles/layout/ArtistsPage.module.scss'
 import { getImageUrl } from '../../../utils/helper.js'
 
 function ArtistsPage() {
-	const { t, i18n } = useTranslation()
-	const currentLanguage = i18n.language
+	const { t } = useTranslation()
 
 	const [creators, setCreators] = useState([])
 	const [loading, setLoading] = useState(true)
 	const navigate = useNavigate()
 	const [error, setError] = useState(null)
 	const [visibleCreatorsCount, setVisibleCreatorsCount] = useState(
-		getPostsCount(window.innerWidth)
+		getCreatorsCount(window.innerWidth),
 	)
 
-	function getPostsCount(width) {
+	function getCreatorsCount(width) {
 		if (width === null || width === undefined) {
 			throw new Error('Width must be a number')
 		}
@@ -39,13 +38,15 @@ function ArtistsPage() {
 
 	useEffect(() => {
 		const handleResize = () => {
-			const newPostCount = getPostsCount(window.innerWidth)
+			const newCreatorCount = getCreatorsCount(window.innerWidth)
 			console.log(
-				`Window width: ${window.innerWidth}, New post count: ${newPostCount}`
+				`Window width: ${window.innerWidth}, New creator count: ${newCreatorCount}`,
 			)
-			if (newPostCount !== visibleCreatorsCount) {
-				setVisibleCreatorsCount(newPostCount)
-				console.log(`Updated visiblePostsCount to: ${newPostCount}`)
+			if (newCreatorCount !== visibleCreatorsCount) {
+				setVisibleCreatorsCount(newCreatorCount)
+				console.log(
+					`Updated visibleCreatorsCount to: ${newCreatorCount}`,
+				)
 			}
 		}
 
@@ -74,7 +75,7 @@ function ArtistsPage() {
 		fetchCreator()
 	}, [])
 
-	const handleAuthorPreviewClick = id => {
+	const handleAuthorPreviewClick = (id) => {
 		navigate(`/artist/${id}`)
 	}
 
@@ -97,7 +98,7 @@ function ArtistsPage() {
 			<div className={`${styles.ArtistsPageArtistsDescriptionWrapper}`}>
 				<p className={`${styles.ArtistsPageArtistsFirstDescription}`}>
 					{t(
-						'Отримуйте запрошення на перегляди виставок та будьте серед перших, хто дізнається про нагороди, призи, книги та виставки в публічних і комерційних галереях.'
+						'Отримуйте запрошення на перегляди виставок та будьте серед перших, хто дізнається про нагороди, призи, книги та виставки в публічних і комерційних галереях.',
 					)}
 				</p>
 
@@ -105,7 +106,7 @@ function ArtistsPage() {
 					{t('Просто шукайте поля для підписки')}&#8194;&#34;
 					{t('СЛІДКУВАТИ ЗА ЦИМ МИТЦЕМ')}&#34;&#8194;
 					{t(
-						'у нижній частині новинних статей Art & Culture Online, профілів митців та попередніх переглядів виставок, або переглядайте сторінки митців нижче.'
+						'у нижній частині новинних статей Art & Culture Online, профілів митців та попередніх переглядів виставок, або переглядайте сторінки митців нижче.',
 					)}
 				</p>
 			</div>
@@ -128,31 +129,47 @@ function ArtistsPage() {
 
 				<div className={`${styles.ArtistsPageGalleryButtonsWrapper}`}>
 					<button className={`${styles.ArtistsPageGalleryButton}`}>
-						<h3 className={`${styles.ArtistsPageGalleryButtonTitle}`}>
+						<h3
+							className={`${styles.ArtistsPageGalleryButtonTitle}`}
+						>
 							{t('Усі')}
 						</h3>
 					</button>
 
-					<p className={`${styles.ArtistsPageGalleryButtonSeparator}`}>|</p>
+					<p
+						className={`${styles.ArtistsPageGalleryButtonSeparator}`}
+					>
+						|
+					</p>
 
 					<button className={`${styles.ArtistsPageGalleryButton}`}>
-						<h3 className={`${styles.ArtistsPageGalleryButtonTitle}`}>
+						<h3
+							className={`${styles.ArtistsPageGalleryButtonTitle}`}
+						>
 							{t('А-Я')}
 						</h3>
 					</button>
 
-					<p className={`${styles.ArtistsPageGalleryButtonSeparator}`}>|</p>
+					<p
+						className={`${styles.ArtistsPageGalleryButtonSeparator}`}
+					>
+						|
+					</p>
 
-					<button className={`${styles.ArtistsPageGalleryButtonWhithClock}`}>
-						<h3 className={`${styles.ArtistsPageGalleryButtonTitle}`}>
+					<button
+						className={`${styles.ArtistsPageGalleryButtonWhithClock}`}
+					>
+						<h3
+							className={`${styles.ArtistsPageGalleryButtonTitle}`}
+						>
 							{t('Час')}
 						</h3>
 
 						<img
 							className={`${styles.ArtistsPageGalleryButtonClock}`}
 							src={'/Img/clock.svg'}
-							alt='Слідкуйте за мистецтвом!'
-							onError={e => {
+							alt="Слідкуйте за мистецтвом!"
+							onError={(e) => {
 								e.target.onerror = null
 								e.target.src = '/Img/newsCardERROR.jpg'
 							}}
@@ -162,7 +179,9 @@ function ArtistsPage() {
 
 				<div className={`${styles.ArtistsPageGalleryCardsWrapper}`}>
 					{loading ? (
-						<div className={styles.loading}>{t('Завантаження...')}</div>
+						<div className={styles.loading}>
+							{t('Завантаження...')}
+						</div>
 					) : error ? (
 						<div className={styles.error}>{error}</div>
 					) : creators.length === 0 ? (
@@ -170,48 +189,75 @@ function ArtistsPage() {
 							{t('Немає митців для відображення.')}
 						</div>
 					) : (
-						<div className={`${styles.ArtistsPageGalleryInnerWrapper}`}>
-							{creators.slice(0, visibleCreatorsCount).map(creator => {
-								const featuredMediaUrl = getImageUrl(creator.images, '/Img/ArtistPhoto.jpg')
+						<div
+							className={`${styles.ArtistsPageGalleryInnerWrapper}`}
+						>
+							{creators
+								.slice(0, visibleCreatorsCount)
+								.map((creator) => {
+									const featuredMediaUrl = getImageUrl(
+										creator.images,
+										'/Img/ArtistPhoto.jpg',
+									)
 
-								return (
-									<div key={creator.id} className={`${styles.ArtistsPageGalleryCardWrapper}`}>
+									return (
 										<div
-											className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}
-											onClick={() => handleAuthorPreviewClick(creator.id)}
-											style={{ cursor: 'pointer' }}
+											key={creator.id}
+											className={`${styles.ArtistsPageGalleryCardWrapper}`}
 										>
-											<img
-												className={`${styles.ArtistsPageGalleryCardPicture}`}
-												src={featuredMediaUrl}
-												alt={`Фото митця ${creator.title}`}
-												loading="lazy"
-												onError={e => {
-													e.target.onerror = null
-													e.target.src = '/Img/ArtistPhoto.jpg'
-												}}
-											/>
+											<div
+												className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}
+												onClick={() =>
+													handleAuthorPreviewClick(
+														creator.id,
+													)
+												}
+												style={{ cursor: 'pointer' }}
+											>
+												<img
+													className={`${styles.ArtistsPageGalleryCardPicture}`}
+													src={featuredMediaUrl}
+													alt={`Фото митця ${creator.title}`}
+													loading="lazy"
+													onError={(e) => {
+														e.target.onerror = null
+														e.target.src =
+															'/Img/ArtistPhoto.jpg'
+													}}
+												/>
+											</div>
+											<div
+												className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}
+											>
+												<p
+													className={`${styles.ArtistsPageGalleryCardDescription}`}
+												>
+													{creator.title}
+												</p>
+											</div>
 										</div>
-										<div className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}>
-											<p className={`${styles.ArtistsPageGalleryCardDescription}`}>{creator.title}</p>
-										</div>
-									</div>
-								)
-							})}
+									)
+								})}
 						</div>
 					)}
 				</div>
 
-				<div className={`${styles.ArtistsPageGalleryAllArtistsButtonWrapper}`}>
-					<button className={`${styles.ArtistsPageGalleryAllArtistsButton}`}>
-						<p className={`${styles.ArtistsPageGalleryAllArtistsButtonText}`}>
+				<div
+					className={`${styles.ArtistsPageGalleryAllArtistsButtonWrapper}`}
+				>
+					<button
+						className={`${styles.ArtistsPageGalleryAllArtistsButton}`}
+					>
+						<p
+							className={`${styles.ArtistsPageGalleryAllArtistsButtonText}`}
+						>
 							{t('Всі митці')}
 						</p>
 						<img
 							className={`${styles.ArtistsPageGalleryAllArtistsButtonArrow}`}
 							src={'/Img/buttonArrow.svg'}
-							alt='Слідкуйте за мистецтвом!'
-							onError={e => {
+							alt="Слідкуйте за мистецтвом!"
+							onError={(e) => {
 								e.target.onerror = null
 								e.target.src = '/Img/newsCardERROR.jpg'
 							}}
