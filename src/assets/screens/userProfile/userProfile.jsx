@@ -7,6 +7,7 @@ import { useAuth } from '../../../Context/AuthContext'
 import API from '../../../utils/api.js'
 import ImageEditor from '../../components/Blocks/ImageEditor.jsx'
 import MuseumAddressSearch from '../../components/Blocks/MuseumAddressSearch.jsx'
+import TranslatedContent from '@components/Blocks/TranslatedContent'
 import TextAreaEditor from '../../components/Blocks/TextAreaEditor.jsx'
 import TextEditor from '../../components/Blocks/TextEditor.jsx'
 import styles from '/src/styles/components/UserProfile/userProfile.module.scss'
@@ -159,42 +160,10 @@ const UserProfile = () => {
 			<h2>{t('Інформація профілю')}</h2>
 			<div className={styles.profileDetails}>
 				<div className={styles.profileInformationContainer}>
-					<div className={styles.profileAvatarWrapper}>
+					{/* <div className={styles.profileAvatarWrapper}>
 						<div className={styles.profileAvatar}>
-							{profileImage && (
-								<img
-									src={
-										profileImage instanceof File
-											? URL.createObjectURL(profileImage)
-											: profileImage.startsWith('http') ||
-												  profileImage.startsWith(
-														'/uploads/profileImages',
-												  )
-												? `${profileImage}`
-												: profileImage
-									}
-									alt="Profile"
-									className={styles.profileImage}
-								/>
-							)}
-							{user && user.role === 'MUSEUM' && museumLogo && (
-								<img
-									src={
-										museumLogo instanceof File
-											? URL.createObjectURL(museumLogo)
-											: museumLogo.startsWith('http') ||
-												  museumLogo.startsWith(
-														'/uploads/museumLogoImages',
-												  )
-												? `${museumLogo}`
-												: museumLogo
-									}
-									alt="Museum Logo"
-									className={styles.museumLogo}
-								/>
-							)}
 						</div>
-					</div>
+					</div> */}
 
 					<div className={styles.profileTextWrapper}>
 						{title && (
@@ -204,9 +173,44 @@ const UserProfile = () => {
 							</p>
 						)}
 
+						{user && user.role === 'MUSEUM' && museumLogo && (
+							<img
+								src={
+									museumLogo instanceof File
+										? URL.createObjectURL(museumLogo)
+										: museumLogo.startsWith('http') ||
+											museumLogo.startsWith(
+												'/uploads/museumLogoImages',
+											)
+											? `${museumLogo}`
+											: museumLogo
+								}
+								alt="Museum Logo"
+								className={styles.museumLogo}
+							/>
+						)}
+
+						{profileImage && (
+							<img
+								src={
+									profileImage instanceof File
+										? URL.createObjectURL(profileImage)
+										: profileImage.startsWith('http') ||
+											profileImage.startsWith(
+												'/uploads/profileImages',
+											)
+											? `${profileImage}`
+											: profileImage
+								}
+								alt="Profile"
+								className={styles.profileImage}
+							/>
+						)}
+
 						{bio && (
 							<p>
-								<strong>{t('Про себе')}:&#8194;</strong> {bio}
+								<strong>{t('Про себе')}:&#8194;</strong>
+								<TranslatedContent en={bio} uk={bio} html />
 							</p>
 						)}
 
@@ -381,7 +385,7 @@ const UserProfile = () => {
 														setCountry(value)
 													}
 													maxLength={100}
-													//required
+												//required
 												/>
 												<TextEditor
 													name="city"
@@ -391,7 +395,7 @@ const UserProfile = () => {
 														setCity(value)
 													}
 													maxLength={100}
-													//required
+												//required
 												/>
 												<TextEditor
 													name="street"
@@ -401,7 +405,7 @@ const UserProfile = () => {
 														setStreet(value)
 													}
 													maxLength={100}
-													//required
+												//required
 												/>
 												<TextEditor
 													name="houseNumber"
@@ -411,7 +415,7 @@ const UserProfile = () => {
 														setHouseNumber(value)
 													}
 													maxLength={50}
-													//required
+												//required
 												/>
 												<TextEditor
 													name="postcode"
@@ -421,7 +425,7 @@ const UserProfile = () => {
 														setPostcode(value)
 													}
 													maxLength={20}
-													//required
+												//required
 												/>
 											</div>
 										)}
@@ -457,7 +461,7 @@ const UserProfile = () => {
 													onChange={({ value }) =>
 														setMuseumLogo(value[0])
 													}
-													// Optional: add validation or constraints
+												// Optional: add validation or constraints
 												/>
 											</div>
 										)}
