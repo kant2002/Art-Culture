@@ -20,6 +20,10 @@ const Footer = () => {
 		navigate('/ArtistsPage')
 	}
 
+	const handleExhibitionsPageClick = () => {
+		navigate('/ExhibitionsPage')
+	}
+
 	const handleMuseumsPageClick = () => {
 		navigate('/MuseumsPage')
 	}
@@ -70,7 +74,7 @@ const Footer = () => {
 									{t('Що поруч')}
 								</a>
 							</li>
-							<li className={`${styles.footerMenuLi}`}>
+							<li className={`${styles.footerMenuLi}`} onClick={handleExhibitionsPageClick}>
 								<a className={`${styles.footerMenuLink}`} href='#'>
 									{t('Виставки')}
 								</a>

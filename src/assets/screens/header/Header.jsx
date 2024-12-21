@@ -107,6 +107,11 @@ function Header() {
 		navigate('/ArtistsPage')
 	}
 
+	const handleExhibitionsPageClick = () => {
+		closeBurgerMenu();
+		navigate('/ExhibitionsPage')
+	}
+
 	const handleMuseumsPageClick = () => {
 		closeBurgerMenu();
 		navigate('/MuseumsPage')
@@ -188,7 +193,7 @@ function Header() {
 									<p>&#8250;</p>
 								</a>
 							</li>
-							<li className='footerMenuLi'>
+							<li className='footerMenuLi' onClick={handleExhibitionsPageClick}>
 								<a className='footerMenuLink' href='#'>
 									<p>{t('Виставки')}</p>
 									<p>&#8250;</p>
@@ -327,7 +332,7 @@ function Header() {
 											{t('Митці')}
 										</a>
 									</li>
-									<li className='mainMenu__li'>
+									<li className='mainMenu__li' onClick={handleExhibitionsPageClick}>
 										<a className='mainMenu__link' href='#'>
 											{t('Виставки')}
 										</a>

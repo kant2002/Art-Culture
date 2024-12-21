@@ -16,6 +16,7 @@ import ArtistPage from '../ArtistPage/ArtistPage'
 import ArtistsPage from '../ArtistsPage/ArtistsPage'
 import MuseumExhibitions from '../ExhibitionList/Exhibitions'
 import ExhibitionPage from '../ExhibitionPage/ExhibitionPage'
+import ExhibitionsPage from '../ExhibitionsPage/ExhibitionsPage'
 import MuseumPage from '../MuseumPage/MuseumPage'
 import MuseumsPage from '../MuseumsPage/MuseumsPage'
 import PostDetail from '../Post/PostDetail'
@@ -132,6 +133,7 @@ const Layout = ({ heading = '' }) => {
 						path="/exhibitions/:id"
 						element={<ExhibitionPage />}
 					/>
+					<Route path="/ExhibitionsPage" element={<ExhibitionsPage />} />
 					<Route
 						path="/signup"
 						element={
