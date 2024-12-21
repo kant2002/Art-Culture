@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 function MuseumAddressSearch({ onSelect }) {
 	const [results, setResults] = useState([])
