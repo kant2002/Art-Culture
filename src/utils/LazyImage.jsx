@@ -1,5 +1,5 @@
 // src/components/LazyImage.jsx
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 function LazyImage({ src, alt, className, onClick }) {
 	const [isVisible, setIsVisible] = useState(false)
