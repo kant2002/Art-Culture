@@ -162,18 +162,7 @@ function MuseumPage() {
 
 			<MuseumPageMasonryGallery />
 
-			{/* <div className={`${styles.underDevelopmentContainer}`}>
-                <p className={`${styles.underDevelopmentPreTitle}`}>{t('Цей контейнер')}</p>
-                <p className={`${styles.underDevelopmentTitle}`}>{t('В розробці')}</p>
-            </div> */}
-
 			<div className={`${styles.underDevelopmentContainer}`}>
-				{/* <p className={`${styles.underDevelopmentPreTitle}`}>
-					{t('Цей контейнер')}
-				</p>
-				<p className={`${styles.underDevelopmentTitle}`}>
-					{t('В розробці')}
-				</p> */}
 				<MuseumMaps museum={museum} />
 			</div>
 

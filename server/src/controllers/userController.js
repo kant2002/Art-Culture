@@ -70,6 +70,13 @@ export const getMuseums = async (req, res, next) => {
         images: true,
         createdAt: true,
         updatedAt: true,
+        lat: true,
+        lon: true,
+        country: true,
+        city: true,
+        street: true,
+        house_number: true,
+        postcode: true,
         museum_logo_image: {
           select: {
             imageUrl: true,

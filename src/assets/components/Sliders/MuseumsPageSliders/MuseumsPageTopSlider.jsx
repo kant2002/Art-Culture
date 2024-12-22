@@ -18,16 +18,15 @@ import '/src/styles/components/Sliders/MainPageBannerSlider/MainPageBannerSlider
 
 const Slide = ({ museum, baseUrl, onClick }) => {
 	const { t } = useTranslation()
-	const navigate = useNavigate()
 
 	const featuredMediaUrl = getImageUrl(museum.images, '/Img/halfNewsCard.jpg')
 	console.log('Витягнуте медіа:', featuredMediaUrl)
 
 	const museumLogoUrl = museum.museum_logo_image?.imageUrl
 		? getImageUrl(
-			museum.museum_logo_image.imageUrl,
-			'/Img/logoMuseum_3.png',
-		)
+				museum.museum_logo_image.imageUrl,
+				'/Img/logoMuseum_3.png',
+			)
 		: '/Img/logoMuseum_3.png' // Fallback logo
 
 	return (
@@ -47,14 +46,16 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 					</div>
 
 					<div className="BannerSliderCardTitleWrapper">
-						<p className="BannerSliderCardTitle">
-							{museum.title}
-						</p>
+						<p className="BannerSliderCardTitle">{museum.title}</p>
 					</div>
 
 					<div className="BannerSliderCardDescriptionWrapper">
 						<p className="BannerSliderCardDescription">
-							<TranslatedContent en={museum.bio} uk={museum.bio} html />
+							<TranslatedContent
+								en={museum.bio}
+								uk={museum.bio}
+								html
+							/>
 						</p>
 					</div>
 

@@ -4,7 +4,10 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import styles from '../../../styles/layout/MuseumsPage.module.scss'
 import { getImageUrl } from '../../../utils/helper.js'
+import AllMuseumsMap from '../../components/Blocks/AllMuseumsMap.jsx'
 import TranslatedContent from '../../components/Blocks/TranslatedContent.jsx'
+import MuseumsPageNewsMuseum from '../../components/Sliders/MuseumsPageSliders/MuseumsPageNewsMuseum.jsx'
+import MuseumsPagePopularMuseums from '../../components/Sliders/MuseumsPageSliders/MuseumsPagePopularMuseums.jsx'
 import MuseumsPageTopSlider from '../../components/Sliders/MuseumsPageSliders/MuseumsPageTopSlider.jsx'
 
 function MuseumsPage() {
@@ -62,6 +65,22 @@ function MuseumsPage() {
 	}, [visibleExhibitionsCount])
 
 	useEffect(() => {
+		const fetchMuseums = async () => {
+			try {
+				const response = await axios.get(`/api/users/museums`)
+				console.log('Fetched museum', response.data)
+				setMuseums(response.data.museums)
+				setLoading(false)
+			} catch (error) {
+				console.error('Error fetch museum', error)
+				setError(t('Не вдалося завантажити дані.'))
+				setLoading(false)
+			}
+		}
+		fetchMuseums()
+	}, [])
+
+	useEffect(() => {
 		const fetchExhibition = async () => {
 			try {
 				const response = await axios.get('/api/exhibitions')
@@ -87,6 +106,8 @@ function MuseumsPage() {
 			</div>
 
 			<MuseumsPageTopSlider />
+
+			<MuseumsPageNewsMuseum />
 
 			<div className={`${styles.ArtistsPageGalleryContainer}`}>
 				<div className={`${styles.ArtistsPageGalleryTitleWrapper}`}>
@@ -245,6 +266,19 @@ function MuseumsPage() {
 						/>
 					</button>
 				</div>
+			</div>
+
+			<MuseumsPagePopularMuseums />
+
+			<div className={`${styles.MuseumsPageMapTitleContainer}`}>
+				<h2 className={`${styles.MuseumsPageMapTitle}`}>
+					{t('Мапа знаходження  Музеїв')}
+				</h2>
+
+				<AllMuseumsMap
+					className={styles.MuseumsMapWrapper}
+					museums={museums}
+				/>
 			</div>
 		</div>
 	)

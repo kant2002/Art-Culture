@@ -186,6 +186,19 @@
   text-align: center;
 }
 
+.MuseumsPageMapTitleContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  .MuseumsPageMapTitle {
+    text-transform: none;
+    font-family: $default-font;
+    margin: $responsiveMediumPadding 0 0 0;
+    margin: 0 0 $responsiveMediumPadding 0;
+  }
+}
+
 @media (min-width: 1441px) {
   .MuseumsPageContainer {
     margin: $staticPcTopPadding 0 0 0;
