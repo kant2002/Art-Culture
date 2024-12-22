@@ -19,14 +19,13 @@ import '/src/styles/components/Sliders/MainPageBannerSlider/MainPageBannerSlider
 const Slide = ({ museum, exhibition, baseUrl, onClick }) => {
 	const { t } = useTranslation()
 
-	const featuredMediaUrl = getImageUrl(
-		exhibition.images && exhibition.images.length > 0
+	const featuredMediaUrl =
+		exhibition.images?.length > 0
 			? getImageUrl(
 					exhibition.images[0].imageUrl,
 					'/Img/halfNewsCard.jpg',
 				)
-			: '/Img/halfNewsCard.jpg',
-	)
+			: '/Img/halfNewsCard.jpg'
 	console.log('Витягнуте медіа:', featuredMediaUrl)
 
 	const museumLogoUrl = museum.museum_logo_image?.imageUrl
