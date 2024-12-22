@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import styles from '../../../styles/layout/MuseumsPage.module.scss'
 import { getImageUrl } from '../../../utils/helper.js'
 import TranslatedContent from '../../components/Blocks/TranslatedContent.jsx'
-import MuseumsPageTopSlider from '../../components/Sliders/MuseumsPageSliders/MuseumsPageTopSlider.jsx'
+import ExhibitionsPageTopSlider from '../../components/Sliders/ExhibitionsPageSlider/ExhibitionsPageTopSlider.jsx'
 
 function MuseumsPage() {
 	const { t } = useTranslation()
@@ -86,7 +86,7 @@ function MuseumsPage() {
 				<div className={`${styles.MuseumsPageTitle}`}>{t('Музеї')}</div>
 			</div>
 
-			<MuseumsPageTopSlider />
+			<ExhibitionsPageTopSlider />
 
 			<div className={`${styles.ArtistsPageGalleryContainer}`}>
 				<div className={`${styles.ArtistsPageGalleryTitleWrapper}`}>

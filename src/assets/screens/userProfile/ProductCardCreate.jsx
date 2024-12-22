@@ -1,12 +1,12 @@
+import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
+import TextAreaEditor from '@components/Blocks/TextAreaEditor'
+import TextEditor from '@components/Blocks/TextEditor'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import API from '../../../utils/api.js'
-import styles from '/src/styles/components/ProductCard/ProductCardCreate.module.scss'
-import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
-import TextEditor from '@components/Blocks/TextEditor'
-import TextAreaEditor from '@components/Blocks/TextAreaEditor'
 import ImageEditor from '../../components/Blocks/ImageEditor.jsx'
+import styles from '/src/styles/components/ProductCard/ProductCardCreate.module.scss'
 
 const ProductCardCreate = () => {
 	const { t } = useTranslation()
@@ -35,10 +35,11 @@ const ProductCardCreate = () => {
 		formDataToSend.append('specs_en', formData.specs_en)
 		formDataToSend.append('specs_uk', formData.specs_uk)
 
-		formData.images.forEach((image) => {
-			formDataToSend.append('productImages', image)
-		})
-
+		if (formData.images && formData.images.length > 0) {
+			Array.from(formData.images).forEach((file) => {
+				formDataToSend.append('productImages', file)
+			})
+		}
 		try {
 			const response = await API.post('/products', formDataToSend, {
 				headers: {
@@ -55,7 +56,9 @@ const ProductCardCreate = () => {
 		} catch (error) {
 			console.error('product create error', error)
 			if (error.response && error.response.data) {
-				setServerMessage(error.response.data.error || 'Product could not be created')
+				setServerMessage(
+					error.response.data.error || 'Product could not be created',
+				)
 			} else {
 				setServerMessage('Product could not be created during action')
 			}
@@ -73,7 +76,7 @@ const ProductCardCreate = () => {
 			{serverMessage && (
 				<p className={styles.serverMessage}>{serverMessage}</p>
 			)}
-			<form onSubmit={handleSubmit} className='form-wrapper'>
+			<form onSubmit={handleSubmit} className="form-wrapper">
 				<div className="flex gap-8 form-wrapper">
 					<div className="form-group">
 						<div className="field-group">
