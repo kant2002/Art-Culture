@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
 import styles from '../../../styles/components/ExhibitionCard/ExhibitionCardCreate.module.scss'
 import API from '../../../utils/api'
+import { getImageUrl } from '../../../utils/helper.js'
 import AddressSearch from '../../components/Blocks/AddressSearchInput'
 import ImageEditor from '../../components/Blocks/ImageEditor'
 
@@ -412,12 +413,6 @@ function ExhibitionForm() {
 		}
 	}
 
-	const getImageUrl = (path) => {
-		// Remove any leading '../' or './' from the path
-		const normalizedPath = path.startsWith('/') ? path : `/${path}`
-		return `${process.env.REACT_APP_BASE_URL}${normalizedPath}`
-	}
-
 	const textEditorOnChange = ({ name, value }) => {
 		const newFormData = { ...formData, [name]: value }
 		setFormData(newFormData)
@@ -484,18 +479,6 @@ function ExhibitionForm() {
 							/>
 						</div>
 
-						{/* Location in Ukrainian 
-						<div className="field-group">
-							<TextEditor
-								label={t('Місце проведення українською')}
-								name="location_uk"
-								value={formData.location_uk}
-								maxLength={500}
-								required
-								onChange={textEditorOnChange}
-							/>
-						</div> */}
-
 						{/* Start Date */}
 						<div className="field-group">
 							<TextEditor
@@ -546,17 +529,6 @@ function ExhibitionForm() {
 								html
 							/>
 						</div>
-						{/* Location in English 
-						<div className="field-group">
-							<TextEditor
-								label={t('Місце проведення англійською')}
-								name="location_en"
-								value={formData.location_en}
-								maxLength={500}
-								required
-								onChange={textEditorOnChange}
-							/>
-						</div>  */}
 
 						{/* End Date */}
 						<div className="field-group">
@@ -622,18 +594,26 @@ function ExhibitionForm() {
 													}
 												>
 													{result.images ? (
-														<img
-															src={getImageUrl(
+														<>
+															{console.log(
+																'Author or painting result:',
+																result,
+																'result.images is:',
 																result.images,
 															)}
-															alt={
-																result.title ||
-																result.email
-															}
-															className={
-																styles.resultAuthorImage
-															}
-														/>
+															<img
+																src={getImageUrl(
+																	result.images,
+																)}
+																alt={
+																	result.title ||
+																	result.email
+																}
+																className={
+																	styles.resultAuthorImage
+																}
+															/>
+														</>
 													) : (
 														<img
 															src={
@@ -671,19 +651,28 @@ function ExhibitionForm() {
 												>
 													{result.images &&
 													result.images.length > 0 ? (
-														<img
-															src={getImageUrl(
-																result.images[0]
-																	.imageUrl,
+														<>
+															{console.log(
+																'Author or painting result:',
+																result,
+																'result.images is:',
+																result.images,
 															)}
-															alt={
-																result.title_en ||
-																result.title_uk
-															}
-															className={
-																styles.resultPaintingsImage
-															}
-														/>
+															<img
+																src={getImageUrl(
+																	result
+																		.images[0]
+																		.imageUrl,
+																)}
+																alt={
+																	result.title_en ||
+																	result.title_uk
+																}
+																className={
+																	styles.resultPaintingsImage
+																}
+															/>
+														</>
 													) : (
 														<img
 															src={
@@ -704,6 +693,11 @@ function ExhibitionForm() {
 										)}
 									</div>
 								)
+								console.log(
+									'Author or painting result:',
+									result,
+								)
+								console.log('result.images is:', result.images)
 							})}
 						</div>
 					)}
@@ -716,11 +710,17 @@ function ExhibitionForm() {
 							className={styles.chipContainer}
 						>
 							{author.images ? (
-								<img
-									src={getImageUrl(author.images)}
-									alt={author.title || author.email}
-									className={styles.chipImage}
-								/>
+								<>
+									{console.log(
+										'Author or painting result:',
+										author.images,
+									)}
+									<img
+										src={getImageUrl(author.images)}
+										alt={author.title || author.email}
+										className={styles.chipImage}
+									/>
+								</>
 							) : (
 								<img
 									src={defaultAuthorImageUrl}
