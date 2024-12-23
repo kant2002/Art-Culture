@@ -98,7 +98,7 @@ function NewsPage() {
 		<div className={`${styles.newsPageContainer}`}>
 			{/* Title Section */}
 			<div className={`${styles.newsPageTitleContainer}`}>
-				<div className={`${styles.newsPageTitle}`}>{t('Новини')}</div>
+				<h1 className={`${styles.newsPageTitle}`}>{t('Новини')}</h1>
 			</div>
 
 			{/* Horizontal Separator */}
