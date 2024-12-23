@@ -40,7 +40,7 @@ function ArtTermPage() {
 		loading ? <Loading /> : error ? <LoadingError />
 			: <div className={`${layoutStyles.PageContainer}`}>
 			<div className={`${layoutStyles.PageTitleWrapper}`}>
-				<h2 className={`${layoutStyles.PageTitle}`}>{title()}</h2>
+				<h1 className={`${layoutStyles.PageTitle}`}>{title()}</h1>
 			</div>
 
 			<div className={`${layoutStyles.PageSeparatorWrapper}`}>

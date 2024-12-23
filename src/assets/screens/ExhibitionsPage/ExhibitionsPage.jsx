@@ -85,7 +85,7 @@ function MuseumsPage() {
 	return (
 		<div className={`${styles.MuseumsPageContainer}`}>
 			<div className={`${styles.MuseumsPageTitleContainer}`}>
-				<h1 className={`${styles.MuseumsPageTitle}`}>{t('Музеї')}</h1>
+				<h1 className={`${styles.MuseumsPageTitle}`}>{t('Виставки')}</h1>
 			</div>
 
 			<ExhibitionsPageTopSlider />
