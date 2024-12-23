@@ -6,6 +6,8 @@ import styles from '../../../styles/layout/MuseumsPage.module.scss'
 import { getImageUrl } from '../../../utils/helper.js'
 import TranslatedContent from '../../components/Blocks/TranslatedContent.jsx'
 import ExhibitionsPageTopSlider from '../../components/Sliders/ExhibitionsPageSlider/ExhibitionsPageTopSlider.jsx'
+import ExhibitionsPageNewsSlider from '../../components/Sliders/ExhibitionsPageSlider/ExhibitionsPageNewsSlider.jsx'
+
 
 function MuseumsPage() {
 	const { t } = useTranslation()
@@ -83,10 +85,12 @@ function MuseumsPage() {
 	return (
 		<div className={`${styles.MuseumsPageContainer}`}>
 			<div className={`${styles.MuseumsPageTitleContainer}`}>
-				<div className={`${styles.MuseumsPageTitle}`}>{t('Музеї')}</div>
+				<h1 className={`${styles.MuseumsPageTitle}`}>{t('Музеї')}</h1>
 			</div>
 
 			<ExhibitionsPageTopSlider />
+
+			<ExhibitionsPageNewsSlider />
 
 			<div className={`${styles.ArtistsPageGalleryContainer}`}>
 				<div className={`${styles.ArtistsPageGalleryTitleWrapper}`}>
