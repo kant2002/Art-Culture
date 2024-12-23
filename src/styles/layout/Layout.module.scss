@@ -2,39 +2,39 @@
 @use '../utilities/variables';
 
 .container {
-	width: 100%;
-	height: 100dvh;
-	}
+    width: 100%;
+    height: 100dvh;
+}
 
 .PageContainer {
-	/* Основной контейнер страницы */
-	display: flex;
-	flex-direction: column;
-	margin: variables.$responsiveTopPadding 0 0 0;
+    /* Основной контейнер страницы */
+    display: flex;
+    flex-direction: column;
+    margin: variables.$responsiveTopPadding 0 0 0;
 
-	* {
-		font-family: variables.$default-font;
-	}
+    * {
+        font-family: variables.$default-font;
+    }
 }
 
 .PageTitleWrapper {
     // Контейнер для названия страницы
-    margin: calc(53px - (30 * ((1440px - 100vw) / (1440 - 375)))) variables.$responsiveLeftAndRightPadding 0;
+    margin: variables.$responsiveBigPadding variables.$responsiveLeftAndRightPadding variables.$responsiveMediumPadding variables.$responsiveLeftAndRightPadding;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.PageTitle {
-    // Заголовок страницы
-    font-size: calc(42px - (24 * ((1440px - 100vw) / (1440 - 375))));
-	font-weight: 600;
-	font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
-	font-size: 28px;
-	text-transform: uppercase;
-    user-select: none;
-	text-align: center;
-}
+// .PageTitle {
+//     // Заголовок страницы
+//     font-size: calc(42px - (24 * ((1440px - 100vw) / (1440 - 375))));
+// 	font-weight: 600;
+// 	font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+// 	font-size: 28px;
+// 	text-transform: uppercase;
+//     user-select: none;
+// 	text-align: center;
+// }
 
 .PageSeparatorWrapper {
     // Контейнер для разделителя
@@ -95,7 +95,7 @@
 
     .PageTitleWrapper {
         /* Контейнер для заголовка страницы */
-        margin: 51px 0 0 0;
+        margin: variables.$staticPcBigPadding variables.$responsiveLeftAndRightPadding variables.$staticPcMediumPadding variables.$responsiveLeftAndRightPadding;
     }
 }
 
