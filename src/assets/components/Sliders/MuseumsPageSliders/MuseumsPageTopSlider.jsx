@@ -24,9 +24,9 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 
 	const museumLogoUrl = museum.museum_logo_image?.imageUrl
 		? getImageUrl(
-				museum.museum_logo_image.imageUrl,
-				'/Img/logoMuseum_3.png',
-			)
+			museum.museum_logo_image.imageUrl,
+			'/Img/logoMuseum_3.png',
+		)
 		: '/Img/logoMuseum_3.png' // Fallback logo
 
 	return (
@@ -44,6 +44,8 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 							}}
 						/>
 					</div>
+
+					<div className="BannerSliderCardSeparator"></div>
 
 					<div className="BannerSliderCardTitleWrapper">
 						<p className="BannerSliderCardTitle">{museum.title}</p>
