@@ -22,17 +22,17 @@ const Slide = ({ museum, exhibition, baseUrl, onClick }) => {
 	const featuredMediaUrl =
 		exhibition.images?.length > 0
 			? getImageUrl(
-					exhibition.images[0].imageUrl,
-					'/Img/halfNewsCard.jpg',
-				)
+				exhibition.images[0].imageUrl,
+				'/Img/halfNewsCard.jpg',
+			)
 			: '/Img/halfNewsCard.jpg'
 	console.log('Витягнуте медіа:', featuredMediaUrl)
 
 	const museumLogoUrl = museum.museum_logo_image?.imageUrl
 		? getImageUrl(
-				museum.museum_logo_image.imageUrl,
-				'/Img/logoMuseum_3.png',
-			)
+			museum.museum_logo_image.imageUrl,
+			'/Img/logoMuseum_3.png',
+		)
 		: '/Img/logoMuseum_3.png' // Fallback logo
 
 	return (
@@ -50,6 +50,8 @@ const Slide = ({ museum, exhibition, baseUrl, onClick }) => {
 							}}
 						/>
 					</div>
+
+					<div className="BannerSliderCardSeparator"></div>
 
 					<div className="BannerSliderCardTitleWrapper">
 						<p className="BannerSliderCardTitle">
