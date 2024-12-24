@@ -12,10 +12,11 @@ import {
 } from 'react'
 import { useTranslation } from 'react-i18next'
 import style from '../../../../styles/components/Sliders/ArtistPageSliders/ArtistPageMasonryGallery.module.scss'
+import TranslatedContent from '../../Blocks/TranslatedContent'
 
 const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	if (!products || products.length === 0) {
-		console.log('No products available.')
+		//	console.log('No products available.')
 		return null // Or display a message if you prefer
 	}
 
@@ -47,7 +48,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 		if (width < 600) return 2
 		if (width < 900) return 4
 		if (width < 1500) return 5
-		return 7
+		return 6
 	}
 
 	const [numberOfColumns, setNumberOfColumns] = useState(getNumberOfColumns())
@@ -66,7 +67,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 
 	// Memoize the images array to prevent unnecessary re-creations
 	const images = useMemo(() => {
-		console.log('Memoizing images based on products.')
+		//	console.log('Memoizing images based on products.')
 		return products.map((product) => {
 			const mainImageSrc =
 				product.images && product.images.length > 0
@@ -91,17 +92,17 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 
 	useEffect(() => {
 		if (images.length === 0) {
-			console.log('No images to load.')
+			//			console.log('No images to load.')
 			return
 		}
 
-		console.log('Loading images...')
+		//	console.log('Loading images...')
 		const imagePromises = images.map((imageObj) => {
 			return new Promise((resolve) => {
 				const img = new Image()
 				img.src = imageObj.src
 				img.onload = () => {
-					console.log(`Image loaded: ${imageObj.src}`)
+					//			console.log(`Image loaded: ${imageObj.src}`)
 					resolve({
 						...imageObj,
 						width: img.width,
@@ -120,7 +121,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 		})
 
 		Promise.all(imagePromises).then((imgs) => {
-			console.log('All images loaded:', imgs)
+			//		console.log('All images loaded:', imgs)
 			setLoadedImages(imgs)
 		})
 	}, [images])
@@ -130,13 +131,9 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 
 	useEffect(() => {
 		if (loadedImages.length === 0) {
-			console.log('No loaded images to split into columns.')
+			//		console.log('No loaded images to split into columns.')
 			return
 		}
-
-		console.log('Splitting images into columns')
-		console.log('Loaded Images:', loadedImages)
-		console.log('Number of Columns:', numberOfColumns)
 
 		const newColumns = Array.from({ length: numberOfColumns }, () => [])
 
@@ -144,7 +141,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 			newColumns[idx % numberOfColumns].push(img)
 		})
 
-		console.log('New Columns:', newColumns)
+		//	console.log('New Columns:', newColumns)
 
 		// Check if columns have actually changed
 		const isColumnsEqual =
@@ -156,13 +153,13 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 				)
 			})
 
-		console.log('Are Columns Equal:', isColumnsEqual)
+		//	console.log('Are Columns Equal:', isColumnsEqual)
 
 		if (!isColumnsEqual) {
-			console.log('Updating columns state')
+			//	console.log('Updating columns state')
 			setColumns(newColumns)
 		} else {
-			console.log('Columns unchanged, not updating state.')
+			//		console.log('Columns unchanged, not updating state.')
 		}
 	}, [loadedImages, numberOfColumns, columns])
 
@@ -172,15 +169,15 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	// Calculate slider width by measuring the DOM
 	useLayoutEffect(() => {
 		if (columns.length === 0) {
-			console.log('No columns available to scale.')
+			//		console.log('No columns available to scale.')
 			return
 		}
 
-		console.log('useLayoutEffect triggered for scaling')
-		console.log('Current Columns:', columns)
-		console.log('Custom Scale Factor:', customScaleFactor)
+		//	console.log('useLayoutEffect triggered for scaling')
+		//	console.log('Current Columns:', columns)
+		//	console.log('Custom Scale Factor:', customScaleFactor)
 
-		const columnWidth = 190 // Desired image width
+		const columnWidth = 170 // Desired image width
 		const columnGap = 20 // Gap between columns
 
 		const newScaledColumns = columns.map((column, colIdx) => {
@@ -197,7 +194,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 			})
 		})
 
-		console.log('New Scaled Columns:', newScaledColumns)
+		//	console.log('New Scaled Columns:', newScaledColumns)
 
 		setScaledColumns(newScaledColumns)
 	}, [columns, customScaleFactor])
@@ -209,7 +206,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 				`.${style.column}`,
 			)
 			if (firstSet.length === 0) {
-				console.log('No columns found for measurement.')
+				//		console.log('No columns found for measurement.')
 				return
 			}
 
@@ -221,7 +218,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 					parseInt(getComputedStyle(col).marginRight, 10)
 			})
 
-			console.log('Measured Slider Width (one set):', totalWidth)
+			//	console.log('Measured Slider Width (one set):', totalWidth)
 			setSliderWidth(totalWidth)
 		}
 	}, [scaledColumns])
@@ -229,9 +226,9 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	// Handle responsive columns with debounce
 	useEffect(() => {
 		const handleResize = debounce(() => {
-			console.log('Window resized')
+			//		console.log('Window resized')
 			const newNumberOfColumns = getNumberOfColumns()
-			console.log('New Number of Columns:', newNumberOfColumns)
+			//		console.log('New Number of Columns:', newNumberOfColumns)
 			setNumberOfColumns(newNumberOfColumns)
 		}, 100) // Adjust the delay as needed
 
@@ -251,14 +248,14 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 				setPosition((prevPosition) => {
 					let newPosition = prevPosition - speed
 
-					console.log('Animating:', {
-						position: newPosition,
-					})
+					//		console.log('Animating:', {
+					//			position: newPosition,
+					//		})
 
 					if (-newPosition >= sliderWidth / 2) {
 						// Reset position to 0 for seamless looping
 
-						console.log('Resetting position to:', newPosition)
+						//				console.log('Resetting position to:', newPosition)
 						return 0
 					}
 
@@ -290,23 +287,23 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 
 	// Handle mouse events to pause and resume animation
 	const handleMouseEnter = () => {
-		console.log('Mouse entered gallery, pausing slider')
+		//		console.log('Mouse entered gallery, pausing slider')
 		setIsPaused(true)
 	}
 
 	const handleMouseLeave = () => {
-		console.log('Mouse left gallery, resuming slider')
+		//		console.log('Mouse left gallery, resuming slider')
 		setIsPaused(false)
 	}
 
 	// Handle image click to open modal
 	const handleImageClick = (productImages, product) => {
-		console.log('Image clicked:', product.id)
+		//		console.log('Image clicked:', product.id)
 		if (productImages && productImages.length > 0) {
 			setSelectedProductImages(productImages)
 			setSelectedProduct(product) // Set the selected product
 			setSelectedCreator(creator) // Set the selected creator
-			console.log('Selected Creator:', creator) // Debugging line
+			//			console.log('Selected Creator:', creator) // Debugging line
 			setZoomStates(
 				productImages.map(() => ({
 					zoomLevel: 1,
@@ -328,7 +325,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 
 	// Handle closing the modal
 	const handleCloseModal = () => {
-		console.log('Closing modal')
+		///		console.log('Closing modal')
 		setIsModalOpen(false)
 		setSelectedProductImages([])
 		setSelectedProduct(null) // Reset to null
@@ -339,7 +336,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 
 	// Handle zoom in
 	const handleZoomIn = (index) => {
-		console.log('Zooming in on image index:', index)
+		//		console.log('Zooming in on image index:', index)
 		setZoomStates((prevZoomStates) => {
 			const newZoomStates = [...prevZoomStates]
 			const currentZoom = newZoomStates[index].zoomLevel
@@ -355,7 +352,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 
 	// Handle zoom out
 	const handleZoomOut = (index) => {
-		console.log('Zooming out on image index:', index)
+		//		console.log('Zooming out on image index:', index)
 		setZoomStates((prevZoomStates) => {
 			const newZoomStates = [...prevZoomStates]
 			const currentZoom = newZoomStates[index].zoomLevel
@@ -394,7 +391,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	// Handle mouse enter to show zoom lens
 	const handleMouseEnterImage = useCallback(
 		(index) => {
-			console.log('Mouse entered image index:', index)
+			//		console.log('Mouse entered image index:', index)
 			setZoomStates((prevZoomStates) => {
 				const newZoomStates = [...prevZoomStates]
 				newZoomStates[index] = {
@@ -410,7 +407,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	// Handle mouse leave to hide zoom lens
 	const handleMouseLeaveImage = useCallback(
 		(index) => {
-			console.log('Mouse left image index:', index)
+			//		console.log('Mouse left image index:', index)
 			setZoomStates((prevZoomStates) => {
 				const newZoomStates = [...prevZoomStates]
 				newZoomStates[index] = {
@@ -427,7 +424,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	// Handle click to toggle zoom
 	const handleImageClickToggleZoom = useCallback(
 		(index) => {
-			console.log('Toggling zoom on image index:', index)
+			//		console.log('Toggling zoom on image index:', index)
 			setZoomStates((prevZoomStates) => {
 				const newZoomStates = [...prevZoomStates]
 				const zoomState = newZoomStates[index]
@@ -447,7 +444,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 
 	// Handle manual navigation in carousel
 	const handlePrevSlide = () => {
-		console.log('Navigating to previous slide')
+		//	console.log('Navigating to previous slide')
 		setCurrentSlide(
 			(prev) =>
 				(prev - 1 + selectedProductImages.length) %
@@ -456,11 +453,11 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	}
 
 	const handleNextSlide = () => {
-		console.log('Navigating to next slide')
+		//	console.log('Navigating to next slide')
 		setCurrentSlide((prev) => (prev + 1) % selectedProductImages.length)
 	}
 
-	const baseImageHeight = 761
+	const baseImageHeight = 600
 
 	const getImageHeight = (columnIdx, imageIdx) => {
 		const pattern =
@@ -484,101 +481,451 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	}
 
 	// Log the current transform value on render
-	console.log('Render: translateX(', position, 'px)')
+	//	console.log('Render: translateX(', position, 'px)')
 
 	return (
-		<div className={style.galleryContainer} style={{ overflow: 'hidden' }}>
-			{/* Gallery Title */}
-			<div className={style.galleryTitleWrapper}>
-				<h3 className={style.galleryTitle}>
-					{t('Роботи цього митця')}
-				</h3>
-			</div>
-
-			{/* Horizontal Slider */}
+		<div className={style.ArtistPageMasonryGalleryWrapper}>
 			<div
-				className={style.justifiedGallery}
-				ref={containerRef}
-				style={{
-					overflow: 'hidden',
-					height: '100vh', // Full window height for vertical columns
-				}}
-				onMouseEnter={handleMouseEnter}
-				onMouseLeave={handleMouseLeave}
+				className={style.galleryContainer}
+				style={{ overflow: 'hidden' }}
 			>
+				{/* Gallery Title */}
+				<div className={style.galleryTitleWrapper}>
+					<h3 className={style.galleryTitle}>
+						{t('Роботи цього митця')}
+					</h3>
+				</div>
+
+				{/* Horizontal Slider */}
 				<div
-					ref={sliderRef}
-					className={style.slider}
-					style={{
-						display: 'flex',
-						flexDirection: 'row', // Arrange columns side by side horizontally
-						transform: `translateX(${position}px)`, // Horizontal movement
-						width: `${sliderWidth * 2}px`, // Set width to accommodate duplicated columns
-						transition: isPaused ? 'none' : 'transform 0.1s linear', // Smooth sliding
-						willChange: 'transform', // Optimize for transform changes
-					}}
+					className={style.justifiedGallery}
+					ref={containerRef}
+					onMouseEnter={handleMouseEnter}
+					onMouseLeave={handleMouseLeave}
 				>
-					{/* Duplicate the entire set of scaled columns for seamless looping */}
-					{scaledColumns
-						.concat(scaledColumns)
-						.map((column, columnIndex) => (
-							<div
-								key={columnIndex}
-								className={style.column}
-								style={{
-									display: 'flex',
-									flexDirection: 'column',
-									marginRight: '20px', // Gap between columns
-								}}
-							>
-								{column.map((img, index) => (
-									<div
-										key={`${img.src}-${index}-${columnIndex}`}
-										className={style.item}
-										style={{
-											marginBottom: '20px', // Gap between items in a column
-											width: `${img.scaledWidth}px`,
-											flex: '0 0 auto', // Prevent flex items from growing or shrinking
-											cursor: 'pointer',
-											height: getImageHeight(
-												columnIndex,
-												index,
-											),
-											position: 'relative',
-										}}
-										onClick={() =>
-											handleImageClick(
-												img.productImages,
-												products.find(
-													(p) =>
-														p.id === img.productId,
+					<div
+						ref={sliderRef}
+						className={style.slider}
+						style={{
+							display: 'flex',
+							flexDirection: 'row', // Arrange columns side by side horizontally
+							transform: `translateX(${position}px)`, // Horizontal movement
+							width: `${sliderWidth * 2}px`, // Set width to accommodate duplicated columns
+							transition: isPaused
+								? 'none'
+								: 'transform 0.1s linear', // Smooth sliding
+							willChange: 'transform', // Optimize for transform changes
+						}}
+					>
+						{/* Duplicate the entire set of scaled columns for seamless looping */}
+						{scaledColumns
+							.concat(scaledColumns)
+							.map((column, columnIndex) => (
+								<div
+									key={columnIndex}
+									className={style.column}
+									style={{
+										display: 'flex',
+										flexDirection: 'column',
+										marginRight: '20px', // Gap between columns
+									}}
+								>
+									{column.map((img, index) => (
+										<div
+											key={`${img.src}-${index}-${columnIndex}`}
+											className={style.item}
+											style={{
+												marginBottom: '20px', // Gap between items in a column
+												width: `${img.scaledWidth}px`,
+												flex: '0 0 auto', // Prevent flex items from growing or shrinking
+												cursor: 'pointer',
+												height: getImageHeight(
+													columnIndex,
+													index,
 												),
-											)
+												position: 'relative',
+											}}
+											onClick={() =>
+												handleImageClick(
+													img.productImages,
+													products.find(
+														(p) =>
+															p.id ===
+															img.productId,
+													),
+												)
+											}
+										>
+											<img
+												src={img.src}
+												alt=""
+												loading="lazy"
+												className={style.galleryImage}
+												style={{
+													width: '100%',
+													height: '100%', // Let height adjust based on image aspect ratio
+													objectFit: 'cover', // Ensures the image covers the container without distortion
+												}}
+												onError={(e) => {
+													e.target.onerror = null
+													e.target.src =
+														'/Img/newsCardERROR.jpg'
+												}}
+											/>
+										</div>
+									))}
+								</div>
+							))}
+					</div>
+				</div>
+
+				{/* Modal */}
+				{isModalOpen && selectedProduct && selectedCreator && (
+					<div
+						className={style.modalOverlay}
+						onClick={handleCloseModal}
+						role="dialog"
+						aria-modal="true"
+						aria-labelledby="productInfoContainer"
+					>
+						<div
+							className={style.modalContent}
+							onClick={(e) => e.stopPropagation()}
+							aria-labelledby="productInfoContainer"
+						>
+							{/* Close Button */}
+							<button
+								className={style.closeButton}
+								onClick={handleCloseModal}
+								aria-label={t('Закрити модальне вікно')}
+							>
+								&times;
+							</button>
+
+							{/* Product Information */}
+							<div
+								id="productInfoContainer"
+								className={style.productInfoContainer}
+								tabIndex="-1" // Make it focusable
+							>
+								<div className={style.productHeaderWrapper}>
+									<h2 className={style.productModalTitle}>
+										{t('Назва Картини:')}
+										<p>
+											<TranslatedContent
+												en={selectedProduct.title_en}
+												uk={selectedProduct.title_uk}
+												html
+											/>
+										</p>
+									</h2>
+									<h3
+										className={style.productModalAuthorName}
+									>
+										{t('Імя автора:')}
+										<p>
+											{selectedCreator.title_en ||
+												selectedCreator.title_uk ||
+												selectedCreator.title ||
+												'—'}
+										</p>
+									</h3>
+								</div>
+
+								<div
+									className={style.productModalMainInfoAbout}
+								>
+									<h3
+										className={style.productModelAboutTitle}
+									>
+										{t('Докладніше')}
+									</h3>
+									<div
+										className={
+											style.productModelDescrWrapper
 										}
 									>
-										<img
-											src={img.src}
-											alt=""
-											loading="lazy"
-											className={style.galleryImage}
-											style={{
-												width: '100%',
-												height: '100%', // Let height adjust based on image aspect ratio
-												objectFit: 'cover', // Ensures the image covers the container without distortion
-											}}
-											onError={(e) => {
-												e.target.onerror = null
-												e.target.src =
-													'/Img/newsCardERROR.jpg'
-											}}
-										/>
+										<h4
+											className={
+												style.productModelDescrTitle
+											}
+										>
+											{t('Про Картину:')}
+											<p
+												className={
+													style.productModelDescr
+												}
+											>
+												<TranslatedContent
+													en={
+														selectedProduct.description_en
+													}
+													uk={
+														selectedProduct.description_uk
+													}
+													html
+												/>
+											</p>
+										</h4>
 									</div>
-								))}
+									<div
+										className={
+											style.productModelSpecsWrapper
+										}
+									>
+										<h4
+											className={
+												style.productModelSpecsTitle
+											}
+										>
+											{t('Використані матеріали:')}
+											<p
+												className={
+													style.productModelSpecs
+												}
+											>
+												<TranslatedContent
+													en={
+														selectedProduct.specs_en
+													}
+													uk={
+														selectedProduct.specs_uk
+													}
+													html
+												/>
+											</p>
+										</h4>
+									</div>
+								</div>
 							</div>
-						))}
-				</div>
-			</div>
 
+							{/* Carousel Navigation Buttons */}
+							{selectedProductImages.length > 1 && (
+								<div className={style.carouselNav}>
+									<button
+										className={style.carouselButton}
+										onClick={handlePrevSlide}
+										aria-label={t('Попереднє зображення')}
+									>
+										&#10094; {/* Left Arrow */}
+									</button>
+									<button
+										className={style.carouselButton}
+										onClick={handleNextSlide}
+										aria-label={t('Наступне зображення')}
+									>
+										&#10095; {/* Right Arrow */}
+									</button>
+								</div>
+							)}
+
+							{/* Carousel Images */}
+							<div className={style.modalImages}>
+								{selectedProductImages &&
+								selectedProductImages.length > 0 ? (
+									selectedProductImages.map(
+										(image, index) => {
+											// Only render the current slide
+											if (index !== currentSlide)
+												return null
+
+											const zoomState = zoomStates[
+												index
+											] || {
+												zoomLevel: 1,
+												isZoomed: false,
+												cursorPos: { x: 0, y: 0 },
+												showLens: false,
+											}
+
+											return (
+												<div
+													key={index}
+													className={
+														style.modalImageWrapper
+													}
+													onMouseEnter={() =>
+														handleMouseEnterImage(
+															index,
+														)
+													}
+													onMouseLeave={() =>
+														handleMouseLeaveImage(
+															index,
+														)
+													}
+													onMouseMove={(e) =>
+														handleMouseMoveImage(
+															e,
+															index,
+														)
+													}
+													onClick={() =>
+														handleImageClickToggleZoom(
+															index,
+														)
+													}
+													style={{
+														position: 'relative',
+														overflow: 'hidden',
+														cursor: zoomState.isZoomed
+															? 'zoom-out'
+															: 'zoom-in',
+														width: '70%', // Make image responsive
+														//height: 'auto',
+														//margin: '0 auto', // Center the image
+													}}
+												>
+													<div
+														className={
+															style.zoomContainer
+														}
+														style={{
+															transform: `scale(${zoomState.zoomLevel})`,
+															transformOrigin: `${zoomState.cursorPos.x}px ${zoomState.cursorPos.y}px`,
+															transition:
+																'transform 0.3s ease-in-out',
+															display:
+																'inline-block',
+														}}
+													>
+														<img
+															src={`${baseUrl}${image.imageUrl.replace('../../', '/')}`}
+															alt={`Product Image ${index + 1}`}
+															loading="lazy"
+															className={
+																style.modalImage
+															}
+															style={{
+																width: '100%',
+																height: 'auto',
+															}}
+															onError={(e) => {
+																e.target.onerror =
+																	null
+																e.target.src =
+																	'/Img/newsCardERROR.jpg'
+																console.error(
+																	'Error loading modal image:',
+																	e.target
+																		.src,
+																)
+															}}
+														/>
+													</div>
+													{zoomState.showLens &&
+														!zoomState.isZoomed && (
+															<div
+																className={
+																	style.zoomLens
+																}
+																style={{
+																	position:
+																		'absolute',
+																	top:
+																		zoomState
+																			.cursorPos
+																			.y -
+																		50,
+																	left:
+																		zoomState
+																			.cursorPos
+																			.x -
+																		50,
+																	width: '100px',
+																	height: '100px',
+																	border: '2px solid #fff',
+																	borderRadius:
+																		'50%',
+																	pointerEvents:
+																		'none',
+																	backgroundColor:
+																		'rgba(255, 255, 255, 0.2)',
+																}}
+															></div>
+														)}
+													{/* Zoom Controls */}
+													{zoomState.isZoomed && (
+														<div
+															className={
+																style.zoomControls
+															}
+														>
+															<button
+																className={
+																	style.zoomButton
+																}
+																onClick={(
+																	e,
+																) => {
+																	e.stopPropagation()
+																	handleZoomOut(
+																		index,
+																	)
+																}}
+																aria-label={t(
+																	'Zoom Out',
+																)}
+															>
+																-
+															</button>
+															<div
+																className={
+																	style.zoomIndicator
+																}
+															>
+																<span>{`Zoom: ${zoomState.zoomLevel}x`}</span>
+																<div
+																	className={
+																		style.zoomBar
+																	}
+																>
+																	<div
+																		className={
+																			style.zoomProgress
+																		}
+																		style={{
+																			width: `${((zoomState.zoomLevel - 1) / 4) * 100}%`,
+																		}}
+																	></div>
+																</div>
+															</div>
+															<button
+																className={
+																	style.zoomButton
+																}
+																onClick={(
+																	e,
+																) => {
+																	e.stopPropagation()
+																	handleZoomIn(
+																		index,
+																	)
+																}}
+																aria-label={t(
+																	'Zoom In',
+																)}
+															>
+																+
+															</button>
+														</div>
+													)}
+												</div>
+											)
+										},
+									)
+								) : (
+									<p>
+										{t(
+											'Немає додаткових зображень для цього продукту.',
+										)}
+									</p>
+								)}
+							</div>
+						</div>
+					</div>
+				)}
+			</div>
 			{/* More Arts Button */}
 			<div className={style.moreArtsButtonWrapper}>
 				<button className={style.moreArtsButton}>
@@ -597,276 +944,6 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 					/>
 				</button>
 			</div>
-
-			{/* Modal */}
-			{isModalOpen && selectedProduct && selectedCreator && (
-				<div
-					className={style.modalOverlay}
-					onClick={handleCloseModal}
-					role="dialog"
-					aria-modal="true"
-					aria-labelledby="productInfoContainer"
-				>
-					<div
-						className={style.modalContent}
-						onClick={(e) => e.stopPropagation()}
-						aria-labelledby="productInfoContainer"
-					>
-						{/* Close Button */}
-						<button
-							className={style.closeButton}
-							onClick={handleCloseModal}
-							aria-label={t('Закрити модальне вікно')}
-						>
-							&times;
-						</button>
-
-						{/* Product Information */}
-						<div
-							id="productInfoContainer"
-							className={style.productInfoContainer}
-							tabIndex="-1" // Make it focusable
-						>
-							<div className={style.productHeaderWrapper}>
-								<h2 className={style.productModalTitle}>
-									{t('Назва Картини:')}
-									<p>
-										{selectedProduct.title_en ||
-											selectedProduct.title_uk ||
-											selectedProduct.title ||
-											'—'}
-									</p>
-								</h2>
-								<h3 className={style.productModalAuthorName}>
-									{t('Імя автора:')}
-									<p>
-										{selectedCreator.title_en ||
-											selectedCreator.title_uk ||
-											selectedCreator.title ||
-											'—'}
-									</p>
-								</h3>
-							</div>
-
-							<div className={style.productModalMainInfoAbout}>
-								<h3 className={style.productModelAboutTitle}>
-									{t('Докладніше')}
-								</h3>
-								<h4 className={style.productModelDescr}>
-									{t('Про Картину:')}
-									<p>
-										{selectedProduct.description_en ||
-											selectedProduct.description_uk ||
-											selectedProduct.description ||
-											'—'}
-									</p>
-								</h4>
-								<h4 className={style.productModelSpecs}>
-									{t('Використані матеріали:')}
-									<p>
-										{selectedProduct.specs_en ||
-											selectedProduct.specs_uk ||
-											selectedProduct.specs ||
-											'—'}
-									</p>
-								</h4>
-							</div>
-						</div>
-
-						{/* Carousel Navigation Buttons */}
-						{selectedProductImages.length > 1 && (
-							<div className={style.carouselNav}>
-								<button
-									className={style.carouselButton}
-									onClick={handlePrevSlide}
-									aria-label={t('Попереднє зображення')}
-								>
-									&#10094; {/* Left Arrow */}
-								</button>
-								<button
-									className={style.carouselButton}
-									onClick={handleNextSlide}
-									aria-label={t('Наступне зображення')}
-								>
-									&#10095; {/* Right Arrow */}
-								</button>
-							</div>
-						)}
-
-						{/* Carousel Images */}
-						<div className={style.modalImages}>
-							{selectedProductImages &&
-							selectedProductImages.length > 0 ? (
-								selectedProductImages.map((image, index) => {
-									// Only render the current slide
-									if (index !== currentSlide) return null
-
-									const zoomState = zoomStates[index] || {
-										zoomLevel: 1,
-										isZoomed: false,
-										cursorPos: { x: 0, y: 0 },
-										showLens: false,
-									}
-
-									return (
-										<div
-											key={index}
-											className={style.modalImageWrapper}
-											onMouseEnter={() =>
-												handleMouseEnterImage(index)
-											}
-											onMouseLeave={() =>
-												handleMouseLeaveImage(index)
-											}
-											onMouseMove={(e) =>
-												handleMouseMoveImage(e, index)
-											}
-											onClick={() =>
-												handleImageClickToggleZoom(
-													index,
-												)
-											}
-											style={{
-												position: 'relative',
-												overflow: 'hidden',
-												cursor: zoomState.isZoomed
-													? 'zoom-out'
-													: 'zoom-in',
-												width: '100%', // Make image responsive
-												height: 'auto',
-												margin: '0 auto', // Center the image
-											}}
-										>
-											<div
-												className={style.zoomContainer}
-												style={{
-													transform: `scale(${zoomState.zoomLevel})`,
-													transformOrigin: `${zoomState.cursorPos.x}px ${zoomState.cursorPos.y}px`,
-													transition:
-														'transform 0.3s ease-in-out',
-													display: 'inline-block',
-												}}
-											>
-												<img
-													src={`${baseUrl}${image.imageUrl.replace('../../', '/')}`}
-													alt={`Product Image ${index + 1}`}
-													loading="lazy"
-													className={style.modalImage}
-													style={{
-														width: '100%',
-														height: 'auto',
-													}}
-													onError={(e) => {
-														e.target.onerror = null
-														e.target.src =
-															'/Img/newsCardERROR.jpg'
-														console.error(
-															'Error loading modal image:',
-															e.target.src,
-														)
-													}}
-												/>
-											</div>
-											{zoomState.showLens &&
-												!zoomState.isZoomed && (
-													<div
-														className={
-															style.zoomLens
-														}
-														style={{
-															position:
-																'absolute',
-															top:
-																zoomState
-																	.cursorPos
-																	.y - 50,
-															left:
-																zoomState
-																	.cursorPos
-																	.x - 50,
-															width: '100px',
-															height: '100px',
-															border: '2px solid #fff',
-															borderRadius: '50%',
-															pointerEvents:
-																'none',
-															backgroundColor:
-																'rgba(255, 255, 255, 0.2)',
-														}}
-													></div>
-												)}
-											{/* Zoom Controls */}
-											{zoomState.isZoomed && (
-												<div
-													className={
-														style.zoomControls
-													}
-												>
-													<button
-														className={
-															style.zoomButton
-														}
-														onClick={(e) => {
-															e.stopPropagation()
-															handleZoomOut(index)
-														}}
-														aria-label={t(
-															'Zoom Out',
-														)}
-													>
-														-
-													</button>
-													<div
-														className={
-															style.zoomIndicator
-														}
-													>
-														<span>{`Zoom: ${zoomState.zoomLevel}x`}</span>
-														<div
-															className={
-																style.zoomBar
-															}
-														>
-															<div
-																className={
-																	style.zoomProgress
-																}
-																style={{
-																	width: `${((zoomState.zoomLevel - 1) / 4) * 100}%`,
-																}}
-															></div>
-														</div>
-													</div>
-													<button
-														className={
-															style.zoomButton
-														}
-														onClick={(e) => {
-															e.stopPropagation()
-															handleZoomIn(index)
-														}}
-														aria-label={t(
-															'Zoom In',
-														)}
-													>
-														+
-													</button>
-												</div>
-											)}
-										</div>
-									)
-								})
-							) : (
-								<p>
-									{t(
-										'Немає додаткових зображень для цього продукту.',
-									)}
-								</p>
-							)}
-						</div>
-					</div>
-				</div>
-			)}
 		</div>
 	)
 }
