@@ -123,7 +123,7 @@ const ArtistsPageNewsArtistsSlider = () => {
 							<SwiperSlide>
 								<div className="error">{error}</div>
 							</SwiperSlide>
-						) : creatorPosts.length === 0 ? (
+						) : creatorPosts.length > 0 ? (
 							<SwiperSlide>
 								<div className="noPosts">
 									{t('Немає публікацій від митців.')}
