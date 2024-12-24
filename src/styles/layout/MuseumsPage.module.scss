@@ -16,15 +16,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: calc(51px - (28 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+  margin: $responsiveBigPadding $responsiveLeftAndRightPadding $responsiveMediumPadding $responsiveLeftAndRightPadding;
 }
 
-.MuseumsPageTitle {
-  /* Заголовок страницы */
-  font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
-  font-weight: 600;
-  text-transform: uppercase;
-}
+// .MuseumsPageTitle {
+//   /* Заголовок страницы */
+//   font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+//   font-weight: 600;
+//   text-transform: uppercase;
+// }
 
 .ArtistsPageGalleryContainer {
   // Контейнер для галереи
@@ -206,13 +206,13 @@
 
   .MuseumsPageTitleContainer {
     /* Контейнер для заголовка страницы новостей */
-    margin: 51px 0 0 0;
+    margin: $staticPcBigPadding $responsiveLeftAndRightPadding $staticPcMediumPadding $responsiveLeftAndRightPadding;
   }
 
-  .MuseumsPageTitle {
-    /* Заголовок страницы новостей */
-    font-size: 28px;
-  }
+  // .MuseumsPageTitle {
+  //   /* Заголовок страницы новостей */
+  //   font-size: 28px;
+  // }
   .ArtistsPageGalleryTitleWrapper {
     // Контейнер для названия галереи
     margin: $staticPcBigPadding $responsiveLeftAndRightPadding 0
