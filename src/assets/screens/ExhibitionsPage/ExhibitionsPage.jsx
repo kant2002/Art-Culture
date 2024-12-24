@@ -7,6 +7,7 @@ import { getImageUrl } from '../../../utils/helper.js'
 import TranslatedContent from '../../components/Blocks/TranslatedContent.jsx'
 import ExhibitionsPageTopSlider from '../../components/Sliders/ExhibitionsPageSlider/ExhibitionsPageTopSlider.jsx'
 import ExhibitionsPageNewsSlider from '../../components/Sliders/ExhibitionsPageSlider/ExhibitionsPageNewsSlider.jsx'
+import ExhibitionsPagePopularExhibitions from '../../components/Sliders/ExhibitionsPageSlider/ExhibitionsPagePopularExhibitions.jsx'
 
 
 function MuseumsPage() {
@@ -169,12 +170,12 @@ function MuseumsPage() {
 								.map((exhibition, index) => {
 									const featuredMediaUrl =
 										exhibition.images &&
-										exhibition.images.length > 0
+											exhibition.images.length > 0
 											? getImageUrl(
-													exhibition.images[0]
-														.imageUrl,
-													'/Img/halfNewsCard.jpg',
-												)
+												exhibition.images[0]
+													.imageUrl,
+												'/Img/halfNewsCard.jpg',
+											)
 											: '/Img/halfNewsCard.jpg'
 									console.log(
 										'Витягнуте медіа:',
@@ -250,6 +251,9 @@ function MuseumsPage() {
 					</button>
 				</div>
 			</div>
+
+			<ExhibitionsPagePopularExhibitions />
+
 		</div>
 	)
 }
