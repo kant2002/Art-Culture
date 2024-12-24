@@ -1,7 +1,7 @@
 import axios from 'axios'
+import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 // Import Swiper styles
@@ -9,12 +9,14 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-import LikeAndShare from '@components/Blocks/LikeAndShare'
+
 // Import Swiper modules
-import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
-import PropTypes from 'prop-types'
+import { useNavigate } from 'react-router-dom'
 import { Navigation, Pagination } from 'swiper/modules'
+import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
+import '@styles/components/Sliders/Base/PopularSlider.scss'
 import { getBaseUrl, getImageUrl } from '../../../../utils/helper'
+import LikeAndShare from '../../Blocks/LikeAndShare'
 import TranslatedContent from '../../Blocks/TranslatedContent'
 
 const Slide = ({ museum, baseUrl, onClick }) => {
@@ -23,30 +25,24 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 	console.log('Витягнуте медіа:', featuredMediaUrl)
 
 	return (
-		<div className="PopularSliderCardWrapper">
-			<div className="PopularSliderCardInnerWrapper">
+		<div className='PopularSliderCardWrapper'>
+			<div className='PopularSliderCardInnerWrapper'>
 				<img
-					className="PopularSliderCardImg"
+					className='PopularSliderCardImg'
 					src={featuredMediaUrl}
 					alt={t('Світлина мистецтва')}
-					onError={(e) => {
+					onError={e => {
 						e.target.onerror = null
 						e.target.src = '/Img/mainPopularArtistsSlide.jpg'
 					}}
 				/>
 			</div>
-			<div className="PopularSliderCardAbsoluteWrapper">
-				<div className="PopularSliderCardButtonWrapper">
-					<button
-						className="PopularSliderCardButton"
-						onClick={() => onClick(museum.id)}
-					>
-						{t('Огляд')}
-					</button>
+			<div className='PopularSliderCardAbsoluteWrapper'>
+				<div className='PopularSliderCardButtonWrapper'>
+					<button className='PopularSliderCardButton' onClick={() => onClick(museum.id)}>{t('Огляд')}</button>
 				</div>
-
-				<div className="NewsSliderCardTitleWrapper">
-					<h3 className="NewsSliderCardTitle">
+				<div className='PopularSliderCardTitleWrapper'>
+					<h3 className='PopularSliderCardTitle'>
 						<TranslatedContent
 							en={museum.title}
 							uk={museum.title}
@@ -54,9 +50,8 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 						/>
 					</h3>
 				</div>
-
-				<div className="NewsSliderCardDescriptionWrapper">
-					<p className="NewsSliderCardDescription">
+				<div className='PopularSliderCardDescriptionWrapper'>
+					<p className='PopularSliderCardDescription'>
 						<TranslatedContent
 							en={museum.bio}
 							uk={museum.bio}
@@ -107,17 +102,17 @@ const PopularMuseumSlider = () => {
 	}
 
 	return (
-		<div className="NewsSliderContainer">
-			<div className="NewsSliderWrapper">
-				<div className="NewsSliderTopInnerWrapper">
-					<div className="NewsSliderTitleWrapper">
-						<h2 className="NewsSliderTitle">
+		<div className='PopularSliderContainer'>
+			<div className='PopularSliderWrapper'>
+				<div className='PopularSliderTopInnerWrapper'>
+					<div className='PopularSliderTitleWrapper'>
+						<h2 className='PopularSliderTitle'>
 							{t('Популярне.')} &#8243;{t('Музеї')}&#8243;
 						</h2>
 					</div>
 					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 				</div>
-				<div className="NewsSliderBottomInnerWrapper">
+				<div className='PopularSliderBottomInnerWrapper'>
 					<Swiper
 						modules={[Navigation, Pagination]}
 						spaceBetween={0}
@@ -125,32 +120,27 @@ const PopularMuseumSlider = () => {
 						navigation
 						pagination={{ clickable: false, type: 'fraction' }}
 						onSlideChange={() => console.log('slide change')}
-						onSwiper={(swiper) => console.log(swiper)}
+						onSwiper={swiper => console.log(swiper)}
 					>
 						{loading ? (
 							<SwiperSlide>
-								<div className="loading">
-									{t('Завантаження...')}
-								</div>
+								<div className='loading'>{t('Завантаження...')}</div>
 							</SwiperSlide>
 						) : error ? (
 							<SwiperSlide>
-								<div className="error">{error}</div>
+								<div className='error'>{error}</div>
 							</SwiperSlide>
 						) : !museums || museums.length === 0 ? (
 							<SwiperSlide>
-								<div className="noPosts">
-									{t('Немає публікацій від митців.')}
+								<div className='noProducts'>
+									{t('Немає продуктів від митців.')}
 								</div>
 							</SwiperSlide>
 						) : (
-							museums.map((museum) => (
+							museums.map(museum => (
 								<SwiperSlide key={museum.id}>
-									<Slide
-										museum={museum}
-										baseUrl={baseUrl}
-										onClick={handleMuseumsPageClick}
-									/>
+									<Slide museum={museum} baseUrl={baseUrl}
+										onClick={handleMuseumsPageClick} />
 								</SwiperSlide>
 							))
 						)}
