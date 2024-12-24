@@ -12,7 +12,6 @@ import 'swiper/css/pagination'
 // Import Swiper modules
 import { useNavigate } from 'react-router-dom'
 import { Navigation, Pagination } from 'swiper/modules'
-
 import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import '@styles/components/Sliders/Base/PopularSlider.scss'
 import { getBaseUrl, getImageUrl } from '../../../../utils/helper'
