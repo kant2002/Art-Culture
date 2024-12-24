@@ -102,7 +102,7 @@
 // 				<div className="NewsSliderTopInnerWrapper">
 // 					<div className="NewsSliderTitleWrapper">
 // 						<h2 className="NewsSliderTitle">
-// 							{t('Популярне.')} &#8243;{t('Музеї')}&#8243;
+// 							{t('Популярне.')} &#8243;{t('Виставки')}&#8243;
 // 						</h2>
 // 					</div>
 // 					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
@@ -267,7 +267,7 @@ const PopularArtsSlider = () => {
 				<div className='PopularSliderTopInnerWrapper'>
 					<div className='PopularSliderTitleWrapper'>
 						<h2 className='PopularSliderTitle'>
-							{t('Популярне.')} &#8243;{t('Музеї')}&#8243;
+							{t('Популярне.')} &#8243;{t('Виставки')}&#8243;
 						</h2>
 					</div>
 					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
