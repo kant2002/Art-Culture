@@ -28,7 +28,7 @@ const Slide = ({ post, baseUrl }) => {
 		<div className="NewsSliderCardContainer">
 			<a
 				className="NewsSliderCardLink"
-				// TODO:Rewrite component to use navigate for post	onClick={handleArtistPageClick}
+			// TODO:Rewrite component to use navigate for post	onClick={handleArtistPageClick}
 			>
 				<div className="NewsSliderCardImgWrapper">
 					<img
@@ -57,7 +57,7 @@ const Slide = ({ post, baseUrl }) => {
 						<TranslatedContent
 							en={post.content_en}
 							uk={post.content_uk}
-							maxLength={230}
+							maxLength={170}
 							html
 						/>
 					</p>

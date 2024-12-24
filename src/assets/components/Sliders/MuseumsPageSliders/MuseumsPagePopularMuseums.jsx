@@ -9,37 +9,34 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
+
 // Import Swiper modules
 import { Navigation, Pagination } from 'swiper/modules'
-
-import LikeAndShare from '@components/Blocks/LikeAndShare'
 import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import { getBaseUrl, getImageUrl } from '../../../../utils/helper'
 import TranslatedContent from '../../Blocks/TranslatedContent'
-import '/src/styles/components/Sliders/Base/NewsSlider.scss'
 
 const Slide = ({ museum, baseUrl, onClick }) => {
 	const { t } = useTranslation()
-
 	const featuredMediaUrl = getImageUrl(museum.images, '/Img/halfNewsCard.jpg')
 	console.log('Витягнуте медіа:', featuredMediaUrl)
 
 	return (
-		<div className="NewsSliderCardContainer">
-			<a
-				className="NewsSliderCardLink"
-				onClick={() => onClick(museum.id)}
-			>
-				<div className="NewsSliderCardImgWrapper">
-					<img
-						className="NewsSliderCardImg"
-						src={featuredMediaUrl}
-						alt={t('Світлина мистецтва')}
-						onError={(e) => {
-							e.target.onerror = null
-							e.target.src = '/Img/newsCardERROR.jpg'
-						}}
-					/>
+		<div className='PopularSliderCardWrapper'>
+			<div className='PopularSliderCardInnerWrapper'>
+				<img
+					className='PopularSliderCardImg'
+					src={featuredMediaUrl}
+					alt={t('Світлина мистецтва')}
+					onError={e => {
+						e.target.onerror = null
+						e.target.src = '/Img/mainPopularArtistsSlide.jpg'
+					}}
+				/>
+			</div>
+			<div className='PopularSliderCardAbsoluteWrapper'>
+				<div className='PopularSliderCardButtonWrapper'>
+					<button className='PopularSliderCardButton' onClick={() => onClick(museum.id)}>{t('Огляд')}</button>
 				</div>
 
 				<div className="NewsSliderCardTitleWrapper">
@@ -57,7 +54,7 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 						<TranslatedContent
 							en={museum.bio}
 							uk={museum.bio}
-							maxLength={230}
+							maxLength={60}
 							html
 						/>
 					</p>
@@ -67,8 +64,14 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 	)
 }
 
-const MuseumsPagePopularMuseumSlider = () => {
+Slide.propTypes = {
+	museum: PropTypes.object,
+	baseUrl: PropTypes.string,
+}
+
+const PopularMuseumSlider = () => {
 	const { t } = useTranslation()
+
 	const [museums, setMuseums] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
@@ -134,13 +137,10 @@ const MuseumsPagePopularMuseumSlider = () => {
 								</div>
 							</SwiperSlide>
 						) : (
-							museums.map((museum) => (
+							museums.map(museum => (
 								<SwiperSlide key={museum.id}>
-									<Slide
-										museum={museum}
-										baseUrl={baseUrl}
-										onClick={handleMuseumsPageClick}
-									/>
+									<Slide museum={museum} baseUrl={baseUrl}
+										onClick={handleMuseumsPageClick} />
 								</SwiperSlide>
 							))
 						)}
@@ -154,4 +154,4 @@ const MuseumsPagePopularMuseumSlider = () => {
 	)
 }
 
-export default MuseumsPagePopularMuseumSlider
+export default PopularMuseumSlider
