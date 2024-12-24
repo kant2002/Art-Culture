@@ -42,13 +42,22 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	// Define the number of columns and custom scaling factor
 	const customScaleFactor = 1.2 // Change this to scale images up or down
 
+	const getBaseImageHeight = () => {
+		const width = window.innerWidth
+		if (width >= 1800) return 689
+		return 599
+	}
+
+	const [baseImageHeight, setBaseImageHeight] = useState(getBaseImageHeight())
+
 	// Determine the number of columns based on viewport width
 	const getNumberOfColumns = () => {
 		const width = window.innerWidth
 		if (width < 600) return 2
 		if (width < 900) return 4
 		if (width < 1500) return 5
-		return 6
+		if (width < 1800) return 6
+		return 7
 	}
 
 	const [numberOfColumns, setNumberOfColumns] = useState(getNumberOfColumns())
@@ -229,6 +238,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 			//		console.log('Window resized')
 			const newNumberOfColumns = getNumberOfColumns()
 			//		console.log('New Number of Columns:', newNumberOfColumns)
+			setBaseImageHeight(getBaseImageHeight())
 			setNumberOfColumns(newNumberOfColumns)
 		}, 100) // Adjust the delay as needed
 
@@ -456,8 +466,6 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 		//	console.log('Navigating to next slide')
 		setCurrentSlide((prev) => (prev + 1) % selectedProductImages.length)
 	}
-
-	const baseImageHeight = 600
 
 	const getImageHeight = (columnIdx, imageIdx) => {
 		const pattern =
