@@ -35,7 +35,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: calc(23px - (2 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
 }
 
 .newsPageHorizontalSeparator {
@@ -376,11 +375,6 @@
     //     /* Заголовок страницы новостей */
     //     font-size: 28px;
     // }
-
-    .newsPageHorizontalSeparatorContainer {
-        /* Контейнер для горизонтального разделителя */
-        margin: 23px 0 0 0;
-    }
 
     .newsPageSearchInput {
         /* Поле ввода для поиска авторов */
