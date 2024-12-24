@@ -173,7 +173,7 @@ function MuseumsPage() {
 						</div>
 					) : error ? (
 						<div className={styles.error}>{error}</div>
-					) : exhibitions.length === 0 ? (
+					) : !exhibitions || exhibitions.length === 0 ? (
 						<div className={styles.noCreators}>
 							{t('Немає виставок для відображення.')}
 						</div>

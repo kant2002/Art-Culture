@@ -90,7 +90,7 @@ const MuseumsPagePopularMuseumSlider = () => {
 		}
 
 		fetchPopularMuseums()
-	}, [t])
+	}, [])
 
 	const handleMuseumsPageClick = (id) => {
 		navigate(`/museumpage/${id}`)
@@ -127,7 +127,7 @@ const MuseumsPagePopularMuseumSlider = () => {
 							<SwiperSlide>
 								<div className="error">{error}</div>
 							</SwiperSlide>
-						) : museums.length === 0 ? (
+						) : !museums || museums.length === 0 ? (
 							<SwiperSlide>
 								<div className="noPosts">
 									{t('Немає публікацій від митців.')}

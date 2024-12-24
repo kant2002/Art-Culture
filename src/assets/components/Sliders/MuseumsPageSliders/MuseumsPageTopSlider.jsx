@@ -24,9 +24,9 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 
 	const museumLogoUrl = museum.museum_logo_image?.imageUrl
 		? getImageUrl(
-			museum.museum_logo_image.imageUrl,
-			'/Img/logoMuseum_3.png',
-		)
+				museum.museum_logo_image.imageUrl,
+				'/Img/logoMuseum_3.png',
+			)
 		: '/Img/logoMuseum_3.png' // Fallback logo
 
 	return (
@@ -109,7 +109,7 @@ const MuseumsPageTopSlider = () => {
 			}
 		}
 		fetchMuseums()
-	}, [t])
+	}, [])
 
 	const handleMuseumPageClick = (id) => {
 		console.log('Navigating to museum with id:', id)
@@ -134,7 +134,7 @@ const MuseumsPageTopSlider = () => {
 					<SwiperSlide>
 						<div className="error">{error}</div>
 					</SwiperSlide>
-				) : museums.length === 0 ? (
+				) : !museums || museums.length === 0 ? (
 					<SwiperSlide>
 						<div className="noProducts">{t('Немає музеїв.')}</div>
 					</SwiperSlide>
