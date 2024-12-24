@@ -64,6 +64,7 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 	)
 }
 
+
 Slide.propTypes = {
 	museum: PropTypes.object,
 	baseUrl: PropTypes.string,
