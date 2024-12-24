@@ -9,10 +9,11 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-
+import LikeAndShare from '@components/Blocks/LikeAndShare'
 // Import Swiper modules
-import { Navigation, Pagination } from 'swiper/modules'
 import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
+import PropTypes from 'prop-types'
+import { Navigation, Pagination } from 'swiper/modules'
 import { getBaseUrl, getImageUrl } from '../../../../utils/helper'
 import TranslatedContent from '../../Blocks/TranslatedContent'
 
@@ -22,21 +23,26 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 	console.log('Витягнуте медіа:', featuredMediaUrl)
 
 	return (
-		<div className='PopularSliderCardWrapper'>
-			<div className='PopularSliderCardInnerWrapper'>
+		<div className="PopularSliderCardWrapper">
+			<div className="PopularSliderCardInnerWrapper">
 				<img
-					className='PopularSliderCardImg'
+					className="PopularSliderCardImg"
 					src={featuredMediaUrl}
 					alt={t('Світлина мистецтва')}
-					onError={e => {
+					onError={(e) => {
 						e.target.onerror = null
 						e.target.src = '/Img/mainPopularArtistsSlide.jpg'
 					}}
 				/>
 			</div>
-			<div className='PopularSliderCardAbsoluteWrapper'>
-				<div className='PopularSliderCardButtonWrapper'>
-					<button className='PopularSliderCardButton' onClick={() => onClick(museum.id)}>{t('Огляд')}</button>
+			<div className="PopularSliderCardAbsoluteWrapper">
+				<div className="PopularSliderCardButtonWrapper">
+					<button
+						className="PopularSliderCardButton"
+						onClick={() => onClick(museum.id)}
+					>
+						{t('Огляд')}
+					</button>
 				</div>
 
 				<div className="NewsSliderCardTitleWrapper">
@@ -59,7 +65,7 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 						/>
 					</p>
 				</div>
-			</a>
+			</div>
 		</div>
 	)
 }
@@ -137,10 +143,13 @@ const PopularMuseumSlider = () => {
 								</div>
 							</SwiperSlide>
 						) : (
-							museums.map(museum => (
+							museums.map((museum) => (
 								<SwiperSlide key={museum.id}>
-									<Slide museum={museum} baseUrl={baseUrl}
-										onClick={handleMuseumsPageClick} />
+									<Slide
+										museum={museum}
+										baseUrl={baseUrl}
+										onClick={handleMuseumsPageClick}
+									/>
 								</SwiperSlide>
 							))
 						)}
