@@ -45,6 +45,9 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	const getBaseImageHeight = () => {
 		const width = window.innerWidth
 		if (width >= 1800) return 689
+		if (width >= 1600) return 607
+		if (width >= 1500) return 571
+		if (width >= 1400) return 567
 		return 599
 	}
 
