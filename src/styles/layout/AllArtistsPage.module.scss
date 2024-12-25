@@ -1,2 +1,113 @@
 @use '@styles/layout/ArtistsPage.module.scss';
 @use '@styles/utilities/variables.scss';
+
+.ArtistsContainer {
+    // Контейнер для артистов
+    margin: variables.$responsiveMediumPadding variables.$responsiveLeftAndRightPadding 0 variables.$responsiveLeftAndRightPadding;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.ArtistsWrapper {
+    // Контейнер для артистов
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+.LetterWrapper {
+    // Контейнер для буквы
+    margin: variables.$responsiveMediumPadding variables.$responsiveMediumPadding 0 0;
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid variables.$red;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+}
+
+.Letter {
+    // Буква
+    font-size: 24px;
+    font-weight: 600;
+    color: variables.$red;
+}
+
+.ArtistsByLetterWrapper {
+    // Контейнер для артистов по букве
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.ArtistWrapper {
+    // Контейнер для артиста
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ArtistInformationWrapper {
+    // Контейнер для информации об артисте
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ArtistTitleWrapper {
+    // Контейнер для названия артиста
+    padding: variables.$responsiveSmallPadding variables.$responsiveMediumPadding variables.$responsiveSmallPadding 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.ArtistTitle {
+    // Название артиста
+    font-size: 24px;
+    font-weight: 500;
+    color: black;
+}
+
+.ArtistPhotoWrapper {
+    // Контейнер для изображения артиста
+    width: 115px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1 / 1;
+}
+
+.ArtistPhoto {
+    // Изображение артиста
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+}
+
+.SeparatorWrapper {
+    // Контейнер для разделителя
+    margin: variables.$responsiveSmallPadding 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Separator {
+    // Разделитель
+    width: 100%;
+    height: 1px;
+    background-color: black;
+}

@@ -55,19 +55,162 @@ function AllArtistsPage() {
                     <h3
                         className={`${styles.ArtistsPageGalleryButtonTitle}`}
                     >
-                        {t('Час')}
+                        {t('A-Z')}
                     </h3>
-
-                    <img
-                        className={`${styles.ArtistsPageGalleryButtonClock}`}
-                        src={'/Img/clock.svg'}
-                        alt="Слідкуйте за мистецтвом!"
-                        onError={(e) => {
-                            e.target.onerror = null
-                            e.target.src = '/Img/newsCardERROR.jpg'
-                        }}
-                    />
                 </button>
+            </div>
+            <div className={styles.ArtistsContainer}>
+
+                <div className={styles.ArtistsWrapper}>
+                    <div className={styles.LetterWrapper}>
+                        <h3 className={styles.Letter}>A</h3>
+                    </div>
+                    <div className={styles.ArtistsByLetterWrapper}>
+
+                        <div className={styles.ArtistWrapper}>
+                            <div className={styles.ArtistInformationWrapper}>
+                                <div className={styles.ArtistTitleWrapper}>
+                                    <p className={styles.ArtistTitle}>Андрій Шевченко</p>
+                                </div>
+                                <div className={styles.ArtistPhotoWrapper}>
+                                    <img
+                                        className={`${styles.ArtistPhoto}`}
+                                        src={'/Img/ArtistPhoto.jpg'}
+                                        alt="Слідкуйте за мистецтвом!"
+                                        onError={(e) => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/newsCardERROR.jpg'
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                            <div className={styles.SeparatorWrapper}>
+                                <div className={styles.Separator}></div>
+                            </div>
+                        </div>
+
+                        <div className={styles.ArtistWrapper}>
+                            <div className={styles.ArtistInformationWrapper}>
+                                <div className={styles.ArtistTitleWrapper}>
+                                    <p className={styles.ArtistTitle}>Андрій Шевченко</p>
+                                </div>
+                                <div className={styles.ArtistPhotoWrapper}>
+                                    <img
+                                        className={`${styles.ArtistPhoto}`}
+                                        src={'/Img/ArtistPhoto.jpg'}
+                                        alt="Слідкуйте за мистецтвом!"
+                                        onError={(e) => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/newsCardERROR.jpg'
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                            <div className={styles.SeparatorWrapper}>
+                                <div className={styles.Separator}></div>
+                            </div>
+                        </div>
+
+                        <div className={styles.ArtistWrapper}>
+                            <div className={styles.ArtistInformationWrapper}>
+                                <div className={styles.ArtistTitleWrapper}>
+                                    <p className={styles.ArtistTitle}>Андрій Шевченко</p>
+                                </div>
+                                <div className={styles.ArtistPhotoWrapper}>
+                                    <img
+                                        className={`${styles.ArtistPhoto}`}
+                                        src={'/Img/ArtistPhoto.jpg'}
+                                        alt="Слідкуйте за мистецтвом!"
+                                        onError={(e) => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/newsCardERROR.jpg'
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                            <div className={styles.SeparatorWrapper}>
+                                <div className={styles.Separator}></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div className={styles.ArtistsWrapper}>
+                    <div className={styles.LetterWrapper}>
+                        <h3 className={styles.Letter}>Б</h3>
+                    </div>
+                    <div className={styles.ArtistsByLetterWrapper}>
+
+                        <div className={styles.ArtistWrapper}>
+                            <div className={styles.ArtistInformationWrapper}>
+                                <div className={styles.ArtistTitleWrapper}>
+                                    <p className={styles.ArtistTitle}>Андрій Шевченко</p>
+                                </div>
+                                <div className={styles.ArtistPhotoWrapper}>
+                                    <img
+                                        className={`${styles.ArtistPhoto}`}
+                                        src={'/Img/ArtistPhoto.jpg'}
+                                        alt="Слідкуйте за мистецтвом!"
+                                        onError={(e) => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/newsCardERROR.jpg'
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                            <div className={styles.SeparatorWrapper}>
+                                <div className={styles.Separator}></div>
+                            </div>
+                        </div>
+
+                        <div className={styles.ArtistWrapper}>
+                            <div className={styles.ArtistInformationWrapper}>
+                                <div className={styles.ArtistTitleWrapper}>
+                                    <p className={styles.ArtistTitle}>Андрій Шевченко</p>
+                                </div>
+                                <div className={styles.ArtistPhotoWrapper}>
+                                    <img
+                                        className={`${styles.ArtistPhoto}`}
+                                        src={'/Img/ArtistPhoto.jpg'}
+                                        alt="Слідкуйте за мистецтвом!"
+                                        onError={(e) => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/newsCardERROR.jpg'
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                            <div className={styles.SeparatorWrapper}>
+                                <div className={styles.Separator}></div>
+                            </div>
+                        </div>
+
+                        <div className={styles.ArtistWrapper}>
+                            <div className={styles.ArtistInformationWrapper}>
+                                <div className={styles.ArtistTitleWrapper}>
+                                    <p className={styles.ArtistTitle}>Андрій Шевченко</p>
+                                </div>
+                                <div className={styles.ArtistPhotoWrapper}>
+                                    <img
+                                        className={`${styles.ArtistPhoto}`}
+                                        src={'/Img/ArtistPhoto.jpg'}
+                                        alt="Слідкуйте за мистецтвом!"
+                                        onError={(e) => {
+                                            e.target.onerror = null
+                                            e.target.src = '/Img/newsCardERROR.jpg'
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                            <div className={styles.SeparatorWrapper}>
+                                <div className={styles.Separator}></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     )
