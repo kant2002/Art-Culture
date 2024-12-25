@@ -10,35 +10,40 @@ import 'swiper/css/pagination'
 // Import Swiper modules
 import { Navigation, Pagination } from 'swiper/modules'
 
-import { useNavigate } from 'react-router-dom'
-import '@styles/components/Sliders/Base/NewsSlider.scss'
-import { getBaseUrl } from '../../../../utils/helper'
 import LikeAndShare from '@components/Blocks/LikeAndShare'
 import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
+import '@styles/components/Sliders/Base/NewsSlider.scss'
+import { useNavigate } from 'react-router-dom'
+import { getBaseUrl } from '../../../../utils/helper'
 import TranslatedContent from '../../Blocks/TranslatedContent'
 
 const Slide = ({ post, baseUrl }) => {
 	const { t } = useTranslation()
+	const navigate = useNavigate()
 
 	const featuredMediaUrl = post.images
 		? `${baseUrl}${post.images.replace('../../', '/')}`
 		: '/Img/halfNewsCard.jpg'
+	const handlePostClick = () => {
+		navigate(`/posts/${post.id}`)
+	}
 	return (
-		<div className='NewsSliderCardContainer'>
-			<div className='NewsSliderCardImgWrapper'>
+		<div className="NewsSliderCardContainer">
+			<div className="NewsSliderCardImgWrapper">
 				<img
-					className='NewsSliderCardImg'
+					className="NewsSliderCardImg"
 					src={featuredMediaUrl}
 					alt={t('Світлина мистецтва')}
-					onError={e => {
+					onClick={() => handlePostClick(post.id)}
+					onError={(e) => {
 						e.target.onerror = null
 						e.target.src = '/Img/newsCardERROR.jpg'
 					}}
 				/>
 			</div>
 
-			<div className='NewsSliderCardTitleWrapper'>
-				<h3 className='NewsSliderCardTitle'>
+			<div className="NewsSliderCardTitleWrapper">
+				<h3 className="NewsSliderCardTitle">
 					<TranslatedContent
 						en={post.title_en}
 						uk={post.title_uk}
@@ -47,12 +52,12 @@ const Slide = ({ post, baseUrl }) => {
 				</h3>
 			</div>
 
-			<div className='NewsSliderCardDescriptionWrapper'>
-				<p className='NewsSliderCardDescription'>
+			<div className="NewsSliderCardDescriptionWrapper">
+				<p className="NewsSliderCardDescription">
 					<TranslatedContent
 						en={post.content_en}
 						uk={post.content_uk}
-						maxLength={230}
+						maxLength={110}
 						html
 					/>
 				</p>
@@ -87,17 +92,17 @@ const ArtistPageNewsArtistsSlider = () => {
 	}, [t])
 
 	return (
-		<div className='NewsSliderContainer'>
-			<div className='NewsSliderWrapper'>
-				<div className='NewsSliderTopInnerWrapper'>
-					<div className='NewsSliderTitleWrapper'>
-						<h2 className='NewsSliderTitle'>
+		<div className="NewsSliderContainer">
+			<div className="NewsSliderWrapper">
+				<div className="NewsSliderTopInnerWrapper">
+					<div className="NewsSliderTitleWrapper">
+						<h2 className="NewsSliderTitle">
 							{t('Новини.')} &#8243;{t('Митці')}&#8243;
 						</h2>
 					</div>
 					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 				</div>
-				<div className='NewsSliderBottomInnerWrapper'>
+				<div className="NewsSliderBottomInnerWrapper">
 					<Swiper
 						modules={[Navigation, Pagination]}
 						spaceBetween={0}
@@ -105,24 +110,26 @@ const ArtistPageNewsArtistsSlider = () => {
 						navigation
 						pagination={{ clickable: false, type: 'fraction' }}
 						onSlideChange={() => console.log('slide change')}
-						onSwiper={swiper => console.log(swiper)}
+						onSwiper={(swiper) => console.log(swiper)}
 					>
 						{loading ? (
 							<SwiperSlide>
-								<div className='loading'>{t('Завантаження...')}</div>
+								<div className="loading">
+									{t('Завантаження...')}
+								</div>
 							</SwiperSlide>
 						) : error ? (
 							<SwiperSlide>
-								<div className='error'>{error}</div>
+								<div className="error">{error}</div>
 							</SwiperSlide>
 						) : creatorPosts.length === 0 ? (
 							<SwiperSlide>
-								<div className='noPosts'>
+								<div className="noPosts">
 									{t('Немає публікацій від митців.')}
 								</div>
 							</SwiperSlide>
 						) : (
-							creatorPosts.map(post => (
+							creatorPosts.map((post) => (
 								<SwiperSlide key={post.id}>
 									<Slide post={post} baseUrl={baseUrl} />
 								</SwiperSlide>

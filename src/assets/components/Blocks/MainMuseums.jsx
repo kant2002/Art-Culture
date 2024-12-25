@@ -2,15 +2,19 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import {
+	getFormattedDate,
+	getFormattedTime,
+	getImageUrl,
+} from '../../../utils/helper'
 import styles from '/src/styles/components/Blocks/MainNews.module.scss'
-import { getFormattedDate, getFormattedTime, getImageUrl } from '../../../utils/helper'
 
 function MainMuseums() {
 	const { t } = useTranslation()
 	const [museums, setMuseums] = useState([])
 	const navigate = useNavigate()
 	const [visibleMuseumsCount, setVisibleMuseumsCount] = useState(
-		getPostsCount(window.innerWidth)
+		getPostsCount(window.innerWidth),
 	)
 
 	function getPostsCount(Width) {
@@ -29,7 +33,7 @@ function MainMuseums() {
 			if (newPostCount !== visibleMuseumsCount) {
 				setVisibleMuseumsCount(newPostCount)
 				console.log(
-					`Window width: ${window.innerWidth}, Visible posts count: ${newPostCount}`
+					`Window width: ${window.innerWidth}, Visible posts count: ${newPostCount}`,
 				)
 			}
 		}
@@ -48,17 +52,17 @@ function MainMuseums() {
 		// Запит на отримання постів з медіа-даними
 		axios
 			.get('/api/users/museums')
-			.then(response => {
+			.then((response) => {
 				console.log('Отримані дані постів:', response.data)
 				setMuseums(response.data.museums)
 			})
-			.catch(error => {
+			.catch((error) => {
 				console.error('Помилка при завантаженні постів', error)
 			})
 	}, [])
 
-	const handleMuseumPageClick = () => {
-		navigate('/MuseumPage')
+	const handleMuseumPageClick = (id) => {
+		navigate(`/museumpage/${id}`)
 	}
 
 	return (
@@ -76,7 +80,7 @@ function MainMuseums() {
 							className={`${styles.mainPageNewsButtonImg}`}
 							src={'/Img/buttonArrow.svg'}
 							alt={t('Стрілка')}
-							onError={e => {
+							onError={(e) => {
 								e.target.onerror = null
 								e.target.src = '/mainNewImg/buttonArrow.svg'
 							}}
@@ -89,7 +93,10 @@ function MainMuseums() {
 					// Логування даних для перевірки
 					console.log('Витягнені музеі:', museums)
 
-					const featuredMediaUrl = getImageUrl(museum.images, '/Img/halfNewsCard.jpg');
+					const featuredMediaUrl = getImageUrl(
+						museum.images,
+						'/Img/halfNewsCard.jpg',
+					)
 					console.log('Витягнуте медіа:', featuredMediaUrl)
 
 					const formattedDate = getFormattedDate(museum.createdAt)
@@ -106,21 +113,26 @@ function MainMuseums() {
 										className={`${styles.cardImg} ${index === 0 ? styles.firstCardImg : index === 1 ? styles.secondCardImg : index === 2 ? styles.thirdCardImg : styles.fourthCardImg}`}
 										src={featuredMediaUrl}
 										alt={t('Світлина музею')}
-										onError={e => {
+										onError={(e) => {
 											e.target.onerror = null
-											e.target.src = '/Img/newsCardERROR.jpg'
+											e.target.src =
+												'/Img/newsCardERROR.jpg'
 										}}
 									/>
 								</div>
 								<div className={`${styles.cardTextWrapper}`}>
-									<div className={`${styles.cardTitleWrapper}`}>
+									<div
+										className={`${styles.cardTitleWrapper}`}
+									>
 										<h3
 											className={`${styles.cardTitle} ${index === 0 ? styles.firstCardTitle : index === 1 ? styles.secondCardTitle : index === 2 ? styles.thirdCardTitle : styles.fourthCardTitle}`}
 										>
 											{museum.title || museum.email}
 										</h3>
 									</div>
-									<div className={`${styles.cardDescriptioneWrapper}`}>
+									<div
+										className={`${styles.cardDescriptioneWrapper}`}
+									>
 										<p
 											className={`${styles.cardDescription} ${index === 0 ? styles.firstCardDescription : index === 1 ? styles.secondCardDescription : styles.thirdCardDescription}`}
 										>
@@ -129,28 +141,49 @@ function MainMuseums() {
 									</div>
 								</div>
 							</div>
-							<div className={`${styles.cardClockAndDateWrapper}`}>
-								<div className={`${styles.cardClockAndDateInner}`}>
-									<div className={`${styles.cardClockImgWrapper}`}>
+							<div
+								className={`${styles.cardClockAndDateWrapper}`}
+							>
+								<div
+									className={`${styles.cardClockAndDateInner}`}
+								>
+									<div
+										className={`${styles.cardClockImgWrapper}`}
+									>
 										<img
 											className={`${styles.cardClockImg}`}
 											src={'/Img/clock.svg'}
 											alt={t('Світлина годинника')}
-											onError={e => {
+											onError={(e) => {
 												e.target.onerror = null
 												e.target.src = '/Img/clock.svg'
 											}}
 										/>
 									</div>
-									<div className={`${styles.cardDateWrapper}`}>
-										<p className={`${styles.cardDate}`}>{formattedDate}</p>
+									<div
+										className={`${styles.cardDateWrapper}`}
+									>
+										<p className={`${styles.cardDate}`}>
+											{formattedDate}
+										</p>
 									</div>
-									<div className={`${styles.cardTimeWrapper}`}>
-										<p className={`${styles.cardTime}`}>{formattedTime}</p>
+									<div
+										className={`${styles.cardTimeWrapper}`}
+									>
+										<p className={`${styles.cardTime}`}>
+											{formattedTime}
+										</p>
 									</div>
 								</div>
-								<div className={`${styles.cardReadMoreWrapper}`}>
-									<a className={`${styles.cardReadMoreLink}`}>
+								<div
+									className={`${styles.cardReadMoreWrapper}`}
+								>
+									<a
+										className={`${styles.cardReadMoreLink}`}
+										onClick={() =>
+											handleMuseumPageClick(museum.id)
+										}
+									>
 										{t('Читати далі')}
 									</a>
 								</div>
@@ -173,7 +206,7 @@ function MainMuseums() {
 						className={`${styles.mainPageNewsButtonImg}`}
 						src={'/Img/buttonArrow.svg'}
 						alt={t('Стрілка')}
-						onError={e => {
+						onError={(e) => {
 							e.target.onerror = null
 							e.target.src = '/Img/buttonArrow.svg'
 						}}

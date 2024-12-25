@@ -176,51 +176,59 @@ import { getBaseUrl, getImageUrl } from '../../../../utils/helper'
 import LikeAndShare from '../../Blocks/LikeAndShare'
 import TranslatedContent from '../../Blocks/TranslatedContent'
 
-const Slide = ({ product, baseUrl }) => {
-	const { t, i18n } = useTranslation()
-	const currentLanguage = i18n.language
+const Slide = ({ exhibition, baseUrl, onClick }) => {
+	const { t } = useTranslation()
+
 	const navigate = useNavigate()
 
-	const handleProductClick = () => {
-		navigate(`/products/${product.id}`) // Adjust the route as per your application
+	const handleExhibitionClick = (id) => {
+		navigate(`/exhibitions/${id}`) // Adjust the route as per your application
 	}
 
 	const imageUrl =
-		product.images && product.images.length > 0
-			? getImageUrl(product.images[0].imageUrl, '/Img/newsCardERROR.jpg')
+		exhibition.images && exhibition.images.length > 0
+			? getImageUrl(
+					exhibition.images[0].imageUrl,
+					'/Img/newsCardERROR.jpg',
+				)
 			: '/Img/newsCardERROR.jpg' // Fallback image
 
 	return (
-		<div className='PopularSliderCardWrapper'>
-			<div className='PopularSliderCardInnerWrapper'>
+		<div className="PopularSliderCardWrapper">
+			<div className="PopularSliderCardInnerWrapper">
 				<img
-					className='PopularSliderCardImg'
+					className="PopularSliderCardImg"
 					src={imageUrl}
 					alt={t('Світлина мистецтва')}
-					onError={e => {
+					onError={(e) => {
 						e.target.onerror = null
 						e.target.src = '/Img/mainPopularArtistsSlide.jpg'
 					}}
 				/>
 			</div>
-			<div className='PopularSliderCardAbsoluteWrapper'>
-				<div className='PopularSliderCardButtonWrapper'>
-					<button className='PopularSliderCardButton'>{t('Огляд')}</button>
+			<div className="PopularSliderCardAbsoluteWrapper">
+				<div className="PopularSliderCardButtonWrapper">
+					<button
+						className="PopularSliderCardButton"
+						onClick={() => handleExhibitionClick(exhibition.id)}
+					>
+						{t('Огляд')}
+					</button>
 				</div>
-				<div className='PopularSliderCardTitleWrapper'>
-					<h3 className='PopularSliderCardTitle'>
+				<div className="PopularSliderCardTitleWrapper">
+					<h3 className="PopularSliderCardTitle">
 						<TranslatedContent
-							en={product.title_en}
-							uk={product.title_uk}
+							en={exhibition.title_en}
+							uk={exhibition.title_uk}
 							maxLength={50}
 						/>
 					</h3>
 				</div>
-				<div className='PopularSliderCardDescriptionWrapper'>
-					<p className='PopularSliderCardDescription'>
+				<div className="PopularSliderCardDescriptionWrapper">
+					<p className="PopularSliderCardDescription">
 						<TranslatedContent
-							en={product.description_en}
-							uk={product.description_uk}
+							en={exhibition.description_en}
+							uk={exhibition.description_uk}
 							maxLength={60}
 							html
 						/>
@@ -232,47 +240,47 @@ const Slide = ({ product, baseUrl }) => {
 }
 
 Slide.propTypes = {
-	product: PropTypes.object,
+	exhibition: PropTypes.object,
 	baseUrl: PropTypes.string,
 }
 
-const PopularArtsSlider = () => {
+const PopularExhibitionsSlider = () => {
 	const { t } = useTranslation()
 
-	const [products, setProducts] = useState([])
+	const [exhibitions, setExhibitions] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 
 	const baseUrl = getBaseUrl()
 
 	useEffect(() => {
-		const fetchCreatorProducts = async () => {
+		const fetchExhibitions = async () => {
 			try {
-				const response = await axios.get('/api/products/creators-products')
+				const response = await axios.get('/api/exhibitions')
 				console.log('Received creator products:', response.data)
-				setProducts(response.data.products || [])
+				setExhibitions(response.data.exhibitions || [])
 				setLoading(false)
 			} catch (err) {
 				console.error('Error fetching creator products:', err)
-				setError(t('Не вдалося завантажити продукти.'))
+				setError(t('Не вдалося завантажити виставки.'))
 				setLoading(false)
 			}
 		}
 
-		fetchCreatorProducts()
-	}, [t])
+		fetchExhibitions()
+	}, [])
 	return (
-		<div className='PopularSliderContainer'>
-			<div className='PopularSliderWrapper'>
-				<div className='PopularSliderTopInnerWrapper'>
-					<div className='PopularSliderTitleWrapper'>
-						<h2 className='PopularSliderTitle'>
+		<div className="PopularSliderContainer">
+			<div className="PopularSliderWrapper">
+				<div className="PopularSliderTopInnerWrapper">
+					<div className="PopularSliderTitleWrapper">
+						<h2 className="PopularSliderTitle">
 							{t('Популярне.')} &#8243;{t('Виставки')}&#8243;
 						</h2>
 					</div>
 					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 				</div>
-				<div className='PopularSliderBottomInnerWrapper'>
+				<div className="PopularSliderBottomInnerWrapper">
 					<Swiper
 						modules={[Navigation, Pagination]}
 						spaceBetween={0}
@@ -280,26 +288,31 @@ const PopularArtsSlider = () => {
 						navigation
 						pagination={{ clickable: false, type: 'fraction' }}
 						onSlideChange={() => console.log('slide change')}
-						onSwiper={swiper => console.log(swiper)}
+						onSwiper={(swiper) => console.log(swiper)}
 					>
 						{loading ? (
 							<SwiperSlide>
-								<div className='loading'>{t('Завантаження...')}</div>
+								<div className="loading">
+									{t('Завантаження...')}
+								</div>
 							</SwiperSlide>
 						) : error ? (
 							<SwiperSlide>
-								<div className='error'>{error}</div>
+								<div className="error">{error}</div>
 							</SwiperSlide>
-						) : products.length === 0 ? (
+						) : exhibitions.length === 0 ? (
 							<SwiperSlide>
-								<div className='noProducts'>
+								<div className="noProducts">
 									{t('Немає продуктів від митців.')}
 								</div>
 							</SwiperSlide>
 						) : (
-							products.map(product => (
-								<SwiperSlide key={product.id}>
-									<Slide product={product} baseUrl={baseUrl} />
+							exhibitions.map((exhibition) => (
+								<SwiperSlide key={exhibition.id}>
+									<Slide
+										exhibition={exhibition}
+										baseUrl={baseUrl}
+									/>
 								</SwiperSlide>
 							))
 						)}
@@ -313,4 +326,4 @@ const PopularArtsSlider = () => {
 	)
 }
 
-export default PopularArtsSlider
+export default PopularExhibitionsSlider

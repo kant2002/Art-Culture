@@ -13,16 +13,21 @@ import { Navigation, Pagination } from 'swiper/modules'
 
 import LikeAndShare from '@components/Blocks/LikeAndShare'
 import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
+import { useNavigate } from 'react-router-dom'
 import { getBaseUrl } from '../../../../utils/helper'
 import TranslatedContent from '../../Blocks/TranslatedContent'
 import '/src/styles/components/Sliders/Base/NewsSlider.scss'
-
 const Slide = ({ post, baseUrl }) => {
 	const { t } = useTranslation()
+	const navigate = useNavigate()
 
 	const featuredMediaUrl = post.images
 		? `${baseUrl}${post.images.replace('../../', '/')}`
 		: '/Img/halfNewsCard.jpg'
+
+	const handlePostClick = () => {
+		navigate(`/posts/${post.id}`)
+	}
 
 	return (
 		<div className="NewsSliderCardContainer">
@@ -35,6 +40,7 @@ const Slide = ({ post, baseUrl }) => {
 						className="NewsSliderCardImg"
 						src={featuredMediaUrl}
 						alt={t('Світлина мистецтва')}
+						onClick={() => handlePostClick(post.id)}
 						onError={(e) => {
 							e.target.onerror = null
 							e.target.src = '/Img/newsCardERROR.jpg'

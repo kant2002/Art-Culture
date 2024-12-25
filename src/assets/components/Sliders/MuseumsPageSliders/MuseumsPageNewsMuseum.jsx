@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 // Import Swiper styles
+import { useNavigate } from 'react-router-dom'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -17,24 +18,30 @@ import { getBaseUrl } from '../../../../utils/helper'
 import TranslatedContent from '../../Blocks/TranslatedContent'
 import '/src/styles/components/Sliders/Base/NewsSlider.scss'
 
-const Slide = ({ post, baseUrl }) => {
+const Slide = ({ post, baseUrl, onClick }) => {
 	const { t } = useTranslation()
+	const navigate = useNavigate()
 
 	const featuredMediaUrl = post.images
 		? `${baseUrl}${post.images.replace('../../', '/')}`
 		: '/Img/halfNewsCard.jpg'
 
+	const handlePostClick = () => {
+		navigate(`/posts/${post.id}`)
+	}
+
 	return (
 		<div className="NewsSliderCardContainer">
 			<a
 				className="NewsSliderCardLink"
-			// TODO:Rewrite component to use navigate for post	onClick={handleArtistPageClick}
+				// TODO:Rewrite component to use navigate for post	onClick={handleArtistPageClick}
 			>
 				<div className="NewsSliderCardImgWrapper">
 					<img
 						className="NewsSliderCardImg"
 						src={featuredMediaUrl}
 						alt={t('Світлина мистецтва')}
+						onClick={() => handlePostClick(post.id)}
 						onError={(e) => {
 							e.target.onerror = null
 							e.target.src = '/Img/newsCardERROR.jpg'
