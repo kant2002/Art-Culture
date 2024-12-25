@@ -63,7 +63,7 @@ function AllArtistsPage() {
 
                 <div className={styles.ArtistsWrapper}>
                     <div className={styles.LetterWrapper}>
-                        <h3 className={styles.Letter}>A</h3>
+                        <h2 className={styles.Letter}>A</h2>
                     </div>
                     <div className={styles.ArtistsByLetterWrapper}>
 
@@ -92,7 +92,7 @@ function AllArtistsPage() {
                         <div className={styles.ArtistWrapper}>
                             <div className={styles.ArtistInformationWrapper}>
                                 <div className={styles.ArtistTitleWrapper}>
-                                    <p className={styles.ArtistTitle}>Андрій Шевченко</p>
+                                    <p className={styles.ArtistTitle}>Олександр Сергійович Білокінь</p>
                                 </div>
                                 <div className={styles.ArtistPhotoWrapper}>
                                     <img
@@ -114,7 +114,7 @@ function AllArtistsPage() {
                         <div className={styles.ArtistWrapper}>
                             <div className={styles.ArtistInformationWrapper}>
                                 <div className={styles.ArtistTitleWrapper}>
-                                    <p className={styles.ArtistTitle}>Андрій Шевченко</p>
+                                    <p className={styles.ArtistTitle}>Марія Задорожна</p>
                                 </div>
                                 <div className={styles.ArtistPhotoWrapper}>
                                     <img
@@ -139,14 +139,14 @@ function AllArtistsPage() {
 
                 <div className={styles.ArtistsWrapper}>
                     <div className={styles.LetterWrapper}>
-                        <h3 className={styles.Letter}>Б</h3>
+                        <h2 className={styles.Letter}>Б</h2>
                     </div>
                     <div className={styles.ArtistsByLetterWrapper}>
 
                         <div className={styles.ArtistWrapper}>
                             <div className={styles.ArtistInformationWrapper}>
                                 <div className={styles.ArtistTitleWrapper}>
-                                    <p className={styles.ArtistTitle}>Андрій Шевченко</p>
+                                    <p className={styles.ArtistTitle}>Андрій Васильович Літвиненко</p>
                                 </div>
                                 <div className={styles.ArtistPhotoWrapper}>
                                     <img
@@ -168,7 +168,7 @@ function AllArtistsPage() {
                         <div className={styles.ArtistWrapper}>
                             <div className={styles.ArtistInformationWrapper}>
                                 <div className={styles.ArtistTitleWrapper}>
-                                    <p className={styles.ArtistTitle}>Андрій Шевченко</p>
+                                    <p className={styles.ArtistTitle}>Катерина Малевич</p>
                                 </div>
                                 <div className={styles.ArtistPhotoWrapper}>
                                     <img
@@ -190,7 +190,7 @@ function AllArtistsPage() {
                         <div className={styles.ArtistWrapper}>
                             <div className={styles.ArtistInformationWrapper}>
                                 <div className={styles.ArtistTitleWrapper}>
-                                    <p className={styles.ArtistTitle}>Андрій Шевченко</p>
+                                    <p className={styles.ArtistTitle}>Тарас Дмитрович Горобець</p>
                                 </div>
                                 <div className={styles.ArtistPhotoWrapper}>
                                     <img
