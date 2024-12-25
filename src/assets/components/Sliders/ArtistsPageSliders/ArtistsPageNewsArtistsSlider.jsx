@@ -64,7 +64,7 @@ const Slide = ({ post, baseUrl }) => {
 						<TranslatedContent
 							en={post.content_en}
 							uk={post.content_uk}
-							maxLength={110}
+							maxLength={200}
 							html
 						/>
 					</p>
