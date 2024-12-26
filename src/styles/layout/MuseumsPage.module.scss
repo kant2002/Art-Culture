@@ -16,7 +16,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: $responsiveBigPadding $responsiveLeftAndRightPadding $responsiveMediumPadding $responsiveLeftAndRightPadding;
+  margin: $responsiveBigPadding $responsiveLeftAndRightPadding
+    $responsiveMediumPadding $responsiveLeftAndRightPadding;
 }
 
 // .MuseumsPageTitle {
@@ -199,6 +200,13 @@
   }
 }
 
+.ExhibitionsMapWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: $responsiveMediumPadding 0 0 0;
+}
+
 @media (min-width: 1441px) {
   .MuseumsPageContainer {
     margin: $staticPcTopPadding 0 0 0;
@@ -206,7 +214,8 @@
 
   .MuseumsPageTitleContainer {
     /* Контейнер для заголовка страницы новостей */
-    margin: $staticPcBigPadding $responsiveLeftAndRightPadding $staticPcMediumPadding $responsiveLeftAndRightPadding;
+    margin: $staticPcBigPadding $responsiveLeftAndRightPadding
+      $staticPcMediumPadding $responsiveLeftAndRightPadding;
   }
 
   // .MuseumsPageTitle {

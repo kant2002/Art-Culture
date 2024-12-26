@@ -121,12 +121,6 @@ export const getAllExhibitions = async (req, res, next) => {
             id: true,
             email: true,
             title: true,
-            // description: true,
-            // startDate: true,
-            // endDate: true,
-            // time: true,
-            // location: true,
-            // artistIds: true,
           },
         },
         exhibitionArtists: {

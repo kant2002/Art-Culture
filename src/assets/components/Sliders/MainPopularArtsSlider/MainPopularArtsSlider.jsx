@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -15,14 +15,25 @@ import '@styles/components/Sliders/Base/PopularSlider.scss'
 import { useNavigate } from 'react-router-dom'
 import { Navigation, Pagination } from 'swiper/modules'
 import { getBaseUrl } from '../../../../utils/helper'
+import ModalWindow from '../../Blocks/ModalWindow'
 import TranslatedContent from '../../Blocks/TranslatedContent'
 
-const Slide = ({ product, baseUrl }) => {
+const Slide = ({ product, baseUrl, onOverviewClick }) => {
 	const { t } = useTranslation()
 	const navigate = useNavigate()
 
 	const handleProductClick = () => {
 		navigate(`/products/${product.id}`) // Adjust the route as per your application
+
+		if (!product || product.length === 0) {
+			return (
+				<div className="popularSliderContainer">
+					<p>
+						{t('У цього митця немає продуктів для відображення.')}
+					</p>
+				</div>
+			)
+		}
 	}
 
 	const imageUrl =
@@ -31,24 +42,29 @@ const Slide = ({ product, baseUrl }) => {
 			: '/Img/newsCardERROR.jpg' // Fallback image
 
 	return (
-		<div className='PopularSliderCardWrapper'>
-			<div className='PopularSliderCardInnerWrapper'>
+		<div className="PopularSliderCardWrapper">
+			<div className="PopularSliderCardInnerWrapper">
 				<img
-					className='PopularSliderCardImg'
+					className="PopularSliderCardImg"
 					src={imageUrl}
 					alt={t('Світлина мистецтва')}
-					onError={e => {
+					onError={(e) => {
 						e.target.onerror = null
 						e.target.src = '/Img/newsCardERROR.jpg'
 					}}
 				/>
 			</div>
-			<div className='PopularSliderCardAbsoluteWrapper'>
-				<div className='PopularSliderCardButtonWrapper'>
-					<button className='PopularSliderCardButton'>{t('Огляд')}</button>
+			<div className="PopularSliderCardAbsoluteWrapper">
+				<div className="PopularSliderCardButtonWrapper">
+					<button
+						className="PopularSliderCardButton"
+						onClick={() => onOverviewClick(product)}
+					>
+						{t('Огляд')}
+					</button>
 				</div>
-				<div className='PopularSliderCardTitleWrapper'>
-					<h3 className='PopularSliderCardTitle'>
+				<div className="PopularSliderCardTitleWrapper">
+					<h3 className="PopularSliderCardTitle">
 						<TranslatedContent
 							en={product.title_en}
 							uk={product.title_uk}
@@ -56,8 +72,8 @@ const Slide = ({ product, baseUrl }) => {
 						/>
 					</h3>
 				</div>
-				<div className='PopularSliderCardDescriptionWrapper'>
-					<p className='PopularSliderCardDescription'>
+				<div className="PopularSliderCardDescriptionWrapper">
+					<p className="PopularSliderCardDescription">
 						<TranslatedContent
 							en={product.description_en}
 							uk={product.description_uk}
@@ -80,10 +96,20 @@ const MainPopularArtistsSlider = () => {
 
 	const baseUrl = getBaseUrl()
 
+	const [isModalOpen, setIsModalOpen] = useState(false)
+	const [selectedProduct, setSelectedProduct] = useState(null)
+	const [selectedCreator, setSelectedCreator] = useState(null)
+	const [selectedProductImages, setSelectedProductImages] = useState([])
+	const [zoomStates, setZoomStates] = useState([])
+	const [currentSlide, setCurrentSlide] = useState(0)
+	const [preloading, setPreloading] = useState(false)
+
 	useEffect(() => {
 		const fetchCreatorProducts = async () => {
 			try {
-				const response = await axios.get('/api/products/creators-products')
+				const response = await axios.get(
+					'/api/products/creators-products',
+				)
 				console.log('Received creator products:', response.data)
 				setProducts(response.data.products || [])
 				setLoading(false)
@@ -96,18 +122,72 @@ const MainPopularArtistsSlider = () => {
 
 		fetchCreatorProducts()
 	}, [t])
+
+	const preloadImages = useCallback(
+		async (images) => {
+			const promises = images.map(
+				(img) =>
+					new Promise((resolve) => {
+						const image = new Image()
+						image.src = `${baseUrl}${img.imageUrl.replace('../../', '/')}`
+						image.onload = resolve
+						image.onerror = resolve
+					}),
+			)
+			await Promise.all(promises)
+		},
+		[baseUrl],
+	)
+
+	// Handler to open the GalleryModal with preloaded images
+	const handleOverviewClick = async (product) => {
+		if (product.images && product.images.length > 0) {
+			setPreloading(true)
+			await preloadImages(product.images)
+			setPreloading(false)
+			setSelectedProductImages(product.images)
+			setSelectedProduct(product)
+			setSelectedCreator(product.author || {}) // Adjust based on actual data structure
+			setZoomStates(
+				product.images.map(() => ({
+					zoomLevel: 1,
+					isZoomed: false,
+					cursorPos: { x: 0, y: 0 },
+					showLens: false,
+				})),
+			)
+			setCurrentSlide(0)
+			setIsModalOpen(true)
+		} else {
+			// If no images, optionally handle this case
+			setSelectedProductImages([])
+			setSelectedProduct(null)
+			setSelectedCreator(null)
+			setZoomStates([])
+			setIsModalOpen(false)
+		}
+	}
+	// Handler to close the GalleryModal
+	const handleCloseModal = () => {
+		setIsModalOpen(false)
+		setSelectedProductImages([])
+		setSelectedProduct(null)
+		setSelectedCreator(null)
+		setZoomStates([])
+		setCurrentSlide(0)
+	}
 	return (
-		<div className='PopularSliderContainer'>
-			<div className='PopularSliderWrapper'>
-				<div className='PopularSliderTopInnerWrapper'>
-					<div className='PopularSliderTitleWrapper'>
-						<h2 className='PopularSliderTitle'>
+		<div className="PopularSliderContainer">
+			<div className="PopularSliderWrapper">
+				<div className="PopularSliderTopInnerWrapper">
+					<div className="PopularSliderTitleWrapper">
+						<h2 className="PopularSliderTitle">
 							{t('Популярне.')} &#8243;{t('Мистецтво')}&#8243;
 						</h2>
 					</div>
 					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 				</div>
-				<div className='PopularSliderBottomInnerWrapper'>
+				<div className="PopularSliderBottomInnerWrapper">
 					<Swiper
 						modules={[Navigation, Pagination]}
 						spaceBetween={0}
@@ -115,26 +195,32 @@ const MainPopularArtistsSlider = () => {
 						navigation
 						pagination={{ clickable: false, type: 'fraction' }}
 						onSlideChange={() => console.log('slide change')}
-						onSwiper={swiper => console.log(swiper)}
+						onSwiper={(swiper) => console.log(swiper)}
 					>
 						{loading ? (
 							<SwiperSlide>
-								<div className='loading'>{t('Завантаження...')}</div>
+								<div className="loading">
+									{t('Завантаження...')}
+								</div>
 							</SwiperSlide>
 						) : error ? (
 							<SwiperSlide>
-								<div className='error'>{error}</div>
+								<div className="error">{error}</div>
 							</SwiperSlide>
 						) : products.length === 0 ? (
 							<SwiperSlide>
-								<div className='noProducts'>
+								<div className="noProducts">
 									{t('Немає продуктів від митців.')}
 								</div>
 							</SwiperSlide>
 						) : (
-							products.map(product => (
+							products.map((product) => (
 								<SwiperSlide key={product.id}>
-									<Slide product={product} baseUrl={baseUrl} />
+									<Slide
+										product={product}
+										baseUrl={baseUrl}
+										onOverviewClick={handleOverviewClick}
+									/>
 								</SwiperSlide>
 							))
 						)}
@@ -144,6 +230,19 @@ const MainPopularArtistsSlider = () => {
 					<div className={'${swiper-button-next}'}></div>
 				</div>
 			</div>
+			<ModalWindow
+				isOpen={isModalOpen}
+				onClose={handleCloseModal}
+				selectedProduct={selectedProduct}
+				selectedCreator={selectedCreator}
+				selectedProductImages={selectedProductImages}
+				zoomStates={zoomStates}
+				setZoomStates={setZoomStates}
+				currentSlide={currentSlide}
+				setCurrentSlide={setCurrentSlide}
+				baseUrl={baseUrl}
+				preloading={preloading}
+			/>
 		</div>
 	)
 }

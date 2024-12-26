@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import styles from '../../../styles/layout/MuseumsPage.module.scss'
 import { getImageUrl } from '../../../utils/helper.js'
+import ExhibitionsMap from '../../components/Blocks/ExhibitionsMap.jsx'
 import TranslatedContent from '../../components/Blocks/TranslatedContent.jsx'
-import ExhibitionsPageTopSlider from '../../components/Sliders/ExhibitionsPageSlider/ExhibitionsPageTopSlider.jsx'
 import ExhibitionsPageNewsSlider from '../../components/Sliders/ExhibitionsPageSlider/ExhibitionsPageNewsSlider.jsx'
 import ExhibitionsPagePopularExhibitions from '../../components/Sliders/ExhibitionsPageSlider/ExhibitionsPagePopularExhibitions.jsx'
-
+import ExhibitionsPageTopSlider from '../../components/Sliders/ExhibitionsPageSlider/ExhibitionsPageTopSlider.jsx'
 
 function MuseumsPage() {
 	const { t } = useTranslation()
@@ -16,7 +16,7 @@ function MuseumsPage() {
 	const navigate = useNavigate()
 	const [error, setError] = useState(null)
 	const [museums, setMuseums] = useState([])
-	const [exhibitions, setExhibitions] = useState(null)
+	const [exhibitions, setExhibitions] = useState([])
 
 	const [visibleExhibitionsCount, setVisibleExhibitionsCount] = useState(
 		getExhibitionsCount(window.innerWidth),
@@ -86,7 +86,9 @@ function MuseumsPage() {
 	return (
 		<div className={`${styles.MuseumsPageContainer}`}>
 			<div className={`${styles.MuseumsPageTitleContainer}`}>
-				<h1 className={`${styles.MuseumsPageTitle}`}>{t('Виставки')}</h1>
+				<h1 className={`${styles.MuseumsPageTitle}`}>
+					{t('Виставки')}
+				</h1>
 			</div>
 
 			<ExhibitionsPageTopSlider />
@@ -170,12 +172,12 @@ function MuseumsPage() {
 								.map((exhibition, index) => {
 									const featuredMediaUrl =
 										exhibition.images &&
-											exhibition.images.length > 0
+										exhibition.images.length > 0
 											? getImageUrl(
-												exhibition.images[0]
-													.imageUrl,
-												'/Img/halfNewsCard.jpg',
-											)
+													exhibition.images[0]
+														.imageUrl,
+													'/Img/halfNewsCard.jpg',
+												)
 											: '/Img/halfNewsCard.jpg'
 									console.log(
 										'Витягнуте медіа:',
@@ -251,9 +253,10 @@ function MuseumsPage() {
 					</button>
 				</div>
 			</div>
-
 			<ExhibitionsPagePopularExhibitions />
-
+			<div className={styles.ExhibitionsMapWrapper}>
+				<ExhibitionsMap exhibitions={exhibitions} />
+			</div>
 		</div>
 	)
 }

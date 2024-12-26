@@ -1,11 +1,11 @@
 import styles from '@/styles/layout/ArtistsPage.module.scss'
 import ArtistsPageNewsArtistsSlider from '@components/Sliders/ArtistsPageSliders/ArtistsPageNewsArtistsSlider.jsx'
-import PopularArtsSlider from '@components/Sliders/ArtistsPageSliders/PopularArtsSlider.jsx'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { getImageUrl } from '../../../utils/helper.js'
+import MainPopularArtistsSlider from '../../components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.jsx'
 
 function ArtistsPage() {
 	const { t } = useTranslation()
@@ -265,7 +265,7 @@ function ArtistsPage() {
 					</button>
 				</div>
 			</div>
-			<PopularArtsSlider />
+			<MainPopularArtistsSlider />
 		</div>
 	)
 }
