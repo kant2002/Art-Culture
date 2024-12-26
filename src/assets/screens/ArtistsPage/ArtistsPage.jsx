@@ -79,6 +79,10 @@ function ArtistsPage() {
 		navigate(`/artist/${id}`)
 	}
 
+	const handleAllAuthorsClick = () => {
+		navigate('/all-artists-page')
+	}
+
 	return (
 		<div className={`${styles.ArtistsPageContainer}`}>
 			<div className={`${styles.ArtistsPageTitleWrapper}`}>
@@ -250,6 +254,7 @@ function ArtistsPage() {
 					>
 						<p
 							className={`${styles.ArtistsPageGalleryAllArtistsButtonText}`}
+							onClick={handleAllAuthorsClick}
 						>
 							{t('Всі митці')}
 						</p>

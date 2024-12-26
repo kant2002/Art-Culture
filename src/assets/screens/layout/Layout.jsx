@@ -9,12 +9,12 @@ import SignUp from '../../components/VerificationPages/SignUpPage'
 import AdminDashboard from '../Admin/AdminDashboard'
 import AdminArtTermsEdit from '../Admin/ArtTermsEdit'
 import AdminArtTermsList from '../Admin/ArtTermsList'
+import AllArtistsPage from '../AllArtistsPage/AllArtistsPage'
 import ArtTermPage from '../ArtTerms/ArtTermPage'
 import ArtTermsFilteredPage from '../ArtTerms/ArtTermsFilteredPage'
 import ArtTermsPage from '../ArtTerms/ArtTermsPage'
 import ArtistPage from '../ArtistPage/ArtistPage'
 import ArtistsPage from '../ArtistsPage/ArtistsPage'
-import AllArtistsPage from '../AllArtistsPage/AllArtistsPage'
 import MuseumExhibitions from '../ExhibitionList/Exhibitions'
 import ExhibitionPage from '../ExhibitionPage/ExhibitionPage'
 import ExhibitionsPage from '../ExhibitionsPage/ExhibitionsPage'
@@ -51,7 +51,10 @@ const Layout = ({ heading = '' }) => {
 					<Route path="/MainPage" element={<MainPage />} />
 					<Route path="/ArtistsPage" element={<ArtistsPage />} />
 					<Route path="/artist/:id" element={<ArtistPage />} />
-					<Route path="/AllArtistsPage" element={<AllArtistsPage />} />
+					<Route
+						path="/all-artists-page"
+						element={<AllArtistsPage />}
+					/>
 					<Route path="/MuseumsPage" element={<MuseumsPage />} />
 					<Route path="/museumpage/:id" element={<MuseumPage />} />
 					<Route path="/art-terms" element={<ArtTermsPage />} />
@@ -135,7 +138,10 @@ const Layout = ({ heading = '' }) => {
 						path="/exhibitions/:id"
 						element={<ExhibitionPage />}
 					/>
-					<Route path="/ExhibitionsPage" element={<ExhibitionsPage />} />
+					<Route
+						path="/ExhibitionsPage"
+						element={<ExhibitionsPage />}
+					/>
 					<Route
 						path="/signup"
 						element={
