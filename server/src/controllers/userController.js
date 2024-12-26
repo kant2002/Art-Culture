@@ -3,6 +3,56 @@
 import prisma from "../../prismaClient.js"
 import logger from "../utils/logging.js"
 
+// src/controllers/userController.js
+
+export const getCreatorsByLanguage = async (req, res, next) => {
+  const { language } = req.params // Expecting 'en' or 'uk'
+
+  try {
+    let titleField = "title_en"
+    let bioField = "bio_en"
+
+    if (language === "uk") {
+      titleField = "title_uk"
+      bioField = "bio_uk"
+    }
+
+    const creators = await prisma.user.findMany({
+      where: {
+        role: "CREATOR",
+      },
+      select: {
+        id: true,
+        email: true,
+        [titleField]: true,
+        [bioField]: true,
+        images: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+      orderBy: {
+        [titleField]: "asc",
+      },
+    })
+
+    // Map the creators to have standard 'title' and 'bio' fields
+    const mappedCreators = creators.map((creator) => ({
+      id: creator.id,
+      email: creator.email,
+      title: creator[titleField],
+      bio: creator[bioField],
+      images: creator.images,
+      createdAt: creator.createdAt,
+      updatedAt: creator.updatedAt,
+    }))
+
+    res.json({ creators: mappedCreators })
+  } catch (error) {
+    logger.error("Error fetching creators by language:", error)
+    next(error)
+  }
+}
+
 export const getCreators = async (req, res, next) => {
   try {
     const creators = await prisma.user.findMany({
