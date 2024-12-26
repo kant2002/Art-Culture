@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import styles from '../../../styles/layout/AllArtistsPage.module.scss'
+import AllArtistsPageUKRSearchSlider from '../../components/Sliders/AllArtistsPage/AllArtistsPageUKRSearchSlider.jsx'
+import AllArtistsPageENGSearchSlider from '../../components/Sliders/AllArtistsPage/AllArtistsPageENGSearchSlider.jsx'
 
 function AllArtistsPage() {
     const { t } = useTranslation()
@@ -59,6 +61,11 @@ function AllArtistsPage() {
                     </h3>
                 </button>
             </div>
+
+            <AllArtistsPageUKRSearchSlider />
+
+            <AllArtistsPageENGSearchSlider />
+
             <div className={styles.ArtistsContainer}>
 
                 <div className={styles.ArtistsWrapper}>
