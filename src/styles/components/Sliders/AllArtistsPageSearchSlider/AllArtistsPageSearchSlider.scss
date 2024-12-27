@@ -2,21 +2,33 @@
 
 .SliderContainer {
     // Контейнер слайдера
-    // margin: variables.$responsiveMediumPadding variables.$responsiveLeftAndRightPadding 0 variables.$responsiveLeftAndRightPadding;
+    margin: variables.$responsiveMediumPadding auto 0 auto;
     display: flex;
-    width: 100%;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - calc(calc(2 * variables.$responsiveLeftAndRightPadding) + calc(2 * var(--swiper-navigation-size))));
 
+    .LetterContainer {
+        // Контейнер для букв
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 63px;
+        height: 63px;
+        border-radius: 50%;
+    }
 
     @at-root {
         :root {
-            --swiper-navigation-size: calc(42px - (7 * ((1440px - 100vw) / (1440 - 375))));
+            --swiper-navigation-size: 63px;
         }
     }
 
     .swiper-wrapper {
-        width: 100%;
         z-index: 1;
         display: flex;
+        justify-content: start;
+        align-items: center;
         transition-property: transform;
         transition-timing-function: var(--swiper-wrapper-transition-timing-function,
                 initial);
@@ -24,17 +36,20 @@
     }
 
     .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         flex-shrink: 0;
-        width: 63px;
-        height: 63px;
         position: relative;
         transition-property: transform;
         display: block;
+        width: fit-content;
     }
 
     .swiper-button-prev,
     .swiper-button-next {
         position: absolute;
+        // top: calc(calc(539px - (75 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 2));
         top: calc(calc(539px - (75 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 2));
         width: var(--swiper-navigation-size);
         height: var(--swiper-navigation-size);
