@@ -1,5 +1,6 @@
 // ArtistPageMasonryGallery.jsx
 
+import style from '@styles/components/Sliders/MasonrySlider/PageMasonryGallery.module.scss'
 import { debounce } from 'lodash' // Using lodash's debounce
 import PropTypes from 'prop-types'
 import {
@@ -11,7 +12,6 @@ import {
 	useState,
 } from 'react'
 import { useTranslation } from 'react-i18next'
-import style from '../../../../styles/components/Sliders/ArtistPageSliders/ArtistPageMasonryGallery.module.scss'
 import TranslatedContent from '../../Blocks/TranslatedContent'
 
 const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
