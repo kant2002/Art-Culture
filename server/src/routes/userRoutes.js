@@ -4,6 +4,7 @@ import express from "express"
 import {
   getCreatorById,
   getCreators,
+  getCreatorsByLanguage,
   getMuseumById,
   getMuseums,
 } from "../controllers/userController.js"
@@ -11,9 +12,10 @@ import {
 const router = express.Router()
 
 // Route to get all creators
-router.get("/museums/:id", getMuseumById)
+router.get("/creators/language/:language", getCreatorsByLanguage)
 router.get("/creators/:id", getCreatorById)
 router.get("/creators", getCreators)
+router.get("/museums/:id", getMuseumById)
 router.get("/museums", getMuseums)
 
 export default router

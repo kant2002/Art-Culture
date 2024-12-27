@@ -6,50 +6,56 @@ import logger from "../utils/logging.js"
 // src/controllers/userController.js
 
 export const getCreatorsByLanguage = async (req, res, next) => {
-  const { language } = req.params // Expecting 'en' or 'uk'
+  const { language } = req.params
+  const { letter } = req.query
+
+  // Log incoming request parameters
+  logger.info(`Received request for language: ${language}, letter: ${letter}`)
+
+  // Validate language
+  if (!["uk", "en"].includes(language)) {
+    logger.warn(`Invalid language parameter: ${language}`)
+    return res.status(400).json({ error: "invalid language" })
+  }
+
+  let titleField = "title"
 
   try {
-    let titleField = "title_en"
-    let bioField = "bio_en"
-
-    if (language === "uk") {
-      titleField = "title_uk"
-      bioField = "bio_uk"
-    }
-
     const creators = await prisma.user.findMany({
       where: {
         role: "CREATOR",
+        ...(letter && {
+          [titleField]: {
+            startsWith: letter,
+          },
+        }),
       },
       select: {
         id: true,
         email: true,
         [titleField]: true,
-        [bioField]: true,
+        bio: true,
         images: true,
-        createdAt: true,
-        updatedAt: true,
       },
       orderBy: {
         [titleField]: "asc",
       },
     })
 
-    // Map the creators to have standard 'title' and 'bio' fields
+    logger.info(`Fetched ${creators.length} creators from database`)
+
     const mappedCreators = creators.map((creator) => ({
       id: creator.id,
       email: creator.email,
       title: creator[titleField],
-      bio: creator[bioField],
+      bio: creator.bio,
       images: creator.images,
-      createdAt: creator.createdAt,
-      updatedAt: creator.updatedAt,
     }))
 
     res.json({ creators: mappedCreators })
   } catch (error) {
     logger.error("Error fetching creators by language:", error)
-    next(error)
+    res.status(500).json({ error: "Internal server error" })
   }
 }
 
