@@ -18,25 +18,27 @@
   display: flex;
   justify-content: center;
   align-items: start;
+  cursor: pointer;
 }
 
-// .LetterWrapper {
-//     // Контейнер для буквы
-//     margin: variables.$responsiveMediumPadding variables.$responsiveMediumPadding 0 0;
-//     width: 50px;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-//     border: 1px solid variables.$red;
-//     border-radius: 50%;
-//     aspect-ratio: 1 / 1;
-// }
+.LetterWrapper {
+  // Контейнер для буквы
+  margin: variables.$responsiveMediumPadding variables.$responsiveMediumPadding
+    0 0;
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid variables.$red;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+}
 
-// .Letter {
-//     // Буква
-//     color: variables.$red;
-// }
+.Letter {
+  // Буква
+  color: variables.$red;
+}
 
 .ArtistsByLetterWrapper {
   // Контейнер для артистов по букве

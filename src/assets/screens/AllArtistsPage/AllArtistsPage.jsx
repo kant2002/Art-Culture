@@ -1,4 +1,3 @@
-import Letters from '@components/Blocks/LettersForCreator'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -13,6 +12,72 @@ function AllArtistsPage() {
 	const [error, setError] = useState(null)
 	const [language, setLanguage] = useState(i18n.language)
 	const [selectedLetter, setSelectedLetter] = useState('')
+
+	const ukrainianLetters = [
+		'А',
+		'Б',
+		'В',
+		'Г',
+		'Ґ',
+		'Д',
+		'Е',
+		'Є',
+		'Ж',
+		'З',
+		'И',
+		'І',
+		'Ї',
+		'Й',
+		'К',
+		'Л',
+		'М',
+		'Н',
+		'О',
+		'П',
+		'Р',
+		'С',
+		'Т',
+		'У',
+		'Ф',
+		'Х',
+		'Ц',
+		'Ч',
+		'Ш',
+		'Щ',
+		'Ь',
+		'Ю',
+		'Я',
+	]
+
+	// Define English letters in alphabetical order
+	const englishLetters = [
+		'A',
+		'B',
+		'C',
+		'D',
+		'E',
+		'F',
+		'G',
+		'H',
+		'I',
+		'J',
+		'K',
+		'L',
+		'M',
+		'N',
+		'O',
+		'P',
+		'Q',
+		'R',
+		'S',
+		'T',
+		'U',
+		'V',
+		'W',
+		'X',
+		'Y',
+		'Z',
+	]
 
 	useEffect(() => {
 		const handleLanguageChange = () => setLanguage(i18n.language)
@@ -58,14 +123,22 @@ function AllArtistsPage() {
 						{},
 					)
 
-					setCreators(groupedCreators)
-				} else {
-					// Handle single creator fetched by ID
-					setCreators({
-						[response.data.creator.title.charAt(0).toUpperCase()]: [
-							response.data.creator,
-						],
+					const sortedLetters = [
+						...ukrainianLetters,
+						...englishLetters,
+					].filter((letter) =>
+						Object.keys(groupedCreators).includes(letter),
+					)
+
+					const sortedGroupedCreators = {}
+					sortedLetters.forEach((letter) => {
+						if (groupedCreators[letter]) {
+							sortedGroupedCreators[letter] =
+								groupedCreators[letter]
+						}
 					})
+
+					setCreators(sortedGroupedCreators)
 				}
 
 				setLoading(false)
@@ -76,7 +149,7 @@ function AllArtistsPage() {
 			}
 		}
 		fetchCreators()
-	}, [language, selectedLetter])
+	}, [])
 
 	const handleLetterSelected = (letter) => {
 		setSelectedLetter(letter)
@@ -134,10 +207,10 @@ function AllArtistsPage() {
 				{Object.keys(creators).map((letter) => (
 					<div key={letter} className={styles.ArtistsWrapper}>
 						<div className={styles.LetterWrapper}>
-							<Letters
+							{/* <Letters
 								onLetterSelected={handleLetterSelected}
 								selected={selectedLetter}
-							/>
+							/> */}
 							<h2 className={styles.Letter}>{letter}</h2>
 						</div>
 						<div className={styles.ArtistsByLetterWrapper}>
@@ -145,6 +218,9 @@ function AllArtistsPage() {
 								<div
 									key={creator.id}
 									className={styles.ArtistWrapper}
+									onClick={() =>
+										handleAuthorPreviewClick(creator.id)
+									}
 								>
 									<div
 										className={
