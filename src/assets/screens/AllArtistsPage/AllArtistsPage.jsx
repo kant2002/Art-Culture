@@ -1,3 +1,5 @@
+import AllArtistsPageENGSearchSlider from '@components/Sliders/AllArtistsPage/AllArtistsPageENGSearchSlider'
+import AllArtistsPageUKRSearchSlider from '@components/Sliders/AllArtistsPage/AllArtistsPageUKRSearchSlider'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -203,6 +205,9 @@ function AllArtistsPage() {
 					</h3>
 				</button>
 			</div>
+
+			<AllArtistsPageENGSearchSlider />
+			<AllArtistsPageUKRSearchSlider />
 			<div className={styles.ArtistsContainer}>
 				{Object.keys(creators).map((letter) => (
 					<div key={letter} className={styles.ArtistsWrapper}>
