@@ -86,7 +86,7 @@ const PopularOfThisArtistSlider = ({ products, baseUrl }) => {
 							{t('Популярне цього митця')}
 						</p>
 					</div>
-					<LikeAndShare className={sliderStyles.likeAndShare} />
+					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 				</div>
 				<div className="popularOfThisArtistSliderBottomInnerWrapper">
 					<Swiper
@@ -106,9 +106,9 @@ const PopularOfThisArtistSlider = ({ products, baseUrl }) => {
 							const description =
 								currentLanguage === 'en'
 									? product.description_en ||
-										product.description
+									product.description
 									: product.description_uk ||
-										product.description
+									product.description
 
 							return (
 								<SwiperSlide
