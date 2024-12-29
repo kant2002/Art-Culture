@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import styles from '../../../styles/layout/AllArtistsPage.module.scss'
+import { englishLetters, ukrainianLetters } from '../../../utils/constants'
 
 function AllArtistsPage() {
 	const { t, i18n } = useTranslation()
@@ -14,72 +15,6 @@ function AllArtistsPage() {
 	const [error, setError] = useState(null)
 	const [language, setLanguage] = useState(i18n.language)
 	const [selectedLetter, setSelectedLetter] = useState('')
-
-	const ukrainianLetters = [
-		'А',
-		'Б',
-		'В',
-		'Г',
-		'Ґ',
-		'Д',
-		'Е',
-		'Є',
-		'Ж',
-		'З',
-		'И',
-		'І',
-		'Ї',
-		'Й',
-		'К',
-		'Л',
-		'М',
-		'Н',
-		'О',
-		'П',
-		'Р',
-		'С',
-		'Т',
-		'У',
-		'Ф',
-		'Х',
-		'Ц',
-		'Ч',
-		'Ш',
-		'Щ',
-		'Ь',
-		'Ю',
-		'Я',
-	]
-
-	// Define English letters in alphabetical order
-	const englishLetters = [
-		'A',
-		'B',
-		'C',
-		'D',
-		'E',
-		'F',
-		'G',
-		'H',
-		'I',
-		'J',
-		'K',
-		'L',
-		'M',
-		'N',
-		'O',
-		'P',
-		'Q',
-		'R',
-		'S',
-		'T',
-		'U',
-		'V',
-		'W',
-		'X',
-		'Y',
-		'Z',
-	]
 
 	useEffect(() => {
 		const handleLanguageChange = () => setLanguage(i18n.language)
