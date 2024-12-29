@@ -1,12 +1,12 @@
+import styles from '@styles/components/Blocks/LoadingError.module.scss'
 import { useTranslation } from 'react-i18next'
-import styles from "@styles/components/Blocks/LoadingError.module.scss"
 
-function LoadingError() {
+function LoadingError({ message }) {
 	const { t } = useTranslation()
 
-	return (
-		<div className={styles.error}>{t("Неможливо завантажити дані")}</div>
-	)
+	const defaultText = t('Неможливо завантажити дані')
+
+	return <div className={styles.error}>{message || defaultText}</div>
 }
 
 export default LoadingError

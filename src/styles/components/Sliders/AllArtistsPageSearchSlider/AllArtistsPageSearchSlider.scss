@@ -1,97 +1,121 @@
-@use '@styles/utilities/variables.scss';
+@use "@styles/utilities/variables.scss";
 
 .SliderContainer {
-    // Контейнер слайдера
-    margin: variables.$responsiveMediumPadding auto 0 auto;
+  // Контейнер слайдера
+  margin: variables.$responsiveMediumPadding auto 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(
+    100% - calc(
+        calc(2 * variables.$responsiveLeftAndRightPadding) +
+          calc(2 * var(--swiper-navigation-size))
+      )
+  );
+
+  .LetterContainer {
+    // Контейнер для букв
     display: flex;
     justify-content: center;
     align-items: center;
-    width: calc(100% - calc(calc(2 * variables.$responsiveLeftAndRightPadding) + calc(2 * var(--swiper-navigation-size))));
+    width: 63px;
+    height: 63px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
 
-    .LetterContainer {
-        // Контейнер для букв
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 63px;
-        height: 63px;
-        border-radius: 50%;
+  @at-root {
+    :root {
+      --swiper-navigation-size: 63px;
     }
+  }
 
-    @at-root {
-        :root {
-            --swiper-navigation-size: 63px;
-        }
-    }
+  .swiper-wrapper {
+    z-index: 1;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    transition-property: transform;
+    transition-timing-function: var(
+      --swiper-wrapper-transition-timing-function,
+      initial
+    );
+    box-sizing: content-box;
+  }
 
-    .swiper-wrapper {
-        z-index: 1;
-        display: flex;
-        justify-content: start;
-        align-items: center;
-        transition-property: transform;
-        transition-timing-function: var(--swiper-wrapper-transition-timing-function,
-                initial);
-        box-sizing: content-box;
-    }
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+    transition-property: transform;
+    display: block;
+    width: fit-content;
+  }
 
-    .swiper-slide {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-shrink: 0;
-        position: relative;
-        transition-property: transform;
-        display: block;
-        width: fit-content;
-    }
+  .swiper-button-prev,
+  .swiper-button-next {
+    position: absolute;
+    // top: calc(calc(539px - (75 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 2));
+    top: calc(
+      calc(539px - (75 * ((1440px - 100vw) / (1440 - 375)))) - calc(
+          var(--swiper-navigation-size) / 2
+        )
+    );
+    width: var(--swiper-navigation-size);
+    height: var(--swiper-navigation-size);
+    z-index: 11;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000000;
+    border-radius: 50%;
+    color: white;
+  }
 
-    .swiper-button-prev,
-    .swiper-button-next {
-        position: absolute;
-        // top: calc(calc(539px - (75 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 2));
-        top: calc(calc(539px - (75 * ((1440px - 100vw) / (1440 - 375)))) - calc(var(--swiper-navigation-size) / 2));
-        width: var(--swiper-navigation-size);
-        height: var(--swiper-navigation-size);
-        z-index: 11;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #000000;
-        border-radius: 50%;
-        color: white;
-    }
+  .swiper-button-prev,
+  .swiper-rtl .swiper-button-next {
+    left: calc(
+      50% - calc(var(--swiper-navigation-size) * 1.14) - calc(
+          34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))
+        )
+    );
+    right: auto;
+  }
 
-    .swiper-button-prev,
-    .swiper-rtl .swiper-button-next {
-        left: calc(50% - calc(var(--swiper-navigation-size) * 1.14) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
-        right: auto;
-    }
+  .swiper-button-next,
+  .swiper-rtl .swiper-button-prev {
+    right: calc(
+      50% - calc(var(--swiper-navigation-size) * 1.14) - calc(
+          34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))
+        )
+    );
+    left: auto;
+  }
 
-    .swiper-button-next,
-    .swiper-rtl .swiper-button-prev {
-        right: calc(50% - calc(var(--swiper-navigation-size) * 1.14) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
-        left: auto;
+  /* Navigation font start */
+  .swiper-button-prev,
+  .swiper-button-next {
+    &:after {
+      font-family: swiper-icons;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: none !important;
+      letter-spacing: 0;
+      font-variant: initial;
+      line-height: 1;
     }
+  }
 
-    /* Navigation font start */
-    .swiper-button-prev,
-    .swiper-button-next {
-        &:after {
-            font-family: swiper-icons;
-            font-size: 10px;
-            font-weight: 900;
-            text-transform: none !important;
-            letter-spacing: 0;
-            font-variant: initial;
-            line-height: 1;
-        }
-    }
-
-    .swiper-button-next,
-    .swiper-rtl .swiper-button-prev {
-        right: calc(50% - calc(var(--swiper-navigation-size) * 1.24) - calc(34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))));
-        left: auto;
-    }
+  .swiper-button-next,
+  .swiper-rtl .swiper-button-prev {
+    right: calc(
+      50% - calc(var(--swiper-navigation-size) * 1.24) - calc(
+          34.5px - (5.5 * ((1440px - 100vw) / (1440 - 375)))
+        )
+    );
+    left: auto;
+  }
 }
