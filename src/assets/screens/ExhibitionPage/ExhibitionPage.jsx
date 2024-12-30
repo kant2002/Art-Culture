@@ -2,10 +2,10 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import styles from '../../../styles/layout/ExhibitionPage.module.scss'
+import styles from '@styles/layout/ExhibitionPage.module.scss'
 import API from '../../../utils/api.js'
 import { getImageUrl } from '../../../utils/helper.js'
-import Map from '../../components/Blocks/Maps'
+import Map from '@components/Blocks/Maps'
 
 function ExhibitionDetails() {
 	const { t, i18n } = useTranslation()

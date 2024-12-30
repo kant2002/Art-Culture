@@ -5,13 +5,13 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import styles from '../../../styles/components/Post/PostDetail.module.scss'
+import styles from '@styles/components/Post/PostDetail.module.scss'
 import {
 	getFormattedDate,
 	getFormattedTime,
 	getImageUrl,
 } from '../../../utils/helper'
-import PostDetailPopularNewsSlider from '../../components/Sliders/PostDetailPopularNewsSlider/PostDetailPopularNewsSlider'
+import PostDetailPopularNewsSlider from '@components/Sliders/PostDetailPopularNewsSlider/PostDetailPopularNewsSlider'
 
 function PostDetail() {
 	const { t } = useTranslation()

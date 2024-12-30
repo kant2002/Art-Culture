@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import styles from '../../../styles/layout/AllArtistsPage.module.scss'
+import styles from '@styles/layout/AllArtistsPage.module.scss'
 import { englishLetters, ukrainianLetters } from '../../../utils/constants'
 
 function AllArtistsPage() {

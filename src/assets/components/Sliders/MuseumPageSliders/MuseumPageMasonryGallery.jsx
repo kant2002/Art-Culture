@@ -11,7 +11,7 @@ import {
 	useState,
 } from 'react'
 import { useTranslation } from 'react-i18next'
-import style from '../../../../styles/components/Sliders/MasonrySlider/PageMasonryGallery.module.scss'
+import style from '@styles/components/Sliders/MasonrySlider/PageMasonryGallery.module.scss'
 import { allImages } from '../../../../utils/constants' // Adjust the path as necessary
 import TranslatedContent from '../../Blocks/TranslatedContent'
 

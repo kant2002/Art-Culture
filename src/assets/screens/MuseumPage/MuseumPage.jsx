@@ -2,10 +2,10 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import styles from '../../../styles/layout/MuseumPage.module.scss'
+import styles from '@styles/layout/MuseumPage.module.scss'
 import { getBaseUrl, getImageUrl } from '../../../utils/helper.js'
-import MuseumMaps from '../../components/Blocks/MuseumMaps'
-import MuseumPageMasonryGallery from '../../components/Sliders/MuseumPageSliders/MuseumPageMasonryGallery.jsx'
+import MuseumMaps from '@components/Blocks/MuseumMaps'
+import MuseumPageMasonryGallery from '@components/Sliders/MuseumPageSliders/MuseumPageMasonryGallery.jsx'
 function MuseumPage() {
 	const { t } = useTranslation()
 	const { id } = useParams()
