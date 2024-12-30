@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import styles from "../../../styles/components/Blocks/ProfilePageContainer.module.scss"
+import styles from "@styles/components/Blocks/ProfilePageContainer.module.scss"
 import Sidebar from './Sidebar';
 
 function ProfilePageContainer({ children }) {

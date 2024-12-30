@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import API from '../../../utils/api.js'
-import ImageEditor from '../../components/Blocks/ImageEditor.jsx'
+import ImageEditor from '@components/Blocks/ImageEditor.jsx'
 import styles from '/src/styles/components/ProductCard/ProductCardCreate.module.scss'
 
 const ProductCardCreate = () => {

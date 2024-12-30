@@ -6,11 +6,11 @@ import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
-import styles from '../../../styles/components/ExhibitionCard/ExhibitionCardCreate.module.scss'
+import styles from '@styles/components/ExhibitionCard/ExhibitionCardCreate.module.scss'
 import API from '../../../utils/api'
 import { getImageUrl } from '../../../utils/helper.js'
-import AddressSearch from '../../components/Blocks/AddressSearchInput'
-import ImageEditor from '../../components/Blocks/ImageEditor'
+import AddressSearch from '@components/Blocks/AddressSearchInput'
+import ImageEditor from '@components/Blocks/ImageEditor'
 
 function ExhibitionForm() {
 	const [formData, setFormData] = useState({

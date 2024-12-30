@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { getImageUrl } from '../../../utils/helper.js'
-import MainPopularArtistsSlider from '../../components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.jsx'
+import MainPopularArtistsSlider from '@components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.jsx'
 
 function ArtistsPage() {
 	const { t } = useTranslation()

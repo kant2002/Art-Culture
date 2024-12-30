@@ -6,7 +6,7 @@ import TextEditor from '@components/Blocks/TextEditor'
 import TranslatedContent from '@components/Blocks/TranslatedContent'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import ImageEditor from '../../components/Blocks/ImageEditor'
+import ImageEditor from '@components/Blocks/ImageEditor'
 import styles from '/src/styles/screen/ProductList/Paintings.module.scss'
 import API from '/src/utils/api.js'
 

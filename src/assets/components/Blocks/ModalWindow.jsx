@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useCallback, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import style from '../../../styles/components/Blocks/ModalWindow.module.scss'
+import style from '@styles/components/Blocks/ModalWindow.module.scss'
 import TranslatedContent from '../Blocks/TranslatedContent'
 
 const GalleryModal = ({
