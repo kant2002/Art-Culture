@@ -1,11 +1,13 @@
 // src/assets/components/ExhibitionDetails.jsx
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import styles from '../../../styles/layout/ExhibitionPage.module.scss'
 import API from '../../../utils/api.js'
 import { getImageUrl } from '../../../utils/helper.js'
 import Map from '../../components/Blocks/Maps'
+import ExhibitionPageMasonryGallery from '../../components/Sliders/ExhibitionPageSlider/ExhibitionPageMasonryGallery'
+import ExhibitionPageNewsPopularExhibition from '../../components/Sliders/ExhibitionPageSlider/ExhibitionPageNewsPopularExhibition'
 
 function ExhibitionDetails() {
 	const { t, i18n } = useTranslation()
@@ -17,6 +19,8 @@ function ExhibitionDetails() {
 	const [error, setError] = useState(null)
 
 	const currentLanguage = i18n.language
+	const navigate = useNavigate()
+	const [isExpanded, setIsExpanded] = useState(false)
 
 	useEffect(() => {
 		// 1) Fetch the exhibition
@@ -115,13 +119,41 @@ function ExhibitionDetails() {
 	// Example: museum title or address if you want to display
 	const museumTitle = museum?.title
 
+	const handleExhibitionPageClick = () => {
+		navigate('/ExhibitionsPage')
+	}
+	const toggleText = () => {
+		setIsExpanded((prevState) => !prevState)
+	}
+
 	return (
 		<div className={styles.exhibitionDetailsContainer}>
+			<div className={`${styles.museumPageNavigationContainer}`}>
+				<nav className={`${styles.museumPageNavigation}`}>
+					<ul className={`${styles.museumPageNavigationList}`}>
+						<li
+							className={`${styles.museumPageNavigationItem}`}
+							onClick={handleExhibitionPageClick}
+						>
+							{t('Виставки')}
+						</li>
+						<p
+							className={`${styles.museumPageNavigationItemSeparator}`}
+						>
+							&#8250;
+						</p>
+						<li className={`${styles.museumPageNavigationItem}`}>
+							{currentLanguage === 'en'
+								? title_en || title_uk
+								: title_uk || title_en}
+						</li>
+					</ul>
+				</nav>
+			</div>
 			<div className={styles.exhibitionDetailsWrapper}>
 				<div className={styles.exhibitionHeadTitleWrapper}>
 					<h2>{t('Деталі виставки')}</h2>
 				</div>
-
 				{/* -----------------------------
             Exhibition Images
         ----------------------------- */}
@@ -145,7 +177,6 @@ function ExhibitionDetails() {
 						{t('No images available')}
 					</div>
 				)}
-
 				{/* -----------------------------
             Exhibition Information
         ----------------------------- */}
@@ -196,6 +227,45 @@ function ExhibitionDetails() {
 					</h4>
 				</div>
 
+				{museum && (
+					<div style={{ marginTop: '1rem' }}>
+						<img
+							src={museumLogoUrl}
+							alt={museumTitle}
+							style={{ maxWidth: '150px' }}
+							onError={(e) => {
+								e.target.onerror = null
+								e.target.src = '/Img/newsCardERROR.jpg'
+							}}
+						/>
+
+						<p>{museumTitle}</p>
+						<div
+							className={`${styles.museumPageMuseumBottomLocationWrapper}`}
+						>
+							<p
+								className={`${styles.museumPageMuseumLocationCity}`}
+							>
+								{museum.country} {''}
+								{museum.city}
+							</p>
+
+							<div
+								className={`${styles.museumPageMuseumDescriptionWrapper} ${isExpanded ? styles.expanded : ''}`}
+							>
+								<p
+									className={`${styles.museumPageMuseumDescription}`}
+								>
+									{museum.bio}
+								</p>
+							</div>
+						</div>
+					</div>
+				)}
+
+				<ExhibitionPageNewsPopularExhibition />
+
+				<ExhibitionPageMasonryGallery />
 				{/* -----------------------------
             Map Rendering
         ----------------------------- */}
@@ -213,7 +283,6 @@ function ExhibitionDetails() {
 						]}
 					/>
 				</div>
-
 				{/* -----------------------------
             Museum Data (If Fetched)
         ----------------------------- */}
@@ -230,6 +299,30 @@ function ExhibitionDetails() {
 						/>
 
 						<p>{museumTitle}</p>
+						<div
+							className={`${styles.museumPageMuseumBottomLocationWrapper}`}
+						>
+							<p
+								className={`${styles.museumPageMuseumLocationStreet}`}
+							>
+								{museum.street} {','} {museum.house_number}
+							</p>
+							<p
+								className={`${styles.museumPageMuseumLocationCity}`}
+							>
+								{museum.city}
+							</p>
+							<p
+								className={`${styles.museumPageMuseumLocationCountry}`}
+							>
+								{museum.country}
+							</p>
+							<p
+								className={`${styles.museumPageMuseumLocationIndex}`}
+							>
+								{museum.postcode}
+							</p>
+						</div>
 					</div>
 				)}
 			</div>
