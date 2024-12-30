@@ -147,9 +147,10 @@ function MuseumPage() {
 				<div
 					className={`${styles.museumPageMuseumDescriptionWrapper} ${isExpanded ? styles.expanded : ''}`}
 				>
-					<p className={`${styles.museumPageMuseumDescription}`}>
-						{museum.bio}
-					</p>
+					<p
+						className={`${styles.museumPageMuseumDescription}`}
+						dangerouslySetInnerHTML={{ __html: museum.bio }}
+					></p>
 				</div>
 
 				<button
