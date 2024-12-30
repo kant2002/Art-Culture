@@ -9,7 +9,7 @@ import styles from '/src/styles/components/UserProfile/userProfileAddPost.module
 import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
 import TextEditor from '@components/Blocks/TextEditor'
 import TextAreaEditor from '@components/Blocks/TextAreaEditor'
-import ImageEditor from '../../components/Blocks/ImageEditor.jsx'
+import ImageEditor from '@components/Blocks/ImageEditor.jsx'
 
 function UserProfileAddPost() {
 	const { t } = useTranslation()

@@ -3,7 +3,7 @@ import TextAreaEditor from '@components/Blocks/TextAreaEditor'
 import TextEditor from '@components/Blocks/TextEditor'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import ImageEditor from '../../components/Blocks/ImageEditor'
+import ImageEditor from '@components/Blocks/ImageEditor'
 import styles from '/src/styles/screen/ExhibitionList/Exhibitions.module.scss'
 import API from '/src/utils/api.js'
 

@@ -7,7 +7,7 @@ import NewsPageAuthorsSlider from '@components/Sliders/NewsPageAuthorsSlider/New
 import { getFormattedDate, getImageUrl } from '../../../utils/helper.js'
 import LikeAndShare from '@components/Blocks/LikeAndShare'
 import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
-import TranslatedContent from '../../components/Blocks/TranslatedContent.jsx'
+import TranslatedContent from '@components/Blocks/TranslatedContent.jsx'
 
 function NewsPage() {
 	const { t, i18n } = useTranslation()

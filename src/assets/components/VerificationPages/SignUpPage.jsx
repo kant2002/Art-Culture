@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext.jsx'
 import API from '../../../utils/api.js'
-import ImageEditor from '../../components/Blocks/ImageEditor.jsx'
+import ImageEditor from '@components/Blocks/ImageEditor.jsx'
 import MuseumAddressSearch from '../Blocks/MuseumAddressSearch.jsx'
 
 const SignUp = () => {

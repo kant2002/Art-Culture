@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next'
-import styles from "../../../styles/components/Blocks/Letters.module.scss"
+import styles from "@styles/components/Blocks/Letters.module.scss"
 
 function Letters({ onLetterSelected, selected }) {
 	const { i18n } = useTranslation()
