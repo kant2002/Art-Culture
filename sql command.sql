@@ -12,3 +12,8 @@
 -- DELETE FROM ProductImage WHERE productId = 6;
 -- DELETE FROM user WHERE id = 11;
 -- DELETE FROM Exhibition WHERE createdById = 3;
+
+
+-- UPDATE user
+-- SET role = 'CREATOR'
+-- WHERE email = 'vavadjan+creator@gmail.com';
