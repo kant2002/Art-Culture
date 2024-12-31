@@ -1,15 +1,16 @@
 import { getFormattedDate } from '@/utils/helper'
+import ImageEditor from '@components/Blocks/ImageEditor.jsx'
+import MuseumAddressSearch from '@components/Blocks/MuseumAddressSearch.jsx'
 import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
+import TextAreaEditor from '@components/Blocks/TextAreaEditor.jsx'
+import TextEditor from '@components/Blocks/TextEditor.jsx'
+import TranslatedContent from '@components/Blocks/TranslatedContent'
+import DOMPurify from 'dompurify' // Import DOMPurify if needed
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
 import API from '../../../utils/api.js'
-import ImageEditor from '@components/Blocks/ImageEditor.jsx'
-import MuseumAddressSearch from '@components/Blocks/MuseumAddressSearch.jsx'
-import TranslatedContent from '@components/Blocks/TranslatedContent'
-import TextAreaEditor from '@components/Blocks/TextAreaEditor.jsx'
-import TextEditor from '@components/Blocks/TextEditor.jsx'
 import styles from '/src/styles/components/UserProfile/userProfile.module.scss'
 
 const UserProfile = () => {
@@ -91,9 +92,44 @@ const UserProfile = () => {
 		e.preventDefault()
 		setServerMessage('')
 
+		// Extract plain text to validate length
+		const plainTextBio = bio.replace(/<[^>]+>/g, '') // Strip HTML tags
+		if (plainTextBio.length > 500) {
+			setServerMessage(
+				'Bio exceeds the maximum length of 500 characters.',
+			)
+			return
+		}
+
+		// Sanitize the bio content (already sanitized in TextAreaEditor, but double-check)
+		const sanitizedBio = DOMPurify.sanitize(bio, {
+			ALLOWED_TAGS: [
+				'b',
+				'i',
+				'em',
+				'strong',
+				'a',
+				'p',
+				'br',
+				'ul',
+				'ol',
+				'li',
+				'span',
+			],
+			ALLOWED_ATTR: ['href', 'title', 'target', 'rel', 'style'],
+			FORBID_EMPTY: true, // Ensure no empty tags remain
+		})
+
+		// Remove any remaining zero-width characters
+		const cleanSanitizedBio = sanitizedBio.replace(
+			/[\u200B-\u200D\uFEFF]/g,
+			'',
+		)
+
+		console.log('Sanitized Bio content:', cleanSanitizedBio) // Log sanitized content
 		const formData = new FormData()
 		formData.append('title', title)
-		formData.append('bio', bio)
+		formData.append('bio', cleanSanitizedBio)
 		if (profileImage instanceof File) {
 			formData.append('profileImage', profileImage)
 		}
@@ -179,9 +215,9 @@ const UserProfile = () => {
 									museumLogo instanceof File
 										? URL.createObjectURL(museumLogo)
 										: museumLogo.startsWith('http') ||
-											museumLogo.startsWith(
-												'/uploads/museumLogoImages',
-											)
+											  museumLogo.startsWith(
+													'/uploads/museumLogoImages',
+											  )
 											? `${museumLogo}`
 											: museumLogo
 								}
@@ -196,9 +232,9 @@ const UserProfile = () => {
 									profileImage instanceof File
 										? URL.createObjectURL(profileImage)
 										: profileImage.startsWith('http') ||
-											profileImage.startsWith(
-												'/uploads/profileImages',
-											)
+											  profileImage.startsWith(
+													'/uploads/profileImages',
+											  )
 											? `${profileImage}`
 											: profileImage
 								}
@@ -344,7 +380,7 @@ const UserProfile = () => {
 												placeholder="Bio"
 												name="bio"
 												value={bio}
-												maxLength={500}
+												maxLength={1500}
 												required
 												onChange={({ value }) =>
 													setBio(value)
@@ -385,7 +421,7 @@ const UserProfile = () => {
 														setCountry(value)
 													}
 													maxLength={100}
-												//required
+													//required
 												/>
 												<TextEditor
 													name="city"
@@ -395,7 +431,7 @@ const UserProfile = () => {
 														setCity(value)
 													}
 													maxLength={100}
-												//required
+													//required
 												/>
 												<TextEditor
 													name="street"
@@ -405,7 +441,7 @@ const UserProfile = () => {
 														setStreet(value)
 													}
 													maxLength={100}
-												//required
+													//required
 												/>
 												<TextEditor
 													name="houseNumber"
@@ -415,7 +451,7 @@ const UserProfile = () => {
 														setHouseNumber(value)
 													}
 													maxLength={50}
-												//required
+													//required
 												/>
 												<TextEditor
 													name="postcode"
@@ -425,7 +461,7 @@ const UserProfile = () => {
 														setPostcode(value)
 													}
 													maxLength={20}
-												//required
+													//required
 												/>
 											</div>
 										)}
@@ -461,7 +497,7 @@ const UserProfile = () => {
 													onChange={({ value }) =>
 														setMuseumLogo(value[0])
 													}
-												// Optional: add validation or constraints
+													// Optional: add validation or constraints
 												/>
 											</div>
 										)}

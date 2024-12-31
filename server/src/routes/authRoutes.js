@@ -103,7 +103,7 @@ router.put(
       .withMessage("Title must be less than 100 characters"),
     body("bio")
       .optional()
-      .isLength({ max: 500 })
+      .isLength({ max: 1500 })
       .withMessage("Bio must be less than 500 characters"),
   ],
   updateUserProfile,
