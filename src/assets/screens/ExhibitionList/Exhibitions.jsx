@@ -1,9 +1,9 @@
+import ImageEditor from '@components/Blocks/ImageEditor'
 import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
 import TextAreaEditor from '@components/Blocks/TextAreaEditor'
 import TextEditor from '@components/Blocks/TextEditor'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import ImageEditor from '@components/Blocks/ImageEditor'
 import styles from '/src/styles/screen/ExhibitionList/Exhibitions.module.scss'
 import API from '/src/utils/api.js'
 
@@ -33,8 +33,9 @@ function MuseumExhibitions() {
 		time: '',
 		endTime: '',
 		artists: [],
-		images: null,
 	})
+	const [existingImages, setExistingImages] = useState([])
+	const [newImages, setNewImages] = useState([])
 	const [message, setMessage] = useState('')
 	const [formErrors, setFormErrors] = useState({})
 	const [error, setError] = useState('')
@@ -63,6 +64,7 @@ function MuseumExhibitions() {
 
 		fetchExhibitions()
 	}, [page])
+
 	useEffect(() => {
 		const fetchArtists = async () => {
 			try {
@@ -74,10 +76,10 @@ function MuseumExhibitions() {
 				setArtists(response.data.creators)
 			} catch (error) {
 				console.error('Error fetching artists:', error)
-				setFormErrors((prevErrors) => [
+				setFormErrors((prevErrors) => ({
 					...prevErrors,
-					'Failed to load artists.',
-				])
+					form: 'Failed to load artists.',
+				}))
 				setArtists([])
 			}
 		}
@@ -95,6 +97,8 @@ function MuseumExhibitions() {
 	const handleCloseModal = () => {
 		setIsModalOpen(false)
 		setSelectedExhibitionImages([])
+		setExistingImages([])
+		setNewImages([])
 	}
 
 	const openEditModal = (exhibition) => {
@@ -109,7 +113,6 @@ function MuseumExhibitions() {
 			latitude: exhibition.latitude || '',
 			longitude: exhibition.longitude || '',
 			address: exhibition.address || '',
-			images: exhibition.images || null,
 			time: exhibition.time || '',
 			endTime: exhibition.endTime || '',
 			startDate: exhibition.startDate
@@ -122,6 +125,8 @@ function MuseumExhibitions() {
 				? exhibition.exhibitionArtists.map((ea) => ea.artist.id)
 				: [],
 		})
+		setExistingImages(exhibition.images || [])
+		setNewImages([])
 		setIsModalOpen(true)
 	}
 
@@ -145,15 +150,20 @@ function MuseumExhibitions() {
 			time: '',
 			endTime: '',
 			artists: [],
-			images: null,
 		})
+		setExistingImages([])
+		setNewImages([])
 	}
 
 	const handleChange = (e) => {
 		const { name, value, files } = e.target
 
-		if (name === 'images' || name === 'exhibitionImages') {
-			setFormData({ ...formData, images: files })
+		if (name === 'exhibitionImages') {
+			// Validate and set new images
+			const validFiles = Array.from(files).filter((file) =>
+				file.type.startsWith('image/'),
+			)
+			setNewImages(validFiles)
 		} else if (name === 'artists') {
 			// Handled in handleArtistSelection
 		} else {
@@ -166,6 +176,7 @@ function MuseumExhibitions() {
 		setMessage('')
 		setFormErrors({})
 
+		// Validation logic
 		if (
 			!formData.title_en ||
 			!formData.description_en ||
@@ -204,17 +215,19 @@ function MuseumExhibitions() {
 			// Append artistIds as a JSON string
 			exhibitionData.append('artistIds', JSON.stringify(formData.artists))
 
-			// Append images
-			if (formData.images && formData.images.length > 0) {
-				for (let i = 0; i < formData.images.length; i++) {
-					exhibitionData.append(
-						'exhibitionImages',
-						formData.images[i],
-					)
+			// Append existing image IDs if needed
+			existingImages.forEach((image) => {
+				exhibitionData.append('existingImages', image.id)
+			})
+
+			// Append new images
+			if (newImages.length > 0) {
+				for (let i = 0; i < newImages.length; i++) {
+					exhibitionData.append('newImages', newImages[i])
 				}
 			}
 
-			// Log FormData entries
+			// Log FormData entries for debugging
 			console.log('FormData entries:')
 			for (let pair of exhibitionData.entries()) {
 				console.log(`${pair[0]}: ${pair[1]}`)
@@ -281,7 +294,7 @@ function MuseumExhibitions() {
 	}
 
 	const handleArtistSelection = (e) => {
-		const artistId = parseInt(e.target.value, 12)
+		const artistId = parseInt(e.target.value, 10) // Correct radix
 		if (e.target.checked) {
 			setFormData((prevState) => ({
 				...prevState,
@@ -294,6 +307,7 @@ function MuseumExhibitions() {
 			}))
 		}
 	}
+
 	const textEditorOnChange = ({ name, value }) => {
 		setFormData((prevState) => ({ ...prevState, [name]: value }))
 	}
@@ -337,27 +351,14 @@ function MuseumExhibitions() {
 												artist.email
 											)
 										})
-										.join(',')
+										.join(', ')
 								: t('Немає митців')
+
 						return (
 							<div
 								key={exhibition.id}
 								className={styles.exhibitionCard}
 							>
-								{/* {exhibition.images && exhibition.images.length > 0 && (
-								<div className={styles.imagesContainer}>
-									{exhibition.images.map(image => (
-										<img
-											key={image.id}
-											src={`${process.env.REACT_APP_API_URL}${image.imageUrl}`}
-											alt={title}
-											className={styles.exhibitionImage}
-											loading='lazy'
-										/>
-									))}
-								</div>
-								)} */}
-
 								{exhibition.images &&
 									exhibition.images.length > 0 && (
 										<div className={styles.imagesContainer}>
@@ -392,9 +393,6 @@ function MuseumExhibitions() {
 								<h4>
 									{t('Дата проведення')}
 									<p className={styles.productCardSubTitle}>
-										{' '}
-									</p>
-									<p className={styles.productCardSubTitle}>
 										{new Date(
 											exhibition.startDate,
 										).toLocaleDateString()}{' '}
@@ -416,7 +414,6 @@ function MuseumExhibitions() {
 										{exhibition.address}
 									</p>
 								</h4>
-								{console.log('type data artists:', artistNames)}
 								<div
 									className={styles.exhibitionDelEditWrapper}
 								>
@@ -451,7 +448,6 @@ function MuseumExhibitions() {
 					onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
 					disabled={page === 1}
 				>
-					{/* {t('Попередня')} */}
 					&#8592;
 				</button>
 				<p>
@@ -463,37 +459,40 @@ function MuseumExhibitions() {
 					}
 					disabled={page === totalPages}
 				>
-					{/* {t('Наступна')} */}
 					&#8594;
 				</button>
 			</div>
 			{/* Image Modal Component */}
-			{isModalOpen && !editingExhibition && (
-				<div className="modal-overlay" onClick={handleCloseModal}>
-					<div
-						className="modal-content"
-						onClick={(e) => e.stopPropagation()}
-					>
-						<button
-							className="modal-close-button"
-							onClick={handleCloseModal}
+			{isModalOpen &&
+				!editingExhibition &&
+				selectedExhibitionImages.length > 0 && (
+					<div className="modal-overlay" onClick={handleCloseModal}>
+						<div
+							className="modal-content"
+							onClick={(e) => e.stopPropagation()}
 						>
-							&times;
-						</button>
-						<div className={styles.modalImages}>
-							{selectedExhibitionImages.map((image, index) => (
-								<img
-									key={index}
-									src={`${process.env.REACT_APP_API_URL}${image.imageUrl}`}
-									alt={`Exhibition Image ${index + 1}`}
-									className={styles.modalImage}
-									loading="lazy"
-								/>
-							))}
+							<button
+								className="modal-close-button"
+								onClick={handleCloseModal}
+							>
+								&times;
+							</button>
+							<div className={styles.modalImages}>
+								{selectedExhibitionImages.map(
+									(image, index) => (
+										<img
+											key={index}
+											src={`${process.env.REACT_APP_API_URL}${image.imageUrl}`}
+											alt={`Exhibition Image ${index + 1}`}
+											className={styles.modalImage}
+											loading="lazy"
+										/>
+									),
+								)}
+							</div>
 						</div>
 					</div>
-				</div>
-			)}
+				)}
 			{/* Modal Edit Component */}
 			{isModalOpen && editingExhibition && (
 				<div className="modal-overlay" onClick={handleCloseModal}>
@@ -685,13 +684,14 @@ function MuseumExhibitions() {
 										))}
 									</div>
 								</div>
+								{/* Image Editor */}
 								<ImageEditor
 									label={t('Додати зображення')}
 									required
 									name="exhibitionImages"
-									value={formData.images}
-									multiple
-									onChange={textEditorOnChange}
+									existingImages={existingImages}
+									newImages={newImages}
+									onChange={handleChange}
 								/>
 								<button type="submit">{t('Зберегти')}</button>
 							</form>
