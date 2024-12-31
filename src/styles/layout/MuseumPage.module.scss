@@ -13,10 +13,8 @@
 
 .museumPageNavigation {
   // навигационный блок
-  margin: calc(51px - (15 * ((1440px - 100vw) / (1440 - 375))))
-    $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+  margin: $responsiveBigPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: start;
 }
@@ -24,7 +22,6 @@
 .museumPageNavigationList {
   // список навигации
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
 }
@@ -39,7 +36,7 @@
 
 .museumPageNavigationItemSeparator {
   // разделитель между элементами списка навигации
-  margin: 0 18px;
+  margin: 0 $responsiveMediumPadding;
   font-size: calc(18px - (6 * ((1440px - 100vw) / (1440 - 375))));
   font-weight: 500;
   color: $red;
@@ -48,8 +45,7 @@
 
 .museumPageAboutMuseumContainer {
   // блок с описанием музея
-  margin: calc(69px - (41 * ((1440px - 100vw) / (1440 - 375))))
-    $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+  margin: $responsiveMediumPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -68,7 +64,6 @@
 
 .museumPageMuseumPhoto {
   // фото музея
-  // margin: 0 auto;
   display: block;
   object-fit: contain;
   object-position: center center;
@@ -78,7 +73,7 @@
 
 .museumPageMuseumLogoWrapper {
   // обертка для логотипа музея
-  margin: calc(24px - (8 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+  margin: $responsiveBigPadding 0 0 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -95,7 +90,7 @@
 
 .museumPageMuseumTitleWrapper {
   // обертка для названия музея
-  margin: 10px 0 0 0;
+  margin: $responsiveSmallPadding 0 0 0;
 }
 
 .museumPageMuseumTitle {
@@ -108,9 +103,8 @@
 
 .museumPageMuseumTopLocationWrapper {
   // обертка для местоположения музея
-  margin: 10px 0 0 0;
+  margin: $responsiveSmallPadding 0 0 0;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
@@ -126,7 +120,7 @@
 }
 
 .museumPageMuseumDescriptionWrapper {
-  margin: 20px 0 0 0;
+  margin: $responsiveSmallPadding 0 0 0;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -141,7 +135,7 @@
 }
 
 .museumPageMuseumDescriptionButton {
-  margin-top: 10px;
+  margin: $responsiveSmallPadding 0 0 0;
   cursor: pointer;
 }
 
@@ -154,7 +148,7 @@
 
 .museumPageMuseumDescriptionButton {
   // кнопка "читать больше"
-  margin: 10px 0 0 auto;
+  margin: $responsiveSmallPadding 0 0 auto;
   font-size: calc(14px - (2 * ((1440px - 100vw) / (1440 - 375))));
   font-weight: 500;
   color: #d83934;
@@ -170,7 +164,7 @@
 
 .museumPageMuseumBottomLocationWrapper {
   // обертка для местоположения музея
-  margin: 10px 0 0 0;
+  margin: $responsiveSmallPadding 0 0 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -179,12 +173,12 @@
 
 .museumPageMuseumToTheSiteButtonWrapper {
   // обёртка кнопки ведущей на сайт музея
-  margin: 0 0 30px 0;
+  margin: 0 0 $responsiveMediumPadding 0;
 }
 
 .museumPageMuseumToTheSiteButton {
   // кнопка ведущая на сайт музея
-  margin: 20px auto 0;
+  margin: $responsiveSmallPadding auto 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -216,7 +210,7 @@
 }
 
 .mapContainer {
-  margin: calc(51px - (15 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+  margin: $responsiveBigPadding 0 0 0;
 }
 
 @media (min-width: 1441px) {
@@ -227,7 +221,7 @@
 
   .museumPageNavigation {
     // навигационный блок
-    margin: 51px $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+    margin: $staticPcBigPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
   }
 
   .museumPageNavigationItem {
@@ -237,12 +231,13 @@
 
   .museumPageNavigationItemSeparator {
     // разделитель между элементами списка навигации
+    margin: 0 $staticPcMediumPadding;
     font-size: 18px;
   }
 
   .museumPageAboutMuseumContainer {
     // блок с описанием музея
-    margin: 69px $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+    margin: $responsiveMediumPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
   }
 
   .museumPageMuseumPhoto {
@@ -252,7 +247,7 @@
 
   .museumPageMuseumLogoWrapper {
     // обертка для логотипа музея
-    margin: 24px 0 0 0;
+    margin: $staticPcBigPadding 0 0 0;
   }
 
   .museumPageMuseumLogo {
@@ -260,29 +255,80 @@
     max-height: 100px;
   }
 
+  .museumPageMuseumTitleWrapper {
+    // обертка для названия музея
+    margin: $staticPcSmallPadding 0 0 0;
+  }
+
   .museumPageMuseumTitle {
     // название музея
     font-size: 18px;
   }
 
-  .museumPageMuseumLocation {
+  .museumPageMuseumTopLocationWrapper {
+    // обертка для местоположения музея
+    margin: $staticPcSmallPadding 0 0 0;
+  }
+
+  .museumPageMuseumLocationStreet,
+  .museumPageMuseumLocationCity,
+  .museumPageMuseumLocationCountry,
+  .museumPageMuseumLocationIndex {
     // местоположение музея
     font-size: 16px;
   }
 
-  .underDevelopmentContainer {
-    // обертка для слайдера "арты митца"
-    margin: 65px 0 0 0;
+  .museumPageMuseumDescriptionWrapper {
+    margin: $staticPcSmallPadding 0 0 0;
+    max-height: calc(18px * 6);
+
   }
 
-  .underDevelopmentPreTitle {
-    // подзаголовок слайдера "арты митца"
+  .museumPageMuseumDescriptionButton {
+    margin: $staticPcSmallPadding 0 0 0;
+  }
+
+  .museumPageMuseumDescription {
+    // описание музея
+    font-size: 18px;
+  }
+
+  .museumPageMuseumDescriptionButton {
+    // кнопка "читать больше"
+    margin: $staticPcSmallPadding 0 0 auto;
+    font-size: 14px;
+  }
+
+  .museumPageMuseumBottomLocationWrapper {
+    // обертка для местоположения музея
+    margin: $staticPcSmallPadding 0 0 0;
+  }
+
+  .museumPageMuseumToTheSiteButtonWrapper {
+    // обёртка кнопки ведущей на сайт музея
+    margin: 0 0 $staticPcMediumPadding 0;
+  }
+
+  .museumPageMuseumToTheSiteButton {
+    // кнопка ведущая на сайт музея
+    margin: $staticPcSmallPadding auto 0;
+  }
+
+  .textWrapper {
+    margin: $staticPcMediumPadding 0 0 0;
+  }
+
+  .infoTextDescription {
+    font-size: 14px;
+  }  
+
+  .infoText {
+    // margin: $staticPcSmallPadding 0 0 0;
     font-size: 16px;
   }
 
-  .underDevelopmentTitle {
-    // заголовок слайдера "арты митца"
-    font-size: 28px;
+  .mapContainer {
+    margin: $staticPcBigPadding 0 0 0;
   }
 }
 
@@ -291,4 +337,115 @@
     // главный контейнер
     margin: $staticMobileTopPadding 0 0 0;
   }
-}
+
+  .museumPageNavigation {
+    // навигационный блок
+    margin: $staticMobileBigPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+  }
+
+  .museumPageNavigationItem {
+    // элемент списка навигации
+    font-size: 12px;
+  }
+
+  .museumPageNavigationItemSeparator {
+    // разделитель между элементами списка навигации
+    margin: 0 $staticMobileMediumPadding;
+    font-size: 12px;
+  }
+
+  .museumPageAboutMuseumContainer {
+    // блок с описанием музея
+    margin: $staticMobileMediumPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+  }
+
+  .museumPageMuseumPhoto {
+    // фото музея
+    max-height: 187px;
+  }
+
+  .museumPageMuseumLogoWrapper {
+    // обертка для логотипа музея
+    margin: $staticMobileBigPadding 0 0 0;
+  }
+
+  .museumPageMuseumLogo {
+    // логотип музея
+    max-height: 60px;
+  }
+
+  .museumPageMuseumTitleWrapper {
+    // обертка для названия музея
+    margin: $staticMobileSmallPadding 0 0 0;
+  }
+
+  .museumPageMuseumTitle {
+    // название музея
+    font-size: 12px;
+  }
+
+  .museumPageMuseumTopLocationWrapper {
+    // обертка для местоположения музея
+    margin: $staticMobileSmallPadding 0 0 0;
+  }
+
+  .museumPageMuseumLocationStreet,
+  .museumPageMuseumLocationCity,
+  .museumPageMuseumLocationCountry,
+  .museumPageMuseumLocationIndex {
+    // местоположение музея
+    font-size: 12px;
+  }
+
+  .museumPageMuseumDescriptionWrapper {
+    margin: $staticMobileSmallPadding 0 0 0;
+    max-height: calc(14px * 6);
+
+  }
+
+  .museumPageMuseumDescriptionButton {
+    margin: $staticMobileSmallPadding 0 0 0;
+  }
+
+  .museumPageMuseumDescription {
+    // описание музея
+    font-size: 14px;
+  }
+
+  .museumPageMuseumDescriptionButton {
+    // кнопка "читать больше"
+    margin: $staticMobileSmallPadding 0 0 auto;
+    font-size: 12px;
+  }
+
+  .museumPageMuseumBottomLocationWrapper {
+    // обертка для местоположения музея
+    margin: $staticMobileSmallPadding 0 0 0;
+  }
+
+  .museumPageMuseumToTheSiteButtonWrapper {
+    // обёртка кнопки ведущей на сайт музея
+    margin: 0 0 $staticMobileMediumPadding 0;
+  }
+
+  .museumPageMuseumToTheSiteButton {
+    // кнопка ведущая на сайт музея
+    margin: $staticMobileSmallPadding auto 0;
+  }
+
+  .textWrapper {
+    margin: $staticMobileMediumPadding 0 0 0;
+  }
+
+  .infoTextDescription {
+    font-size: 12px;
+  }
+
+  .infoText {
+    // margin: $staticMobileSmallPadding 0 0 0;
+    font-size: 12px;
+  }
+
+  .mapContainer {
+    margin: $staticMobileBigPadding 0 0 0;
+  }}
