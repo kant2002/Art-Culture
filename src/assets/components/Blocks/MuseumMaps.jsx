@@ -32,7 +32,7 @@ function MuseumMaps({ museum }) {
 		<MapContainer
 			center={position}
 			zoom={closeZoom}
-			style={{ height: '500px', width: '60%' }}
+			style={{ height: '500px', width: '100%' }}
 		>
 			<TileLayer
 				attribution='&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
