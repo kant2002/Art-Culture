@@ -2,12 +2,12 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import styles from '../../../styles/layout/ExhibitionPage.module.scss'
+import styles from '@styles/layout/MuseumPage.module.scss'
 import API from '../../../utils/api.js'
 import { getImageUrl } from '../../../utils/helper.js'
-import Map from '../../components/Blocks/Maps'
-import ExhibitionPageMasonryGallery from '../../components/Sliders/ExhibitionPageSlider/ExhibitionPageMasonryGallery'
-import ExhibitionPageNewsPopularExhibition from '../../components/Sliders/ExhibitionPageSlider/ExhibitionPageNewsPopularExhibition'
+import Map from '@components/Blocks/Maps'
+import ExhibitionPageMasonryGallery from '@components/Sliders/ExhibitionPageSlider/ExhibitionPageMasonryGallery'
+import ExhibitionPageNewsPopularExhibition from '@components/Sliders/ExhibitionPageSlider/ExhibitionPageNewsPopularExhibition'
 
 function ExhibitionDetails() {
 	const { t, i18n } = useTranslation()
@@ -96,13 +96,13 @@ function ExhibitionDetails() {
 	const artistNames =
 		exhibitionArtists && exhibitionArtists.length > 0
 			? exhibitionArtists
-					.map(
-						(ea) =>
-							ea.artist.name ||
-							ea.artist.title ||
-							ea.artist.email,
-					)
-					.join(', ')
+				.map(
+					(ea) =>
+						ea.artist.name ||
+						ea.artist.title ||
+						ea.artist.email,
+				)
+				.join(', ')
 			: t('Немає митців')
 
 	// --------------------------------------------------
@@ -127,7 +127,7 @@ function ExhibitionDetails() {
 	}
 
 	return (
-		<div className={styles.exhibitionDetailsContainer}>
+		<div className={styles.museumPage}>
 			<div className={`${styles.museumPageNavigationContainer}`}>
 				<nav className={`${styles.museumPageNavigation}`}>
 					<ul className={`${styles.museumPageNavigationList}`}>
@@ -150,125 +150,119 @@ function ExhibitionDetails() {
 					</ul>
 				</nav>
 			</div>
+
 			<div className={styles.exhibitionDetailsWrapper}>
-				<div className={styles.exhibitionHeadTitleWrapper}>
+				{/* <div className={styles.exhibitionHeadTitleWrapper}>
 					<h2>{t('Деталі виставки')}</h2>
-				</div>
-				{/* -----------------------------
-            Exhibition Images
-        ----------------------------- */}
-				{images && images.length > 0 ? (
-					<div className={styles.exhibitionImageWrapper}>
-						{images.map((image) => (
-							<img
-								key={image.id}
-								src={getImageUrl(
-									image.imageUrl,
-									'/Img/halfNewsCard.jpg',
-								)}
-								alt={title_en || title_uk || 'Exhibition Image'}
-								className={styles.exhibitionImage}
-								loading="lazy"
-							/>
-						))}
+				</div> */}
+				<div className={`${styles.museumPageAboutMuseumContainer}`}>
+					{images && images.length > 0 ? (
+						<div className={styles.museumPageMuseumPhotoWrapper}>
+							{images.map((image) => (
+								<img
+									key={image.id}
+									src={getImageUrl(
+										image.imageUrl,
+										'/Img/halfNewsCard.jpg',
+									)}
+									alt={title_en || title_uk || 'Exhibition Image'}
+									className={styles.museumPageMuseumPhoto}
+									loading="lazy"
+								/>
+							))}
+						</div>
+					) : (
+						<div className={styles.noImages}>
+							{t('No images available')}
+						</div>
+					)}
+					<div className={`${styles.museumPageTopAdressWrapper}`}>
+						<div className={`${styles.textWrapper}`}>
+							<p className={styles.infoTextDescription}>{t('Назва виставки')}&#32;&#58;</p>
+							<p className={styles.museumPageMuseumTitle}>
+								{currentLanguage === 'en'
+									? title_en || title_uk
+									: title_uk || title_en}
+							</p>
+						</div>
+
+						<div className={styles.textWrapper}>
+							<p className={styles.infoTextDescription}>{t('Опис виставки')}&#58;</p>
+							<p className={styles.infoText}>
+								{currentLanguage === 'en'
+									? description_en || description_uk
+									: description_uk || description_en}
+							</p>
+						</div>
+
+						<div className={styles.textWrapper}>
+							<p className={styles.infoTextDescription}>{t('Митці')}&#58;</p>
+							<p className={styles.infoText}>{artistNames}</p>
+						</div>
+
+						<div className={styles.textWrapper}>
+							<p className={styles.infoTextDescription}>{t('Дата проведення')}&#58;</p>
+							<p className={styles.infoText}>
+								{new Date(startDate).toLocaleDateString()} -{' '}
+								{new Date(endDate).toLocaleDateString()}
+							</p>
+						</div>
+
+						<div className={styles.textWrapper}>
+							<p className={styles.infoTextDescription}>{t('Час проведення виставки')}&#58;</p>
+							<p className={styles.infoText}>
+								{time} - {endTime}
+							</p>
+						</div>
+
+						<div className={styles.textWrapper}>
+							<p className={styles.infoTextDescription}>{t('Місце проведення')}&#58;</p>
+							<p className={styles.infoText}>
+								{address || t('Немає даних')}
+							</p>
+						</div>
 					</div>
-				) : (
-					<div className={styles.noImages}>
-						{t('No images available')}
-					</div>
-				)}
-				{/* -----------------------------
-            Exhibition Information
-        ----------------------------- */}
-				<div className={styles.infoContainer}>
-					<h3>
-						{t('Назва виставки')}:
-						<p className={styles.infoText}>
-							{currentLanguage === 'en'
-								? title_en || title_uk
-								: title_uk || title_en}
-						</p>
-					</h3>
 
-					<h4>
-						{t('Опис виставки')}:
-						<p className={styles.infoText}>
-							{currentLanguage === 'en'
-								? description_en || description_uk
-								: description_uk || description_en}
-						</p>
-					</h4>
+					<div className={`${styles.museumPageMuseumTopLogoWhithAdressWrapper}`}>
+						<div className={`${styles.museumPageMuseumLogoWrapper}`}>
+							{museum && (
+								<img
+									className={`${styles.museumPageMuseumLogo}`}
+									src={museumLogoUrl}
+									alt={museumTitle}
+									onError={(e) => {
+										e.target.onerror = null
+										e.target.src = '/Img/newsCardERROR.jpg'
+									}}
+								/>
+							)}
+						</div>
 
-					<h4>
-						{t('Митці')}:
-						<p className={styles.infoText}>{artistNames}</p>
-					</h4>
+						<div className={`${styles.museumPageMuseumTitleWrapper}`}>
+							<p className={`${styles.museumPageMuseumTitle}`}>
+								{museum.title}
+							</p>
+						</div>
 
-					<h4>
-						{t('Дата проведення')}:
-						<p className={styles.infoText}>
-							{new Date(startDate).toLocaleDateString()} -{' '}
-							{new Date(endDate).toLocaleDateString()}
-						</p>
-					</h4>
-
-					<h4>
-						{t('Час проведення виставки')}:
-						<p className={styles.infoText}>
-							{time} - {endTime}
-						</p>
-					</h4>
-
-					<h4>
-						{t('Місце проведення')}:
-						<p className={styles.infoText}>
-							{address || t('Немає даних')}
-						</p>
-					</h4>
-				</div>
-
-				{museum && (
-					<div style={{ marginTop: '1rem' }}>
-						<img
-							src={museumLogoUrl}
-							alt={museumTitle}
-							style={{ maxWidth: '150px' }}
-							onError={(e) => {
-								e.target.onerror = null
-								e.target.src = '/Img/newsCardERROR.jpg'
-							}}
-						/>
-
-						<p>{museumTitle}</p>
-						<div
-							className={`${styles.museumPageMuseumBottomLocationWrapper}`}
-						>
-							<p
-								className={`${styles.museumPageMuseumLocationCity}`}
-							>
+						<div className={`${styles.museumPageMuseumBottomLocationWrapper}`}>
+							<p className={`${styles.museumPageMuseumLocationCity}`}>
 								{museum.country} {''}
 								{museum.city}
 							</p>
 
-							<div
-								className={`${styles.museumPageMuseumDescriptionWrapper} ${isExpanded ? styles.expanded : ''}`}
-							>
-								<p
-									className={`${styles.museumPageMuseumDescription}`}
-								>
+							<div className={`${styles.museumPageMuseumDescriptionWrapper} ${isExpanded ? styles.expanded : ''}`}>
+								<p className={`${styles.museumPageMuseumDescription}`}>
 									{museum.bio}
 								</p>
 							</div>
 						</div>
 					</div>
-				)}
+				</div>
 
 				<ExhibitionPageNewsPopularExhibition />
 
 				<ExhibitionPageMasonryGallery />
-				{/* -----------------------------
-            Map Rendering
-        ----------------------------- */}
+
 				<div className={styles.mapContainer}>
 					<Map
 						exhibitions={[
@@ -283,48 +277,45 @@ function ExhibitionDetails() {
 						]}
 					/>
 				</div>
-				{/* -----------------------------
-            Museum Data (If Fetched)
-        ----------------------------- */}
-				{museum && (
-					<div style={{ marginTop: '1rem' }}>
-						<img
-							src={museumLogoUrl}
-							alt={museumTitle}
-							style={{ maxWidth: '150px' }}
-							onError={(e) => {
-								e.target.onerror = null
-								e.target.src = '/Img/newsCardERROR.jpg'
-							}}
-						/>
 
-						<p>{museumTitle}</p>
-						<div
-							className={`${styles.museumPageMuseumBottomLocationWrapper}`}
-						>
-							<p
-								className={`${styles.museumPageMuseumLocationStreet}`}
-							>
+				<div className={`${styles.museumPageMuseumBottomLogoWhithAdressWrapper}`}>
+					<div className={`${styles.museumPageищеещьAdressWrapper}`}>
+						<div className={`${styles.museumPageMuseumLogoWrapper}`}>
+							{museum && (
+								<img
+									className={`${styles.museumPageMuseumLogo}`}
+									src={museumLogoUrl}
+									alt={museumTitle}
+									onError={(e) => {
+										e.target.onerror = null
+										e.target.src = '/Img/newsCardERROR.jpg'
+									}}
+								/>
+							)}
+						</div>
+
+						<div className={`${styles.museumPageMuseumTitleWrapper}`}>
+							<p className={`${styles.museumPageMuseumTitle}`}>
+								{museum.title}
+							</p>
+						</div>
+
+						<div className={`${styles.museumPageMuseumBottomLocationWrapper}`}>
+							<p className={`${styles.museumPageMuseumLocationStreet}`}>
 								{museum.street} {','} {museum.house_number}
 							</p>
-							<p
-								className={`${styles.museumPageMuseumLocationCity}`}
-							>
+							<p className={`${styles.museumPageMuseumLocationCity}`}>
 								{museum.city}
 							</p>
-							<p
-								className={`${styles.museumPageMuseumLocationCountry}`}
-							>
+							<p className={`${styles.museumPageMuseumLocationCountry}`}>
 								{museum.country}
 							</p>
-							<p
-								className={`${styles.museumPageMuseumLocationIndex}`}
-							>
+							<p className={`${styles.museumPageMuseumLocationIndex}`}>
 								{museum.postcode}
 							</p>
 						</div>
 					</div>
-				)}
+				</div>
 			</div>
 		</div>
 	)

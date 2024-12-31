@@ -50,9 +50,9 @@ function MuseumPage() {
 
 	const museumLogo = museum.museum_logo_image?.imageUrl
 		? getImageUrl(
-				museum.museum_logo_image.imageUrl,
-				'/Img/logoMuseum_3.png',
-			)
+			museum.museum_logo_image.imageUrl,
+			'/Img/logoMuseum_3.png',
+		)
 		: '/Img/logoMuseum_3.png' // Fallback logo
 	const toggleText = () => {
 		setIsExpanded((prevState) => !prevState)
@@ -77,9 +77,7 @@ function MuseumPage() {
 						>
 							{t('Музеи')}
 						</li>
-						<p
-							className={`${styles.museumPageNavigationItemSeparator}`}
-						>
+						<p className={`${styles.museumPageNavigationItemSeparator}`}>
 							&#8250;
 						</p>
 						<li className={`${styles.museumPageNavigationItem}`}>
@@ -102,9 +100,7 @@ function MuseumPage() {
 					/>
 				</div>
 
-				<div
-					className={`${styles.museumPageMuseumTopLogoWhithAdressWrapper}`}
-				>
+				<div className={`${styles.museumPageMuseumTopLogoWhithAdressWrapper}`}>
 					<div className={`${styles.museumPageMuseumLogoWrapper}`}>
 						<img
 							className={`${styles.museumPageMuseumLogo}`}
@@ -118,58 +114,44 @@ function MuseumPage() {
 					</div>
 
 					<div className={`${styles.museumPageTopAdressWrapper}`}>
-						<div
-							className={`${styles.museumPageMuseumTitleWrapper}`}
-						>
+						<div className={`${styles.museumPageMuseumTitleWrapper}`}>
 							<p className={`${styles.museumPageMuseumTitle}`}>
 								{museum.title}
 							</p>
 						</div>
 
-						<div
-							className={`${styles.museumPageMuseumTopLocationWrapper}`}
-						>
-							<p
-								className={`${styles.museumPageMuseumLocationCity}`}
-							>
+						<div className={`${styles.museumPageMuseumTopLocationWrapper}`}>
+							<p className={`${styles.museumPageMuseumLocationCity}`}>
 								{museum.city}
 							</p>
 							<p>&#44;&#160;</p>
-							<p
-								className={`${styles.museumPageMuseumLocationCountry}`}
-							>
+							<p className={`${styles.museumPageMuseumLocationCountry}`}>
 								{museum.country}
 							</p>
 						</div>
 					</div>
 				</div>
 
-				<div
-					className={`${styles.museumPageMuseumDescriptionWrapper} ${isExpanded ? styles.expanded : ''}`}
-				>
-					<p
-						className={`${styles.museumPageMuseumDescription}`}
-						dangerouslySetInnerHTML={{ __html: museum.bio }}
-					></p>
+				<div className={`${styles.museumPageMuseumDescriptionWrapper} ${isExpanded ? styles.expanded : ''}`}>
+					<p className={`${styles.museumPageMuseumDescription}`}
+						dangerouslySetInnerHTML={{ __html: museum.bio }}>
+					</p>
 				</div>
 
 				<button
 					className={`${styles.museumPageMuseumDescriptionButton}`}
-					onClick={toggleText}
-				>
+					onClick={toggleText}>
 					{isExpanded ? t('Згорнути текст') : t('Читати далі')}
 				</button>
 			</div>
 
 			<MuseumPageMasonryGallery />
 
-			<div className={`${styles.underDevelopmentContainer}`}>
+			<div className={`${styles.mapContainer}`}>
 				<MuseumMaps museum={museum} />
 			</div>
 
-			<div
-				className={`${styles.museumPageMuseumBottomLogoWhithAdressWrapper}`}
-			>
+			<div className={`${styles.museumPageMuseumBottomLogoWhithAdressWrapper}`}>
 				<div className={`${styles.museumPageищеещьAdressWrapper}`}>
 					<div className={`${styles.museumPageMuseumLogoWrapper}`}>
 						<img
@@ -189,32 +171,22 @@ function MuseumPage() {
 						</p>
 					</div>
 
-					<div
-						className={`${styles.museumPageMuseumBottomLocationWrapper}`}
-					>
-						<p
-							className={`${styles.museumPageMuseumLocationStreet}`}
-						>
+					<div className={`${styles.museumPageMuseumBottomLocationWrapper}`}>
+						<p className={`${styles.museumPageMuseumLocationStreet}`}>
 							{museum.street} {','} {museum.house_number}
 						</p>
 						<p className={`${styles.museumPageMuseumLocationCity}`}>
 							{museum.city}
 						</p>
-						<p
-							className={`${styles.museumPageMuseumLocationCountry}`}
-						>
+						<p className={`${styles.museumPageMuseumLocationCountry}`}>
 							{museum.country}
 						</p>
-						<p
-							className={`${styles.museumPageMuseumLocationIndex}`}
-						>
+						<p className={`${styles.museumPageMuseumLocationIndex}`}>
 							{museum.postcode}
 						</p>
 					</div>
 
-					<div
-						className={`${styles.museumPageMuseumToTheSiteButtonWrapper}`}
-					>
+					<div className={`${styles.museumPageMuseumToTheSiteButtonWrapper}`}>
 						<button
 							className={`${styles.museumPageMuseumToTheSiteButton}`}
 							onClick={handleMainPageClick}
