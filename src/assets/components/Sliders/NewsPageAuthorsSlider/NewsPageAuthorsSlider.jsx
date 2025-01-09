@@ -12,36 +12,39 @@ import 'swiper/css/pagination'
 // Import Swiper modules
 import { Navigation, Pagination } from 'swiper/modules'
 
-import '/src/styles/components/Sliders/NewsPageAuthorsSlider/NewsPageAuthorsSlider.scss'
 import { getBaseUrl } from '../../../../utils/helper'
+import '/src/styles/components/Sliders/NewsPageAuthorsSlider/NewsPageAuthorsSlider.scss'
 
-const Slide = ({ creator, onClick }) => {
+const Slide = ({ author, onClick }) => {
 	const { t } = useTranslation()
 	const baseUrl = getBaseUrl()
 	return (
 		<div
-			className='newsPageAuthorsSliderCardContainer'
-			onClick={() => onClick(creator.id)}
+			className="newsPageAuthorsSliderCardContainer"
+			onClick={() => onClick(author.id)}
 		>
-			<div className='newsPageAuthorsSliderCardWrapper'>
-				<div className='newsPageAuthorsSliderCardUserPhotoWrapper'>
+			<div className="newsPageAuthorsSliderCardWrapper">
+				<div className="newsPageAuthorsSliderCardUserPhotoWrapper">
 					<img
-						className='newsPageAuthorsSliderCardUserPhoto'
+						className="newsPageAuthorsSliderCardUserPhoto"
 						src={
-							creator.images
-								? `${baseUrl}${creator.images.replace('../../', '/')}`
+							author.images
+								? `${baseUrl}${author.images.replace('../../', '/')}`
 								: '/Img/halfNewsCard.jpg'
 						}
 						alt={t('Фотографія автора')}
-						loading='lazy'
-						onError={e => {
+						loading="lazy"
+						onError={(e) => {
 							e.target.onerror = null
-							e.target.src = '/Img/mainInstagramSliderUserPhoto.png'
+							e.target.src =
+								'/Img/mainInstagramSliderUserPhoto.png'
 						}}
 					/>
 				</div>
-				<div className='newsPageAuthorsSliderCardUserNameWrapper'>
-					<p className='newsPageAuthorsSliderCardUserName'>{creator.title}</p>
+				<div className="newsPageAuthorsSliderCardUserNameWrapper">
+					<p className="newsPageAuthorsSliderCardUserName">
+						{author.title}
+					</p>
 				</div>
 			</div>
 		</div>
@@ -52,16 +55,16 @@ const NewsPageAuthorsSlider = () => {
 	const { t } = useTranslation()
 	const [posts, setPosts] = useState([])
 	const [error, setError] = useState(null)
-	const [creators, setCreators] = useState({})
+	const [authors, setAuthors] = useState({})
 	const [loading, setLoading] = useState(true)
 	const navigate = useNavigate()
 
 	useEffect(() => {
 		const fetchCreator = async () => {
 			try {
-				const response = await axios.get(`/api/users/creators`)
+				const response = await axios.get(`/api/users/authors`)
 				console.log('Received author data ', response.data)
-				setCreators(response.data.creators)
+				setAuthors(response.data.authors)
 				setLoading(false)
 			} catch (error) {
 				console.error('Error fetching author data', error)
@@ -72,24 +75,24 @@ const NewsPageAuthorsSlider = () => {
 		fetchCreator()
 	}, [])
 
-	const handleSlideClick = id => {
+	const handleSlideClick = (id) => {
 		navigate(`/artist/${id}`)
 	}
 
 	return (
-		<div className='newsPageAuthorsSliderContainer'>
-			<div className='newsPageAuthorsSliderWrapper'>
-				<div className='newsPageAuthorsSliderTitleWrapper'>
-					<p className='newsPageAuthorsSliderTitle'>{t('Автори')}</p>
+		<div className="newsPageAuthorsSliderContainer">
+			<div className="newsPageAuthorsSliderWrapper">
+				<div className="newsPageAuthorsSliderTitleWrapper">
+					<p className="newsPageAuthorsSliderTitle">{t('Автори')}</p>
 				</div>
 
-				<div className='newsPageAuthorsSliderInnerWrapper'>
+				<div className="newsPageAuthorsSliderInnerWrapper">
 					{' '}
 					{loading ? (
 						<p>{t('Завантаження авторів...')}</p>
 					) : error ? (
 						<p>{error}</p>
-					) : creators.length === 0 ? (
+					) : authors.length === 0 ? (
 						<p>{t('Немає авторів для відображення.')}</p>
 					) : (
 						<Swiper
@@ -99,11 +102,14 @@ const NewsPageAuthorsSlider = () => {
 							navigation
 							pagination={{ clickable: false, type: 'fraction' }}
 							onSlideChange={() => console.log('slide change')}
-							onSwiper={swiper => console.log(swiper)}
+							onSwiper={(swiper) => console.log(swiper)}
 						>
-							{creators.map(creator => (
-								<SwiperSlide key={creator.id}>
-									<Slide creator={creator} onClick={handleSlideClick} />
+							{authors.map((author) => (
+								<SwiperSlide key={author.id}>
+									<Slide
+										author={author}
+										onClick={handleSlideClick}
+									/>
 								</SwiperSlide>
 							))}
 						</Swiper>
