@@ -1,3 +1,4 @@
+import ImageEditor from '@components/Blocks/ImageEditor.jsx'
 import TextAreaEditor from '@components/Blocks/TextAreaEditor'
 import TextEditor from '@components/Blocks/TextEditor'
 import styles from '@styles/components/VerificationPage/LoginPage.module.scss'
@@ -6,7 +7,6 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext.jsx'
 import API from '../../../utils/api.js'
-import ImageEditor from '@components/Blocks/ImageEditor.jsx'
 import MuseumAddressSearch from '../Blocks/MuseumAddressSearch.jsx'
 
 const SignUp = () => {
@@ -140,12 +140,47 @@ const SignUp = () => {
 				)}
 				<form className={styles.SignUpForm} onSubmit={handleSubmit}>
 					<p>
-						{t("Зарееструватися як")}
-						<input type="radio" className='' required name="role" value="USER" checked={signUpDetails.role == 'USER'} onChange={handleChange} /> {t("тип_реестрації_користувач")}
-						<input type="radio" className='' required name="role" value="MUSEUM" checked={signUpDetails.role == 'MUSEUM'} onChange={handleChange} /> {t("тип_реестрації_музей")}
-						<input type="radio" className='' required name="role" value="CREATOR" checked={signUpDetails.role == 'CREATOR'} onChange={handleChange} /> {t("тип_реестрації_митець")}
-						{/* <input type="radio" className='' required name="role" value="EDITOR" checked={signUpDetails.role == 'EDITOR'} onChange={handleChange} /> Editor */}
-
+						{t('Зарееструватися як')}
+						<input
+							type="radio"
+							className=""
+							required
+							name="role"
+							value="USER"
+							checked={signUpDetails.role == 'USER'}
+							onChange={handleChange}
+						/>{' '}
+						{t('тип_реестрації_користувач')}
+						<input
+							type="radio"
+							className=""
+							required
+							name="role"
+							value="MUSEUM"
+							checked={signUpDetails.role == 'MUSEUM'}
+							onChange={handleChange}
+						/>{' '}
+						{t('тип_реестрації_музей')}
+						<input
+							type="radio"
+							className=""
+							required
+							name="role"
+							value="CREATOR"
+							checked={signUpDetails.role == 'CREATOR'}
+							onChange={handleChange}
+						/>{' '}
+						{t('тип_реестрації_митець')}
+						<input
+							type="radio"
+							className=""
+							required
+							name="role"
+							value="AUTHOR"
+							checked={signUpDetails.role == 'AUTHOR'}
+							onChange={handleChange}
+						/>{' '}
+						{t('тип_реестрації_автор')}
 					</p>
 					<TextEditor
 						label="Email"

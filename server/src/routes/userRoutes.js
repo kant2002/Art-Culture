@@ -2,6 +2,8 @@
 
 import express from "express"
 import {
+  getAuthorById,
+  getAuthors,
   getCreatorById,
   getCreators,
   getCreatorsByLanguage,
@@ -13,6 +15,8 @@ const router = express.Router()
 
 // Route to get all creators
 router.get("/creators/language/:language", getCreatorsByLanguage)
+router.get("/authors", getAuthors)
+router.get("/authors/:id", getAuthorById)
 router.get("/creators/:id", getCreatorById)
 router.get("/creators", getCreators)
 router.get("/museums/:id", getMuseumById)

@@ -112,6 +112,69 @@ export const getCreatorById = async (req, res, next) => {
   }
 }
 
+export const getAuthors = async (req, res, next) => {
+  try {
+    const authors = await prisma.user.findMany({
+      where: {
+        role: "AUTHOR",
+      },
+      select: {
+        id: true,
+        email: true,
+        title: true,
+        bio: true,
+        images: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    })
+
+    res.json({ authors })
+  } catch (error) {
+    logger.error("Error fetching authors:", error)
+    next(error)
+  }
+}
+
+export const getAuthorById = async (req, res, next) => {
+  try {
+    const authorId = parseInt(req.params.id, 10)
+    if (isNaN(authorId)) {
+      return res.status(400).json({ error: "invalid author id" })
+    }
+
+    const author = await prisma.user.findUnique({
+      where: { id: authorId },
+      include: {
+        products: {
+          include: {
+            images: true,
+          },
+          orderBy: { createdAt: "desc" },
+        },
+      },
+    })
+
+    if (!author || author.role !== "AUTHOR") {
+      return res.status(404).json({ error: "Author not found" })
+    }
+    res.json({ author })
+  } catch (error) {
+    logger.error("Error fetch data author id", error)
+    next(error)
+  }
+  prisma.user
+    .findUnique({
+      where: { id: authorId },
+    })
+    .then((author) => {
+      if (!author || author.role !== "AUTHOR") {
+        return res.status(404).json({ error: "Author not found" })
+      }
+      res.json({ author })
+    })
+}
+
 export const getMuseums = async (req, res, next) => {
   try {
     const museums = await prisma.user.findMany({

@@ -1,7 +1,7 @@
+import styles from '@styles/components/Blocks/Sidebar.module.scss'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext.jsx'
-import styles from "@styles/components/Blocks/Sidebar.module.scss"
 
 function Sidebar() {
 	const { t } = useTranslation()
@@ -12,6 +12,7 @@ function Sidebar() {
 	const isMuseum = user && user.role === 'MUSEUM'
 	const isAdmin = user && user.role === 'ADMIN'
 	const isCreator = user && user.role === 'CREATOR'
+	const isAuthor = user && user.role === 'AUTHOR'
 
 	const handleProfilePageClick = () => {
 		navigate('/profile')
@@ -34,7 +35,7 @@ function Sidebar() {
 	}
 
 	const handleExhibitionCardCreateClick = () => {
-		navigate('/exhibitions/create')
+		navigate('/`exhibitions/create')
 	}
 
 	const handleExhibitionListClick = () => {
@@ -64,7 +65,7 @@ function Sidebar() {
 					</button>
 				</>
 			)}
-			{(isCreator || isEditor || isAdmin) && (
+			{isAuthor && (
 				<>
 					<button
 						className={styles.profileAction}
@@ -72,9 +73,16 @@ function Sidebar() {
 					>
 						{t('Додати публікацію')}
 					</button>
-					<button className={styles.profileAction} onClick={handlePostsClick}>
+					<button
+						className={styles.profileAction}
+						onClick={handlePostsClick}
+					>
 						{t('Публікації')}
 					</button>
+				</>
+			)}
+			{(isCreator || isEditor || isAdmin) && (
+				<>
 					<button
 						className={styles.profileAction}
 						onClick={handleProductCartCreateClick}
