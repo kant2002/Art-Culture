@@ -38,10 +38,10 @@ model User {
 
 model Post {
   id         Int      @id @default(autoincrement())
-  title_en   String   @db.VarChar(50)
-  title_uk   String   @db.VarChar(50)
-  content_en String   @db.VarChar(500)
-  content_uk String   @db.VarChar(500)
+  title_en   String   @db.VarChar(150)
+  title_uk   String   @db.VarChar(150)
+  content_en String   @db.VarChar(1000)
+  content_uk String   @db.VarChar(1000)
   authorId   Int      @map("author_id")
   images     String?
   createdAt  DateTime @default(now()) @map("created_at")
@@ -53,10 +53,10 @@ model Post {
 
 model Product {
   id             Int            @id @default(autoincrement())
-  title_en       String         @db.VarChar(50)
-  title_uk       String         @db.VarChar(50)
-  description_en String         @db.VarChar(500)
-  description_uk String         @db.VarChar(500)
+  title_en       String         @db.VarChar(100)
+  title_uk       String         @db.VarChar(100)
+  description_en String         @db.VarChar(1000)
+  description_uk String         @db.VarChar(1000)
   specs_en       String?        @db.VarChar(500)
   specs_uk       String?        @db.VarChar(500)
   createdAt      DateTime       @default(now())
@@ -90,8 +90,8 @@ model Exhibition {
   description_uk    String?            @db.VarChar(500)
   location_en       String?            @db.VarChar(500)
   location_uk       String?            @db.VarChar(500)
-  title_en          String?            @db.VarChar(50)
-  title_uk          String?            @db.VarChar(50)
+  title_en          String?            @db.VarChar(150)
+  title_uk          String?            @db.VarChar(150)
   address           String?
   latitude          Float?
   longitude         Float?
@@ -156,4 +156,5 @@ enum Role {
   MUSEUM
   CREATOR
   EDITOR
+  AUTHOR
 }

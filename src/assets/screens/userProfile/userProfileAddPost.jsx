@@ -1,15 +1,15 @@
 // src/components/UserProfile/UserProfileAddPost.jsx
 
+import ImageEditor from '@components/Blocks/ImageEditor.jsx'
+import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
+import TextAreaEditor from '@components/Blocks/TextAreaEditor'
+import TextEditor from '@components/Blocks/TextEditor'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext.jsx'
 import API from '../../../utils/api.js'
 import styles from '/src/styles/components/UserProfile/userProfileAddPost.module.scss'
-import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
-import TextEditor from '@components/Blocks/TextEditor'
-import TextAreaEditor from '@components/Blocks/TextAreaEditor'
-import ImageEditor from '@components/Blocks/ImageEditor.jsx'
 
 function UserProfileAddPost() {
 	const { t } = useTranslation()
@@ -24,12 +24,12 @@ function UserProfileAddPost() {
 		images: null,
 	})
 	const [message, setMessage] = useState('')
-	const [errors, setErrors] = useState("")
+	const [errors, setErrors] = useState('')
 
-	const handleSubmit = async e => {
+	const handleSubmit = async (e) => {
 		e.preventDefault()
 		setMessage('')
-		setErrors("")
+		setErrors('')
 
 		// Frontend Validation
 		if (
@@ -43,14 +43,14 @@ function UserProfileAddPost() {
 		}
 
 		if (!user) {
-			setErrors(t("Користувач не авторізован"))
+			setErrors(t('Користувач не авторізован'))
 			navigate('/login')
 			return
 		}
 
 		const token = localStorage.getItem('token')
 		if (!token) {
-			setErrors(t("Користувач не авторізован"))
+			setErrors(t('Користувач не авторізован'))
 			navigate('/login')
 			return
 		}
@@ -72,7 +72,7 @@ function UserProfileAddPost() {
 			})
 
 			if (response.status === 201) {
-				setMessage(t("Публікація успішно створена"))
+				setMessage(t('Публікація успішно створена'))
 				navigate('/profile/posts')
 			}
 		} catch (error) {
@@ -80,17 +80,17 @@ function UserProfileAddPost() {
 			setErrors(
 				error.response?.data?.error
 					? t(error.response?.data?.error)
-					: t("Неможливо створити публікацію")
+					: t('Неможливо створити публікацію'),
 			)
 		}
 	}
 
-	const textEditorOnChange = ({name, value}) => {
+	const textEditorOnChange = ({ name, value }) => {
 		console.log(name, value)
 		const newFormData = { ...formData, [name]: value }
 		setFormData(newFormData)
-	};
-	console.log(formData);
+	}
+	console.log(formData)
 	return (
 		<ProfilePageContainer>
 			<h2>{t('Додати нову публікацію')}</h2>
@@ -100,34 +100,61 @@ function UserProfileAddPost() {
 				<div className="flex gap-8 form-wrapper">
 					<div className="form-group">
 						<div className="field-group">
-							<TextEditor label={t('Назва публікації українською')}
-								name='title_uk' value={formData.title_uk}
-								maxLength={50} required onChange={textEditorOnChange}/>
+							<TextEditor
+								label={t('Назва публікації українською')}
+								name="title_uk"
+								value={formData.title_uk}
+								maxLength="150"
+								required
+								onChange={textEditorOnChange}
+								html
+							/>
 						</div>
 						<div className="field-group">
-							<TextAreaEditor label={t('Опис публікації українською')}
-								name='content_uk' value={formData.content_uk}
-								maxLength='500' required onChange={textEditorOnChange}
-								html/>
+							<TextAreaEditor
+								label={t('Опис публікації українською')}
+								name="content_uk"
+								value={formData.content_uk}
+								maxLength="1000"
+								required
+								onChange={textEditorOnChange}
+								html
+							/>
 						</div>
 					</div>
 					<div className="form-group">
 						<div className="field-group">
-							<TextEditor label={t('Назва публікації англійською')}
-								name='title_en' value={formData.title_en}
-								maxLength='50' required onChange={textEditorOnChange}/>
+							<TextEditor
+								label={t('Назва публікації англійською')}
+								name="title_en"
+								value={formData.title_en}
+								maxLength="150"
+								required
+								onChange={textEditorOnChange}
+								html
+							/>
 						</div>
 						<div className="field-group">
-							<TextAreaEditor label={t('Опис публікації англійською')}
-								name='content_en' value={formData.content_en}
-								maxLength='500' required onChange={textEditorOnChange}
-								html/>
+							<TextAreaEditor
+								label={t('Опис публікації англійською')}
+								name="content_en"
+								value={formData.content_en}
+								maxLength="1000"
+								required
+								onChange={textEditorOnChange}
+								html
+							/>
 						</div>
 					</div>
 				</div>
 				<div className="field-group">
-					<ImageEditor label={t('Додати зображення')} required
-						name='images' value={formData.images} onChange={textEditorOnChange} />
+					<ImageEditor
+						label={t('Додати зображення')}
+						required
+						name="images"
+						value={formData.images}
+						onChange={textEditorOnChange}
+					/>
 				</div>
 
 				<div className={styles.profileLinksWrapper}>
@@ -137,7 +164,7 @@ function UserProfileAddPost() {
 							window.open(
 								'https://www.deepl.com/en/translator',
 								'_blank',
-								'noopener'
+								'noopener',
 							)
 						}
 					>
@@ -149,14 +176,14 @@ function UserProfileAddPost() {
 							window.open(
 								'https://cloudconvert.com/jpeg-to-webp',
 								'_blank',
-								'noopener'
+								'noopener',
 							)
 						}
 					>
 						{t('Онлайн WEBP-конвертер')}&#8194;&#187;
 					</button>
 				</div>
-				<button type='submit' className={styles.profileAddPostButton}>
+				<button type="submit" className={styles.profileAddPostButton}>
 					{t('Зберегти')}
 				</button>
 			</form>

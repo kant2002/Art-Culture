@@ -163,16 +163,6 @@ export const getAuthorById = async (req, res, next) => {
     logger.error("Error fetch data author id", error)
     next(error)
   }
-  prisma.user
-    .findUnique({
-      where: { id: authorId },
-    })
-    .then((author) => {
-      if (!author || author.role !== "AUTHOR") {
-        return res.status(404).json({ error: "Author not found" })
-      }
-      res.json({ author })
-    })
 }
 
 export const getMuseums = async (req, res, next) => {

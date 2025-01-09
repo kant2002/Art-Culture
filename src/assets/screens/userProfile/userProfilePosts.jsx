@@ -1,4 +1,5 @@
 import { getFormattedDate } from '@/utils/helper.js'
+import ImageEditor from '@components/Blocks/ImageEditor.jsx'
 import Loading from '@components/Blocks/Loading.jsx'
 import LoadingError from '@components/Blocks/LoadingError.jsx'
 import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
@@ -10,7 +11,6 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext.jsx'
 import API from '../../../utils/api.js'
-import ImageEditor from '@components/Blocks/ImageEditor.jsx'
 import styles from '/src/styles/components/UserProfile/userProfilePosts.module.scss'
 
 function UserProfilePosts() {
@@ -230,7 +230,7 @@ function UserProfilePosts() {
 										<TranslatedContent
 											en={post.content_en}
 											uk={post.content_uk}
-											maxLength={100}
+											maxLength={500}
 											html
 										/>
 									</p>

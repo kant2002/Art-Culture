@@ -29,7 +29,7 @@ router.post(
       .withMessage("Password must be at least 6 characters"),
     body("role")
       .optional()
-      .isIn(["ADMIN", "USER", "MUSEUM", "CREATOR", "EDITOR"])
+      .isIn(["ADMIN", "USER", "MUSEUM", "CREATOR", "EDITOR", "AUTHOR"])
       .withMessage("Invalid role"),
     // Add additional validations for address fields if role is MUSEUM
     body("country")
