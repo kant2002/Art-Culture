@@ -65,6 +65,10 @@ function MainMuseums() {
 		navigate(`/museumpage/${id}`)
 	}
 
+	const handleMuseumsPageClick = () => {
+		navigate('/MuseumsPage')
+	}
+
 	return (
 		<div className={`${styles.mainPageNewsContainer}`}>
 			<div className={`${styles.mainPageNewsTitleWithButton}`}>
@@ -73,7 +77,10 @@ function MainMuseums() {
 					className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}
 				>
 					<button className={`${styles.mainPageNewsButton}`}>
-						<p className={`${styles.mainPageNewsButtonTitle}`}>
+						<p
+							className={`${styles.mainPageNewsButtonTitle}`}
+							onClick={handleMuseumsPageClick}
+						>
 							{t('Усі музеї')}
 						</p>
 						<img

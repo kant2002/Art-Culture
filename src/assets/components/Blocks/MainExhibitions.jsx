@@ -73,6 +73,10 @@ function MainExhibitions() {
 		navigate(`/exhibitions/${id}`)
 	}
 
+	const handleExhibitionsPageClick = () => {
+		navigate('/ExhibitionsPage')
+	}
+
 	return (
 		<div className={`${styles.mainPageNewsContainer}`}>
 			<div className={`${styles.mainPageNewsTitleWithButton}`}>
@@ -83,7 +87,10 @@ function MainExhibitions() {
 					className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}
 				>
 					<button className={`${styles.mainPageNewsButton}`}>
-						<p className={`${styles.mainPageNewsButtonTitle}`}>
+						<p
+							className={`${styles.mainPageNewsButtonTitle}`}
+							onClick={handleExhibitionsPageClick}
+						>
 							{t('Усі виставки')}
 						</p>
 						<img

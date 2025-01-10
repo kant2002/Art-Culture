@@ -73,6 +73,10 @@ function MainArtists() {
 		navigate(`/artist/${id}`)
 	}
 
+	const handleAllArtistPageClick = () => {
+		navigate('/all-artists-page')
+	}
+
 	return (
 		<div className={styles.mainPageNewsContainer}>
 			<div className={styles.mainPageNewsTitleWithButton}>
@@ -81,7 +85,10 @@ function MainArtists() {
 					className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}
 				>
 					<button className={styles.mainPageNewsButton}>
-						<p className={styles.mainPageNewsButtonTitle}>
+						<p
+							className={styles.mainPageNewsButtonTitle}
+							onClick={handleAllArtistPageClick}
+						>
 							{t('Усі митці')}
 						</p>
 						<img
