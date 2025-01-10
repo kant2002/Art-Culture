@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
-import styles from '/src/styles/components/Blocks/MainNews.module.scss' // Assuming you have a CSS module for styling
 import { getFormattedDate, getImageUrl } from '../../../utils/helper'
+import styles from '/src/styles/components/Blocks/MainNews.module.scss' // Assuming you have a CSS module for styling
 
 function MainArtists() {
 	const { t } = useTranslation()
@@ -14,7 +14,7 @@ function MainArtists() {
 	const [regTime, setRegTime] = useState('')
 	const { user } = useAuth()
 	const [visibleCreatorsCount, setVisibleCreatorsCount] = useState(
-		getPostsCount(window.innerWidth)
+		getPostsCount(window.innerWidth),
 	)
 
 	function getPostsCount(width) {
@@ -39,7 +39,7 @@ function MainArtists() {
 		const handleResize = () => {
 			const newPostCount = getPostsCount(window.innerWidth)
 			console.log(
-				`Window width: ${window.innerWidth}, New post count: ${newPostCount}`
+				`Window width: ${window.innerWidth}, New post count: ${newPostCount}`,
 			)
 			if (newPostCount !== visibleCreatorsCount) {
 				setVisibleCreatorsCount(newPostCount)
@@ -60,16 +60,16 @@ function MainArtists() {
 	useEffect(() => {
 		axios
 			.get('/api/users/creators')
-			.then(response => {
+			.then((response) => {
 				console.log('Received creator data:', response.data)
 				setCreators(response.data.creators)
 			})
-			.catch(error => {
+			.catch((error) => {
 				console.error('Error loading creator', error)
 			})
 	}, [])
 
-	const handleArtistPageClick = id => {
+	const handleArtistPageClick = (id) => {
 		navigate(`/artist/${id}`)
 	}
 
@@ -81,12 +81,14 @@ function MainArtists() {
 					className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}
 				>
 					<button className={styles.mainPageNewsButton}>
-						<p className={styles.mainPageNewsButtonTitle}>{t('Усі митці')}</p>
+						<p className={styles.mainPageNewsButtonTitle}>
+							{t('Усі митці')}
+						</p>
 						<img
 							className={styles.mainPageNewsButtonImg}
 							src={'/Img/buttonArrow.svg'}
 							alt={t('Стрілка')}
-							onError={e => {
+							onError={(e) => {
 								e.target.onerror = null
 								e.target.src = '/mainNewImg/buttonArrow.svg'
 							}}
@@ -95,85 +97,119 @@ function MainArtists() {
 				</div>
 			</div>
 			<div className={styles.mainPageNewsCardsWrapper}>
-				{creators.slice(0, visibleCreatorsCount).map((creator, index) => {
-					const featuredMediaUrl = getImageUrl(creator.images, '/Img/halfNewsCard.jpg');
+				{creators
+					.slice(0, visibleCreatorsCount)
+					.map((creator, index) => {
+						const featuredMediaUrl = getImageUrl(
+							creator.images,
+							'/Img/halfNewsCard.jpg',
+						)
 
-					const formattedDate = getFormattedDate(creator.createdAt)
+						const formattedDate = getFormattedDate(
+							creator.createdAt,
+						)
 
-					const formattedTime = new Date(creator.createdAt).toLocaleTimeString(
-						'uk-UA',
-						{
+						const formattedTime = new Date(
+							creator.createdAt,
+						).toLocaleTimeString('uk-UA', {
 							hour: '2-digit',
 							minute: '2-digit',
-						}
-					)
+						})
 
-					return (
-						<div
-							key={creator.id}
-							className={`${styles.mainPageNewsCard} ${index === 0 ? styles.firstCard : index === 1 ? styles.secondCard : styles.thirdCard}`}
-						>
-							<div className={styles.cardInner}>
-								<div className={styles.cardImgWrapper}>
-									<img
-										className={`${styles.cardImg} ${index === 0 ? styles.firstCardImg : index === 1 ? styles.secondCardImg : index === 2 ? styles.thirdCardImg : styles.fourthCardImg}`}
-										src={featuredMediaUrl}
-										alt={t('Світлина')}
-										onError={e => {
-											e.target.onerror = null
-											e.target.src = '/Img/halfNewsCard.jpg'
-										}}
-									/>
-								</div>
-								<div className={styles.cardTextWrapper}>
-									<div className={styles.cardTitleWrapper}>
-										<h3
-											className={`${styles.cardTitle} ${index === 0 ? styles.firstCardTitle : index === 1 ? styles.secondCardTitle : index === 2 ? styles.thirdCardTitle : styles.fourthCardTitle}`}
-										>
-											{creator.title || creator.email}
-										</h3>
-									</div>
-									<div className={styles.cardDescriptioneWrapper}>
-										<p
-											className={`${styles.cardDescription} ${index === 0 ? styles.firstCardDescription : index === 1 ? styles.secondCardDescription : styles.thirdCardDescription}`}
-										>
-											{creator.bio || t('Немає біографії')}
-										</p>
-									</div>
-								</div>
-							</div>
-							<div className={styles.cardClockAndDateWrapper}>
-								<div className={styles.cardClockAndDateInner}>
-									<div className={styles.cardClockImgWrapper}>
+						return (
+							<div
+								key={creator.id}
+								className={`${styles.mainPageNewsCard} ${index === 0 ? styles.firstCard : index === 1 ? styles.secondCard : styles.thirdCard}`}
+							>
+								<div className={styles.cardInner}>
+									<div
+										className={styles.cardImgWrapper}
+										onClick={() =>
+											handleArtistPageClick(creator.id)
+										}
+									>
 										<img
-											className={styles.cardClockImg}
-											src={'/Img/clock.svg'}
-											alt={t('Світлина годинника')}
-											onError={e => {
+											className={`${styles.cardImg} ${index === 0 ? styles.firstCardImg : index === 1 ? styles.secondCardImg : index === 2 ? styles.thirdCardImg : styles.fourthCardImg}`}
+											src={featuredMediaUrl}
+											alt={t('Світлина')}
+											onError={(e) => {
 												e.target.onerror = null
-												e.target.src = '/Img/clock.svg'
+												e.target.src =
+													'/Img/halfNewsCard.jpg'
 											}}
 										/>
 									</div>
-									<div className={styles.cardDateWrapper}>
-										<p className={styles.cardDate}>{formattedDate}</p>
-									</div>
-									<div className={styles.cardTimeWrapper}>
-										<p className={styles.cardTime}>{formattedTime}</p>
+									<div className={styles.cardTextWrapper}>
+										<div
+											className={styles.cardTitleWrapper}
+										>
+											<h3
+												className={`${styles.cardTitle} ${index === 0 ? styles.firstCardTitle : index === 1 ? styles.secondCardTitle : index === 2 ? styles.thirdCardTitle : styles.fourthCardTitle}`}
+											>
+												{creator.title || creator.email}
+											</h3>
+										</div>
+										<div
+											className={
+												styles.cardDescriptioneWrapper
+											}
+										>
+											<p
+												className={`${styles.cardDescription} ${index === 0 ? styles.firstCardDescription : index === 1 ? styles.secondCardDescription : styles.thirdCardDescription}`}
+											>
+												{creator.bio ||
+													t('Немає біографії')}
+											</p>
+										</div>
 									</div>
 								</div>
-								<div className={styles.cardReadMoreWrapper}>
-									<a
-										onClick={() => handleArtistPageClick(creator.id)}
-										className={styles.cardReadMoreLink}
+								<div className={styles.cardClockAndDateWrapper}>
+									<div
+										className={styles.cardClockAndDateInner}
 									>
-										{t('Читати далі')}
-									</a>
+										<div
+											className={
+												styles.cardClockImgWrapper
+											}
+										>
+											<img
+												className={styles.cardClockImg}
+												src={'/Img/clock.svg'}
+												alt={t('Світлина годинника')}
+												onError={(e) => {
+													e.target.onerror = null
+													e.target.src =
+														'/Img/clock.svg'
+												}}
+											/>
+										</div>
+										<div className={styles.cardDateWrapper}>
+											<p className={styles.cardDate}>
+												{formattedDate}
+											</p>
+										</div>
+										<div className={styles.cardTimeWrapper}>
+											<p className={styles.cardTime}>
+												{formattedTime}
+											</p>
+										</div>
+									</div>
+									<div className={styles.cardReadMoreWrapper}>
+										<a
+											onClick={() =>
+												handleArtistPageClick(
+													creator.id,
+												)
+											}
+											className={styles.cardReadMoreLink}
+										>
+											{t('Читати далі')}
+										</a>
+									</div>
 								</div>
 							</div>
-						</div>
-					)
-				})}
+						)
+					})}
 			</div>
 			<div
 				className={`${styles.mainPageNewsButtonWrapper} ${styles.mobileButtonWrapper}`}
@@ -189,7 +225,7 @@ function MainArtists() {
 						className={styles.mainPageNewsButtonImg}
 						src={'/Img/buttonArrow.svg'}
 						alt={t('Стрілка')}
-						onError={e => {
+						onError={(e) => {
 							e.target.onerror = null
 							e.target.src = '/Img/buttonArrow.svg'
 						}}

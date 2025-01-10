@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import { getFormattedDate, getImageUrl } from '../../../utils/helper'
 import TranslatedContent from './TranslatedContent'
 import styles from '/src/styles/components/Blocks/MainNews.module.scss'
@@ -13,6 +14,7 @@ function MainExhibitions() {
 	const [visibleExhibitionsCount, setVisibleExhibitionsCount] = useState(
 		getPostsCount(window.innerWidth),
 	)
+	const navigate = useNavigate()
 
 	function getPostsCount(width) {
 		if (width === null || width === undefined) {
@@ -66,6 +68,10 @@ function MainExhibitions() {
 			})
 	}, [])
 	// Запит на отримання медіа
+
+	const handleExhibitionPageClick = (id) => {
+		navigate(`/exhibitions/${id}`)
+	}
 
 	return (
 		<div className={`${styles.mainPageNewsContainer}`}>
@@ -126,7 +132,14 @@ function MainExhibitions() {
 								className={`${styles.mainPageNewsCard} ${index === 0 ? styles.firstCard : index === 1 ? styles.secondCard : styles.thirdCard}`}
 							>
 								<div className={`${styles.cardInner}`}>
-									<div className={`${styles.cardImgWrapper}`}>
+									<div
+										className={`${styles.cardImgWrapper}`}
+										onClick={() =>
+											handleExhibitionPageClick(
+												exhibition.id,
+											)
+										}
+									>
 										<img
 											className={`${styles.cardImg} ${index === 0 ? styles.firstCardImg : index === 1 ? styles.secondCardImg : index === 2 ? styles.thirdCardImg : styles.fourthCardImg}`}
 											src={featuredMediaUrl}
@@ -135,6 +148,9 @@ function MainExhibitions() {
 												e.target.onerror = null
 												e.target.src =
 													'/Img/newsCardERROR.jpg'
+												onClick = {
+													handleExhibitionPageClick,
+												}
 											}}
 										/>
 									</div>

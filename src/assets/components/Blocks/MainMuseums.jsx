@@ -108,7 +108,12 @@ function MainMuseums() {
 							className={`${styles.mainPageNewsCard} ${index === 0 ? styles.firstCard : index === 1 ? styles.secondCard : styles.thirdCard}`}
 						>
 							<div className={`${styles.cardInner}`}>
-								<div className={`${styles.cardImgWrapper}`}>
+								<div
+									className={`${styles.cardImgWrapper}`}
+									onClick={() =>
+										handleMuseumPageClick(museum.id)
+									}
+								>
 									<img
 										className={`${styles.cardImg} ${index === 0 ? styles.firstCardImg : index === 1 ? styles.secondCardImg : index === 2 ? styles.thirdCardImg : styles.fourthCardImg}`}
 										src={featuredMediaUrl}
@@ -196,10 +201,7 @@ function MainMuseums() {
 				className={`${styles.mainPageNewsButtonWrapper} ${styles.mobileButtonWrapper}`}
 			>
 				<button className={`${styles.mainPageNewsButton}`}>
-					<p
-						className={`${styles.mainPageNewsButtonTitle}`}
-						onClick={handleMuseumPageClick}
-					>
+					<p className={`${styles.mainPageNewsButtonTitle}`}>
 						{t('Усі музеї')}
 					</p>
 					<img

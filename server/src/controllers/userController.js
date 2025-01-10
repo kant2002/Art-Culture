@@ -112,6 +112,59 @@ export const getCreatorById = async (req, res, next) => {
   }
 }
 
+export const getAuthorsByLanguage = async (req, res, next) => {
+  const { language } = req.params
+  const { letter } = req.query
+
+  //* Log incoming request parameters
+  logger.info(`Received request for language: ${language}, letter: ${letter}`)
+
+  //* Validate language
+  if (!["uk", "en"].includes(language)) {
+    logger.warn(`Invalid language parameter: ${language}`)
+    return res.status(400).json({ error: "invalid language" })
+  }
+
+  let titleField = "title"
+
+  try {
+    const authors = await prisma.user.findMany({
+      where: {
+        role: "AUTHOR",
+        ...(letter && {
+          [titleField]: {
+            startsWith: letter,
+          },
+        }),
+      },
+      select: {
+        id: true,
+        email: true,
+        [titleField]: true,
+        bio: true,
+        images: true,
+      },
+      orderBy: {
+        [titleField]: "asc",
+      },
+    })
+
+    logger.info(`Fetched ${authors.length} authors from database`)
+
+    const mappedAuthors = authors.map((author) => ({
+      id: author.id,
+      email: author.email,
+      title: author[titleField],
+      bio: author.bio,
+      images: author.images,
+    }))
+    res.json({ creators: mappedCreators })
+  } catch (error) {
+    logger.error("Error fetching creators by language:", error)
+    res.status(500).json({ error: "Internal server error" })
+  }
+}
+
 export const getAuthors = async (req, res, next) => {
   try {
     const authors = await prisma.user.findMany({
