@@ -16,10 +16,13 @@ import TranslatedContent from '../../Blocks/TranslatedContent'
 
 const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	if (!products || products.length === 0) {
-		//	console.log('No products available.')
+		console.warn('No products available for ArtistPageMasonryGallery.')
 		return null // Or display a message if you prefer
 	}
 
+	// Refs for mutable values
+	const positionRef = useRef(0)
+	const enableTransitionRef = useRef(true)
 	const { t, i18n } = useTranslation()
 	const currentLanguage = i18n.language
 	const containerRef = useRef(null)
@@ -33,6 +36,8 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	const [selectedProduct, setSelectedProduct] = useState(null)
 	const [selectedCreator, setSelectedCreator] = useState(null) // Initialize with null
 
+	const animationDuration = sliderWidth / speed // in seconds or ms
+
 	// Zoom-related state variables
 	const [zoomStates, setZoomStates] = useState([])
 
@@ -42,12 +47,18 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	// Define the number of columns and custom scaling factor
 	const customScaleFactor = 1.2 // Change this to scale images up or down
 
+	const [enableTransition, setEnableTransition] = useState(true)
+
 	const getBaseImageHeight = () => {
 		const width = window.innerWidth
+		if (width >= 1921) return 715
 		if (width >= 1800) return 689
-		if (width >= 1600) return 607
-		if (width >= 1500) return 571
-		if (width >= 1400) return 567
+		if (width >= 1600) return 735
+		if (width >= 1500) return 705
+		if (width >= 1400) return 701
+		if (width >= 1000) return 700
+		if (width >= 900) return 700
+		if (width >= 400) return 670
 		return 599
 	}
 
@@ -60,6 +71,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 		if (width < 900) return 4
 		if (width < 1500) return 5
 		if (width < 1800) return 6
+		if (width > 1921) return 7
 		return 7
 	}
 
@@ -70,16 +82,11 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 		[33, 67], // Column 0: Top 33%, Middle 67%
 		[20, 20, 60], // Column 1: Top 20%, Middle 20%, Bottom 60%
 		[25, 50, 25], // Column 2: Top 25%, Middle 50%, Bottom 25%
-		// [20, 40, 20, 20], // Column 3: Top 20%, Middle 40%, Next 20%, Last 20%
-		// [30, 70], // Column 4: Top 30%, Bottom 70%
-		// [50, 50], // Column 5: Top 50%, Bottom 50%
-		// [40, 30, 30], // Column 6: Top 40%, Middle 30%, Bottom 30%
 		// Add more patterns as needed
 	]
 
 	// Memoize the images array to prevent unnecessary re-creations
 	const images = useMemo(() => {
-		//	console.log('Memoizing images based on products.')
 		return products.map((product) => {
 			const mainImageSrc =
 				product.images && product.images.length > 0
@@ -104,17 +111,16 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 
 	useEffect(() => {
 		if (images.length === 0) {
-			//			console.log('No images to load.')
+			console.warn('Images array is empty after mapping.')
 			return
 		}
 
-		//	console.log('Loading images...')
 		const imagePromises = images.map((imageObj) => {
 			return new Promise((resolve) => {
 				const img = new Image()
 				img.src = imageObj.src
 				img.onload = () => {
-					//			console.log(`Image loaded: ${imageObj.src}`)
+					console.log(`Image loaded: ${imageObj.src}`)
 					resolve({
 						...imageObj,
 						width: img.width,
@@ -133,7 +139,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 		})
 
 		Promise.all(imagePromises).then((imgs) => {
-			//		console.log('All images loaded:', imgs)
+			console.log('All images processed:', imgs)
 			setLoadedImages(imgs)
 		})
 	}, [images])
@@ -143,7 +149,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 
 	useEffect(() => {
 		if (loadedImages.length === 0) {
-			//		console.log('No loaded images to split into columns.')
+			console.warn('No loaded images to distribute into columns.')
 			return
 		}
 
@@ -152,8 +158,6 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 		loadedImages.forEach((img, idx) => {
 			newColumns[idx % numberOfColumns].push(img)
 		})
-
-		//	console.log('New Columns:', newColumns)
 
 		// Check if columns have actually changed
 		const isColumnsEqual =
@@ -165,38 +169,29 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 				)
 			})
 
-		//	console.log('Are Columns Equal:', isColumnsEqual)
-
 		if (!isColumnsEqual) {
-			//	console.log('Updating columns state')
+			console.log('Updating columns:', newColumns)
 			setColumns(newColumns)
 		} else {
-			//		console.log('Columns unchanged, not updating state.')
+			console.log('Columns unchanged.')
 		}
 	}, [loadedImages, numberOfColumns, columns])
 
 	// Define scaledColumns state
 	const [scaledColumns, setScaledColumns] = useState([])
 
-	// Calculate slider width by measuring the DOM
+	// Calculate scaled columns
 	useLayoutEffect(() => {
 		if (columns.length === 0) {
-			//		console.log('No columns available to scale.')
+			console.warn('No columns available for scaling.')
 			return
 		}
 
-		//	console.log('useLayoutEffect triggered for scaling')
-		//	console.log('Current Columns:', columns)
-		//	console.log('Custom Scale Factor:', customScaleFactor)
-
-		const columnWidth = 170 // Desired image width
-		const columnGap = 20 // Gap between columns
-
-		const newScaledColumns = columns.map((column, colIdx) => {
+		const columnWidth = 250 // Desired image width
+		const newScaledColumns = columns.map((column) => {
 			return column.map((img) => {
 				const aspectRatio = img.height / img.width || 1
 				const scaledWidth = columnWidth * customScaleFactor
-				// Height will be handled by CSS, so we don't set it here
 
 				return {
 					...img,
@@ -206,44 +201,48 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 			})
 		})
 
-		//	console.log('New Scaled Columns:', newScaledColumns)
-
+		console.log('Scaled columns calculated:', newScaledColumns)
 		setScaledColumns(newScaledColumns)
 	}, [columns, customScaleFactor])
 
-	// Measure the width of one set of columns after scaling
+	// Measure the total width of the slider accurately
 	useLayoutEffect(() => {
 		if (sliderRef.current) {
-			const firstSet = sliderRef.current.querySelectorAll(
+			const firstColumn = sliderRef.current.querySelector(
 				`.${style.column}`,
 			)
-			if (firstSet.length === 0) {
-				//		console.log('No columns found for measurement.')
-				return
+			if (firstColumn) {
+				const columnStyles = getComputedStyle(firstColumn)
+				const marginRight = parseInt(columnStyles.marginRight, 10)
+				const width = firstColumn.offsetWidth + marginRight
+
+				console.log(
+					`First column offsetWidth: ${firstColumn.offsetWidth}px`,
+				)
+				console.log(`First column marginRight: ${marginRight}px`)
+				console.log(`Calculated column total width: ${width}px`)
+				console.log(`Number of columns: ${numberOfColumns}`)
+				console.log(
+					`Calculated sliderWidth: ${width * numberOfColumns}px`,
+				)
+				setSliderWidth(width * numberOfColumns) // Total width for all columns
+			} else {
+				console.warn('First column not found in sliderRef.')
 			}
-
-			// Calculate the total width of one set of columns
-			let totalWidth = 0
-			firstSet.forEach((col) => {
-				totalWidth +=
-					col.offsetWidth +
-					parseInt(getComputedStyle(col).marginRight, 10)
-			})
-
-			//	console.log('Measured Slider Width (one set):', totalWidth)
-			setSliderWidth(totalWidth)
 		}
-	}, [scaledColumns])
+	}, [scaledColumns, numberOfColumns, style.column])
 
 	// Handle responsive columns with debounce
 	useEffect(() => {
 		const handleResize = debounce(() => {
-			//		console.log('Window resized')
 			const newNumberOfColumns = getNumberOfColumns()
-			//		console.log('New Number of Columns:', newNumberOfColumns)
-			setBaseImageHeight(getBaseImageHeight())
+			const newBaseImageHeight = getBaseImageHeight()
+			console.log(
+				`Window resized. New number of columns: ${newNumberOfColumns}, New base image height: ${newBaseImageHeight}`,
+			)
+			setBaseImageHeight(newBaseImageHeight)
 			setNumberOfColumns(newNumberOfColumns)
-		}, 100) // Adjust the delay as needed
+		}, 150) // Adjust the delay as needed
 
 		window.addEventListener('resize', handleResize)
 		return () => {
@@ -253,27 +252,39 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	}, [])
 
 	// Automatically move images to the left (horizontal sliding)
+	// Automatically move images to the left (horizontal sliding)
 	useEffect(() => {
+		const slider = sliderRef.current
+		if (!slider) return
+
 		let animationFrameId
+		let lastTime = performance.now()
 
-		const animate = () => {
+		const animate = (currentTime) => {
+			const deltaTime = currentTime - lastTime
+			lastTime = currentTime
+
 			if (!isPaused) {
-				setPosition((prevPosition) => {
-					let newPosition = prevPosition - speed
+				const distance = speed * (deltaTime / 16.666) // Pixels per frame
+				positionRef.current -= distance
 
-					//		console.log('Animating:', {
-					//			position: newPosition,
-					//		})
+				if (-positionRef.current >= sliderWidth) {
+					// Shift back by sliderWidth to loop
+					positionRef.current += sliderWidth
+					// Temporarily disable transition for instant jump
+					slider.style.transition = 'none'
+					slider.style.transform = `translateX(${positionRef.current}px)`
 
-					if (-newPosition >= sliderWidth / 2) {
-						// Reset position to 0 for seamless looping
+					// Force reflow to apply the transform without transition
+					// eslint-disable-next-line no-unused-expressions
+					slider.offsetHeight // Trigger reflow
 
-						//				console.log('Resetting position to:', newPosition)
-						return 0
-					}
-
-					return newPosition
-				})
+					// Re-enable transition
+					slider.style.transition = `scroll ${animationDuration}s linear infinite`
+				} else {
+					// Apply the transform with transition
+					slider.style.transform = `translateX(${positionRef.current}px)`
+				}
 			}
 
 			animationFrameId = requestAnimationFrame(animate)
@@ -292,31 +303,32 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	// Prevent body scrolling when any image is zoomed
 	useEffect(() => {
 		if (isAnyImageZoomed) {
+			console.log('An image is zoomed. Disabling body scroll.')
 			document.body.style.overflow = 'hidden'
 		} else {
+			console.log('No images are zoomed. Enabling body scroll.')
 			document.body.style.overflow = 'auto'
 		}
 	}, [isAnyImageZoomed])
 
 	// Handle mouse events to pause and resume animation
 	const handleMouseEnter = () => {
-		//		console.log('Mouse entered gallery, pausing slider')
+		console.log('Mouse entered gallery. Pausing animation.')
 		setIsPaused(true)
 	}
 
 	const handleMouseLeave = () => {
-		//		console.log('Mouse left gallery, resuming slider')
+		console.log('Mouse left gallery. Resuming animation.')
 		setIsPaused(false)
 	}
 
 	// Handle image click to open modal
 	const handleImageClick = (productImages, product) => {
-		//		console.log('Image clicked:', product.id)
 		if (productImages && productImages.length > 0) {
+			console.log(`Opening modal for product ID: ${product.id}`)
 			setSelectedProductImages(productImages)
 			setSelectedProduct(product) // Set the selected product
 			setSelectedCreator(creator) // Set the selected creator
-			//			console.log('Selected Creator:', creator) // Debugging line
 			setZoomStates(
 				productImages.map(() => ({
 					zoomLevel: 1,
@@ -328,6 +340,9 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 			setCurrentSlide(0) // Reset carousel to first slide
 		} else {
 			// If no sub-images, display fallback
+			console.warn(
+				`No sub-images available for product ID: ${product.id}.`,
+			)
 			setSelectedProductImages([])
 			setSelectedProduct(null)
 			setSelectedCreator(null)
@@ -338,7 +353,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 
 	// Handle closing the modal
 	const handleCloseModal = () => {
-		///		console.log('Closing modal')
+		console.log('Closing modal.')
 		setIsModalOpen(false)
 		setSelectedProductImages([])
 		setSelectedProduct(null) // Reset to null
@@ -349,7 +364,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 
 	// Handle zoom in
 	const handleZoomIn = (index) => {
-		//		console.log('Zooming in on image index:', index)
+		console.log(`Zooming in on image index: ${index}`)
 		setZoomStates((prevZoomStates) => {
 			const newZoomStates = [...prevZoomStates]
 			const currentZoom = newZoomStates[index].zoomLevel
@@ -358,6 +373,9 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 					(currentZoom + 0.5).toFixed(1),
 				)
 				newZoomStates[index].isZoomed = true
+				console.log(
+					`Image index ${index} zoom level increased to ${newZoomStates[index].zoomLevel}`,
+				)
 			}
 			return newZoomStates
 		})
@@ -365,7 +383,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 
 	// Handle zoom out
 	const handleZoomOut = (index) => {
-		//		console.log('Zooming out on image index:', index)
+		console.log(`Zooming out on image index: ${index}`)
 		setZoomStates((prevZoomStates) => {
 			const newZoomStates = [...prevZoomStates]
 			const currentZoom = newZoomStates[index].zoomLevel
@@ -375,6 +393,11 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 				)
 				if (newZoomStates[index].zoomLevel === 1) {
 					newZoomStates[index].isZoomed = false
+					console.log(`Image index ${index} is no longer zoomed.`)
+				} else {
+					console.log(
+						`Image index ${index} zoom level decreased to ${newZoomStates[index].zoomLevel}`,
+					)
 				}
 			}
 			return newZoomStates
@@ -397,6 +420,10 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 				}
 				return newZoomStates
 			})
+
+			console.log(
+				`Mouse moved on image index ${index}: cursorPos=(${x}, ${y})`,
+			)
 		},
 		[setZoomStates],
 	)
@@ -404,7 +431,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	// Handle mouse enter to show zoom lens
 	const handleMouseEnterImage = useCallback(
 		(index) => {
-			//		console.log('Mouse entered image index:', index)
+			console.log(`Mouse entered image index: ${index}`)
 			setZoomStates((prevZoomStates) => {
 				const newZoomStates = [...prevZoomStates]
 				newZoomStates[index] = {
@@ -420,7 +447,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	// Handle mouse leave to hide zoom lens
 	const handleMouseLeaveImage = useCallback(
 		(index) => {
-			//		console.log('Mouse left image index:', index)
+			console.log(`Mouse left image index: ${index}`)
 			setZoomStates((prevZoomStates) => {
 				const newZoomStates = [...prevZoomStates]
 				newZoomStates[index] = {
@@ -437,7 +464,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	// Handle click to toggle zoom
 	const handleImageClickToggleZoom = useCallback(
 		(index) => {
-			//		console.log('Toggling zoom on image index:', index)
+			console.log(`Toggling zoom on image index: ${index}`)
 			setZoomStates((prevZoomStates) => {
 				const newZoomStates = [...prevZoomStates]
 				const zoomState = newZoomStates[index]
@@ -449,6 +476,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 					isZoomed,
 					zoomLevel,
 				}
+				console.log(`Image index ${index} zoom toggled to ${isZoomed}`)
 				return newZoomStates
 			})
 		},
@@ -457,7 +485,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 
 	// Handle manual navigation in carousel
 	const handlePrevSlide = () => {
-		//	console.log('Navigating to previous slide')
+		console.log('Navigating to previous slide.')
 		setCurrentSlide(
 			(prev) =>
 				(prev - 1 + selectedProductImages.length) %
@@ -466,7 +494,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	}
 
 	const handleNextSlide = () => {
-		//	console.log('Navigating to next slide')
+		console.log('Navigating to next slide.')
 		setCurrentSlide((prev) => (prev + 1) % selectedProductImages.length)
 	}
 
@@ -490,9 +518,6 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 			return `${baseImageHeight}px`
 		}
 	}
-
-	// Log the current transform value on render
-	//	console.log('Render: translateX(', position, 'px)')
 
 	return (
 		<div className={style.ArtistPageMasonryGalleryWrapper}>
@@ -519,74 +544,193 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 						className={style.slider}
 						style={{
 							display: 'flex',
-							flexDirection: 'row', // Arrange columns side by side horizontally
-							transform: `translateX(${position}px)`, // Horizontal movement
-							width: `${sliderWidth * 2}px`, // Set width to accommodate duplicated columns
-							transition: isPaused
-								? 'none'
-								: 'transform 0.1s linear', // Smooth sliding
-							willChange: 'transform', // Optimize for transform changes
+							flexDirection: 'row', // Розташування колонок горизонтально
+							transform: `translateX(${position}px)`, // Прокрутка
+							width: `${sliderWidth * 2}px`, // Подвійна ширина для двох копій колонок
+							animation: `scroll ${animationDuration}s linear infinite`,
 						}}
 					>
-						{/* Duplicate the entire set of scaled columns for seamless looping */}
-						{scaledColumns
-							.concat(scaledColumns)
-							.map((column, columnIndex) => (
-								<div
-									key={columnIndex}
-									className={style.column}
-									style={{
-										display: 'flex',
-										flexDirection: 'column',
-										marginRight: '20px', // Gap between columns
-									}}
-								>
-									{column.map((img, index) => (
-										<div
-											key={`${img.src}-${index}-${columnIndex}`}
-											className={style.item}
-											style={{
-												marginBottom: '20px', // Gap between items in a column
-												width: `${img.scaledWidth}px`,
-												flex: '0 0 auto', // Prevent flex items from growing or shrinking
-												cursor: 'pointer',
-												height: getImageHeight(
-													columnIndex,
-													index,
+						{scaledColumns.map((column, columnIndex) => (
+							<div
+								key={`original-${columnIndex}`}
+								className={style.column}
+								style={{
+									display: 'flex',
+									flexDirection: 'column',
+									marginRight: '20px', // Gap between columns
+								}}
+							>
+								{column.map((img, index) => (
+									<div
+										key={`${img.src}-${index}-${columnIndex}`}
+										className={style.item}
+										style={{
+											marginBottom: '20px', // Gap between items in a column
+											width: `${img.scaledWidth}px`,
+											flex: '0 0 auto', // Prevent flex items from growing or shrinking
+											cursor: 'pointer',
+											height: getImageHeight(
+												columnIndex,
+												index,
+											),
+											position: 'relative',
+										}}
+										onClick={() =>
+											handleImageClick(
+												img.productImages,
+												products.find(
+													(p) =>
+														p.id === img.productId,
 												),
-												position: 'relative',
+											)
+										}
+									>
+										<img
+											src={img.src}
+											alt=""
+											loading="lazy"
+											className={style.galleryImage}
+											style={{
+												width: '100%',
+												height: '100%', // Let height adjust based on image aspect ratio
+												objectFit: 'cover', // Ensures the image covers the container without distortion
 											}}
-											onClick={() =>
-												handleImageClick(
-													img.productImages,
-													products.find(
-														(p) =>
-															p.id ===
-															img.productId,
-													),
+											onError={(e) => {
+												e.target.onerror = null
+												e.target.src =
+													'/Img/newsCardERROR.jpg'
+												console.error(
+													'Error loading gallery image:',
+													e.target.src,
 												)
-											}
-										>
-											<img
-												src={img.src}
-												alt=""
-												loading="lazy"
-												className={style.galleryImage}
-												style={{
-													width: '100%',
-													height: '100%', // Let height adjust based on image aspect ratio
-													objectFit: 'cover', // Ensures the image covers the container without distortion
-												}}
-												onError={(e) => {
-													e.target.onerror = null
-													e.target.src =
-														'/Img/newsCardERROR.jpg'
-												}}
-											/>
-										</div>
-									))}
-								</div>
-							))}
+											}}
+										/>
+									</div>
+								))}
+							</div>
+						))}
+
+						{/* Second Set of Columns (Duplicate) */}
+						{scaledColumns.map((column, columnIndex) => (
+							<div
+								key={`duplicate-${columnIndex}`}
+								className={style.column}
+								style={{
+									display: 'flex',
+									flexDirection: 'column',
+									marginRight: '20px', // Gap between columns
+								}}
+							>
+								{column.map((img, index) => (
+									<div
+										key={`${img.src}-${index}-${columnIndex}`}
+										className={style.item}
+										style={{
+											marginBottom: '20px', // Gap between items in a column
+											width: `${img.scaledWidth}px`,
+											flex: '0 0 auto', // Prevent flex items from growing or shrinking
+											cursor: 'pointer',
+											height: getImageHeight(
+												columnIndex,
+												index,
+											),
+											position: 'relative',
+										}}
+										onClick={() =>
+											handleImageClick(
+												img.productImages,
+												products.find(
+													(p) =>
+														p.id === img.productId,
+												),
+											)
+										}
+									>
+										<img
+											src={img.src}
+											alt=""
+											loading="lazy"
+											className={style.galleryImage}
+											style={{
+												width: '100%',
+												height: '100%',
+												objectFit: 'cover',
+											}}
+											onError={(e) => {
+												e.target.onerror = null
+												e.target.src =
+													'/Img/newsCardERROR.jpg'
+												console.error(
+													'Error loading gallery image:',
+													e.target.src,
+												)
+											}}
+										/>
+									</div>
+								))}
+							</div>
+						))}
+
+						{/* Third Set of Columns (Duplicate) */}
+						{scaledColumns.map((column, columnIndex) => (
+							<div
+								key={`duplicate-${columnIndex}`}
+								className={style.column}
+								style={{
+									display: 'flex',
+									flexDirection: 'column',
+									marginRight: '20px', // Gap between columns
+								}}
+							>
+								{column.map((img, index) => (
+									<div
+										key={`${img.src}-${index}-${columnIndex}`}
+										className={style.item}
+										style={{
+											marginBottom: '20px', // Gap between items in a column
+											width: `${img.scaledWidth}px`,
+											flex: '0 0 auto', // Prevent flex items from growing or shrinking
+											cursor: 'pointer',
+											height: getImageHeight(
+												columnIndex,
+												index,
+											),
+											position: 'relative',
+										}}
+										onClick={() =>
+											handleImageClick(
+												img.productImages,
+												products.find(
+													(p) =>
+														p.id === img.productId,
+												),
+											)
+										}
+									>
+										<img
+											src={img.src}
+											alt=""
+											loading="lazy"
+											className={style.galleryImage}
+											style={{
+												width: '100%',
+												height: '100%',
+												objectFit: 'cover',
+											}}
+											onError={(e) => {
+												e.target.onerror = null
+												e.target.src =
+													'/Img/newsCardERROR.jpg'
+												console.error(
+													'Error loading gallery image:',
+													e.target.src,
+												)
+											}}
+										/>
+									</div>
+								))}
+							</div>
+						))}
 					</div>
 				</div>
 
@@ -783,8 +927,6 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 															? 'zoom-out'
 															: 'zoom-in',
 														width: '70%', // Make image responsive
-														//height: 'auto',
-														//margin: '0 auto', // Center the image
 													}}
 												>
 													<div
@@ -896,7 +1038,12 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 																			style.zoomProgress
 																		}
 																		style={{
-																			width: `${((zoomState.zoomLevel - 1) / 4) * 100}%`,
+																			width: `${
+																				((zoomState.zoomLevel -
+																					1) /
+																					4) *
+																				100
+																			}%`,
 																		}}
 																	></div>
 																</div>
@@ -937,12 +1084,12 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 					</div>
 				)}
 			</div>
-			{/* More Arts Button */}
 			<div className={style.moreArtsButtonWrapper}>
 				<button className={style.moreArtsButton}>
 					<p className={style.moreArtsButtonText}>
 						{t('Всі роботи Митця')}
 					</p>
+					``
 					<img
 						className={`${style.buttonArrow}`}
 						src={'/Img/buttonArrow.svg'}

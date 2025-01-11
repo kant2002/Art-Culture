@@ -315,6 +315,9 @@ function NewsPage() {
 											{/* Image */}
 											<div
 												className={`${styles.newsPageCardImageWrapper}`}
+												onClick={() =>
+													handlePostPageClick(post.id)
+												}
 											>
 												<img
 													className={`${styles.newsPageCardImage}`}

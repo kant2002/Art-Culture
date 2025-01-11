@@ -27,19 +27,28 @@
 .justifiedGallery {
   display: flex;
   flex-direction: row; // Arrange columns side by side horizontally
-  justify-content: flex-start; // Align columns to the left
-  align-items: flex-start; // Align items to the top
+  justify-content: center; // Align columns to the left
+  // align-items: center; // Align items to the top
   margin: calc(46px - (29 * ((1440px - 100vw) / (1440 - 375)))) 0 0;
   width: 100%;
-  height: 80vh; // Full viewport height for vertical columns
+  height: 70vh; // Full viewport height for vertical columns
   position: relative;
 }
 
 .slider {
   display: flex;
   flex-direction: row; // Arrange columns side by side horizontally
-  transition: transform 0.1s linear; // Smooth sliding
-  will-change: transform; // Optimize for transform changes
+  width: 200%; // Double the width for duplication
+  animation: scroll infinite linear;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .column {
