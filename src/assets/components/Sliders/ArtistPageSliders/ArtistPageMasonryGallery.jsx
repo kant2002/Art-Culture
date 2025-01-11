@@ -51,14 +51,14 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 
 	const getBaseImageHeight = () => {
 		const width = window.innerWidth
-		if (width >= 1921) return 715
-		if (width >= 1800) return 689
-		if (width >= 1600) return 735
-		if (width >= 1500) return 705
-		if (width >= 1400) return 701
-		if (width >= 1000) return 700
-		if (width >= 900) return 700
-		if (width >= 400) return 670
+		if (width >= 1921) return 620
+		if (width >= 1800) return 599
+		if (width >= 1600) return 575
+		if (width >= 1500) return 555
+		if (width >= 1400) return 545
+		if (width >= 1000) return 535
+		if (width >= 900) return 525
+		if (width >= 400) return 515
 		return 599
 	}
 
@@ -187,7 +187,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 			return
 		}
 
-		const columnWidth = 250 // Desired image width
+		const columnWidth = 200 // Desired image width
 		const newScaledColumns = columns.map((column) => {
 			return column.map((img) => {
 				const aspectRatio = img.height / img.width || 1
