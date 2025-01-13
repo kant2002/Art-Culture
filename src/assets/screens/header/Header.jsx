@@ -343,7 +343,7 @@ function Header() {
 										</a>
 									</li>
 									<li className='mainMenu__li' onClick={handleArtTermsPageClick}>
-										<a className='mainMenu__link' href='#'> 
+										<a className='mainMenu__link' href='#'>
 											{t('Арт терміни')}
 										</a>
 									</li>
@@ -432,7 +432,7 @@ function Header() {
 					</div>
 				</div>
 			</header>
-			{burgerMenuVisible && <div className="burgerMenuBackdrop" onClick={closeBurgerMenu}></div>}	
+			{burgerMenuVisible && <div className="burgerMenuBackdrop" onClick={closeBurgerMenu}></div>}
 			{burgerMenuVisible && burgerMenu}
 		</>
 	)
