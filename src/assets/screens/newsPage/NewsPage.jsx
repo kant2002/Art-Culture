@@ -200,7 +200,7 @@ function NewsPage() {
 													<TranslatedContent
 														en={post.title_en}
 														uk={post.title_uk}
-														maxLength={50}
+														maxLength={100}
 													/>
 												</p>
 											</div>
@@ -215,7 +215,7 @@ function NewsPage() {
 													<TranslatedContent
 														en={post.content_en}
 														uk={post.content_uk}
-														maxLength={100}
+														maxLength={150}
 														html
 													/>
 												</p>
@@ -341,7 +341,7 @@ function NewsPage() {
 													<TranslatedContent
 														en={post.title_en}
 														uk={post.title_uk}
-														maxLength={50}
+														maxLength={100}
 													/>
 												</p>
 											</div>
@@ -356,7 +356,7 @@ function NewsPage() {
 													<TranslatedContent
 														en={post.content_en}
 														uk={post.content_uk}
-														maxLength={100}
+														maxLength={150}
 														html
 													/>
 												</p>

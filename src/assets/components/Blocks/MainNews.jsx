@@ -144,6 +144,7 @@ function MainNews() {
 												en={post.title_en}
 												uk={post.title_uk}
 												maxLength={50}
+												html
 											/>
 										</h3>
 									</div>

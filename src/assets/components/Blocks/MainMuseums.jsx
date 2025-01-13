@@ -7,6 +7,7 @@ import {
 	getFormattedTime,
 	getImageUrl,
 } from '../../../utils/helper'
+import TranslatedContent from './TranslatedContent'
 import styles from '/src/styles/components/Blocks/MainNews.module.scss'
 
 function MainMuseums() {
@@ -139,7 +140,15 @@ function MainMuseums() {
 										<h3
 											className={`${styles.cardTitle} ${index === 0 ? styles.firstCardTitle : index === 1 ? styles.secondCardTitle : index === 2 ? styles.thirdCardTitle : styles.fourthCardTitle}`}
 										>
-											{museum.title || museum.email}
+											<TranslatedContent
+												en={
+													museum.title || museum.email
+												}
+												uk={
+													museum.title || museum.email
+												}
+												html
+											/>
 										</h3>
 									</div>
 									<div
@@ -148,7 +157,17 @@ function MainMuseums() {
 										<p
 											className={`${styles.cardDescription} ${index === 0 ? styles.firstCardDescription : index === 1 ? styles.secondCardDescription : styles.thirdCardDescription}`}
 										>
-											{museum.bio || t('Немає біографії')}
+											<TranslatedContent
+												en={
+													museum.bio ||
+													t('Немає біографії')
+												}
+												uk={
+													museum.bio ||
+													t('Немає біографії')
+												}
+												html
+											/>
 										</p>
 									</div>
 								</div>

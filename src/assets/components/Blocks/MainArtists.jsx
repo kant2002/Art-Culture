@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
 import { getFormattedDate, getImageUrl } from '../../../utils/helper'
+import TranslatedContent from './TranslatedContent'
 import styles from '/src/styles/components/Blocks/MainNews.module.scss' // Assuming you have a CSS module for styling
 
 function MainArtists() {
@@ -153,7 +154,16 @@ function MainArtists() {
 											<h3
 												className={`${styles.cardTitle} ${index === 0 ? styles.firstCardTitle : index === 1 ? styles.secondCardTitle : index === 2 ? styles.thirdCardTitle : styles.fourthCardTitle}`}
 											>
-												{creator.title || creator.email}
+												<TranslatedContent
+													en={
+														creator.title ||
+														creator.email
+													}
+													uk={
+														creator.title ||
+														creator.email
+													}
+												/>
 											</h3>
 										</div>
 										<div
@@ -164,8 +174,16 @@ function MainArtists() {
 											<p
 												className={`${styles.cardDescription} ${index === 0 ? styles.firstCardDescription : index === 1 ? styles.secondCardDescription : styles.thirdCardDescription}`}
 											>
-												{creator.bio ||
-													t('Немає біографії')}
+												<TranslatedContent
+													en={
+														creator.bio ||
+														t('Немає біографії')
+													}
+													uk={
+														creator.bio ||
+														t('Немає біографії')
+													}
+												/>
 											</p>
 										</div>
 									</div>
