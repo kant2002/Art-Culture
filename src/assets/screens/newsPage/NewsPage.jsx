@@ -104,7 +104,6 @@ function NewsPage() {
 			<div className={`${styles.newsPageTitleContainer}`}>
 				<h1 className={`${styles.newsPageTitle}`}>{t('Новини')}</h1>
 			</div>
-
 			{/* Horizontal Separator */}
 			<div className={`${styles.newsPageHorizontalSeparatorContainer}`}>
 				<img
@@ -117,7 +116,6 @@ function NewsPage() {
 					}}
 				/>
 			</div>
-
 			{/* Search Input */}
 			<div className={`${styles.newsPageSearchContainer}`}>
 				<input
@@ -128,12 +126,10 @@ function NewsPage() {
 					onChange={(e) => setSearchTerm(e.target.value)}
 				/>
 			</div>
-
 			{/* Like and Share Buttons */}
 			<div className={`${styles.newsPageLikeAndShareContainer}`}>
 				<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 			</div>
-
 			{/* Top Cards Section */}
 			<div className={`${styles.newsPageTopCardsContainer}`}>
 				<div className={`${styles.newsPageTopCardsWrapper}`}>
@@ -271,10 +267,8 @@ function NewsPage() {
 					)}
 				</div>
 			</div>
-
-			{/* Authors Slider */}
+			//* Authors Slider
 			<NewsPageAuthorsSlider />
-
 			{/* Bottom Cards Section */}
 			<div className={`${styles.newsPageBottomCardsContainer}`}>
 				<div className={`${styles.newsPageBottomCardsWrapper}`}>
@@ -412,7 +406,6 @@ function NewsPage() {
 					)}
 				</div>
 			</div>
-
 			{/* More News and Like/Share Buttons */}
 			<div
 				className={`${styles.newsPageMoreNewsButtonAndLikeAndShareWrapper}`}
@@ -439,7 +432,6 @@ function NewsPage() {
 
 				<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 			</div>
-
 			{/* Subscription Section */}
 			<div className={`${styles.newsPageInputMailContainer}`}>
 				<p className={`${styles.newsPageInputMailTitle}`}>
@@ -452,7 +444,6 @@ function NewsPage() {
 					// You can add value and onChange handlers if needed
 				/>
 			</div>
-
 			<div className={`${styles.newsPageSignUpButtonContainer}`}>
 				<button
 					className={`${styles.newsPageSignUpButton}`}
