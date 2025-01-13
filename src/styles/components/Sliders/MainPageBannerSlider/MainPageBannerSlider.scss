@@ -15,7 +15,7 @@
     // Обёртка карточки слайдера
     position: relative;
     width: 100%;
-    height: 88%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -32,9 +32,9 @@
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    width: 40%;
+    width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(0, 0, 0, 0.8);
     z-index: 10;
 }
 
@@ -63,13 +63,36 @@
     background-color: black;
 }
 
+.BannerSliderCardStaticTitleWrapper {
+    // Обёртка статического заголовка
+    margin: calc($responsiveBigPadding + 100px) 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    text-align: start;
+    width: 100%;
+    height: fit-content;
+    z-index: 1;
+}
+
+.BannerSliderCardStaticTitle {
+    // Статический заголовок
+    width: 100%;
+    height: 100%;
+    // font-size: calc(42px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 500;
+    text-transform: uppercase;
+    color: rgb(255, 255, 255);
+    font-family: $default-font;
+}
+
 .BannerSliderCardTitleWrapper {
     // Обёртка названия музея
     margin: $responsiveMediumPadding 0 0 0;
     display: flex;
     justify-content: center;
-    align-items: center;
-    text-align: center;
+    align-items: start;
+    text-align: start;
     width: 100%;
     height: fit-content;
     z-index: 1;
@@ -79,10 +102,10 @@
     //Название музея
     width: 100%;
     height: 100%;
-    font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
-    font-weight: 500;
-    text-transform: uppercase;
-    color: black;
+    // font-size: calc(24px - (10 * ((1440px - 100vw) / (1440 - 375))));
+    font-weight: 400;
+    text-transform: none;
+    color: rgb(255, 255, 255);
     font-family: $default-font;
 }
 
@@ -111,7 +134,7 @@
 
 .BannerSliderCardReadMoreButtonWrapper {
     // Обёртка кнопки "Читать далее"
-    margin: auto 0 0 auto;
+    margin: $responsiveBigPadding auto 0 0;
     width: auto;
     height: auto;
     z-index: 1;
@@ -200,9 +223,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: black;
+        background: rgb(255, 255, 255);
         border-radius: 50%;
-        color: white;
+        color: rgb(0, 0, 0);
     }
 
     .swiper-button-prev,
@@ -249,7 +272,7 @@
 
     /* Fraction */
     .swiper-pagination-fraction {
-        color: black;
+        color: rgb(255, 255, 255);
     }
 }
 
@@ -264,15 +287,25 @@
         margin: $staticPcMediumPadding 0 0 0;
     }
 
+    .BannerSliderCardStaticTitleWrapper {
+        // Обёртка статического заголовка
+        margin: $staticPcBigPadding 0 0 0;
+    }
+
     .BannerSliderCardTitleWrapper {
         // Обёртка названия музея
         margin: $staticPcMediumPadding 0 0 0;
     }
 
-    .BannerSliderCardTitle {
-        //Название музея
-        font-size: 28px;
-    }
+    // .BannerSliderCardStaticTitle {
+    //     //Название музея
+    //     font-size: 42px;
+    // }
+
+    // .BannerSliderCardTitle {
+    //     //Название музея
+    //     font-size: 24px;
+    // }
 
     .BannerSliderCardDescriptionWrapper {
         // Обёртка описания музея
@@ -283,6 +316,11 @@
     .BannerSliderCardDescription {
         // Описание музея
         font-size: 20px;
+    }
+
+    .BannerSliderCardReadMoreButtonWrapper {
+        // Обёртка кнопки "Читать далее"
+        margin: $staticPcBigPadding auto 0 0;
     }
 
     .BannerSliderContainer {
@@ -344,15 +382,25 @@
         margin: $staticMobileMediumPadding 0 0 0;
     }
 
+    .BannerSliderCardStaticTitleWrapper {
+        // Обёртка статического заголовка
+        margin: $staticMobileBigPadding 0 0 0;
+    }
+
     .BannerSliderCardTitleWrapper {
         // Обёртка названия музея
         margin: $staticMobileMediumPadding 0 0 0;
     }
 
-    .BannerSliderCardTitle {
-        //Название музея
-        font-size: 18px;
-    }
+    // .BannerSliderCardTitle {
+    //     //Название музея
+    //     font-size: 18px;
+    // }
+
+    // .BannerSliderCardTitle {
+    //     //Название музея
+    //     font-size: 18px;
+    // }
 
     .BannerSliderCardDescriptionWrapper {
         // Обёртка описания музея
@@ -363,6 +411,11 @@
     .BannerSliderCardDescription {
         // Описание музея
         font-size: 14px;
+    }
+
+    .BannerSliderCardReadMoreButtonWrapper {
+        // Обёртка кнопки "Читать далее"
+        margin: $staticMobileBigPadding auto 0 0;
     }
 
     .BannerSliderContainer {

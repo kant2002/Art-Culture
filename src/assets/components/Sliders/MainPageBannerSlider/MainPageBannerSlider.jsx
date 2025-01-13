@@ -34,7 +34,7 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 		<div className="BannerSliderCardContainer">
 			<div className="BannerSliderCardWrapper">
 				<div className="BannerSliderCardInnerWrapper">
-					<div className="BannerSliderCardLogoWrapper">
+					{/* <div className="BannerSliderCardLogoWrapper">
 						<img
 							className="BannerSliderCardLogo"
 							src={museumLogoUrl}
@@ -44,21 +44,27 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 								e.target.src = '/Img/newsCardERROR.jpg'
 							}}
 						/>
-					</div>
+					</div> */}
 
-					<div className="BannerSliderCardSeparator"></div>
+					{/* <div className="BannerSliderCardSeparator"></div> */}
+					
+					<div className="BannerSliderCardStaticTitleWrapper">
+						<h1 className="BannerSliderCardStaticTitle">
+							{t('Велика подорож з')}
+						</h1>
+					</div>
 
 					<div className="BannerSliderCardTitleWrapper">
-						<h2 className="BannerSliderCardTitle">
+						<h3 className="BannerSliderCardTitle">
 							{museum.title}
-						</h2>
+						</h3>
 					</div>
 
-					<div className="BannerSliderCardDescriptionWrapper">
+					{/* <div className="BannerSliderCardDescriptionWrapper">
 						<p className="BannerSliderCardDescription">
 							<TranslatedContent en={museum.bio} uk={museum.bio} html />
 						</p>
-					</div>
+					</div> */}
 
 					<div className="BannerSliderCardReadMoreButtonWrapper">
 						<button
