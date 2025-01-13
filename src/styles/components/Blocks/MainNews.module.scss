@@ -17,13 +17,10 @@
   align-items: center;
 }
 
-// .mainPageNewsTitle {
-//   // Стили для заголовка
-//   font-family: $default-font;
-//   font-weight: 600;
-//   font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
-//   text-transform: uppercase;
-// }
+.mainPageNewsTitle {
+  // Стили для заголовка
+  text-decoration: underline;
+}
 
 .mobileButtonWrapper {
   // Дополнительные стили для обертки кнопки на мобильных устройствах
