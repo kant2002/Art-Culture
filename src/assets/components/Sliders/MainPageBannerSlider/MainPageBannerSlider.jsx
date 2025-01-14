@@ -34,7 +34,8 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 		<div className="BannerSliderCardContainer">
 			<div className="BannerSliderCardWrapper">
 				<div className="BannerSliderCardInnerWrapper">
-					{/* <div className="BannerSliderCardLogoWrapper">
+					<div className="BannerSliderCardSecondInnerWrapper">
+						{/* <div className="BannerSliderCardLogoWrapper">
 						<img
 							className="BannerSliderCardLogo"
 							src={museumLogoUrl}
@@ -46,33 +47,34 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 						/>
 					</div> */}
 
-					{/* <div className="BannerSliderCardSeparator"></div> */}
-					
-					<div className="BannerSliderCardStaticTitleWrapper">
-						<h1 className="BannerSliderCardStaticTitle">
-							{t('Велика подорож з')}
-						</h1>
-					</div>
+						{/* <div className="BannerSliderCardSeparator"></div> */}
 
-					<div className="BannerSliderCardTitleWrapper">
-						<h3 className="BannerSliderCardTitle">
-							{museum.title}
-						</h3>
-					</div>
+						<div className="BannerSliderCardStaticTitleWrapper">
+							<h1 className="BannerSliderCardStaticTitle">
+								{t('Велика подорож з')}
+							</h1>
+						</div>
 
-					{/* <div className="BannerSliderCardDescriptionWrapper">
+						<div className="BannerSliderCardTitleWrapper">
+							<h3 className="BannerSliderCardTitle">
+								{museum.title}
+							</h3>
+						</div>
+
+						{/* <div className="BannerSliderCardDescriptionWrapper">
 						<p className="BannerSliderCardDescription">
 							<TranslatedContent en={museum.bio} uk={museum.bio} html />
 						</p>
 					</div> */}
 
-					<div className="BannerSliderCardReadMoreButtonWrapper">
-						<button
-							className="BannerSliderCardReadMoreButton"
-							onClick={() => onClick(museum.id)}
-						>
-							{t('Читати далі')}
-						</button>
+						<div className="BannerSliderCardReadMoreButtonWrapper">
+							<button
+								className="BannerSliderCardReadMoreButton"
+								onClick={() => onClick(museum.id)}
+							>
+								{t('Читати далі')}
+							</button>
+						</div>
 					</div>
 				</div>
 
