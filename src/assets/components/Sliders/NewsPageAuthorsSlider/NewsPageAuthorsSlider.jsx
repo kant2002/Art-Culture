@@ -75,8 +75,8 @@ const NewsPageAuthorsSlider = () => {
 		fetchCreator()
 	}, [])
 
-	const handleSlideClick = (id) => {
-		navigate(`/artist/${id}`)
+	const handleAuthorPreviewClick = () => {
+		navigate(`/all-author-posts/${posts.author.id}`)
 	}
 
 	return (
@@ -108,7 +108,7 @@ const NewsPageAuthorsSlider = () => {
 								<SwiperSlide key={author.id}>
 									<Slide
 										author={author}
-										onClick={handleSlideClick}
+										onClick={handleAuthorPreviewClick}
 									/>
 								</SwiperSlide>
 							))}

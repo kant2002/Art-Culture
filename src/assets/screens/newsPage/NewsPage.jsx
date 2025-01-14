@@ -267,7 +267,7 @@ function NewsPage() {
 					)}
 				</div>
 			</div>
-			//* Authors Slider
+
 			<NewsPageAuthorsSlider />
 			{/* Bottom Cards Section */}
 			<div className={`${styles.newsPageBottomCardsContainer}`}>
