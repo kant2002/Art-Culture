@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import styles from '../../../styles/screen/Authors/AllArtistPostPage.module.scss'
 import { getImageUrl } from '../../../utils/helper'
+import TranslatedContent from '../../components/Blocks/TranslatedContent'
 
 function AuthorPostsLists() {
 	const { t } = useTranslation()
@@ -89,7 +90,72 @@ function AuthorPostsLists() {
 					<p className={styles.AuthorTitle}>{author.title}</p>
 				</div>
 			</div>
+
+			<div className={styles.AuthorPostsListsWrapper}>
+				{posts.length > 0 ? (
+					posts.map((post) => (
+						<div
+							key={post.id}
+							className={styles.AuthorPostsLists}
+							onClick={() => handlePostClick(post.id)}
+						>
+							<div className={styles.AuthorPostsListsInfoWrapper}>
+								<div
+									className={
+										styles.AuthorPostsListsTitleWrapper
+									}
+								>
+									<h2
+										className={styles.AuthorPostsListsTitle}
+									>
+										<TranslatedContent
+											en={post.title_en}
+											uk={post.title_uk}
+											html
+										/>
+									</h2>
+								</div>
+								<div
+									className={
+										styles.AuthorPostsListsContentWrapper
+									}
+								>
+									<p>
+										<TranslatedContent
+											en={post.content_en}
+											uk={post.content_uk}
+											html
+										/>
+									</p>
+								</div>
+								<div
+									className={
+										styles.AuthorPostsListsImageWrapper
+									}
+								>
+									{post.images && (
+										<img
+											src={post.images}
+											alt={post.title_uk || post.title_en}
+											onError={(e) => {
+												e.target.onerror = null
+												e.target.src =
+													'/Img/newsCardERROR.jpg'
+											}}
+										/>
+									)}
+								</div>
+							</div>
+						</div>
+					))
+				) : (
+					<div className={styles.noPosts}>
+						{t('Новини не знайдено')}
+					</div>
+				)}
+			</div>
 		</div>
 	)
 }
+
 export default AuthorPostsLists
