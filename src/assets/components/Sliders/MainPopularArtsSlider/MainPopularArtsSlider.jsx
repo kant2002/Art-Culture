@@ -42,7 +42,10 @@ const Slide = ({ product, baseUrl, onOverviewClick }) => {
 			: '/Img/newsCardERROR.jpg' // Fallback image
 
 	return (
-		<div className="PopularSliderCardWrapper">
+		<div
+			className="PopularSliderCardWrapper"
+			onClick={() => onOverviewClick(product)}
+		>
 			<div className="PopularSliderCardInnerWrapper">
 				<img
 					className="PopularSliderCardImg"
