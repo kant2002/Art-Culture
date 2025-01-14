@@ -513,7 +513,7 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 				{/* Gallery Title */}
 				<div className={style.galleryTitleWrapper}>
 					<h3 className={style.galleryTitle}>
-						{t('Роботи цього митця')}
+						{t('Експонати цього музею')}
 					</h3>
 				</div>
 
