@@ -110,6 +110,7 @@ body {
 	flex-direction: column;
 	justify-content: space-between;
 	width: 100%;
+	max-width: 600px;
 }
 .titleWrapper {
 	display: flex;
@@ -204,7 +205,6 @@ body {
 		display: flex;
 		justify-content: space-between;
 		margin: 0 auto;
-		max-width: 1072px;
 	}
 
 	&__li {
@@ -453,9 +453,9 @@ body {
 	color: #000000;
 }
 
-@media (min-width: 1921px) {
-	.titleWrapper {
-		padding: 0 112.8px 0 0;
+@media (min-width: 1600px) {
+	.mainHeaderLogo {
+		width: 363.59px;
 	}
 }
 
@@ -496,6 +496,10 @@ body {
 	}
 	.titleContainer {
 		margin: 17px calc(22.5 / 1440 * 100vw) 0 calc(22.5 / 1440 * 100vw);
+	}
+
+	.headerTitle {
+		font-size: 24px;
 	}
 
 	.headerLanguageSwitchButton {
