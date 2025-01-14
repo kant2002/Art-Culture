@@ -16,21 +16,31 @@ function MainExhibitions() {
 	)
 	const navigate = useNavigate()
 
-	function getPostsCount(width) {
-		if (width === null || width === undefined) {
-			throw new Error('Width must be a number')
-		}
-		if (width >= 1920) {
-			return 4
-		}
-		if (width >= 1441 && width < 1920) {
+	// function getPostsCount(width) {
+	// 	if (width === null || width === undefined) {
+	// 		throw new Error('Width must be a number')
+	// 	}
+	// 	if (width >= 1920) {
+	// 		return 4
+	// 	}
+	// 	if (width >= 1441 && width < 1920) {
+	// 		return 3
+	// 	}
+	// 	if (width > 570 && width < 1440) {
+	// 		return 2
+	// 	}
+	// 	if (width <= 569) {
+	// 		return 1
+	// 	}
+	// }
+
+	function getPostsCount(Width) {
+		if (Width >= 1600) {
 			return 3
-		}
-		if (width > 570 && width < 1440) {
+		} else if (Width >= 1440) {
 			return 2
-		}
-		if (width <= 569) {
-			return 1
+		} else {
+			return 2 // Assuming you meant to return 1 for widths below 1440px
 		}
 	}
 
