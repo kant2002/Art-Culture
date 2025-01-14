@@ -1,9 +1,15 @@
+import LikeAndShare from '@components/Blocks/LikeAndShare'
+import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import styles from '../../../styles/screen/Authors/AllArtistPostPage.module.scss'
-import { getImageUrl } from '../../../utils/helper'
+import {
+	getFormattedDate,
+	getFormattedTime,
+	getImageUrl,
+} from '../../../utils/helper'
 import TranslatedContent from '../../components/Blocks/TranslatedContent'
 
 function AuthorPostsLists() {
@@ -72,6 +78,10 @@ function AuthorPostsLists() {
 		navigate(`/posts/${id}`)
 	}
 
+	const handleAllAuthorsClick = () => {
+		navigate('/all-authors-page')
+	}
+
 	return (
 		<div className={styles.AuthorsPageContainer}>
 			<div className={styles.AuthorPhotoNameContainer}>
@@ -91,43 +101,115 @@ function AuthorPostsLists() {
 				</div>
 			</div>
 
+			<div className={styles.AuthorNavBarTwoSection}>
+				<div className={styles.AuthorNavBarWrapper}>
+					<p className={styles.PostsNavBarLeft}>{t('Статті')}</p>
+					<p className={styles.NavBarSeparator}>{'|'}</p>
+					<p
+						className={styles.AuthorsNavBarRight}
+						onClick={handleAllArtistsPageClick}
+					>
+						{t('Усі Автори')}
+					</p>
+				</div>
+				<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
+			</div>
+
 			<div className={styles.AuthorPostsListsWrapper}>
 				{posts.length > 0 ? (
-					posts.map((post) => (
-						<div
-							key={post.id}
-							className={styles.AuthorPostsLists}
-							onClick={() => handlePostClick(post.id)}
-						>
-							<div className={styles.AuthorPostsListsInfoWrapper}>
+					posts.map((post) => {
+						const formattedDate = getFormattedDate(post.createdAt)
+						const formattedTime = getFormattedTime(post.createdAt)
+
+						return (
+							<div
+								key={post.id}
+								className={styles.AuthorPostsLists}
+								onClick={() => handlePostClick(post.id)}
+							>
 								<div
 									className={
-										styles.AuthorPostsListsTitleWrapper
+										styles.AuthorPostsListsInfoWrapper
 									}
 								>
-									<h2
-										className={styles.AuthorPostsListsTitle}
+									<div
+										className={
+											styles.AuthorPostsListsTitleWrapper
+										}
 									>
-										<TranslatedContent
-											en={post.title_en}
-											uk={post.title_uk}
-											html
-										/>
-									</h2>
+										<h2
+											className={
+												styles.AuthorPostsListsTitle
+											}
+										>
+											<TranslatedContent
+												en={post.title_en}
+												uk={post.title_uk}
+												html
+											/>
+										</h2>
+									</div>
+									<div
+										className={
+											styles.AuthorPostsListsContentWrapper
+										}
+									>
+										<p
+											className={
+												styles.AuthorPostsListsContent
+											}
+										>
+											<TranslatedContent
+												en={post.content_en}
+												uk={post.content_uk}
+												html
+											/>
+										</p>
+									</div>
+									<div
+										className={`${styles.cardClockAndDateWrapper}`}
+									>
+										<div
+											className={`${styles.cardClockAndDateInner}`}
+										>
+											<div
+												className={`${styles.cardClockImgWrapper}`}
+											>
+												<img
+													className={`${styles.cardClockImg}`}
+													src={'/Img/clock.svg'}
+													alt={t(
+														'Світлина годинника',
+													)}
+													onError={(e) => {
+														e.target.onerror = null
+														e.target.src =
+															'/Img/clock.svg'
+													}}
+												/>
+											</div>
+											<div
+												className={`${styles.cardDateWrapper}`}
+											>
+												<p
+													className={`${styles.cardDate}`}
+												>
+													{formattedDate}
+												</p>
+											</div>
+											<div
+												className={`${styles.cardTimeWrapper}`}
+											>
+												<p
+													className={`${styles.cardTime}`}
+												>
+													{formattedTime}
+												</p>
+											</div>
+										</div>
+									</div>
 								</div>
-								<div
-									className={
-										styles.AuthorPostsListsContentWrapper
-									}
-								>
-									<p>
-										<TranslatedContent
-											en={post.content_en}
-											uk={post.content_uk}
-											html
-										/>
-									</p>
-								</div>
+
 								<div
 									className={
 										styles.AuthorPostsListsImageWrapper
@@ -135,6 +217,7 @@ function AuthorPostsLists() {
 								>
 									{post.images && (
 										<img
+											className={`${styles.AuthorPostsListsImage}`}
 											src={post.images}
 											alt={post.title_uk || post.title_en}
 											onError={(e) => {
@@ -146,8 +229,8 @@ function AuthorPostsLists() {
 									)}
 								</div>
 							</div>
-						</div>
-					))
+						)
+					})
 				) : (
 					<div className={styles.noPosts}>
 						{t('Новини не знайдено')}

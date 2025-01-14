@@ -19,10 +19,7 @@ const Slide = ({ author, onClick }) => {
 	const { t } = useTranslation()
 	const baseUrl = getBaseUrl()
 	return (
-		<div
-			className="newsPageAuthorsSliderCardContainer"
-			onClick={() => onClick(author.id)}
-		>
+		<div className="newsPageAuthorsSliderCardContainer">
 			<div className="newsPageAuthorsSliderCardWrapper">
 				<div className="newsPageAuthorsSliderCardUserPhotoWrapper">
 					<img
@@ -34,6 +31,7 @@ const Slide = ({ author, onClick }) => {
 						}
 						alt={t('Фотографія автора')}
 						loading="lazy"
+						onClick={() => onClick(author.id)}
 						onError={(e) => {
 							e.target.onerror = null
 							e.target.src =
@@ -75,8 +73,8 @@ const NewsPageAuthorsSlider = () => {
 		fetchCreator()
 	}, [])
 
-	const handleAuthorPreviewClick = () => {
-		navigate(`/all-author-posts/${posts.author.id}`)
+	const handleAuthorPreviewClick = (author) => {
+		navigate(`/all-author-posts/${author}`)
 	}
 
 	return (
