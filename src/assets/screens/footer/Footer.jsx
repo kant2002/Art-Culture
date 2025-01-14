@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
-	const { t } = useTranslation();	
+	const { t } = useTranslation();
 
 	const navigate = useNavigate()
-	
+
 	const handleMainPageClick = () => {
 		navigate('/MainPage')
 	}
@@ -28,19 +28,26 @@ const Footer = () => {
 		navigate('/MuseumsPage')
 	}
 
+	const goToMainPage = () => {
+		navigate('/MainPage')
+	}
+
 	return (
 		<footer className={`${styles.footer}`}>
 			<div className={`${styles.footerWrapper}`}>
 				<div className={`${styles.footerLeftWrapper}`}>
 
-					<div className={`${styles.footerLogoWrapper}`}>
-						<img className={`${styles.footerLogoImg}`} src='/Img/logo.svg' alt='Art & culture Ukraine' />
-						<div className={`${styles.footerLogoTitleWrapper}`}>
-							<p className={`${styles.footerLogoFirstWord}`}>art</p>
-							<p className={`${styles.footerLogoSecondWord}`}>&culture</p>
-							<p className={`${styles.footerLogoThirdWord}`}>Ukraine</p>
+					<a className='footerLogoLink'
+						onClick={goToMainPage}>
+						<div className={`${styles.footerLogoWrapper}`}>
+							<img className={`${styles.footerLogoImg}`} src='/Img/logo.svg' alt='Art & culture Ukraine' />
+							<div className={`${styles.footerLogoTitleWrapper}`}>
+								<p className={`${styles.footerLogoFirstWord}`}>art</p>
+								<p className={`${styles.footerLogoSecondWord}`}>&culture</p>
+								<p className={`${styles.footerLogoThirdWord}`}>Ukraine</p>
+							</div>
 						</div>
-					</div>
+					</a>
 
 					<nav className={`${styles.footerMenuWrapper}`}>
 						<ul className={`${styles.footerMenuUl}`}>
