@@ -163,6 +163,7 @@ function MainArtists() {
 														creator.title ||
 														creator.email
 													}
+													html
 												/>
 											</h3>
 										</div>
@@ -183,6 +184,7 @@ function MainArtists() {
 														creator.bio ||
 														t('Немає біографії')
 													}
+													html
 												/>
 											</p>
 										</div>

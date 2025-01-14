@@ -100,6 +100,7 @@ function PostDetail() {
 						<TranslatedContent
 							en={post.title_en}
 							uk={post.title_uk}
+							html
 						/>
 					</h1>
 				</div>
