@@ -25,7 +25,7 @@
 .BannerSliderCardInnerWrapper {
     // Внутренняя обёртка карточки слайдера
     position: absolute;
-    padding: $responsiveBigPadding $responsiveLeftAndRightPadding $responsiveMediumPadding $responsiveLeftAndRightPadding;
+    padding: $responsiveBigPadding $responsiveLeftAndRightPadding;
     top: 0;
     left: 0;
     display: flex;
@@ -36,6 +36,11 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 10;
+}
+
+.BannerSliderCardSecondInnerWrapper {
+    margin: auto 0;
+    width: 100%;
 }
 
 .BannerSliderCardLogoWrapper {
@@ -65,7 +70,6 @@
 
 .BannerSliderCardStaticTitleWrapper {
     // Обёртка статического заголовка
-    margin: calc($responsiveBigPadding + 100px) 0 0 0;
     display: flex;
     justify-content: center;
     align-items: start;
@@ -279,7 +283,7 @@
 @media screen and (min-width: 1441px) {
     .BannerSliderCardInnerWrapper {
         // Внутренняя обёртка карточки слайдера
-        padding: $staticPcBigPadding $responsiveLeftAndRightPadding $staticPcMediumPadding $responsiveLeftAndRightPadding;
+        padding: $staticPcBigPadding $responsiveLeftAndRightPadding;
     }
 
     .BannerSliderCardSeparator {
@@ -373,7 +377,7 @@
 @media screen and (max-width: 569px) {
     .BannerSliderCardInnerWrapper {
         // Внутренняя обёртка карточки слайдера
-        padding: $staticMobileBigPadding $responsiveLeftAndRightPadding $staticMobileMediumPadding $responsiveLeftAndRightPadding;
+        padding: $staticMobileBigPadding $responsiveLeftAndRightPadding;
         width: 100%;
     }
 
