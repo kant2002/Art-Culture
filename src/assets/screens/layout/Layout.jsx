@@ -15,6 +15,7 @@ import ArtTermsFilteredPage from '../ArtTerms/ArtTermsFilteredPage'
 import ArtTermsPage from '../ArtTerms/ArtTermsPage'
 import ArtistPage from '../ArtistPage/ArtistPage'
 import ArtistsPage from '../ArtistsPage/ArtistsPage'
+import AllAuthorPosts from '../Authors/AllAuthorPosts'
 import AllAuthorsPage from '../Authors/AllAuthorsPage'
 import MuseumExhibitions from '../ExhibitionList/Exhibitions'
 import ExhibitionPage from '../ExhibitionPage/ExhibitionPage'
@@ -59,6 +60,10 @@ const Layout = ({ heading = '' }) => {
 					<Route
 						path="/all-authors-page"
 						element={<AllAuthorsPage />}
+					/>
+					<Route
+						path="/all-author-posts/:id"
+						element={<AllAuthorPosts />}
 					/>
 					<Route path="/MuseumsPage" element={<MuseumsPage />} />
 					<Route path="/museumpage/:id" element={<MuseumPage />} />

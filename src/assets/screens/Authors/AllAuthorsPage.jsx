@@ -132,7 +132,7 @@ function AllAuthorsPage() {
 	}
 
 	const handleAuthorPreviewClick = (id) => {
-		navigate(`/artist/${id}`)
+		navigate(`/all-author-posts/${id}`)
 	}
 
 	return (

@@ -1,0 +1,90 @@
+@import "/src/styles/utilities/variables.scss";
+
+.AuthorsPageContainer {
+  //* главный контейнер
+  margin: $responsiveTopPadding 0 0 0;
+  display: flex;
+  flex-direction: column;
+
+  * {
+    font-family: $default-font;
+  }
+}
+
+.AuthorPhotoNameContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.AuthorPhotoWrapper {
+  //* Контейнер для изображения артиста
+  width: calc(115px - (15 * ((1440px - 100vw) / (1440 - 375))));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1 / 1;
+}
+
+.AuthorPhoto {
+  //* Изображение артиста
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+}
+
+.AuthorTitleWrapper {
+  //* Контейнер для названия страницы
+  margin: $responsiveBigPadding $responsiveLeftAndRightPadding 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.AuthorTitle {
+}
+
+.popularOfThisArtistSliderTopInnerWrapper {
+  //* Верхняя часть слайдера
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0 calc(51px - (17 * ((1440px - 100vw) / (1440 - 375)))) 0;
+}
+
+.popularOfThisArtistSliderTitleWrapper {
+  //*Обёртка заголовка
+  display: flex;
+  align-items: center;
+}
+
+.popularOfThisArtistSliderTitle {
+  //* Заголовок
+  font-family: $default-font;
+  font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+  text-transform: uppercase;
+}
+
+.AuthorNavBarTwoSection {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0 calc(51px - (17 * ((1440px - 100vw) / (1440 - 375)))) 0;
+}
+.AuthorNavBarWrapper {
+  display: flex;
+  align-items: center;
+}
+.PostsNavBarLeft {
+  font-family: $default-font;
+  font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+  text-transform: uppercase;
+}
+.AllAuthorsNavBarRight {
+  font-family: $default-font;
+  font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+  text-transform: uppercase;
+}

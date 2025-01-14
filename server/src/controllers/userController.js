@@ -158,7 +158,7 @@ export const getAuthorsByLanguage = async (req, res, next) => {
       bio: author.bio,
       images: author.images,
     }))
-    res.json({ creators: mappedCreators })
+    res.json({ authors: mappedAuthors })
   } catch (error) {
     logger.error("Error fetching creators by language:", error)
     res.status(500).json({ error: "Internal server error" })

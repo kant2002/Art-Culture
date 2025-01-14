@@ -1,17 +1,17 @@
 // src/components/PostDetail/PostDetail.jsx
 
 import TranslatedContent from '@components/Blocks/TranslatedContent'
+import PostDetailPopularNewsSlider from '@components/Sliders/PostDetailPopularNewsSlider/PostDetailPopularNewsSlider'
+import styles from '@styles/components/Post/PostDetail.module.scss'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import styles from '@styles/components/Post/PostDetail.module.scss'
 import {
 	getFormattedDate,
 	getFormattedTime,
 	getImageUrl,
 } from '../../../utils/helper'
-import PostDetailPopularNewsSlider from '@components/Sliders/PostDetailPopularNewsSlider/PostDetailPopularNewsSlider'
 
 function PostDetail() {
 	const { t } = useTranslation()
@@ -47,6 +47,10 @@ function PostDetail() {
 	const formattedTime = getFormattedTime(post.createdAt)
 	const handleNewsPageClick = () => {
 		navigate('/NewsPage')
+	}
+
+	const handleAuthorPreviewClick = () => {
+		navigate(`/all-author-posts/${post.author.id}`)
 	}
 
 	return (
@@ -145,6 +149,7 @@ function PostDetail() {
 					<button className={`${styles.postPageNewsReadMoreButton}`}>
 						<p
 							className={`${styles.postPageNewsReadMoreButtonText}`}
+							onClick={handleAuthorPreviewClick}
 						>
 							{t('Інші статті автора')}
 						</p>
