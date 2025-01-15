@@ -39,7 +39,8 @@ const Slide = ({ museum, exhibition, baseUrl, onClick }) => {
 		<div className="BannerSliderCardContainer">
 			<div className="BannerSliderCardWrapper">
 				<div className="BannerSliderCardInnerWrapper">
-					{/* <div className="BannerSliderCardLogoWrapper">
+					<div className="BannerSliderCardSecondInnerWrapper">
+						{/* <div className="BannerSliderCardLogoWrapper">
 						<img
 							className="BannerSliderCardLogo"
 							src={museumLogoUrl}
@@ -52,23 +53,23 @@ const Slide = ({ museum, exhibition, baseUrl, onClick }) => {
 					</div>
 
 					<div className="BannerSliderCardSeparator"></div> */}
-					
-					<div className="BannerSliderCardStaticTitleWrapper">
-						<h1 className="BannerSliderCardStaticTitle">
-							{t('Велика подорож з')}
-						</h1>
-					</div>
 
-					<div className="BannerSliderCardTitleWrapper">
-						<h3 className="BannerSliderCardTitle">
-							<TranslatedContent
-								en={exhibition.title_en}
-								uk={exhibition.title_uk}
-							/>
-						</h3>
-					</div>
+						<div className="BannerSliderCardStaticTitleWrapper">
+							<h1 className="BannerSliderCardStaticTitle">
+								{t('Велика подорож з')}
+							</h1>
+						</div>
 
-					{/* <div className="BannerSliderCardDescriptionWrapper">
+						<div className="BannerSliderCardTitleWrapper">
+							<h3 className="BannerSliderCardTitle">
+								<TranslatedContent
+									en={exhibition.title_en}
+									uk={exhibition.title_uk}
+								/>
+							</h3>
+						</div>
+
+						{/* <div className="BannerSliderCardDescriptionWrapper">
 						<p className="BannerSliderCardDescription">
 							<TranslatedContent
 								en={exhibition.description_en}
@@ -78,13 +79,14 @@ const Slide = ({ museum, exhibition, baseUrl, onClick }) => {
 						</p>
 					</div> */}
 
-					<div className="BannerSliderCardReadMoreButtonWrapper">
-						<button
-							className="BannerSliderCardReadMoreButton"
-							onClick={() => onClick(exhibition.id)}
-						>
-							{t('Читати далі')}
-						</button>
+						<div className="BannerSliderCardReadMoreButtonWrapper">
+							<button
+								className="BannerSliderCardReadMoreButton"
+								onClick={() => onClick(exhibition.id)}
+							>
+								{t('Читати далі')}
+							</button>
+						</div>
 					</div>
 				</div>
 
