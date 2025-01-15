@@ -67,6 +67,7 @@
 }
 .PostsNavBarLeft {
   padding: 0 $responsiveSmallPadding 0 0;
+  cursor: pointer;
 }
 
 .NavBarSeparator {
@@ -74,6 +75,7 @@
 
 .AuthorsNavBarRight {
   padding: 0 0 0 $responsiveSmallPadding;
+  cursor: pointer;
 }
 
 .AuthorPostsListsWrapper {
