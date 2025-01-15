@@ -556,7 +556,6 @@ function MuseumExhibitions() {
 												name="location_uk"
 												value={formData.location_uk}
 												maxLength={500}
-												required
 												onChange={textEditorOnChange}
 											/>
 										</div>
@@ -618,7 +617,6 @@ function MuseumExhibitions() {
 												name="location_en"
 												value={formData.location_en}
 												maxLength={500}
-												required
 												onChange={textEditorOnChange}
 											/>
 										</div>
