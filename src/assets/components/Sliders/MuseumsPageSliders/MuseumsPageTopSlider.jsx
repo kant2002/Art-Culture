@@ -9,6 +9,7 @@ import axios from 'axios'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
+import { Autoplay } from 'swiper/modules';
 import { getBaseUrl, getImageUrl } from '../../../../utils/helper'
 
 // Import Swiper modules
@@ -126,13 +127,19 @@ const MuseumsPageTopSlider = () => {
 	return (
 		<div className="BannerSliderContainer">
 			<Swiper
-				modules={[Navigation, Pagination]}
+				modules={[Navigation, Pagination, Autoplay]}
 				spaceBetween={0}
 				slidesPerView={'1'}
 				navigation
 				pagination={{ clickable: false, type: 'fraction' }}
 				onSlideChange={() => console.log('slide change')}
 				onSwiper={(swiper) => console.log(swiper)}
+				autoplay={{
+					delay: 2000, // Задержка в миллисекундах
+					disableOnInteraction: false, // Продолжать автопрокрутку после взаимодействия
+					pauseOnMouseEnter: true // Останавливать при наведении
+				}}
+				loop={true} // Бесконечная прокрутках слайдов
 			>
 				{loading ? (
 					<SwiperSlide>
