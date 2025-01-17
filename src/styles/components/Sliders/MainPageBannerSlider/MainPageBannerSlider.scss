@@ -85,7 +85,7 @@
     height: 100%;
     // font-size: calc(42px - (10 * ((1440px - 100vw) / (1440 - 375))));
     font-weight: 500;
-    text-transform: uppercase;
+    text-transform: none;
     color: rgb(255, 255, 255);
     font-family: $default-font;
 }
