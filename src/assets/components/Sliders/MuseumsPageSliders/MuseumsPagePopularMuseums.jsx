@@ -16,7 +16,7 @@ import { Navigation, Pagination } from 'swiper/modules'
 import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import '@styles/components/Sliders/Base/PopularSlider.scss'
 import { getBaseUrl, getImageUrl } from '../../../../utils/helper'
-import LikeAndShare from '../../Blocks/LikeAndShare'
+// import LikeAndShare from '../../Blocks/LikeAndShare'
 import TranslatedContent from '../../Blocks/TranslatedContent'
 
 const Slide = ({ museum, baseUrl, onClick }) => {
@@ -110,7 +110,7 @@ const PopularMuseumSlider = () => {
 							{t('Популярне.')} &#8243;{t('Музеї')}&#8243;
 						</h2>
 					</div>
-					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
+					{/* <LikeAndShare className={sliderStyles.LikeAndShareFixed} /> */}
 				</div>
 				<div className='PopularSliderBottomInnerWrapper'>
 					<Swiper
