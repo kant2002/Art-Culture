@@ -9,7 +9,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 // Import Swiper modules
-import LikeAndShare from '@components/Blocks/LikeAndShare'
+// import LikeAndShare from '@components/Blocks/LikeAndShare'
 import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import '@styles/components/Sliders/Base/PopularSlider.scss'
 import { useNavigate } from 'react-router-dom'
@@ -188,7 +188,7 @@ const MainPopularArtistsSlider = () => {
 							{t('Популярне.')} &#8243;{t('Мистецтво')}&#8243;
 						</h2>
 					</div>
-					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
+					{/* <LikeAndShare className={sliderStyles.LikeAndShareFixed} /> */}
 				</div>
 				<div className="PopularSliderBottomInnerWrapper">
 					<Swiper

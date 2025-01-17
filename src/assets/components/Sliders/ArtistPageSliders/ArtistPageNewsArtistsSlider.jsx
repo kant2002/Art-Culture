@@ -100,7 +100,7 @@ const ArtistPageNewsArtistsSlider = () => {
 							{t('Новини.')} &#8243;{t('Митці')}&#8243;
 						</h2>
 					</div>
-					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
+					{/* <LikeAndShare className={sliderStyles.LikeAndShareFixed} /> */}
 				</div>
 				<div className="NewsSliderBottomInnerWrapper">
 					<Swiper

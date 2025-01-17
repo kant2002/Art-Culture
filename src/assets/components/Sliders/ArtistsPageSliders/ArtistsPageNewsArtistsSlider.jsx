@@ -11,7 +11,7 @@ import 'swiper/css/pagination'
 // Import Swiper modules
 import { Navigation, Pagination } from 'swiper/modules'
 
-import LikeAndShare from '@components/Blocks/LikeAndShare'
+// import LikeAndShare from '@components/Blocks/LikeAndShare'
 import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { getBaseUrl } from '../../../../utils/helper'
@@ -108,7 +108,7 @@ const ArtistsPageNewsArtistsSlider = () => {
 							{t('Новини.')} &#8243;{t('Митці')}&#8243;
 						</h2>
 					</div>
-					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
+					{/* <LikeAndShare className={sliderStyles.LikeAndShareFixed} /> */}
 				</div>
 				<div className="NewsSliderBottomInnerWrapper">
 					<Swiper
