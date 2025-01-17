@@ -104,7 +104,7 @@ function UserProfileAddPost() {
 								label={t('Назва публікації українською')}
 								name="title_uk"
 								value={formData.title_uk}
-								maxLength="150"
+								maxLength="200"
 								required
 								onChange={textEditorOnChange}
 								html
@@ -115,7 +115,7 @@ function UserProfileAddPost() {
 								label={t('Опис публікації українською')}
 								name="content_uk"
 								value={formData.content_uk}
-								maxLength="1000"
+								maxLength="3000"
 								required
 								onChange={textEditorOnChange}
 								html
@@ -128,7 +128,7 @@ function UserProfileAddPost() {
 								label={t('Назва публікації англійською')}
 								name="title_en"
 								value={formData.title_en}
-								maxLength="150"
+								maxLength="200"
 								required
 								onChange={textEditorOnChange}
 								html
@@ -139,7 +139,7 @@ function UserProfileAddPost() {
 								label={t('Опис публікації англійською')}
 								name="content_en"
 								value={formData.content_en}
-								maxLength="1000"
+								maxLength="3000"
 								required
 								onChange={textEditorOnChange}
 								html
@@ -150,7 +150,6 @@ function UserProfileAddPost() {
 				<div className="field-group">
 					<ImageEditor
 						label={t('Додати зображення')}
-						required
 						name="images"
 						value={formData.images}
 						onChange={textEditorOnChange}

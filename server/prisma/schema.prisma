@@ -38,11 +38,12 @@ model User {
 
 model Post {
   id         Int      @id @default(autoincrement())
-  title_en   String   @db.VarChar(150)
-  title_uk   String   @db.VarChar(150)
-  content_en String   @db.VarChar(1000)
-  content_uk String   @db.VarChar(1000)
+  title_en   String   @db.VarChar(250)
+  title_uk   String   @db.VarChar(250)
+  content_en String   @db.VarChar(5000)
+  content_uk String   @db.VarChar(5000)
   authorId   Int      @map("author_id")
+  creatorId  Int?     @map("creator_id")
   images     String?
   createdAt  DateTime @default(now()) @map("created_at")
   updatedAt  DateTime @updatedAt @map("updated_at")

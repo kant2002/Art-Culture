@@ -65,7 +65,7 @@ function Sidebar() {
 					</button>
 				</>
 			)}
-			{isAuthor && (
+			{(isAuthor || isCreator || isMuseum) && (
 				<>
 					<button
 						className={styles.profileAction}
