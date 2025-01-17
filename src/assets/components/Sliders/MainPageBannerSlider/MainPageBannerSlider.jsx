@@ -52,7 +52,7 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 
 						<div className="BannerSliderCardStaticTitleWrapper">
 							<h1 className="BannerSliderCardStaticTitle">
-								{t('Велика подорож з')}
+								the GREAT JOURNEY WHITH the
 							</h1>
 						</div>
 
