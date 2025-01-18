@@ -203,6 +203,7 @@ export const getPostsByAuthorId = async (req, res, next) => {
     if (isNaN(authorId)) {
       return res.status(400).json({ error: "invalid post id" })
     }
+
     const posts = await prisma.post.findMany({
       where: {
         authorId: authorId,
@@ -214,6 +215,7 @@ export const getPostsByAuthorId = async (req, res, next) => {
             id: true,
             email: true,
             title: true,
+            role: true,
           },
         },
       },

@@ -230,7 +230,7 @@ function UserProfilePosts() {
 										<TranslatedContent
 											en={post.content_en}
 											uk={post.content_uk}
-											maxLength={500}
+											maxLength={700}
 											html
 										/>
 									</p>
@@ -309,7 +309,7 @@ function UserProfilePosts() {
 											)}
 											name="title_uk"
 											value={formData.title_uk}
-											maxLength={50}
+											maxLength={200}
 											required
 											onChange={textEditorOnChange}
 										/>
@@ -321,7 +321,7 @@ function UserProfilePosts() {
 											)}
 											name="content_uk"
 											value={formData.content_uk}
-											maxLength={500}
+											maxLength={3000}
 											required
 											onChange={textEditorOnChange}
 											html
@@ -337,7 +337,7 @@ function UserProfilePosts() {
 											)}
 											name="title_en"
 											value={formData.title_en}
-											maxLength={50}
+											maxLength={200}
 											required
 											onChange={textEditorOnChange}
 										/>
@@ -349,7 +349,7 @@ function UserProfilePosts() {
 											)}
 											name="content_en"
 											value={formData.content_en}
-											maxLength={500}
+											maxLength={3000}
 											required
 											onChange={textEditorOnChange}
 											html

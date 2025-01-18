@@ -34,6 +34,8 @@ router.post(
 // Get post by Creator
 router.get("/creators", getCreatorsPosts)
 
+router.get("/creator/:authorId", getPostsByAuthorId)
+
 router.get("/authors", getAuthorsPosts)
 
 router.get("/author/:authorId", getPostsByAuthorId)
