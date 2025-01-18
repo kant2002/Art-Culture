@@ -8,7 +8,6 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-
 // Import Swiper modules
 import { Navigation, Pagination } from 'swiper/modules'
 
@@ -53,28 +52,78 @@ const NewsPageAuthorsSlider = () => {
 	const { t } = useTranslation()
 	const [posts, setPosts] = useState([])
 	const [error, setError] = useState(null)
-	const [authors, setAuthors] = useState({})
+	const [authors, setAuthors] = useState([])
+	const [creators, setCreators] = useState([])
 	const [loading, setLoading] = useState(true)
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		const fetchCreator = async () => {
+		const fetchAuthorsAndCreators = async () => {
 			try {
-				const response = await axios.get(`/api/users/authors`)
-				console.log('Received author data ', response.data)
-				setAuthors(response.data.authors)
-				setLoading(false)
+				setLoading(true)
+
+				// Fetch Authors
+				const authorsResponse = await axios.get('/api/users/authors')
+				const authorsWithPosts = await Promise.all(
+					authorsResponse.data.authors.map(async (author) => {
+						try {
+							const postsResponse = await axios.get(
+								`/api/posts/author/${author.id}`,
+							)
+							if (postsResponse.data.posts.length > 0) {
+								author.posts = postsResponse.data.posts
+								return author
+							}
+							return null // Skip if no posts
+						} catch (error) {
+							console.error(
+								`Error fetching posts for author ${author.id}`,
+								error,
+							)
+							return null
+						}
+					}),
+				)
+				setAuthors(authorsWithPosts.filter((author) => author !== null)) // Filter out authors with no posts
+
+				// Fetch Creators
+				const creatorsResponse = await axios.get('/api/users/creators')
+				const creatorsWithPosts = await Promise.all(
+					creatorsResponse.data.creators.map(async (creator) => {
+						try {
+							const postsResponse = await axios.get(
+								`/api/posts/author/${creator.id}`,
+							)
+							if (postsResponse.data.posts.length > 0) {
+								creator.posts = postsResponse.data.posts
+								return creator
+							}
+							return null // Skip if no posts
+						} catch (error) {
+							console.error(
+								`Error fetching posts for creator ${creator.id}`,
+								error,
+							)
+							return null
+						}
+					}),
+				)
+				setCreators(
+					creatorsWithPosts.filter((creator) => creator !== null),
+				) // Filter out creators with no posts
 			} catch (error) {
-				console.error('Error fetching author data', error)
+				console.error('Error fetching Authors or Creators', error)
+				setError(t('Не вдалося завантажити дані авторів та творців.'))
+			} finally {
 				setLoading(false)
 			}
 		}
 
-		fetchCreator()
-	}, [])
+		fetchAuthorsAndCreators()
+	}, [t])
 
-	const handleAuthorPreviewClick = (author) => {
-		navigate(`/all-author-posts/${author}`)
+	const handleAuthorPreviewClick = (authorId) => {
+		navigate(`/all-author-posts/${authorId}`)
 	}
 
 	return (
@@ -85,12 +134,11 @@ const NewsPageAuthorsSlider = () => {
 				</div>
 
 				<div className="newsPageAuthorsSliderInnerWrapper">
-					{' '}
 					{loading ? (
 						<p>{t('Завантаження авторів...')}</p>
 					) : error ? (
 						<p>{error}</p>
-					) : authors.length === 0 ? (
+					) : authors.length === 0 && creators.length === 0 ? (
 						<p>{t('Немає авторів для відображення.')}</p>
 					) : (
 						<Swiper
@@ -99,9 +147,8 @@ const NewsPageAuthorsSlider = () => {
 							slidesPerView={'auto'}
 							navigation
 							pagination={{ clickable: false, type: 'fraction' }}
-							onSlideChange={() => console.log('slide change')}
-							onSwiper={(swiper) => console.log(swiper)}
 						>
+							{/* Render Authors */}
 							{authors.map((author) => (
 								<SwiperSlide key={author.id}>
 									<Slide
@@ -110,11 +157,18 @@ const NewsPageAuthorsSlider = () => {
 									/>
 								</SwiperSlide>
 							))}
+
+							{/* Render Creators */}
+							{creators.map((creator) => (
+								<SwiperSlide key={creator.id}>
+									<Slide
+										author={creator}
+										onClick={handleAuthorPreviewClick}
+									/>
+								</SwiperSlide>
+							))}
 						</Swiper>
 					)}
-					<div className={'${swiper-button-prev}'}></div>
-					<div className={'${swiper-pagination}'}></div>
-					<div className={'${swiper-button-next}'}></div>
 				</div>
 			</div>
 		</div>
