@@ -11,16 +11,11 @@ function AllAuthorsPage() {
 	const { t, i18n } = useTranslation()
 	const navigate = useNavigate()
 
-	// Existing statesS
-	const [authors, setAuthors] = useState({})
+	const [authorsAndCreators, setAuthorsAndCreators] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 	const [language, setLanguage] = useState(i18n.language)
-
-	// Tracks which letter user selected in the slider
 	const [selectedLetter, setSelectedLetter] = useState('')
-
-	// Which "sort mode" (button) is active? "ALL" | "UK" | "EN"
 	const [sortMode, setSortMode] = useState('ALL')
 
 	useEffect(() => {
@@ -32,39 +27,35 @@ function AllAuthorsPage() {
 		}
 	}, [i18n])
 
-	/**
-	 * Helper: group an array of authors by the first letter of `author.title`.
-	 * Then filter + sort letters depending on sortMode: UK or EN or ALL.
-	 */
-	const groupByLetter = (authorsArray) => {
-		const grouped = authorsArray.reduce((acc, author) => {
-			const letter = author.title?.charAt(0).toUpperCase() || ''
-			if (!acc[letter]) {
-				acc[letter] = []
-			}
-			acc[letter].push(author)
-			return acc
-		}, {})
+	const groupByLetter = (authorsAndCreatorsArray) => {
+		const grouped = authorsAndCreatorsArray.reduce(
+			(acc, authorOrCreator) => {
+				const letter =
+					authorOrCreator.title?.charAt(0).toUpperCase() || ''
+				if (!acc[letter]) {
+					acc[letter] = []
+				}
+				acc[letter].push(authorOrCreator)
+				return acc
+			},
+			{},
+		)
 
 		let lettersInUse = Object.keys(grouped)
 
 		if (sortMode === 'UK') {
-			// Show only Ukrainian letters that have authors
 			lettersInUse = ukrainianLetters.filter((l) =>
 				lettersInUse.includes(l),
 			)
 		} else if (sortMode === 'EN') {
-			// Show only English letters that have authors
 			lettersInUse = englishLetters.filter((l) =>
 				lettersInUse.includes(l),
 			)
 		} else {
-			// "ALL" => optionally merge both sets
 			const merged = [...ukrainianLetters, ...englishLetters]
 			lettersInUse = merged.filter((l) => lettersInUse.includes(l))
 		}
 
-		// Rebuild a sorted object
 		const sortedObj = {}
 		lettersInUse.forEach((letter) => {
 			sortedObj[letter] = grouped[letter]
@@ -72,47 +63,81 @@ function AllAuthorsPage() {
 		return sortedObj
 	}
 
-	/**
-	 * Fetch authors whenever sortMode or selectedLetter changes
-	 */
 	useEffect(() => {
-		const fetchAuthors = async () => {
+		const fetchAuthorsAndCreators = async () => {
 			try {
 				setLoading(true)
 				setError(null)
 
-				// Decide the endpoint based on active button
-				let url = '/api/users/authors' // Default => all
-				if (sortMode === 'UK') {
-					url = selectedLetter
-						? `/api/users/authors/language/uk?letter=${selectedLetter}`
-						: `/api/users/authors/language/uk`
-				} else if (sortMode === 'EN') {
-					url = selectedLetter
-						? `/api/users/authors/language/en?letter=${selectedLetter}`
-						: `/api/users/authors/language/en`
-				}
+				// Fetch Authors
+				const authorsResponse = await axios.get('/api/users/authors')
+				const authorsWithPosts = await Promise.all(
+					authorsResponse.data.authors.map(async (author) => {
+						try {
+							const postsResponse = await axios.get(
+								`/api/posts/author/${author.id}`,
+							)
+							if (postsResponse.data.posts.length > 0) {
+								author.posts = postsResponse.data.posts
+								author.type = 'author' // Mark the type
+								return author
+							}
+							return null
+						} catch (error) {
+							console.error(
+								`Error fetching posts for author ${author.id}`,
+								error,
+							)
+							return null
+						}
+					}),
+				)
 
-				console.log('Requesting URL:', url)
-				const response = await axios.get(url)
-				const fetchedAuthors = response.data.authors || []
+				// Fetch Creators
+				const creatorsResponse = await axios.get('/api/users/creators')
+				const creatorsWithPosts = await Promise.all(
+					creatorsResponse.data.creators.map(async (creator) => {
+						try {
+							const postsResponse = await axios.get(
+								`/api/posts/author/${creator.id}`,
+							)
+							if (postsResponse.data.posts.length > 0) {
+								creator.posts = postsResponse.data.posts
+								creator.type = 'creator' // Mark the type
+								return creator
+							}
+							return null
+						} catch (error) {
+							console.error(
+								`Error fetching posts for creator ${creator.id}`,
+								error,
+							)
+							return null
+						}
+					}),
+				)
 
-				// Group them by letter => so "Усі" also remains letter-based
-				const grouped = groupByLetter(fetchedAuthors)
-				setAuthors(grouped)
-
+				// Combine authors and creators, and filter out those without posts
+				const combined = [
+					...authorsWithPosts,
+					...creatorsWithPosts,
+				].filter((item) => item !== null)
+				setAuthorsAndCreators(groupByLetter(combined))
+			} catch (error) {
+				console.error('Error fetching authors and creators', error)
+				setError(t('Не вдалося завантажити дані авторів та творців.'))
+			} finally {
 				setLoading(false)
-			} catch (err) {
-				setLoading(false)
-				console.error('Error fetching authors:', err)
-				setError(err.response?.data?.error || 'An error occurred')
 			}
 		}
 
-		fetchAuthors()
-	}, [sortMode, selectedLetter])
+		fetchAuthorsAndCreators()
+	}, [sortMode, selectedLetter, t])
 
-	// Buttons
+	const handleLetterSelected = (letter) => {
+		setSelectedLetter(letter)
+	}
+
 	const handleShowAll = () => {
 		setSortMode('ALL')
 		setSelectedLetter('')
@@ -126,11 +151,6 @@ function AllAuthorsPage() {
 		setSelectedLetter('')
 	}
 
-	// Slider callback => sets selected letter => triggers fetch
-	const handleLetterSelected = (letter) => {
-		setSelectedLetter(letter)
-	}
-
 	const handleAuthorPreviewClick = (id) => {
 		navigate(`/all-author-posts/${id}`)
 	}
@@ -138,7 +158,7 @@ function AllAuthorsPage() {
 	return (
 		<div className={styles.ArtistsPageContainer}>
 			<div className={styles.ArtistsPageTitleWrapper}>
-				<h1>{t('Усі автори')}</h1>
+				<h1>{t('Усі автори та творці')}</h1>
 			</div>
 			<div className={styles.ArtistsPageSeparatorWrapper}>
 				<div className={styles.ArtistsPageSeparator}></div>
@@ -150,7 +170,7 @@ function AllAuthorsPage() {
 				/>
 			</div>
 
-			{/** 3-Button Block */}
+			{/* Buttons to toggle sort mode */}
 			<div className={styles.ArtistsPageGalleryButtonsWrapper}>
 				<button
 					className={styles.ArtistsPageGalleryButton}
@@ -184,7 +204,7 @@ function AllAuthorsPage() {
 				</button>
 			</div>
 
-			{/** Conditionally show the slider for UK or EN */}
+			{/* Letter selection slider */}
 			{sortMode === 'UK' && (
 				<AllArtistsPageSearchSlider
 					letters={ukrainianLetters}
@@ -200,66 +220,91 @@ function AllAuthorsPage() {
 				/>
 			)}
 
+			{/* Render Authors and Creators */}
 			<div className={styles.ArtistsContainer}>
-				{/** 1) Display a global "No authors" if empty and not loading */}
-				{!loading && Object.keys(authors).length === 0 && (
+				{!loading && Object.keys(authorsAndCreators).length === 0 && (
 					<LoadingError
-						message={t('Відсутні автори за ціею літерою')}
+						message={t(
+							'Відсутні автори та творці для відображення',
+						)}
 					/>
 				)}
-				{Object.keys(authors).map((letter) => (
+
+				{/* Render Authors and Creators grouped together */}
+				{Object.keys(authorsAndCreators).map((letter) => (
 					<div key={letter} className={styles.ArtistsWrapper}>
 						<div className={styles.LetterWrapper}>
 							<h2 className={styles.Letter}>{letter}</h2>
 						</div>
 						<div className={styles.ArtistsByLetterWrapper}>
-							{authors[letter].map((author) => (
-								<div
-									key={author.id}
-									className={styles.ArtistWrapper}
-									onClick={() =>
-										handleAuthorPreviewClick(author.id)
-									}
-								>
+							{authorsAndCreators[letter].map(
+								(authorOrCreator) => (
 									<div
-										className={
-											styles.ArtistInformationWrapper
+										key={authorOrCreator.id}
+										className={styles.ArtistWrapper}
+										onClick={() =>
+											handleAuthorPreviewClick(
+												authorOrCreator.id,
+											)
 										}
 									>
 										<div
 											className={
-												styles.ArtistTitleWrapper
+												styles.ArtistInformationWrapper
 											}
 										>
-											<p className={styles.ArtistTitle}>
-												{author.title}
-											</p>
+											<div
+												className={
+													styles.ArtistTitleWrapper
+												}
+											>
+												<p
+													className={
+														styles.ArtistTitle
+													}
+												>
+													{authorOrCreator.title}
+
+													{/* (
+													{authorOrCreator.type ===
+													'author'
+														? 'Автор'
+														: 'Творець'}
+													) */}
+												</p>
+											</div>
+											<div
+												className={
+													styles.ArtistPhotoWrapper
+												}
+											>
+												<img
+													className={
+														styles.ArtistPhoto
+													}
+													src={
+														authorOrCreator.images ||
+														'/Img/ArtistPhoto.jpg'
+													}
+													alt={authorOrCreator.title}
+													onError={(e) => {
+														e.target.onerror = null
+														e.target.src =
+															'/Img/newsCardERROR.jpg'
+													}}
+												/>
+											</div>
 										</div>
 										<div
-											className={
-												styles.ArtistPhotoWrapper
-											}
+											className={styles.SeparatorWrapper}
 										>
-											<img
-												className={styles.ArtistPhoto}
-												src={
-													author.images ||
-													'/Img/ArtistPhoto.jpg'
-												}
-												alt={author.title}
-												onError={(e) => {
-													e.target.onerror = null
-													e.target.src =
-														'/Img/newsCardERROR.jpg'
-												}}
-											/>
+											<div
+												className={styles.Separator}
+											></div>
 										</div>
 									</div>
-									<div className={styles.SeparatorWrapper}>
-										<div className={styles.Separator}></div>
-									</div>
-								</div>
-							))}
+								),
+							)}
 						</div>
 					</div>
 				))}
