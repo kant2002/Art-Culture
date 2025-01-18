@@ -18,40 +18,64 @@ function AuthorPostsLists() {
 	const { id } = useParams()
 	const [posts, setPosts] = useState([])
 	const [author, setAuthor] = useState({})
+	const [creator, setCreator] = useState({})
 	const [error, setError] = useState(null)
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
-		const getAuthorPosts = async () => {
+		const fetchAuthorPosts = async () => {
 			try {
 				setLoading(true)
-				const response = await axios.get(`/api/users/authors/${id}`)
-				setAuthor(response.data.author)
-			} catch (error) {
-				console.error('Error fetch author', error)
-				setError(t('Не вдалося завантажити дані автора.'))
-				setLoading(false)
-				return
-			}
-			try {
-				//* Fetch post by authorId
-				setLoading(true)
+
+				// Attempt to fetch Creator data first
+				const creatorResponse = await axios.get(
+					`/api/users/creators/${id}`,
+				)
+				setAuthor(creatorResponse.data.creator) // Store Creator data
+
+				// Fetch posts for the Creator
 				const postsResponse = await axios.get(`/api/posts/author/${id}`)
-				console.log('PostFetched', postsResponse.data.posts)
-				setPosts(postsResponse.data.posts)
-			} catch (error) {
-				if (error.response && error.response.status === 404) {
-					console.log('No posts found for this author')
-					setPosts([])
+				setPosts(postsResponse.data.posts) // Store posts for the Creator
+			} catch (creatorError) {
+				// If fetching Creator fails (404), try fetching Author data
+				if (
+					creatorError.response &&
+					creatorError.response.status === 404
+				) {
+					try {
+						const authorResponse = await axios.get(
+							`/api/users/authors/${id}`,
+						)
+						setAuthor(authorResponse.data.author) // Store Author data
+
+						// Fetch posts for the Author
+						const postsResponse = await axios.get(
+							`/api/posts/author/${id}`,
+						)
+						setPosts(postsResponse.data.posts) // Store posts for the Author
+					} catch (authorError) {
+						console.error(
+							'Error fetching Author data:',
+							authorError,
+						)
+						setError(
+							t('Не вдалося завантажити дані автора або новини.'),
+						)
+						setPosts([])
+					}
 				} else {
-					console.error('Error fetch posts', error)
-					setError(t('Не вдалося завантажити новини.'))
+					console.error('Error fetching Creator data:', creatorError)
+					setError(
+						t('Не вдалося завантажити дані автора або новини.'),
+					)
 					setPosts([])
 				}
+			} finally {
+				setLoading(false)
 			}
-			setLoading(false)
 		}
-		getAuthorPosts()
+
+		fetchAuthorPosts()
 	}, [id, t])
 
 	if (loading) {
