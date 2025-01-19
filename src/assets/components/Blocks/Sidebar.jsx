@@ -13,6 +13,7 @@ function Sidebar() {
 	const isAdmin = user && user.role === 'ADMIN'
 	const isCreator = user && user.role === 'CREATOR'
 	const isAuthor = user && user.role === 'AUTHOR'
+	const isExhibition = user && user.role === 'EXHIBITION'
 
 	const handleProfilePageClick = () => {
 		navigate('/profile')
@@ -65,7 +66,7 @@ function Sidebar() {
 					</button>
 				</>
 			)}
-			{(isAuthor || isCreator || isMuseum) && (
+			{(isAuthor || isCreator || isMuseum || isExhibition) && (
 				<>
 					<button
 						className={styles.profileAction}
@@ -97,7 +98,7 @@ function Sidebar() {
 					</button>
 				</>
 			)}
-			{isMuseum && (
+			{isExhibition && (
 				<>
 					<button
 						className={styles.profileAction}

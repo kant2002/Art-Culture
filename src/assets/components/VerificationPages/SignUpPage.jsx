@@ -181,6 +181,16 @@ const SignUp = () => {
 							onChange={handleChange}
 						/>{' '}
 						{t('тип_реестрації_автор')}
+						<input
+							type="radio"
+							className=""
+							required
+							name="role"
+							value="EXHIBITION"
+							checked={signUpDetails.role == 'EXHIBITION'}
+							onChange={handleChange}
+						/>{' '}
+						{t('тип_реестрації_організатор_виставки')}
 					</p>
 					<TextEditor
 						label="Email"
