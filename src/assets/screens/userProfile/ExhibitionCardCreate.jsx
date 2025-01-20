@@ -41,6 +41,7 @@ function ExhibitionForm() {
 	const [museums, setMuseums] = useState([])
 	const [selectedMuseum, setSelectedMuseum] = useState(null)
 	const [museumSearchResult, setMuseumSearchResult] = useState([])
+	const [museumSearchQuery, setMuseumSearchQuery] = useState('')
 
 	const navigate = useNavigate()
 	const { t } = useTranslation()
@@ -57,8 +58,9 @@ function ExhibitionForm() {
 
 	useEffect(() => {
 		// Fetch artists to populate the checkboxes
-		const fetchArtists = async () => {
+		const fetchArtistsAndMuseums = async () => {
 			try {
+				setLoading(true)
 				const response = await axios.get('/api/users/creators', {
 					headers: {
 						Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -66,18 +68,43 @@ function ExhibitionForm() {
 				})
 				console.log('Artists data:', response.data.creators)
 				setArtists(response.data.creators)
+				const museumsResponse = await axios.get('/api/users/museums', {
+					headers: {
+						Authorization: `Bearer ${localStorage.getItem('token')}`,
+					},
+				})
+				console.log('Mus data', museumsResponse.data.museums)
+				setMuseums(museumsResponse.data.museums)
 			} catch (error) {
 				console.error('Error fetching artists:', error)
 				setErrors((prevErrors) => [
 					...prevErrors,
 					'Failed to load artists.',
 				])
-				setArtists([])
+				setLoading(false)
 			}
 		}
 
-		fetchArtists()
-	}, [])
+		fetchArtistsAndMuseums()
+	}, [setArtists, setMuseums])
+
+	const handleMuseumSearchChange = async (e) => {
+		const query = e.target.value
+		setMuseumSearchQuery(query)
+
+		if (query.length > 2) {
+			try {
+				const museumsResponse = await API.get(
+					`/search/museums?q=${query}`,
+				)
+				setMuseumSearchResult(museumsResponse.data.museums)
+			} catch (error) {
+				console.error('Error fetching museums:', error)
+			}
+		} else {
+			setMuseumSearchResult([])
+		}
+	}
 
 	const handleSearchChange = async (e) => {
 		const query = e.target.value
