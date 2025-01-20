@@ -301,6 +301,72 @@ export const getPostByExhibitionId = async (req, res, next) => {
   }
 }
 
+export const getMuseumsPost = async (req, res, next) => {
+  try {
+    const posts = await prisma.post.findMany({
+      where: {
+        author: {
+          role: "MUSEUM",
+        },
+      },
+      include: {
+        author: {
+          select: {
+            id: true,
+            email: true,
+            title: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    })
+
+    res.json({ posts })
+  } catch (error) {
+    logger.error("Error fetching creator posts:", error)
+    next(error)
+  }
+}
+
+export const getPostByMuseumId = async (req, res, next) => {
+  try {
+    const museumId = parseInt(req.params.museumId, 10)
+    if (isNaN(museumId)) {
+      return res.status(400).json({ error: "invalid post id" })
+    }
+
+    const posts = await prisma.post.findMany({
+      where: {
+        authorId: museumId,
+      },
+      include: {
+        author: {
+          select: {
+            id: true,
+            email: true,
+            title: true,
+            role: true,
+          },
+        },
+      },
+      orderedBy: {
+        createdAt: "desc",
+      },
+    })
+
+    if (!posts || posts.length === 0) {
+      return res.status(404).json({ error: "Posts not found" })
+    }
+
+    res.json({ posts })
+  } catch (error) {
+    logger.error("Error fetching posts by museum ID:", error)
+    next(error)
+  }
+}
+
 export const updatePost = async (req, res, next) => {
   try {
     const { id } = req.params

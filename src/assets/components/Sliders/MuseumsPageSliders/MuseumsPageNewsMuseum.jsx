@@ -13,7 +13,6 @@ import 'swiper/css/pagination'
 import { Navigation, Pagination } from 'swiper/modules'
 
 // import LikeAndShare from '@components/Blocks/LikeAndShare'
-import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import { getBaseUrl } from '../../../../utils/helper'
 import TranslatedContent from '../../Blocks/TranslatedContent'
 import '/src/styles/components/Sliders/Base/NewsSlider.scss'
@@ -32,10 +31,7 @@ const Slide = ({ post, baseUrl, onClick }) => {
 
 	return (
 		<div className="NewsSliderCardContainer">
-			<a
-				className="NewsSliderCardLink"
-				// TODO:Rewrite component to use navigate for post	onClick={handleArtistPageClick}
-			>
+			<a className="NewsSliderCardLink">
 				<div className="NewsSliderCardImgWrapper">
 					<img
 						className="NewsSliderCardImg"
@@ -76,27 +72,27 @@ const Slide = ({ post, baseUrl, onClick }) => {
 
 const ArtistsPageNewsArtistsSlider = () => {
 	const { t } = useTranslation()
-	const [creatorPosts, setCreatorPosts] = useState([])
+	const [museumPosts, setMuseumPosts] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 
 	const baseUrl = getBaseUrl()
 
 	useEffect(() => {
-		const fetchCreatorPosts = async () => {
+		const fetchMuseumPosts = async () => {
 			try {
-				const response = await axios.get('/api/posts/creators')
+				setLoading(true)
+				const response = await axios.get('/api/posts/museums')
 				console.log('Received creator posts:', response.data)
-				setCreatorPosts(response.data.posts || [])
-				setLoading(false)
+				setMuseumPosts(response.data.posts || [])
 			} catch (err) {
 				console.error('Error fetching creator posts:', err)
 				setError(t('Не вдалося завантажити публікації.'))
-				setLoading(false)
 			}
+			setLoading(false)
 		}
 
-		fetchCreatorPosts()
+		fetchMuseumPosts()
 	}, [])
 
 	return (
@@ -130,14 +126,14 @@ const ArtistsPageNewsArtistsSlider = () => {
 							<SwiperSlide>
 								<div className="error">{error}</div>
 							</SwiperSlide>
-						) : !creatorPosts || creatorPosts.length === 0 ? (
+						) : !museumPosts || museumPosts.length === 0 ? (
 							<SwiperSlide>
 								<div className="noPosts">
 									{t('Немає публікацій від митців.')}
 								</div>
 							</SwiperSlide>
 						) : (
-							creatorPosts.map((post) => (
+							museumPosts.map((post) => (
 								<SwiperSlide key={post.id}>
 									<Slide post={post} baseUrl={baseUrl} />
 								</SwiperSlide>
