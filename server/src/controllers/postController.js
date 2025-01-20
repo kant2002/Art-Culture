@@ -235,6 +235,72 @@ export const getPostsByAuthorId = async (req, res, next) => {
   }
 }
 
+export const getExhibitionsPost = async (req, res, next) => {
+  try {
+    const posts = await prisma.post.findMany({
+      where: {
+        author: {
+          role: "EXHIBITION",
+        },
+      },
+      include: {
+        author: {
+          select: {
+            id: true,
+            email: true,
+            title: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    })
+
+    res.json({ posts })
+  } catch (error) {
+    logger.error("Error fetching creator posts:", error)
+    next(error)
+  }
+}
+
+export const getPostByExhibitionId = async (req, res, next) => {
+  try {
+    const exhibitionId = parseInt(req.params.exhibitionId, 10)
+    if (isNaN(exhibitionId)) {
+      return res.status(400).json({ error: "invalid post id" })
+    }
+
+    const posts = await prisma.post.findMany({
+      where: {
+        authorId: exhibitionId,
+      },
+      include: {
+        author: {
+          select: {
+            id: true,
+            email: true,
+            title: true,
+            role: true,
+          },
+        },
+      },
+      orderedBy: {
+        createdAt: "desc",
+      },
+    })
+
+    if (!posts || posts.length === 0) {
+      return res.status(404).json({ error: "Posts not found" })
+    }
+
+    res.json({ posts })
+  } catch (error) {
+    logger.error("Error fetching posts by author ID:", error)
+    next(error)
+  }
+}
+
 export const updatePost = async (req, res, next) => {
   try {
     const { id } = req.params

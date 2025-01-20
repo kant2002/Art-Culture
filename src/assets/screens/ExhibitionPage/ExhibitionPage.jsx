@@ -44,7 +44,7 @@ function ExhibitionDetails() {
 					// 	`/users/museums/${fetchedExhibition.createdById}`,
 					// )
 					// console.log('Fetched Museum Data:', museumResponse.data)
-					setMuseum(fetchExhibition.museum) // or .data if shaped differently
+					setMuseum(fetchedExhibition.museum) // or .data if shaped differently
 				}
 
 				setLoading(false)
@@ -163,22 +163,32 @@ function ExhibitionDetails() {
 				<div className={`${styles.museumPageAboutMuseumContainer}`}>
 					{imageArray.length > 0 ? (
 						<div className={styles.museumPageMuseumPhotoWrapper}>
-							{imageArray.map((image) => (
-								<img
-									key={image.id}
-									src={getImageUrl(
-										image.imageUrl,
-										'/Img/halfNewsCard.jpg',
-									)}
-									alt={
-										title_en ||
-										title_uk ||
-										'Exhibition Image'
-									}
-									className={styles.museumPageMuseumPhoto}
-									loading="lazy"
-								/>
-							))}
+							{imageArray.map((image, index) => {
+								if (!image || !image.imageUrl) {
+									console.warn(
+										`Image object at index ${index} is missing imageUrl`,
+										image,
+									)
+									return null
+								}
+
+								return (
+									<img
+										key={image.id}
+										src={getImageUrl(
+											image.imageUrl,
+											'/Img/halfNewsCard.jpg',
+										)}
+										alt={
+											title_en ||
+											title_uk ||
+											'Exhibition Image'
+										}
+										className={styles.museumPageMuseumPhoto}
+										loading="lazy"
+									/>
+								)
+							})}
 						</div>
 					) : (
 						<div className={styles.noImages}>

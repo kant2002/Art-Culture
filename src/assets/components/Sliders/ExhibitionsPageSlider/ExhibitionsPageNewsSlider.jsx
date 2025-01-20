@@ -12,7 +12,6 @@ import 'swiper/css/pagination'
 import { Navigation, Pagination } from 'swiper/modules'
 
 // import LikeAndShare from '@components/Blocks/LikeAndShare'
-import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { getBaseUrl } from '../../../../utils/helper'
 import TranslatedContent from '../../Blocks/TranslatedContent'
@@ -84,7 +83,7 @@ const ArtistsPageNewsArtistsSlider = () => {
 	useEffect(() => {
 		const fetchCreatorPosts = async () => {
 			try {
-				const response = await axios.get('/api/posts/creators')
+				const response = await axios.get('/api/posts/exhibitions')
 				console.log('Received creator posts:', response.data)
 				setCreatorPosts(response.data.posts || [])
 				setLoading(false)

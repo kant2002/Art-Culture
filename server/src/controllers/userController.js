@@ -263,7 +263,7 @@ export const getMuseumById = async (req, res, next) => {
     const museum = await prisma.user.findUnique({
       where: { id: museumId },
       include: {
-        //museum_logo_image: true,
+        museum_logo_image: true,
         products: {
           include: {
             images: true,

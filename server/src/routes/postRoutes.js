@@ -6,6 +6,8 @@ import {
   getAllPosts,
   getAuthorsPosts,
   getCreatorsPosts,
+  getExhibitionsPost,
+  getPostByExhibitionId,
   getPostById,
   getPostsByAuthorId,
   updatePost,
@@ -39,6 +41,10 @@ router.get("/creator/:authorId", getPostsByAuthorId)
 router.get("/authors", getAuthorsPosts)
 
 router.get("/author/:authorId", getPostsByAuthorId)
+
+router.get("/exhibitions", getExhibitionsPost)
+
+router.get("/exhibition/:exhibitionId", getPostByExhibitionId)
 
 // Get all posts
 router.get("/", getAllPosts)
