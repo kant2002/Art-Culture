@@ -43,6 +43,7 @@ function ExhibitionForm() {
 	const [selectedMuseum, setSelectedMuseum] = useState(null)
 	const [museumSearchResult, setMuseumSearchResult] = useState([])
 	const [museumSearchQuery, setMuseumSearchQuery] = useState('')
+	const [loading, setLoading] = useState(false)
 
 	const navigate = useNavigate()
 	const { t } = useTranslation()
@@ -328,6 +329,12 @@ function ExhibitionForm() {
 			return
 		}
 
+		if (!selectedMuseum) {
+			setErrors(['Please select a museum.'])
+			setIsSubmitting(false)
+			return
+		}
+
 		// Destructure formData for easier access
 		const {
 			title_en,
@@ -391,6 +398,7 @@ function ExhibitionForm() {
 		submissionData.append('latitude', formData.latitude)
 		submissionData.append('longitude', formData.longitude)
 		submissionData.append('address', formData.address)
+		submissionData.append('museumId', selectedMuseum.id)
 
 		// Append images
 		Array.from(images).forEach((image) => {
@@ -457,7 +465,7 @@ function ExhibitionForm() {
 			address: address,
 		}))
 	}
-
+	const defaultMuseumImageUrl = '/Img/museumPhoto_2.jpg'
 	const defaultAuthorImageUrl = '/Img/ArtistPhoto.jpg'
 	const defaultPaintingImageUrl = '/Img/ArtistPhoto.jpg'
 
@@ -849,7 +857,7 @@ function ExhibitionForm() {
 									onClick={() => {
 										setSelectedMuseum(museum)
 										setMuseumSearchQuery('')
-										setMuseumSearchResults([])
+										setMuseumSearchResult([])
 									}}
 								>
 									<p>{museum.title || museum.email}</p>
@@ -860,7 +868,10 @@ function ExhibitionForm() {
 					{selectedMuseum && (
 						<div className={styles.selectedChip}>
 							<img
-								src={museum_logo_imagesUrl(selectedMuseum)} // a helper similar to getImageUrl (or adjust as needed)
+								src={
+									getImageUrl(selectedMuseum.images) ||
+									defaultMuseumImageUrl
+								} // a helper similar to getImageUrl (or adjust as needed)
 								alt={
 									selectedMuseum.title || selectedMuseum.email
 								}
@@ -870,7 +881,7 @@ function ExhibitionForm() {
 								{selectedMuseum.title || selectedMuseum.email}
 							</p>
 							<button onClick={() => setSelectedMuseum(null)}>
-								×
+								Видалити
 							</button>
 						</div>
 					)}

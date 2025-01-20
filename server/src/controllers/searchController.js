@@ -78,10 +78,11 @@ export const searchMuseum = async (req, res, next) => {
 
     const museums = await prisma.user.findMany({
       where: {
-        role: "EXHIBITION",
+        role: "MUSEUM",
         OR: [
           { email: { contains: query.toLowerCase() } },
           { title: { contains: query.toLowerCase() } },
+          { bio: { contains: query.toLowerCase() } },
         ],
       },
       select: {

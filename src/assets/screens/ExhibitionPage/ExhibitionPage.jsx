@@ -40,11 +40,11 @@ function ExhibitionDetails() {
 				// 2) If we have a museum ID, fetch the museum
 				// Depending on your backend, you might have "createdById" or "createdBy.id"
 				if (fetchedExhibition?.createdById) {
-					const museumResponse = await API.get(
-						`/users/museums/${fetchedExhibition.createdById}`,
-					)
-					console.log('Fetched Museum Data:', museumResponse.data)
-					setMuseum(museumResponse.data.museum) // or .data if shaped differently
+					// const museumResponse = await API.get(
+					// 	`/users/museums/${fetchedExhibition.createdById}`,
+					// )
+					// console.log('Fetched Museum Data:', museumResponse.data)
+					setMuseum(fetchExhibition.museum) // or .data if shaped differently
 				}
 
 				setLoading(false)
@@ -126,6 +126,7 @@ function ExhibitionDetails() {
 	const toggleText = () => {
 		setIsExpanded((prevState) => !prevState)
 	}
+	const imageArray = images || []
 
 	return (
 		<div className={styles.museumPage}>
@@ -160,9 +161,9 @@ function ExhibitionDetails() {
 					<h2>{t('Деталі виставки')}</h2>
 				</div> */}
 				<div className={`${styles.museumPageAboutMuseumContainer}`}>
-					{images && images.length > 0 ? (
+					{imageArray.length > 0 ? (
 						<div className={styles.museumPageMuseumPhotoWrapper}>
-							{images.map((image) => (
+							{imageArray.map((image) => (
 								<img
 									key={image.id}
 									src={getImageUrl(
@@ -272,7 +273,7 @@ function ExhibitionDetails() {
 							className={`${styles.museumPageMuseumTitleWrapper}`}
 						>
 							<p className={`${styles.museumPageMuseumTitle}`}>
-								{museum.title}
+								{museumTitle}
 							</p>
 						</div>
 
@@ -282,8 +283,8 @@ function ExhibitionDetails() {
 							<p
 								className={`${styles.museumPageMuseumLocationCity}`}
 							>
-								{museum.country} {''}
-								{museum.city}
+								{museum?.country} {''}
+								{museum?.city}
 							</p>
 
 							<div
@@ -293,8 +294,8 @@ function ExhibitionDetails() {
 									className={`${styles.museumPageMuseumDescription}`}
 								>
 									<TranslatedContent
-										en={museum.bio}
-										uk={museum.bio}
+										en={museum?.bio}
+										uk={museum?.bio}
 										maxLength={300}
 										html
 									/>
@@ -347,7 +348,7 @@ function ExhibitionDetails() {
 							className={`${styles.museumPageMuseumTitleWrapper}`}
 						>
 							<p className={`${styles.museumPageMuseumTitle}`}>
-								{museum.title}
+								{museumTitle}
 							</p>
 						</div>
 
@@ -357,22 +358,22 @@ function ExhibitionDetails() {
 							<p
 								className={`${styles.museumPageMuseumLocationStreet}`}
 							>
-								{museum.street} {','} {museum.house_number}
+								{museum?.street} {','} {museum?.house_number}
 							</p>
 							<p
 								className={`${styles.museumPageMuseumLocationCity}`}
 							>
-								{museum.city}
+								{museum?.city}
 							</p>
 							<p
 								className={`${styles.museumPageMuseumLocationCountry}`}
 							>
-								{museum.country}
+								{museum?.country}
 							</p>
 							<p
 								className={`${styles.museumPageMuseumLocationIndex}`}
 							>
-								{museum.postcode}
+								{museum?.postcode}
 							</p>
 						</div>
 					</div>
