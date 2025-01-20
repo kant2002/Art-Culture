@@ -1,16 +1,16 @@
+import AddressSearch from '@components/Blocks/AddressSearchInput'
+import ImageEditor from '@components/Blocks/ImageEditor'
 import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
 import TextAreaEditor from '@components/Blocks/TextAreaEditor'
 import TextEditor from '@components/Blocks/TextEditor'
+import styles from '@styles/components/ExhibitionCard/ExhibitionCardCreate.module.scss'
 import axios from 'axios'
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
-import styles from '@styles/components/ExhibitionCard/ExhibitionCardCreate.module.scss'
 import API from '../../../utils/api'
 import { getImageUrl } from '../../../utils/helper.js'
-import AddressSearch from '@components/Blocks/AddressSearchInput'
-import ImageEditor from '@components/Blocks/ImageEditor'
 
 function ExhibitionForm() {
 	const [formData, setFormData] = useState({
@@ -38,6 +38,9 @@ function ExhibitionForm() {
 	const [searchResults, setSearchResults] = useState([])
 	const [selectedAuthors, setSelectedAuthors] = useState([])
 	const [selectedAuthorPaintings, setSelectedAuthorPaintings] = useState({})
+	const [museums, setMuseums] = useState([])
+	const [selectedMuseum, setSelectedMuseum] = useState(null)
+	const [museumSearchResult, setMuseumSearchResult] = useState([])
 
 	const navigate = useNavigate()
 	const { t } = useTranslation()
