@@ -1,16 +1,16 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
-import styles from '@styles/layout/MuseumsPage.module.scss'
-import { getImageUrl } from '../../../utils/helper.js'
 import ExhibitionsMap from '@components/Blocks/ExhibitionsMap.jsx'
 import TranslatedContent from '@components/Blocks/TranslatedContent.jsx'
 import ExhibitionsPageNewsSlider from '@components/Sliders/ExhibitionsPageSlider/ExhibitionsPageNewsSlider.jsx'
 import ExhibitionsPagePopularExhibitions from '@components/Sliders/ExhibitionsPageSlider/ExhibitionsPagePopularExhibitions.jsx'
 import ExhibitionsPageTopSlider from '@components/Sliders/ExhibitionsPageSlider/ExhibitionsPageTopSlider.jsx'
+import styles from '@styles/layout/MuseumsPage.module.scss'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
+import { getImageUrl } from '../../../utils/helper.js'
 
-function MuseumsPage() {
+function ExhibitionsPage() {
 	const { t } = useTranslation()
 	const [loading, setLoading] = useState(true)
 	const navigate = useNavigate()
@@ -261,4 +261,4 @@ function MuseumsPage() {
 	)
 }
 
-export default MuseumsPage
+export default ExhibitionsPage

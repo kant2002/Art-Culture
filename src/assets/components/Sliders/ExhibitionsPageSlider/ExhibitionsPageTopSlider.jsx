@@ -9,7 +9,7 @@ import axios from 'axios'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import { Autoplay } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules'
 import { getBaseUrl, getImageUrl } from '../../../../utils/helper'
 
 // Import Swiper modules
@@ -23,18 +23,18 @@ const Slide = ({ museum, exhibition, baseUrl, onClick }) => {
 	const featuredMediaUrl =
 		exhibition.images?.length > 0
 			? getImageUrl(
-				exhibition.images[0].imageUrl,
-				'/Img/halfNewsCard.jpg',
-			)
+					exhibition.images[0].imageUrl,
+					'/Img/halfNewsCard.jpg',
+				)
 			: '/Img/halfNewsCard.jpg'
 	console.log('Витягнуте медіа:', featuredMediaUrl)
 
-	const museumLogoUrl = museum.museum_logo_image?.imageUrl
-		? getImageUrl(
-			museum.museum_logo_image.imageUrl,
-			'/Img/logoMuseum_3.png',
-		)
-		: '/Img/logoMuseum_3.png' // Fallback logo
+	// const museumLogoUrl = museum.museum_logo_image?.imageUrl
+	// 	? getImageUrl(
+	// 		museum.museum_logo_image.imageUrl,
+	// 		'/Img/logoMuseum_3.png',
+	// 	)
+	// 	: '/Img/logoMuseum_3.png' // Fallback logo
 
 	return (
 		<div className="BannerSliderCardContainer">
@@ -166,7 +166,7 @@ const MuseumsPageTopSlider = () => {
 				autoplay={{
 					delay: 2000, // Задержка в миллисекундах
 					disableOnInteraction: false, // Продолжать автопрокрутку после взаимодействия
-					pauseOnMouseEnter: true // Останавливать при наведении
+					pauseOnMouseEnter: true, // Останавливать при наведении
 				}}
 				loop={true} // Бесконечная прокрутках слайдов
 			>

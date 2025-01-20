@@ -6,14 +6,7 @@ const userSchema = new prisma.Schema(
     password: { type: String, required: true },
     role: {
       type: String,
-      enum: [
-        "USER",
-        "CREATOR",
-        "MUSEUM",
-        "EDITOR",
-        "AUTHOR",
-        "EXHIBITION_OWNER",
-      ],
+      enum: ["USER", "CREATOR", "MUSEUM", "EDITOR", "AUTHOR", "EXHIBITION"],
       default: "USER",
     },
     title: { type: String, default: "" },

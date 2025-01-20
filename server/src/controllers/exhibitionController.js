@@ -24,6 +24,7 @@ export const createExhibitions = async (req, res, next) => {
       latitude,
       longitude,
       address,
+      museumId,
     } = req.body
     let { artistIds } = req.body
 
@@ -42,6 +43,13 @@ export const createExhibitions = async (req, res, next) => {
           .status(400)
           .json({ errors: [{ msg: "All artist IDs must be valid numbers" }] })
       }
+    }
+
+    const parsedMuseumId = parseInt(museumId, 10)
+    if (isNaN(parsedMuseumId)) {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: "Invalid museum ID provided" }] })
     }
 
     const userId = req.user.id
@@ -67,6 +75,15 @@ export const createExhibitions = async (req, res, next) => {
         .json({ errors: [{ msg: "Invalid artist IDs provided" }] })
     }
 
+    const museum = await prisma.user.findUnique({
+      where: { id: parsedMuseumId },
+    })
+    if (!museum || museum.role !== "MUSEUM") {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: "Invalid museum ID provided" }] })
+    }
+
     const exhibition = await prisma.exhibition.create({
       data: {
         title_en,
@@ -86,6 +103,7 @@ export const createExhibitions = async (req, res, next) => {
           create: images,
         },
         createdBy: { connect: { id: userId } },
+        museum: { connect: { id: parsedMuseumId } },
         exhibitionArtists: {
           create: artistIds.map((artistId) => ({
             artist: { connect: { id: artistId } },
@@ -116,6 +134,11 @@ export const getAllExhibitions = async (req, res, next) => {
     const exhibitions = await prisma.exhibition.findMany({
       include: {
         images: true,
+        museum: {
+          include: {
+            museum_logo_image: true,
+          },
+        },
         createdBy: {
           select: {
             id: true,
@@ -148,6 +171,7 @@ export const getExhibitionById = async (req, res, next) => {
       where: { id: exhibitionId },
       include: {
         images: true,
+
         createdBy: {
           select: {
             id: true,
@@ -158,6 +182,23 @@ export const getExhibitionById = async (req, res, next) => {
         exhibitionArtists: {
           include: {
             artist: true,
+          },
+        },
+        museum: {
+          select: {
+            id: true,
+            title: true,
+            bio: true,
+            street: true,
+            house_number: true,
+            city: true,
+            country: true,
+            postcode: true,
+            museum_logo_image: {
+              select: {
+                imageUrl: true,
+              },
+            },
           },
         },
       },

@@ -32,6 +32,7 @@ model User {
   posts              Post[]
   products           Product[]
   museum_logo_image  museum_logo_images? @relation("UserMuseumLogo")
+  museumExhibition   Exhibition[]        @relation("MuseumExhibition")
 
   @@map("user")
 }
@@ -100,8 +101,11 @@ model Exhibition {
   createdBy         User               @relation("UserCreatedExhibitions", fields: [createdById], references: [id])
   exhibitionArtists ExhibitionArtist[]
   images            ExhibitionImage[]  @relation("ExhibitionsImages")
+  museumId          Int?
+  museum            User?              @relation("MuseumExhibition", fields: [museumId], references: [id])
 
   @@index([createdById], map: "Exhibition_createdById_fkey")
+  @@index([museumId], map: "Exhibition_museumId_fkey")
 }
 
 model ExhibitionImage {
@@ -158,4 +162,5 @@ enum Role {
   CREATOR
   EDITOR
   AUTHOR
+  EXHIBITION
 }

@@ -18,7 +18,7 @@ router.post(
   "/",
 
   authenticateToken,
-  authorize("MUSEUM", "CREATOR", "ADMIN"),
+  authorize("MUSEUM", "CREATOR", "ADMIN", "EXHIBITION"),
   //uploadExhibition.array('exhibitionImages', 10),
   uploadExhibition.upload,
   uploadExhibition.processImages,
@@ -58,7 +58,7 @@ router.get("/:id", getExhibitionById)
 router.put(
   "/:id",
   authenticateToken,
-  authorize("MUSEUM", "CREATOR", "ADMIN"),
+  authorize("MUSEUM", "CREATOR", "ADMIN", "EXHIBITION"),
   uploadExhibition.upload,
   uploadExhibition.processImages,
   [

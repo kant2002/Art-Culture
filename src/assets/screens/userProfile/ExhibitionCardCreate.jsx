@@ -1,16 +1,16 @@
+import AddressSearch from '@components/Blocks/AddressSearchInput'
+import ImageEditor from '@components/Blocks/ImageEditor'
 import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
 import TextAreaEditor from '@components/Blocks/TextAreaEditor'
 import TextEditor from '@components/Blocks/TextEditor'
+import styles from '@styles/components/ExhibitionCard/ExhibitionCardCreate.module.scss'
 import axios from 'axios'
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
-import styles from '@styles/components/ExhibitionCard/ExhibitionCardCreate.module.scss'
 import API from '../../../utils/api'
 import { getImageUrl } from '../../../utils/helper.js'
-import AddressSearch from '@components/Blocks/AddressSearchInput'
-import ImageEditor from '@components/Blocks/ImageEditor'
 
 function ExhibitionForm() {
 	const [formData, setFormData] = useState({
@@ -28,6 +28,7 @@ function ExhibitionForm() {
 		longitude: '',
 		address: '',
 		artists: [],
+		museumId: null,
 		images: [],
 	})
 	const [artists, setArtists] = useState([]) // All available artists
@@ -38,6 +39,11 @@ function ExhibitionForm() {
 	const [searchResults, setSearchResults] = useState([])
 	const [selectedAuthors, setSelectedAuthors] = useState([])
 	const [selectedAuthorPaintings, setSelectedAuthorPaintings] = useState({})
+	const [museums, setMuseums] = useState([])
+	const [selectedMuseum, setSelectedMuseum] = useState(null)
+	const [museumSearchResult, setMuseumSearchResult] = useState([])
+	const [museumSearchQuery, setMuseumSearchQuery] = useState('')
+	const [loading, setLoading] = useState(false)
 
 	const navigate = useNavigate()
 	const { t } = useTranslation()
@@ -54,8 +60,9 @@ function ExhibitionForm() {
 
 	useEffect(() => {
 		// Fetch artists to populate the checkboxes
-		const fetchArtists = async () => {
+		const fetchArtistsAndMuseums = async () => {
 			try {
+				setLoading(true)
 				const response = await axios.get('/api/users/creators', {
 					headers: {
 						Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -63,18 +70,43 @@ function ExhibitionForm() {
 				})
 				console.log('Artists data:', response.data.creators)
 				setArtists(response.data.creators)
+				const museumsResponse = await axios.get('/api/users/museums', {
+					headers: {
+						Authorization: `Bearer ${localStorage.getItem('token')}`,
+					},
+				})
+				console.log('Mus data', museumsResponse.data.museums)
+				setMuseums(museumsResponse.data.museums)
 			} catch (error) {
 				console.error('Error fetching artists:', error)
 				setErrors((prevErrors) => [
 					...prevErrors,
 					'Failed to load artists.',
 				])
-				setArtists([])
+				setLoading(false)
 			}
 		}
 
-		fetchArtists()
-	}, [])
+		fetchArtistsAndMuseums()
+	}, [setArtists, setMuseums])
+
+	const handleMuseumSearchChange = async (e) => {
+		const query = e.target.value
+		setMuseumSearchQuery(query)
+
+		if (query.length > 2) {
+			try {
+				const museumsResponse = await API.get(
+					`/search/museums?q=${query}`,
+				)
+				setMuseumSearchResult(museumsResponse.data.museums)
+			} catch (error) {
+				console.error('Error fetching museums:', error)
+			}
+		} else {
+			setMuseumSearchResult([])
+		}
+	}
 
 	const handleSearchChange = async (e) => {
 		const query = e.target.value
@@ -297,6 +329,12 @@ function ExhibitionForm() {
 			return
 		}
 
+		if (!selectedMuseum) {
+			setErrors(['Please select a museum.'])
+			setIsSubmitting(false)
+			return
+		}
+
 		// Destructure formData for easier access
 		const {
 			title_en,
@@ -360,6 +398,7 @@ function ExhibitionForm() {
 		submissionData.append('latitude', formData.latitude)
 		submissionData.append('longitude', formData.longitude)
 		submissionData.append('address', formData.address)
+		submissionData.append('museumId', selectedMuseum.id)
 
 		// Append images
 		Array.from(images).forEach((image) => {
@@ -426,7 +465,7 @@ function ExhibitionForm() {
 			address: address,
 		}))
 	}
-
+	const defaultMuseumImageUrl = '/Img/museumPhoto_2.jpg'
 	const defaultAuthorImageUrl = '/Img/ArtistPhoto.jpg'
 	const defaultPaintingImageUrl = '/Img/ArtistPhoto.jpg'
 
@@ -797,6 +836,55 @@ function ExhibitionForm() {
 							)}
 						</div>
 					))}
+				</div>
+
+				<div className="field-group">
+					<label className="field-label">{t('Пошук музею')}</label>
+					<input
+						type="text"
+						name="museumSearch"
+						value={museumSearchQuery}
+						onChange={handleMuseumSearchChange}
+						placeholder={t('Введіть назву музею')}
+						className={styles.formInput}
+					/>
+					{museumSearchResult.length > 0 && (
+						<div className={styles.searchResults}>
+							{museumSearchResult.map((museum) => (
+								<div
+									key={`museum-${museum.id}`}
+									className={styles.searchResultItem}
+									onClick={() => {
+										setSelectedMuseum(museum)
+										setMuseumSearchQuery('')
+										setMuseumSearchResult([])
+									}}
+								>
+									<p>{museum.title || museum.email}</p>
+								</div>
+							))}
+						</div>
+					)}
+					{selectedMuseum && (
+						<div className={styles.selectedChip}>
+							<img
+								src={
+									getImageUrl(selectedMuseum.images) ||
+									defaultMuseumImageUrl
+								} // a helper similar to getImageUrl (or adjust as needed)
+								alt={
+									selectedMuseum.title || selectedMuseum.email
+								}
+								className={styles.chipImage}
+							/>
+							<p>
+								{selectedMuseum.title || selectedMuseum.email}
+							</p>
+							<button onClick={() => setSelectedMuseum(null)}>
+								Видалити
+							</button>
+						</div>
+					)}
 				</div>
 
 				{/* Address Search block */}

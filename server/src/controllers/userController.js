@@ -282,3 +282,56 @@ export const getMuseumById = async (req, res, next) => {
     next(error)
   }
 }
+
+export const getExhibitions = async (req, res, next) => {
+  try {
+    const exhibition = await prisma.exhibition.findMany({
+      where: {
+        role: "EXHIBITION",
+      },
+      select: {
+        id: true,
+        email: true,
+        title: true,
+        bio: true,
+        images: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    })
+
+    res.json({ exhibition })
+  } catch (error) {
+    logger.error("Error fetching exhibitions:", error)
+    next(error)
+  }
+}
+
+export const getExhibitionById = async (req, res, next) => {
+  try {
+    const exhibitionId = parseInt(req.params.id, 10)
+    if (isNaN(exhibitionId)) {
+      return res.status(400).json({ error: "invalid exhibition id" })
+    }
+
+    const exhibition = await prisma.user.findUnique({
+      where: { id: exhibitionId },
+      include: {
+        products: {
+          include: {
+            images: true,
+          },
+          orderBy: { createdAt: "desc" },
+        },
+      },
+    })
+
+    if (!exhibition || exhibition.role !== "EXHIBITION") {
+      return res.status(404).json({ error: "Exhibition not found" })
+    }
+    res.json({ exhibition })
+  } catch (error) {
+    logger.error("Error fetch data creator id", error)
+    next(error)
+  }
+}

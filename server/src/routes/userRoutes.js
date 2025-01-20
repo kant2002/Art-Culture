@@ -8,6 +8,8 @@ import {
   getCreatorById,
   getCreators,
   getCreatorsByLanguage,
+  getExhibitionById,
+  getExhibitions,
   getMuseumById,
   getMuseums,
 } from "../controllers/userController.js"
@@ -22,5 +24,7 @@ router.get("/creators/:id", getCreatorById)
 router.get("/creators", getCreators)
 router.get("/museums/:id", getMuseumById)
 router.get("/museums", getMuseums)
+router.get("/exhibitions", getExhibitions)
+router.get("/exhibitions/:id", getExhibitionById)
 
 export default router
