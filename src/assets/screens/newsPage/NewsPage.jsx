@@ -1,4 +1,5 @@
 import LikeAndShare from '@components/Blocks/LikeAndShare'
+import LikeAndShareVertical from '@components/Blocks/LikeAndShareVertical'
 import TranslatedContent from '@components/Blocks/TranslatedContent.jsx'
 import NewsPageAuthorsSlider from '@components/Sliders/NewsPageAuthorsSlider/NewsPageAuthorsSlider.jsx'
 import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
@@ -100,6 +101,7 @@ function NewsPage() {
 
 	return (
 		<div className={`${styles.newsPageContainer}`}>
+			<LikeAndShareVertical />
 			{/* Title Section */}
 			<div className={`${styles.newsPageTitleContainer}`}>
 				<h1 className={`${styles.newsPageTitle}`}>{t('Новини')}</h1>
