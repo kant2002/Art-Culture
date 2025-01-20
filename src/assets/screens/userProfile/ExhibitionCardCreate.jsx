@@ -28,6 +28,7 @@ function ExhibitionForm() {
 		longitude: '',
 		address: '',
 		artists: [],
+		museumId: null,
 		images: [],
 	})
 	const [artists, setArtists] = useState([]) // All available artists
@@ -827,6 +828,52 @@ function ExhibitionForm() {
 							)}
 						</div>
 					))}
+				</div>
+
+				<div className="field-group">
+					<label className="field-label">{t('Пошук музею')}</label>
+					<input
+						type="text"
+						name="museumSearch"
+						value={museumSearchQuery}
+						onChange={handleMuseumSearchChange}
+						placeholder={t('Введіть назву музею')}
+						className={styles.formInput}
+					/>
+					{museumSearchResult.length > 0 && (
+						<div className={styles.searchResults}>
+							{museumSearchResult.map((museum) => (
+								<div
+									key={`museum-${museum.id}`}
+									className={styles.searchResultItem}
+									onClick={() => {
+										setSelectedMuseum(museum)
+										setMuseumSearchQuery('')
+										setMuseumSearchResults([])
+									}}
+								>
+									<p>{museum.title || museum.email}</p>
+								</div>
+							))}
+						</div>
+					)}
+					{selectedMuseum && (
+						<div className={styles.selectedChip}>
+							<img
+								src={museum_logo_imagesUrl(selectedMuseum)} // a helper similar to getImageUrl (or adjust as needed)
+								alt={
+									selectedMuseum.title || selectedMuseum.email
+								}
+								className={styles.chipImage}
+							/>
+							<p>
+								{selectedMuseum.title || selectedMuseum.email}
+							</p>
+							<button onClick={() => setSelectedMuseum(null)}>
+								×
+							</button>
+						</div>
+					)}
 				</div>
 
 				{/* Address Search block */}
