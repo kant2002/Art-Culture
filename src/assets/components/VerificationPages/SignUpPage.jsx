@@ -32,6 +32,8 @@ const SignUp = () => {
 	const { login } = useAuth() // Utilize login from AuthContext
 	const navigate = useNavigate()
 
+	const isMuseum = signUpDetails.role === 'MUSEUM'
+	const isExhibition = signUpDetails.role === 'EXHIBITION'
 	const textEditorOnChange = ({ name, value }) => {
 		setSignUpDetails((prev) => ({
 			...prev,
@@ -211,7 +213,9 @@ const SignUp = () => {
 						required
 					/>
 					<TextEditor
-						label={t('П.І.Б.')}
+						label={
+							isExhibition || isMuseum ? t('Назва') : t('П.І.Б.')
+						}
 						type="text"
 						name="title"
 						value={signUpDetails.title}
@@ -220,7 +224,9 @@ const SignUp = () => {
 						required
 					/>
 					<TextAreaEditor
-						label={t('Про себе')}
+						label={
+							isExhibition || isMuseum ? t('Опис') : t('Про себе')
+						}
 						placeholder="Bio"
 						name="bio"
 						value={signUpDetails.bio}

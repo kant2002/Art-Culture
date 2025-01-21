@@ -1,3 +1,4 @@
+import ImageEditor from '@components/Blocks/ImageEditor'
 import Loading from '@components/Blocks/Loading.jsx'
 import LoadingError from '@components/Blocks/LoadingError.jsx'
 import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
@@ -6,7 +7,7 @@ import TextEditor from '@components/Blocks/TextEditor'
 import TranslatedContent from '@components/Blocks/TranslatedContent'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import ImageEditor from '@components/Blocks/ImageEditor'
+import { getUserRole } from '../../../utils/constants'
 import styles from '/src/styles/screen/ProductList/Paintings.module.scss'
 import API from '/src/utils/api.js'
 
@@ -31,6 +32,7 @@ const Paintings = () => {
 	const [formErrors, setFormErrors] = useState({})
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState('')
+	const { isMuseum } = getUserRole()
 
 	useEffect(() => {
 		const fetchProducts = async () => {
@@ -172,7 +174,7 @@ const Paintings = () => {
 	return (
 		<ProfilePageContainer>
 			<div className={styles.productList}>
-				<h2>{t('Картини')}</h2>
+				<h2>{isMuseum ? t('Вироби') : t('Картини')}</h2>
 				{loading ? (
 					<Loading />
 				) : error ? (
@@ -212,7 +214,9 @@ const Paintings = () => {
 											/>
 										)}
 										<p className={styles.productCardTitle}>
-											{t('Назва картини')}
+											{isMuseum
+												? t('Назва виробу')
+												: t('Назва картини')}
 										</p>
 										<p
 											className={

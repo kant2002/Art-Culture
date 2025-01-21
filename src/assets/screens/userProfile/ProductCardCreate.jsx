@@ -1,3 +1,4 @@
+import ImageEditor from '@components/Blocks/ImageEditor.jsx'
 import ProfilePageContainer from '@components/Blocks/ProfilePageContainer'
 import TextAreaEditor from '@components/Blocks/TextAreaEditor'
 import TextEditor from '@components/Blocks/TextEditor'
@@ -5,7 +6,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import API from '../../../utils/api.js'
-import ImageEditor from '@components/Blocks/ImageEditor.jsx'
+import { getUserRole } from '../../../utils/constants.jsx'
 import styles from '/src/styles/components/ProductCard/ProductCardCreate.module.scss'
 
 const ProductCardCreate = () => {
@@ -22,6 +23,7 @@ const ProductCardCreate = () => {
 	})
 
 	const [serverMessage, setServerMessage] = useState('')
+	const { isMuseum } = getUserRole()
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
@@ -72,7 +74,7 @@ const ProductCardCreate = () => {
 
 	return (
 		<ProfilePageContainer>
-			<h2>{t('Додати картину')}</h2>
+			<h2>{isMuseum ? t('Додати експонат') : t('Додати картину')}</h2>
 			{serverMessage && (
 				<p className={styles.serverMessage}>{serverMessage}</p>
 			)}

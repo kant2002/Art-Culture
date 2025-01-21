@@ -11,11 +11,11 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
 import API from '../../../utils/api.js'
+import { getUserRole } from '../../../utils/constants.jsx'
 import styles from '/src/styles/components/UserProfile/userProfile.module.scss'
-
 const UserProfile = () => {
 	const { user, updateUser, loading, error } = useAuth() // Access user and logout from context
-
+	const { isMuseum, isExhibition } = getUserRole()
 	const [email, setEmail] = useState('')
 	const [regDate, setRegDate] = useState('')
 	const [serverMessage, setServerMessage] = useState('')
@@ -204,7 +204,12 @@ const UserProfile = () => {
 					<div className={styles.profileTextWrapper}>
 						{title && (
 							<p>
-								<strong>{t('П.І.Б.')}:&#8194;</strong>
+								<strong>
+									{isExhibition || isMuseum
+										? t('Назва')
+										: t('П.І.Б.')}
+									:&#8194;
+								</strong>
 								{title}
 							</p>
 						)}
@@ -245,7 +250,12 @@ const UserProfile = () => {
 
 						{bio && (
 							<p>
-								<strong>{t('Про себе')}:&#8194;</strong>
+								<strong>
+									{isExhibition || isMuseum
+										? t('Опис')
+										: t('Про себе')}
+									:&#8194;
+								</strong>
 								<TranslatedContent en={bio} uk={bio} html />
 							</p>
 						)}

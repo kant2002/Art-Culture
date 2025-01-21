@@ -1,3 +1,17 @@
+import { useAuth } from '../Context/AuthContext'
+export const getUserRole = () => {
+	const { user } = useAuth()
+	return {
+		isUser: user && user.role === 'USER',
+		isEditor: user && user.role === 'EDITOR',
+		isMuseum: user && user.role === 'MUSEUM',
+		isAdmin: user && user.role === 'ADMIN',
+		isCreator: user && user.role === 'CREATOR',
+		isAuthor: user && user.role === 'AUTHOR',
+		isExhibition: user && user.role === 'EXHIBITION',
+	}
+}
+
 const allImages = [
 	'/Img/gallery/1.webp',
 	'/Img/gallery/2.webp',
