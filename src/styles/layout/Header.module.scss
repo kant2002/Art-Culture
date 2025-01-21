@@ -26,7 +26,7 @@ body {
 	z-index: 1000;
 }
 .mainHeaderLogo {
-	margin: 0 calc(22.5 / 1440 * 100vw) 0 0;
+	margin: calc(-9 / 1440 * 100vw) calc(22.5 / 1440 * 100vw) 0 0;
 	display: flex;
 	width: auto;
 }
