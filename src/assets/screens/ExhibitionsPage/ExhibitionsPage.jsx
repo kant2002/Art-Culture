@@ -239,7 +239,7 @@ function ExhibitionsPage() {
 						<p
 							className={`${styles.ArtistsPageGalleryAllArtistsButtonText}`}
 						>
-							{t('Всі музеї')}
+							{t('Всі виставки')}
 						</p>
 						<img
 							className={`${styles.ArtistsPageGalleryAllArtistsButtonArrow}`}
