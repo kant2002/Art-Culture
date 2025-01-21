@@ -145,7 +145,7 @@
 
 .ArtistsPageGalleryButtonClock {
     // Часы
-    margin: 0 0 0 $responsiveMediumPadding;
+    margin: 0 0 0 $responsiveSmallPadding;
     width: calc(24px - (10 * ((1440px - 100vw) / (1440 - 375))));
     min-width: 14px;
     max-width: 24px;
@@ -291,7 +291,7 @@
 
     .ArtistsPageGalleryButtonClock {
         // Часы
-        margin: 0 0 0 $staticPcMediumPadding;
+        margin: 0 0 0 $staticPcSmallPadding;
     }
 
     .ArtistsPageGalleryButtonSeparator {
@@ -395,7 +395,7 @@
 
     .ArtistsPageGalleryButtonClock {
         // Часы
-        margin: 0 0 0 $staticMobileMediumPadding;
+        margin: 0 0 0 $staticMobileSmallPadding;
     }
 
     .ArtistsPageGalleryButtonSeparator {
