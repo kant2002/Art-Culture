@@ -2,11 +2,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import {
-	getFormattedDate,
-	getFormattedTime,
-	getImageUrl,
-} from '../../../utils/helper'
+import {getFormattedDate, getFormattedTime,	getImageUrl} from '../../../utils/helper'
 import TranslatedContent from './TranslatedContent'
 import styles from '/src/styles/components/Blocks/MainNews.module.scss'
 

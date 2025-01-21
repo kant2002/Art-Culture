@@ -8,13 +8,11 @@ import styles from '/src/styles/components/Blocks/MainNews.module.scss'
 
 function MainExhibitions() {
 	const { t } = useTranslation()
-
 	const [exhibitions, setExhibitions] = useState([])
-
+	const navigate = useNavigate()
 	const [visibleExhibitionsCount, setVisibleExhibitionsCount] = useState(
 		getPostsCount(window.innerWidth),
 	)
-	const navigate = useNavigate()
 
 	function getPostsCount(width) {
 		if (width === null || width === undefined) {
@@ -115,9 +113,9 @@ function MainExhibitions() {
 						const featuredMediaUrl =
 							exhibition.images && exhibition.images.length > 0
 								? getImageUrl(
-										exhibition.images[0].imageUrl,
-										'/Img/halfNewsCard.jpg',
-									)
+									exhibition.images[0].imageUrl,
+									'/Img/halfNewsCard.jpg',
+								)
 								: '/Img/halfNewsCard.jpg'
 						console.log('Витягнуте медіа:', featuredMediaUrl)
 
