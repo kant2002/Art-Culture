@@ -37,17 +37,15 @@ const Footer = () => {
 			<div className={`${styles.footerWrapper}`}>
 				<div className={`${styles.footerLeftWrapper}`}>
 
-					<a className='footerLogoLink'
+					<div className={`${styles.footerLogoWrapper}`}
 						onClick={goToMainPage}>
-						<div className={`${styles.footerLogoWrapper}`}>
-							<img className={`${styles.footerLogoImg}`} src='/Img/logo.svg' alt='Art & culture Ukraine' />
-							<div className={`${styles.footerLogoTitleWrapper}`}>
-								<p className={`${styles.footerLogoFirstWord}`}>art</p>
-								<p className={`${styles.footerLogoSecondWord}`}>&culture</p>
-								<p className={`${styles.footerLogoThirdWord}`}>Ukraine</p>
-							</div>
+						<img className={`${styles.footerLogoImg}`} src='/Img/logo.svg' alt='Art & culture Ukraine' />
+						<div className={`${styles.footerLogoTitleWrapper}`}>
+							<p className={`${styles.footerLogoFirstWord}`}>art</p>
+							<p className={`${styles.footerLogoSecondWord}`}>&culture</p>
+							<p className={`${styles.footerLogoThirdWord}`}>Ukraine</p>
 						</div>
-					</a>
+					</div>
 
 					<nav className={`${styles.footerMenuWrapper}`}>
 						<ul className={`${styles.footerMenuUl}`}>

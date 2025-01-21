@@ -26,7 +26,7 @@ body {
 	z-index: 1000;
 }
 .mainHeaderLogo {
-	margin: 0 calc(22.5 / 1440 * 100vw) 0 0;
+	margin: calc(-9 / 1440 * 100vw) calc(22.5 / 1440 * 100vw) 0 0;
 	display: flex;
 	width: auto;
 }
@@ -458,7 +458,7 @@ body {
 		padding: 39px 0 29px 0;
 	}
 	.mainHeaderLogo {
-		margin: 0 22.5px 0 0;
+		margin: -9px 22.5px 0 0;
 	}
 	.logo {
 		&__titleWrapper {
@@ -579,6 +579,7 @@ body {
 	.mainHeaderLogo {
 		margin: auto calc(22.5 / 1440 * 100vw) auto 0;
 		display: flex;
+		justify-content: center;
 		width: auto;
 	}
 	.headerLanguageSwitchContainer {

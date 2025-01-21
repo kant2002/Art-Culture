@@ -281,21 +281,19 @@ function Header() {
 			<header>
 				<div className='mainHeader'>
 					<div className='mainHeaderWrapper'>
-						<a className='mainHeader__logoLink'>
-							<div className='mainHeaderLogo logo'
-								onClick={goToMainPage}>
-								<img
-									className='logo__img'
-									src='/Img/logo.svg'
-									alt='Art & culture Ukraine'
-								/>
-								<div className='logo__titleWrapper'>
-									<p className='logo__firstWord white'>art</p>
-									<p className='logo__secondWord white'>&culture</p>
-									<p className='logo__thirdWord white'>Ukraine</p>
-								</div>
+						<div className='mainHeaderLogo logo'
+							onClick={goToMainPage}>
+							<img
+								className='logo__img'
+								src='/Img/logo.svg'
+								alt='Art & culture Ukraine'
+							/>
+							<div className='logo__titleWrapper'>
+								<p className='logo__firstWord white'>art</p>
+								<p className='logo__secondWord white'>&culture</p>
+								<p className='logo__thirdWord white'>Ukraine</p>
 							</div>
-						</a>
+						</div>
 						<div className='titleContainer'>
 							<div className='titleWrapper'>
 								<div className='headerLanguageSwitchContainer'>
@@ -399,12 +397,10 @@ function Header() {
 				</div>
 				<div className='staticHeader'>
 					<div className='staticHeaderWrapper'>
-						<a className='staticHeaderLogoLink'
+						<div className='staticHeaderLogo'
 							onClick={goToMainPage}>
-							<div className='staticHeaderLogo'>
-								<p className='staticHeaderLogoTitle'>art</p>
-							</div>
-						</a>
+							<p className='staticHeaderLogoTitle'>art</p>
+						</div>
 						<div className='staticHeaderTitleContainer'>
 							<button className='staticHeaderTitleContainer__likeButton circleButton'>
 								<img src='/Img/likeHeart.svg' alt='Like' />
@@ -441,8 +437,9 @@ function Header() {
 						</div>
 					</div>
 				</div>
-			</header>
-			{burgerMenuVisible && <div className="burgerMenuBackdrop" onClick={closeBurgerMenu}></div>}
+			</header >
+			{burgerMenuVisible && <div className="burgerMenuBackdrop" onClick={closeBurgerMenu}></div>
+			}
 			{burgerMenuVisible && burgerMenu}
 		</>
 	)
