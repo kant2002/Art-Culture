@@ -155,10 +155,14 @@ function AllAuthorsPage() {
 		navigate(`/all-author-posts/${id}`)
 	}
 
+	const renderedLetters = Object.keys(authorsAndCreators).filter(
+		(letter) => !selectedLetter || letter === selectedLetter,
+	)
+
 	return (
 		<div className={styles.ArtistsPageContainer}>
 			<div className={styles.ArtistsPageTitleWrapper}>
-				<h1>{t('Усі автори та творці')}</h1>
+				<h1>{t('Усі автори')}</h1>
 			</div>
 			<div className={styles.ArtistsPageSeparatorWrapper}>
 				<div className={styles.ArtistsPageSeparator}></div>
@@ -222,7 +226,7 @@ function AllAuthorsPage() {
 
 			{/* Render Authors and Creators */}
 			<div className={styles.ArtistsContainer}>
-				{!loading && Object.keys(authorsAndCreators).length === 0 && (
+				{!loading && renderedLetters.length === 0 && (
 					<LoadingError
 						message={t(
 							'Відсутні автори та творці для відображення',
@@ -231,83 +235,95 @@ function AllAuthorsPage() {
 				)}
 
 				{/* Render Authors and Creators grouped together */}
-				{Object.keys(authorsAndCreators).map((letter) => (
-					<div key={letter} className={styles.ArtistsWrapper}>
-						<div className={styles.LetterWrapper}>
-							<h2 className={styles.Letter}>{letter}</h2>
-						</div>
-						<div className={styles.ArtistsByLetterWrapper}>
-							{authorsAndCreators[letter].map(
-								(authorOrCreator) => (
-									<div
-										key={authorOrCreator.id}
-										className={styles.ArtistWrapper}
-										onClick={() =>
-											handleAuthorPreviewClick(
-												authorOrCreator.id,
-											)
-										}
-									>
+				{Object.keys(authorsAndCreators)
+					// If selectedLetter is empty, show all letters;
+					// otherwise show only the letter the user clicked
+					.filter(
+						(letter) =>
+							!selectedLetter || letter === selectedLetter,
+					)
+					.map((letter) => (
+						<div key={letter} className={styles.ArtistsWrapper}>
+							<div className={styles.LetterWrapper}>
+								<h2 className={styles.Letter}>{letter}</h2>
+							</div>
+							<div className={styles.ArtistsByLetterWrapper}>
+								{authorsAndCreators[letter].map(
+									(authorOrCreator) => (
 										<div
-											className={
-												styles.ArtistInformationWrapper
+											key={authorOrCreator.id}
+											className={styles.ArtistWrapper}
+											onClick={() =>
+												handleAuthorPreviewClick(
+													authorOrCreator.id,
+												)
 											}
 										>
 											<div
 												className={
-													styles.ArtistTitleWrapper
+													styles.ArtistInformationWrapper
 												}
 											>
-												<p
+												<div
 													className={
-														styles.ArtistTitle
+														styles.ArtistTitleWrapper
 													}
 												>
-													{authorOrCreator.title}
+													<p
+														className={
+															styles.ArtistTitle
+														}
+													>
+														{authorOrCreator.title}
 
-													{/* (
+														{/* (
 													{authorOrCreator.type ===
 													'author'
 														? 'Автор'
 														: 'Творець'}
 													) */}
-												</p>
+													</p>
+												</div>
+												<div
+													className={
+														styles.ArtistPhotoWrapper
+													}
+												>
+													<img
+														className={
+															styles.ArtistPhoto
+														}
+														src={
+															authorOrCreator.images ||
+															'/Img/ArtistPhoto.jpg'
+														}
+														alt={
+															authorOrCreator.title
+														}
+														onError={(e) => {
+															e.target.onerror =
+																null
+															e.target.src =
+																'/Img/newsCardERROR.jpg'
+														}}
+													/>
+												</div>
 											</div>
 											<div
 												className={
-													styles.ArtistPhotoWrapper
+													styles.SeparatorWrapper
 												}
 											>
-												<img
-													className={
-														styles.ArtistPhoto
-													}
-													src={
-														authorOrCreator.images ||
-														'/Img/ArtistPhoto.jpg'
-													}
-													alt={authorOrCreator.title}
-													onError={(e) => {
-														e.target.onerror = null
-														e.target.src =
-															'/Img/newsCardERROR.jpg'
-													}}
-												/>
+												<div
+													className={styles.Separator}
+												></div>
 											</div>
 										</div>
-										<div
-											className={styles.SeparatorWrapper}
-										>
-											<div
-												className={styles.Separator}
-											></div>
-										</div>
-									</div>
-								),
-							)}
+									),
+								)}
+							</div>
 						</div>
-					</div>
-				))}
+					))}
 			</div>
 		</div>
 	)

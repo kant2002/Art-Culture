@@ -83,6 +83,10 @@ function ExhibitionsPage() {
 	const handleExhibitionClick = (id) => {
 		navigate(`/exhibitions/${id}`)
 	}
+
+	const handleAllExhibitionsClick = () => {
+		navigate('/all-exhibitions-page')
+	}
 	return (
 		<div className={`${styles.MuseumsPageContainer}`}>
 			<div className={`${styles.MuseumsPageTitleContainer}`}>
@@ -238,6 +242,7 @@ function ExhibitionsPage() {
 					>
 						<p
 							className={`${styles.ArtistsPageGalleryAllArtistsButtonText}`}
+							onClick={handleAllExhibitionsClick}
 						>
 							{t('Всі виставки')}
 						</p>

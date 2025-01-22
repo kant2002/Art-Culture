@@ -10,6 +10,8 @@ import AdminDashboard from '../Admin/AdminDashboard'
 import AdminArtTermsEdit from '../Admin/ArtTermsEdit'
 import AdminArtTermsList from '../Admin/ArtTermsList'
 import AllArtistsPage from '../AllArtistsPage/AllArtistsPage'
+import AllExhibitionsPage from '../AllExhibitionsPage/AllExhibitionsPage'
+import AllExhibitsProductPage from '../AllExhibitsProductPage/AllExhibitsProductPage'
 import ArtTermPage from '../ArtTerms/ArtTermPage'
 import ArtTermsFilteredPage from '../ArtTerms/ArtTermsFilteredPage'
 import ArtTermsPage from '../ArtTerms/ArtTermsPage'
@@ -34,7 +36,6 @@ import UserProfile from '../userProfile/userProfile'
 import UserProfileAddPost from '../userProfile/userProfileAddPost'
 import UserProfilePosts from '../userProfile/userProfilePosts'
 import styles from '/src/styles/layout/Layout.module.scss'
-
 const Layout = ({ heading = '' }) => {
 	const [username, setUsername] = useState('')
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -60,6 +61,14 @@ const Layout = ({ heading = '' }) => {
 					<Route
 						path="/all-authors-page"
 						element={<AllAuthorsPage />}
+					/>
+					<Route
+						path="/all-exhibitions-page"
+						element={<AllExhibitionsPage />}
+					/>
+					<Route
+						path="/all-exhibits-product-page"
+						element={<AllExhibitsProductPage />}
 					/>
 					<Route
 						path="/all-author-posts/:id"

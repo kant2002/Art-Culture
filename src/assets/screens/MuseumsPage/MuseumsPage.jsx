@@ -107,6 +107,10 @@ function MuseumsPage() {
 	const handleMuseumClick = (id) => {
 		navigate(`/Museums/${id}`)
 	}
+
+	const handleShowAllExhibits = () => {
+		navigate('/all-exhibits-product-page')
+	}
 	return (
 		<div className={`${styles.MuseumsPageContainer}`}>
 			<div className={`${styles.MuseumsPageTitleContainer}`}>
@@ -183,7 +187,7 @@ function MuseumsPage() {
 						<div className={styles.error}>{error}</div>
 					) : !products || products.length === 0 ? (
 						<div className={styles.noCreators}>
-							{t('Немає виставок для відображення.')}
+							{t('Немає експонатів для відображення.')}
 						</div>
 					) : (
 						<div
@@ -259,6 +263,7 @@ function MuseumsPage() {
 					>
 						<p
 							className={`${styles.ArtistsPageGalleryAllArtistsButtonText}`}
+							onClick={handleShowAllExhibits}
 						>
 							{t('Всі експонати')}
 						</p>
