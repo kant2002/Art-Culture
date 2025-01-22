@@ -43,11 +43,9 @@ router.get("/creators-products", getCreatorProducts)
 router.get("/", getProducts)
 router.get("/my-products", authenticateToken, getUserProducts)
 router.get("/author/:authorId", getProductByAuthorId)
-router.get("/:productId", getProductById)
-
-router.get("/museum/:museumId", getProductByMuseumId)
-
 router.get("/museum-products", getMuseumProducts)
+router.get("/museum/:museumId", getProductByMuseumId)
+router.get("/:productId", getProductById)
 
 router.put(
   "/:id",

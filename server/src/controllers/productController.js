@@ -205,7 +205,7 @@ export const getProductByAuthorId = async (req, res, next) => {
 
 export const getMuseumProducts = async (req, res, next) => {
   try {
-    const product = await prisma.product.findMany({
+    const products = await prisma.product.findMany({
       where: {
         author: {
           role: "MUSEUM",
@@ -226,7 +226,7 @@ export const getMuseumProducts = async (req, res, next) => {
         createdAt: "desc",
       },
     })
-    res.json({ product })
+    res.json({ products })
   } catch (error) {
     console.error("Error fetching museum products", error)
     next(error)
@@ -240,7 +240,7 @@ export const getProductByMuseumId = async (req, res, next) => {
       return res.status(400).json({ error: "invalid product id" })
     }
 
-    const product = await prisma.product.findMany({
+    const products = await prisma.product.findMany({
       where: {
         authorId: museumId,
       },
@@ -258,11 +258,11 @@ export const getProductByMuseumId = async (req, res, next) => {
         createdAt: "desc",
       },
     })
-    if (!product || product.length === 0) {
+    if (!products || products.length === 0) {
       return res.status(404).json({ error: "Products not found" })
     }
 
-    res.json({ product }) // Wrap products in an object
+    res.json({ products }) // Wrap products in an object
   } catch (error) {
     console.error("Error fetching products by museum ID:", error)
     next(error)

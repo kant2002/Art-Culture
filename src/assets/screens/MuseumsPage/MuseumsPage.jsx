@@ -1,14 +1,14 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
-import styles from '@styles/layout/MuseumsPage.module.scss'
-import { getImageUrl } from '../../../utils/helper.js'
 import AllMuseumsMap from '@components/Blocks/AllMuseumsMap.jsx'
 import TranslatedContent from '@components/Blocks/TranslatedContent.jsx'
 import MuseumsPageNewsMuseum from '@components/Sliders/MuseumsPageSliders/MuseumsPageNewsMuseum.jsx'
 import MuseumsPagePopularMuseums from '@components/Sliders/MuseumsPageSliders/MuseumsPagePopularMuseums.jsx'
 import MuseumsPageTopSlider from '@components/Sliders/MuseumsPageSliders/MuseumsPageTopSlider.jsx'
+import styles from '@styles/layout/MuseumsPage.module.scss'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
+import { getImageUrl } from '../../../utils/helper.js'
 
 function MuseumsPage() {
 	const { t } = useTranslation()
@@ -16,13 +16,13 @@ function MuseumsPage() {
 	const navigate = useNavigate()
 	const [error, setError] = useState(null)
 	const [museums, setMuseums] = useState([])
-	const [exhibitions, setExhibitions] = useState(null)
+	const [products, setProducts] = useState([])
 
-	const [visibleExhibitionsCount, setVisibleExhibitionsCount] = useState(
-		getExhibitionsCount(window.innerWidth),
+	const [visibleMuseumsCount, setVisibleMuseumsCount] = useState(
+		getMuseumsCount(window.innerWidth),
 	)
 
-	function getExhibitionsCount(width) {
+	function getMuseumsCount(width) {
 		if (width === null || width === undefined) {
 			throw new Error('Width must be a number')
 		}
@@ -42,15 +42,13 @@ function MuseumsPage() {
 
 	useEffect(() => {
 		const handleResize = () => {
-			const newExhibitionCount = getExhibitionsCount(window.innerWidth)
+			const newMuseumCount = getMuseumsCount(window.innerWidth)
 			console.log(
-				`Window width: ${window.innerWidth}, New exhibition count: ${newExhibitionCount}`,
+				`Window width: ${window.innerWidth}, New museum count: ${newMuseumCount}`,
 			)
-			if (newExhibitionCount !== visibleExhibitionsCount) {
-				setVisibleExhibitionsCount(newExhibitionCount)
-				console.log(
-					`Updated visibleExhibitionCount to: ${newExhibitionCount}`,
-				)
+			if (newMuseumCount !== visibleMuseumsCount) {
+				setVisibleMuseumsCount(newMuseumCount)
+				console.log(`Updated visibleMuseumCount to: ${newMuseumCount}`)
 			}
 		}
 
@@ -62,9 +60,16 @@ function MuseumsPage() {
 		return () => {
 			window.removeEventListener('resize', handleResize)
 		}
-	}, [visibleExhibitionsCount])
+	}, [visibleMuseumsCount])
 
 	useEffect(() => {
+		/**
+		 * Fetches a list of museums from the API and updates the state with the retrieved data.
+		 * Sets loading state to false after the data is fetched or an error occurs.
+		 * Logs the fetched data or error to the console.
+		 * Displays an error message if the fetch operation fails.
+		 */
+
 		const fetchMuseums = async () => {
 			try {
 				const response = await axios.get(`/api/users/museums`)
@@ -81,23 +86,26 @@ function MuseumsPage() {
 	}, [])
 
 	useEffect(() => {
-		const fetchExhibition = async () => {
+		const fetchMUseumsProducts = async () => {
 			try {
-				const response = await axios.get('/api/exhibitions')
-				console.log('Fetch exhibitions', response.data)
-				setExhibitions(response.data.exhibitions || [])
-				setLoading(false)
+				setLoading(true)
+				const response = await axios.get(
+					'/api/products/museum-products',
+				)
+				console.log('Fetch Products Maps', response.data)
+				setProducts(response.data.products)
 			} catch (error) {
-				console.error('Error fetching exhibitions:', error)
+				console.error('Error fetching Museums:', error)
 				setError(t('Не вдалося завантажити.'))
+			} finally {
 				setLoading(false)
 			}
 		}
-		fetchExhibition()
+		fetchMUseumsProducts()
 	}, [])
 
-	const handleExhibitionClick = (id) => {
-		navigate(`/exhibitions/${id}`)
+	const handleMuseumClick = (id) => {
+		navigate(`/Museums/${id}`)
 	}
 	return (
 		<div className={`${styles.MuseumsPageContainer}`}>
@@ -112,7 +120,7 @@ function MuseumsPage() {
 			<div className={`${styles.ArtistsPageGalleryContainer}`}>
 				<div className={`${styles.ArtistsPageGalleryTitleWrapper}`}>
 					<h2 className={`${styles.ArtistsPageGalleryTitle}`}>
-						{t('Перегляд.')} &#8243;{t('ВИСТАВКИ')}&#8243;
+						{t('Перегляд.')} &#8243;{t('ЕКСПОНАТИ')}&#8243;
 					</h2>
 				</div>
 
@@ -173,7 +181,7 @@ function MuseumsPage() {
 						</div>
 					) : error ? (
 						<div className={styles.error}>{error}</div>
-					) : !exhibitions || exhibitions.length === 0 ? (
+					) : !products || products.length === 0 ? (
 						<div className={styles.noCreators}>
 							{t('Немає виставок для відображення.')}
 						</div>
@@ -181,15 +189,14 @@ function MuseumsPage() {
 						<div
 							className={`${styles.ArtistsPageGalleryInnerWrapper}`}
 						>
-							{exhibitions
-								.slice(0, visibleExhibitionsCount)
-								.map((exhibition, index) => {
+							{products
+								.slice(0, visibleMuseumsCount)
+								.map((product) => {
 									const featuredMediaUrl =
-										exhibition.images &&
-										exhibition.images.length > 0
+										product.images &&
+										product.images.length > 0
 											? getImageUrl(
-													exhibition.images[0]
-														.imageUrl,
+													product.images[0].imageUrl,
 													'/Img/halfNewsCard.jpg',
 												)
 											: '/Img/halfNewsCard.jpg'
@@ -200,14 +207,14 @@ function MuseumsPage() {
 
 									return (
 										<div
-											key={exhibition.id}
+											key={product.id}
 											className={`${styles.ArtistsPageGalleryCardWrapper}`}
 										>
 											<div
 												className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}
 												onClick={() =>
-													handleExhibitionClick(
-														exhibition.id,
+													handleMuseumClick(
+														product.id,
 													)
 												}
 												style={{ cursor: 'pointer' }}
@@ -215,7 +222,7 @@ function MuseumsPage() {
 												<img
 													className={`${styles.ArtistsPageGalleryCardPicture}`}
 													src={featuredMediaUrl}
-													alt={`Фото митця ${(<TranslatedContent en={exhibition.title_en} uk={exhibition.title_uk} maxLength={50} />)}`}
+													alt={`Фото митця ${(<TranslatedContent en={product.title_en} uk={product.title_uk} maxLength={150} />)}`}
 													loading="lazy"
 													onError={(e) => {
 														e.target.onerror = null
@@ -231,9 +238,9 @@ function MuseumsPage() {
 													className={`${styles.ArtistsPageGalleryCardDescription}`}
 												>
 													<TranslatedContent
-														en={exhibition.title_en}
-														uk={exhibition.title_uk}
-														maxLength={50}
+														en={product.title_en}
+														uk={product.title_uk}
+														maxLength={150}
 													/>
 												</p>
 											</div>
@@ -253,7 +260,7 @@ function MuseumsPage() {
 						<p
 							className={`${styles.ArtistsPageGalleryAllArtistsButtonText}`}
 						>
-							{t('Всі музеї')}
+							{t('Всі експонати')}
 						</p>
 						<img
 							className={`${styles.ArtistsPageGalleryAllArtistsButtonArrow}`}
