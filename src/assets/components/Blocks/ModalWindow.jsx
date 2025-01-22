@@ -1,7 +1,9 @@
+import style from '@styles/components/Blocks/ModalWindow.module.scss'
 import PropTypes from 'prop-types'
 import { useCallback, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import style from '@styles/components/Blocks/ModalWindow.module.scss'
+import { getUserRole } from '../../../utils/constants'
+import { getImageUrl } from '../../../utils/helper'
 import TranslatedContent from '../Blocks/TranslatedContent'
 
 const GalleryModal = ({
@@ -19,6 +21,7 @@ const GalleryModal = ({
 }) => {
 	const { t } = useTranslation()
 	const modalRef = useRef(null)
+	const { isMuseum } = getUserRole()
 
 	useEffect(() => {
 		if (isOpen && modalRef.current) {
@@ -176,7 +179,9 @@ const GalleryModal = ({
 				>
 					<div className={style.productHeaderWrapper}>
 						<h2 className={style.productModalTitle}>
-							{t('Назва Картини:')}
+							{isMuseum
+								? t('Назва експонату')
+								: t('Назва Картини:')}
 							<p>
 								<TranslatedContent
 									en={selectedProduct.title_en}
@@ -186,7 +191,7 @@ const GalleryModal = ({
 							</p>
 						</h2>
 						<h3 className={style.productModalAuthorName}>
-							{t('Імя автора:')}
+							{isMuseum ? t('Музей') : t('Імя автора:')}
 							<p>
 								{selectedCreator.title_en ||
 									selectedCreator.title_uk ||
@@ -202,7 +207,9 @@ const GalleryModal = ({
 						</h3>
 						<div className={style.productModelDescrWrapper}>
 							<h4 className={style.productModelDescrTitle}>
-								{t('Про Картину:')}
+								{isMuseum
+									? t('Опис експонату')
+									: t('Про Картину:')}
 								<p className={style.productModelDescr}>
 									<TranslatedContent
 										en={selectedProduct.description_en}
@@ -296,7 +303,10 @@ const GalleryModal = ({
 										}}
 									>
 										<img
-											src={`${baseUrl}${image.imageUrl.replace('../../', '/')}`}
+											src={getImageUrl(
+												baseUrl,
+												image.imageUrl,
+											)}
 											alt={`Product Image ${index + 1}`}
 											loading="lazy"
 											className={style.modalImage}

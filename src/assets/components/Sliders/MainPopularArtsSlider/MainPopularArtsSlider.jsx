@@ -10,11 +10,10 @@ import 'swiper/css/pagination'
 
 // Import Swiper modules
 // import LikeAndShare from '@components/Blocks/LikeAndShare'
-import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import '@styles/components/Sliders/Base/PopularSlider.scss'
 import { useNavigate } from 'react-router-dom'
 import { Navigation, Pagination } from 'swiper/modules'
-import { getBaseUrl } from '../../../../utils/helper'
+import { getBaseUrl, getImageUrl } from '../../../../utils/helper'
 import ModalWindow from '../../Blocks/ModalWindow'
 import TranslatedContent from '../../Blocks/TranslatedContent'
 
@@ -36,10 +35,10 @@ const Slide = ({ product, baseUrl, onOverviewClick }) => {
 		}
 	}
 
-	const imageUrl =
-		product.images && product.images.length > 0
-			? `${baseUrl}${product.images[0].imageUrl.replace('../../', '/')}`
-			: '/Img/newsCardERROR.jpg' // Fallback image
+	const imageUrl = getImageUrl(
+		product.images?.[0]?.imageUrl,
+		'/Img/newsCardERROR.jpg',
+	) // Fallback image
 
 	return (
 		<div
@@ -133,6 +132,7 @@ const MainPopularArtistsSlider = () => {
 					new Promise((resolve) => {
 						const image = new Image()
 						image.src = `${baseUrl}${img.imageUrl.replace('../../', '/')}`
+
 						image.onload = resolve
 						image.onerror = resolve
 					}),

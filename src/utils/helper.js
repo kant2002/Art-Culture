@@ -13,11 +13,31 @@ export function getBaseUrl() {
  * @param {string} defaultImage Default image to display, if imagePath is empty.
  * @returns {string} The normalized path to the image which should be displayed in the browser.
  */
-export function getImageUrl(imagePath, defaultImage) {
+export function getImageUrl(imagePath, defaultImage = '/img/placeholder.jpg') {
 	const baseUrl = getBaseUrl()
-	const featuredMediaUrl = imagePath
-		? `${baseUrl}${imagePath.replace('../../', '/')}`
-		: defaultImage
+
+	// 1) If no path, return the fallback
+	if (!imagePath) {
+		return defaultImage
+	}
+
+	// 2) If the path is already an absolute URL (http, https, data)
+	if (/^(http|https|data):/.test(imagePath)) {
+		return imagePath
+	}
+
+	// 3) Strip out leading '../../' or '../'
+	//    (In case your stored paths include multiple '../' segments)
+	let finalPath = imagePath.replace(/^(\.\.\/)+/, '')
+
+	// 4) Ensure that baseUrl + finalPath forms one valid URL
+	//    If your final path doesn't start with '/', you can add it:
+	if (!finalPath.startsWith('/')) {
+		finalPath = `/${finalPath}`
+	}
+
+	// Combine with baseUrl
+	const featuredMediaUrl = `${baseUrl}${finalPath}`
 	return featuredMediaUrl
 }
 

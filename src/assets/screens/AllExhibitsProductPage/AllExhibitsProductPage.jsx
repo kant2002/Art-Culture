@@ -2,25 +2,31 @@ import LoadingError from '@components/Blocks/LoadingError'
 import AllArtistsPageSearchSlider from '@components/Sliders/AllArtistsPageLettersSortSlider/AllArtistsPageSearchSlider'
 import styles from '@styles/layout/AllArtistsPage.module.scss'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
 import { englishLetters, ukrainianLetters } from '../../../utils/constants'
+import ModalWindow from '../../components/Blocks/ModalWindow'
 import TranslatedContent from '../../components/Blocks/TranslatedContent'
 
-function AllExhibitsProductPage() {
+function AllExhibitsProductPage({ baseUrl }) {
 	const { t, i18n } = useTranslation()
-	const navigate = useNavigate()
 
 	// Existing states
 	const [products, setProducts] = useState({})
-	const [museums, setMuseums] = useState({})
+
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 	const [language, setLanguage] = useState(i18n.language)
+	const [preloading, setPreloading] = useState(false)
 
 	// Tracks which letter user selected in the slider
 	const [selectedLetter, setSelectedLetter] = useState('')
+	const [isModalOpen, setIsModalOpen] = useState(false)
+	const [selectedProduct, setSelectedProduct] = useState(null)
+	const [selectedMuseum, setSelectedMuseum] = useState(null)
+	const [selectedProductImages, setSelectedProductImages] = useState([])
+	const [zoomStates, setZoomStates] = useState([])
+	const [currentSlide, setCurrentSlide] = useState(0)
 
 	// Which "sort mode" (button) is active? "ALL" | "UK" | "EN"
 	const [sortMode, setSortMode] = useState('ALL')
@@ -111,14 +117,63 @@ function AllExhibitsProductPage() {
 		setSelectedLetter(letter)
 	}
 
-	const handleAuthorPreviewClick = (id) => {
-		navigate(`/exhibitions/${id}`)
-	}
+	const preloadImages = useCallback(
+		async (images) => {
+			const promises = images.map(
+				(img) =>
+					new Promise((resolve) => {
+						const image = new Image()
+						image.src = `${baseUrl}${img.imageUrl}`
+						image.onload = resolve
+						image.onerror = resolve
+					}),
+			)
+			await Promise.all(promises)
+		},
+		[baseUrl],
+	)
 
+	// Handler to open the GalleryModal with preloaded images
+	const handleOverviewClick = async (product) => {
+		if (product.images && product.images.length > 0) {
+			setPreloading(true)
+			await preloadImages(product.images)
+			setPreloading(false)
+			setSelectedProductImages(product.images)
+			setSelectedProduct(product)
+			setSelectedMuseum(product.author || {}) // Adjust based on actual data structure
+			setZoomStates(
+				product.images.map(() => ({
+					zoomLevel: 1,
+					isZoomed: false,
+					cursorPos: { x: 0, y: 0 },
+					showLens: false,
+				})),
+			)
+			setCurrentSlide(0)
+			setIsModalOpen(true)
+		} else {
+			// If no images, optionally handle this case
+			setSelectedProductImages([])
+			setSelectedProduct(null)
+			setSelectedMuseum(null)
+			setZoomStates([])
+			setIsModalOpen(false)
+		}
+	}
+	// Handler to close the GalleryModal
+	const handleCloseModal = () => {
+		setIsModalOpen(false)
+		setSelectedProductImages([])
+		setSelectedProduct(null)
+		setSelectedMuseum(null)
+		setZoomStates([])
+		setCurrentSlide(0)
+	}
 	return (
 		<div className={styles.ArtistsPageContainer}>
 			<div className={styles.ArtistsPageTitleWrapper}>
-				<h1>{t('Усі виставки')}</h1>
+				<h1>{t('Усі експонати')}</h1>
 			</div>
 			<div className={styles.ArtistsPageSeparatorWrapper}>
 				<div className={styles.ArtistsPageSeparator}></div>
@@ -126,7 +181,7 @@ function AllExhibitsProductPage() {
 			<div className={styles.ArtistsPageArtistsSearchWrapper}>
 				<input
 					className={styles.ArtistsPageArtistsSearchInput}
-					placeholder={t('Пошук виставки')}
+					placeholder={t('Пошук експонатів')}
 				/>
 			</div>
 
@@ -201,9 +256,6 @@ function AllExhibitsProductPage() {
 									<div
 										key={product.id}
 										className={styles.ArtistWrapper}
-										onClick={() =>
-											handleAuthorPreviewClick(product.id)
-										}
 									>
 										<div
 											className={
@@ -235,6 +287,11 @@ function AllExhibitsProductPage() {
 												<img
 													className={
 														styles.ArtistPhoto
+													}
+													onClick={() =>
+														handleOverviewClick(
+															product,
+														)
 													}
 													src={
 														product.images?.[0]
@@ -276,6 +333,19 @@ function AllExhibitsProductPage() {
 					))
 				})()}
 			</div>
+			<ModalWindow
+				isOpen={isModalOpen}
+				onClose={handleCloseModal}
+				selectedProduct={selectedProduct}
+				selectedCreator={selectedMuseum}
+				selectedProductImages={selectedProductImages}
+				zoomStates={zoomStates}
+				setZoomStates={setZoomStates}
+				currentSlide={currentSlide}
+				setCurrentSlide={setCurrentSlide}
+				baseUrl={baseUrl}
+				preloading={preloading}
+			/>
 		</div>
 	)
 }
