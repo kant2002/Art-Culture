@@ -86,7 +86,7 @@ const ProductCardCreate = () => {
 								label={t('Назва українською')}
 								name="title_uk"
 								value={formData.title_uk}
-								maxLength={50}
+								maxLength={150}
 								required
 								onChange={textEditorOnChange}
 							/>
@@ -96,7 +96,7 @@ const ProductCardCreate = () => {
 								label={t('Опис українською')}
 								name="description_uk"
 								value={formData.description_uk}
-								maxLength={500}
+								maxLength={1000}
 								required
 								onChange={textEditorOnChange}
 								html
@@ -120,7 +120,7 @@ const ProductCardCreate = () => {
 								label={t('Назва англійською')}
 								name="title_en"
 								value={formData.title_en}
-								maxLength={50}
+								maxLength={150}
 								required
 								onChange={textEditorOnChange}
 							/>

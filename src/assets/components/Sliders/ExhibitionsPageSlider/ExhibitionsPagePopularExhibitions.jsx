@@ -146,7 +146,7 @@ const PopularExhibitionsSlider = () => {
 						) : exhibitions.length === 0 ? (
 							<SwiperSlide>
 								<div className="noProducts">
-									{t('Немає продуктів від митців.')}
+									{t('Немає виставок.')}
 								</div>
 							</SwiperSlide>
 						) : (
