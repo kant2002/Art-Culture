@@ -40,6 +40,8 @@ const Slide = ({ product, baseUrl, onOverviewClick }) => {
 		'/Img/newsCardERROR.jpg',
 	) // Fallback image
 
+	console.log('Slider image URL for product', product.id, '=>', imageUrl)
+
 	return (
 		<div
 			className="PopularSliderCardWrapper"
@@ -131,8 +133,10 @@ const MainPopularArtistsSlider = () => {
 				(img) =>
 					new Promise((resolve) => {
 						const image = new Image()
-						image.src = `${baseUrl}${img.imageUrl.replace('../../', '/')}`
-
+						image.src = getImageUrl(
+							img.imageUrl,
+							'/Img/newsCardERROR.jpg',
+						)
 						image.onload = resolve
 						image.onerror = resolve
 					}),
@@ -141,6 +145,8 @@ const MainPopularArtistsSlider = () => {
 		},
 		[baseUrl],
 	)
+
+	console.log('baseUrl', baseUrl)
 
 	// Handler to open the GalleryModal with preloaded images
 	const handleOverviewClick = async (product) => {

@@ -300,8 +300,8 @@ const GalleryModal = ({
 									>
 										<img
 											src={getImageUrl(
-												baseUrl,
 												image.imageUrl,
+												'/Img/newsCardERROR.jpg',
 											)}
 											alt={`Product Image ${index + 1}`}
 											loading="lazy"
