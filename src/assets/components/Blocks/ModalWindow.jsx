@@ -179,9 +179,7 @@ const GalleryModal = ({
 				>
 					<div className={style.productHeaderWrapper}>
 						<h2 className={style.productModalTitle}>
-							{isMuseum
-								? t('Назва експонату')
-								: t('Назва Картини:')}
+							{t('Назва Картини:')}
 							<p>
 								<TranslatedContent
 									en={selectedProduct.title_en}
@@ -191,7 +189,7 @@ const GalleryModal = ({
 							</p>
 						</h2>
 						<h3 className={style.productModalAuthorName}>
-							{isMuseum ? t('Музей') : t('Імя автора:')}
+							{t('Імя автора:')}
 							<p>
 								{selectedCreator.title_en ||
 									selectedCreator.title_uk ||
@@ -207,9 +205,7 @@ const GalleryModal = ({
 						</h3>
 						<div className={style.productModelDescrWrapper}>
 							<h4 className={style.productModelDescrTitle}>
-								{isMuseum
-									? t('Опис експонату')
-									: t('Про Картину:')}
+								{t('Про Картину:')}
 								<p className={style.productModelDescr}>
 									<TranslatedContent
 										en={selectedProduct.description_en}
