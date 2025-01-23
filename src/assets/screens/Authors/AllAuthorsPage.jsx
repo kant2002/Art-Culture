@@ -64,12 +64,12 @@ function AllAuthorsPage() {
 	}
 
 	useEffect(() => {
-		const fetchAuthorsAndCreators = async () => {
+		const fetchAuthorsCreatorsMuseumsExhibitions = async () => {
 			try {
 				setLoading(true)
 				setError(null)
 
-				// Fetch Authors
+				// 1) Fetch Authors
 				const authorsResponse = await axios.get('/api/users/authors')
 				const authorsWithPosts = await Promise.all(
 					authorsResponse.data.authors.map(async (author) => {
@@ -79,7 +79,7 @@ function AllAuthorsPage() {
 							)
 							if (postsResponse.data.posts.length > 0) {
 								author.posts = postsResponse.data.posts
-								author.type = 'author' // Mark the type
+								author.type = 'author'
 								return author
 							}
 							return null
@@ -93,7 +93,7 @@ function AllAuthorsPage() {
 					}),
 				)
 
-				// Fetch Creators
+				// 2) Fetch Creators
 				const creatorsResponse = await axios.get('/api/users/creators')
 				const creatorsWithPosts = await Promise.all(
 					creatorsResponse.data.creators.map(async (creator) => {
@@ -103,7 +103,7 @@ function AllAuthorsPage() {
 							)
 							if (postsResponse.data.posts.length > 0) {
 								creator.posts = postsResponse.data.posts
-								creator.type = 'creator' // Mark the type
+								creator.type = 'creator'
 								return creator
 							}
 							return null
@@ -117,21 +117,88 @@ function AllAuthorsPage() {
 					}),
 				)
 
-				// Combine authors and creators, and filter out those without posts
+				// 3) Fetch Museums
+				const museumsResponse = await axios.get('/api/users/museums')
+				console.log('museumsResponse.data:', museumsResponse.data)
+				const museumsWithPosts = await Promise.all(
+					museumsResponse.data.museums.map(async (museum) => {
+						try {
+							const postsResponse = await axios.get(
+								`/api/posts/author/${museum.id}`,
+							)
+							if (postsResponse.data.posts.length > 0) {
+								museum.posts = postsResponse.data.posts
+								museum.type = 'museum'
+								return museum
+							}
+							return null
+						} catch (error) {
+							console.error(
+								`Error fetching posts for museum ${museum.id}`,
+								error,
+							)
+							return null
+						}
+					}),
+				)
+
+				// 4) Fetch Exhibitions
+				const exhibitionResponse = await axios.get(
+					'/api/users/exhibitions',
+				)
+				console.log(
+					'exhibitionsResponse.data:',
+					exhibitionResponse.data,
+				)
+				const exhibitionWithPosts = await Promise.all(
+					exhibitionResponse.data.exhibition.map(
+						async (exhibition) => {
+							try {
+								const postsResponse = await axios.get(
+									`/api/posts/author/${exhibition.id}`,
+								)
+								if (postsResponse.data.posts.length > 0) {
+									exhibition.posts = postsResponse.data.posts
+									exhibition.type = 'exhibition'
+									return exhibition
+								}
+								return null
+							} catch (error) {
+								console.error(
+									`Error fetching posts for exhibition ${exhibition.id}`,
+									error,
+								)
+								return null
+							}
+						},
+					),
+				)
+
+				// Combine all
 				const combined = [
 					...authorsWithPosts,
 					...creatorsWithPosts,
+					...museumsWithPosts,
+					...exhibitionWithPosts,
 				].filter((item) => item !== null)
+
 				setAuthorsAndCreators(groupByLetter(combined))
-			} catch (error) {
-				console.error('Error fetching authors and creators', error)
-				setError(t('Не вдалося завантажити дані авторів та творців.'))
+			} catch (err) {
+				console.error(
+					'Error fetching authors, creators, museums, exhibitions',
+					err,
+				)
+				setError(
+					t(
+						'Не вдалося завантажити дані (авторів, творців, музеїв, виставок).',
+					),
+				)
 			} finally {
 				setLoading(false)
 			}
 		}
 
-		fetchAuthorsAndCreators()
+		fetchAuthorsCreatorsMuseumsExhibitions()
 	}, [sortMode, selectedLetter, t])
 
 	const handleLetterSelected = (letter) => {

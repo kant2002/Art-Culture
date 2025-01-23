@@ -38,17 +38,19 @@ model User {
 }
 
 model Post {
-  id         Int      @id @default(autoincrement())
-  title_en   String   @db.VarChar(250)
-  title_uk   String   @db.VarChar(250)
-  content_en String   @db.VarChar(5000)
-  content_uk String   @db.VarChar(5000)
-  authorId   Int      @map("author_id")
-  creatorId  Int?     @map("creator_id")
-  images     String?
-  createdAt  DateTime @default(now()) @map("created_at")
-  updatedAt  DateTime @updatedAt @map("updated_at")
-  author     User     @relation(fields: [authorId], references: [id])
+  id           Int      @id @default(autoincrement())
+  title_en     String   @db.VarChar(250)
+  title_uk     String   @db.VarChar(250)
+  content_en   String   @db.VarChar(5000)
+  content_uk   String   @db.VarChar(5000)
+  authorId     Int      @map("author_id")
+  creatorId    Int?     @map("creator_id")
+  museumId     Int?     @map("museum_id")
+  exhibitionId Int?     @map("exhibition_id")
+  images       String?
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+  author       User     @relation(fields: [authorId], references: [id])
 
   @@index([authorId], map: "Post_author_id_fkey")
 }
@@ -81,20 +83,25 @@ model ProductImage {
 }
 
 model Exhibition {
-  id                Int                @id @default(autoincrement())
-  startDate         DateTime
-  endDate           DateTime
-  time              String?            @db.VarChar(200)
-  createdById       Int
-  createdAt         DateTime           @default(now())
-  updatedAt         DateTime           @updatedAt
-  description_en    String?            @db.VarChar(500)
-  description_uk    String?            @db.VarChar(500)
-  location_en       String?            @db.VarChar(500)
-  location_uk       String?            @db.VarChar(500)
-  title_en          String?            @db.VarChar(150)
-  title_uk          String?            @db.VarChar(150)
-  address           String?
+  id             Int      @id @default(autoincrement())
+  startDate      DateTime
+  endDate        DateTime
+  time           String?  @db.VarChar(200)
+  createdById    Int
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  description_en String?  @db.VarChar(500)
+  description_uk String?  @db.VarChar(500)
+  location_en    String?  @db.VarChar(500)
+  location_uk    String?  @db.VarChar(500)
+  title_en       String?  @db.VarChar(150)
+  title_uk       String?  @db.VarChar(150)
+  address        String?
+  role           String   @default("EXHIBITION")
+  email          String?
+  title          String?
+  bio            String?
+
   latitude          Float?
   longitude         Float?
   endTime           String?            @db.VarChar(200)

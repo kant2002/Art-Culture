@@ -285,7 +285,7 @@ export const getMuseumById = async (req, res, next) => {
 
 export const getExhibitions = async (req, res, next) => {
   try {
-    const exhibition = await prisma.exhibition.findMany({
+    const exhibition = await prisma.user.findMany({
       where: {
         role: "EXHIBITION",
       },

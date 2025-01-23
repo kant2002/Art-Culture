@@ -27,17 +27,17 @@ function AuthorPostsLists() {
 			try {
 				setLoading(true)
 
-				//* Attempt to fetch Creator data first
+				// 1) Attempt to fetch CREATOR data first
 				const creatorResponse = await axios.get(
 					`/api/users/creators/${id}`,
 				)
 				setAuthor(creatorResponse.data.creator) // Store Creator data
 
-				// Fetch posts for the Creator
+				// Then fetch posts for the Creator
 				const postsResponse = await axios.get(`/api/posts/author/${id}`)
-				setPosts(postsResponse.data.posts) // Store posts for the Creator
+				setPosts(postsResponse.data.posts)
 			} catch (creatorError) {
-				// If fetching Creator fails (404), try fetching Author data
+				// If fetching Creator fails (404), try fetching AUTHOR data
 				if (
 					creatorError.response &&
 					creatorError.response.status === 404
@@ -52,21 +52,92 @@ function AuthorPostsLists() {
 						const postsResponse = await axios.get(
 							`/api/posts/author/${id}`,
 						)
-						setPosts(postsResponse.data.posts) // Store posts for the Author
+						setPosts(postsResponse.data.posts)
 					} catch (authorError) {
-						console.error(
-							'Error fetching Author data:',
-							authorError,
-						)
-						setError(
-							t('Не вдалося завантажити дані автора або новини.'),
-						)
-						setPosts([])
+						// If Author fetch also fails with 404, try MUSEUM
+						if (
+							authorError.response &&
+							authorError.response.status === 404
+						) {
+							try {
+								const museumResponse = await axios.get(
+									`/api/users/museums/${id}`,
+								)
+								setAuthor(museumResponse.data.museum) // Store Museum data
+
+								// Fetch posts for the Museum
+								const museumPostsResponse = await axios.get(
+									`/api/posts/author/${id}`,
+								)
+								setPosts(museumPostsResponse.data.posts)
+							} catch (museumError) {
+								// If Museum fetch also fails with 404, try EXHIBITION
+								if (
+									museumError.response &&
+									museumError.response.status === 404
+								) {
+									try {
+										const exhibitionResponse =
+											await axios.get(
+												`/api/users/exhibitions/${id}`,
+											)
+										setAuthor(
+											exhibitionResponse.data.exhibition,
+										) // Store Exhibition data
+										console.log(
+											'exhibitionsResponse.data:',
+											exhibitionResponse.data,
+										)
+										// Fetch posts for the Exhibition
+										const exhibitionPostsResponse =
+											await axios.get(
+												`/api/posts/author/${id}`,
+											)
+										setPosts(
+											exhibitionPostsResponse.data.posts,
+										)
+									} catch (exhibitionError) {
+										console.error(
+											'Error fetching Exhibition data:',
+											exhibitionError,
+										)
+										setError(
+											t(
+												'Не вдалося завантажити дані виставки або новини.',
+											),
+										)
+										setPosts([])
+									}
+								} else {
+									console.error(
+										'Error fetching Museum data:',
+										museumError,
+									)
+									setError(
+										t(
+											'Не вдалося завантажити дані музею або новини.',
+										),
+									)
+									setPosts([])
+								}
+							}
+						} else {
+							console.error(
+								'Error fetching Author data:',
+								authorError,
+							)
+							setError(
+								t(
+									'Не вдалося завантажити дані автора або новини.',
+								),
+							)
+							setPosts([])
+						}
 					}
 				} else {
 					console.error('Error fetching Creator data:', creatorError)
 					setError(
-						t('Не вдалося завантажити дані автора або новини.'),
+						t('Не вдалося завантажити дані творця або новини.'),
 					)
 					setPosts([])
 				}
