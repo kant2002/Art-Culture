@@ -27,7 +27,7 @@ function AuthorPostsLists() {
 			try {
 				setLoading(true)
 
-				// Attempt to fetch Creator data first
+				//* Attempt to fetch Creator data first
 				const creatorResponse = await axios.get(
 					`/api/users/creators/${id}`,
 				)
