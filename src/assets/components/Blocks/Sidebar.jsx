@@ -97,6 +97,8 @@ function Sidebar() {
 				</>
 			)}
 			{isExhibition ||
+				isCreator ||
+				isMuseum ||
 				(isAdmin && (
 					<>
 						<button
