@@ -16,12 +16,14 @@ import ArtTermPage from '../ArtTerms/ArtTermPage'
 import ArtTermsFilteredPage from '../ArtTerms/ArtTermsFilteredPage'
 import ArtTermsPage from '../ArtTerms/ArtTermsPage'
 import ArtistPage from '../ArtistPage/ArtistPage'
+import PaintsProductPage from '../ArtistPage/PaintsProductPage'
 import ArtistsPage from '../ArtistsPage/ArtistsPage'
 import AllAuthorPosts from '../Authors/AllAuthorPosts'
 import AllAuthorsPage from '../Authors/AllAuthorsPage'
 import MuseumExhibitions from '../ExhibitionList/Exhibitions'
 import ExhibitionPage from '../ExhibitionPage/ExhibitionPage'
 import ExhibitionsPage from '../ExhibitionsPage/ExhibitionsPage'
+import ExhibitsProductPage from '../MuseumPage/ExhibitsProductPage'
 import MuseumPage from '../MuseumPage/MuseumPage'
 import MuseumsPage from '../MuseumsPage/MuseumsPage'
 import PostDetail from '../Post/PostDetail'
@@ -55,6 +57,10 @@ const Layout = ({ heading = '' }) => {
 					<Route path="/ArtistsPage" element={<ArtistsPage />} />
 					<Route path="/artist/:id" element={<ArtistPage />} />
 					<Route
+						path="/artist/:id/products"
+						element={<PaintsProductPage />}
+					/>
+					<Route
 						path="/all-artists-page"
 						element={<AllArtistsPage />}
 					/>
@@ -75,6 +81,10 @@ const Layout = ({ heading = '' }) => {
 						element={<AllAuthorPosts />}
 					/>
 					<Route path="/MuseumsPage" element={<MuseumsPage />} />
+					<Route
+						path="/museumpage/:id/products"
+						element={<ExhibitsProductPage />}
+					/>
 					<Route path="/museumpage/:id" element={<MuseumPage />} />
 					<Route path="/art-terms" element={<ArtTermsPage />} />
 					<Route

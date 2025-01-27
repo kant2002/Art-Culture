@@ -66,6 +66,7 @@ model Product {
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
   authorId       Int
+  museumId       Int?
   artTerms       ArtTerm[]
   author         User           @relation(fields: [authorId], references: [id])
   images         ProductImage[] @relation("ProductImages")
@@ -97,7 +98,7 @@ model Exhibition {
   title_en       String?  @db.VarChar(150)
   title_uk       String?  @db.VarChar(150)
   address        String?
-  role           String   @default("EXHIBITION")
+  role           String?
   email          String?
   title          String?
   bio            String?

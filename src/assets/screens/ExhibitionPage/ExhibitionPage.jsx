@@ -101,7 +101,8 @@ function ExhibitionDetails() {
 						(ea) =>
 							ea.artist.name ||
 							ea.artist.title ||
-							ea.artist.email,
+							ea.artist.email ||
+							ea.artist.images,
 					)
 					.join(', ')
 			: t('Немає митців')

@@ -12,6 +12,7 @@ import {
 	useState,
 } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate, useParams } from 'react-router-dom'
 import TranslatedContent from '../../Blocks/TranslatedContent'
 
 const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
@@ -24,6 +25,8 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	const positionRef = useRef(0)
 	const enableTransitionRef = useRef(true)
 	const { t, i18n } = useTranslation()
+	const { id } = useParams()
+	const navigate = useNavigate()
 	const currentLanguage = i18n.language
 	const containerRef = useRef(null)
 	const sliderRef = useRef(null)
@@ -517,6 +520,10 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 			// Fallback if scaledColumns[columnIdx] is undefined or has no remaining images
 			return `${baseImageHeight}px`
 		}
+	}
+
+	const handlePaintsProductPage = () => {
+		navigate(`/artist/${id}/products`)
 	}
 
 	return (
@@ -1086,7 +1093,10 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 			</div>
 			<div className={style.moreArtsButtonWrapper}>
 				<button className={style.moreArtsButton}>
-					<p className={style.moreArtsButtonText}>
+					<p
+						className={style.moreArtsButtonText}
+						onClick={handlePaintsProductPage}
+					>
 						{t('Всі роботи Митця')}
 					</p>
 					``

@@ -1,6 +1,7 @@
-// MuseumPageMasonryGallery.jsx
+// ArtistPageMasonryGallery.jsx
 
-import { debounce } from 'lodash'
+import style from '@styles/components/Sliders/MasonrySlider/PageMasonryGallery.module.scss'
+import { debounce } from 'lodash' // Using lodash's debounce
 import PropTypes from 'prop-types'
 import {
 	useCallback,
@@ -11,26 +12,34 @@ import {
 	useState,
 } from 'react'
 import { useTranslation } from 'react-i18next'
-import style from '@styles/components/Sliders/MasonrySlider/PageMasonryGallery.module.scss'
-import { allImages } from '../../../../utils/constants' // Adjust the path as necessary
+import { useNavigate, useParams } from 'react-router-dom'
 import TranslatedContent from '../../Blocks/TranslatedContent'
 
-const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
-	const { t, i18n } = useTranslation()
-	const currentLanguage = i18n.language
+const MuseumPageMasonryGallery = ({ products, baseUrl, museum }) => {
+	if (!products || products.length === 0) {
+		console.warn('No products available for MuseumPageMasonryGallery.')
+		return null // Or display a message if you prefer
+	}
 
+	// Refs for mutable values
+	const positionRef = useRef(0)
+	const enableTransitionRef = useRef(true)
+	const { t, i18n } = useTranslation()
+	const { id } = useParams()
+	const currentLanguage = i18n.language
 	const containerRef = useRef(null)
 	const sliderRef = useRef(null)
-
 	const [isPaused, setIsPaused] = useState(false)
-	const [sliderWidth, setSliderWidth] = useState(0)
-	const [position, setPosition] = useState(0)
+	const [sliderWidth, setSliderWidth] = useState(0) // Width of one set of columns
+	const [position, setPosition] = useState(0) // Current translateX position
 	const speed = 0.5 // Pixels per frame
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [selectedProductImages, setSelectedProductImages] = useState([])
 	const [selectedProduct, setSelectedProduct] = useState(null)
-	const [selectedCreator, setSelectedCreator] = useState(null)
+	const [selectedMuseum, setSelectedMuseum] = useState(null) // Initialize with null
 
+	const animationDuration = sliderWidth / speed // in seconds or ms
+	const navigate = useNavigate()
 	// Zoom-related state variables
 	const [zoomStates, setZoomStates] = useState([])
 
@@ -40,12 +49,18 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	// Define the number of columns and custom scaling factor
 	const customScaleFactor = 1.2 // Change this to scale images up or down
 
+	const [enableTransition, setEnableTransition] = useState(true)
+
 	const getBaseImageHeight = () => {
 		const width = window.innerWidth
-		if (width >= 1800) return 689
-		if (width >= 1600) return 607
-		if (width >= 1500) return 571
-		if (width >= 1400) return 567
+		if (width >= 1921) return 620
+		if (width >= 1800) return 599
+		if (width >= 1600) return 575
+		if (width >= 1500) return 555
+		if (width >= 1400) return 545
+		if (width >= 1000) return 535
+		if (width >= 900) return 525
+		if (width >= 400) return 515
 		return 599
 	}
 
@@ -58,6 +73,7 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 		if (width < 900) return 4
 		if (width < 1500) return 5
 		if (width < 1800) return 6
+		if (width > 1921) return 7
 		return 7
 	}
 
@@ -71,76 +87,42 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 		// Add more patterns as needed
 	]
 
-	// Import fallback images from constants.jsx
-	const fallbackImageList = useMemo(() => allImages, [])
-
 	// Memoize the images array to prevent unnecessary re-creations
 	const images = useMemo(() => {
-		if (products && products.length > 0) {
-			return products.map((product) => {
-				const mainImageSrc =
-					product.images && product.images.length > 0
-						? `${baseUrl}${product.images[0].imageUrl.replace('../../', '/')}`
-						: null // Will handle null later
+		return products.map((product) => {
+			const mainImageSrc =
+				product.images && product.images.length > 0
+					? `${baseUrl}${product.images[0].imageUrl.replace('../../', '/')}`
+					: '/Img/newsCardERROR.jpg' // Fallback image
 
-				return {
-					src: mainImageSrc, // Can be null if no images
-					alt:
-						product.title_en ||
-						product.title_uk ||
-						product.title ||
-						'Artwork',
-					productId: product.id,
-					productImages: product.images,
-				}
-			})
-		} else {
-			// If no products, use fallback images
-			return fallbackImageList.map((src, idx) => ({
-				src,
-				alt: `Fallback Image ${idx + 1}`,
-				productId: null,
-				productImages: [],
-			}))
-		}
-	}, [products, baseUrl, fallbackImageList])
+			return {
+				src: mainImageSrc,
+				alt:
+					product.title_en ||
+					product.title_uk ||
+					product.title ||
+					'Artwork',
+				productId: product.id,
+				productImages: product.images,
+			}
+		})
+	}, [products, baseUrl])
 
 	// Prepare images with dimensions
 	const [loadedImages, setLoadedImages] = useState([])
 
 	useEffect(() => {
 		if (images.length === 0) {
-			console.warn('No images to load.')
-			// As a fallback, load images from constants.jsx
-			const fallbackLoadedImages = fallbackImageList.map((src, idx) => ({
-				src,
-				alt: `Fallback Image ${idx + 1}`,
-				productId: null,
-				width: 0,
-				height: 0,
-			}))
-			setLoadedImages(fallbackLoadedImages)
+			console.warn('Images array is empty after mapping.')
 			return
 		}
 
 		const imagePromises = images.map((imageObj) => {
 			return new Promise((resolve) => {
-				if (!imageObj.src) {
-					// If src is null, use fallback
-					resolve({
-						...imageObj,
-						src: allImages[
-							Math.floor(Math.random() * allImages.length)
-						], // Random fallback image
-						width: 0,
-						height: 0,
-					})
-					return
-				}
-
 				const img = new Image()
 				img.src = imageObj.src
 				img.onload = () => {
+					console.log(`Image loaded: ${imageObj.src}`)
 					resolve({
 						...imageObj,
 						width: img.width,
@@ -149,12 +131,8 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 				}
 				img.onerror = () => {
 					console.error('Error loading image:', imageObj.src)
-					// On error, use a fallback image
-					const fallbackSrc =
-						allImages[Math.floor(Math.random() * allImages.length)]
 					resolve({
 						...imageObj,
-						src: fallbackSrc,
 						width: 0,
 						height: 0,
 					})
@@ -163,37 +141,17 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 		})
 
 		Promise.all(imagePromises).then((imgs) => {
-			// Check if all images failed to load and fallback images are needed
-			const hasValidImages = imgs.some(
-				(img) => img.src && img.src !== '/Img/newsCardERROR.jpg',
-			)
-
-			if (!hasValidImages) {
-				console.warn(
-					'All images failed to load. Using fallback images.',
-				)
-				const fallbackLoadedImages = fallbackImageList.map(
-					(src, idx) => ({
-						src,
-						alt: `Fallback Image ${idx + 1}`,
-						productId: null,
-						width: 0,
-						height: 0,
-					}),
-				)
-				setLoadedImages(fallbackLoadedImages)
-			} else {
-				setLoadedImages(imgs)
-			}
+			console.log('All images processed:', imgs)
+			setLoadedImages(imgs)
 		})
-	}, [images, fallbackImageList])
+	}, [images])
 
 	// Split images into columns
 	const [columns, setColumns] = useState([])
 
 	useEffect(() => {
 		if (loadedImages.length === 0) {
-			console.log('No loaded images to split into columns.')
+			console.warn('No loaded images to distribute into columns.')
 			return
 		}
 
@@ -214,67 +172,79 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 			})
 
 		if (!isColumnsEqual) {
+			console.log('Updating columns:', newColumns)
 			setColumns(newColumns)
+		} else {
+			console.log('Columns unchanged.')
 		}
 	}, [loadedImages, numberOfColumns, columns])
 
 	// Define scaledColumns state
 	const [scaledColumns, setScaledColumns] = useState([])
 
-	// Calculate slider width by measuring the DOM
+	// Calculate scaled columns
 	useLayoutEffect(() => {
 		if (columns.length === 0) {
+			console.warn('No columns available for scaling.')
 			return
 		}
 
-		const columnWidth = 170 // Desired image width
-		const columnGap = 20 // Gap between columns
-
+		const columnWidth = 200 // Desired image width
 		const newScaledColumns = columns.map((column) => {
 			return column.map((img) => {
 				const aspectRatio = img.height / img.width || 1
 				const scaledWidth = columnWidth * customScaleFactor
-				// Height will be handled by CSS
 
 				return {
 					...img,
 					scaledWidth,
-					aspectRatio,
+					aspectRatio, // Added aspect ratio
 				}
 			})
 		})
 
+		console.log('Scaled columns calculated:', newScaledColumns)
 		setScaledColumns(newScaledColumns)
 	}, [columns, customScaleFactor])
 
-	// Measure the width of one set of columns after scaling
+	// Measure the total width of the slider accurately
 	useLayoutEffect(() => {
 		if (sliderRef.current) {
-			const firstSet = sliderRef.current.querySelectorAll(
+			const firstColumn = sliderRef.current.querySelector(
 				`.${style.column}`,
 			)
-			if (firstSet.length === 0) {
-				return
+			if (firstColumn) {
+				const columnStyles = getComputedStyle(firstColumn)
+				const marginRight = parseInt(columnStyles.marginRight, 10)
+				const width = firstColumn.offsetWidth + marginRight
+
+				console.log(
+					`First column offsetWidth: ${firstColumn.offsetWidth}px`,
+				)
+				console.log(`First column marginRight: ${marginRight}px`)
+				console.log(`Calculated column total width: ${width}px`)
+				console.log(`Number of columns: ${numberOfColumns}`)
+				console.log(
+					`Calculated sliderWidth: ${width * numberOfColumns}px`,
+				)
+				setSliderWidth(width * numberOfColumns) // Total width for all columns
+			} else {
+				console.warn('First column not found in sliderRef.')
 			}
-
-			let totalWidth = 0
-			firstSet.forEach((col) => {
-				totalWidth +=
-					col.offsetWidth +
-					parseInt(getComputedStyle(col).marginRight, 10)
-			})
-
-			setSliderWidth(totalWidth)
 		}
-	}, [scaledColumns])
+	}, [scaledColumns, numberOfColumns, style.column])
 
 	// Handle responsive columns with debounce
 	useEffect(() => {
 		const handleResize = debounce(() => {
 			const newNumberOfColumns = getNumberOfColumns()
-			setBaseImageHeight(getBaseImageHeight())
+			const newBaseImageHeight = getBaseImageHeight()
+			console.log(
+				`Window resized. New number of columns: ${newNumberOfColumns}, New base image height: ${newBaseImageHeight}`,
+			)
+			setBaseImageHeight(newBaseImageHeight)
 			setNumberOfColumns(newNumberOfColumns)
-		}, 100)
+		}, 150) // Adjust the delay as needed
 
 		window.addEventListener('resize', handleResize)
 		return () => {
@@ -284,21 +254,39 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	}, [])
 
 	// Automatically move images to the left (horizontal sliding)
+	// Automatically move images to the left (horizontal sliding)
 	useEffect(() => {
+		const slider = sliderRef.current
+		if (!slider) return
+
 		let animationFrameId
+		let lastTime = performance.now()
 
-		const animate = () => {
+		const animate = (currentTime) => {
+			const deltaTime = currentTime - lastTime
+			lastTime = currentTime
+
 			if (!isPaused) {
-				setPosition((prevPosition) => {
-					let newPosition = prevPosition - speed
+				const distance = speed * (deltaTime / 16.666) // Pixels per frame
+				positionRef.current -= distance
 
-					if (-newPosition >= sliderWidth / 2) {
-						// Reset position to 0 for seamless looping
-						return 0
-					}
+				if (-positionRef.current >= sliderWidth) {
+					// Shift back by sliderWidth to loop
+					positionRef.current += sliderWidth
+					// Temporarily disable transition for instant jump
+					slider.style.transition = 'none'
+					slider.style.transform = `translateX(${positionRef.current}px)`
 
-					return newPosition
-				})
+					// Force reflow to apply the transform without transition
+					// eslint-disable-next-line no-unused-expressions
+					slider.offsetHeight // Trigger reflow
+
+					// Re-enable transition
+					slider.style.transition = `scroll ${animationDuration}s linear infinite`
+				} else {
+					// Apply the transform with transition
+					slider.style.transform = `translateX(${positionRef.current}px)`
+				}
 			}
 
 			animationFrameId = requestAnimationFrame(animate)
@@ -317,27 +305,32 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	// Prevent body scrolling when any image is zoomed
 	useEffect(() => {
 		if (isAnyImageZoomed) {
+			console.log('An image is zoomed. Disabling body scroll.')
 			document.body.style.overflow = 'hidden'
 		} else {
+			console.log('No images are zoomed. Enabling body scroll.')
 			document.body.style.overflow = 'auto'
 		}
 	}, [isAnyImageZoomed])
 
 	// Handle mouse events to pause and resume animation
 	const handleMouseEnter = () => {
+		console.log('Mouse entered gallery. Pausing animation.')
 		setIsPaused(true)
 	}
 
 	const handleMouseLeave = () => {
+		console.log('Mouse left gallery. Resuming animation.')
 		setIsPaused(false)
 	}
 
 	// Handle image click to open modal
 	const handleImageClick = (productImages, product) => {
 		if (productImages && productImages.length > 0) {
+			console.log(`Opening modal for product ID: ${product.id}`)
 			setSelectedProductImages(productImages)
-			setSelectedProduct(product)
-			setSelectedCreator(creator)
+			setSelectedProduct(product) // Set the selected product
+			setSelectedMuseum(museum) // Set the selected creator
 			setZoomStates(
 				productImages.map(() => ({
 					zoomLevel: 1,
@@ -346,12 +339,15 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 					showLens: false,
 				})),
 			)
-			setCurrentSlide(0)
+			setCurrentSlide(0) // Reset carousel to first slide
 		} else {
 			// If no sub-images, display fallback
+			console.warn(
+				`No sub-images available for product ID: ${product.id}.`,
+			)
 			setSelectedProductImages([])
 			setSelectedProduct(null)
-			setSelectedCreator(null)
+			setSelectedMuseum(null)
 			setZoomStates([])
 		}
 		setIsModalOpen(true)
@@ -359,16 +355,18 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 
 	// Handle closing the modal
 	const handleCloseModal = () => {
+		console.log('Closing modal.')
 		setIsModalOpen(false)
 		setSelectedProductImages([])
-		setSelectedProduct(null)
-		setSelectedCreator(null)
+		setSelectedProduct(null) // Reset to null
+		setSelectedMuseum(null) // Reset to null
 		setZoomStates([])
-		setCurrentSlide(0)
+		setCurrentSlide(0) // Reset carousel
 	}
 
 	// Handle zoom in
 	const handleZoomIn = (index) => {
+		console.log(`Zooming in on image index: ${index}`)
 		setZoomStates((prevZoomStates) => {
 			const newZoomStates = [...prevZoomStates]
 			const currentZoom = newZoomStates[index].zoomLevel
@@ -377,6 +375,9 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 					(currentZoom + 0.5).toFixed(1),
 				)
 				newZoomStates[index].isZoomed = true
+				console.log(
+					`Image index ${index} zoom level increased to ${newZoomStates[index].zoomLevel}`,
+				)
 			}
 			return newZoomStates
 		})
@@ -384,6 +385,7 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 
 	// Handle zoom out
 	const handleZoomOut = (index) => {
+		console.log(`Zooming out on image index: ${index}`)
 		setZoomStates((prevZoomStates) => {
 			const newZoomStates = [...prevZoomStates]
 			const currentZoom = newZoomStates[index].zoomLevel
@@ -393,6 +395,11 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 				)
 				if (newZoomStates[index].zoomLevel === 1) {
 					newZoomStates[index].isZoomed = false
+					console.log(`Image index ${index} is no longer zoomed.`)
+				} else {
+					console.log(
+						`Image index ${index} zoom level decreased to ${newZoomStates[index].zoomLevel}`,
+					)
 				}
 			}
 			return newZoomStates
@@ -415,6 +422,10 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 				}
 				return newZoomStates
 			})
+
+			console.log(
+				`Mouse moved on image index ${index}: cursorPos=(${x}, ${y})`,
+			)
 		},
 		[setZoomStates],
 	)
@@ -422,6 +433,7 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	// Handle mouse enter to show zoom lens
 	const handleMouseEnterImage = useCallback(
 		(index) => {
+			console.log(`Mouse entered image index: ${index}`)
 			setZoomStates((prevZoomStates) => {
 				const newZoomStates = [...prevZoomStates]
 				newZoomStates[index] = {
@@ -437,6 +449,7 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	// Handle mouse leave to hide zoom lens
 	const handleMouseLeaveImage = useCallback(
 		(index) => {
+			console.log(`Mouse left image index: ${index}`)
 			setZoomStates((prevZoomStates) => {
 				const newZoomStates = [...prevZoomStates]
 				newZoomStates[index] = {
@@ -453,6 +466,7 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	// Handle click to toggle zoom
 	const handleImageClickToggleZoom = useCallback(
 		(index) => {
+			console.log(`Toggling zoom on image index: ${index}`)
 			setZoomStates((prevZoomStates) => {
 				const newZoomStates = [...prevZoomStates]
 				const zoomState = newZoomStates[index]
@@ -464,6 +478,7 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 					isZoomed,
 					zoomLevel,
 				}
+				console.log(`Image index ${index} zoom toggled to ${isZoomed}`)
 				return newZoomStates
 			})
 		},
@@ -472,6 +487,7 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 
 	// Handle manual navigation in carousel
 	const handlePrevSlide = () => {
+		console.log('Navigating to previous slide.')
 		setCurrentSlide(
 			(prev) =>
 				(prev - 1 + selectedProductImages.length) %
@@ -480,6 +496,7 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	}
 
 	const handleNextSlide = () => {
+		console.log('Navigating to next slide.')
 		setCurrentSlide((prev) => (prev + 1) % selectedProductImages.length)
 	}
 
@@ -502,6 +519,10 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 			// Fallback if scaledColumns[columnIdx] is undefined or has no remaining images
 			return `${baseImageHeight}px`
 		}
+	}
+
+	const handleExhibitsProductPage = () => {
+		navigate(`/museumpage/${id}/products`)
 	}
 
 	return (
@@ -529,79 +550,198 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 						className={style.slider}
 						style={{
 							display: 'flex',
-							flexDirection: 'row', // Arrange columns side by side horizontally
-							transform: `translateX(${position}px)`, // Horizontal movement
-							width: `${sliderWidth * 2}px`, // Set width to accommodate duplicated columns
-							transition: isPaused
-								? 'none'
-								: 'transform 0.1s linear', // Smooth sliding
-							willChange: 'transform', // Optimize for transform changes
+							flexDirection: 'row', // Розташування колонок горизонтально
+							transform: `translateX(${position}px)`, // Прокрутка
+							width: `${sliderWidth * 2}px`, // Подвійна ширина для двох копій колонок
+							animation: `scroll ${animationDuration}s linear infinite`,
 						}}
 					>
-						{/* Duplicate the entire set of scaled columns for seamless looping */}
-						{scaledColumns
-							.concat(scaledColumns)
-							.map((column, columnIndex) => (
-								<div
-									key={columnIndex}
-									className={style.column}
-									style={{
-										display: 'flex',
-										flexDirection: 'column',
-										marginRight: '20px', // Gap between columns
-									}}
-								>
-									{column.map((img, index) => (
-										<div
-											key={`${img.src}-${index}-${columnIndex}`}
-											className={style.item}
-											style={{
-												marginBottom: '20px', // Gap between items in a column
-												width: `${img.scaledWidth}px`,
-												flex: '0 0 auto', // Prevent flex items from growing or shrinking
-												cursor: 'pointer',
-												height: getImageHeight(
-													columnIndex,
-													index,
+						{scaledColumns.map((column, columnIndex) => (
+							<div
+								key={`original-${columnIndex}`}
+								className={style.column}
+								style={{
+									display: 'flex',
+									flexDirection: 'column',
+									marginRight: '20px', // Gap between columns
+								}}
+							>
+								{column.map((img, index) => (
+									<div
+										key={`${img.src}-${index}-${columnIndex}`}
+										className={style.item}
+										style={{
+											marginBottom: '20px', // Gap between items in a column
+											width: `${img.scaledWidth}px`,
+											flex: '0 0 auto', // Prevent flex items from growing or shrinking
+											cursor: 'pointer',
+											height: getImageHeight(
+												columnIndex,
+												index,
+											),
+											position: 'relative',
+										}}
+										onClick={() =>
+											handleImageClick(
+												img.productImages,
+												products.find(
+													(p) =>
+														p.id === img.productId,
 												),
-												position: 'relative',
+											)
+										}
+									>
+										<img
+											src={img.src}
+											alt=""
+											loading="lazy"
+											className={style.galleryImage}
+											style={{
+												width: '100%',
+												height: '100%', // Let height adjust based on image aspect ratio
+												objectFit: 'cover', // Ensures the image covers the container without distortion
 											}}
-											onClick={() =>
-												handleImageClick(
-													img.productImages,
-													products.find(
-														(p) =>
-															p.id ===
-															img.productId,
-													),
+											onError={(e) => {
+												e.target.onerror = null
+												e.target.src =
+													'/Img/newsCardERROR.jpg'
+												console.error(
+													'Error loading gallery image:',
+													e.target.src,
 												)
-											}
-										>
-											<img
-												src={img.src}
-												alt={img.alt}
-												loading="lazy"
-												className={style.galleryImage}
-												style={{
-													width: '100%',
-													height: '100%', // Let height adjust based on image aspect ratio
-													objectFit: 'cover', // Ensures the image covers the container without distortion
-												}}
-												onError={(e) => {
-													e.target.onerror = null
-													e.target.src =
-														'/Img/newsCardERROR.jpg'
-												}}
-											/>
-										</div>
-									))}
-								</div>
-							))}
+											}}
+										/>
+									</div>
+								))}
+							</div>
+						))}
+
+						{/* Second Set of Columns (Duplicate) */}
+						{scaledColumns.map((column, columnIndex) => (
+							<div
+								key={`duplicate-${columnIndex}`}
+								className={style.column}
+								style={{
+									display: 'flex',
+									flexDirection: 'column',
+									marginRight: '20px', // Gap between columns
+								}}
+							>
+								{column.map((img, index) => (
+									<div
+										key={`${img.src}-${index}-${columnIndex}`}
+										className={style.item}
+										style={{
+											marginBottom: '20px', // Gap between items in a column
+											width: `${img.scaledWidth}px`,
+											flex: '0 0 auto', // Prevent flex items from growing or shrinking
+											cursor: 'pointer',
+											height: getImageHeight(
+												columnIndex,
+												index,
+											),
+											position: 'relative',
+										}}
+										onClick={() =>
+											handleImageClick(
+												img.productImages,
+												products.find(
+													(p) =>
+														p.id === img.productId,
+												),
+											)
+										}
+									>
+										<img
+											src={img.src}
+											alt=""
+											loading="lazy"
+											className={style.galleryImage}
+											style={{
+												width: '100%',
+												height: '100%',
+												objectFit: 'cover',
+											}}
+											onError={(e) => {
+												e.target.onerror = null
+												e.target.src =
+													'/Img/newsCardERROR.jpg'
+												console.error(
+													'Error loading gallery image:',
+													e.target.src,
+												)
+											}}
+										/>
+									</div>
+								))}
+							</div>
+						))}
+
+						{/* Third Set of Columns (Duplicate) */}
+						{scaledColumns.map((column, columnIndex) => (
+							<div
+								key={`duplicate-${columnIndex}`}
+								className={style.column}
+								style={{
+									display: 'flex',
+									flexDirection: 'column',
+									marginRight: '20px', // Gap between columns
+								}}
+							>
+								{column.map((img, index) => (
+									<div
+										key={`${img.src}-${index}-${columnIndex}`}
+										className={style.item}
+										style={{
+											marginBottom: '20px', // Gap between items in a column
+											width: `${img.scaledWidth}px`,
+											flex: '0 0 auto', // Prevent flex items from growing or shrinking
+											cursor: 'pointer',
+											height: getImageHeight(
+												columnIndex,
+												index,
+											),
+											position: 'relative',
+										}}
+										onClick={() =>
+											handleImageClick(
+												img.productImages,
+												products.find(
+													(p) =>
+														p.id === img.productId,
+												),
+											)
+										}
+									>
+										<img
+											src={img.src}
+											alt=""
+											loading="lazy"
+											className={style.galleryImage}
+											style={{
+												width: '100%',
+												height: '100%',
+												objectFit: 'cover',
+											}}
+											onError={(e) => {
+												e.target.onerror = null
+												e.target.src =
+													'/Img/newsCardERROR.jpg'
+												console.error(
+													'Error loading gallery image:',
+													e.target.src,
+												)
+											}}
+										/>
+									</div>
+								))}
+							</div>
+						))}
 					</div>
 				</div>
 
 				{/* Modal */}
-				{isModalOpen && selectedProduct && selectedCreator && (
+				{isModalOpen && selectedProduct && selectedMuseum && (
 					<div
 						className={style.modalOverlay}
 						onClick={handleCloseModal}
@@ -645,9 +785,9 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 									>
 										{t('Імя автора:')}
 										<p>
-											{selectedCreator.title_en ||
-												selectedCreator.title_uk ||
-												selectedCreator.title ||
+											{selectedMuseum.title_en ||
+												selectedMuseum.title_uk ||
+												selectedMuseum.title ||
 												'—'}
 										</p>
 									</h3>
@@ -904,7 +1044,12 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 																			style.zoomProgress
 																		}
 																		style={{
-																			width: `${((zoomState.zoomLevel - 1) / 4) * 100}%`,
+																			width: `${
+																				((zoomState.zoomLevel -
+																					1) /
+																					4) *
+																				100
+																			}%`,
 																		}}
 																	></div>
 																</div>
@@ -945,12 +1090,15 @@ const MuseumPageMasonryGallery = ({ products, baseUrl, creator }) => {
 					</div>
 				)}
 			</div>
-			{/* More Arts Button */}
 			<div className={style.moreArtsButtonWrapper}>
 				<button className={style.moreArtsButton}>
-					<p className={style.moreArtsButtonText}>
-						{t('Всі роботи Митця')}
+					<p
+						className={style.moreArtsButtonText}
+						onClick={handleExhibitsProductPage}
+					>
+						{t('Всі експонати цього музею ')}
 					</p>
+					``
 					<img
 						className={`${style.buttonArrow}`}
 						src={'/Img/buttonArrow.svg'}
@@ -995,12 +1143,12 @@ MuseumPageMasonryGallery.propTypes = {
 		}),
 	).isRequired,
 	baseUrl: PropTypes.string.isRequired,
-	creator: PropTypes.shape({
+	museum: PropTypes.shape({
 		title: PropTypes.string,
 		title_en: PropTypes.string,
 		title_uk: PropTypes.string,
 		// ... other fields
-	}).isRequired,
+	}).isRequired, // Ensure creator has the necessary fields
 }
 
 export default MuseumPageMasonryGallery
