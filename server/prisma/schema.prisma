@@ -33,6 +33,7 @@ model User {
   products           Product[]
   museum_logo_image  museum_logo_images? @relation("UserMuseumLogo")
   museumExhibition   Exhibition[]        @relation("MuseumExhibition")
+  museumProducts     Product[]           @relation("MuseumProducts") // New relation
 
   @@map("user")
 }
@@ -56,21 +57,24 @@ model Post {
 }
 
 model Product {
-  id             Int            @id @default(autoincrement())
-  title_en       String         @db.VarChar(100)
-  title_uk       String         @db.VarChar(100)
-  description_en String         @db.VarChar(1000)
-  description_uk String         @db.VarChar(1000)
-  specs_en       String?        @db.VarChar(500)
-  specs_uk       String?        @db.VarChar(500)
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
+  id             Int                 @id @default(autoincrement())
+  title_en       String              @db.VarChar(100)
+  title_uk       String              @db.VarChar(100)
+  description_en String              @db.VarChar(1000)
+  description_uk String              @db.VarChar(1000)
+  specs_en       String?             @db.VarChar(500)
+  specs_uk       String?             @db.VarChar(500)
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
   authorId       Int
   museumId       Int?
   artTerms       ArtTerm[]
-  author         User           @relation(fields: [authorId], references: [id])
-  images         ProductImage[] @relation("ProductImages")
+  author         User                @relation(fields: [authorId], references: [id])
+  museum         User?               @relation("MuseumProducts", fields: [museumId], references: [id])
+  images         ProductImage[]      @relation("ProductImages")
+  exhibitions    ExhibitionProduct[]
 
+  @@index([museumId], map: "Product_museumId_fkey")
   @@index([authorId], map: "Product_authorId_fkey")
 }
 
@@ -105,15 +109,26 @@ model Exhibition {
 
   latitude          Float?
   longitude         Float?
-  endTime           String?            @db.VarChar(200)
-  createdBy         User               @relation("UserCreatedExhibitions", fields: [createdById], references: [id])
+  endTime           String?             @db.VarChar(200)
+  createdBy         User                @relation("UserCreatedExhibitions", fields: [createdById], references: [id])
   exhibitionArtists ExhibitionArtist[]
-  images            ExhibitionImage[]  @relation("ExhibitionsImages")
+  images            ExhibitionImage[]   @relation("ExhibitionsImages")
   museumId          Int?
-  museum            User?              @relation("MuseumExhibition", fields: [museumId], references: [id])
+  museum            User?               @relation("MuseumExhibition", fields: [museumId], references: [id])
+  products          ExhibitionProduct[]
 
   @@index([createdById], map: "Exhibition_createdById_fkey")
   @@index([museumId], map: "Exhibition_museumId_fkey")
+}
+
+model ExhibitionProduct {
+  exhibition   Exhibition @relation(fields: [exhibitionId], references: [id])
+  product      Product    @relation(fields: [productId], references: [id])
+  exhibitionId Int
+  productId    Int
+
+  @@id([exhibitionId, productId])
+  @@index([productId], map: "ExhibitionProduct_productId_fkey")
 }
 
 model ExhibitionImage {

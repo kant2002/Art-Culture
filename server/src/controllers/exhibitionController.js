@@ -418,3 +418,79 @@ export const getMyExhibitions = async (req, res, next) => {
     next(error)
   }
 }
+
+export const addProductToExhibition = async (req, res, next) => {
+  try {
+    const { exhibitionId, productId } = req.body
+
+    const parseExhibitionId = parseInt(exhibitionId, 10)
+    const parseProductId = parseInt(productId, 10)
+    if (isNaN(parseExhibitionId) || isNaN(parseProductId)) {
+      return res
+        .status(400)
+        .json({
+          errors: [{ msg: "Invalid exhibition or product ID provided" }],
+        })
+    }
+    const exhibition = await prisma.exhibition.findUnique({
+      where: { id: parseExhibitionId },
+    })
+    if (!exhibition) {
+      return res.status(404).json({ errors: [{ msg: "Exhibition not found" }] })
+    }
+
+    const exhibitionProduct = await prisma.exhibitionProduct.create({
+      data: {
+        exhibition: { connect: { id: parseExhibitionId } },
+        product: { connect: { id: parseProductId } },
+      },
+    })
+
+    res
+      .status(201)
+      .json({
+        exhibitionProduct,
+        message: "Product added to exhibition successfully",
+      })
+  } catch (error) {
+    console.error("Error adding product to exhibition:", error)
+    next(error)
+  }
+}
+
+export const getProductByExhibitionId = async (req, res, next) => {
+  try {
+    const exhibitionId = parseInt(req.params.exhibitionId, 10)
+    if (isNaN(exhibitionId)) {
+      return res.status(400).json({ error: "Invalid exhibition ID" })
+    }
+
+    const exhibition = await prisma.exhibition.findMany({
+      where: { id: exhibitionId },
+      include: {
+        products: {
+          include: {
+            product: {
+              include: {
+                images: true,
+                author: true,
+                museum: true,
+              },
+            },
+          },
+        },
+      },
+    })
+
+    if (!exhibition) {
+      return res.status(404).json({ error: "Exhibition not found" })
+    }
+
+    const products = exhibition.products.map((product) => product.product)
+
+    res.json({ products })
+  } catch (error) {
+    console.error("Error fetching product by ID:", error)
+    next(error)
+  }
+}
