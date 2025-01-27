@@ -6,6 +6,7 @@ import {
   getAllExhibitions,
   getExhibitionById,
   getMyExhibitions,
+  getProductByExhibitionId,
   updateExhibition,
 } from "../controllers/exhibitionController.js"
 import authenticateToken from "../middleware/authMiddleware.js"
@@ -54,6 +55,8 @@ router.get(
   getMyExhibitions,
 )
 router.get("/:id", getExhibitionById)
+
+router.get("/getProductByExhibitionId", getProductByExhibitionId)
 
 router.put(
   "/:id",
