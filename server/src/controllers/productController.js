@@ -56,24 +56,57 @@ export const createProduct = async (req, res, next) => {
 }
 export const getProducts = async (req, res, next) => {
   try {
-    const products = await prisma.product.findMany({
-      include: {
-        images: true,
-        author: {
-          select: {
-            id: true,
-            email: true,
-            title: true,
+    const { authorIds } = req.query // Expecting 'authorIds=1,2,3'
+
+    let products
+
+    if (authorIds) {
+      const authorIdArray = authorIds.split(",").map((id) => parseInt(id, 10))
+
+      // Validate that all IDs are numbers
+      if (authorIdArray.some(isNaN)) {
+        return res.status(400).json({ error: "Invalid authorIds" })
+      }
+
+      products = await prisma.product.findMany({
+        where: {
+          OR: [
+            { authorId: { in: authorIdArray } },
+            { museumId: { in: authorIdArray } },
+          ],
+        },
+        include: {
+          images: true,
+          author: {
+            select: {
+              id: true,
+              email: true,
+              title: true,
+            },
           },
         },
-      },
-    })
+      })
+    } else {
+      // Fetch all products if no authorIds are provided
+      products = await prisma.product.findMany({
+        include: {
+          images: true,
+          author: {
+            select: {
+              id: true,
+              email: true,
+              title: true,
+            },
+          },
+        },
+      })
+    }
+
     res.json({ products })
   } catch (error) {
     console.error("Error fetching products:", error)
     next(error)
   }
-  console.log("createProduct - req.user:", req.user)
 }
 
 export const getProductById = async (req, res, next) => {
@@ -375,6 +408,43 @@ export const deleteProduct = async (req, res, next) => {
     res.json({ message: "Product delete successfully" })
   } catch (error) {
     console.error("Error deleting product:", error)
+    next(error)
+  }
+}
+
+export const getProductByExhibitionId = async (req, res, next) => {
+  try {
+    const exhibitionId = parseInt(req.params.exhibitionId, 10)
+    if (isNaN(exhibitionId)) {
+      return res.status(400).json({ error: "Invalid exhibition ID" })
+    }
+
+    const exhibition = await prisma.exhibition.findUnique({
+      where: { id: exhibitionId },
+      include: {
+        products: {
+          include: {
+            product: {
+              include: {
+                images: true,
+                author: true,
+                museum: true,
+              },
+            },
+          },
+        },
+      },
+    })
+    console.log("Exhibition and products data:", exhibition)
+    if (!exhibition) {
+      return res.status(404).json({ error: "Exhibition not found" })
+    }
+
+    const products = exhibition.products.map((ep) => ep.product)
+
+    res.json({ products })
+  } catch (error) {
+    console.error("Error fetching product by ID:", error)
     next(error)
   }
 }

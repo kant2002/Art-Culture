@@ -48,15 +48,9 @@ router.post(
 )
 
 router.get("/", getAllExhibitions)
-router.get(
-  "/my-exhibitions",
-  authenticateToken,
-
-  getMyExhibitions,
-)
+router.get("/my-exhibitions", authenticateToken, getMyExhibitions)
+router.get("/:exhibitionId/products", getProductByExhibitionId)
 router.get("/:id", getExhibitionById)
-
-router.get("/getProductByExhibitionId", getProductByExhibitionId)
 
 router.put(
   "/:id",

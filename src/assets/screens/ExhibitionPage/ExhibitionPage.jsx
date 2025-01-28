@@ -1,21 +1,23 @@
 // src/assets/components/ExhibitionDetails.jsx
 import Map from '@components/Blocks/Maps'
-import ExhibitionPageMasonryGallery from '@components/Sliders/ExhibitionPageSlider/ExhibitionPageMasonryGallery'
 import ExhibitionPageNewsPopularExhibition from '@components/Sliders/ExhibitionPageSlider/ExhibitionPageNewsPopularExhibition'
 import styles from '@styles/layout/MuseumPage.module.scss'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import API from '../../../utils/api.js'
-import { getImageUrl } from '../../../utils/helper.js'
+import { getBaseUrl, getImageUrl } from '../../../utils/helper.js'
 import TranslatedContent from '../../components/Blocks/TranslatedContent.jsx'
+import ExhibitionPageMasonryGallery from '../../components/Sliders/ExhibitionPageSlider/ExhibitionPageMasonryGallery.jsx'
 
 function ExhibitionDetails() {
 	const { t, i18n } = useTranslation()
-	const { id } = useParams() // Get exhibition ID from URL
-
+	const { id, productId } = useParams() // Get exhibition ID from URL
+	const baseUrl = getBaseUrl()
 	const [exhibition, setExhibition] = useState(null)
 	const [museum, setMuseum] = useState(null) // <--- New state
+	const [creator, setCreator] = useState([])
+	const [products, setProducts] = useState([]) // <--- New state
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 
@@ -37,16 +39,35 @@ function ExhibitionDetails() {
 
 				setExhibition(fetchedExhibition)
 
-				// 2) If we have a museum ID, fetch the museum
-				// Depending on your backend, you might have "createdById" or "createdBy.id"
-				if (fetchedExhibition?.createdById) {
-					// const museumResponse = await API.get(
-					// 	`/users/museums/${fetchedExhibition.createdById}`,
-					// )
-					// console.log('Fetched Museum Data:', museumResponse.data)
-					setMuseum(fetchedExhibition.museum) // or .data if shaped differently
+				if (fetchedExhibition?.museumId) {
+					const museumResponse = await API.get(
+						`/users/museums/${fetchedExhibition.museumId}`,
+					)
+					console.log('Fetched Museum Data:', museumResponse.data)
+					setMuseum(museumResponse.data.museum) // or .data if shaped differently
 				}
 
+				const fetchProducts = async () => {
+					try {
+						setLoading(true)
+						const productsResponse = await API.get(
+							`/exhibitions/${id}/products`,
+						)
+						console.log(
+							'Fetched Products for Exhibition:',
+							productsResponse.data.products,
+						)
+						setProducts(productsResponse.data.products)
+					} catch (error) {
+						console.error(
+							'Error fetching products for exhibition:',
+							error,
+						)
+						setError(t('Не вдалося завантажити продукти виставки.'))
+					}
+				}
+
+				await fetchProducts()
 				setLoading(false)
 			} catch (err) {
 				console.error('Error fetching exhibition:', err)
@@ -95,7 +116,7 @@ function ExhibitionDetails() {
 
 	// Prepare artist names
 	const artistNames =
-		exhibitionArtists && exhibitionArtists.length > 0
+		Array.isArray(exhibitionArtists) && exhibitionArtists.length > 0
 			? exhibitionArtists
 					.map(
 						(ea) =>
@@ -318,7 +339,14 @@ function ExhibitionDetails() {
 
 				<ExhibitionPageNewsPopularExhibition />
 
-				<ExhibitionPageMasonryGallery />
+				<ExhibitionPageMasonryGallery
+					products={products}
+					baseUrl={baseUrl} // Ensure API.baseURL is correctly defined
+					museum={museum}
+					creator={exhibition.exhibitionArtists.map(
+						(ea) => ea.artist,
+					)}
+				/>
 
 				<div className={styles.mapContainer}>
 					<Map

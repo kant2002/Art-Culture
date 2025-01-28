@@ -8,6 +8,7 @@ import {
   getCreatorProducts,
   getMuseumProducts,
   getProductByAuthorId,
+  getProductByExhibitionId,
   getProductById,
   getProductByMuseumId,
   getProducts,
@@ -45,6 +46,7 @@ router.get("/my-products", authenticateToken, getUserProducts)
 router.get("/author/:authorId", getProductByAuthorId)
 router.get("/museum-products", getMuseumProducts)
 router.get("/museum/:museumId", getProductByMuseumId)
+router.get("/exproducts", getProductByExhibitionId)
 router.get("/:productId", getProductById)
 
 router.put(

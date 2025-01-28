@@ -410,8 +410,8 @@ function ExhibitionForm() {
 			submissionData.append('artistIds', artistId)
 		})
 
-		uniquePaintingIds.forEach((paintingIds) => {
-			submissionData.append('paintingIds', paintingIds)
+		uniquePaintingIds.forEach((paintingId) => {
+			submissionData.append('paintingIds', paintingId)
 		})
 
 		// Debug: Log FormData entries

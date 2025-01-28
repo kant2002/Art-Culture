@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client"
 import fs from "fs"
 import path, { dirname } from "path"
 import { fileURLToPath } from "url"
+import logger from "../utils/logging.js"
 const prisma = new PrismaClient()
 
 const __filename = fileURLToPath(import.meta.url)
@@ -26,7 +27,7 @@ export const createExhibitions = async (req, res, next) => {
       address,
       museumId,
     } = req.body
-    let { artistIds } = req.body
+    let { artistIds, paintingIds } = req.body
 
     // Ensure artistIds is an array
     if (!artistIds) {
@@ -42,6 +43,22 @@ export const createExhibitions = async (req, res, next) => {
         return res
           .status(400)
           .json({ errors: [{ msg: "All artist IDs must be valid numbers" }] })
+      }
+    }
+
+    if (!paintingIds) {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: "Painting IDs are required" }] })
+    } else {
+      if (!Array.isArray(paintingIds)) {
+        paintingIds = [paintingIds]
+      }
+      paintingIds = paintingIds.map((id) => parseInt(id, 10))
+      if (paintingIds.some(isNaN)) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "All painting IDs must be valid numbers" }] })
       }
     }
 
@@ -73,6 +90,23 @@ export const createExhibitions = async (req, res, next) => {
       return res
         .status(400)
         .json({ errors: [{ msg: "Invalid artist IDs provided" }] })
+    }
+
+    const paintings = await prisma.product.findMany({
+      where: {
+        id: { in: paintingIds },
+        authorId: { in: artistIds },
+      },
+    })
+
+    if (paintings.length !== paintingIds.length) {
+      return res.status(400).json({
+        errors: [
+          {
+            msg: "Some painting IDs are invalid or do not belong to the selected artists",
+          },
+        ],
+      })
     }
 
     const museum = await prisma.user.findUnique({
@@ -109,12 +143,22 @@ export const createExhibitions = async (req, res, next) => {
             artist: { connect: { id: artistId } },
           })),
         },
+        products: {
+          create: paintingIds.map((paintingId) => ({
+            product: { connect: { id: paintingId } },
+          })),
+        },
       },
       include: {
         images: true,
         exhibitionArtists: {
           include: {
             artist: true,
+          },
+        },
+        products: {
+          include: {
+            product: true,
           },
         },
       },
@@ -329,7 +373,7 @@ export const deleteExhibition = async (req, res, next) => {
     // Verify ownership
     const exhibition = await prisma.exhibition.findUnique({
       where: { id: parseInt(id) },
-      include: { images: true },
+      include: { images: true, exhibitionArtists: true, products: true },
     })
     if (!exhibition)
       return res.status(404).json({ error: "Exhibition not found" })
@@ -358,7 +402,11 @@ export const deleteExhibition = async (req, res, next) => {
       where: { exhibitionId: exhibition.id },
     })
 
-    await prisma.exhibition.delete({ where: { id: parseInt(id) } })
+    await prisma.exhibitionProduct.deleteMany({
+      where: { exhibitionId: exhibition.id },
+    })
+
+    await prisma.exhibition.delete({ where: { id: exhibition.id } })
 
     res.json({ message: "Exhibition deleted successfully" })
   } catch (error) {
@@ -426,11 +474,9 @@ export const addProductToExhibition = async (req, res, next) => {
     const parseExhibitionId = parseInt(exhibitionId, 10)
     const parseProductId = parseInt(productId, 10)
     if (isNaN(parseExhibitionId) || isNaN(parseProductId)) {
-      return res
-        .status(400)
-        .json({
-          errors: [{ msg: "Invalid exhibition or product ID provided" }],
-        })
+      return res.status(400).json({
+        errors: [{ msg: "Invalid exhibition or product ID provided" }],
+      })
     }
     const exhibition = await prisma.exhibition.findUnique({
       where: { id: parseExhibitionId },
@@ -446,12 +492,10 @@ export const addProductToExhibition = async (req, res, next) => {
       },
     })
 
-    res
-      .status(201)
-      .json({
-        exhibitionProduct,
-        message: "Product added to exhibition successfully",
-      })
+    res.status(201).json({
+      exhibitionProduct,
+      message: "Product added to exhibition successfully",
+    })
   } catch (error) {
     console.error("Error adding product to exhibition:", error)
     next(error)
@@ -460,13 +504,14 @@ export const addProductToExhibition = async (req, res, next) => {
 
 export const getProductByExhibitionId = async (req, res, next) => {
   try {
-    const exhibitionId = parseInt(req.params.exhibitionId, 10)
-    if (isNaN(exhibitionId)) {
-      return res.status(400).json({ error: "Invalid exhibition ID" })
-    }
+    const { exhibitionId } = req.params
 
-    const exhibition = await prisma.exhibition.findMany({
-      where: { id: exhibitionId },
+    if (!exhibitionId || isNaN(parseInt(exhibitionId, 10)))
+      return res.status(400).json({ error: "Invalid exhibition ID" })
+
+    logger.info("Exhibition ID:", exhibitionId)
+    const exhibition = await prisma.exhibition.findUnique({
+      where: { id: parseInt(exhibitionId, 10) },
       include: {
         products: {
           include: {
@@ -481,13 +526,13 @@ export const getProductByExhibitionId = async (req, res, next) => {
         },
       },
     })
-
+    logger.info("Exhibition and products data:", exhibition)
     if (!exhibition) {
       return res.status(404).json({ error: "Exhibition not found" })
     }
 
-    const products = exhibition.products.map((product) => product.product)
-
+    const products = exhibition.products.map((ep) => ep.product)
+    logger.log("Fetched products:", products)
     res.json({ products })
   } catch (error) {
     console.error("Error fetching product by ID:", error)

@@ -6,6 +6,7 @@ import {
 	useCallback,
 	useEffect,
 	useLayoutEffect,
+	useMemo,
 	useRef,
 	useState,
 } from 'react'
@@ -55,7 +56,7 @@ const ExhibitionPageMasonryGallery = memo(
 		const [selectedProductImages, setSelectedProductImages] = useState([])
 		const [selectedProduct, setSelectedProduct] = useState(null)
 		const [selectedMuseum, setSelectedMuseum] = useState(null) // Initialize with null
-		const { selectedCreator, setSelectedCreator } = useState(null)
+		const [selectedCreator, setSelectedCreator] = useState(null)
 
 		const animationDuration = sliderWidth / speed // in seconds or ms
 		const navigate = useNavigate()
@@ -108,6 +109,7 @@ const ExhibitionPageMasonryGallery = memo(
 
 		// Memoize the images array to prevent unnecessary re-creations
 		const images = useMemo(() => {
+			// Remove the filtering by exhibitionId
 			return products.map((product) => {
 				const mainImageSrc =
 					product.images && product.images.length > 0
@@ -564,7 +566,7 @@ const ExhibitionPageMasonryGallery = memo(
 					{/* Gallery Title */}
 					<div className={style.galleryTitleWrapper}>
 						<h3 className={style.galleryTitle}>
-							{t('Експонати цього музею')}
+							{t('Експонати цієї виставки')}
 						</h3>
 					</div>
 
@@ -835,11 +837,11 @@ const ExhibitionPageMasonryGallery = memo(
 											>
 												{t('Імя автора:')}
 												<p>
-													{selectedMuseum ||
+													{selectedMuseum?.title_en ||
 														selectedCreator.title_en ||
-														selectedMuseum ||
+														selectedMuseum?.title_uk ||
 														selectedCreator.title_uk ||
-														selectedMuseum ||
+														selectedMuseum?.title ||
 														selectedCreator.title ||
 														'—'}
 												</p>
@@ -1166,10 +1168,9 @@ const ExhibitionPageMasonryGallery = memo(
 							className={style.moreArtsButtonText}
 							onClick={handleExhibitsProductPage}
 						>
-							{t('Всі експонати цього музею ')}
+							{t()}
 						</p>
-						``
-						<img
+						{/* <img
 							className={`${style.buttonArrow}`}
 							src={'/Img/buttonArrow.svg'}
 							alt={t('Фото митця')}
@@ -1178,7 +1179,7 @@ const ExhibitionPageMasonryGallery = memo(
 								e.target.onerror = null
 								e.target.src = '/Img/newsCardERROR.jpg'
 							}}
-						/>
+						/> */}
 					</button>
 				</div>
 			</div>
@@ -1190,6 +1191,7 @@ ExhibitionPageMasonryGallery.propTypes = {
 	products: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.number.isRequired,
+			exhibitionId: PropTypes.number.isRequired,
 			images: PropTypes.arrayOf(
 				PropTypes.shape({
 					id: PropTypes.number.isRequired,
@@ -1220,12 +1222,14 @@ ExhibitionPageMasonryGallery.propTypes = {
 		title_uk: PropTypes.string,
 		// ... other fields
 	}).isRequired,
-	creator: PropTypes.shape({
-		title: PropTypes.string,
-		title_en: PropTypes.string,
-		title_uk: PropTypes.string,
-		// ... other fields
-	}).isRequired, // Ensure creator has the necessary fields
+	creator: PropTypes.arrayOf(
+		PropTypes.shape({
+			title: PropTypes.string,
+			title_en: PropTypes.string,
+			title_uk: PropTypes.string,
+			// ... other fields
+		}),
+	).isRequired, // Ensure creator has the necessary fields
 }
 
 export default ExhibitionPageMasonryGallery
