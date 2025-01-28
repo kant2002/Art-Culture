@@ -34,6 +34,7 @@ model User {
   museum_logo_image  museum_logo_images? @relation("UserMuseumLogo")
   museumExhibition   Exhibition[]        @relation("MuseumExhibition")
   museumProducts     Product[]           @relation("MuseumProducts") // New relation
+  likes              Like[]
 
   @@map("user")
 }
@@ -52,6 +53,7 @@ model Post {
   createdAt    DateTime @default(now()) @map("created_at")
   updatedAt    DateTime @updatedAt @map("updated_at")
   author       User     @relation(fields: [authorId], references: [id])
+  likes        Like[]
 
   @@index([authorId], map: "Post_author_id_fkey")
 }
@@ -73,6 +75,7 @@ model Product {
   museum         User?               @relation("MuseumProducts", fields: [museumId], references: [id])
   images         ProductImage[]      @relation("ProductImages")
   exhibitions    ExhibitionProduct[]
+  likes          Like[]
 
   @@index([museumId], map: "Product_museumId_fkey")
   @@index([authorId], map: "Product_authorId_fkey")
@@ -116,6 +119,7 @@ model Exhibition {
   museumId          Int?
   museum            User?               @relation("MuseumExhibition", fields: [museumId], references: [id])
   products          ExhibitionProduct[]
+  likes             Like[]
 
   @@index([createdById], map: "Exhibition_createdById_fkey")
   @@index([museumId], map: "Exhibition_museumId_fkey")
@@ -176,6 +180,25 @@ model museum_logo_images {
   user     User   @relation("UserMuseumLogo", fields: [userId], references: [id])
 
   @@index([userId], map: "Museum_logo_images_userId_fkey")
+}
+
+model Like {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  postId       Int?
+  productId    Int?
+  exhibitionId Int?
+  createdAt    DateTime @default(now())
+
+  user       User        @relation(fields: [userId], references: [id])
+  post       Post?       @relation(fields: [postId], references: [id])
+  product    Product?    @relation(fields: [productId], references: [id])
+  exhibition Exhibition? @relation(fields: [exhibitionId], references: [id])
+
+  @@index([userId])
+  @@index([postId])
+  @@index([productId])
+  @@index([exhibitionId])
 }
 
 enum Role {
