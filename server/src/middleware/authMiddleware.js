@@ -8,6 +8,7 @@ const authenticateToken = async (req, res, next) => {
   const token = authHeader && authHeader.split(" ")[1]
 
   if (!authHeader || !token) {
+    console.error("Missing authorization header or token.")
     return res.status(401).json({ error: "Access token is missing" })
   }
 
@@ -16,6 +17,7 @@ const authenticateToken = async (req, res, next) => {
     console.log("Decoded token:", decoded)
 
     if (!decoded || !decoded.id) {
+      console.error("Invalid token structure.")
       return res.status(400).json({ error: "Invalid token structure" })
     }
 
@@ -43,6 +45,7 @@ const authenticateToken = async (req, res, next) => {
     })
 
     if (!user) {
+      console.error("User not found.")
       return res.status(404).json({ error: "User not found" })
     }
 

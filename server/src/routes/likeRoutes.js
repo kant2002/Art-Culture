@@ -1,5 +1,7 @@
 import express from "express"
 import {
+  getLikeCount,
+  getLikeStatus,
   getTopLikedEntities,
   likeEntity,
   unlikeEntity,
@@ -9,8 +11,10 @@ import authenticateToken from "../middleware/authMiddleware.js"
 const router = express.Router()
 
 //* Route to like an entity
-router.post("/like", authenticateToken, likeEntity)
-router.post("/unlike", authenticateToken, unlikeEntity)
+router.post("/", authenticateToken, likeEntity)
+router.delete("/unlike", authenticateToken, unlikeEntity)
 router.get("/top-liked", getTopLikedEntities)
+router.get("/status", authenticateToken, getLikeStatus)
+router.get("/count", getLikeCount)
 
 export default router

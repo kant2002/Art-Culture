@@ -12,6 +12,7 @@ import artTermsRoutes from "./src/routes/artTermsRoutes.js"
 import authRoutes from "./src/routes/authRoutes.js"
 import exhibitionRoutes from "./src/routes/exhibitionRoutes.js"
 import geoRoutes from "./src/routes/geoRoutes.js"
+import likeRoutes from "./src/routes/likeRoutes.js"
 import postRoutes from "./src/routes/postRoutes.js"
 import productRoutes from "./src/routes/productRoutes.js"
 import searchRoutes from "./src/routes/searchRoutes.js"
@@ -103,6 +104,7 @@ app.use("/api/exhibitions", exhibitionRoutes)
 app.use("/api/art-terms", artTermsRoutes)
 app.use("/api/search", searchRoutes)
 app.use("/api/geo", geoRoutes)
+app.use("/api/like", likeRoutes)
 
 // Route debugging
 console.log("Environment", process.env.NODE_ENV)
