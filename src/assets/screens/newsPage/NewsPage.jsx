@@ -432,7 +432,7 @@ function NewsPage() {
 					</button>
 				</div>
 
-				<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
+				{/* <LikeAndShare className={sliderStyles.LikeAndShareFixed} /> */}
 			</div>
 			{/* Subscription Section */}
 			<div className={`${styles.newsPageInputMailContainer}`}>
