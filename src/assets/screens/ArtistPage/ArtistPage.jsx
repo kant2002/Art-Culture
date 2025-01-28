@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import styles from '@styles/layout/ArtistPage.module.scss'
 import { getBaseUrl, getImageUrl } from '../../../utils/helper.js'
+import LikeAndShare from '@components/Blocks/LikeAndShare'
+import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import ArtistPageMasonryGallery from '@components/Sliders/ArtistPageSliders/ArtistPageMasonryGallery.jsx'
 import ArtistPageNewsArtistsSlider from '@components/Sliders/ArtistPageSliders/ArtistPageNewsArtistsSlider.jsx'
 import PopularOfThisArtistSlider from '@components/Sliders/ArtistPageSliders/PopularOfThisArtistSlider.jsx'
@@ -159,6 +161,8 @@ function ArtistPage() {
 					</button>
 				</div>
 			</div>
+
+			<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 
 			<ArtistPageNewsArtistsSlider />
 

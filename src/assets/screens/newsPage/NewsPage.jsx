@@ -130,7 +130,7 @@ function NewsPage() {
 			</div>
 			{/* Like and Share Buttons */}
 			<div className={`${styles.newsPageLikeAndShareContainer}`}>
-				<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
+				{/* <LikeAndShare className={sliderStyles.LikeAndShareFixed} /> */}
 			</div>
 			{/* Top Cards Section */}
 			<div className={`${styles.newsPageTopCardsContainer}`}>
