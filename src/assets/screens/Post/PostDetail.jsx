@@ -1,5 +1,6 @@
 // src/components/PostDetail/PostDetail.jsx
 
+import LikeAndShare from '@components/Blocks/LikeAndShare'
 import TranslatedContent from '@components/Blocks/TranslatedContent'
 import PostDetailPopularNewsSlider from '@components/Sliders/PostDetailPopularNewsSlider/PostDetailPopularNewsSlider'
 import styles from '@styles/components/Post/PostDetail.module.scss'
@@ -146,6 +147,7 @@ function PostDetail() {
 						</div>
 					</div>
 				</div>
+				<LikeAndShare />
 				<div className={`${styles.postPageNewsReadMoreButtonWrapper}`}>
 					<button className={`${styles.postPageNewsReadMoreButton}`}>
 						<p
