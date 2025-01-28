@@ -160,9 +160,8 @@ function ArtistPage() {
 						</p>
 					</button>
 				</div>
+				<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 			</div>
-
-			<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
 
 			<ArtistPageNewsArtistsSlider />
 
