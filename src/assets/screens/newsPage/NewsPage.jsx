@@ -27,65 +27,83 @@ function NewsPage() {
 	// Determine the number of visible posts based on window width
 	const [visiblePostsCount, setVisiblePostsCount] = useState(
 		getPostsCount(window.innerWidth),
-	)
+		)
 
-	// Function to determine number of posts to display based on window width
-	function getPostsCount(width) {
-		if (width >= 1600) {
-			return 3
-		} else if (width >= 1440) {
-			return 2
-		} else {
-			return 1 // Changed to 1 for widths below 1440px
+		// // Function to determine number of posts to display based on window width
+		// function getPostsCount(width) {
+		// 	if (width >= 1600) {
+		// 		return 3
+		// 	} else if (width >= 1440) {
+		// 		return 2
+		// 	} else {
+		// 		return 1 // Changed to 1 for widths below 1440px
+		// 	}
+		// }
+
+		function getPostsCount(width) {
+			if (width === null || width === undefined) {
+				throw new Error('Width must be a number')
+			}
+			if (width >= 1920) {
+				return 4
+			}
+			if (width >= 1600 && width < 1920) {
+				return 3
+			}
+			if (width > 1440 && width < 1600) {
+				return 2
+			}
+			if (width <= 1440) {
+				return 2
+			}
 		}
-	}
 
 	// Handle window resize to adjust visible posts count
 	useEffect(() => {
-		const handleResize = () => {
-			const newPostCount = getPostsCount(window.innerWidth)
-			if (newPostCount !== visiblePostsCount) {
-				setVisiblePostsCount(newPostCount)
-				console.log(
-					`Window width: ${window.innerWidth}, Visible posts count: ${newPostCount}`,
-				)
+			const handleResize = () => {
+				const newPostCount = getPostsCount(window.innerWidth)
+				if (newPostCount !== visiblePostsCount) {
+					setVisiblePostsCount(newPostCount)
+					console.log(
+						`Window width: ${window.innerWidth}, Visible posts count: ${newPostCount}`,
+					)
+				}
 			}
-		}
 
-		window.addEventListener('resize', handleResize)
+			window.addEventListener('resize', handleResize)
 
-		// Initial check
-		handleResize()
+			// Initial check
+			handleResize()
 
-		return () => {
-			window.removeEventListener('resize', handleResize)
-		}
-	}, [visiblePostsCount])
+			return () => {
+				window.removeEventListener('resize', handleResize)
+			}
+		}, [visiblePostsCount])
 
 	// Fetch all posts from the server
 	useEffect(() => {
-		const fetchPosts = async () => {
-			try {
-				const response = await axios.get('/api/posts')
-				console.log('Received posts data:', response.data)
-				// Assuming the API returns { posts: [...] }
-				setPosts(response.data)
-				setLoading(false)
-			} catch (err) {
-				console.error('Error loading posts:', err)
-				setError('Failed to load posts.')
-				setLoading(false)
+			const fetchPosts = async () => {
+				try {
+					const response = await axios.get('/api/posts')
+					console.log('Received posts data:', response.data)
+					// Assuming the API returns { posts: [...] }
+					setPosts(response.data)
+					setLoading(false)
+				} catch (err) {
+					console.error('Error loading posts:', err)
+					setError('Failed to load posts.')
+					setLoading(false)
+				}
 			}
-		}
 
-		fetchPosts()
-	}, [])
+			fetchPosts()
+		}, [])
 
 	// Filter posts based on search term (author's title or email)
 	const filteredPosts = posts.filter((post) => {
-		const authorName = post.author.title || post.author.email
-		return authorName.toLowerCase().includes(searchTerm.toLowerCase())
-	})
+			const authorName = post.author.title || post.author.email
+			return authorName.toLowerCase().includes(searchTerm.toLowerCase())
+		})
 
 	const handleNewsPageClick = () => {
 		navigate('/NewsPage')
@@ -443,7 +461,7 @@ function NewsPage() {
 					className={`${styles.newsPageInputMail}`}
 					type="email"
 					placeholder={t('Введіть ваш email')}
-					// You can add value and onChange handlers if needed
+				// You can add value and onChange handlers if needed
 				/>
 			</div>
 			<div className={`${styles.newsPageSignUpButtonContainer}`}>
