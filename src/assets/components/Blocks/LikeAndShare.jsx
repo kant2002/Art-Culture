@@ -7,12 +7,11 @@ import { toast, ToastContainer } from 'react-toastify'
 function LikeAndShare({ className, postId, countClassName }) {
 	const { t } = useTranslation()
 	const [isLoading, setIsLoading] = useState(true)
+	// { liked: false, likeCount: 0 }
 	const [likeStatus, setLikeStatus] = useState({ liked: false, likeCount: 0 })
 
-	// Fetch like status and count on component load
 	useEffect(() => {
 		const fetchLikeStatus = async () => {
-			console.log('[Front-end] => fetchLikeStatus for postId:', postId)
 			try {
 				const token = localStorage.getItem('token')
 				const headers = token
@@ -20,41 +19,25 @@ function LikeAndShare({ className, postId, countClassName }) {
 					: {}
 
 				const response = await axios.get('/api/like/status', {
-					// Notice: these are query params
 					params: { entityId: postId, entityType: 'post' },
 					headers,
 				})
-				console.log(
-					'[Front-end] => Response from /status:',
-					response.data,
-				)
-
 				setLikeStatus({
 					liked: response.data.liked,
 					likeCount: response.data.likeCount,
 				})
 			} catch (error) {
-				console.error(
-					'[Front-end] => Error fetching like status:',
-					error,
-				)
+				// If user not authenticated, just fetch count
 				if (
 					error.response?.status === 401 ||
 					error.response?.status === 403
 				) {
-					console.warn(
-						'[Front-end] => User not authenticated. Only count visible.',
-					)
 					try {
 						const response = await axios.get('/api/like/count', {
 							params: { entityId: postId, entityType: 'post' },
 						})
-						console.log(
-							'[Front-end] => Fallback count:',
-							response.data,
-						)
-						setLikeStatus((prevState) => ({
-							...prevState,
+						setLikeStatus((prev) => ({
+							...prev,
 							likeCount: response.data.likeCount,
 						}))
 					} catch (countError) {
@@ -63,6 +46,11 @@ function LikeAndShare({ className, postId, countClassName }) {
 							countError,
 						)
 					}
+				} else {
+					console.error(
+						'[Front-end] => Error fetching like status:',
+						error,
+					)
 				}
 			} finally {
 				setIsLoading(false)
@@ -73,35 +61,70 @@ function LikeAndShare({ className, postId, countClassName }) {
 	}, [postId])
 
 	const handleLikeToggle = async () => {
-		console.log(
-			'[Front-end] => handleLikeToggle. Current status:',
-			likeStatus,
-		)
+		const token = localStorage.getItem('token')
+		if (!token) {
+			toast.error(t('Ви маєте бути зареєстровані для вподобайки'), {
+				position: 'top-right',
+			})
+			return
+		}
+
+		// 1. Optimistic update
+		setIsLoading(true)
+		setLikeStatus((prev) => {
+			// If currently liked, we want to decrement
+			const newCount = prev.liked
+				? prev.likeCount - 1
+				: prev.likeCount + 1
+			return { liked: !prev.liked, likeCount: newCount }
+		})
+
 		try {
-			const token = localStorage.getItem('token')
-			if (!token) {
-				toast.error(t('Ви маєте бути зареєстровані для вподобайки'), {
-					position: 'top-right',
-				})
-				return
-			}
-
-			setIsLoading(true)
 			const headers = { Authorization: `Bearer ${token}` }
-
 			const res = await axios.post(
 				'/api/like/toggle',
 				{ entityId: postId, entityType: 'post' },
 				{ headers },
 			)
-			console.log('[Front-end] => toggle response:', res.data)
 
+			// 2. Update with server response
 			setLikeStatus({
 				liked: res.data.liked,
 				likeCount: res.data.likeCount,
 			})
 		} catch (error) {
 			console.error('[Front-end] => Error toggling like:', error)
+
+			// 3. Revert optimistic update if fail
+			setLikeStatus((prev) => {
+				// If we last toggled from "true -> false", revert
+				// But we need the original values. So let's get them from error or do a second fetch.
+				// Simpler approach: re-fetch from server for the final truth
+				return prev // temporarily keep the optimistic state
+			})
+			// Or re-fetch directly for true “revert”:
+			try {
+				const token = localStorage.getItem('token')
+				const headers = token
+					? { Authorization: `Bearer ${token}` }
+					: {}
+				const response = await axios.get('/api/like/status', {
+					params: { entityId: postId, entityType: 'post' },
+					headers,
+				})
+				// Overwrite state with real data
+				setLikeStatus({
+					liked: response.data.liked,
+					likeCount: response.data.likeCount,
+				})
+			} catch (refetchError) {
+				console.error(
+					'[Front-end] => Error refetching status:',
+					refetchError,
+				)
+			}
+
+			// Show an error message
 			if (error.response?.data?.error === 'Already liked') {
 				toast.error(t('Вже вподобанно вами!'), {
 					position: 'top-right',
@@ -120,7 +143,7 @@ function LikeAndShare({ className, postId, countClassName }) {
 		<div
 			className={`${className ? className : ''} socialLikeAndShareInner`}
 		>
-			{countClassName && !isLoading ? (
+			{countClassName ? (
 				<div className={countClassName}>{likeStatus.likeCount}</div>
 			) : (
 				<div style={{ display: 'none' }}>{likeStatus.likeCount}</div>

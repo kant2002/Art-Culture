@@ -10,7 +10,6 @@ import 'swiper/css/pagination'
 
 // Import Swiper modules
 // import LikeAndShare from '@components/Blocks/LikeAndShare'
-import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import '@styles/components/Sliders/Base/PopularSlider.scss'
 import { useNavigate } from 'react-router-dom'
 import { Navigation, Pagination } from 'swiper/modules'
@@ -85,7 +84,7 @@ const MainPopularArtistsSlider = () => {
 	useEffect(() => {
 		const fetchPosts = async () => {
 			try {
-				const response = await axios.get('/api/posts')
+				const response = await axios.get('/api/like/top-liked-posts')
 				console.log('Received creator products:', response.data)
 				setPosts(response.data || [])
 				setLoading(false)
