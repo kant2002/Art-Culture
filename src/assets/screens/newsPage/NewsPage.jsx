@@ -32,10 +32,10 @@ function NewsPage() {
 		if (width === null || width === undefined) {
 			throw new Error('Width must be a number')
 		}
-		if (width >= 1920) {
+		if (width > 1920) {
 			return 4
 		}
-		if (width >= 1600 && width < 1920) {
+		if (width >= 1600 && width <= 1920) {
 			return 3
 		}
 		if (width > 1440 && width < 1600) {
@@ -165,7 +165,7 @@ function NewsPage() {
 								)
 
 								// Determine the card number for styling (1 to 12)
-								const cardNumber = index + 1 // Adjust if you have separate top and bottom sections
+								const cardNumber = index + 6 // Adjust if you have separate top and bottom sections
 
 								return (
 									<div
@@ -290,10 +290,10 @@ function NewsPage() {
 						</p>
 					) : (
 						filteredPosts
-							.slice(visiblePostsCount, 12)
+							.slice(visiblePostsCount, 10)
 							.map((post, index) => {
 								// Calculate the card number starting from 5
-								const cardNumber = visiblePostsCount + index + 1
+								const cardNumber = visiblePostsCount + index + 3
 
 								// Construct image URL similar to MainNews component
 								const featuredMediaUrl = getImageUrl(
