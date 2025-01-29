@@ -1,8 +1,6 @@
-import LikeAndShare from '@components/Blocks/LikeAndShare'
 import LikeAndShareVertical from '@components/Blocks/LikeAndShareVertical'
 import TranslatedContent from '@components/Blocks/TranslatedContent.jsx'
 import NewsPageAuthorsSlider from '@components/Sliders/NewsPageAuthorsSlider/NewsPageAuthorsSlider.jsx'
-import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import styles from '@styles/layout/newsPage.module.scss'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
@@ -31,12 +29,20 @@ function NewsPage() {
 
 	// Function to determine number of posts to display based on window width
 	function getPostsCount(width) {
-		if (width >= 1600) {
+		if (width === null || width === undefined) {
+			throw new Error('Width must be a number')
+		}
+		if (width >= 1920) {
+			return 4
+		}
+		if (width >= 1600 && width < 1920) {
 			return 3
-		} else if (width >= 1440) {
+		}
+		if (width > 1440 && width < 1600) {
 			return 2
-		} else {
-			return 1 // Changed to 1 for widths below 1440px
+		}
+		if (width <= 1440) {
+			return 2
 		}
 	}
 

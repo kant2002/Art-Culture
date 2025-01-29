@@ -92,7 +92,7 @@ function LikeAndShare({ className, postId, countClassName }) {
 			{countClassName ? (
 				<div className={countClassName}>{likeCount}</div>
 			) : (
-				<div>{likeCount}</div>
+				<div style={{ display: 'none' }}>{likeCount}</div>
 			)}
 			<button
 				className={`socialLikeAndShareInner__likeButton circleButton ${like ? 'liked' : ''}`}
