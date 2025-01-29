@@ -6,82 +6,113 @@ import { toast, ToastContainer } from 'react-toastify'
 
 function LikeAndShare({ className, postId, countClassName }) {
 	const { t } = useTranslation()
-	const [like, setLike] = useState(false)
-	const [likeCount, setLikeCount] = useState(0)
+	const [isLoading, setIsLoading] = useState(true)
+	const [likeStatus, setLikeStatus] = useState({ liked: false, likeCount: 0 })
 
 	// Fetch like status and count on component load
 	useEffect(() => {
 		const fetchLikeStatus = async () => {
+			console.log('[Front-end] => fetchLikeStatus for postId:', postId)
 			try {
 				const token = localStorage.getItem('token')
 				const headers = token
 					? { Authorization: `Bearer ${token}` }
 					: {}
 
-				const response = await axios.get(`/api/like/status`, {
+				const response = await axios.get('/api/like/status', {
+					// Notice: these are query params
 					params: { entityId: postId, entityType: 'post' },
 					headers,
 				})
+				console.log(
+					'[Front-end] => Response from /status:',
+					response.data,
+				)
 
-				setLike(response.data.liked)
-				setLikeCount(response.data.likeCount)
+				setLikeStatus({
+					liked: response.data.liked,
+					likeCount: response.data.likeCount,
+				})
 			} catch (error) {
+				console.error(
+					'[Front-end] => Error fetching like status:',
+					error,
+				)
 				if (
 					error.response?.status === 401 ||
 					error.response?.status === 403
 				) {
 					console.warn(
-						'User not authenticated. Only like count is visible.',
+						'[Front-end] => User not authenticated. Only count visible.',
 					)
 					try {
-						const response = await axios.get(`/api/like/count`, {
+						const response = await axios.get('/api/like/count', {
 							params: { entityId: postId, entityType: 'post' },
 						})
-						setLikeCount(response.data.likeCount)
+						console.log(
+							'[Front-end] => Fallback count:',
+							response.data,
+						)
+						setLikeStatus((prevState) => ({
+							...prevState,
+							likeCount: response.data.likeCount,
+						}))
 					} catch (countError) {
-						console.error('Error fetching like count:', countError)
+						console.error(
+							'[Front-end] => Error fetching like count:',
+							countError,
+						)
 					}
-				} else {
-					console.error('Error fetching like status:', error)
 				}
+			} finally {
+				setIsLoading(false)
 			}
 		}
 
 		fetchLikeStatus()
 	}, [postId])
 
-	const handleLikeClick = async () => {
+	const handleLikeToggle = async () => {
+		console.log(
+			'[Front-end] => handleLikeToggle. Current status:',
+			likeStatus,
+		)
 		try {
 			const token = localStorage.getItem('token')
 			if (!token) {
-				toast.error(t('Ви маєте бути зареестровані для вподобайки'), {
+				toast.error(t('Ви маєте бути зареєстровані для вподобайки'), {
 					position: 'top-right',
 				})
 				return
 			}
 
+			setIsLoading(true)
 			const headers = { Authorization: `Bearer ${token}` }
-			if (like) {
-				await axios.delete(`/api/like/unlike`, {
-					data: { entityId: postId, entityType: 'post' },
-					headers,
-				})
-				setLikeCount((prev) => prev - 1)
-				setLike(false)
-			} else {
-				await axios.post(
-					`/api/like`,
-					{ entityId: postId, entityType: 'post' },
-					{ headers },
-				)
-				setLikeCount((prev) => prev + 1)
-				setLike(true)
-			}
-		} catch (error) {
-			console.error('Error liking/unliking the post:', error)
-			toast.error(t('An error occurred. Please try again.'), {
-				position: 'top-right',
+
+			const res = await axios.post(
+				'/api/like/toggle',
+				{ entityId: postId, entityType: 'post' },
+				{ headers },
+			)
+			console.log('[Front-end] => toggle response:', res.data)
+
+			setLikeStatus({
+				liked: res.data.liked,
+				likeCount: res.data.likeCount,
 			})
+		} catch (error) {
+			console.error('[Front-end] => Error toggling like:', error)
+			if (error.response?.data?.error === 'Already liked') {
+				toast.error(t('Вже вподобанно вами!'), {
+					position: 'top-right',
+				})
+			} else {
+				toast.error(t('Сталася помилка. Спробуйте ще раз.'), {
+					position: 'top-right',
+				})
+			}
+		} finally {
+			setIsLoading(false)
 		}
 	}
 
@@ -89,14 +120,15 @@ function LikeAndShare({ className, postId, countClassName }) {
 		<div
 			className={`${className ? className : ''} socialLikeAndShareInner`}
 		>
-			{countClassName ? (
-				<div className={countClassName}>{likeCount}</div>
+			{countClassName && !isLoading ? (
+				<div className={countClassName}>{likeStatus.likeCount}</div>
 			) : (
-				<div style={{ display: 'none' }}>{likeCount}</div>
+				<div style={{ display: 'none' }}>{likeStatus.likeCount}</div>
 			)}
 			<button
-				className={`socialLikeAndShareInner__likeButton circleButton ${like ? 'liked' : ''}`}
-				onClick={handleLikeClick}
+				className={`socialLikeAndShareInner__likeButton circleButton ${likeStatus.liked ? 'liked' : ''}`}
+				onClick={handleLikeToggle}
+				disabled={isLoading}
 			>
 				<img
 					className="likeButtonImg"

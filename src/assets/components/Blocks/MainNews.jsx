@@ -64,7 +64,7 @@ function MainNews() {
 	useEffect(() => {
 		// Запит на отримання постів з медіа-даними
 		axios
-			.get('/api/posts')
+			.get('/api/like/top-liked-posts')
 			.then((response) => {
 				console.log('Отримані дані постів:', response.data)
 				setPosts(response.data)
