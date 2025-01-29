@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast, ToastContainer } from 'react-toastify'
 
-function LikeAndShare({ className, postId }) {
+function LikeAndShare({ className, postId, countClassName }) {
 	const { t } = useTranslation()
 	const [like, setLike] = useState(false)
 	const [likeCount, setLikeCount] = useState(0)
@@ -89,6 +89,11 @@ function LikeAndShare({ className, postId }) {
 		<div
 			className={`${className ? className : ''} socialLikeAndShareInner`}
 		>
+			{countClassName ? (
+				<div className={countClassName}>{likeCount}</div>
+			) : (
+				<div>{likeCount}</div>
+			)}
 			<button
 				className={`socialLikeAndShareInner__likeButton circleButton ${like ? 'liked' : ''}`}
 				onClick={handleLikeClick}
@@ -102,7 +107,6 @@ function LikeAndShare({ className, postId }) {
 						e.target.src = '/Img/likeHeart.svg'
 					}}
 				/>
-				<span>{likeCount}</span>
 			</button>
 			<ToastContainer />
 			<button className="socialLikeAndShareInner__shareButton circleButton">
@@ -123,6 +127,7 @@ function LikeAndShare({ className, postId }) {
 LikeAndShare.propTypes = {
 	className: PropTypes.string,
 	postId: PropTypes.number.isRequired,
+	countClassName: PropTypes.string,
 }
 
 export default LikeAndShare

@@ -1,12 +1,23 @@
 .LikeAndShareFixed {
-    // Обёртка кнопок Like и Share
-    width: 177px !important;
-    margin: 0 0 0 auto;
+  // Обёртка кнопок Like и Share
+  width: 250px !important;
+  margin: 0 0 0 auto;
+  align-items: center;
 }
 
 @media screen and (max-width: 569px) {
-    .LikeAndShareFixed {
-        // Обёртка кнопок Like и Share
-        width: 80px !important;
-    }
+  .LikeAndShareFixed {
+    // Обёртка кнопок Like и Share
+    width: 115px !important;
+    align-items: center;
+  }
+}
+.likeCountWrapper {
+  display: flex;
+  /* margin: 10px; */
+  border: 1px;
+  padding: 10px 10px;
+  border-radius: 20px;
+  background-color: coral;
+  font-size: 20px;
 }
