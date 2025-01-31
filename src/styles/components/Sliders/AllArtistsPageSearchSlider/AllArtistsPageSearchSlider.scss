@@ -7,6 +7,7 @@
   justify-content: center;
   align-items: center;
   width: calc(100% - (calc(2 * variables.$responsiveLeftAndRightPadding)));
+  --swiper-navigation-size: 63px;
 
   .LetterContainer {
     // Контейнер для букв
@@ -18,11 +19,11 @@
     cursor: pointer;
   }
 
-  @at-root {
-    :root {
-      --swiper-navigation-size: 63px;
-    }
-  }
+  // @at-root {
+  //   :root {
+  //     --swiper-navigation-size: 63px;
+  //   }
+  // }
 
   .swiper-wrapper {
     z-index: 1;
@@ -44,8 +45,15 @@
     flex-shrink: 0;
     position: relative;
     transition-property: transform;
-    display: block;
     width: fit-content;
+  }
+
+  .swiper-slide:first-child {
+    margin: 0 0 0 var(--swiper-navigation-size);
+  }
+
+  .swiper-slide:last-child {
+    margin: 0 var(--swiper-navigation-size) 0 0;
   }
 
   .swiper-button-prev,
@@ -61,6 +69,7 @@
     justify-content: center;
     background: white;
     color: variables.$red;
+    user-select: none;
   }
 
   .swiper-button-prev,
