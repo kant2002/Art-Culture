@@ -1,13 +1,31 @@
 import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 
+function getLikeField(entityType) {
+  switch (entityType) {
+    case "post":
+      return "postId"
+    case "product":
+      return "productId"
+    case "exhibition":
+      return "exhibitionId"
+    case "user":
+    case "creator":
+    case "museum":
+    case "exhibition":
+      return "likedUserId"
+    default:
+      return null
+  }
+}
+
 export const toggleLikeEntity = async (req, res) => {
   try {
     console.log("=> toggleLikeEntity called")
     console.log("Request body data:", req.body)
 
     // Ensure user is authenticated
-    if (!req.user || !req.user.id) {
+    if (!req.user?.id) {
       console.error("User not authenticated.")
       return res.status(401).json({ error: "User not authenticated" })
     }
@@ -20,16 +38,10 @@ export const toggleLikeEntity = async (req, res) => {
     console.log("Entity ID (parsed):", entityIdInt)
     console.log("Entity type:", entityType)
 
-    if (
-      !entityIdInt ||
-      !entityType ||
-      !["post", "product", "exhibition", "user"].includes(entityType)
-    ) {
-      console.error("Invalid or missing parameters.")
+    const field = getLikeField(entityType)
+    if (!field || !entityIdInt) {
       return res.status(400).json({ error: "Invalid or missing parameters" })
     }
-
-    const field = `${entityType}Id`
 
     // Check if user already liked
     const existingLike = await prisma.like.findFirst({
@@ -88,16 +100,10 @@ export const getLikeStatus = async (req, res) => {
     console.log("Entity ID (parsed):", entityIdInt)
     console.log("Entity type:", entityType)
 
-    if (
-      !entityIdInt ||
-      !entityType ||
-      !["post", "product", "exhibition", "user"].includes(entityType)
-    ) {
-      console.error("Invalid entity type or missing parameters.")
+    const field = getLikeField(entityType)
+    if (!field || !entityIdInt) {
       return res.status(400).json({ error: "Invalid entity type" })
     }
-
-    const field = `${entityType}Id`
     const likeCount = await prisma.like.count({
       where: { [field]: entityIdInt },
     })
@@ -133,16 +139,10 @@ export const getLikeCount = async (req, res) => {
     console.log("Entity ID (parsed):", entityIdInt)
     console.log("Entity type:", entityType)
 
-    if (
-      !entityIdInt ||
-      !entityType ||
-      !["post", "product", "exhibition", "user"].includes(entityType)
-    ) {
-      console.error("Invalid or missing parameters for getLikeCount.")
+    const field = getLikeField(entityType)
+    if (!field || !entityIdInt) {
       return res.status(400).json({ error: "Invalid or missing parameters" })
     }
-
-    const field = `${entityType}Id`
     const count = await prisma.like.count({
       where: { [field]: entityIdInt },
     })
@@ -175,5 +175,80 @@ export const getTopLikedPosts = async (req, res) => {
   } catch (error) {
     console.error("Error fetching top liked posts:", error)
     res.status(500).json({ error: "Failed to fetch top liked posts" })
+  }
+}
+
+export const getTopLikedMuseums = async (req, res) => {
+  try {
+    const topMUseums = await prisma.user.findMany({
+      where: {
+        role: "MUSEUM",
+      },
+      include: {
+        _count: {
+          select: { likesReceived: true },
+          // Count likes for each post
+        },
+      },
+      orderBy: {
+        likesReceived: {
+          _count: "desc", // Sort by like count in descending order
+        },
+      },
+      take: 10, // You can adjust the limit
+    })
+
+    res.status(200).json(topMUseums)
+  } catch (error) {
+    console.error("Error fetching top liked museum:", error)
+    res.status(500).json({ error: "Failed to fetch top liked museum" })
+  }
+}
+
+export const getTopLikedExhibitions = async (req, res) => {
+  try {
+    const topExhibitions = await prisma.exhibition.findMany({
+      include: {
+        images: true,
+        _count: {
+          select: { likes: true }, // Count likes for each post
+        },
+      },
+      orderBy: {
+        likes: {
+          _count: "desc", // Sort by like count in descending order
+        },
+      },
+      take: 10, // You can adjust the limit
+    })
+
+    res.status(200).json(topExhibitions)
+  } catch (error) {
+    console.error("Error fetching top liked posts:", error)
+    res.status(500).json({ error: "Failed to fetch top liked posts" })
+  }
+}
+
+export const getTopLikedPaintings = async (req, res) => {
+  try {
+    const topPaintings = await prisma.product.findMany({
+      include: {
+        images: true,
+        _count: {
+          select: { likes: true }, // Count likes for each post
+        },
+      },
+      orderBy: {
+        likes: {
+          _count: "desc", // Sort by like count in descending order
+        },
+      },
+      take: 10, // You can adjust the limit
+    })
+
+    res.status(200).json(topPaintings)
+  } catch (error) {
+    console.error("Error fetching top liked paintings:", error)
+    res.status(500).json({ error: "Failed to fetch top liked paintings" })
   }
 }

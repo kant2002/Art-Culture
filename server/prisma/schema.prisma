@@ -34,7 +34,8 @@ model User {
   museum_logo_image  museum_logo_images? @relation("UserMuseumLogo")
   museumExhibition   Exhibition[]        @relation("MuseumExhibition")
   museumProducts     Product[]           @relation("MuseumProducts") // New relation
-  likes              Like[]
+  likesReceived      Like[]              @relation("LikesReceived")
+  likesGiven         Like[]              @relation("LikesGiven")
 
   @@map("user")
 }
@@ -188,17 +189,20 @@ model Like {
   postId       Int?
   productId    Int?
   exhibitionId Int?
+  likedUserId  Int?
   createdAt    DateTime @default(now())
 
-  user       User        @relation(fields: [userId], references: [id])
+  user       User        @relation("LikesGiven", fields: [userId], references: [id])
   post       Post?       @relation(fields: [postId], references: [id])
   product    Product?    @relation(fields: [productId], references: [id])
   exhibition Exhibition? @relation(fields: [exhibitionId], references: [id])
+  likedUser  User?       @relation("LikesReceived", fields: [likedUserId], references: [id])
 
   @@index([userId])
   @@index([postId])
   @@index([productId])
   @@index([exhibitionId])
+  @@index([likedUserId])
 }
 
 enum Role {

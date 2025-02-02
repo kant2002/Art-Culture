@@ -1,5 +1,7 @@
+import LikeAndShare from '@components/Blocks/LikeAndShare.jsx'
 import MuseumMaps from '@components/Blocks/MuseumMaps'
 import MuseumPageMasonryGallery from '@components/Sliders/MuseumPageSliders/MuseumPageMasonryGallery.jsx'
+import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import styles from '@styles/layout/MuseumPage.module.scss'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
@@ -162,7 +164,12 @@ function MuseumPage() {
 						</div>
 					</div>
 				</div>
-
+				<LikeAndShare
+					className={sliderStyles.LikeAndShareFixed}
+					entityId={museum.id}
+					entityType={'user'}
+					countClassName={sliderStyles.likeCountWrapper}
+				/>
 				<div
 					className={`${styles.museumPageMuseumDescriptionWrapper} ${isExpanded ? styles.expanded : ''}`}
 				>

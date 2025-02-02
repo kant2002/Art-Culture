@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast, ToastContainer } from 'react-toastify'
 
-function LikeAndShare({ className, postId, countClassName }) {
+function LikeAndShare({ className, entityId, entityType, countClassName }) {
 	const { t } = useTranslation()
 	const [isLoading, setIsLoading] = useState(true)
 	// { liked: false, likeCount: 0 }
@@ -19,7 +19,7 @@ function LikeAndShare({ className, postId, countClassName }) {
 					: {}
 
 				const response = await axios.get('/api/like/status', {
-					params: { entityId: postId, entityType: 'post' },
+					params: { entityId, entityType },
 					headers,
 				})
 				setLikeStatus({
@@ -34,7 +34,7 @@ function LikeAndShare({ className, postId, countClassName }) {
 				) {
 					try {
 						const response = await axios.get('/api/like/count', {
-							params: { entityId: postId, entityType: 'post' },
+							params: { entityId, entityType },
 						})
 						setLikeStatus((prev) => ({
 							...prev,
@@ -58,7 +58,7 @@ function LikeAndShare({ className, postId, countClassName }) {
 		}
 
 		fetchLikeStatus()
-	}, [postId])
+	}, [entityId, entityType])
 
 	const handleLikeToggle = async () => {
 		const token = localStorage.getItem('token')
@@ -83,7 +83,7 @@ function LikeAndShare({ className, postId, countClassName }) {
 			const headers = { Authorization: `Bearer ${token}` }
 			const res = await axios.post(
 				'/api/like/toggle',
-				{ entityId: postId, entityType: 'post' },
+				{ entityId, entityType },
 				{ headers },
 			)
 
@@ -109,7 +109,7 @@ function LikeAndShare({ className, postId, countClassName }) {
 					? { Authorization: `Bearer ${token}` }
 					: {}
 				const response = await axios.get('/api/like/status', {
-					params: { entityId: postId, entityType: 'post' },
+					params: { entityId, entityType },
 					headers,
 				})
 				// Overwrite state with real data
@@ -181,7 +181,8 @@ function LikeAndShare({ className, postId, countClassName }) {
 
 LikeAndShare.propTypes = {
 	className: PropTypes.string,
-	postId: PropTypes.number.isRequired,
+	entityId: PropTypes.number.isRequired,
+	entityType: PropTypes.string.isRequired,
 	countClassName: PropTypes.string,
 }
 

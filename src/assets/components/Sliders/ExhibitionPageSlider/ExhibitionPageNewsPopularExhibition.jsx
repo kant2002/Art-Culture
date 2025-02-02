@@ -13,7 +13,6 @@ import 'swiper/css/pagination'
 import { useNavigate } from 'react-router-dom'
 import { Navigation, Pagination } from 'swiper/modules'
 
-import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import '@styles/components/Sliders/Base/PopularSlider.scss'
 import { getBaseUrl, getImageUrl } from '../../../../utils/helper'
 // import LikeAndShare from '../../Blocks/LikeAndShare'
@@ -99,9 +98,11 @@ const PopularExhibitionsSlider = () => {
 	useEffect(() => {
 		const fetchExhibitions = async () => {
 			try {
-				const response = await axios.get('/api/exhibitions')
+				const response = await axios.get(
+					'/api/like/top-liked-exhibitions',
+				)
 				console.log('Received creator products:', response.data)
-				setExhibitions(response.data.exhibitions || [])
+				setExhibitions(response.data || [])
 				setLoading(false)
 			} catch (err) {
 				console.error('Error fetching creator products:', err)
@@ -143,7 +144,7 @@ const PopularExhibitionsSlider = () => {
 							<SwiperSlide>
 								<div className="error">{error}</div>
 							</SwiperSlide>
-						) : exhibitions.length === 0 ? (
+						) : !exhibitions || exhibitions.length === 0 ? (
 							<SwiperSlide>
 								<div className="noProducts">
 									{t('Немає продуктів від митців.')}

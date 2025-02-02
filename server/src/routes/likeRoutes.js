@@ -2,6 +2,9 @@ import express from "express"
 import {
   getLikeCount,
   getLikeStatus,
+  getTopLikedExhibitions,
+  getTopLikedMuseums,
+  getTopLikedPaintings,
   getTopLikedPosts,
   toggleLikeEntity,
 } from "../controllers/likeController.js"
@@ -14,6 +17,9 @@ const router = express.Router()
 // router.delete("/unlike", authenticateToken, unlikeEntity)
 router.post("/toggle", authenticateToken, toggleLikeEntity)
 router.get("/top-liked-posts", getTopLikedPosts)
+router.get("/top-liked-museums", getTopLikedMuseums)
+router.get("/top-liked-exhibitions", getTopLikedExhibitions)
+router.get("/top-liked-paintings", getTopLikedPaintings)
 router.get("/status", authenticateToken, getLikeStatus)
 router.get("/count", getLikeCount)
 

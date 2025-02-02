@@ -1,10 +1,12 @@
 import style from '@styles/components/Blocks/ModalWindow.module.scss'
+import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import PropTypes from 'prop-types'
 import { useCallback, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getUserRole } from '../../../utils/constants'
 import { getImageUrl } from '../../../utils/helper'
 import TranslatedContent from '../Blocks/TranslatedContent'
+import LikeAndShare from './LikeAndShare'
 
 const GalleryModal = ({
 	isOpen,
@@ -228,6 +230,12 @@ const GalleryModal = ({
 							</h4>
 						</div>
 					</div>
+					<LikeAndShare
+						className={sliderStyles.LikeAndShareFixed}
+						countClassName={sliderStyles.likeCountWrapper}
+						entityId={selectedProduct.id}
+						entityType={'product'}
+					/>
 				</div>
 
 				{/* Carousel Navigation Buttons */}

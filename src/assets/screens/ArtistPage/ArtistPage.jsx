@@ -1,15 +1,15 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useNavigate, useParams } from 'react-router-dom'
-import styles from '@styles/layout/ArtistPage.module.scss'
-import { getBaseUrl, getImageUrl } from '../../../utils/helper.js'
 import LikeAndShare from '@components/Blocks/LikeAndShare'
-import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import ArtistPageMasonryGallery from '@components/Sliders/ArtistPageSliders/ArtistPageMasonryGallery.jsx'
 import ArtistPageNewsArtistsSlider from '@components/Sliders/ArtistPageSliders/ArtistPageNewsArtistsSlider.jsx'
 import PopularOfThisArtistSlider from '@components/Sliders/ArtistPageSliders/PopularOfThisArtistSlider.jsx'
 import MainPopularArtsSlider from '@components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.jsx'
+import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
+import styles from '@styles/layout/ArtistPage.module.scss'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate, useParams } from 'react-router-dom'
+import { getBaseUrl, getImageUrl } from '../../../utils/helper.js'
 
 function ArtistPage() {
 	const { t, i18n } = useTranslation()
@@ -160,7 +160,12 @@ function ArtistPage() {
 						</p>
 					</button>
 				</div>
-				<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
+				<LikeAndShare
+					className={sliderStyles.LikeAndShareFixed}
+					countClassName={sliderStyles.likeCountWrapper}
+					entityId={creator.id}
+					entityType={'user'}
+				/>
 			</div>
 
 			<ArtistPageNewsArtistsSlider />

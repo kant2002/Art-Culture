@@ -150,7 +150,8 @@ function PostDetail() {
 				</div>
 				<LikeAndShare
 					className={sliderStyles.LikeAndShareFixed}
-					postId={post.id}
+					entityId={post.id}
+					entityType={'post'}
 					countClassName={sliderStyles.likeCountWrapper}
 				/>
 				<div className={`${styles.postPageNewsReadMoreButtonWrapper}`}>

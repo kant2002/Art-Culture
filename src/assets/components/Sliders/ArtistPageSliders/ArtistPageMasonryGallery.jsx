@@ -1,5 +1,6 @@
 // ArtistPageMasonryGallery.jsx
 
+import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import style from '@styles/components/Sliders/MasonrySlider/PageMasonryGallery.module.scss'
 import { debounce } from 'lodash' // Using lodash's debounce
 import PropTypes from 'prop-types'
@@ -13,6 +14,7 @@ import {
 } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
+import LikeAndShare from '../../Blocks/LikeAndShare'
 import TranslatedContent from '../../Blocks/TranslatedContent'
 
 const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
@@ -859,6 +861,14 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 										</h4>
 									</div>
 								</div>
+								<LikeAndShare
+									className={sliderStyles.LikeAndShareFixed}
+									countClassName={
+										sliderStyles.likeCountWrapper
+									}
+									entityId={selectedProduct.id}
+									entityType={'product'}
+								/>
 							</div>
 
 							{/* Carousel Navigation Buttons */}
@@ -1099,7 +1109,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 					>
 						{t('Всі роботи Митця')}
 					</p>
-					``
+
 					<img
 						className={`${style.buttonArrow}`}
 						src={'/Img/buttonArrow.svg'}

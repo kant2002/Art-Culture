@@ -5,19 +5,26 @@ import MuseumsPagePopularMuseums from '@components/Sliders/MuseumsPageSliders/Mu
 import MuseumsPageTopSlider from '@components/Sliders/MuseumsPageSliders/MuseumsPageTopSlider.jsx'
 import styles from '@styles/layout/MuseumsPage.module.scss'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { getImageUrl } from '../../../utils/helper.js'
+import ModalWindow from '../../components/Blocks/ModalWindow'
 
-function MuseumsPage() {
+function MuseumsPage({ baseUrl }) {
 	const { t } = useTranslation()
 	const [loading, setLoading] = useState(true)
 	const navigate = useNavigate()
 	const [error, setError] = useState(null)
 	const [museums, setMuseums] = useState([])
 	const [products, setProducts] = useState([])
-
+	const [isModalOpen, setIsModalOpen] = useState(false)
+	const [selectedProduct, setSelectedProduct] = useState(null)
+	const [selectedMuseum, setSelectedMuseum] = useState(null)
+	const [selectedProductImages, setSelectedProductImages] = useState([])
+	const [zoomStates, setZoomStates] = useState([])
+	const [currentSlide, setCurrentSlide] = useState(0)
+	const [preloading, setPreloading] = useState(false)
 	const [visibleMuseumsCount, setVisibleMuseumsCount] = useState(
 		getMuseumsCount(window.innerWidth),
 	)
@@ -111,6 +118,59 @@ function MuseumsPage() {
 	const handleShowAllExhibits = () => {
 		navigate('/all-exhibits-product-page')
 	}
+	const preloadImages = useCallback(
+		async (images) => {
+			const promises = images.map(
+				(img) =>
+					new Promise((resolve) => {
+						const image = new Image()
+						image.src = `${baseUrl}${img.imageUrl}`
+						image.onload = resolve
+						image.onerror = resolve
+					}),
+			)
+			await Promise.all(promises)
+		},
+		[baseUrl],
+	)
+
+	const handleOverviewClick = async (product) => {
+		if (product.images && product.images.length > 0) {
+			setPreloading(true)
+			await preloadImages(product.images)
+			setPreloading(false)
+			setSelectedProductImages(product.images)
+			setSelectedProduct(product)
+			setSelectedMuseum(product.author || {}) // Adjust based on actual data structure
+			setZoomStates(
+				product.images.map(() => ({
+					zoomLevel: 1,
+					isZoomed: false,
+					cursorPos: { x: 0, y: 0 },
+					showLens: false,
+				})),
+			)
+			setCurrentSlide(0)
+			setIsModalOpen(true)
+		} else {
+			// If no images, optionally handle this case
+			setSelectedProductImages([])
+			setSelectedProduct(null)
+			setSelectedMuseum(null)
+			setZoomStates([])
+			setIsModalOpen(false)
+		}
+	}
+	// Handler to close the GalleryModal
+	const handleCloseModal = () => {
+		setIsModalOpen(false)
+		setSelectedProductImages([])
+		setSelectedProduct(null)
+		setSelectedMuseum(null)
+		setZoomStates([])
+		setCurrentSlide(0)
+	}
+
 	return (
 		<div className={`${styles.MuseumsPageContainer}`}>
 			<div className={`${styles.MuseumsPageTitleContainer}`}>
@@ -217,9 +277,7 @@ function MuseumsPage() {
 											<div
 												className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}
 												onClick={() =>
-													handleMuseumClick(
-														product.id,
-													)
+													handleOverviewClick(product)
 												}
 												style={{ cursor: 'pointer' }}
 											>
@@ -292,6 +350,19 @@ function MuseumsPage() {
 					museums={museums}
 				/>
 			</div>
+			<ModalWindow
+				isOpen={isModalOpen}
+				onClose={handleCloseModal}
+				selectedProduct={selectedProduct}
+				selectedCreator={selectedMuseum}
+				selectedProductImages={selectedProductImages}
+				zoomStates={zoomStates}
+				setZoomStates={setZoomStates}
+				currentSlide={currentSlide}
+				setCurrentSlide={setCurrentSlide}
+				baseUrl={baseUrl}
+				preloading={preloading}
+			/>
 		</div>
 	)
 }

@@ -112,10 +112,10 @@ const MainPopularArtistsSlider = () => {
 		const fetchCreatorProducts = async () => {
 			try {
 				const response = await axios.get(
-					'/api/products/creators-products',
+					'/api/like/top-liked-paintings',
 				)
 				console.log('Received creator products:', response.data)
-				setProducts(response.data.products || [])
+				setProducts(response.data || [])
 				setLoading(false)
 			} catch (err) {
 				console.error('Error fetching creator products:', err)
