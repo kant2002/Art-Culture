@@ -204,13 +204,13 @@ function MainExhibitions() {
 											</p>
 										</div>
 
-										<div
+										{/* <div
 											className={`${styles.cardExhibDurTimeWrapper}`}
 										>
 											<p
 												className={`${styles.cardExhibDurTime} ${index === 0 ? styles.firstCardExhibDurTime : index === 1 ? styles.secondCardExhibDurTime : styles.thirdCardExhibDurTime}`}
 											></p>
-										</div>
+										</div> */}
 									</div>
 								</div>
 								<div
@@ -237,7 +237,7 @@ function MainExhibitions() {
 											className={`${styles.cardDateWrapper}`}
 										>
 											<p className={`${styles.cardTime}`}>
-												{time} - {endTime}
+												{/* {time} - {endTime} */}
 											</p>
 										</div>
 										<div
