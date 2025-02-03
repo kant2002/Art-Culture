@@ -233,13 +233,13 @@ function MainExhibitions() {
 												}}
 											/>
 										</div>
-										<div
+										{/* <div
 											className={`${styles.cardDateWrapper}`}
 										>
 											<p className={`${styles.cardTime}`}>
-												{/* {time} - {endTime} */}
+												{time} - {endTime}
 											</p>
-										</div>
+										</div> */}
 										<div
 											className={`${styles.cardTimeWrapper}`}
 										>
