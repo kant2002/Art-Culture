@@ -211,13 +211,13 @@ function MainArtists() {
 											/>
 										</div>
 										<div className={styles.cardDateWrapper}>
-											<p className={styles.cardDate}>
-												{formattedDate}
+											<p className={styles.cardTime}>
+												{formattedTime}
 											</p>
 										</div>
 										<div className={styles.cardTimeWrapper}>
-											<p className={styles.cardTime}>
-												{formattedTime}
+											<p className={styles.cardDate}>
+												{formattedDate}
 											</p>
 										</div>
 									</div>

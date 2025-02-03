@@ -113,9 +113,9 @@ function MainExhibitions() {
 						const featuredMediaUrl =
 							exhibition.images && exhibition.images.length > 0
 								? getImageUrl(
-									exhibition.images[0].imageUrl,
-									'/Img/halfNewsCard.jpg',
-								)
+										exhibition.images[0].imageUrl,
+										'/Img/halfNewsCard.jpg',
+									)
 								: '/Img/halfNewsCard.jpg'
 						console.log('Витягнуте медіа:', featuredMediaUrl)
 
@@ -209,9 +209,7 @@ function MainExhibitions() {
 										>
 											<p
 												className={`${styles.cardExhibDurTime} ${index === 0 ? styles.firstCardExhibDurTime : index === 1 ? styles.secondCardExhibDurTime : styles.thirdCardExhibDurTime}`}
-											>
-												{time} - {endTime}
-											</p>
+											></p>
 										</div>
 									</div>
 								</div>
@@ -238,17 +236,17 @@ function MainExhibitions() {
 										<div
 											className={`${styles.cardDateWrapper}`}
 										>
-											<p className={`${styles.cardDate}`}>
-												{formattedStartDate} -{' '}
-												{formattedEndDate}
+											<p className={`${styles.cardTime}`}>
+												{time} - {endTime}
 											</p>
 										</div>
 										<div
 											className={`${styles.cardTimeWrapper}`}
 										>
-											<p
-												className={`${styles.cardTime}`}
-											></p>
+											<p className={`${styles.cardDate}`}>
+												{formattedStartDate} -{' '}
+												{formattedEndDate}
+											</p>
 										</div>
 									</div>
 
