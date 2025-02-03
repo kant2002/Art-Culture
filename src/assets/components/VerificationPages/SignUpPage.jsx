@@ -31,7 +31,7 @@ const SignUp = () => {
 	const [serverMessage, setServerMessage] = useState('')
 	const { login } = useAuth() // Utilize login from AuthContext
 	const navigate = useNavigate()
-
+	const [passwordVisible, setPasswordVisible] = useState(false)
 	const isMuseum = signUpDetails.role === 'MUSEUM'
 	const isExhibition = signUpDetails.role === 'EXHIBITION'
 	const textEditorOnChange = ({ name, value }) => {
@@ -133,6 +133,10 @@ const SignUp = () => {
 		}
 	}
 
+	const togglePasswordVisibility = () => {
+		setPasswordVisible((prevVisible) => !prevVisible)
+	}
+
 	return (
 		<div className={styles.LoginContainer}>
 			<header className={styles.LoginWrapper}>
@@ -205,12 +209,14 @@ const SignUp = () => {
 					/>
 					<TextEditor
 						label={t('Пароль')}
-						type="password"
+						type={passwordVisible ? 'text' : 'password'}
 						name="password"
 						value={signUpDetails.password}
 						onChange={textEditorOnChange}
 						maxLength="191"
 						required
+						togglePasswordVisibility={togglePasswordVisibility}
+						passwordVisible={passwordVisible}
 					/>
 					<TextEditor
 						label={
