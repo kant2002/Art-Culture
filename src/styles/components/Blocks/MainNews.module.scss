@@ -4,7 +4,7 @@
   // Стили для основного контейнераконтейнера
   display: flex;
   flex-direction: column;
-  margin: $responsiveBigPadding 0 0 0;
+  margin: $responsiveMediumPadding 0 0 0;
   padding: 0 calc($responsiveLeftAndRightPadding - calc(10 / 1440 * 100vw));
   font-family: $default-font;
 }
@@ -24,7 +24,10 @@
 
 .mobileButtonWrapper {
   // Дополнительные стили для обертки кнопки на мобильных устройствах
-  display: none;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin: $responsiveSmallPadding 0 0 0;
 }
 
 .mainPageNewsButton {
@@ -209,7 +212,7 @@
 @media (min-width: 1920px) {
   .mainPageNewsContainer {
     // Стили для основного контейнераконтейнера
-    margin: 72px 0 0 0;
+    // margin: 72px 0 0 0;
   }
 
   .mainPageNewsCard {
@@ -266,7 +269,7 @@
 @media (min-width: 1441px) {
   .mainPageNewsContainer {
     // Стили для основного контейнераконтейнера
-    margin: $staticPcBigPadding 0 0 0;
+    margin: $staticPcMediumPadding 0 0 0;
   }
 
   // .mainPageNewsTitle {
@@ -344,6 +347,11 @@
     // Стили для обертки даты
     margin: 0 0 0 $staticPcSmallPadding;
   }
+
+  .mobileButtonWrapper {
+    // Дополнительные стили для обертки кнопки на мобильных устройствах
+    margin: $staticPcSmallPadding 0 0 0;
+  }
 }
 
 @media (max-width: 799px) {
@@ -372,8 +380,6 @@
 
   .mobileButtonWrapper {
     // Дополнительные стили для обертки кнопки на мобильных устройствах
-    margin: 33px 0 0 0;
-    display: flex;
     justify-content: center;
   }
 }
@@ -381,7 +387,7 @@
 @media (max-width: 569px) {
   .mainPageNewsContainer {
     // Стили для основного контейнераконтейнера
-    margin: $staticMobileBigPadding 0 0 0;
+    margin: $staticMobileMediumPadding 0 0 0;
   }
 
   .cardTextWrapper {
@@ -429,5 +435,10 @@
     // Стили для обертки ссылки "Читати далi"
     margin: $staticMobileSmallPadding 0 0 0;
     justify-content: center;
+  }
+
+  .mobileButtonWrapper {
+    // Дополнительные стили для обертки кнопки на мобильных устройствах
+    margin: $staticMobileSmallPadding 0 0 0;
   }
 }

@@ -85,7 +85,7 @@ function MainArtists() {
 				<div
 					className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}
 				>
-					<button className={styles.mainPageNewsButton}>
+					{/* <button className={styles.mainPageNewsButton}>
 						<p
 							className={styles.mainPageNewsButtonTitle}
 							onClick={handleAllArtistPageClick}
@@ -101,7 +101,7 @@ function MainArtists() {
 								e.target.src = '/mainNewImg/buttonArrow.svg'
 							}}
 						/>
-					</button>
+					</button> */}
 				</div>
 			</div>
 			<div className={styles.mainPageNewsCardsWrapper}>
@@ -244,7 +244,7 @@ function MainArtists() {
 				<button className={styles.mainPageNewsButton}>
 					<p
 						className={styles.mainPageNewsButtonTitle}
-						onClick={handleArtistPageClick}
+						onClick={handleAllArtistPageClick}
 					>
 						{t('Усі митці')}
 					</p>
@@ -254,7 +254,7 @@ function MainArtists() {
 						alt={t('Стрілка')}
 						onError={(e) => {
 							e.target.onerror = null
-							e.target.src = '/Img/buttonArrow.svg'
+							e.target.src = '/mainNewImg/buttonArrow.svg'
 						}}
 					/>
 				</button>

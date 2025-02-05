@@ -85,7 +85,7 @@ function MainNews() {
 				<div
 					className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}
 				>
-					<button
+					{/* <button
 						className={`${styles.mainPageNewsButton}`}
 						onClick={handleNewsPageClick}
 					>
@@ -101,7 +101,7 @@ function MainNews() {
 								e.target.src = '/mainNewImg/buttonArrow.svg'
 							}}
 						/>
-					</button>
+					</button> */}
 				</div>
 			</div>
 			<div className={`${styles.mainPageNewsCardsWrapper}`}>
@@ -224,7 +224,7 @@ function MainNews() {
 			<div
 				className={`${styles.mainPageNewsButtonWrapper} ${styles.mobileButtonWrapper}`}
 			>
-				<button
+				{/* <button
 					className={`${styles.mainPageNewsButton}`}
 					onClick={handleNewsPageClick}
 				>
@@ -238,6 +238,23 @@ function MainNews() {
 						onError={(e) => {
 							e.target.onerror = null
 							e.target.src = '/Img/buttonArrow.svg'
+						}}
+					/>
+				</button> */}
+				<button
+					className={`${styles.mainPageNewsButton}`}
+					onClick={handleNewsPageClick}
+				>
+					<p className={`${styles.mainPageNewsButtonTitle}`}>
+						{t('Усі новини')}
+					</p>
+					<img
+						className={`${styles.mainPageNewsButtonImg}`}
+						src={'/Img/buttonArrow.svg'}
+						alt={t('Стрілка')}
+						onError={(e) => {
+							e.target.onerror = null
+							e.target.src = '/mainNewImg/buttonArrow.svg'
 						}}
 					/>
 				</button>
