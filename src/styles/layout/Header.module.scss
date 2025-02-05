@@ -29,6 +29,7 @@ body {
   margin: calc(-9 / 1440 * 100vw) calc(22.5 / 1440 * 100vw) 0 0;
   display: flex;
   width: auto;
+  cursor: pointer;
 }
 .logo {
   position: relative;
@@ -397,6 +398,7 @@ body {
 }
 .staticHeaderLogo {
   margin: 0 calc(22.5 / 1440 * 100vw) calc(15 / 1440 * 100vw) 0;
+  cursor: pointer;
 }
 .staticHeaderLogoTitle {
   font-family: $chiller-font;
