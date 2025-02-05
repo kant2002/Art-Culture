@@ -84,7 +84,7 @@ function MainExhibitions() {
 				<div
 					className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}
 				>
-					<button className={`${styles.mainPageNewsButton}`}>
+					{/* <button className={`${styles.mainPageNewsButton}`}>
 						<p
 							className={`${styles.mainPageNewsButtonTitle}`}
 							onClick={handleExhibitionsPageClick}
@@ -100,7 +100,7 @@ function MainExhibitions() {
 								e.target.src = '/mainNewImg/buttonArrow.svg'
 							}}
 						/>
-					</button>
+					</button> */}
 				</div>
 			</div>
 			<div className={`${styles.mainPageNewsCardsWrapper}`}>
@@ -113,9 +113,9 @@ function MainExhibitions() {
 						const featuredMediaUrl =
 							exhibition.images && exhibition.images.length > 0
 								? getImageUrl(
-										exhibition.images[0].imageUrl,
-										'/Img/halfNewsCard.jpg',
-									)
+									exhibition.images[0].imageUrl,
+									'/Img/halfNewsCard.jpg',
+								)
 								: '/Img/halfNewsCard.jpg'
 						console.log('Витягнуте медіа:', featuredMediaUrl)
 
@@ -270,7 +270,10 @@ function MainExhibitions() {
 				className={`${styles.mainPageNewsButtonWrapper} ${styles.mobileButtonWrapper}`}
 			>
 				<button className={`${styles.mainPageNewsButton}`}>
-					<p className={`${styles.mainPageNewsButtonTitle}`}>
+					<p
+						className={`${styles.mainPageNewsButtonTitle}`}
+						onClick={handleExhibitionsPageClick}
+					>
 						{t('Усі виставки')}
 					</p>
 					<img
@@ -279,7 +282,7 @@ function MainExhibitions() {
 						alt={t('Стрілка')}
 						onError={(e) => {
 							e.target.onerror = null
-							e.target.src = '/Img/buttonArrow.svg'
+							e.target.src = '/mainNewImg/buttonArrow.svg'
 						}}
 					/>
 				</button>

@@ -85,7 +85,7 @@ function MainMuseums() {
 				<div
 					className={`${styles.mainPageNewsButtonWrapper} ${styles.desktopButtonWrapper}`}
 				>
-					<button className={`${styles.mainPageNewsButton}`}>
+					{/* <button className={`${styles.mainPageNewsButton}`}>
 						<p
 							className={`${styles.mainPageNewsButtonTitle}`}
 							onClick={handleMuseumsPageClick}
@@ -101,7 +101,7 @@ function MainMuseums() {
 								e.target.src = '/mainNewImg/buttonArrow.svg'
 							}}
 						/>
-					</button>
+					</button> */}
 				</div>
 			</div>
 			<div className={`${styles.mainPageNewsCardsWrapper}`}>
@@ -235,7 +235,10 @@ function MainMuseums() {
 				className={`${styles.mainPageNewsButtonWrapper} ${styles.mobileButtonWrapper}`}
 			>
 				<button className={`${styles.mainPageNewsButton}`}>
-					<p className={`${styles.mainPageNewsButtonTitle}`}>
+					<p
+						className={`${styles.mainPageNewsButtonTitle}`}
+						onClick={handleMuseumsPageClick}
+					>
 						{t('Усі музеї')}
 					</p>
 					<img
@@ -244,7 +247,7 @@ function MainMuseums() {
 						alt={t('Стрілка')}
 						onError={(e) => {
 							e.target.onerror = null
-							e.target.src = '/Img/buttonArrow.svg'
+							e.target.src = '/mainNewImg/buttonArrow.svg'
 						}}
 					/>
 				</button>
