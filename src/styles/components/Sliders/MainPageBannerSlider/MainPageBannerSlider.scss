@@ -87,7 +87,7 @@
     font-weight: 500;
     text-transform: none;
     color: rgb(255, 255, 255);
-    font-family: $default-font;
+    font-family: $default-font;text-shadow: -1px -1px 1px #999, 1px 1px 1px #fff;
 }
 
 .BannerSliderCardTitleWrapper {
@@ -111,6 +111,7 @@
     text-transform: none;
     color: rgb(255, 255, 255);
     font-family: $default-font;
+    text-shadow: -1px -1px 1px #999, 1px 1px 1px #fff;
 }
 
 .BannerSliderCardDescriptionWrapper {
@@ -134,6 +135,7 @@
     font-size: calc(20px - (6 * ((1440px - 100vw) / (1440 - 375))));
     font-weight: 400;
     font-family: $default-font;
+    text-shadow: -1px -1px 1px #999, 1px 1px 1px #fff;
 }
 
 .BannerSliderCardReadMoreButtonWrapper {
