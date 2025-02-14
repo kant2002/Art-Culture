@@ -27,6 +27,7 @@ import ExhibitsProductPage from '../MuseumPage/ExhibitsProductPage'
 import MuseumPage from '../MuseumPage/MuseumPage'
 import MuseumsPage from '../MuseumsPage/MuseumsPage'
 import PostDetail from '../Post/PostDetail'
+import ItemDetail from '../ProductItemCard/ItemDetail'
 import Paintings from '../ProductList/Paintings'
 import Footer from '../footer/Footer'
 import Header from '../header/Header'
@@ -163,6 +164,7 @@ const Layout = ({ heading = '' }) => {
 						}
 					/>
 					<Route path="/posts/:id" element={<PostDetail />} />
+					<Route path="/ItemDetail" element={<ItemDetail />} />
 					<Route
 						path="/exhibitions/:id"
 						element={<ExhibitionPage />}
