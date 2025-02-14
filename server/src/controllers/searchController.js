@@ -108,3 +108,74 @@ export const searchMuseum = async (req, res, next) => {
     next(error)
   }
 }
+
+export const searchQuery = async (req, res, next) => {
+  try {
+    const query = req.query.q || ""
+
+    const searchQuery = await prisma.user.findMany({
+      where: {
+        role: { in: ["CREATOR", "MUSEUM", "EXHIBITION", "MUSEUM"] },
+        OR: [
+          { email: { contains: query.toLowerCase() } },
+          { title: { contain: query.toLowerCase() } },
+        ],
+      },
+      select: {
+        id: true,
+        email: true,
+        title: true,
+        bio: true,
+        images: true,
+      },
+      take: 10,
+    })
+    res.json({ searchQuery })
+  } catch (error) {
+    console.error("error searching", error)
+    next(error)
+  }
+}
+
+export const searchProductQuery = async (res, req, next) => {
+  try {
+    const query = req.query.q || ""
+    const authorId = req.params.authorId
+      ? parseInt(req.params.authorId, 10)
+      : null
+
+    const searchProduct = await prisma.product.findMany({
+      where: {
+        AND: [
+          {
+            OR: [
+              { title_en: { contains: query.toLowerCase() } },
+              { description_en: { contains: query.toLowerCase() } },
+              { title_uk: { contains: query.toLowerCase() } },
+              { description_uk: { contains: query.toLowerCase() } },
+            ],
+          },
+          authorId ? { authorId: authorId || museumId } : {},
+        ],
+      },
+      include: {
+        images: true,
+        author: {
+          select: {
+            id: true,
+            email: true,
+            title: true,
+            bio: true,
+            images: true,
+          },
+        },
+      },
+      take: 10,
+    })
+
+    res.json({ searchProduct })
+  } catch (error) {
+    console.error("error searching for product", error)
+    next(error)
+  }
+}
