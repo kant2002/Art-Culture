@@ -12,7 +12,6 @@ function ItemDetail() {
 					<ul className={`${styles.ItemPageNavigationList}`}>
 						<li
 							className={`${styles.ItemPageNavigationItem}`}
-							onClick={handleNewsPageClick}
 						>
 							{t('Митці')}
 						</li>
@@ -22,10 +21,6 @@ function ItemDetail() {
 							&#8250;
 						</p>
 						<li className={`${styles.ItemPageNavigationItem}`}>
-							<TranslatedContent
-								en={post.title_en}
-								uk={post.title_uk}
-							/>
 						</li>
 					</ul>
 				</nav>
