@@ -27,62 +27,65 @@
   margin: $responsiveBigPadding auto;
 }
 
-.authorsContainer {
-  display: flex;
-  .authorsWrapper {
-    display: flex;
-    flex-direction: column;
-    .authorsInfo {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
-      & img {
-        width: 150px;
-      }
-      .authorInfoTitle {
-        margin: 0 0 0 $responsiveBigPadding;
-        & p {
-          font-family: $default-font;
-          color: $dark;
-          font-size: 23px;
-        }
-      }
-    }
-  }
-}
+// .itemContainer {
+//   display: flex;
+//   .itemWrapper {
+//     display: flex;
+//     flex-direction: column;
+//     .itemInfo {
+//       display: flex;
+//       flex-direction: row;
+//       justify-content: space-around;
+//       align-items: center;
+//       & img {
+//         width: 150px;
+//       }
+//       .authorInfoTitle {
+//         margin: 0 0 0 $responsiveBigPadding;
+//         & p {
+//           font-family: $default-font;
+//           color: $dark;
+//           font-size: 23px;
+//         }
+//       }
+//     }
+//   }
+// }
 
-.productContainer {
-  display: flex;
-  .productWrapper {
-    display: flex;
-    flex-direction: column;
-    .productInfo {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
-      & img {
-        width: 150px;
-      }
-      .productInfoTitle {
-        margin: 0 0 0 $responsiveBigPadding;
-        & p {
-          font-family: $default-font;
-          color: $dark;
-          font-size: 23px;
-        }
-      }
-    }
-  }
-}
+// .itemContainer {
+//   display: flex;
+//   .itemWrapper {
+//     display: flex;
+//     flex-direction: column;
+//     .itemInfo {
+//       display: flex;
+//       flex-direction: row;
+//       justify-content: space-around;
+//       align-items: center;
+//       & img {
+//         width: 150px;
+//       }
+//       .productInfoTitle {
+//         margin: 0 0 0 $responsiveBigPadding;
+//         & p {
+//           font-family: $default-font;
+//           color: $dark;
+//           font-size: 23px;
+//         }
+//       }
+//     }
+//   }
+// }
 
-.postsContainer {
+.itemContainer {
   display: flex;
-  .postsWrapper {
-    display: flex;
-    flex-direction: column;
-    .postInfo {
+  .itemWrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 500px);
+    grid-template-rows: repeat(3, auto);
+    grid-auto-flow: dense;
+    gap: 1rem;
+    .itemInfo {
       display: flex;
       flex-direction: row;
       justify-content: space-around;
@@ -90,7 +93,7 @@
       & img {
         width: 150px;
       }
-      .postInfoTitle {
+      .itemInfoTitle {
         margin: 0 0 0 $responsiveBigPadding;
         & p {
           font-family: $default-font;

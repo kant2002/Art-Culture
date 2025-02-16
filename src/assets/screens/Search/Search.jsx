@@ -87,11 +87,11 @@ function SearchResult({ className, searchInput, styleInput }) {
 				<div className={styles.resultsWrapper}>
 					{/* Display Authors */}
 					{results.authors.length > 0 && (
-						<div className={styles.authorsContainer}>
-							<div className={styles.authorsWrapper}>
+						<div className={styles.itemContainer}>
+							<div className={styles.itemWrapper}>
 								{results.authors.map((author) => (
 									<div
-										className={styles.authorsInfo}
+										className={styles.itemInfo}
 										key={author.id}
 										onClick={() => handleRoleClick(author)}
 									>
@@ -106,7 +106,7 @@ function SearchResult({ className, searchInput, styleInput }) {
 												}
 											/>
 										</>
-										<div className={styles.authorInfoTitle}>
+										<div className={styles.itemInfoTitle}>
 											<p>
 												{author.title || author.email}
 											</p>
@@ -119,11 +119,11 @@ function SearchResult({ className, searchInput, styleInput }) {
 
 					{/* Display Products */}
 					{results.products.length > 0 && (
-						<div className={styles.productContainer}>
-							<div className={styles.productWrapper}>
+						<div className={styles.itemContainer}>
+							<div className={styles.itemWrapper}>
 								{results.products.map((product) => (
 									<div
-										className={styles.productInfo}
+										className={styles.itemInfo}
 										key={product.id}
 									>
 										<>
@@ -145,9 +145,7 @@ function SearchResult({ className, searchInput, styleInput }) {
 												}
 											/>
 										</>
-										<div
-											className={styles.productInfoTitle}
-										>
+										<div className={styles.itemInfoTitle}>
 											<p>
 												{product.title_uk ||
 													product.title_en}
@@ -159,12 +157,12 @@ function SearchResult({ className, searchInput, styleInput }) {
 						</div>
 					)}
 					{results.posts && results.posts.length > 0 && (
-						<div className={styles.postsContainer}>
-							<div className={styles.postsWrapper}>
+						<div className={styles.itemContainer}>
+							<div className={styles.itemWrapper}>
 								{results.posts.map((post) => (
 									<div
 										key={post.id}
-										className={styles.postInfo}
+										className={styles.itemInfo}
 										onClick={() =>
 											handlePostPageClick(post)
 										}
@@ -177,7 +175,7 @@ function SearchResult({ className, searchInput, styleInput }) {
 												'Post'
 											}
 										/>
-										<div className={styles.postInfoTitle}>
+										<div className={styles.itemInfoTitle}>
 											<p>
 												{post.title_uk || post.title_en}
 											</p>
