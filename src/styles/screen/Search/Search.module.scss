@@ -16,7 +16,7 @@
     margin: 0 auto;
     font-family: $default-font;
     color: $dark;
-    font-size: 23px;
+    font-size: calc(18px - (2 * ((1440px - 100vw) / (1440 - 375))));
     border: 1px solid #c5c5c5;
     border-radius: 6px;
     padding: $responsiveMediumPadding;

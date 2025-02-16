@@ -1,11 +1,13 @@
 import styles from '@/styles/layout/ArtistsPage.module.scss'
 import ArtistsPageNewsArtistsSlider from '@components/Sliders/ArtistsPageSliders/ArtistsPageNewsArtistsSlider.jsx'
+import MainPopularArtistsSlider from '@components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.jsx'
+import searchStyle from '@styles/layout/ArtistsPage.module.scss'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { getImageUrl } from '../../../utils/helper.js'
-import MainPopularArtistsSlider from '@components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.jsx'
+import Search from '../Search/Search'
 
 function ArtistsPage() {
 	const { t } = useTranslation()
@@ -115,12 +117,17 @@ function ArtistsPage() {
 				</p>
 			</div>
 
-			<div className={`${styles.ArtistsPageArtistsSearchWrapper}`}>
+			{/* <div className={`${styles.ArtistsPageArtistsSearchWrapper}`}>
 				<input
 					className={`${styles.ArtistsPageArtistsSearchInput}`}
 					placeholder={t('Пошук митця')}
 				/>
-			</div>
+			</div> */}
+
+			<Search
+				className={searchStyle.ArtistsPageArtistsSearchWrapper}
+				searchInput={searchStyle.ArtistsPageArtistsSearchInput}
+			/>
 
 			<ArtistsPageNewsArtistsSlider />
 

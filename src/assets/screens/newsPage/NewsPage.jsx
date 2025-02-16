@@ -6,7 +6,9 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import searchStyle from '../../../styles/layout/newsPage.module.scss'
 import { getFormattedDate, getImageUrl } from '../../../utils/helper.js'
+import Search from '../../screens/Search/Search'
 
 function NewsPage() {
 	const { t, i18n } = useTranslation()
@@ -125,7 +127,7 @@ function NewsPage() {
 				/>
 			</div>
 			{/* Search Input */}
-			<div className={`${styles.newsPageSearchContainer}`}>
+			{/* <div className={`${styles.newsPageSearchContainer}`}>
 				<input
 					className={`${styles.newsPageSearchInput}`}
 					type="text"
@@ -133,7 +135,11 @@ function NewsPage() {
 					value={searchTerm}
 					onChange={(e) => setSearchTerm(e.target.value)}
 				/>
-			</div>
+			</div> */}
+			<Search
+				className={searchStyle.newsPageSearchContainer}
+				searchInput={searchStyle.newsPageSearchInput}
+			/>
 			{/* Like and Share Buttons */}
 			<div className={`${styles.newsPageLikeAndShareContainer}`}>
 				{/* <LikeAndShare className={sliderStyles.LikeAndShareFixed} /> */}
