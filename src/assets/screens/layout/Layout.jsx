@@ -56,7 +56,7 @@ const Layout = ({ heading = '' }) => {
 				<ScrollToTop />
 				<Routes>
 					<Route path="/" element={<Navigate to="/MainPage" />} />
-					<Route path="/MainPage" element={<MainPage />} />
+					<Route path="/main-page" element={<MainPage />} />
 					<Route path="/ArtistsPage" element={<ArtistsPage />} />
 					<Route path="/artist/:id" element={<ArtistPage />} />
 					<Route
@@ -85,10 +85,10 @@ const Layout = ({ heading = '' }) => {
 					/>
 					<Route path="/MuseumsPage" element={<MuseumsPage />} />
 					<Route
-						path="/museumpage/:id/products"
+						path="/museum-page/:id/products"
 						element={<ExhibitsProductPage />}
 					/>
-					<Route path="/museumpage/:id" element={<MuseumPage />} />
+					<Route path="/museum-page/:id" element={<MuseumPage />} />
 					<Route path="/art-terms" element={<ArtTermsPage />} />
 					<Route
 						path="/art-terms/letters/:letter"
@@ -166,13 +166,13 @@ const Layout = ({ heading = '' }) => {
 						}
 					/>
 					<Route path="/posts/:id" element={<PostDetail />} />
-					<Route path="/ItemDetail" element={<ItemDetail />} />
+					<Route path="/item-detail" element={<ItemDetail />} />
 					<Route
 						path="/exhibitions/:id"
 						element={<ExhibitionPage />}
 					/>
 					<Route
-						path="/ExhibitionsPage"
+						path="/exhibitions-page"
 						element={<ExhibitionsPage />}
 					/>
 					<Route path="/search" element={<Search />} />
