@@ -109,16 +109,18 @@ export const searchMuseum = async (req, res, next) => {
   }
 }
 
-export const searchQuery = async (req, res, next) => {
+// controllers/searchController.js
+export const searchAll = async (req, res, next) => {
   try {
     const query = req.query.q || ""
 
-    const searchQuery = await prisma.user.findMany({
+    // Search for authors (fixing the typo: "contains" instead of "contain")
+    const searchAllAuthors = await prisma.user.findMany({
       where: {
-        role: { in: ["CREATOR", "MUSEUM", "EXHIBITION", "MUSEUM"] },
+        role: { in: ["CREATOR", "MUSEUM", "EXHIBITION", "AUTHOR"] }, // Removed duplicate "MUSEUM"
         OR: [
           { email: { contains: query.toLowerCase() } },
-          { title: { contain: query.toLowerCase() } },
+          { title: { contains: query.toLowerCase() } },
         ],
       },
       select: {
@@ -127,24 +129,13 @@ export const searchQuery = async (req, res, next) => {
         title: true,
         bio: true,
         images: true,
+        role: true,
       },
       take: 10,
     })
-    res.json({ searchQuery })
-  } catch (error) {
-    console.error("error searching", error)
-    next(error)
-  }
-}
 
-export const searchProductQuery = async (res, req, next) => {
-  try {
-    const query = req.query.q || ""
-    const authorId = req.params.authorId
-      ? parseInt(req.params.authorId, 10)
-      : null
-
-    const searchProduct = await prisma.product.findMany({
+    // Search for products (remove reference to undefined museumId)
+    const searchAllProduct = await prisma.product.findMany({
       where: {
         AND: [
           {
@@ -155,7 +146,7 @@ export const searchProductQuery = async (res, req, next) => {
               { description_uk: { contains: query.toLowerCase() } },
             ],
           },
-          authorId ? { authorId: authorId || museumId } : {},
+          // Remove or modify the authorId condition if not needed
         ],
       },
       include: {
@@ -173,9 +164,27 @@ export const searchProductQuery = async (res, req, next) => {
       take: 10,
     })
 
-    res.json({ searchProduct })
+    const searchAllPosts = await prisma.post.findMany({
+      where: {
+        OR: [
+          { title_en: { contains: query.toLowerCase() } },
+          { content_en: { contains: query.toLowerCase() } },
+          { title_uk: { contains: query.toLowerCase() } },
+          { content_uk: { contains: query.toLowerCase() } },
+        ],
+      },
+      select: {
+        id: true,
+        title_en: true,
+        title_uk: true,
+        images: true,
+      },
+      take: 10,
+    })
+
+    res.json({ searchAllAuthors, searchAllProduct, searchAllPosts })
   } catch (error) {
-    console.error("error searching for product", error)
+    console.error("error in searchAll", error)
     next(error)
   }
 }

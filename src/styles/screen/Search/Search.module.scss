@@ -1,0 +1,103 @@
+@import "/src/styles/utilities/variables.scss";
+
+.searchWrapper {
+  // Обертка для секции поиска в бургер-меню
+  display: flex;
+  margin: calc(215px - (3 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
+  height: 100vh;
+  width: 100%;
+  flex-direction: column;
+  .searchInputWrapper {
+    width: 90%;
+    height: 5%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    font-family: $default-font;
+    color: $dark;
+    font-size: 23px;
+    border: 1px solid #c5c5c5;
+    border-radius: 6px;
+    padding: $responsiveMediumPadding;
+  }
+}
+
+.resultsWrapper {
+  width: 90%;
+  margin: $responsiveBigPadding auto;
+}
+
+.authorsContainer {
+  display: flex;
+  .authorsWrapper {
+    display: flex;
+    flex-direction: column;
+    .authorsInfo {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      & img {
+        width: 150px;
+      }
+      .authorInfoTitle {
+        margin: 0 0 0 $responsiveBigPadding;
+        & p {
+          font-family: $default-font;
+          color: $dark;
+          font-size: 23px;
+        }
+      }
+    }
+  }
+}
+
+.productContainer {
+  display: flex;
+  .productWrapper {
+    display: flex;
+    flex-direction: column;
+    .productInfo {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      & img {
+        width: 150px;
+      }
+      .productInfoTitle {
+        margin: 0 0 0 $responsiveBigPadding;
+        & p {
+          font-family: $default-font;
+          color: $dark;
+          font-size: 23px;
+        }
+      }
+    }
+  }
+}
+
+.postsContainer {
+  display: flex;
+  .postsWrapper {
+    display: flex;
+    flex-direction: column;
+    .postInfo {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      & img {
+        width: 150px;
+      }
+      .postInfoTitle {
+        margin: 0 0 0 $responsiveBigPadding;
+        & p {
+          font-family: $default-font;
+          color: $dark;
+          font-size: 23px;
+        }
+      }
+    }
+  }
+}
