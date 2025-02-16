@@ -6,6 +6,8 @@ import { useState } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import ProtectedRoute from '../../../routes/ProtectedRoute'
 import ScrollToTop from '../../../utils/ScrollToTop'
+import Search from '../../screens/Search/Search'
+import ErrorPage from '../404/404'
 import AdminDashboard from '../Admin/AdminDashboard'
 import AdminArtTermsEdit from '../Admin/ArtTermsEdit'
 import AdminArtTermsList from '../Admin/ArtTermsList'
@@ -173,6 +175,7 @@ const Layout = ({ heading = '' }) => {
 						path="/ExhibitionsPage"
 						element={<ExhibitionsPage />}
 					/>
+					<Route path="/search" element={<Search />} />
 					<Route
 						path="/signup"
 						element={
@@ -184,6 +187,7 @@ const Layout = ({ heading = '' }) => {
 							/>
 						}
 					/>
+					<Route path={'*'} element={<ErrorPage />} />
 				</Routes>
 				<Footer />
 			</section>

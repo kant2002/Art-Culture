@@ -1,5 +1,6 @@
 import express from "express"
 import {
+  searchAll,
   searchAuthors,
   searchMuseum,
   searchPainting,
@@ -11,5 +12,5 @@ const router = express.Router()
 router.get("/authors", authenticateToken, searchAuthors)
 router.get("/paintings", authenticateToken, searchPainting)
 router.get("/museums", authenticateToken, searchMuseum)
-
+router.get("/all-search", searchAll)
 export default router
