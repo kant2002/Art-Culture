@@ -84,7 +84,7 @@ function ArtistPage() {
 	const images = getImageUrl(creator.images, '/Img/newsCardERROR.jpg')
 
 	const handleArtistsPageClick = () => {
-		navigate('/ArtistsPage')
+		navigate('/artists-page')
 	}
 
 	return (

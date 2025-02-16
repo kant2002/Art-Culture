@@ -50,7 +50,7 @@ function SearchResult({ className, searchInput, styleInput }) {
 	const handleRoleClick = (author) => {
 		switch (author.role) {
 			case 'MUSEUM':
-				navigate(`/museumpage/${author.id}`)
+				navigate(`/museum-page/${author.id}`)
 				break
 			case 'EXHIBITION':
 				navigate(`/all-author-posts/${author.id}`)

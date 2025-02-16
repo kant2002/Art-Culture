@@ -19,7 +19,7 @@ function MainNews() {
 	)
 	const navigate = useNavigate()
 	const handleNewsPageClick = () => {
-		navigate('/NewsPage')
+		navigate('/news-page')
 	}
 
 	function getPostsCount(width) {

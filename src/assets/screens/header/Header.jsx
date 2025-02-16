@@ -98,27 +98,27 @@ function Header() {
 
 	const handleMainPageClick = () => {
 		closeBurgerMenu()
-		navigate('/MainPage')
+		navigate('/main-page')
 	}
 
 	const handleNewsPageClick = () => {
 		closeBurgerMenu()
-		navigate('/NewsPage')
+		navigate('/news-page')
 	}
 
 	const handleArtistsPageClick = () => {
 		closeBurgerMenu()
-		navigate('/ArtistsPage')
+		navigate('/artists-page')
 	}
 
 	const handleExhibitionsPageClick = () => {
 		closeBurgerMenu()
-		navigate('/ExhibitionsPage')
+		navigate('/exhibitions-page')
 	}
 
 	const handleMuseumsPageClick = () => {
 		closeBurgerMenu()
-		navigate('/MuseumsPage')
+		navigate('/museums-page')
 	}
 
 	const handleArtTermsPageClick = () => {
@@ -127,7 +127,7 @@ function Header() {
 	}
 
 	const goToMainPage = () => {
-		navigate('/MainPage')
+		navigate('/main-page')
 	}
 
 	const handleSearchFieldClick = () => {

@@ -554,7 +554,7 @@ const ExhibitionPageMasonryGallery = memo(
 		}
 
 		const handleExhibitsProductPage = () => {
-			navigate(`/museumpage/${id}/products`)
+			navigate(`/museum-page/${id}/products`)
 		}
 
 		return (

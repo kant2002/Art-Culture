@@ -145,7 +145,7 @@ function ExhibitionDetails() {
 	const museumTitle = museum?.title
 
 	const handleExhibitionPageClick = () => {
-		navigate('/ExhibitionsPage')
+		navigate('/exhibitions-page')
 	}
 	const toggleText = () => {
 		setIsExpanded((prevState) => !prevState)

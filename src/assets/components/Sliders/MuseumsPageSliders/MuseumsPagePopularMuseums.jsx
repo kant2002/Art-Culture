@@ -100,7 +100,7 @@ const PopularMuseumSlider = () => {
 	}, [])
 
 	const handleMuseumsPageClick = (id) => {
-		navigate(`/museumpage/${id}`)
+		navigate(`/museum-page/${id}`)
 	}
 
 	return (

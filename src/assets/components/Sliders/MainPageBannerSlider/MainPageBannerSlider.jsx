@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import TranslatedContent from '../../Blocks/TranslatedContent'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 // Import Swiper styles
@@ -9,7 +8,7 @@ import axios from 'axios'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import { Autoplay } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules'
 import { getBaseUrl, getImageUrl } from '../../../../utils/helper'
 
 // Import Swiper modules
@@ -26,9 +25,9 @@ const Slide = ({ museum, baseUrl, onClick }) => {
 
 	const museumLogoUrl = museum.museum_logo_image?.imageUrl
 		? getImageUrl(
-			museum.museum_logo_image.imageUrl,
-			'/Img/logoMuseum_3.png',
-		)
+				museum.museum_logo_image.imageUrl,
+				'/Img/logoMuseum_3.png',
+			)
 		: '/Img/logoMuseum_3.png' // Fallback logo
 
 	return (
@@ -120,7 +119,7 @@ const MainPageBannerSlider = () => {
 	}, [t])
 	const handleMuseumPageClick = (id) => {
 		console.log('Navigating to museum with id:', id)
-		navigate(`/museumpage/${id}`)
+		navigate(`/museum-page/${id}`)
 	}
 	return (
 		<div className="BannerSliderContainer">
@@ -135,7 +134,7 @@ const MainPageBannerSlider = () => {
 				autoplay={{
 					delay: 2000, // Задержка в миллисекундах
 					disableOnInteraction: false, // Продолжать автопрокрутку после взаимодействия
-					pauseOnMouseEnter: true // Останавливать при наведении
+					pauseOnMouseEnter: true, // Останавливать при наведении
 				}}
 				loop={true} // Бесконечная прокрутках слайдов
 			>

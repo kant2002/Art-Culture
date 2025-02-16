@@ -71,11 +71,11 @@ function MainMuseums() {
 	}, [])
 
 	const handleMuseumPageClick = (id) => {
-		navigate(`/museumpage/${id}`)
+		navigate(`/museum-page/${id}`)
 	}
 
 	const handleMuseumsPageClick = () => {
-		navigate('/MuseumsPage')
+		navigate('/museums-page')
 	}
 
 	return (

@@ -48,7 +48,7 @@ function PostDetail() {
 	const formattedDate = getFormattedDate(post.createdAt)
 	const formattedTime = getFormattedTime(post.createdAt)
 	const handleNewsPageClick = () => {
-		navigate('/NewsPage')
+		navigate('/news-page')
 	}
 
 	const handleAuthorPreviewClick = () => {

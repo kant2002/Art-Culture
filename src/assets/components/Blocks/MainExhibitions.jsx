@@ -72,7 +72,7 @@ function MainExhibitions() {
 	}
 
 	const handleExhibitionsPageClick = () => {
-		navigate('/ExhibitionsPage')
+		navigate('/exhibitions-page')
 	}
 
 	return (
@@ -113,9 +113,9 @@ function MainExhibitions() {
 						const featuredMediaUrl =
 							exhibition.images && exhibition.images.length > 0
 								? getImageUrl(
-									exhibition.images[0].imageUrl,
-									'/Img/halfNewsCard.jpg',
-								)
+										exhibition.images[0].imageUrl,
+										'/Img/halfNewsCard.jpg',
+									)
 								: '/Img/halfNewsCard.jpg'
 						console.log('Витягнуте медіа:', featuredMediaUrl)
 

@@ -96,11 +96,11 @@ function NewsPage() {
 	})
 
 	const handleNewsPageClick = () => {
-		navigate('/NewsPage')
+		navigate('/news-page')
 	}
 
 	const handleSignUpClick = () => {
-		navigate('/SignUp')
+		navigate('/signup')
 	}
 
 	const handlePostPageClick = (id) => {

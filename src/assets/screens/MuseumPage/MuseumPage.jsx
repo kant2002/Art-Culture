@@ -80,11 +80,11 @@ function MuseumPage() {
 	}
 
 	const handleMainPageClick = () => {
-		navigate('/MainPage')
+		navigate('/main-page')
 	}
 
 	const handleMuseumsPage = () => {
-		navigate('/MuseumsPage')
+		navigate('/museums-page')
 	}
 
 	return (
