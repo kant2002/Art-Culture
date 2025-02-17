@@ -25,6 +25,25 @@
   border: 1px solid $secondary-color;
   box-shadow: 0 4px 20px $turquoise;
   color: black;
+  .SignUpForm {
+    .roleSelectorWrapper {
+      display: flex;
+      flex-direction: column;
+      & h2 {
+        font-weight: 700;
+        font-size: calc(12px + 6 * (100vw / 1440));
+      }
+      .roleSelectorInput {
+        display: flex;
+        flex-direction: row;
+        margin: $responsiveSmallPadding 0;
+      }
+      .roleSelectorCheck {
+        display: flex;
+        margin: 0 $responsiveSmallPadding;
+      }
+    }
+  }
 }
 
 // Form Styles

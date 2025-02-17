@@ -182,7 +182,38 @@ export const searchAll = async (req, res, next) => {
       take: 10,
     })
 
-    res.json({ searchAllAuthors, searchAllProduct, searchAllPosts })
+    const searchAllExhibitions = await prisma.exhibition.findMany({
+      include: {
+        images: true,
+        museum: {
+          include: {
+            museum_logo_image: true,
+          },
+        },
+        createdBy: {
+          select: {
+            id: true,
+            email: true,
+            title: true,
+          },
+        },
+        exhibitionArtists: {
+          include: {
+            artist: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    })
+
+    res.json({
+      searchAllAuthors,
+      searchAllProduct,
+      searchAllPosts,
+      searchAllExhibitions,
+    })
   } catch (error) {
     console.error("error in searchAll", error)
     next(error)

@@ -145,59 +145,69 @@ const SignUp = () => {
 					<p className={styles.ErrorMessage}>{serverMessage}</p>
 				)}
 				<form className={styles.SignUpForm} onSubmit={handleSubmit}>
-					<p>
-						{t('Зарееструватися як')}
-						<input
-							type="radio"
-							className=""
-							required
-							name="role"
-							value="USER"
-							checked={signUpDetails.role == 'USER'}
-							onChange={handleChange}
-						/>{' '}
-						{t('тип_реестрації_користувач')}
-						<input
-							type="radio"
-							className=""
-							required
-							name="role"
-							value="MUSEUM"
-							checked={signUpDetails.role == 'MUSEUM'}
-							onChange={handleChange}
-						/>{' '}
-						{t('тип_реестрації_музей')}
-						<input
-							type="radio"
-							className=""
-							required
-							name="role"
-							value="CREATOR"
-							checked={signUpDetails.role == 'CREATOR'}
-							onChange={handleChange}
-						/>{' '}
-						{t('тип_реестрації_митець')}
-						<input
-							type="radio"
-							className=""
-							required
-							name="role"
-							value="AUTHOR"
-							checked={signUpDetails.role == 'AUTHOR'}
-							onChange={handleChange}
-						/>{' '}
-						{t('тип_реестрації_автор')}
-						<input
-							type="radio"
-							className=""
-							required
-							name="role"
-							value="EXHIBITION"
-							checked={signUpDetails.role == 'EXHIBITION'}
-							onChange={handleChange}
-						/>{' '}
-						{t('тип_реестрації_організатор_виставки')}
-					</p>
+					<div className={styles.roleSelectorWrapper}>
+						<h2>{t('Зарееструватися як')}</h2>
+						<div className={styles.roleSelectorInput}>
+							<input
+								type="radio"
+								className={styles.roleSelectorCheck}
+								required
+								name="role"
+								value="USER"
+								checked={signUpDetails.role == 'USER'}
+								onChange={handleChange}
+							/>{' '}
+							{t('тип_реестрації_користувач')}
+						</div>
+						<div className={styles.roleSelectorInput}>
+							<input
+								type="radio"
+								className={styles.roleSelectorCheck}
+								required
+								name="role"
+								value="MUSEUM"
+								checked={signUpDetails.role == 'MUSEUM'}
+								onChange={handleChange}
+							/>{' '}
+							{t('тип_реестрації_музей')}
+						</div>
+						<div className={styles.roleSelectorInput}>
+							<input
+								type="radio"
+								className={styles.roleSelectorCheck}
+								required
+								name="role"
+								value="CREATOR"
+								checked={signUpDetails.role == 'CREATOR'}
+								onChange={handleChange}
+							/>{' '}
+							{t('тип_реестрації_митець')}
+						</div>
+						<div className={styles.roleSelectorInput}>
+							<input
+								type="radio"
+								className={styles.roleSelectorCheck}
+								required
+								name="role"
+								value="AUTHOR"
+								checked={signUpDetails.role == 'AUTHOR'}
+								onChange={handleChange}
+							/>{' '}
+							{t('тип_реестрації_автор')}
+						</div>
+						<div className={styles.roleSelectorInput}>
+							<input
+								type="radio"
+								className={styles.roleSelectorCheck}
+								required
+								name="role"
+								value="EXHIBITION"
+								checked={signUpDetails.role == 'EXHIBITION'}
+								onChange={handleChange}
+							/>{' '}
+							{t('тип_реестрації_організатор_виставки')}
+						</div>
+					</div>
 					<TextEditor
 						label="Email"
 						type="email"

@@ -11,7 +11,9 @@ function SearchResult({ className, searchInput, styleInput }) {
 	const [results, setResults] = useState({
 		authors: [],
 		products: [],
+		exhibitions: [],
 		posts: [],
+		museums: [],
 	})
 	const [page, setPage] = useState(1)
 	const [hasMore, setHasMore] = useState(true)
@@ -19,7 +21,9 @@ function SearchResult({ className, searchInput, styleInput }) {
 	const [filters, setFilters] = useState({
 		authors: true,
 		products: true,
+		exhibitions: true,
 		posts: true,
+		museums: true,
 	})
 	const navigate = useNavigate()
 	const resultsRef = useRef(null)
@@ -33,24 +37,50 @@ function SearchResult({ className, searchInput, styleInput }) {
 	}
 
 	// Helper to fetch results (page 1) using current searchQuery and filters.
-	const fetchResults = async (query, activeFilters) => {
+	const fetchResults = async (query, activeFilters, pageNumber = 1) => {
 		try {
 			const response = await API.get(
 				`/search/all-search?q=${query}&page=1&limit=30&filter=${activeFilters}`,
 			)
-			const { searchAllAuthors, searchAllProduct, searchAllPosts } =
-				response.data
-			setResults({
-				authors: searchAllAuthors || [],
-				products: searchAllProduct || [],
-				posts: searchAllPosts || [],
-			})
-			setPage(1)
+			const {
+				searchAllAuthors,
+				searchAllProduct,
+				searchAllPosts,
+				searchAllExhibitions,
+			} = response.data
+			const allAuthors = searchAllAuthors || []
+			const museumAuthors = allAuthors.filter((a) => a.role === 'MUSEUM')
+			const nonMuseumAuthors = allAuthors.filter(
+				(a) => a.role !== 'MUSEUM',
+			)
+
+			if (pageNumber === 1) {
+				setResults({
+					authors: nonMuseumAuthors,
+					museums: museumAuthors,
+					exhibitions: searchAllExhibitions || [],
+					products: searchAllProduct || [],
+					posts: searchAllPosts || [],
+				})
+			} else {
+				setResults((prev) => ({
+					authors: [...prev.authors, ...nonMuseumAuthors],
+					museums: [...prev.museums, ...museumAuthors],
+					exhibitions: [
+						...prev.exhibitions,
+						...(searchAllExhibitions || []),
+					],
+					products: [...prev.products, ...(searchAllProduct || [])],
+					posts: [...prev.posts, ...(searchAllPosts || [])],
+				}))
+			}
+			setPage(pageNumber)
 			// If fewer than 30 items returned in every category, assume no more results.
 			if (
 				(searchAllAuthors?.length || 0) < 30 &&
 				(searchAllProduct?.length || 0) < 30 &&
-				(searchAllPosts?.length || 0) < 30
+				(searchAllPosts?.length || 0) < 30 &&
+				(searchAllExhibitions?.length || 0) < 30
 			) {
 				setHasMore(false)
 			} else {
@@ -74,7 +104,13 @@ function SearchResult({ className, searchInput, styleInput }) {
 				.join(',')
 			await fetchResults(query, activeFilters)
 		} else {
-			setResults({ authors: [], products: [], posts: [] })
+			setResults({
+				authors: [],
+				museums: [],
+				exhibitions: [],
+				products: [],
+				posts: [],
+			})
 			setPage(1)
 			setHasMore(true)
 		}
@@ -176,6 +212,10 @@ function SearchResult({ className, searchInput, styleInput }) {
 		setFilters((prev) => ({ ...prev, [filterName]: !prev[filterName] }))
 	}
 
+	const handleExhibitionClick = (exhibition) => {
+		navigate(`/exhibitions/${exhibition.id}`)
+	}
+
 	return (
 		<div className={`${styles.searchWrapper} ${className || ''}`}>
 			<input
@@ -200,6 +240,22 @@ function SearchResult({ className, searchInput, styleInput }) {
 							onChange={() => toggleFilter('authors')}
 						/>
 						{t('Автори')}
+					</label>
+					<label>
+						<input
+							type="checkbox"
+							checked={filters.museums}
+							onChange={() => toggleFilter('museums')}
+						/>
+						{t('Музеї')}
+					</label>
+					<label>
+						<input
+							type="checkbox"
+							checked={filters.exhibitions}
+							onChange={() => toggleFilter('exhibitions')}
+						/>
+						{t('Виставки')}
 					</label>
 					<label>
 						<input
@@ -242,6 +298,74 @@ function SearchResult({ className, searchInput, styleInput }) {
 										<div className={styles.itemInfoTitle}>
 											<p>
 												{author.title || author.email}
+											</p>
+										</div>
+									</div>
+								))}
+							</div>
+						</div>
+					)}
+
+					{/* Display Museums */}
+					{filters.museums && results.museums.length > 0 && (
+						<div className={styles.itemContainer}>
+							<h2>{t('Музеї')}</h2>
+							<div className={styles.itemWrapper}>
+								{results.museums.map((museum) => (
+									<div
+										className={styles.itemInfo}
+										key={museum.id}
+										onClick={() => handleRoleClick(museum)}
+									>
+										<img
+											src={getImageUrl(
+												museum.images || defaultAuthor,
+											)}
+											alt={museum.title || museum.email}
+										/>
+										<div className={styles.itemInfoTitle}>
+											<p>
+												{museum.title || museum.email}
+											</p>
+										</div>
+									</div>
+								))}
+							</div>
+						</div>
+					)}
+
+					{/* Display Exhibitions */}
+					{filters.exhibitions && results.exhibitions.length > 0 && (
+						<div className={styles.itemContainer}>
+							<h2>{t('Виставки')}</h2>
+							<div className={styles.itemWrapper}>
+								{results.exhibitions.map((exhibition) => (
+									<div
+										key={exhibition.id}
+										className={styles.itemInfo}
+										onClick={() =>
+											handleExhibitionClick(exhibition)
+										}
+									>
+										<img
+											src={
+												exhibition.images?.[0]?.imageUrl
+													? getImageUrl(
+															exhibition.images[0]
+																.imageUrl,
+														)
+													: defaultProduct
+											}
+											alt={
+												exhibition.title_uk ||
+												exhibition.title_en ||
+												'Exhibition'
+											}
+										/>
+										<div className={styles.itemInfoTitle}>
+											<p>
+												{exhibition.title_uk ||
+													exhibition.title_en}
 											</p>
 										</div>
 									</div>
@@ -329,6 +453,8 @@ function SearchResult({ className, searchInput, styleInput }) {
 
 					{/* If no results found */}
 					{results.authors.length === 0 &&
+						results.museums.length === 0 &&
+						results.exhibitions.length === 0 &&
 						results.products.length === 0 &&
 						results.posts.length === 0 && (
 							<div className={styles.noResults}>
