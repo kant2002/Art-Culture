@@ -21,6 +21,24 @@
     border-radius: 6px;
     padding: $responsiveMediumPadding;
   }
+  .filterControls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    & h2 {
+      font-size: 20px;
+    }
+    label {
+      font-family: $default-font;
+      font-size: 20px;
+      color: $dark;
+
+      input {
+        margin-right: 0.5rem;
+      }
+    }
+  }
 }
 
 .resultsWrapper {

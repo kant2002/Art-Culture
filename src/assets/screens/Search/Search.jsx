@@ -16,6 +16,11 @@ function SearchResult({ className, searchInput, styleInput }) {
 	const [page, setPage] = useState(1)
 	const [hasMore, setHasMore] = useState(true)
 	const [isFetching, setIsFetching] = useState(false)
+	const [filters, setFilters] = useState({
+		authors: true,
+		products: true,
+		posts: true,
+	})
 	const navigate = useNavigate()
 	const resultsRef = useRef(null)
 
@@ -27,12 +32,76 @@ function SearchResult({ className, searchInput, styleInput }) {
 		return path.startsWith('/') ? path : `/${path}`
 	}
 
-	// Function to fetch a specific page of results.
+	// Helper to fetch results (page 1) using current searchQuery and filters.
+	const fetchResults = async (query, activeFilters) => {
+		try {
+			const response = await API.get(
+				`/search/all-search?q=${query}&page=1&limit=30&filter=${activeFilters}`,
+			)
+			const { searchAllAuthors, searchAllProduct, searchAllPosts } =
+				response.data
+			setResults({
+				authors: searchAllAuthors || [],
+				products: searchAllProduct || [],
+				posts: searchAllPosts || [],
+			})
+			setPage(1)
+			// If fewer than 30 items returned in every category, assume no more results.
+			if (
+				(searchAllAuthors?.length || 0) < 30 &&
+				(searchAllProduct?.length || 0) < 30 &&
+				(searchAllPosts?.length || 0) < 30
+			) {
+				setHasMore(false)
+			} else {
+				setHasMore(true)
+			}
+		} catch (error) {
+			console.error('Error fetching search result', error)
+		}
+	}
+
+	// When the search query changes
+	const handleSearchChange = async (e) => {
+		const query = e.target.value
+		setSearchQuery(query)
+		if (query.length > 2) {
+			// Reset pagination when query changes.
+			setPage(1)
+			setHasMore(true)
+			const activeFilters = Object.keys(filters)
+				.filter((key) => filters[key])
+				.join(',')
+			await fetchResults(query, activeFilters)
+		} else {
+			setResults({ authors: [], products: [], posts: [] })
+			setPage(1)
+			setHasMore(true)
+		}
+	}
+
+	// Re-fetch results when filters change (and query exists)
+	useEffect(() => {
+		if (searchQuery.length > 2) {
+			const activeFilters = Object.keys(filters)
+				.filter((key) => filters[key])
+				.join(',')
+			// Reset pagination
+			setPage(1)
+			setHasMore(true)
+			fetchResults(searchQuery, activeFilters)
+		}
+	}, [filters])
+
+	// Infinite scroll handler: fetch next page if near bottom.
 	const fetchPage = async (pageNumber) => {
 		setIsFetching(true)
 		try {
+			const activeFilters = Object.keys(filters)
+				.filter((key) => filters[key])
+				.join(',')
 			const response = await API.get(
-				`/search/all-search?q=${searchQuery}&page=${pageNumber}&limit=30`,
+				`/search/all-search?q=${searchQuery}&page=${pageNumber}&limit=30&filter=${activeFilters}`,
 			)
 			const { searchAllAuthors, searchAllProduct, searchAllPosts } =
 				response.data
@@ -43,7 +112,6 @@ function SearchResult({ className, searchInput, styleInput }) {
 				posts: [...prev.posts, ...(searchAllPosts || [])],
 			}))
 			setPage(pageNumber)
-			// If every category returns less than 30, assume no more results.
 			if (
 				(searchAllAuthors?.length || 0) < 30 &&
 				(searchAllProduct?.length || 0) < 30 &&
@@ -58,45 +126,6 @@ function SearchResult({ className, searchInput, styleInput }) {
 		}
 	}
 
-	// Reset when the search query changes.
-	const handleSearchChange = async (e) => {
-		const query = e.target.value
-		setSearchQuery(query)
-		if (query.length > 2) {
-			// Reset pagination when query changes
-			setPage(1)
-			setHasMore(true)
-			try {
-				const response = await API.get(
-					`/search/all-search?q=${query}&page=1&limit=30`,
-				)
-				const { searchAllAuthors, searchAllProduct, searchAllPosts } =
-					response.data
-				console.log(searchAllAuthors, searchAllProduct, searchAllPosts)
-				setResults({
-					authors: searchAllAuthors || [],
-					products: searchAllProduct || [],
-					posts: searchAllPosts || [],
-				})
-				// Check if we received fewer than 30 in each category.
-				if (
-					(searchAllAuthors?.length || 0) < 30 &&
-					(searchAllProduct?.length || 0) < 30 &&
-					(searchAllPosts?.length || 0) < 30
-				) {
-					setHasMore(false)
-				}
-			} catch (error) {
-				console.error('Error fetching search result', error)
-			}
-		} else {
-			setResults({ authors: [], products: [], posts: [] })
-			setPage(1)
-			setHasMore(true)
-		}
-	}
-
-	// Infinite scroll handler: fetch next page if near bottom.
 	useEffect(() => {
 		const resultsDiv = resultsRef.current
 		if (!resultsDiv) return
@@ -118,7 +147,7 @@ function SearchResult({ className, searchInput, styleInput }) {
 		return () => resultsDiv.removeEventListener('scroll', handleScroll)
 	}, [page, hasMore, isFetching])
 
-	// Navigation handlers (unchanged)
+	// Navigation handlers remain unchanged.
 	const handleRoleClick = (author) => {
 		switch (author.role) {
 			case 'MUSEUM':
@@ -143,6 +172,10 @@ function SearchResult({ className, searchInput, styleInput }) {
 		navigate(`/posts/${post.id}`)
 	}
 
+	const toggleFilter = (filterName) => {
+		setFilters((prev) => ({ ...prev, [filterName]: !prev[filterName] }))
+	}
+
 	return (
 		<div className={`${styles.searchWrapper} ${className || ''}`}>
 			<input
@@ -153,14 +186,46 @@ function SearchResult({ className, searchInput, styleInput }) {
 				onChange={handleSearchChange}
 				placeholder={t('Пошук') || 'Пошук...'}
 			/>
+
+			{/* Filter Controls */}
+			{searchQuery.length > 2 && (
+				<div className={styles.filterControls}>
+					<>
+						<h2>{t('Оберіть категорію:')}</h2>
+					</>
+					<label>
+						<input
+							type="checkbox"
+							checked={filters.authors}
+							onChange={() => toggleFilter('authors')}
+						/>
+						{t('Автори')}
+					</label>
+					<label>
+						<input
+							type="checkbox"
+							checked={filters.products}
+							onChange={() => toggleFilter('products')}
+						/>
+						{t('Вироби')}
+					</label>
+					<label>
+						<input
+							type="checkbox"
+							checked={filters.posts}
+							onChange={() => toggleFilter('posts')}
+						/>
+						{t('Новини')}
+					</label>
+				</div>
+			)}
+
 			{searchQuery.length > 2 && (
 				<div ref={resultsRef} className={styles.resultsWrapper}>
 					{/* Display Authors */}
-					{results.authors.length > 0 && (
+					{filters.authors && results.authors.length > 0 && (
 						<div className={styles.itemContainer}>
-							<>
-								<h2>{t('Автори')}</h2>
-							</>
+							<h2>{t('Автори')}</h2>
 							<div className={styles.itemWrapper}>
 								{results.authors.map((author) => (
 									<div
@@ -168,17 +233,12 @@ function SearchResult({ className, searchInput, styleInput }) {
 										key={author.id}
 										onClick={() => handleRoleClick(author)}
 									>
-										<>
-											<img
-												src={getImageUrl(
-													author.images ||
-														defaultAuthor,
-												)}
-												alt={
-													author.title || author.email
-												}
-											/>
-										</>
+										<img
+											src={getImageUrl(
+												author.images || defaultAuthor,
+											)}
+											alt={author.title || author.email}
+										/>
 										<div className={styles.itemInfoTitle}>
 											<p>
 												{author.title || author.email}
@@ -191,36 +251,30 @@ function SearchResult({ className, searchInput, styleInput }) {
 					)}
 
 					{/* Display Products */}
-					{results.products.length > 0 && (
+					{filters.products && results.products.length > 0 && (
 						<div className={styles.itemContainer}>
-							<>
-								<h2>{t('Вироби')}</h2>
-							</>
+							<h2>{t('Вироби')}</h2>
 							<div className={styles.itemWrapper}>
 								{results.products.map((product) => (
 									<div
 										className={styles.itemInfo}
 										key={product.id}
 									>
-										<>
-											<img
-												src={
-													product.images?.[0]
-														?.imageUrl
-														? getImageUrl(
-																product
-																	.images[0]
-																	.imageUrl,
-															)
-														: defaultProduct
-												}
-												alt={
-													product.title_en ||
-													product.title_uk ||
-													'Product'
-												}
-											/>
-										</>
+										<img
+											src={
+												product.images?.[0]?.imageUrl
+													? getImageUrl(
+															product.images[0]
+																.imageUrl,
+														)
+													: defaultProduct
+											}
+											alt={
+												product.title_en ||
+												product.title_uk ||
+												'Product'
+											}
+										/>
 										<div className={styles.itemInfoTitle}>
 											<p>
 												{product.title_uk ||
@@ -234,44 +288,50 @@ function SearchResult({ className, searchInput, styleInput }) {
 					)}
 
 					{/* Display Posts */}
-					{results.posts && results.posts.length > 0 && (
-						<div className={styles.itemContainer}>
-							<>
+					{filters.posts &&
+						results.posts &&
+						results.posts.length > 0 && (
+							<div className={styles.itemContainer}>
 								<h2>{t('Новини')}</h2>
-							</>
-							<div className={styles.itemWrapper}>
-								{results.posts.map((post) => (
-									<div
-										key={post.id}
-										className={styles.itemInfo}
-										onClick={() =>
-											handlePostPageClick(post)
-										}
-									>
-										<img
-											src={post.images || defaultProduct}
-											alt={
-												post.title_en ||
-												post.title_uk ||
-												'Post'
+								<div className={styles.itemWrapper}>
+									{results.posts.map((post) => (
+										<div
+											key={post.id}
+											className={styles.itemInfo}
+											onClick={() =>
+												handlePostPageClick(post)
 											}
-										/>
-										<div className={styles.itemInfoTitle}>
-											<p>
-												{post.title_uk || post.title_en}
-											</p>
+										>
+											<img
+												src={
+													post.images ||
+													defaultProduct
+												}
+												alt={
+													post.title_en ||
+													post.title_uk ||
+													'Post'
+												}
+											/>
+											<div
+												className={styles.itemInfoTitle}
+											>
+												<p>
+													{post.title_uk ||
+														post.title_en}
+												</p>
+											</div>
 										</div>
-									</div>
-								))}
+									))}
+								</div>
 							</div>
-						</div>
-					)}
+						)}
 
 					{/* If no results found */}
 					{results.authors.length === 0 &&
 						results.products.length === 0 &&
 						results.posts.length === 0 && (
-							<div>
+							<div className={styles.noResults}>
 								{t('Не знайдено результатів') ||
 									'No results found'}
 							</div>
@@ -287,4 +347,5 @@ SearchResult.propTypes = {
 	searchInput: PropTypes.string,
 	styleInput: PropTypes.object,
 }
+
 export default SearchResult
