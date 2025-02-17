@@ -117,13 +117,6 @@ function ArtistsPage() {
 				</p>
 			</div>
 
-			{/* <div className={`${styles.ArtistsPageArtistsSearchWrapper}`}>
-				<input
-					className={`${styles.ArtistsPageArtistsSearchInput}`}
-					placeholder={t('Пошук митця')}
-				/>
-			</div> */}
-
 			<Search
 				className={searchStyle.ArtistsPageArtistsSearchWrapper}
 				searchInput={searchStyle.ArtistsPageArtistsSearchInput}
