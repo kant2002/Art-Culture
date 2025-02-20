@@ -4,7 +4,7 @@ import ArtistsPageNewsArtistsSlider from '@components/Sliders/ArtistsPageSliders
 import MainPopularArtistsSlider from '@components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.jsx'
 import searchStyle from '@styles/layout/ArtistsPage.module.scss'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { englishLetters, ukrainianLetters } from '../../../utils/constants'
@@ -21,6 +21,8 @@ function ArtistsPage() {
 	const [visibleCreatorsCount, setVisibleCreatorsCount] = useState(
 		getCreatorsCount(window.innerWidth),
 	)
+
+	const timeLineRef = useRef(null)
 
 	// ADD sortMode state: "ALL" or "ALPHABETICAL"
 	const [sortMode, setSortMode] = useState('ALL')
@@ -220,6 +222,24 @@ function ArtistsPage() {
 		lettersBtnText = hoveringLettersButton ? 'А-Я' : 'A-Z'
 	}
 
+	const handleScrollLeft = () => {
+		if (timeLineRef.current) {
+			timeLineRef.current.scrollBy({
+				left: -100, // negative => scroll left
+				behavior: 'smooth', // optional for smooth scrolling
+			})
+		}
+	}
+
+	const handleScrollRight = () => {
+		if (timeLineRef.current) {
+			timeLineRef.current.scrollBy({
+				left: 100,
+				behavior: 'smooth',
+			})
+		}
+	}
+
 	return (
 		<div className={`${styles.ArtistsPageContainer}`}>
 			<div className={`${styles.ArtistsPageTitleWrapper}`}>
@@ -353,27 +373,51 @@ function ArtistsPage() {
 				{/* If we're in TIME mode => show the dynamic timeline */}
 				{sortMode === 'TIME' && timelineYears.length > 0 && (
 					<div className={styles.timelineWrapper}>
-						<div className={styles.timelineContainer}>
-							{timelineYears.map((year) => {
-								const isSelected = selectedYear === year
-								return (
-									<div
-										key={year}
-										className={`${styles.timelineMarker} ${
-											isSelected
-												? styles.selectedMarker
-												: ''
-										}`}
-										onClick={() => setSelectedYear(year)}
-									>
-										<div className={styles.timelineYear}>
-											{year}
+						{/* The horizontally scrollable container */}
+						<div
+							className={styles.timelineScrollArea}
+							ref={timeLineRef}
+						>
+							<div className={styles.timelineContainer}>
+								{timelineYears.map((year) => {
+									const isSelected = selectedYear === year
+									return (
+										<div
+											key={year}
+											className={`${styles.timelineMarker} ${
+												isSelected
+													? styles.selectedMarker
+													: ''
+											}`}
+											onClick={() =>
+												setSelectedYear(year)
+											}
+										>
+											<div
+												className={styles.timelineYear}
+											>
+												{year}
+											</div>
+											<div
+												className={styles.timelineTick}
+											/>
 										</div>
-										<div className={styles.timelineTick} />
-									</div>
-								)
-							})}
+									)
+								})}
+							</div>
 						</div>
+
+						{/* The left arrow */}
+						<button
+							className={`${styles.timelineNavButton} ${styles.leftArrow}`}
+							onClick={handleScrollLeft}
+						></button>
+
+						{/* The right arrow */}
+						<button
+							className={`${styles.timelineNavButton} ${styles.rightArrow}`}
+							onClick={handleScrollRight}
+						></button>
 					</div>
 				)}
 

@@ -5,7 +5,7 @@ import MuseumsPagePopularMuseums from '@components/Sliders/MuseumsPageSliders/Mu
 import MuseumsPageTopSlider from '@components/Sliders/MuseumsPageSliders/MuseumsPageTopSlider.jsx'
 import styles from '@styles/layout/MuseumsPage.module.scss'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { getImageUrl } from '../../../utils/helper.js'
@@ -24,10 +24,15 @@ function MuseumsPage({ baseUrl }) {
 		getMuseumsCount(window.innerWidth),
 	)
 
+	const timeLineRef = useRef(null)
+
 	const [sortMode, setSortMode] = useState('ALL')
 	const [selectedLetter, setSelectedLetter] = useState('')
 	const [lettersMode, setLettersMode] = useState('uk')
 	const [hoveringLettersButton, setHoveringLettersButton] = useState(false)
+
+	const [timelineYears, setTimelineYears] = useState([])
+	const [selectedYear, setSelectedYear] = useState(null)
 
 	function getMuseumsCount(width) {
 		if (width === null || width === undefined) {
@@ -111,6 +116,37 @@ function MuseumsPage({ baseUrl }) {
 		fetchMUseumsProducts()
 	}, [])
 
+	useEffect(() => {
+		if (!museums.length) return // no museums => skip
+
+		let minYear = Infinity
+		let maxYear = -Infinity
+
+		// Find the min and max years from createdAt
+		museums.forEach((museum) => {
+			if (museum.createdAt) {
+				const year = new Date(museum.createdAt).getFullYear()
+				if (year < minYear) minYear = year
+				if (year > maxYear) maxYear = year
+			}
+		})
+
+		// If data had no valid dates, skip
+		if (minYear === Infinity || maxYear === -Infinity) return
+
+		// Build a timeline array in steps, e.g. every 10 years
+		const yearSet = new Set()
+		museums.forEach((museum) => {
+			if (museum.createdAt) {
+				const y = new Date(museum.createdAt).getFullYear()
+				yearSet.add(y)
+			}
+		})
+
+		const distinctYears = Array.from(yearSet).sort((a, b) => a - b)
+		setTimelineYears(distinctYears)
+	}, [museums])
+
 	const handleMuseumClick = (id) => {
 		navigate(`/museum-page/${id}`)
 	}
@@ -124,24 +160,34 @@ function MuseumsPage({ baseUrl }) {
 		setSelectedLetter('')
 	}
 	const handleLettersButtonClick = () => {
-		// If we were "ALL", switch to "LETTERS"
 		if (sortMode === 'ALL') {
 			setSortMode('LETTERS')
 			setSelectedLetter('')
-			// lettersMode is left as is, or toggled — depends on your preference.
-			// Let's actually toggle between 'uk' and 'en' each time user clicks.
-			// setLettersMode((prev) => (prev === 'uk' ? 'en' : 'uk'))
-		}
-		// If we were already "LETTERS", just toggle alphabets
-		else {
+			setSelectedYear(null)
+			// lettersMode toggles each click
+			setLettersMode((prev) => (prev === 'uk' ? 'en' : 'uk'))
+		} else if (sortMode === 'LETTERS') {
+			// Just switch alphabets
 			setLettersMode((prev) => (prev === 'uk' ? 'en' : 'uk'))
 			setSelectedLetter('')
+		} else if (sortMode === 'TIME') {
+			// If currently in TIME mode, let's switch to LETTERS
+			setSortMode('LETTERS')
+			setSelectedLetter('')
+			setSelectedYear(null)
 		}
 	}
 
 	// Called by the slider to pick a letter
 	const handleLetterSelected = (letter) => {
 		setSelectedLetter(letter)
+	}
+
+	// "Час" => switch to TIME mode
+	const handleTimeSortClick = () => {
+		setSortMode('TIME')
+		// Clear letter stuff
+		setSelectedLetter('')
 	}
 
 	// -----------------------
@@ -163,6 +209,24 @@ function MuseumsPage({ baseUrl }) {
 				return firstChar === selectedLetter
 			})
 		}
+	} else if (sortMode === 'TIME') {
+		// Sort by time (descending or ascending).
+		// For example, let's assume newest creators first:
+		displayedMuseums.sort((a, b) => {
+			const dateA = new Date(a.createdAt)
+			const dateB = new Date(b.createdAt)
+			// descending (newest first):
+			return dateB - dateA
+		})
+		// If the user selected a year => filter out those older
+		// or filter however you prefer (>= year, or a range, etc.)
+		if (selectedYear !== null) {
+			displayedMuseums = displayedMuseums.filter((museum) => {
+				const year = new Date(museum.createdAt).getFullYear()
+				// e.g., for “1950” means 1950 <= year < 1960
+				return year >= selectedYear && year < selectedYear + 10
+			})
+		}
 	}
 	// If sortMode === 'ALL', no sorting/filtering
 
@@ -180,6 +244,24 @@ function MuseumsPage({ baseUrl }) {
 		lettersBtnText = hoveringLettersButton ? 'A-Z' : 'А-Я'
 	} else {
 		lettersBtnText = hoveringLettersButton ? 'А-Я' : 'A-Z'
+	}
+
+	const handleScrollLeft = () => {
+		if (timeLineRef.current) {
+			timeLineRef.current.scrollBy({
+				left: -100, // negative => scroll left
+				behavior: 'smooth', // optional for smooth scrolling
+			})
+		}
+	}
+
+	const handleScrollRight = () => {
+		if (timeLineRef.current) {
+			timeLineRef.current.scrollBy({
+				left: 100,
+				behavior: 'smooth',
+			})
+		}
 	}
 
 	return (
@@ -262,6 +344,7 @@ function MuseumsPage({ baseUrl }) {
 
 					<button
 						className={`${styles.ArtistsPageGalleryButtonWhithClock}`}
+						onClick={handleTimeSortClick}
 					>
 						<h3
 							className={`${styles.ArtistsPageGalleryButtonTitle}`}
@@ -280,6 +363,57 @@ function MuseumsPage({ baseUrl }) {
 						/>
 					</button>
 				</div>
+
+				{/* If we're in TIME mode => show the dynamic timeline */}
+				{sortMode === 'TIME' && timelineYears.length > 0 && (
+					<div className={styles.timelineWrapper}>
+						{/* The horizontally scrollable container */}
+						<div
+							className={styles.timelineScrollArea}
+							ref={timeLineRef}
+						>
+							<div className={styles.timelineContainer}>
+								{timelineYears.map((year) => {
+									const isSelected = selectedYear === year
+									return (
+										<div
+											key={year}
+											className={`${styles.timelineMarker} ${
+												isSelected
+													? styles.selectedMarker
+													: ''
+											}`}
+											onClick={() =>
+												setSelectedYear(year)
+											}
+										>
+											<div
+												className={styles.timelineYear}
+											>
+												{year}
+											</div>
+											<div
+												className={styles.timelineTick}
+											/>
+										</div>
+									)
+								})}
+							</div>
+						</div>
+
+						{/* The left arrow */}
+						<button
+							className={`${styles.timelineNavButton} ${styles.leftArrow}`}
+							onClick={handleScrollLeft}
+						></button>
+
+						{/* The right arrow */}
+						<button
+							className={`${styles.timelineNavButton} ${styles.rightArrow}`}
+							onClick={handleScrollRight}
+						></button>
+					</div>
+				)}
 
 				{sortMode === 'LETTERS' && (
 					<AllArtistsPageSearchSlider

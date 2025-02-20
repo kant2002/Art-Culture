@@ -207,6 +207,90 @@
   margin: $responsiveMediumPadding 0 0 0;
 }
 
+/* ARROWS: absolutely positioned in .timelineWrapper */
+.timelineNavButton {
+  position: absolute;
+  top: 50%; // vertically center
+  transform: translateY(-50%);
+
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  z-index: 2; // above the timeline
+}
+
+.leftArrow {
+  left: -25px; // pinned to left side
+  background-image: url("/public/Img/leftBlackArrow.svg");
+  background-repeat: no-repeat;
+}
+
+.rightArrow {
+  right: -50px; // pinned to right side
+  background-image: url("/public/Img/rightBlackArrow.svg");
+  background-repeat: no-repeat;
+}
+
+.timelineWrapper {
+  width: 95%;
+
+  position: relative;
+  /* Hide scrollbar in Webkit browsers */
+}
+
+.timelineScrollArea {
+  overflow-x: auto;
+  overflow-y: hidden; // no vertical scroll if you like
+  -webkit-overflow-scrolling: touch; // smooth iOS scrolling
+
+  /* Hide scrollbars if you want: */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.timelineContainer {
+  display: flex;
+  /* horizontal layout */
+  align-items: flex-start;
+  margin: $responsiveBigPadding 1rem; /* some spacing above */
+}
+
+/* Each year + tick is a "marker" */
+.timelineMarker {
+  position: relative; /* so the tick can be absolutely positioned */
+  margin: 0 $responsiveMediumPadding; /* space between markers */
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* The text for the year */
+.timelineYear {
+  color: gray;
+  font-weight: normal;
+  /* You can add more spacing, e.g. margin-bottom: 5px */
+}
+
+/* The vertical line */
+.timelineTick {
+  position: absolute;
+  top: 1.3em; /* push the line below the text */
+  left: 50%; /* center under the text */
+  width: 2px;
+  height: 15px; /* vertical length of the tick */
+  background-color: black;
+  transform: translateX(-50%);
+}
+
+/* If the marker is "selected", highlight the year differently */
+.selectedMarker .timelineYear {
+  color: red;
+  font-weight: bold;
+}
+
 @media (min-width: 1441px) {
   .MuseumsPageContainer {
     margin: $staticPcTopPadding 0 0 0;
