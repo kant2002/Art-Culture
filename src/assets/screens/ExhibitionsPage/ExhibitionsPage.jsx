@@ -17,7 +17,7 @@ function ExhibitionsPage() {
 	const [error, setError] = useState(null)
 	const [museums, setMuseums] = useState([])
 	const [exhibitions, setExhibitions] = useState([])
-
+	const [filterMode, setFilterMode] = useState('CURRENT')
 	const [visibleExhibitionsCount, setVisibleExhibitionsCount] = useState(
 		getExhibitionsCount(window.innerWidth),
 	)
@@ -87,6 +87,51 @@ function ExhibitionsPage() {
 	const handleAllExhibitionsClick = () => {
 		navigate('/all-exhibitions-page')
 	}
+
+	const handleShowCurrent = () => {
+		setFilterMode('CURRENT')
+	}
+	const handleShowFuture = () => {
+		setFilterMode('FUTURE')
+	}
+	const handleShowPast = () => {
+		setFilterMode('PAST')
+	}
+
+	// 2) Filter exhibitions based on filterMode
+	let displayedExhibitions = [...exhibitions]
+	const now = new Date()
+
+	if (filterMode === 'CURRENT') {
+		// start <= now <= end
+		displayedExhibitions = displayedExhibitions.filter((ex) => {
+			if (!ex.startDate || !ex.endDate) return false
+			const start = new Date(ex.startDate)
+			const end = new Date(ex.endDate)
+			return start <= now && now <= end
+		})
+	} else if (filterMode === 'FUTURE') {
+		// start > now
+		displayedExhibitions = displayedExhibitions.filter((ex) => {
+			if (!ex.startDate) return false
+			const start = new Date(ex.startDate)
+			return start > now
+		})
+	} else if (filterMode === 'PAST') {
+		// end < now
+		displayedExhibitions = displayedExhibitions.filter((ex) => {
+			if (!ex.endDate) return false
+			const end = new Date(ex.endDate)
+			return end < now
+		})
+	}
+
+	// Then limit by visibleExhibitionsCount
+	displayedExhibitions = displayedExhibitions.slice(
+		0,
+		visibleExhibitionsCount,
+	)
+
 	return (
 		<div className={`${styles.MuseumsPageContainer}`}>
 			<div className={`${styles.MuseumsPageTitleContainer}`}>
@@ -107,11 +152,12 @@ function ExhibitionsPage() {
 				</div>
 
 				<div className={`${styles.ArtistsPageGalleryButtonsWrapper}`}>
-					<button className={`${styles.ArtistsPageGalleryButton}`}>
-						<h3
-							className={`${styles.ArtistsPageGalleryButtonTitle}`}
-						>
-							{t('Усі')}
+					<button
+						className={`${styles.ArtistsPageGalleryButton}`}
+						onClick={handleShowCurrent}
+					>
+						<h3 className={styles.ArtistsPageGalleryButtonTitle}>
+							{t('Поточні')}
 						</h3>
 					</button>
 
@@ -121,11 +167,12 @@ function ExhibitionsPage() {
 						|
 					</p>
 
-					<button className={`${styles.ArtistsPageGalleryButton}`}>
-						<h3
-							className={`${styles.ArtistsPageGalleryButtonTitle}`}
-						>
-							{t('А-Я')}
+					<button
+						className={`${styles.ArtistsPageGalleryButton}`}
+						onClick={handleShowFuture}
+					>
+						<h3 className={styles.ArtistsPageGalleryButtonTitle}>
+							{t('Майбутні')}
 						</h3>
 					</button>
 
@@ -137,14 +184,13 @@ function ExhibitionsPage() {
 
 					<button
 						className={`${styles.ArtistsPageGalleryButtonWhithClock}`}
+						onClick={handleShowPast}
 					>
-						<h3
-							className={`${styles.ArtistsPageGalleryButtonTitle}`}
-						>
-							{t('Час')}
+						<h3 className={styles.ArtistsPageGalleryButtonTitle}>
+							{t('Попередні')}
 						</h3>
 
-						<img
+						{/* <img
 							className={`${styles.ArtistsPageGalleryButtonClock}`}
 							src={'/Img/clock.svg'}
 							alt="Слідкуйте за мистецтвом!"
@@ -152,7 +198,7 @@ function ExhibitionsPage() {
 								e.target.onerror = null
 								e.target.src = '/Img/newsCardERROR.jpg'
 							}}
-						/>
+						/> */}
 					</button>
 				</div>
 
@@ -163,7 +209,7 @@ function ExhibitionsPage() {
 						</div>
 					) : error ? (
 						<div className={styles.error}>{error}</div>
-					) : exhibitions.length === 0 ? (
+					) : displayedExhibitions.length === 0 ? (
 						<div className={styles.noCreators}>
 							{t('Немає виставок для відображення.')}
 						</div>
@@ -171,65 +217,62 @@ function ExhibitionsPage() {
 						<div
 							className={`${styles.ArtistsPageGalleryInnerWrapper}`}
 						>
-							{exhibitions
-								.slice(0, visibleExhibitionsCount)
-								.map((exhibition, index) => {
-									const featuredMediaUrl =
-										exhibition.images &&
-										exhibition.images.length > 0
-											? getImageUrl(
-													exhibition.images[0]
-														.imageUrl,
-													'/Img/halfNewsCard.jpg',
-												)
-											: '/Img/halfNewsCard.jpg'
-									console.log(
-										'Витягнуте медіа:',
-										featuredMediaUrl,
-									)
+							{displayedExhibitions.map((exhibition, index) => {
+								const featuredMediaUrl =
+									exhibition.images &&
+									exhibition.images.length > 0
+										? getImageUrl(
+												exhibition.images[0].imageUrl,
+												'/Img/halfNewsCard.jpg',
+											)
+										: '/Img/halfNewsCard.jpg'
+								console.log(
+									'Витягнуте медіа:',
+									featuredMediaUrl,
+								)
 
-									return (
+								return (
+									<div
+										key={exhibition.id}
+										className={`${styles.ArtistsPageGalleryCardWrapper}`}
+									>
 										<div
-											key={exhibition.id}
-											className={`${styles.ArtistsPageGalleryCardWrapper}`}
+											className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}
+											onClick={() =>
+												handleExhibitionClick(
+													exhibition.id,
+												)
+											}
+											style={{ cursor: 'pointer' }}
 										>
-											<div
-												className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}
-												onClick={() =>
-													handleExhibitionClick(
-														exhibition.id,
-													)
-												}
-												style={{ cursor: 'pointer' }}
-											>
-												<img
-													className={`${styles.ArtistsPageGalleryCardPicture}`}
-													src={featuredMediaUrl}
-													alt={`Фото митця ${(<TranslatedContent en={exhibition.title_en} uk={exhibition.title_uk} maxLength={50} />)}`}
-													loading="lazy"
-													onError={(e) => {
-														e.target.onerror = null
-														e.target.src =
-															'/Img/ArtistPhoto.jpg'
-													}}
-												/>
-											</div>
-											<div
-												className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}
-											>
-												<p
-													className={`${styles.ArtistsPageGalleryCardDescription}`}
-												>
-													<TranslatedContent
-														en={exhibition.title_en}
-														uk={exhibition.title_uk}
-														maxLength={50}
-													/>
-												</p>
-											</div>
+											<img
+												className={`${styles.ArtistsPageGalleryCardPicture}`}
+												src={featuredMediaUrl}
+												alt={`Фото митця ${(<TranslatedContent en={exhibition.title_en} uk={exhibition.title_uk} maxLength={50} />)}`}
+												loading="lazy"
+												onError={(e) => {
+													e.target.onerror = null
+													e.target.src =
+														'/Img/ArtistPhoto.jpg'
+												}}
+											/>
 										</div>
-									)
-								})}
+										<div
+											className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}
+										>
+											<p
+												className={`${styles.ArtistsPageGalleryCardDescription}`}
+											>
+												<TranslatedContent
+													en={exhibition.title_en}
+													uk={exhibition.title_uk}
+													maxLength={50}
+												/>
+											</p>
+										</div>
+									</div>
+								)
+							})}
 						</div>
 					)}
 				</div>
