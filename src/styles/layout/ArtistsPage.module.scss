@@ -259,6 +259,18 @@
   text-align: center;
 }
 
+.timelineWrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; // for smooth scrolling on iOS
+  /* Optional: Hide scrollbar in Firefox & IE */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  /* Hide scrollbar in Webkit browsers */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 /* Container: left-aligned horizontal list of markers */
 .timelineContainer {
   display: flex; /* horizontal layout */

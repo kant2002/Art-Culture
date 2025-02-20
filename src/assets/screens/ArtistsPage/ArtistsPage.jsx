@@ -352,24 +352,28 @@ function ArtistsPage() {
 
 				{/* If we're in TIME mode => show the dynamic timeline */}
 				{sortMode === 'TIME' && timelineYears.length > 0 && (
-					<div className={styles.timelineContainer}>
-						{timelineYears.map((year) => {
-							const isSelected = selectedYear === year
-							return (
-								<div
-									key={year}
-									className={`${styles.timelineMarker} ${
-										isSelected ? styles.selectedMarker : ''
-									}`}
-									onClick={() => setSelectedYear(year)}
-								>
-									<div className={styles.timelineYear}>
-										{year}
+					<div className={styles.timelineWrapper}>
+						<div className={styles.timelineContainer}>
+							{timelineYears.map((year) => {
+								const isSelected = selectedYear === year
+								return (
+									<div
+										key={year}
+										className={`${styles.timelineMarker} ${
+											isSelected
+												? styles.selectedMarker
+												: ''
+										}`}
+										onClick={() => setSelectedYear(year)}
+									>
+										<div className={styles.timelineYear}>
+											{year}
+										</div>
+										<div className={styles.timelineTick} />
 									</div>
-									<div className={styles.timelineTick} />
-								</div>
-							)
-						})}
+								)
+							})}
+						</div>
 					</div>
 				)}
 
