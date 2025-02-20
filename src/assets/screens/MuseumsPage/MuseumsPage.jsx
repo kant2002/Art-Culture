@@ -1,15 +1,16 @@
 import AllMuseumsMap from '@components/Blocks/AllMuseumsMap.jsx'
-import TranslatedContent from '@components/Blocks/TranslatedContent.jsx'
+import AllArtistsPageSearchSlider from '@components/Sliders/AllArtistsPageLettersSortSlider/AllArtistsPageSearchSlider'
 import MuseumsPageNewsMuseum from '@components/Sliders/MuseumsPageSliders/MuseumsPageNewsMuseum.jsx'
 import MuseumsPagePopularMuseums from '@components/Sliders/MuseumsPageSliders/MuseumsPagePopularMuseums.jsx'
 import MuseumsPageTopSlider from '@components/Sliders/MuseumsPageSliders/MuseumsPageTopSlider.jsx'
 import styles from '@styles/layout/MuseumsPage.module.scss'
 import axios from 'axios'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { getImageUrl } from '../../../utils/helper.js'
-import ModalWindow from '../../components/Blocks/ModalWindow'
+
+import { englishLetters, ukrainianLetters } from '../../../utils/constants'
 
 function MuseumsPage({ baseUrl }) {
 	const { t } = useTranslation()
@@ -17,17 +18,16 @@ function MuseumsPage({ baseUrl }) {
 	const navigate = useNavigate()
 	const [error, setError] = useState(null)
 	const [museums, setMuseums] = useState([])
-	const [products, setProducts] = useState([])
-	const [isModalOpen, setIsModalOpen] = useState(false)
-	const [selectedProduct, setSelectedProduct] = useState(null)
-	const [selectedMuseum, setSelectedMuseum] = useState(null)
-	const [selectedProductImages, setSelectedProductImages] = useState([])
-	const [zoomStates, setZoomStates] = useState([])
-	const [currentSlide, setCurrentSlide] = useState(0)
-	const [preloading, setPreloading] = useState(false)
+	const [product, setProducts] = useState([])
+
 	const [visibleMuseumsCount, setVisibleMuseumsCount] = useState(
 		getMuseumsCount(window.innerWidth),
 	)
+
+	const [sortMode, setSortMode] = useState('ALL')
+	const [selectedLetter, setSelectedLetter] = useState('')
+	const [lettersMode, setLettersMode] = useState('uk')
+	const [hoveringLettersButton, setHoveringLettersButton] = useState(false)
 
 	function getMuseumsCount(width) {
 		if (width === null || width === undefined) {
@@ -112,63 +112,74 @@ function MuseumsPage({ baseUrl }) {
 	}, [])
 
 	const handleMuseumClick = (id) => {
-		navigate(`/Museums/${id}`)
+		navigate(`/museum-page/${id}`)
 	}
 
-	const handleShowAllExhibits = () => {
-		navigate('/all-exhibits-product-page')
+	const handleAllMuseumsPageClick = () => {
+		navigate('/all-museums-page')
 	}
-	const preloadImages = useCallback(
-		async (images) => {
-			const promises = images.map(
-				(img) =>
-					new Promise((resolve) => {
-						const image = new Image()
-						image.src = `${baseUrl}${img.imageUrl}`
-						image.onload = resolve
-						image.onerror = resolve
-					}),
-			)
-			await Promise.all(promises)
-		},
-		[baseUrl],
-	)
 
-	const handleOverviewClick = async (product) => {
-		if (product.images && product.images.length > 0) {
-			setPreloading(true)
-			await preloadImages(product.images)
-			setPreloading(false)
-			setSelectedProductImages(product.images)
-			setSelectedProduct(product)
-			setSelectedMuseum(product.author || {}) // Adjust based on actual data structure
-			setZoomStates(
-				product.images.map(() => ({
-					zoomLevel: 1,
-					isZoomed: false,
-					cursorPos: { x: 0, y: 0 },
-					showLens: false,
-				})),
-			)
-			setCurrentSlide(0)
-			setIsModalOpen(true)
-		} else {
-			// If no images, optionally handle this case
-			setSelectedProductImages([])
-			setSelectedProduct(null)
-			setSelectedMuseum(null)
-			setZoomStates([])
-			setIsModalOpen(false)
+	const handleShowAll = () => {
+		setSortMode('ALL')
+		setSelectedLetter('')
+	}
+	const handleLettersButtonClick = () => {
+		// If we were "ALL", switch to "LETTERS"
+		if (sortMode === 'ALL') {
+			setSortMode('LETTERS')
+			setSelectedLetter('')
+			// lettersMode is left as is, or toggled — depends on your preference.
+			// Let's actually toggle between 'uk' and 'en' each time user clicks.
+			// setLettersMode((prev) => (prev === 'uk' ? 'en' : 'uk'))
+		}
+		// If we were already "LETTERS", just toggle alphabets
+		else {
+			setLettersMode((prev) => (prev === 'uk' ? 'en' : 'uk'))
+			setSelectedLetter('')
 		}
 	}
-	// Handler to close the GalleryModal
-	const handleCloseModal = () => {
-		setIsModalOpen(false)
-		setSelectedProductImages([])
-		setSelectedProduct(null)
-		setSelectedMuseum(null)
-		setZoomStates([])
-		setCurrentSlide(0)
+
+	// Called by the slider to pick a letter
+	const handleLetterSelected = (letter) => {
+		setSelectedLetter(letter)
+	}
+
+	// -----------------------
+	// DERIVED array
+	// -----------------------
+	let displayedMuseums = [...museums]
+
+	if (sortMode === 'LETTERS') {
+		// Sort by the correct locale
+		const locale = lettersMode === 'uk' ? 'uk' : 'en'
+		displayedMuseums.sort((a, b) =>
+			(a.title || '').localeCompare(b.title || '', locale),
+		)
+
+		// Filter by selected letter if any
+		if (selectedLetter) {
+			displayedMuseums = displayedMuseums.filter((museum) => {
+				const firstChar = museum.title?.[0]?.toUpperCase() || ''
+				return firstChar === selectedLetter
+			})
+		}
+	}
+	// If sortMode === 'ALL', no sorting/filtering
+
+	// Limit to visible
+	displayedMuseums = displayedMuseums.slice(0, visibleMuseumsCount)
+
+	// Decide what letters to show
+	const letters = lettersMode === 'uk' ? ukrainianLetters : englishLetters
+
+	// Decide the letters button text
+	//   - If lettersMode is 'uk', by default we show "А-Я", but on hover we show "A-Z".
+	//   - If lettersMode is 'en', by default we show "A-Z", but on hover we show "А-Я".
+	let lettersBtnText = ''
+	if (lettersMode === 'uk') {
+		lettersBtnText = hoveringLettersButton ? 'A-Z' : 'А-Я'
+	} else {
+		lettersBtnText = hoveringLettersButton ? 'А-Я' : 'A-Z'
 	}
 
 	return (
@@ -184,12 +195,15 @@ function MuseumsPage({ baseUrl }) {
 			<div className={`${styles.ArtistsPageGalleryContainer}`}>
 				<div className={`${styles.ArtistsPageGalleryTitleWrapper}`}>
 					<h2 className={`${styles.ArtistsPageGalleryTitle}`}>
-						{t('Перегляд.')} &#8243;{t('ЕКСПОНАТИ')}&#8243;
+						{t('Перегляд.')} &#8243;{t('МУЗЕЇ')}&#8243;
 					</h2>
 				</div>
 
 				<div className={`${styles.ArtistsPageGalleryButtonsWrapper}`}>
-					<button className={`${styles.ArtistsPageGalleryButton}`}>
+					<button
+						className={`${styles.ArtistsPageGalleryButton}`}
+						onClick={handleShowAll}
+					>
 						<h3
 							className={`${styles.ArtistsPageGalleryButtonTitle}`}
 						>
@@ -202,15 +216,44 @@ function MuseumsPage({ baseUrl }) {
 					>
 						|
 					</p>
-
-					<button className={`${styles.ArtistsPageGalleryButton}`}>
-						<h3
-							className={`${styles.ArtistsPageGalleryButtonTitle}`}
+					<div
+						onMouseEnter={() => setHoveringLettersButton(true)}
+						onMouseLeave={() => setHoveringLettersButton(false)}
+						style={{
+							position: 'relative',
+							display: 'inline-block',
+						}}
+					>
+						<button
+							className={`${styles.ArtistsPageGalleryButton}`}
+							onClick={handleLettersButtonClick}
 						>
-							{t('А-Я')}
-						</h3>
-					</button>
-
+							<h3
+								className={`${styles.ArtistsPageGalleryButtonTitle}`}
+							>
+								{lettersBtnText}
+							</h3>
+						</button>
+						{hoveringLettersButton && (
+							<div
+								style={{
+									position: 'absolute',
+									bottom: '105%', // place tooltip above the button
+									left: '50%',
+									transform: 'translateX(-50%)',
+									backgroundColor: '#333',
+									color: '#fff',
+									padding: '4px 8px',
+									borderRadius: '4px',
+									whiteSpace: 'nowrap',
+									fontSize: '0.85rem',
+									zIndex: 9999,
+								}}
+							>
+								{t('Натисніть, щоб вибрати мову')}
+							</div>
+						)}
+					</div>
 					<p
 						className={`${styles.ArtistsPageGalleryButtonSeparator}`}
 					>
@@ -238,6 +281,14 @@ function MuseumsPage({ baseUrl }) {
 					</button>
 				</div>
 
+				{sortMode === 'LETTERS' && (
+					<AllArtistsPageSearchSlider
+						letters={letters}
+						onLetterSelected={handleLetterSelected}
+						selectedLetter={selectedLetter}
+					/>
+				)}
+
 				<div className={`${styles.ArtistsPageGalleryCardsWrapper}`}>
 					{loading ? (
 						<div className={styles.loading}>
@@ -245,70 +296,56 @@ function MuseumsPage({ baseUrl }) {
 						</div>
 					) : error ? (
 						<div className={styles.error}>{error}</div>
-					) : !products || products.length === 0 ? (
+					) : displayedMuseums.length === 0 ? (
 						<div className={styles.noCreators}>
-							{t('Немає експонатів для відображення.')}
+							{t('Немає музеїв для відображення.')}
 						</div>
 					) : (
 						<div
 							className={`${styles.ArtistsPageGalleryInnerWrapper}`}
 						>
-							{products
-								.slice(0, visibleMuseumsCount)
-								.map((product) => {
-									const featuredMediaUrl =
-										product.images &&
-										product.images.length > 0
-											? getImageUrl(
-													product.images[0].imageUrl,
-													'/Img/halfNewsCard.jpg',
-												)
-											: '/Img/halfNewsCard.jpg'
-									console.log(
-										'Витягнуте медіа:',
-										featuredMediaUrl,
-									)
+							{displayedMuseums.map((museum) => {
+								const featuredMediaUrl = getImageUrl(
+									museum.images,
+									'/Img/halfNewsCard.jpg',
+								)
 
-									return (
+								return (
+									<div
+										key={museum.id}
+										className={`${styles.ArtistsPageGalleryCardWrapper}`}
+									>
 										<div
-											key={product.id}
-											className={`${styles.ArtistsPageGalleryCardWrapper}`}
+											className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}
+											style={{ cursor: 'pointer' }}
+											onClick={() =>
+												handleMuseumClick(museum.id)
+											}
 										>
-											<div
-												className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}
-												onClick={() =>
-													handleOverviewClick(product)
-												}
-												style={{ cursor: 'pointer' }}
-											>
-												<img
-													className={`${styles.ArtistsPageGalleryCardPicture}`}
-													src={featuredMediaUrl}
-													alt={`Фото митця ${(<TranslatedContent en={product.title_en} uk={product.title_uk} maxLength={150} />)}`}
-													loading="lazy"
-													onError={(e) => {
-														e.target.onerror = null
-														e.target.src =
-															'/Img/ArtistPhoto.jpg'
-													}}
-												/>
-											</div>
-											<div
-												className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}
-											>
-												<p
-													className={`${styles.ArtistsPageGalleryCardDescription}`}
-												>
-													<TranslatedContent
-														en={product.title_en}
-														uk={product.title_uk}
-														maxLength={150}
-													/>
-												</p>
-											</div>
+											<img
+												className={`${styles.ArtistsPageGalleryCardPicture}`}
+												src={featuredMediaUrl}
+												alt={'Фото музею'}
+												loading="lazy"
+												onError={(e) => {
+													e.target.onerror = null
+													e.target.src =
+														'/Img/ArtistPhoto.jpg'
+												}}
+											/>
 										</div>
-									)
-								})}
+										<div
+											className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}
+										>
+											<p
+												className={`${styles.ArtistsPageGalleryCardDescription}`}
+											>
+												{museum.title}
+											</p>
+										</div>
+									</div>
+								)
+							})}
 						</div>
 					)}
 				</div>
@@ -321,9 +358,9 @@ function MuseumsPage({ baseUrl }) {
 					>
 						<p
 							className={`${styles.ArtistsPageGalleryAllArtistsButtonText}`}
-							onClick={handleShowAllExhibits}
+							onClick={handleAllMuseumsPageClick}
 						>
-							{t('Всі експонати')}
+							{t('Всі музеї')}
 						</p>
 						<img
 							className={`${styles.ArtistsPageGalleryAllArtistsButtonArrow}`}
@@ -350,19 +387,6 @@ function MuseumsPage({ baseUrl }) {
 					museums={museums}
 				/>
 			</div>
-			<ModalWindow
-				isOpen={isModalOpen}
-				onClose={handleCloseModal}
-				selectedProduct={selectedProduct}
-				selectedCreator={selectedMuseum}
-				selectedProductImages={selectedProductImages}
-				zoomStates={zoomStates}
-				setZoomStates={setZoomStates}
-				currentSlide={currentSlide}
-				setCurrentSlide={setCurrentSlide}
-				baseUrl={baseUrl}
-				preloading={preloading}
-			/>
 		</div>
 	)
 }

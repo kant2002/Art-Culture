@@ -259,6 +259,43 @@
   text-align: center;
 }
 
+/* Container: left-aligned horizontal list of markers */
+.timelineContainer {
+  display: flex; /* horizontal layout */
+  align-items: flex-start;
+  margin: $responsiveBigPadding 0; /* some spacing above */
+}
+
+/* Each year + tick is a "marker" */
+.timelineMarker {
+  position: relative; /* so the tick can be absolutely positioned */
+  margin: 0 $responsiveMediumPadding; /* space between markers */
+  cursor: pointer;
+}
+
+/* The text for the year */
+.timelineYear {
+  color: gray;
+  font-weight: normal;
+  /* You can add more spacing, e.g. margin-bottom: 5px */
+}
+
+/* The vertical line */
+.timelineTick {
+  position: absolute;
+  top: 1.3em; /* push the line below the text */
+  left: 50%; /* center under the text */
+  width: 2px;
+  height: 15px; /* vertical length of the tick */
+  background-color: black;
+}
+
+/* If the marker is "selected", highlight the year differently */
+.selectedMarker .timelineYear {
+  color: red;
+  font-weight: bold;
+}
+
 @media (min-width: 1441px) {
   .ArtistsPageContainer {
     // главный контейнер

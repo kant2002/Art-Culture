@@ -1,4 +1,5 @@
 import styles from '@/styles/layout/ArtistsPage.module.scss'
+import AllArtistsPageSearchSlider from '@components/Sliders/AllArtistsPageLettersSortSlider/AllArtistsPageSearchSlider'
 import ArtistsPageNewsArtistsSlider from '@components/Sliders/ArtistsPageSliders/ArtistsPageNewsArtistsSlider.jsx'
 import MainPopularArtistsSlider from '@components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.jsx'
 import searchStyle from '@styles/layout/ArtistsPage.module.scss'
@@ -6,6 +7,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import { englishLetters, ukrainianLetters } from '../../../utils/constants'
 import { getImageUrl } from '../../../utils/helper.js'
 import Search from '../Search/Search'
 
@@ -19,6 +21,15 @@ function ArtistsPage() {
 	const [visibleCreatorsCount, setVisibleCreatorsCount] = useState(
 		getCreatorsCount(window.innerWidth),
 	)
+
+	// ADD sortMode state: "ALL" or "ALPHABETICAL"
+	const [sortMode, setSortMode] = useState('ALL')
+	const [selectedLetter, setSelectedLetter] = useState()
+	const [lettersMode, setLettersMode] = useState('uk')
+	const [hoveringLettersButton, setHoveringLettersButton] = useState(false)
+
+	const [timelineYears, setTimelineYears] = useState([])
+	const [selectedYear, setSelectedYear] = useState(null)
 
 	function getCreatorsCount(width) {
 		if (width === null || width === undefined) {
@@ -77,12 +88,136 @@ function ArtistsPage() {
 		fetchCreator()
 	}, [])
 
+	useEffect(() => {
+		if (!creators.length) return // no creators => skip
+
+		let minYear = Infinity
+		let maxYear = -Infinity
+
+		// Find the min and max years from createdAt
+		creators.forEach((creator) => {
+			if (creator.createdAt) {
+				const year = new Date(creator.createdAt).getFullYear()
+				if (year < minYear) minYear = year
+				if (year > maxYear) maxYear = year
+			}
+		})
+
+		// If data had no valid dates, skip
+		if (minYear === Infinity || maxYear === -Infinity) return
+
+		// Build a timeline array in steps, e.g. every 10 years
+		const yearSet = new Set()
+		creators.forEach((creator) => {
+			if (creator.createdAt) {
+				const y = new Date(creator.createdAt).getFullYear()
+				yearSet.add(y)
+			}
+		})
+
+		const distinctYears = Array.from(yearSet).sort((a, b) => a - b)
+		setTimelineYears(distinctYears)
+	}, [creators])
+
 	const handleAuthorPreviewClick = (id) => {
 		navigate(`/artist/${id}`)
 	}
 
 	const handleAllAuthorsClick = () => {
 		navigate('/all-artists-page')
+	}
+
+	const handleShowAll = () => {
+		setSortMode('ALL')
+		setSelectedLetter('')
+		setSelectedYear(null)
+	}
+	const handleLettersButtonClick = () => {
+		if (sortMode === 'ALL') {
+			setSortMode('LETTERS')
+			setSelectedLetter('')
+			setSelectedYear(null)
+			// lettersMode toggles each click
+			setLettersMode((prev) => (prev === 'uk' ? 'en' : 'uk'))
+		} else if (sortMode === 'LETTERS') {
+			// Just switch alphabets
+			setLettersMode((prev) => (prev === 'uk' ? 'en' : 'uk'))
+			setSelectedLetter('')
+		} else if (sortMode === 'TIME') {
+			// If currently in TIME mode, let's switch to LETTERS
+			setSortMode('LETTERS')
+			setSelectedLetter('')
+			setSelectedYear(null)
+		}
+	}
+
+	// Called by the slider to pick a letter
+	const handleLetterSelected = (letter) => {
+		setSelectedLetter(letter)
+	}
+
+	// "Час" => switch to TIME mode
+	const handleTimeSortClick = () => {
+		setSortMode('TIME')
+		// Clear letter stuff
+		setSelectedLetter('')
+	}
+
+	// -----------------------
+	// DERIVED array
+	// -----------------------
+	let displayedCreators = [...creators]
+
+	if (sortMode === 'LETTERS') {
+		// Sort by the correct locale
+		const locale = lettersMode === 'uk' ? 'uk' : 'en'
+		displayedCreators.sort((a, b) =>
+			(a.title || '').localeCompare(b.title || '', locale),
+		)
+
+		// Filter by selected letter if any
+		if (selectedLetter) {
+			displayedCreators = displayedCreators.filter((creator) => {
+				const firstChar = creator.title?.[0]?.toUpperCase() || ''
+				return firstChar === selectedLetter
+			})
+		}
+	} else if (sortMode === 'TIME') {
+		// Sort by time (descending or ascending).
+		// For example, let's assume newest creators first:
+		displayedCreators.sort((a, b) => {
+			const dateA = new Date(a.createdAt)
+			const dateB = new Date(b.createdAt)
+			// descending (newest first):
+			return dateB - dateA
+		})
+		// If the user selected a year => filter out those older
+		// or filter however you prefer (>= year, or a range, etc.)
+		if (selectedYear !== null) {
+			displayedCreators = displayedCreators.filter((creator) => {
+				const year = new Date(creator.createdAt).getFullYear()
+				// e.g., for “1950” means 1950 <= year < 1960
+				return year >= selectedYear && year < selectedYear + 10
+			})
+		}
+	}
+
+	// If sortMode === 'ALL', no sorting/filtering
+
+	// Limit to visible
+	displayedCreators = displayedCreators.slice(0, visibleCreatorsCount)
+
+	// Decide what letters to show
+	const letters = lettersMode === 'uk' ? ukrainianLetters : englishLetters
+
+	// Decide the letters button text
+	//   - If lettersMode is 'uk', by default we show "А-Я", but on hover we show "A-Z".
+	//   - If lettersMode is 'en', by default we show "A-Z", but on hover we show "А-Я".
+	let lettersBtnText = ''
+	if (lettersMode === 'uk') {
+		lettersBtnText = hoveringLettersButton ? 'A-Z' : 'А-Я'
+	} else {
+		lettersBtnText = hoveringLettersButton ? 'А-Я' : 'A-Z'
 	}
 
 	return (
@@ -120,6 +255,7 @@ function ArtistsPage() {
 			<Search
 				className={searchStyle.ArtistsPageArtistsSearchWrapper}
 				searchInput={searchStyle.ArtistsPageArtistsSearchInput}
+				placeholderName={t('Пошук митців')}
 			/>
 
 			<ArtistsPageNewsArtistsSlider />
@@ -132,7 +268,10 @@ function ArtistsPage() {
 				</div>
 
 				<div className={`${styles.ArtistsPageGalleryButtonsWrapper}`}>
-					<button className={`${styles.ArtistsPageGalleryButton}`}>
+					<button
+						className={`${styles.ArtistsPageGalleryButton}`}
+						onClick={handleShowAll}
+					>
 						<h3
 							className={`${styles.ArtistsPageGalleryButtonTitle}`}
 						>
@@ -145,15 +284,44 @@ function ArtistsPage() {
 					>
 						|
 					</p>
-
-					<button className={`${styles.ArtistsPageGalleryButton}`}>
-						<h3
-							className={`${styles.ArtistsPageGalleryButtonTitle}`}
+					<div
+						onMouseEnter={() => setHoveringLettersButton(true)}
+						onMouseLeave={() => setHoveringLettersButton(false)}
+						style={{
+							position: 'relative',
+							display: 'inline-block',
+						}}
+					>
+						<button
+							className={`${styles.ArtistsPageGalleryButton}`}
+							onClick={handleLettersButtonClick}
 						>
-							{t('А-Я')}
-						</h3>
-					</button>
-
+							<h3
+								className={`${styles.ArtistsPageGalleryButtonTitle}`}
+							>
+								{lettersBtnText}
+							</h3>
+						</button>
+						{hoveringLettersButton && (
+							<div
+								style={{
+									position: 'absolute',
+									bottom: '105%', // place tooltip above the button
+									left: '50%',
+									transform: 'translateX(-50%)',
+									backgroundColor: '#333',
+									color: '#fff',
+									padding: '4px 8px',
+									borderRadius: '4px',
+									whiteSpace: 'nowrap',
+									fontSize: '0.85rem',
+									zIndex: 9999,
+								}}
+							>
+								{t('Натисніть, щоб вибрати мову')}
+							</div>
+						)}
+					</div>
 					<p
 						className={`${styles.ArtistsPageGalleryButtonSeparator}`}
 					>
@@ -162,6 +330,7 @@ function ArtistsPage() {
 
 					<button
 						className={`${styles.ArtistsPageGalleryButtonWhithClock}`}
+						onClick={handleTimeSortClick}
 					>
 						<h3
 							className={`${styles.ArtistsPageGalleryButtonTitle}`}
@@ -181,6 +350,37 @@ function ArtistsPage() {
 					</button>
 				</div>
 
+				{/* If we're in TIME mode => show the dynamic timeline */}
+				{sortMode === 'TIME' && timelineYears.length > 0 && (
+					<div className={styles.timelineContainer}>
+						{timelineYears.map((year) => {
+							const isSelected = selectedYear === year
+							return (
+								<div
+									key={year}
+									className={`${styles.timelineMarker} ${
+										isSelected ? styles.selectedMarker : ''
+									}`}
+									onClick={() => setSelectedYear(year)}
+								>
+									<div className={styles.timelineYear}>
+										{year}
+									</div>
+									<div className={styles.timelineTick} />
+								</div>
+							)
+						})}
+					</div>
+				)}
+
+				{sortMode === 'LETTERS' && (
+					<AllArtistsPageSearchSlider
+						letters={letters}
+						onLetterSelected={handleLetterSelected}
+						selectedLetter={selectedLetter}
+					/>
+				)}
+
 				<div className={`${styles.ArtistsPageGalleryCardsWrapper}`}>
 					{loading ? (
 						<div className={styles.loading}>
@@ -188,7 +388,7 @@ function ArtistsPage() {
 						</div>
 					) : error ? (
 						<div className={styles.error}>{error}</div>
-					) : creators.length === 0 ? (
+					) : displayedCreators.length === 0 ? (
 						<div className={styles.noCreators}>
 							{t('Немає митців для відображення.')}
 						</div>
@@ -196,52 +396,50 @@ function ArtistsPage() {
 						<div
 							className={`${styles.ArtistsPageGalleryInnerWrapper}`}
 						>
-							{creators
-								.slice(0, visibleCreatorsCount)
-								.map((creator) => {
-									const featuredMediaUrl = getImageUrl(
-										creator.images,
-										'/Img/ArtistPhoto.jpg',
-									)
+							{displayedCreators.map((creator) => {
+								const featuredMediaUrl = getImageUrl(
+									creator.images,
+									'/Img/ArtistPhoto.jpg',
+								)
 
-									return (
+								return (
+									<div
+										key={creator.id}
+										className={`${styles.ArtistsPageGalleryCardWrapper}`}
+									>
 										<div
-											key={creator.id}
-											className={`${styles.ArtistsPageGalleryCardWrapper}`}
+											className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}
+											onClick={() =>
+												handleAuthorPreviewClick(
+													creator.id,
+												)
+											}
+											style={{ cursor: 'pointer' }}
 										>
-											<div
-												className={`${styles.ArtistsPageGalleryCardPictureWrapper}`}
-												onClick={() =>
-													handleAuthorPreviewClick(
-														creator.id,
-													)
-												}
-												style={{ cursor: 'pointer' }}
-											>
-												<img
-													className={`${styles.ArtistsPageGalleryCardPicture}`}
-													src={featuredMediaUrl}
-													alt={`Фото митця ${creator.title}`}
-													loading="lazy"
-													onError={(e) => {
-														e.target.onerror = null
-														e.target.src =
-															'/Img/ArtistPhoto.jpg'
-													}}
-												/>
-											</div>
-											<div
-												className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}
-											>
-												<p
-													className={`${styles.ArtistsPageGalleryCardDescription}`}
-												>
-													{creator.title}
-												</p>
-											</div>
+											<img
+												className={`${styles.ArtistsPageGalleryCardPicture}`}
+												src={featuredMediaUrl}
+												alt={`Фото митця ${creator.title}`}
+												loading="lazy"
+												onError={(e) => {
+													e.target.onerror = null
+													e.target.src =
+														'/Img/ArtistPhoto.jpg'
+												}}
+											/>
 										</div>
-									)
-								})}
+										<div
+											className={`${styles.ArtistsPageGalleryCardDescriptionWrapper}`}
+										>
+											<p
+												className={`${styles.ArtistsPageGalleryCardDescription}`}
+											>
+												{creator.title}
+											</p>
+										</div>
+									</div>
+								)
+							})}
 						</div>
 					)}
 				</div>

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import styles from '../../../styles/screen/Search/Search.module.scss'
 import API from '../../../utils/api'
 
-function SearchResult({ className, searchInput, styleInput }) {
+function SearchResult({ className, searchInput, styleInput, placeholderName }) {
 	const { t } = useTranslation()
 	const [searchQuery, setSearchQuery] = useState('')
 	const [results, setResults] = useState({
@@ -224,7 +224,7 @@ function SearchResult({ className, searchInput, styleInput }) {
 				style={styleInput}
 				value={searchQuery}
 				onChange={handleSearchChange}
-				placeholder={t('Пошук') || 'Пошук...'}
+				placeholder={placeholderName || t('Пошук')}
 			/>
 
 			{/* Filter Controls */}
@@ -472,6 +472,7 @@ SearchResult.propTypes = {
 	className: PropTypes.string,
 	searchInput: PropTypes.string,
 	styleInput: PropTypes.object,
+	placeholderName: PropTypes.string,
 }
 
 export default SearchResult

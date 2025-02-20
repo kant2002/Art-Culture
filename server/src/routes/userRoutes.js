@@ -12,12 +12,14 @@ import {
   getExhibitions,
   getMuseumById,
   getMuseums,
+  getMuseumsByLanguage,
 } from "../controllers/userController.js"
 
 const router = express.Router()
 
 router.get("/authors/language/:language", getAuthorsByLanguage)
 router.get("/creators/language/:language", getCreatorsByLanguage)
+router.get("/museums/language/:language", getMuseumsByLanguage)
 router.get("/authors/:id", getAuthorById)
 router.get("/authors", getAuthors)
 router.get("/creators/:id", getCreatorById)

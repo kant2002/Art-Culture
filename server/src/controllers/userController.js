@@ -59,6 +59,60 @@ export const getCreatorsByLanguage = async (req, res, next) => {
   }
 }
 
+export const getMuseumsByLanguage = async (req, res, next) => {
+  const { language } = req.params
+  const { letter } = req.query
+
+  // Log incoming request parameters
+  logger.info(`Received request for language: ${language}, letter: ${letter}`)
+
+  // Validate language
+  if (!["uk", "en"].includes(language)) {
+    logger.warn(`Invalid language parameter: ${language}`)
+    return res.status(400).json({ error: "invalid language" })
+  }
+
+  let titleField = "title"
+
+  try {
+    const museums = await prisma.user.findMany({
+      where: {
+        role: "MUSEUMS",
+        ...(letter && {
+          [titleField]: {
+            startsWith: letter,
+          },
+        }),
+      },
+      select: {
+        id: true,
+        email: true,
+        [titleField]: true,
+        bio: true,
+        images: true,
+      },
+      orderBy: {
+        [titleField]: "asc",
+      },
+    })
+
+    logger.info(`Fetched ${museums.length} creators from database`)
+
+    const mappedMuseums = museums.map((museum) => ({
+      id: museum.id,
+      email: museum.email,
+      title: museum[titleField],
+      bio: museum.bio,
+      images: museum.images,
+    }))
+
+    res.json({ museums: mappedMuseums })
+  } catch (error) {
+    logger.error("Error fetching museums by language:", error)
+    res.status(500).json({ error: "Internal server error" })
+  }
+}
+
 export const getCreators = async (req, res, next) => {
   try {
     const creators = await prisma.user.findMany({

@@ -16,7 +16,7 @@ function AllArtistsPage() {
 	const navigate = useNavigate()
 
 	// Existing states
-	const [creators, setCreators] = useState({})
+	const [museums, setMuseums] = useState({})
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 	const [language, setLanguage] = useState(i18n.language)
@@ -40,13 +40,13 @@ function AllArtistsPage() {
 	 * Helper: group an array of creators by the first letter of `creator.title`.
 	 * Then filter + sort letters depending on sortMode: UK or EN or ALL.
 	 */
-	const groupByLetter = (creatorsArray) => {
-		const grouped = creatorsArray.reduce((acc, creator) => {
-			const letter = creator.title?.charAt(0).toUpperCase() || ''
+	const groupByLetter = (museumsArray) => {
+		const grouped = museumsArray.reduce((acc, museum) => {
+			const letter = museum.title?.charAt(0).toUpperCase() || ''
 			if (!acc[letter]) {
 				acc[letter] = []
 			}
-			acc[letter].push(creator)
+			acc[letter].push(museum)
 			return acc
 		}, {})
 
@@ -80,40 +80,40 @@ function AllArtistsPage() {
 	 * Fetch creators whenever sortMode or selectedLetter changes
 	 */
 	useEffect(() => {
-		const fetchCreators = async () => {
+		const fetchMuseums = async () => {
 			try {
 				setLoading(true)
 				setError(null)
 
 				// Decide the endpoint based on active button
-				let url = '/api/users/creators' // Default => all
+				let url = '/api/users/museums' // Default => all
 				if (sortMode === 'UK') {
 					url = selectedLetter
-						? `/api/users/creators/language/uk?letter=${selectedLetter}`
-						: `/api/users/creators/language/uk`
+						? `/api/users/museums/language/uk?letter=${selectedLetter}`
+						: `/api/users/museums/language/uk`
 				} else if (sortMode === 'EN') {
 					url = selectedLetter
-						? `/api/users/creators/language/en?letter=${selectedLetter}`
-						: `/api/users/creators/language/en`
+						? `/api/users/museums/language/en?letter=${selectedLetter}`
+						: `/api/users/museums/language/en`
 				}
 
 				console.log('Requesting URL:', url)
 				const response = await axios.get(url)
-				const fetchedCreators = response.data.creators || []
+				const fetchedMuseums = response.data.museums || []
 
 				// Group them by letter => so "Усі" also remains letter-based
-				const grouped = groupByLetter(fetchedCreators)
-				setCreators(grouped)
+				const grouped = groupByLetter(fetchedMuseums)
+				setMuseums(grouped)
 
 				setLoading(false)
 			} catch (err) {
 				setLoading(false)
-				console.error('Error fetching creators:', err)
+				console.error('Error fetching museum:', err)
 				setError(err.response?.data?.error || 'An error occurred')
 			}
 		}
 
-		fetchCreators()
+		fetchMuseums()
 	}, [sortMode, selectedLetter])
 
 	// Buttons
@@ -135,28 +135,23 @@ function AllArtistsPage() {
 		setSelectedLetter(letter)
 	}
 
-	const handleAuthorPreviewClick = (id) => {
-		navigate(`/artist/${id}`)
+	const handleMuseumPreviewClick = (id) => {
+		navigate(`/museum-page/${id}`)
 	}
 
 	return (
 		<div className={styles.ArtistsPageContainer}>
 			<div className={styles.ArtistsPageTitleWrapper}>
-				<h1>{t('Усі митці')}</h1>
+				<h1>{t('Усі музеї')}</h1>
 			</div>
 			<div className={styles.ArtistsPageSeparatorWrapper}>
 				<div className={styles.ArtistsPageSeparator}></div>
 			</div>
-			{/* <div className={styles.ArtistsPageArtistsSearchWrapper}>
-				<input
-					className={styles.ArtistsPageArtistsSearchInput}
-					placeholder={t('Пошук митця')}
-				/>
-			</div> */}
+
 			<Search
 				className={searchStyle.ArtistsPageArtistsSearchWrapper}
 				searchInput={searchStyle.ArtistsPageArtistsSearchInput}
-				placeholderName={t('Пошук митця')}
+				placeholderName={t('Пошук музея')}
 			/>
 
 			{/** 3-Button Block */}
@@ -211,23 +206,23 @@ function AllArtistsPage() {
 
 			<div className={styles.ArtistsContainer}>
 				{/** 1) Display a global "No authors" if empty and not loading */}
-				{!loading && Object.keys(creators).length === 0 && (
+				{!loading && Object.keys(museums).length === 0 && (
 					<LoadingError
 						message={t('Відсутні автори за ціею літерою')}
 					/>
 				)}
-				{Object.keys(creators).map((letter) => (
+				{Object.keys(museums).map((letter) => (
 					<div key={letter} className={styles.ArtistsWrapper}>
 						<div className={styles.LetterWrapper}>
 							<h2 className={styles.Letter}>{letter}</h2>
 						</div>
 						<div className={styles.ArtistsByLetterWrapper}>
-							{creators[letter].map((creator) => (
+							{museums[letter].map((museum) => (
 								<div
-									key={creator.id}
+									key={museum.id}
 									className={styles.ArtistWrapper}
 									onClick={() =>
-										handleAuthorPreviewClick(creator.id)
+										handleMuseumPreviewClick(museum.id)
 									}
 								>
 									<div
@@ -241,7 +236,7 @@ function AllArtistsPage() {
 											}
 										>
 											<p className={styles.ArtistTitle}>
-												{creator.title}
+												{museum.title}
 											</p>
 										</div>
 										<div
@@ -252,10 +247,10 @@ function AllArtistsPage() {
 											<img
 												className={styles.ArtistPhoto}
 												src={
-													creator.images ||
+													museum.images ||
 													'/Img/ArtistPhoto.jpg'
 												}
-												alt={creator.title}
+												alt={museum.title}
 												onError={(e) => {
 													e.target.onerror = null
 													e.target.src =
