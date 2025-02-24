@@ -4,7 +4,7 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  z-index: 1000; // Base z-index for non-zoomed image
+  //z-index: 1000; // Base z-index for non-zoomed image
 }
 
 .zoomed {
@@ -12,8 +12,8 @@
   top: 50%;
   left: 50%;
   width: auto;
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 70%;
+  max-height: 70%;
   transform: translate(-50%, -50%);
   z-index: 1001; // Above the overlay
   padding: 20px;
