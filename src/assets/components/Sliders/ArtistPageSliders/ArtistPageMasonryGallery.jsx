@@ -17,7 +17,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import LikeAndShare from '../../Blocks/LikeAndShare'
 import TranslatedContent from '../../Blocks/TranslatedContent'
 
-const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
+const ArtistPageMasonryGallery = ({ products, baseUrl, creator, product }) => {
 	if (!products || products.length === 0) {
 		console.warn('No products available for ArtistPageMasonryGallery.')
 		return null // Or display a message if you prefer
@@ -527,7 +527,10 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 	const handlePaintsProductPage = () => {
 		navigate(`/artist/${id}/products`)
 	}
-
+	const handleProductClick = (id) => {
+		if (!id) return
+		navigate(`/item-detail/${id}`) // Adjust the route as per your application
+	}
 	return (
 		<div className={style.ArtistPageMasonryGalleryWrapper}>
 			<div
@@ -584,14 +587,17 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 											),
 											position: 'relative',
 										}}
+										// onClick={() =>
+										// 	handleImageClick(
+										// 		img.productImages,
+										// 		products.find(
+										// 			(p) =>
+										// 				p.id === img.productId,
+										// 		),
+										// 	)
+										// }
 										onClick={() =>
-											handleImageClick(
-												img.productImages,
-												products.find(
-													(p) =>
-														p.id === img.productId,
-												),
-											)
+											handleProductClick(product.id)
 										}
 									>
 										<img
@@ -645,14 +651,17 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 											),
 											position: 'relative',
 										}}
+										// onClick={() =>
+										// 	handleImageClick(
+										// 		img.productImages,
+										// 		products.find(
+										// 			(p) =>
+										// 				p.id === img.productId,
+										// 		),
+										// 	)
+										// }
 										onClick={() =>
-											handleImageClick(
-												img.productImages,
-												products.find(
-													(p) =>
-														p.id === img.productId,
-												),
-											)
+											handleProductClick(product.id)
 										}
 									>
 										<img
@@ -706,14 +715,17 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator }) => {
 											),
 											position: 'relative',
 										}}
+										// onClick={() =>
+										// 	handleImageClick(
+										// 		img.productImages,
+										// 		products.find(
+										// 			(p) =>
+										// 				p.id === img.productId,
+										// 		),
+										// 	)
+										// }
 										onClick={() =>
-											handleImageClick(
-												img.productImages,
-												products.find(
-													(p) =>
-														p.id === img.productId,
-												),
-											)
+											handleProductClick(product.id)
 										}
 									>
 										<img

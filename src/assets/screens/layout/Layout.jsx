@@ -171,7 +171,7 @@ const Layout = ({ heading = '' }) => {
 						}
 					/>
 					<Route path="/posts/:id" element={<PostDetail />} />
-					<Route path="/item-detail" element={<ItemDetail />} />
+					<Route path="/item-detail/:id" element={<ItemDetail />} />
 					<Route
 						path="/exhibitions/:id"
 						element={<ExhibitionPage />}

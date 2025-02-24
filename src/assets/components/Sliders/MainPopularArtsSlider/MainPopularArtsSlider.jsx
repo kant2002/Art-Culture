@@ -21,8 +21,9 @@ const Slide = ({ product, baseUrl, onOverviewClick }) => {
 	const { t } = useTranslation()
 	const navigate = useNavigate()
 
-	const handleProductClick = () => {
-		navigate(`/products/${product.id}`) // Adjust the route as per your application
+	const handleProductClick = (id) => {
+		if (!id) return
+		navigate(`/item-detail/${id}`) // Adjust the route as per your application
 
 		if (!product || product.length === 0) {
 			return (
@@ -45,7 +46,8 @@ const Slide = ({ product, baseUrl, onOverviewClick }) => {
 	return (
 		<div
 			className="PopularSliderCardWrapper"
-			onClick={() => onOverviewClick(product)}
+			// onClick={() => onOverviewClick(product)}
+			onClick={() => handleProductClick(product.id)}
 		>
 			<div className="PopularSliderCardInnerWrapper">
 				<img
@@ -62,7 +64,7 @@ const Slide = ({ product, baseUrl, onOverviewClick }) => {
 				<div className="PopularSliderCardButtonWrapper">
 					<button
 						className="PopularSliderCardButton"
-						onClick={() => onOverviewClick(product)}
+						onClick={() => handleProductClick(product.id)}
 					>
 						{t('Огляд')}
 					</button>

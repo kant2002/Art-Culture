@@ -1,13 +1,108 @@
 import LikeAndShare from '@components/Blocks/LikeAndShare'
 import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import styles from '@styles/components/ProductItemCard/ItemDetail.module.scss'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IconContext } from 'react-icons/lib'
 import { LuZoomIn } from 'react-icons/lu'
+import { useNavigate, useParams } from 'react-router-dom'
+import { getImageUrl } from '../../../utils/helper.js'
+import TranslatedContent from '../../components/Blocks/TranslatedContent'
+import ZoomableImage from '../../components/Blocks/Zoomable.jsx'
 
-function ItemDetail() {
+function ItemDetail({ index }) {
 	const { t } = useTranslation()
+	const [product, setProduct] = useState([])
+	const { id } = useParams()
+	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState(null)
+	const [creator, setCreator] = useState({})
+	const navigate = useNavigate()
 
+	const [zoomState, setZoomState] = useState({
+		zoomLevel: 1,
+		isZoomed: false,
+		cursorPos: { x: 0, y: 0 },
+		showLens: false,
+	})
+
+	useEffect(() => {
+		const fetchProduct = async () => {
+			try {
+				// 1) Fetch the product by ID
+				const response = await axios.get(`/api/products/${id}`)
+				const fetchedProduct = response.data.product
+
+				// 2) Store the product in state
+				setProduct(fetchedProduct)
+			} catch (err) {
+				console.error('Error fetching product:', err)
+				setError('Failed to load product data.')
+			} finally {
+				setLoading(false)
+			}
+		}
+
+		fetchProduct()
+	}, [id])
+
+	if (loading) return <div>Loading product...</div>
+	if (error) return <div>{error}</div>
+	if (!product) return <div>Product not found.</div>
+
+	// 3) If your product includes `author`, you can store that separately or just use product.author
+	const author = product.author || {}
+
+	const featuredMediaUrl =
+		product.images && product.images.length > 0
+			? getImageUrl(product.images[0].imageUrl, '/Img/halfNewsCard.jpg')
+			: '/Img/halfNewsCard.jpg'
+
+	const handleZoomIn = () => {
+		setZoomState((prev) => ({
+			...prev,
+			zoomLevel: Math.min(prev.zoomLevel + 0.5, 5),
+			isZoomed: true,
+		}))
+	}
+	const handleZoomOut = () => {
+		setZoomState((prev) => ({
+			...prev,
+			zoomLevel: Math.max(prev.zoomLevel - 0.5, 1),
+			isZoomed: prev.zoomLevel - 0.5 > 1,
+		}))
+	}
+	const handleMouseMove = (e) => {
+		const rect = e.currentTarget.getBoundingClientRect()
+		const x = e.clientX - rect.left
+		const y = e.clientY - rect.top
+		setZoomState((prev) => ({
+			...prev,
+			cursorPos: { x, y },
+		}))
+	}
+	const handleMouseEnter = () => {
+		setZoomState((prev) => ({ ...prev, showLens: true }))
+	}
+	const handleMouseLeave = () => {
+		setZoomState((prev) => ({
+			...prev,
+			showLens: false,
+			cursorPos: { x: 0, y: 0 },
+		}))
+	}
+	const handleToggleZoom = () => {
+		setZoomState((prev) => ({
+			...prev,
+			isZoomed: !prev.isZoomed,
+			zoomLevel: !prev.isZoomed ? 2 : 1,
+		}))
+	}
+
+	const handleAuthorPreviewClick = (id) => {
+		navigate(`/artist/${id}`)
+	}
 	return (
 		<div className={styles.ItemDetailContainer}>
 			<div className={`${styles.ItemPageNavigationContainer}`}>
@@ -21,8 +116,15 @@ function ItemDetail() {
 						>
 							&#8250;
 						</p>
-						<li className={`${styles.ItemPageNavigationItem}`}>
-							Митець
+						<li
+							className={`${styles.ItemPageNavigationItem}`}
+							onClick={() => handleAuthorPreviewClick(author.id)}
+						>
+							<TranslatedContent
+								en={author.title}
+								uk={author.title}
+								html
+							/>
 						</li>
 						<p
 							className={`${styles.ItemPageNavigationItemSeparator}`}
@@ -30,7 +132,11 @@ function ItemDetail() {
 							&#8250;
 						</p>
 						<li className={`${styles.ItemPageNavigationItem}`}>
-							Картина
+							<TranslatedContent
+								en={product.title_en}
+								uk={product.title_uk}
+								html
+							/>
 						</li>
 					</ul>
 				</nav>
@@ -38,69 +144,93 @@ function ItemDetail() {
 			<div className={`${styles.ItemDetailTopContainer}`}>
 				<div className={`${styles.ItemDetailImageContainer}`}>
 					<div className={`${styles.ItemDetailImageWrapper}`}>
-						<img
-							className={`${styles.ItemDetailBottomImage}`}
-							src="/Img/gallery/1.webp"
-							alt="Картинка"
+						<ZoomableImage
+							imageUrl={featuredMediaUrl}
+							zoomState={zoomState}
+							handleZoomIn={handleZoomIn}
+							handleZoomOut={handleZoomOut}
+							handleMouseMove={handleMouseMove}
+							handleMouseEnter={handleMouseEnter}
+							handleMouseLeave={handleMouseLeave}
+							handleToggleZoom={handleToggleZoom}
+							key={index}
 						/>
 					</div>
-					<IconContext.Provider
-						value={{
-							className: 'ItemDetailBottomImage',
-							size: 30,
-							backgroundColor: 'white',
-							padding: 5,
-							borderRadius: 50,
-						}}
-					>
-						<div
-							className={`${styles.ItemDetailZoomButtonWrapper}`}
-						>
-							<button
-								className={`${styles.ItemDetailZoomButton}`}
-							>
-								{/* <img
+					<div className={`${styles.ItemDetailZoomButtonWrapper}`}>
+						<button className={`${styles.ItemDetailZoomButton}`}>
+							{/* <img
 								className={`${styles.ItemDetailBottomImage}`}
 								src="/Img/gallery/1.webp"
 								alt="Картинка"
-							/> */}
+								/> */}
+							<IconContext.Provider
+								value={{
+									size: 40,
+									fill: 'black',
+									style: {
+										backgroundColor: 'white', // add your background color
+										padding: '8px', // add your padding
+										borderRadius: '50%', // optional, if you want rounded corners
+										// any other styling you need
+									},
+								}}
+							>
 								<LuZoomIn />
-							</button>
-						</div>
-					</IconContext.Provider>
+							</IconContext.Provider>
+						</button>
+					</div>
 				</div>
 			</div>
 			<div className={`${styles.ItemDetailBottomContainer}`}>
 				<div className={`${styles.ItemDetailLeftContainer}`}>
 					<div className={`${styles.ItemDetailTitleWrapper}`}>
 						<h1 className={`${styles.ItemDetailTitle}`}>
-							Назва картини
+							{t('Назва картини')}
+							<p>
+								<TranslatedContent
+									en={product.title_en}
+									uk={product.title_uk}
+									html
+								/>
+							</p>
 						</h1>
 					</div>
 					<div
 						className={`${styles.ItemDetailDateOfCreationWrapper}`}
 					>
 						<p className={`${styles.ItemDetailDateOfCreation}`}>
-							Дата створення картини
+							{t('Дата створення картини')}
 						</p>
 					</div>
-					<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
+					<LikeAndShare
+						className={sliderStyles.LikeAndShareFixed}
+						countClassName={sliderStyles.likeCountWrapper}
+						entityId={product.id}
+						entityType={'product'}
+					/>
 					<div className={`${styles.ItemDetailAboutContainer}`}>
 						<div
 							className={`${styles.ItemDetailArtistNameWrapper}`}
 						>
 							<p className={`${styles.ItemDetailArtistName}`}>
-								Митець&#58;
+								{t('Митець:')}
 							</p>
 							<p
 								className={`${styles.ItemDetailArtistNameValue}`}
+								onClick={() =>
+									handleAuthorPreviewClick(author.id)
+								}
 							>
-								Ім'я митця
+								<TranslatedContent
+									en={author.title}
+									uk={author.title}
+									html
+								/>
 							</p>
 						</div>
 						<div className={`${styles.ItemDetailSizeWrapper}`}>
 							<p className={`${styles.ItemDetailSize}`}>
-								Розмір&#58;
+								{t('Розмір:')}
 							</p>
 							<p className={`${styles.ItemDetailSizeValue}`}>
 								Розмір
@@ -108,7 +238,7 @@ function ItemDetail() {
 						</div>
 						<div className={`${styles.ItemDetailStileWrapper}`}>
 							<p className={`${styles.ItemDetailStile}`}>
-								Стиль&#58;
+								{t('Стиль:')}
 							</p>
 							<p className={`${styles.ItemDetailStileValue}`}>
 								Стиль
@@ -118,17 +248,23 @@ function ItemDetail() {
 							className={`${styles.ItemDetailOriginalTitleWrapper}`}
 						>
 							<p className={`${styles.ItemDetailOriginalTitle}`}>
-								Оригінальна назва&#58;
+								{t('Оригінальна назва:')}
 							</p>
 							<p
 								className={`${styles.ItemDetailOriginalTitleValue}`}
 							>
-								Оригінальна назва
+								<p>
+									<TranslatedContent
+										en={product.title_en}
+										uk={product.title_uk}
+										html
+									/>
+								</p>
 							</p>
 						</div>
 						<div className={`${styles.ItemDetailTechniqueWrapper}`}>
 							<p className={`${styles.ItemDetailTechnique}`}>
-								Техніка&#58;
+								{t('Техніка:')}
 							</p>
 							<p className={`${styles.ItemDetailTechniqueValue}`}>
 								Техніка
@@ -139,53 +275,11 @@ function ItemDetail() {
 				<div className={`${styles.ItemDetailRightContainer}`}>
 					<div className={`${styles.ItemDetailDescriptionWrapper}`}>
 						<p className={`${styles.ItemDetailDescription}`}>
-							Lorem ipsum dolor, sit amet consectetur adipisicing
-							elit. Facilis earum atque reprehenderit! Temporibus,
-							voluptatum. Necessitatibus, nam molestias aperiam
-							laboriosam sit aliquam nobis sunt facilis unde
-							dolores? Saepe quasi minima accusantium? Eveniet
-							voluptatem quia corporis quae hic vitae? Consequatur
-							totam eum nam a porro fuga voluptas doloremque, quo
-							adipisci earum debitis veniam necessitatibus ut
-							laboriosam animi quod tempora accusamus odio
-							accusantium. Quasi, sunt. Numquam asperiores aperiam
-							provident exercitationem omnis, et obcaecati
-							dignissimos ut ipsa itaque? Soluta ad, eius tempora
-							totam eveniet consequatur ullam, nisi quidem ipsam
-							eligendi fugit, quisquam illum ipsum! Maiores
-							corporis optio, quod molestiae enim modi adipisci
-							aliquid aut corrupti temporibus qui perferendis
-							blanditiis eveniet in unde velit quo laborum
-							voluptates assumenda at. Voluptates magnam aut
-							tenetur consequuntur explicabo. Eaque fuga quae
-							quidem sequi, tempora quo illo maiores quibusdam
-							dolores voluptas et aut, odio molestias officia
-							beatae unde quaerat libero adipisci soluta
-							exercitationem ducimus inventore similique.
-							Dignissimos, dolorem animi. Repudiandae facere
-							laboriosam aliquid corporis magnam non alias
-							cupiditate voluptates eius id, animi assumenda.
-							Dolorem nesciunt, maiores laborum laboriosam
-							deserunt obcaecati aliquam nostrum, magni saepe
-							earum, libero maxime! Reiciendis, nisi. Quas porro,
-							aperiam totam quisquam repellendus esse! Veniam enim
-							recusandae a natus autem deserunt velit, suscipit
-							illum, minima laborum eaque. Veniam sequi a cum
-							voluptate expedita quisquam reiciendis quod modi.
-							Modi molestias error accusamus recusandae neque
-							culpa corrupti facere optio porro repudiandae, enim
-							inventore laboriosam nesciunt nobis aut voluptas
-							placeat incidunt? Ab alias eligendi consectetur
-							repellendus rerum molestias assumenda illo. Ex omnis
-							temporibus nemo impedit! Qui odio tempore fuga
-							adipisci nemo in, placeat quas animi ad quidem
-							laudantium omnis? Esse quas voluptates quod
-							accusamus tempore repellat quisquam quam at cumque.
-							Expedita culpa facere deleniti nostrum hic! Voluptas
-							quia porro maxime. Rerum eveniet nostrum distinctio
-							architecto asperiores quo nulla at nam quas! Ad
-							commodi aut impedit delectus pariatur ut excepturi
-							veniam.
+							<TranslatedContent
+								en={product.description_en}
+								uk={product.description_uk}
+								html
+							/>
 						</p>
 					</div>
 					<button className={`${styles.ItemDetailReadMoreButton}`}>
