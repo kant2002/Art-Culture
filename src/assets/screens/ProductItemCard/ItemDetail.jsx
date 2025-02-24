@@ -188,8 +188,8 @@ function ItemDetail({ index }) {
 			<div className={`${styles.ItemDetailBottomContainer}`}>
 				<div className={`${styles.ItemDetailLeftContainer}`}>
 					<div className={`${styles.ItemDetailTitleWrapper}`}>
-						<h1 className={`${styles.ItemDetailTitle}`}>
-							{t('Назва картини')}
+						<h2 className={`${styles.ItemDetailTitle}`}>
+							{/* {t('Назва картини')} */}
 							<p>
 								<TranslatedContent
 									en={product.title_en}
@@ -197,11 +197,9 @@ function ItemDetail({ index }) {
 									html
 								/>
 							</p>
-						</h1>
+						</h2>
 					</div>
-					<div
-						className={`${styles.ItemDetailDateOfCreationWrapper}`}
-					>
+					<div className={`${styles.ItemDetailDateOfCreationWrapper}`}>
 						<p className={`${styles.ItemDetailDateOfCreation}`}>
 							{t('Дата створення картини')}
 						</p>
