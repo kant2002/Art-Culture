@@ -1,24 +1,27 @@
-@import "@styles/utilities/variables.scss";
+@use "@styles/utilities/variables.scss";
 
 .postDetailContainer {
   // главный контейнер
-  margin: $responsiveTopPadding 0 0 0;
+  margin: variables.$responsiveTopPadding variables.$responsiveLeftAndRightPadding 0
+    variables.$responsiveLeftAndRightPadding;
   display: flex;
   flex-direction: column;
 
   * {
-    font-family: $default-font;
+    font-family: variables.$default-font;
   }
 }
 
 .postPageNavigationContainer {
+  // контейнер для навигации
+  display: flex;
+  width: 100%;
 }
+
 .postPageNavigation {
   // навигационный блок
-  margin: calc(51px - (15 * ((1440px - 100vw) / (1440 - 375))))
-    $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+  margin: variables.$responsiveBigPadding 0 0 0;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: start;
 }
@@ -39,17 +42,17 @@
 }
 .postPageNavigationItemSeparator {
   // разделитель между элементами списка навигации
-  margin: 0 18px;
+  margin: 0 variables.$responsiveMediumPadding;
   font-size: calc(18px - (4 * ((1440px - 100vw) / (1440 - 375))));
   font-weight: 500;
-  color: $red;
+  color: variables.$red;
   user-select: none;
 }
 
 .postPageAboutNewsContainer {
   // блок с описанием митця
-  margin: calc(69px - (41 * ((1440px - 100vw) / (1440 - 375))))
-    $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+  margin: variables.$responsiveMediumPadding variables.$responsiveLeftAndRightPadding 0
+    variables.$responsiveLeftAndRightPadding;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -140,7 +143,7 @@
 
 .cardClockAndDateWrapper {
   // Стили для обертки даты и времени карточки
-  margin: $responsiveSmallPadding 0 0 0;
+  margin: variables.$responsiveSmallPadding 0 0 0;
   display: flex;
   align-items: center;
 }
@@ -204,12 +207,13 @@
 @media (min-width: 1441px) {
   .postDetailContainer {
     // главный контейнер
-    margin: $staticPcTopPadding 0 0 0;
+    margin: variables.$staticPcTopPadding variables.$responsiveLeftAndRightPadding 0
+      variables.$responsiveLeftAndRightPadding;
   }
 
   .postPageNavigation {
     // навигационный блок
-    margin: 51px 0 0 $responsiveLeftAndRightPadding;
+    margin: variables.$staticPcBigPadding 0 0 variables.$responsiveLeftAndRightPadding;
   }
 
   .postPageNavigationItem {
@@ -220,6 +224,12 @@
   .postPageNavigationItemSeparator {
     // разделитель между элементами списка навигации
     font-size: 18px;
+  }
+
+  .postPageAboutNewsContainer {
+    // блок с описанием митця
+    margin: variables.$staticPcMediumPadding variables.$responsiveLeftAndRightPadding 0
+      variables.$responsiveLeftAndRightPadding;
   }
 
   .postPageNewsPhoto {
@@ -270,7 +280,7 @@
 
   .artistPageFollowContainer {
     // обертка для слайдера "арты митца"
-    margin: 67px $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+    margin: 67px variables.$responsiveLeftAndRightPadding 0 variables.$responsiveLeftAndRightPadding;
   }
 
   .artistPageFollowTitle {
@@ -297,7 +307,14 @@
 @media (max-width: 569px) {
   .postDetailContainer {
     // главный контейнер
-    margin: $staticMobileTopPadding 0 0 0;
+    margin: variables.$staticMobileTopPadding variables.$responsiveLeftAndRightPadding 0
+      variables.$responsiveLeftAndRightPadding;
+  }
+
+  .postPageAboutNewsContainer {
+    // блок с описанием митця
+    margin: variables.$staticMobileMediumPadding variables.$responsiveLeftAndRightPadding 0
+      variables.$responsiveLeftAndRightPadding;
   }
 }
 
