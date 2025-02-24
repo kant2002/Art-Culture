@@ -155,29 +155,33 @@ function ItemDetail({ index }) {
 							handleToggleZoom={handleToggleZoom}
 							key={index}
 						/>
-					</div>
-					<div className={`${styles.ItemDetailZoomButtonWrapper}`}>
-						<button className={`${styles.ItemDetailZoomButton}`}>
-							{/* <img
+						<div
+							className={`${styles.ItemDetailZoomButtonWrapper}`}
+						>
+							<button
+								className={`${styles.ItemDetailZoomButton}`}
+							>
+								{/* <img
 								className={`${styles.ItemDetailBottomImage}`}
 								src="/Img/gallery/1.webp"
 								alt="Картинка"
 								/> */}
-							<IconContext.Provider
-								value={{
-									size: 40,
-									fill: 'black',
-									style: {
-										backgroundColor: 'white', // add your background color
-										padding: '8px', // add your padding
-										borderRadius: '50%', // optional, if you want rounded corners
-										// any other styling you need
-									},
-								}}
-							>
-								<LuZoomIn />
-							</IconContext.Provider>
-						</button>
+								<IconContext.Provider
+									value={{
+										size: 40,
+										fill: 'black',
+										style: {
+											backgroundColor: 'white', // add your background color
+											padding: '8px', // add your padding
+											borderRadius: '50%', // optional, if you want rounded corners
+											// any other styling you need
+										},
+									}}
+								>
+									<LuZoomIn />
+								</IconContext.Provider>
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
