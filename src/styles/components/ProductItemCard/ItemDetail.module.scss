@@ -52,39 +52,55 @@
 
 .ItemDetailTopContainer {
   // Верхний контейнер с изображением
-  margin: variables.$responsiveMediumPadding variables.$responsiveLeftAndRightPadding 0
-    variables.$responsiveLeftAndRightPadding;
+  margin: variables.$responsiveMediumPadding 0 0 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 53dvh;
 }
 
 .ItemDetailImageContainer {
   // Контейнер изображения
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
 .ItemDetailImageWrapper {
   // Обертка для изображения
+  position: relative;
+  margin: 0 variables.$responsiveMediumPadding variables.$responsiveMediumPadding variables.$responsiveMediumPadding;
   display: flex;
-  height: 50%;
-  width: 50%;
-}
+  align-items: center;
+  justify-content: center;
 
-.ItemDetailBottomImage {
-  // Само изображение
-  display: flex;
+  img {
+    max-height: 75dvh;
+    object-fit: contain;
+    object-position: center center;
+  }
 }
 
 .ItemDetailZoomButtonWrapper {
   // Обертка кнопки увеличения изображения
+  position: absolute;
+  right: calc(-1 * variables.$responsiveSmallPadding);
+  bottom: calc(-1 * variables.$responsiveSmallPadding);
   display: flex;
-  align-items: flex-end;
-  position: relative;
-  right: 80px;
-  top: 10px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.ItemDetailZoomButtonWrapper:hover {
+  cursor: pointer;
+  scale: 1.1;
+  transition: 0.3s;
+}
+
+.ItemDetailZoomButtonWrapper:not(:hover) {
+  scale: 1;
+  transition: 0.3s;
 }
 
 .ItemDetailZoomButton {
