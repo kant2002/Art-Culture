@@ -1,25 +1,26 @@
-@import "@styles/utilities/variables.scss";
+@use "@styles/utilities/variables.scss";
 
 .ItemDetailContainer {
-  margin: $responsiveTopPadding $responsiveLeftAndRightPadding 0
-    $responsiveLeftAndRightPadding;
-  //height: 100%;
+  // главный контейнер
+  margin: variables.$responsiveTopPadding variables.$responsiveLeftAndRightPadding 0
+    variables.$responsiveLeftAndRightPadding;
   display: flex;
   flex-direction: column;
 
   * {
-    font-family: $default-font;
+    font-family: variables.$default-font;
   }
 }
 
-.postPageNavigationContainer {
+.ItemPageNavigationContainer {
+  // контейнер для навигации
   display: flex;
+  width: 100%;
 }
 
 .ItemPageNavigation {
   // навигационный блок
-  margin: calc(51px - (15 * ((1440px - 100vw) / (1440 - 375)))) 0
-    calc(51px - (15 * ((1440px - 100vw) / (1440 - 375)))) 0;
+  margin: variables.$responsiveBigPadding 0 0 0;
   display: flex;
   align-items: center;
   justify-content: start;
@@ -42,20 +43,21 @@
 
 .ItemPageNavigationItemSeparator {
   // разделитель между элементами списка навигации
-  margin: 0 18px;
+  margin: 0 variables.$responsiveMediumPadding;
   font-size: calc(18px - (4 * ((1440px - 100vw) / (1440 - 375))));
   font-weight: 500;
-  color: $red;
+  color: variables.$red;
   user-select: none;
 }
 
 .ItemDetailTopContainer {
   // Верхний контейнер с изображением
+  margin: variables.$responsiveMediumPadding variables.$responsiveLeftAndRightPadding 0
+    variables.$responsiveLeftAndRightPadding;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 0 $responsiveSmallPadding 0;
-  min-height: 53vh;
+  min-height: 53dvh;
 }
 
 .ItemDetailImageContainer {
@@ -93,7 +95,7 @@
 .ItemDetailBottomContainer {
   // Нижний контейнер с деталями
   display: flex;
-  margin: $responsiveSmallPadding 0 0 0;
+  margin: variables.$responsiveSmallPadding 0 0 0;
   justify-content: space-between;
 }
 
@@ -101,7 +103,7 @@
   // Левая часть (название, инфо о картине)
   display: flex;
   flex-direction: column;
-  padding: 0 $responsiveLeftAndRightPadding 0 0;
+  padding: 0 variables.$responsiveLeftAndRightPadding 0 0;
 }
 
 .ItemDetailTitleWrapper {
@@ -210,7 +212,7 @@
   // Правая часть с описанием
   display: flex;
   flex-direction: column;
-  padding: 0 0 0 $responsiveLeftAndRightPadding;
+  padding: 0 0 0 variables.$responsiveLeftAndRightPadding;
 }
 
 .ItemDetailDescriptionWrapper {
