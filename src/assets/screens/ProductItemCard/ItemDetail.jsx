@@ -1,8 +1,9 @@
-import TranslatedContent from '@components/Blocks/TranslatedContent'
-import styles from '@styles/components/ProductItemCard/ItemDetail.module.scss'
-import { useTranslation } from 'react-i18next'
 import LikeAndShare from '@components/Blocks/LikeAndShare'
 import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
+import styles from '@styles/components/ProductItemCard/ItemDetail.module.scss'
+import { useTranslation } from 'react-i18next'
+import { IconContext } from 'react-icons/lib'
+import { LuZoomIn } from 'react-icons/lu'
 
 function ItemDetail() {
 	const { t } = useTranslation()
@@ -43,15 +44,30 @@ function ItemDetail() {
 							alt="Картинка"
 						/>
 					</div>
-					<div className={`${styles.ItemDetailZoomButtonWrapper}`}>
-						<button className={`${styles.ItemDetailZoomButton}`}>
-							<img
+					<IconContext.Provider
+						value={{
+							className: 'ItemDetailBottomImage',
+							size: 30,
+							backgroundColor: 'white',
+							padding: 5,
+							borderRadius: 50,
+						}}
+					>
+						<div
+							className={`${styles.ItemDetailZoomButtonWrapper}`}
+						>
+							<button
+								className={`${styles.ItemDetailZoomButton}`}
+							>
+								{/* <img
 								className={`${styles.ItemDetailBottomImage}`}
 								src="/Img/gallery/1.webp"
 								alt="Картинка"
-							/>
-						</button>
-					</div>
+							/> */}
+								<LuZoomIn />
+							</button>
+						</div>
+					</IconContext.Provider>
 				</div>
 			</div>
 			<div className={`${styles.ItemDetailBottomContainer}`}>
@@ -121,9 +137,7 @@ function ItemDetail() {
 					</div>
 				</div>
 				<div className={`${styles.ItemDetailRightContainer}`}>
-					<div
-						className={`${styles.ItemDetailDescriptionWrapper}`}
-					>
+					<div className={`${styles.ItemDetailDescriptionWrapper}`}>
 						<p className={`${styles.ItemDetailDescription}`}>
 							Lorem ipsum dolor, sit amet consectetur adipisicing
 							elit. Facilis earum atque reprehenderit! Temporibus,
@@ -174,9 +188,7 @@ function ItemDetail() {
 							veniam.
 						</p>
 					</div>
-					<button
-						className={`${styles.ItemDetailReadMoreButton}`}
-					>
+					<button className={`${styles.ItemDetailReadMoreButton}`}>
 						{t('Читати далі')}
 					</button>
 				</div>
