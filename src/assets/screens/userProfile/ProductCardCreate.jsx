@@ -19,6 +19,12 @@ const ProductCardCreate = () => {
 		description_uk: '',
 		specs_en: '',
 		specs_uk: '',
+		size: '',
+		dateofcreation: '',
+		style_en: '',
+		style_uk: '',
+		technique_en: '',
+		technique_uk: '',
 		images: [],
 	})
 
@@ -36,7 +42,12 @@ const ProductCardCreate = () => {
 		formDataToSend.append('description_uk', formData.description_uk)
 		formDataToSend.append('specs_en', formData.specs_en)
 		formDataToSend.append('specs_uk', formData.specs_uk)
-
+		formDataToSend.append('size', formData.size)
+		formDataToSend.append('dateofcreation', formData.dateofcreation)
+		formDataToSend.append('style_en', formData.style_en)
+		formDataToSend.append('style_uk', formData.style_uk)
+		formDataToSend.append('technique_en', formData.technique_en)
+		formDataToSend.append('technique_uk', formData.technique_uk)
 		if (formData.images && formData.images.length > 0) {
 			Array.from(formData.images).forEach((file) => {
 				formDataToSend.append('productImages', file)
@@ -113,6 +124,28 @@ const ProductCardCreate = () => {
 								html
 							/>
 						</div>
+						<div className="field-group">
+							<TextAreaEditor
+								label={t('Стиль українською')}
+								name="style_uk"
+								value={formData.style_uk}
+								maxLength={500}
+								required
+								onChange={textEditorOnChange}
+								html
+							/>
+						</div>
+						<div className="field-group">
+							<TextAreaEditor
+								label={t('Техніка українською')}
+								name="technique_uk"
+								value={formData.technique_uk}
+								maxLength={500}
+								required
+								onChange={textEditorOnChange}
+								html
+							/>
+						</div>
 					</div>
 					<div className="form-group">
 						<div className="field-group">
@@ -147,6 +180,50 @@ const ProductCardCreate = () => {
 								html
 							/>
 						</div>
+						<div className="field-group">
+							<TextAreaEditor
+								label={t('Стиль англійською')}
+								name="style_en"
+								value={formData.style_en}
+								maxLength={500}
+								required
+								onChange={textEditorOnChange}
+								html
+							/>
+						</div>
+						<div className="field-group">
+							<TextAreaEditor
+								label={t('Техніка англійською')}
+								name="technique_en"
+								value={formData.technique_en}
+								maxLength={500}
+								required
+								onChange={textEditorOnChange}
+								html
+							/>
+						</div>
+					</div>
+					<div className="field-group">
+						<TextAreaEditor
+							label={t('Розмір')}
+							name="size"
+							value={formData.size}
+							maxLength={100}
+							required
+							onChange={textEditorOnChange}
+							html
+						/>
+					</div>
+					<div className="field-group">
+						<TextAreaEditor
+							label={t('Дата створення')}
+							name="dateofcreation"
+							value={formData.dateofcreation}
+							maxLength={100}
+							required
+							onChange={textEditorOnChange}
+							html
+						/>
 					</div>
 				</div>
 				<ImageEditor

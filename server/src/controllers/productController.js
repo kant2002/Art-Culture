@@ -21,6 +21,12 @@ export const createProduct = async (req, res, next) => {
       description_uk,
       specs_en,
       specs_uk,
+      size,
+      dateofcreation,
+      style_en,
+      style_uk,
+      technique_en,
+      technique_uk,
     } = req.body
     const userId = req.user.id
 
@@ -38,6 +44,12 @@ export const createProduct = async (req, res, next) => {
         description_uk,
         specs_en,
         specs_uk,
+        size,
+        dateofcreation,
+        style_en,
+        style_uk,
+        technique_en,
+        technique_uk,
         images: {
           create: images,
         },
@@ -312,6 +324,12 @@ export const updateProduct = async (req, res, next) => {
       description_uk,
       specs_en,
       specs_uk,
+      size,
+      dateofcreation,
+      style_en,
+      style_uk,
+      technique_en,
+      technique_uk,
     } = req.body
     const userId = req.user.id
 
@@ -352,6 +370,12 @@ export const updateProduct = async (req, res, next) => {
         description_uk,
         specs_en,
         specs_uk,
+        size,
+        dateofcreation,
+        style_en,
+        style_uk,
+        technique_en,
+        technique_uk,
         images: {
           create: imagesData,
         },

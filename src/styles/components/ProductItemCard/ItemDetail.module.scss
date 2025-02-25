@@ -2,7 +2,8 @@
 
 .ItemDetailContainer {
   // главный контейнер
-  margin: variables.$responsiveTopPadding variables.$responsiveLeftAndRightPadding 0
+  margin: variables.$responsiveTopPadding
+    variables.$responsiveLeftAndRightPadding 0
     variables.$responsiveLeftAndRightPadding;
   display: flex;
   flex-direction: column;
@@ -20,7 +21,7 @@
 
 .ItemPageNavigation {
   // навигационный блок
-  margin: variables.$responsiveBigPadding 0 0 0;
+  margin: variables.$responsiveMediumPadding 0 0 0;
   display: flex;
   align-items: center;
   justify-content: start;
@@ -68,7 +69,8 @@
 .ItemDetailImageWrapper {
   // Обертка для изображения
   position: relative;
-  margin: 0 variables.$responsiveMediumPadding variables.$responsiveMediumPadding variables.$responsiveMediumPadding;
+  margin: 0 variables.$responsiveMediumPadding
+    variables.$responsiveMediumPadding variables.$responsiveMediumPadding;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -124,6 +126,9 @@
   // Обертка заголовка
   margin: variables.$responsiveSmallPadding 0 0 0;
   display: flex;
+  p {
+    font-size: calc(18px + 6 * (100vw / 1440));
+  }
 }
 
 .ItemDetailTitle {
@@ -158,6 +163,7 @@
   // Обертка имени художника
   margin: variables.$responsiveMediumPadding 0 0 0;
   display: flex;
+  flex-direction: column;
 }
 
 .ItemDetailArtistName {
@@ -180,6 +186,7 @@
   // Обертка размеров картины
   margin: variables.$responsiveSmallPadding 0 0 0;
   display: flex;
+  flex-direction: column;
 }
 
 .ItemDetailSize {
@@ -201,6 +208,7 @@
   // Обертка стиля
   margin: variables.$responsiveSmallPadding 0 0 0;
   display: flex;
+  flex-direction: column;
 }
 
 .ItemDetailStile {
@@ -222,6 +230,7 @@
   // Обертка оригинального названия
   margin: variables.$responsiveSmallPadding 0 0 0;
   display: flex;
+  flex-direction: column;
 }
 
 .ItemDetailOriginalTitle {
@@ -243,6 +252,7 @@
   // Обертка техники
   margin: variables.$responsiveSmallPadding 0 0 0;
   display: flex;
+  flex-direction: column;
 }
 
 .ItemDetailTechnique {
