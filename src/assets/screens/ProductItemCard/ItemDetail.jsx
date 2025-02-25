@@ -203,7 +203,11 @@ function ItemDetail({ index }) {
 						className={`${styles.ItemDetailDateOfCreationWrapper}`}
 					>
 						<p className={`${styles.ItemDetailDateOfCreation}`}>
-							{product.dateofcreation}s
+							<TranslatedContent
+								uk={product.dateofcreation}
+								en={product.dateofcreation}
+								html
+							/>
 						</p>
 					</div>
 					<LikeAndShare
