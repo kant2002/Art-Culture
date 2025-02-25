@@ -164,6 +164,7 @@
 .ItemDetailArtistName {
   // Лейбл "Митець"
   display: flex;
+  font-weight: 700;
 }
 
 .ItemDetailArtistNameValue {
@@ -182,6 +183,7 @@
 .ItemDetailSize {
   // Лейбл "Розмір"
   display: flex;
+  font-weight: 700;
 }
 
 .ItemDetailSizeValue {
@@ -198,7 +200,7 @@
 
 .ItemDetailStile {
   // Лейбл "Стиль"
-  display: flex;
+  font-weight: 700;
 }
 
 .ItemDetailStileValue {
@@ -217,6 +219,7 @@
 .ItemDetailOriginalTitle {
   // Лейбл "Оригінальна назва"
   display: flex;
+  font-weight: 700;
 }
 
 .ItemDetailOriginalTitleValue {
@@ -234,6 +237,7 @@
 .ItemDetailTechnique {
   // Лейбл "Техніка"
   display: flex;
+  font-weight: 700;
 }
 
 .ItemDetailTechniqueValue {
