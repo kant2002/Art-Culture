@@ -117,12 +117,7 @@
   // Левая часть (название, инфо о картине)
   display: flex;
   flex-direction: column;
-  min-width: 35%;
-
-  .LikeAndShareFixed {
-    // Обёртка кнопок Like и Share
-    margin: 0 !important;
-  }
+  min-width: 40%;
 }
 
 .ItemDetailTitleWrapper {
@@ -145,6 +140,11 @@
 .ItemDetailDateOfCreation {
   // Дата создания
   display: flex;
+}
+
+.ItemDetailLikeAndShare {
+  // Обертка кнопок "Лайк" и "Поделиться"
+  margin: 0 auto 0 0;
 }
 
 .ItemDetailAboutContainer {

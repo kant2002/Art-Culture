@@ -206,11 +206,12 @@ function ItemDetail({ index }) {
 						</p>
 					</div>
 					<LikeAndShare
-						className={sliderStyles.LikeAndShareFixed}
+						className={`${sliderStyles.LikeAndShareFixed} ${styles.ItemDetailLikeAndShare}`}
 						countClassName={sliderStyles.likeCountWrapper}
 						entityId={product.id}
-						entityType={'product'}
+						entityType="product"
 					/>
+
 					<div className={`${styles.ItemDetailAboutContainer}`}>
 						<div
 							className={`${styles.ItemDetailArtistNameWrapper}`}
