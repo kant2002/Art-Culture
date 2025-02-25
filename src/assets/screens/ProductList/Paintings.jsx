@@ -26,6 +26,11 @@ const Paintings = () => {
 		title_uk: '',
 		description_uk: '',
 		specs_uk: '',
+		size: '',
+		style_en: '',
+		style_uk: '',
+		technique_en: '',
+		technique_uk: '',
 		images: [],
 	})
 	const [message, setMessage] = useState('')
@@ -73,6 +78,11 @@ const Paintings = () => {
 			title_uk: product.title_uk || '',
 			description_uk: product.description_uk || '',
 			specs_uk: product.specs_uk || '',
+			size: product.size || '',
+			style_en: product.style_en || '',
+			style_uk: product.style_uk || '',
+			technique_en: product.technique_en || '',
+			technique_uk: product.technique_uk || '',
 			images: [],
 		})
 		setIsModalOpen(true)
@@ -96,7 +106,11 @@ const Paintings = () => {
 			!formData.title_uk ||
 			!formData.description_uk ||
 			!formData.specs_en ||
-			!formData.specs_uk
+			!formData.specs_uk ||
+			!formData.style_en ||
+			!formData.style_uk ||
+			!formData.technique_en ||
+			!formData.technique_uk
 		) {
 			setFormErrors({ form: 'Потрібно заповнити поля' })
 			return
@@ -110,6 +124,11 @@ const Paintings = () => {
 			productData.append('description_uk', formData.description_uk)
 			productData.append('specs_en', formData.specs_en)
 			productData.append('specs_uk', formData.specs_uk)
+			productData.append('style_en', formData.style_en)
+			productData.append('style_uk', formData.style_uk)
+			productData.append('technique_en', formData.technique_en)
+			productData.append('technique_uk', formData.technique_uk)
+			productData.append('size', formData.size)
 			if (formData.images && formData.images.length > 0) {
 				Array.from(formData.images).forEach((file) => {
 					productData.append('productImages', file)
@@ -259,6 +278,51 @@ const Paintings = () => {
 											/>
 										</p>
 
+										<p className={styles.productCardTitle}>
+											{t('Розмір')}
+										</p>
+										<p
+											className={
+												styles.productCardSubTitle
+											}
+										>
+											<TranslatedContent
+												en={product.size}
+												uk={product.size}
+												html
+											/>
+										</p>
+
+										<p className={styles.productCardTitle}>
+											{t('Cтиль')}
+										</p>
+										<p
+											className={
+												styles.productCardSubTitle
+											}
+										>
+											<TranslatedContent
+												en={product.style_en}
+												uk={product.style_uk}
+												html
+											/>
+										</p>
+
+										<p className={styles.productCardTitle}>
+											{t('Техніка')}
+										</p>
+										<p
+											className={
+												styles.productCardSubTitle
+											}
+										>
+											<TranslatedContent
+												en={product.technique_en}
+												uk={product.technique_uk}
+												html
+											/>
+										</p>
+
 										<div
 											className={
 												styles.paintingsDelEditWrapper
@@ -381,6 +445,28 @@ const Paintings = () => {
 											html
 										/>
 									</div>
+									<div className="field-group">
+										<TextAreaEditor
+											label={t('Стиль українською')}
+											name="style_uk"
+											value={formData.style_uk}
+											maxLength={500}
+											required
+											onChange={textEditorOnChange}
+											html
+										/>
+									</div>
+									<div className="field-group">
+										<TextAreaEditor
+											label={t('Техніка українською')}
+											name="technique_uk"
+											value={formData.technique_uk}
+											maxLength={500}
+											required
+											onChange={textEditorOnChange}
+											html
+										/>
+									</div>
 								</div>
 								<div className="form-group">
 									<div className="field-group">
@@ -417,6 +503,39 @@ const Paintings = () => {
 											html
 										/>
 									</div>
+									<div className="field-group">
+										<TextAreaEditor
+											label={t('Стиль англійською')}
+											name="style_en"
+											value={formData.style_en}
+											maxLength={500}
+											required
+											onChange={textEditorOnChange}
+											html
+										/>
+									</div>
+									<div className="field-group">
+										<TextAreaEditor
+											label={t('Техніка англійською')}
+											name="technique_en"
+											value={formData.technique_en}
+											maxLength={500}
+											required
+											onChange={textEditorOnChange}
+											html
+										/>
+									</div>
+								</div>
+								<div className="field-group">
+									<TextAreaEditor
+										label={t('Розмір')}
+										name="size"
+										value={formData.size}
+										maxLength={500}
+										required
+										onChange={textEditorOnChange}
+										html
+									/>
 								</div>
 							</div>
 							<ImageEditor

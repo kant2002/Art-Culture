@@ -199,7 +199,9 @@ function ItemDetail({ index }) {
 							</p>
 						</h2>
 					</div>
-					<div className={`${styles.ItemDetailDateOfCreationWrapper}`}>
+					<div
+						className={`${styles.ItemDetailDateOfCreationWrapper}`}
+					>
 						<p className={`${styles.ItemDetailDateOfCreation}`}>
 							{t('Дата створення картини')}
 						</p>
@@ -215,7 +217,7 @@ function ItemDetail({ index }) {
 							className={`${styles.ItemDetailArtistNameWrapper}`}
 						>
 							<p className={`${styles.ItemDetailArtistName}`}>
-								{t('Митець:')}
+								{t('product.authorTitle')}
 							</p>
 							<p
 								className={`${styles.ItemDetailArtistNameValue}`}
@@ -232,18 +234,26 @@ function ItemDetail({ index }) {
 						</div>
 						<div className={`${styles.ItemDetailSizeWrapper}`}>
 							<p className={`${styles.ItemDetailSize}`}>
-								{t('Розмір:')}
+								{t('product.Size')}
 							</p>
 							<p className={`${styles.ItemDetailSizeValue}`}>
-								Розмір
+								<TranslatedContent
+									en={product.size}
+									uk={product.size}
+									html
+								/>
 							</p>
 						</div>
 						<div className={`${styles.ItemDetailStileWrapper}`}>
 							<p className={`${styles.ItemDetailStile}`}>
-								{t('Стиль:')}
+								{t('product.Style')}
 							</p>
 							<p className={`${styles.ItemDetailStileValue}`}>
-								Стиль
+								<TranslatedContent
+									en={product.style_en}
+									uk={product.style_uk}
+									html
+								/>
 							</p>
 						</div>
 						<div
@@ -266,10 +276,14 @@ function ItemDetail({ index }) {
 						</div>
 						<div className={`${styles.ItemDetailTechniqueWrapper}`}>
 							<p className={`${styles.ItemDetailTechnique}`}>
-								{t('Техніка:')}
+								{t('product.Tech')}
 							</p>
 							<p className={`${styles.ItemDetailTechniqueValue}`}>
-								Техніка
+								<TranslatedContent
+									en={product.technique_en}
+									uk={product.technique_uk}
+									html
+								/>
 							</p>
 						</div>
 					</div>
