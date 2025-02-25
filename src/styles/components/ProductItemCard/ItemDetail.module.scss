@@ -113,14 +113,13 @@
 .ItemDetailBottomContainer {
   // Нижний контейнер с деталями
   display: flex;
-  justify-content: space-between;
 }
 
 .ItemDetailLeftContainer {
   // Левая часть (название, инфо о картине)
   display: flex;
   flex-direction: column;
-  width: 20%;
+  min-width: 35%;
 }
 
 .ItemDetailTitleWrapper {
@@ -139,13 +138,19 @@
 
 .ItemDetailDateOfCreationWrapper {
   // Обертка даты создания
-  margin: variables.$responsiveSmallPadding 0 0 0;
+  margin: variables.$responsiveSmallPadding 0 variables.$responsiveMediumPadding 0;
   display: flex;
 }
 
 .ItemDetailDateOfCreation {
   // Дата создания
-  display: flex;
+  font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 400;
+}
+
+.ItemDetailLikeAndShare {
+  // Обертка кнопок "Лайк" и "Поделиться"
+  margin: 0 auto 0 0;
 }
 
 .ItemDetailAboutContainer {
@@ -156,21 +161,25 @@
 
 .ItemDetailArtistNameWrapper {
   // Обертка имени художника
-  margin: variables.$responsiveSmallPadding 0 0 0;
+  margin: variables.$responsiveMediumPadding 0 0 0;
   display: flex;
   flex-direction: column;
 }
 
 .ItemDetailArtistName {
   // Лейбл "Митець"
-  display: flex;
-  font-weight: 700;
+  font-size: calc(14px - (2 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 300;
+  text-align: start;
+  color: variables.$secondary-color;
 }
 
 .ItemDetailArtistNameValue {
   // Имя художника
+  margin: 0 0 0 variables.$responsiveSmallPadding;
   display: flex;
-  cursor: pointer;
+  font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 400;
 }
 
 .ItemDetailSizeWrapper {
@@ -182,13 +191,17 @@
 
 .ItemDetailSize {
   // Лейбл "Розмір"
-  display: flex;
-  font-weight: 700;
+  font-size: calc(14px - (2 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 300;
+  text-align: start;
+  color: variables.$secondary-color;
 }
 
 .ItemDetailSizeValue {
   // Значение размеров
-  display: flex;
+  margin: 0 0 0 variables.$responsiveSmallPadding;
+  font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 400;
 }
 
 .ItemDetailStileWrapper {
@@ -200,13 +213,17 @@
 
 .ItemDetailStile {
   // Лейбл "Стиль"
-  font-weight: 700;
+  font-size: calc(14px - (2 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 300;
+  text-align: start;
+  color: variables.$secondary-color;
 }
 
 .ItemDetailStileValue {
   // Значение стиля
-  display: flex;
-  flex-direction: column;
+  margin: 0 0 0 variables.$responsiveSmallPadding;
+  font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 400;
 }
 
 .ItemDetailOriginalTitleWrapper {
@@ -218,13 +235,17 @@
 
 .ItemDetailOriginalTitle {
   // Лейбл "Оригінальна назва"
-  display: flex;
-  font-weight: 700;
+  font-size: calc(14px - (2 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 300;
+  text-align: start;
+  color: variables.$secondary-color;
 }
 
 .ItemDetailOriginalTitleValue {
   // Оригинальное название
-  display: flex;
+  margin: 0 0 0 variables.$responsiveSmallPadding;
+  font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 400;
 }
 
 .ItemDetailTechniqueWrapper {
@@ -236,13 +257,17 @@
 
 .ItemDetailTechnique {
   // Лейбл "Техніка"
-  display: flex;
-  font-weight: 700;
+  font-size: calc(14px - (2 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 300;
+  text-align: start;
+  color: variables.$secondary-color;
 }
 
 .ItemDetailTechniqueValue {
   // Значение техники
-  display: flex;
+  margin: 0 0 0 variables.$responsiveSmallPadding;
+  font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 400;
 }
 
 .ItemDetailRightContainer {
@@ -260,7 +285,8 @@
 
 .ItemDetailDescription {
   // Описание картины
-  display: flex;
+  font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 400;
 }
 
 .ItemDetailReadMoreButton {

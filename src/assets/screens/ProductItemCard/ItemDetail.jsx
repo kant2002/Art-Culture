@@ -189,7 +189,6 @@ function ItemDetail({ index }) {
 				<div className={`${styles.ItemDetailLeftContainer}`}>
 					<div className={`${styles.ItemDetailTitleWrapper}`}>
 						<h2 className={`${styles.ItemDetailTitle}`}>
-							{/* {t('Назва картини')} */}
 							<p>
 								<TranslatedContent
 									en={product.title_en}
@@ -211,11 +210,12 @@ function ItemDetail({ index }) {
 						</p>
 					</div>
 					<LikeAndShare
-						className={sliderStyles.LikeAndShareItemDetail}
+						className={`${sliderStyles.LikeAndShareFixed} ${styles.ItemDetailLikeAndShare}`}
 						countClassName={sliderStyles.likeCountWrapper}
 						entityId={product.id}
-						entityType={'product'}
+						entityType="product"
 					/>
+
 					<div className={`${styles.ItemDetailAboutContainer}`}>
 						<div
 							className={`${styles.ItemDetailArtistNameWrapper}`}
@@ -264,7 +264,7 @@ function ItemDetail({ index }) {
 							className={`${styles.ItemDetailOriginalTitleWrapper}`}
 						>
 							<p className={`${styles.ItemDetailOriginalTitle}`}>
-								{t('Оригінальна назва:')}
+								{t('Оригінальна назва')}&#58;
 							</p>
 							<p
 								className={`${styles.ItemDetailOriginalTitleValue}`}
