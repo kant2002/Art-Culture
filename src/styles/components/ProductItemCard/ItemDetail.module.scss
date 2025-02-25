@@ -117,7 +117,7 @@
   // Левая часть (название, инфо о картине)
   display: flex;
   flex-direction: column;
-  min-width: 40%;
+  min-width: 35%;
 }
 
 .ItemDetailTitleWrapper {
@@ -139,7 +139,8 @@
 
 .ItemDetailDateOfCreation {
   // Дата создания
-  display: flex;
+  font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 400;
 }
 
 .ItemDetailLikeAndShare {
@@ -171,7 +172,8 @@
   // Имя художника
   margin: 0 0 0 variables.$responsiveSmallPadding;
   display: flex;
-  // cursor: pointer;
+  font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 400;
 }
 
 .ItemDetailSizeWrapper {
@@ -191,7 +193,8 @@
 .ItemDetailSizeValue {
   // Значение размеров
   margin: 0 0 0 variables.$responsiveSmallPadding;
-  display: flex;
+  font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 400;
 }
 
 .ItemDetailStileWrapper {
@@ -211,7 +214,8 @@
 .ItemDetailStileValue {
   // Значение стиля
   margin: 0 0 0 variables.$responsiveSmallPadding;
-  display: flex;
+  font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 400;
 }
 
 .ItemDetailOriginalTitleWrapper {
@@ -231,7 +235,8 @@
 .ItemDetailOriginalTitleValue {
   // Оригинальное название
   margin: 0 0 0 variables.$responsiveSmallPadding;
-  display: flex;
+  font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 400;
 }
 
 .ItemDetailTechniqueWrapper {
@@ -251,7 +256,8 @@
 .ItemDetailTechniqueValue {
   // Значение техники
   margin: 0 0 0 variables.$responsiveSmallPadding;
-  display: flex;
+  font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 400;
 }
 
 .ItemDetailRightContainer {
@@ -269,7 +275,8 @@
 
 .ItemDetailDescription {
   // Описание картины
-  display: flex;
+  font-size: calc(16px - (4 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 400;
 }
 
 .ItemDetailReadMoreButton {
