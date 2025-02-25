@@ -597,7 +597,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator, product }) => {
 										// 	)
 										// }
 										onClick={() =>
-											handleProductClick(product.id)
+											handleProductClick(img.productId)
 										}
 									>
 										<img
@@ -661,7 +661,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator, product }) => {
 										// 	)
 										// }
 										onClick={() =>
-											handleProductClick(product.id)
+											handleProductClick(img.productId)
 										}
 									>
 										<img
@@ -725,7 +725,7 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator, product }) => {
 										// 	)
 										// }
 										onClick={() =>
-											handleProductClick(product.id)
+											handleProductClick(img.productId)
 										}
 									>
 										<img
