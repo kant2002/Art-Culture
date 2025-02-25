@@ -283,6 +283,16 @@
   // Обертка описания
   margin: variables.$responsiveSmallPadding 0 0 0;
   display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  overflow: hidden;
+  max-height: calc(calc(16px - (4 * ((1440px - 100vw) / (1440 - 375)))) * 8);
+  transition: max-height 0.3s ease-in-out;
+
+  &.expanded {
+    max-height: none; // Убираем ограничение по высоте при раскрытии
+  }
 }
 
 .ItemDetailDescription {
@@ -293,5 +303,12 @@
 
 .ItemDetailReadMoreButton {
   // Кнопка "Читать далее"
-  display: flex;
+  margin: variables.$responsiveSmallPadding 0 0 auto;
+  font-size: calc(14px - (2 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 500;
+  color: variables.$red;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  background: none;
 }
