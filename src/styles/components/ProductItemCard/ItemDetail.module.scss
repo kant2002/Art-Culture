@@ -111,14 +111,13 @@
 .ItemDetailBottomContainer {
   // Нижний контейнер с деталями
   display: flex;
-  justify-content: space-between;
 }
 
 .ItemDetailLeftContainer {
   // Левая часть (название, инфо о картине)
   display: flex;
   flex-direction: column;
-  width: 40%;
+  min-width: 40%;
 }
 
 .ItemDetailTitleWrapper {
@@ -134,7 +133,7 @@
 
 .ItemDetailDateOfCreationWrapper {
   // Обертка даты создания
-  margin: variables.$responsiveSmallPadding 0 0 0;
+  margin: variables.$responsiveSmallPadding 0 variables.$responsiveMediumPadding 0;
   display: flex;
 }
 
@@ -151,19 +150,23 @@
 
 .ItemDetailArtistNameWrapper {
   // Обертка имени художника
-  margin: variables.$responsiveSmallPadding 0 0 0;
+  margin: variables.$responsiveMediumPadding 0 0 0;
   display: flex;
 }
 
 .ItemDetailArtistName {
   // Лейбл "Митець"
-  display: flex;
+  font-size: calc(14px - (2 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 300;
+  text-align: start;
+  color: variables.$secondary-color;
 }
 
 .ItemDetailArtistNameValue {
   // Имя художника
+  margin: 0 0 0 variables.$responsiveSmallPadding;
   display: flex;
-  cursor: pointer;
+  // cursor: pointer;
 }
 
 .ItemDetailSizeWrapper {
@@ -174,11 +177,15 @@
 
 .ItemDetailSize {
   // Лейбл "Розмір"
-  display: flex;
+  font-size: calc(14px - (2 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 300;
+  text-align: start;
+  color: variables.$secondary-color;
 }
 
 .ItemDetailSizeValue {
   // Значение размеров
+  margin: 0 0 0 variables.$responsiveSmallPadding;
   display: flex;
 }
 
@@ -190,11 +197,15 @@
 
 .ItemDetailStile {
   // Лейбл "Стиль"
-  display: flex;
+  font-size: calc(14px - (2 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 300;
+  text-align: start;
+  color: variables.$secondary-color;
 }
 
 .ItemDetailStileValue {
   // Значение стиля
+  margin: 0 0 0 variables.$responsiveSmallPadding;
   display: flex;
 }
 
@@ -206,11 +217,15 @@
 
 .ItemDetailOriginalTitle {
   // Лейбл "Оригінальна назва"
-  display: flex;
+  font-size: calc(14px - (2 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 300;
+  text-align: start;
+  color: variables.$secondary-color;
 }
 
 .ItemDetailOriginalTitleValue {
   // Оригинальное название
+  margin: 0 0 0 variables.$responsiveSmallPadding;
   display: flex;
 }
 
@@ -222,11 +237,15 @@
 
 .ItemDetailTechnique {
   // Лейбл "Техніка"
-  display: flex;
+  font-size: calc(14px - (2 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 300;
+  text-align: start;
+  color: variables.$secondary-color;
 }
 
 .ItemDetailTechniqueValue {
   // Значение техники
+  margin: 0 0 0 variables.$responsiveSmallPadding;
   display: flex;
 }
 
