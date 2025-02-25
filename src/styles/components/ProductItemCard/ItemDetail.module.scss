@@ -119,7 +119,8 @@
   // Левая часть (название, инфо о картине)
   display: flex;
   flex-direction: column;
-  min-width: 35%;
+  width:fit-content;
+  max-width: 35%;
 }
 
 .ItemDetailTitleWrapper {
@@ -140,6 +141,7 @@
   // Обертка даты создания
   margin: variables.$responsiveSmallPadding 0 variables.$responsiveMediumPadding 0;
   display: flex;
+  align-items: center;
 }
 
 .ItemDetailDateOfCreation {
@@ -163,7 +165,7 @@
   // Обертка имени художника
   margin: variables.$responsiveMediumPadding 0 0 0;
   display: flex;
-  flex-direction: column;
+  align-items: center;
 }
 
 .ItemDetailArtistName {
@@ -186,7 +188,7 @@
   // Обертка размеров картины
   margin: variables.$responsiveSmallPadding 0 0 0;
   display: flex;
-  flex-direction: column;
+  align-items: center;
 }
 
 .ItemDetailSize {
@@ -208,7 +210,7 @@
   // Обертка стиля
   margin: variables.$responsiveSmallPadding 0 0 0;
   display: flex;
-  flex-direction: column;
+  align-items: center;
 }
 
 .ItemDetailStile {
@@ -230,7 +232,7 @@
   // Обертка оригинального названия
   margin: variables.$responsiveSmallPadding 0 0 0;
   display: flex;
-  flex-direction: column;
+  align-items: center;
 }
 
 .ItemDetailOriginalTitle {
@@ -252,7 +254,7 @@
   // Обертка техники
   margin: variables.$responsiveSmallPadding 0 0 0;
   display: flex;
-  flex-direction: column;
+  align-items: center;
 }
 
 .ItemDetailTechnique {

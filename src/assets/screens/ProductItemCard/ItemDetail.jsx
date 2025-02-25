@@ -221,7 +221,7 @@ function ItemDetail({ index }) {
 							className={`${styles.ItemDetailArtistNameWrapper}`}
 						>
 							<p className={`${styles.ItemDetailArtistName}`}>
-								{t('product.authorTitle')}
+								{t('product.authorTitle')}&#58;
 							</p>
 							<p
 								className={`${styles.ItemDetailArtistNameValue}`}
@@ -238,7 +238,7 @@ function ItemDetail({ index }) {
 						</div>
 						<div className={`${styles.ItemDetailSizeWrapper}`}>
 							<p className={`${styles.ItemDetailSize}`}>
-								{t('product.Size')}
+								{t('product.Size')}&#58;
 							</p>
 							<p className={`${styles.ItemDetailSizeValue}`}>
 								<TranslatedContent
@@ -250,7 +250,7 @@ function ItemDetail({ index }) {
 						</div>
 						<div className={`${styles.ItemDetailStileWrapper}`}>
 							<p className={`${styles.ItemDetailStile}`}>
-								{t('product.Style')}
+								{t('product.Style')}&#58;
 							</p>
 							<p className={`${styles.ItemDetailStileValue}`}>
 								<TranslatedContent
@@ -264,7 +264,7 @@ function ItemDetail({ index }) {
 							className={`${styles.ItemDetailOriginalTitleWrapper}`}
 						>
 							<p className={`${styles.ItemDetailOriginalTitle}`}>
-								{t('Оригінальна назва')}&#58;
+								{t('product.OriginalTitle')}&#58;
 							</p>
 							<p
 								className={`${styles.ItemDetailOriginalTitleValue}`}
@@ -280,7 +280,7 @@ function ItemDetail({ index }) {
 						</div>
 						<div className={`${styles.ItemDetailTechniqueWrapper}`}>
 							<p className={`${styles.ItemDetailTechnique}`}>
-								{t('product.Tech')}
+								{t('product.Tech')}&#58;
 							</p>
 							<p className={`${styles.ItemDetailTechniqueValue}`}>
 								<TranslatedContent
