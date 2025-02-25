@@ -203,11 +203,11 @@ function ItemDetail({ index }) {
 						className={`${styles.ItemDetailDateOfCreationWrapper}`}
 					>
 						<p className={`${styles.ItemDetailDateOfCreation}`}>
-							{t('Дата створення картини')}
+							{product.dateofcreation}s
 						</p>
 					</div>
 					<LikeAndShare
-						className={sliderStyles.LikeAndShareFixed}
+						className={sliderStyles.LikeAndShareItemDetail}
 						countClassName={sliderStyles.likeCountWrapper}
 						entityId={product.id}
 						entityType={'product'}

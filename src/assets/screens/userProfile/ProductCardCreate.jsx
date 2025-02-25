@@ -20,6 +20,7 @@ const ProductCardCreate = () => {
 		specs_en: '',
 		specs_uk: '',
 		size: '',
+		dateofcreation: '',
 		style_en: '',
 		style_uk: '',
 		technique_en: '',
@@ -41,11 +42,12 @@ const ProductCardCreate = () => {
 		formDataToSend.append('description_uk', formData.description_uk)
 		formDataToSend.append('specs_en', formData.specs_en)
 		formDataToSend.append('specs_uk', formData.specs_uk)
-		formDataToSend.append('size', size)
-		formDataToSend.append('style_en', style_en)
-		formDataToSend.append('style_uk', style_uk)
-		formDataToSend.append('technique_en', technique_en)
-		formDataToSend.append('technique_uk', technique_uk)
+		formDataToSend.append('size', formData.size)
+		formDataToSend.append('dateofcreation', formData.dateofcreation)
+		formDataToSend.append('style_en', formData.style_en)
+		formDataToSend.append('style_uk', formData.style_uk)
+		formDataToSend.append('technique_en', formData.technique_en)
+		formDataToSend.append('technique_uk', formData.technique_uk)
 		if (formData.images && formData.images.length > 0) {
 			Array.from(formData.images).forEach((file) => {
 				formDataToSend.append('productImages', file)
@@ -206,6 +208,17 @@ const ProductCardCreate = () => {
 							label={t('Розмір')}
 							name="size"
 							value={formData.size}
+							maxLength={100}
+							required
+							onChange={textEditorOnChange}
+							html
+						/>
+					</div>
+					<div className="field-group">
+						<TextAreaEditor
+							label={t('Дата створення')}
+							name="dateofcreation"
+							value={formData.dateofcreation}
 							maxLength={100}
 							required
 							onChange={textEditorOnChange}

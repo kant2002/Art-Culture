@@ -27,6 +27,7 @@ const Paintings = () => {
 		description_uk: '',
 		specs_uk: '',
 		size: '',
+		dateofcreation: '',
 		style_en: '',
 		style_uk: '',
 		technique_en: '',
@@ -79,6 +80,7 @@ const Paintings = () => {
 			description_uk: product.description_uk || '',
 			specs_uk: product.specs_uk || '',
 			size: product.size || '',
+			dateofcreation: product.dateofcreation || '',
 			style_en: product.style_en || '',
 			style_uk: product.style_uk || '',
 			technique_en: product.technique_en || '',
@@ -129,6 +131,7 @@ const Paintings = () => {
 			productData.append('technique_en', formData.technique_en)
 			productData.append('technique_uk', formData.technique_uk)
 			productData.append('size', formData.size)
+			productData.append('dateofcreation', formData.dateofcreation)
 			if (formData.images && formData.images.length > 0) {
 				Array.from(formData.images).forEach((file) => {
 					productData.append('productImages', file)
@@ -259,6 +262,20 @@ const Paintings = () => {
 											<TranslatedContent
 												en={product.description_en}
 												uk={product.description_uk}
+												html
+											/>
+										</p>
+										<p className={styles.productCardTitle}>
+											{t('Дата створення')}
+										</p>
+										<p
+											className={
+												styles.productCardSubTitle
+											}
+										>
+											<TranslatedContent
+												en={product.dateofcreation}
+												uk={product.dateofcreation}
 												html
 											/>
 										</p>
@@ -531,6 +548,17 @@ const Paintings = () => {
 										label={t('Розмір')}
 										name="size"
 										value={formData.size}
+										maxLength={500}
+										required
+										onChange={textEditorOnChange}
+										html
+									/>
+								</div>
+								<div className="field-group">
+									<TextAreaEditor
+										label={t('Дата створення')}
+										name="dateofcreation"
+										value={formData.dateofcreation}
 										maxLength={500}
 										required
 										onChange={textEditorOnChange}
