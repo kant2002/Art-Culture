@@ -15,6 +15,7 @@ function ItemDetail({ index }) {
 	const { t } = useTranslation()
 	const [product, setProduct] = useState([])
 	const { id } = useParams()
+	const [isExpanded, setIsExpanded] = useState(false)
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 	const [creator, setCreator] = useState({})
@@ -102,6 +103,9 @@ function ItemDetail({ index }) {
 
 	const handleAuthorPreviewClick = (id) => {
 		navigate(`/artist/${id}`)
+	}
+	const toggleText = () => {
+		setIsExpanded((prevState) => !prevState)
 	}
 	return (
 		<div className={styles.ItemDetailContainer}>
@@ -293,7 +297,9 @@ function ItemDetail({ index }) {
 					</div>
 				</div>
 				<div className={`${styles.ItemDetailRightContainer}`}>
-					<div className={`${styles.ItemDetailDescriptionWrapper}`}>
+					<div
+						className={`${styles.ItemDetailDescriptionWrapper} ${isExpanded ? styles.expandedexpanded : ''}`}
+					>
 						<p className={`${styles.ItemDetailDescription}`}>
 							<TranslatedContent
 								en={product.description_en}
@@ -302,8 +308,11 @@ function ItemDetail({ index }) {
 							/>
 						</p>
 					</div>
-					<button className={`${styles.ItemDetailReadMoreButton}`}>
-						{t('Читати далі')}
+					<button
+						className={`${styles.ItemDetailReadMoreButton}`}
+						onClick={toggleText}
+					>
+						{isExpanded ? t('Згорнути текст') : t('Читати далі')}
 					</button>
 				</div>
 			</div>
