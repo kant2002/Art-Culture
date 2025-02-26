@@ -35,10 +35,10 @@
 
 .ItemPageNavigationItem {
   // элемент списка навигации
-  display: flex;
   font-size: calc(18px - (4 * ((1440px - 100vw) / (1440 - 375))));
   font-weight: 500;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .ItemPageNavigationItemSeparator {
