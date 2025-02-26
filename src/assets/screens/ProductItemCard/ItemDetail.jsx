@@ -104,6 +104,10 @@ function ItemDetail({ index }) {
 	const handleAuthorPreviewClick = (id) => {
 		navigate(`/artist/${id}`)
 	}
+
+	const handleAuthorsPageClick = () => {
+		navigate('/artists-page')
+	}
 	const toggleText = () => {
 		setIsExpanded((prevState) => !prevState)
 	}
@@ -112,7 +116,10 @@ function ItemDetail({ index }) {
 			<div className={`${styles.ItemPageNavigationContainer}`}>
 				<nav className={`${styles.ItemPageNavigation}`}>
 					<ul className={`${styles.ItemPageNavigationList}`}>
-						<li className={`${styles.ItemPageNavigationItem}`}>
+						<li
+							className={`${styles.ItemPageNavigationItem}`}
+							onClick={handleAuthorsPageClick}
+						>
 							{t('Митці')}
 						</li>
 						<p
@@ -165,11 +172,6 @@ function ItemDetail({ index }) {
 							<button
 								className={`${styles.ItemDetailZoomButton}`}
 							>
-								{/* <img
-								className={`${styles.ItemDetailBottomImage}`}
-								src="/Img/gallery/1.webp"
-								alt="Картинка"
-								/> */}
 								<IconContext.Provider
 									value={{
 										size: 40,

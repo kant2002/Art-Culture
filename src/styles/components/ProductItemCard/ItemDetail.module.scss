@@ -2,7 +2,8 @@
 
 .ItemDetailContainer {
   // главный контейнер
-  margin: variables.$responsiveTopPadding variables.$responsiveLeftAndRightPadding 0
+  margin: variables.$responsiveTopPadding
+    variables.$responsiveLeftAndRightPadding 0
     variables.$responsiveLeftAndRightPadding;
   display: flex;
   flex-direction: column;
@@ -68,7 +69,8 @@
 .ItemDetailImageWrapper {
   // Обертка для изображения
   position: relative;
-  margin: 0 variables.$responsiveMediumPadding variables.$responsiveMediumPadding variables.$responsiveMediumPadding;
+  margin: 0 variables.$responsiveMediumPadding
+    variables.$responsiveMediumPadding variables.$responsiveMediumPadding;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -138,7 +140,8 @@
 
 .ItemDetailDateOfCreationWrapper {
   // Обертка даты создания
-  margin: variables.$responsiveSmallPadding 0 variables.$responsiveMediumPadding 0;
+  margin: variables.$responsiveSmallPadding 0 variables.$responsiveMediumPadding
+    0;
   display: flex;
   align-items: center;
 }
@@ -165,6 +168,7 @@
   margin: variables.$responsiveMediumPadding 0 0 0;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .ItemDetailArtistName {
@@ -316,7 +320,8 @@
 @media (min-width: 1441px) {
   .ItemDetailContainer {
     // главный контейнер
-    margin: variables.$staticPcTopPadding variables.$responsiveLeftAndRightPadding 0
+    margin: variables.$staticPcTopPadding
+      variables.$responsiveLeftAndRightPadding 0
       variables.$responsiveLeftAndRightPadding;
   }
 
@@ -343,7 +348,8 @@
 
   .ItemDetailImageWrapper {
     // Обертка для изображения
-    margin: 0 variables.$staticPcMediumPadding variables.$staticPcMediumPadding variables.$staticPcMediumPadding;
+    margin: 0 variables.$staticPcMediumPadding variables.$staticPcMediumPadding
+      variables.$staticPcMediumPadding;
   }
 
   .ItemDetailZoomButtonWrapper {
@@ -495,7 +501,8 @@
 @media (max-width: 569px) {
   .ItemDetailContainer {
     // главный контейнер
-    margin: variables.$staticMobileTopPadding variables.$responsiveLeftAndRightPadding 0
+    margin: variables.$staticMobileTopPadding
+      variables.$responsiveLeftAndRightPadding 0
       variables.$responsiveLeftAndRightPadding;
   }
 
@@ -523,8 +530,8 @@
 
   .ItemDetailImageWrapper {
     // Обертка для изображения
-    margin: 0 variables.$staticMobileMediumPadding variables.$staticMobileMediumPadding
-      variables.$staticMobileMediumPadding;
+    margin: 0 variables.$staticMobileMediumPadding
+      variables.$staticMobileMediumPadding variables.$staticMobileMediumPadding;
   }
 
   .ItemDetailZoomButtonWrapper {
@@ -544,7 +551,8 @@
 
   .ItemDetailDateOfCreationWrapper {
     // Обертка даты создания
-    margin: variables.$staticMobileSmallPadding 0 variables.$staticMobileMediumPadding 0;
+    margin: variables.$staticMobileSmallPadding 0
+      variables.$staticMobileMediumPadding 0;
   }
 
   .ItemDetailDateOfCreation {
@@ -552,10 +560,10 @@
     font-size: 12px;
   }
 
-.ItemDetailLeftContainer {
-  // Левая часть (название, инфо о картине)
-  margin: 0 auto 0 0;
-}
+  .ItemDetailLeftContainer {
+    // Левая часть (название, инфо о картине)
+    margin: 0 auto 0 0;
+  }
 
   .ItemDetailArtistNameWrapper {
     // Обертка имени художника
