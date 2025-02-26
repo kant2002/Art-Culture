@@ -2,8 +2,7 @@
 
 .ItemDetailContainer {
   // главный контейнер
-  margin: variables.$responsiveTopPadding
-    variables.$responsiveLeftAndRightPadding 0
+  margin: variables.$responsiveTopPadding variables.$responsiveLeftAndRightPadding 0
     variables.$responsiveLeftAndRightPadding;
   display: flex;
   flex-direction: column;
@@ -69,8 +68,7 @@
 .ItemDetailImageWrapper {
   // Обертка для изображения
   position: relative;
-  margin: 0 variables.$responsiveMediumPadding
-    variables.$responsiveMediumPadding variables.$responsiveMediumPadding;
+  margin: 0 variables.$responsiveMediumPadding variables.$responsiveMediumPadding variables.$responsiveMediumPadding;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,13 +111,15 @@
 .ItemDetailBottomContainer {
   // Нижний контейнер с деталями
   display: flex;
+  width: 100%;
 }
 
 .ItemDetailLeftContainer {
   // Левая часть (название, инфо о картине)
   display: flex;
   flex-direction: column;
-  min-width: 35%;
+  width: fit-content;
+  max-width: 35%;
 }
 
 .ItemDetailTitleWrapper {
@@ -140,6 +140,7 @@
   // Обертка даты создания
   margin: variables.$responsiveSmallPadding 0 variables.$responsiveMediumPadding 0;
   display: flex;
+  align-items: center;
 }
 
 .ItemDetailDateOfCreation {
@@ -163,7 +164,7 @@
   // Обертка имени художника
   margin: variables.$responsiveMediumPadding 0 0 0;
   display: flex;
-  flex-direction: column;
+  align-items: center;
 }
 
 .ItemDetailArtistName {
@@ -186,7 +187,7 @@
   // Обертка размеров картины
   margin: variables.$responsiveSmallPadding 0 0 0;
   display: flex;
-  flex-direction: column;
+  align-items: center;
 }
 
 .ItemDetailSize {
@@ -208,7 +209,7 @@
   // Обертка стиля
   margin: variables.$responsiveSmallPadding 0 0 0;
   display: flex;
-  flex-direction: column;
+  align-items: center;
 }
 
 .ItemDetailStile {
@@ -230,7 +231,7 @@
   // Обертка оригинального названия
   margin: variables.$responsiveSmallPadding 0 0 0;
   display: flex;
-  flex-direction: column;
+  align-items: center;
 }
 
 .ItemDetailOriginalTitle {
@@ -252,7 +253,7 @@
   // Обертка техники
   margin: variables.$responsiveSmallPadding 0 0 0;
   display: flex;
-  flex-direction: column;
+  align-items: center;
 }
 
 .ItemDetailTechnique {
@@ -280,7 +281,18 @@
 .ItemDetailDescriptionWrapper {
   // Обертка описания
   margin: variables.$responsiveSmallPadding 0 0 0;
+  width: 100%;
   display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  overflow: hidden;
+  max-height: calc(calc(16px - (4 * ((1440px - 100vw) / (1440 - 375)))) * 8);
+  transition: max-height 0.3s ease-in-out;
+
+  &.expanded {
+    max-height: none; // Убираем ограничение по высоте при раскрытии
+  }
 }
 
 .ItemDetailDescription {
@@ -291,5 +303,354 @@
 
 .ItemDetailReadMoreButton {
   // Кнопка "Читать далее"
-  display: flex;
+  margin: variables.$responsiveSmallPadding 0 0 auto;
+  font-size: calc(14px - (2 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 500;
+  color: variables.$red;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  background: none;
+}
+
+@media (min-width: 1441px) {
+  .ItemDetailContainer {
+    // главный контейнер
+    margin: variables.$staticPcTopPadding variables.$responsiveLeftAndRightPadding 0
+      variables.$responsiveLeftAndRightPadding;
+  }
+
+  .ItemPageNavigation {
+    // навигационный блок
+    margin: variables.$staticPcMediumPadding 0 0 0;
+  }
+
+  .ItemPageNavigationItem {
+    // элемент списка навигации
+    font-size: 18px;
+  }
+
+  .ItemPageNavigationItemSeparator {
+    // разделитель между элементами списка навигации
+    margin: 0 variables.$staticPcMediumPadding;
+    font-size: 18px;
+  }
+
+  .ItemDetailTopContainer {
+    // Верхний контейнер с изображением
+    margin: variables.$staticPcMediumPadding 0 0 0;
+  }
+
+  .ItemDetailImageWrapper {
+    // Обертка для изображения
+    margin: 0 variables.$staticPcMediumPadding variables.$staticPcMediumPadding variables.$staticPcMediumPadding;
+  }
+
+  .ItemDetailZoomButtonWrapper {
+    // Обертка кнопки увеличения изображения
+    right: calc(-1 * variables.$staticPcSmallPadding);
+    bottom: calc(-1 * variables.$staticPcSmallPadding);
+  }
+
+  .ItemDetailTitleWrapper {
+    // Обертка заголовка
+    margin: variables.$staticPcSmallPadding 0 0 0;
+    display: flex;
+    p {
+      font-size: 18px;
+    }
+  }
+
+  .ItemDetailDateOfCreationWrapper {
+    // Обертка даты создания
+    margin: variables.$staticPcSmallPadding 0 variables.$staticPcMediumPadding 0;
+  }
+
+  .ItemDetailDateOfCreation {
+    // Дата создания
+    font-size: 16px;
+  }
+
+  .ItemDetailArtistNameWrapper {
+    // Обертка имени художника
+    margin: variables.$staticPcMediumPadding 0 0 0;
+  }
+
+  .ItemDetailArtistName {
+    // Лейбл "Митець"
+    font-size: 14px;
+  }
+
+  .ItemDetailArtistNameValue {
+    // Имя художника
+    margin: 0 0 0 variables.$staticPcSmallPadding;
+    font-size: 16px;
+  }
+
+  .ItemDetailSizeWrapper {
+    // Обертка размеров картины
+    margin: variables.$staticPcSmallPadding 0 0 0;
+  }
+
+  .ItemDetailSize {
+    // Лейбл "Розмір"
+    font-size: 14px;
+  }
+
+  .ItemDetailSizeValue {
+    // Значение размеров
+    margin: 0 0 0 variables.$staticPcSmallPadding;
+    font-size: 16px;
+  }
+
+  .ItemDetailStileWrapper {
+    // Обертка стиля
+    margin: variables.$staticPcSmallPadding 0 0 0;
+  }
+
+  .ItemDetailStile {
+    // Лейбл "Стиль"
+    font-size: 14px;
+  }
+
+  .ItemDetailStileValue {
+    // Значение стиля
+    margin: 0 0 0 variables.$staticPcSmallPadding;
+    font-size: 16px;
+  }
+
+  .ItemDetailOriginalTitleWrapper {
+    // Обертка оригинального названия
+    margin: variables.$staticPcSmallPadding 0 0 0;
+  }
+
+  .ItemDetailOriginalTitle {
+    // Лейбл "Оригінальна назва"
+    font-size: 14px;
+  }
+
+  .ItemDetailOriginalTitleValue {
+    // Оригинальное название
+    margin: 0 0 0 variables.$staticPcSmallPadding;
+    font-size: 16px;
+  }
+
+  .ItemDetailTechniqueWrapper {
+    // Обертка техники
+    margin: variables.$staticPcSmallPadding 0 0 0;
+  }
+
+  .ItemDetailTechnique {
+    // Лейбл "Техніка"
+    font-size: 14px;
+  }
+
+  .ItemDetailTechniqueValue {
+    // Значение техники
+    margin: 0 0 0 variables.$staticPcSmallPadding;
+    font-size: 16px;
+  }
+
+  .ItemDetailRightContainer {
+    // Правая часть с описанием
+    margin: 0 0 0 variables.$responsiveLeftAndRightPadding;
+  }
+
+  .ItemDetailDescriptionWrapper {
+    // Обертка описания
+    margin: variables.$staticPcSmallPadding 0 0 0;
+    max-height: calc(16px * 8);
+  }
+
+  .ItemDetailDescription {
+    // Описание картины
+    font-size: 16px;
+  }
+
+  .ItemDetailReadMoreButton {
+    // Кнопка "Читать далее"
+    margin: variables.$staticPcSmallPadding 0 0 auto;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .ItemDetailBottomContainer {
+    // Нижний контейнер с деталями
+    flex-direction: column;
+  }
+
+  .ItemDetailLeftContainer {
+    // Левая часть (название, инфо о картине)
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  .ItemDetailRightContainer {
+    // Правая часть с описанием
+    margin: variables.$staticMobileMediumPadding 0 0 0;
+  }
+}
+
+@media (max-width: 569px) {
+  .ItemDetailContainer {
+    // главный контейнер
+    margin: variables.$staticMobileTopPadding variables.$responsiveLeftAndRightPadding 0
+      variables.$responsiveLeftAndRightPadding;
+  }
+
+  .ItemPageNavigation {
+    // навигационный блок
+    margin: variables.$staticMobileMediumPadding 0 0 0;
+  }
+
+  .ItemPageNavigationItem {
+    // элемент списка навигации
+    font-size: 14px;
+  }
+
+  .ItemPageNavigationItemSeparator {
+    // разделитель между элементами списка навигации
+    margin: 0 variables.$staticMobileMediumPadding;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .ItemDetailTopContainer {
+    // Верхний контейнер с изображением
+    margin: variables.$staticMobileMediumPadding 0 0 0;
+  }
+
+  .ItemDetailImageWrapper {
+    // Обертка для изображения
+    margin: 0 variables.$staticMobileMediumPadding variables.$staticMobileMediumPadding
+      variables.$staticMobileMediumPadding;
+  }
+
+  .ItemDetailZoomButtonWrapper {
+    // Обертка кнопки увеличения изображения
+    position: absolute;
+    right: calc(-1 * variables.$staticMobileSmallPadding);
+    bottom: calc(-1 * variables.$staticMobileSmallPadding);
+  }
+
+  .ItemDetailTitleWrapper {
+    // Обертка заголовка
+    margin: variables.$staticMobileSmallPadding 0 0 0;
+    p {
+      font-size: 14px;
+    }
+  }
+
+  .ItemDetailDateOfCreationWrapper {
+    // Обертка даты создания
+    margin: variables.$staticMobileSmallPadding 0 variables.$staticMobileMediumPadding 0;
+  }
+
+  .ItemDetailDateOfCreation {
+    // Дата создания
+    font-size: 12px;
+  }
+
+.ItemDetailLeftContainer {
+  // Левая часть (название, инфо о картине)
+  margin: 0 auto 0 0;
+}
+
+  .ItemDetailArtistNameWrapper {
+    // Обертка имени художника
+    margin: variables.$staticMobileMediumPadding 0 0 0;
+  }
+
+  .ItemDetailArtistName {
+    // Лейбл "Митець"
+    font-size: 12px;
+  }
+
+  .ItemDetailArtistNameValue {
+    // Имя художника
+    margin: 0 0 0 variables.$staticMobileSmallPadding;
+    font-size: 12px;
+  }
+
+  .ItemDetailSizeWrapper {
+    // Обертка размеров картины
+    margin: variables.$staticMobileSmallPadding 0 0 0;
+  }
+
+  .ItemDetailSize {
+    // Лейбл "Розмір"
+    font-size: 12px;
+  }
+
+  .ItemDetailSizeValue {
+    // Значение размеров
+    margin: 0 0 0 variables.$staticMobileSmallPadding;
+    font-size: 12px;
+  }
+
+  .ItemDetailStileWrapper {
+    // Обертка стиля
+    margin: variables.$staticMobileSmallPadding 0 0 0;
+  }
+
+  .ItemDetailStile {
+    // Лейбл "Стиль"
+    font-size: 12px;
+  }
+
+  .ItemDetailStileValue {
+    // Значение стиля
+    margin: 0 0 0 variables.$staticMobileSmallPadding;
+    font-size: 12px;
+  }
+
+  .ItemDetailOriginalTitleWrapper {
+    // Обертка оригинального названия
+    margin: variables.$staticMobileSmallPadding 0 0 0;
+  }
+
+  .ItemDetailOriginalTitle {
+    // Лейбл "Оригінальна назва"
+    font-size: 12px;
+  }
+
+  .ItemDetailOriginalTitleValue {
+    // Оригинальное название
+    margin: 0 0 0 variables.$staticMobileSmallPadding;
+    font-size: 12px;
+  }
+
+  .ItemDetailTechniqueWrapper {
+    // Обертка техники
+    margin: variables.$staticMobileSmallPadding 0 0 0;
+  }
+
+  .ItemDetailTechnique {
+    // Лейбл "Техніка"
+    font-size: 12px;
+  }
+
+  .ItemDetailTechniqueValue {
+    // Значение техники
+    margin: 0 0 0 variables.$staticMobileSmallPadding;
+    font-size: 12px;
+  }
+
+  .ItemDetailDescriptionWrapper {
+    // Обертка описания
+    margin: variables.$staticMobileSmallPadding 0 0 0;
+    max-height: calc(12px * 8);
+  }
+
+  .ItemDetailDescription {
+    // Описание картины
+    font-size: 12px;
+  }
+
+  .ItemDetailReadMoreButton {
+    // Кнопка "Читать далее"
+    margin: variables.$staticMobileSmallPadding 0 0 auto;
+    font-size: 12px;
+  }
 }

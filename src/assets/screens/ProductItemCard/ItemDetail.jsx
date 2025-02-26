@@ -15,6 +15,7 @@ function ItemDetail({ index }) {
 	const { t } = useTranslation()
 	const [product, setProduct] = useState([])
 	const { id } = useParams()
+	const [isExpanded, setIsExpanded] = useState(false)
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 	const [creator, setCreator] = useState({})
@@ -102,6 +103,9 @@ function ItemDetail({ index }) {
 
 	const handleAuthorPreviewClick = (id) => {
 		navigate(`/artist/${id}`)
+	}
+	const toggleText = () => {
+		setIsExpanded((prevState) => !prevState)
 	}
 	return (
 		<div className={styles.ItemDetailContainer}>
@@ -221,7 +225,7 @@ function ItemDetail({ index }) {
 							className={`${styles.ItemDetailArtistNameWrapper}`}
 						>
 							<p className={`${styles.ItemDetailArtistName}`}>
-								{t('product.authorTitle')}
+								{t('product.authorTitle')}&#58;
 							</p>
 							<p
 								className={`${styles.ItemDetailArtistNameValue}`}
@@ -238,7 +242,7 @@ function ItemDetail({ index }) {
 						</div>
 						<div className={`${styles.ItemDetailSizeWrapper}`}>
 							<p className={`${styles.ItemDetailSize}`}>
-								{t('product.Size')}
+								{t('product.Size')}&#58;
 							</p>
 							<p className={`${styles.ItemDetailSizeValue}`}>
 								<TranslatedContent
@@ -250,7 +254,7 @@ function ItemDetail({ index }) {
 						</div>
 						<div className={`${styles.ItemDetailStileWrapper}`}>
 							<p className={`${styles.ItemDetailStile}`}>
-								{t('product.Style')}
+								{t('product.Style')}&#58;
 							</p>
 							<p className={`${styles.ItemDetailStileValue}`}>
 								<TranslatedContent
@@ -264,7 +268,7 @@ function ItemDetail({ index }) {
 							className={`${styles.ItemDetailOriginalTitleWrapper}`}
 						>
 							<p className={`${styles.ItemDetailOriginalTitle}`}>
-								{t('Оригінальна назва')}&#58;
+								{t('product.OriginalTitle')}&#58;
 							</p>
 							<p
 								className={`${styles.ItemDetailOriginalTitleValue}`}
@@ -280,7 +284,7 @@ function ItemDetail({ index }) {
 						</div>
 						<div className={`${styles.ItemDetailTechniqueWrapper}`}>
 							<p className={`${styles.ItemDetailTechnique}`}>
-								{t('product.Tech')}
+								{t('product.Tech')}&#58;
 							</p>
 							<p className={`${styles.ItemDetailTechniqueValue}`}>
 								<TranslatedContent
@@ -293,7 +297,9 @@ function ItemDetail({ index }) {
 					</div>
 				</div>
 				<div className={`${styles.ItemDetailRightContainer}`}>
-					<div className={`${styles.ItemDetailDescriptionWrapper}`}>
+					<div
+						className={`${styles.ItemDetailDescriptionWrapper} ${isExpanded ? styles.expandedexpanded : ''}`}
+					>
 						<p className={`${styles.ItemDetailDescription}`}>
 							<TranslatedContent
 								en={product.description_en}
@@ -302,8 +308,11 @@ function ItemDetail({ index }) {
 							/>
 						</p>
 					</div>
-					<button className={`${styles.ItemDetailReadMoreButton}`}>
-						{t('Читати далі')}
+					<button
+						className={`${styles.ItemDetailReadMoreButton}`}
+						onClick={toggleText}
+					>
+						{isExpanded ? t('Згорнути текст') : t('Читати далі')}
 					</button>
 				</div>
 			</div>

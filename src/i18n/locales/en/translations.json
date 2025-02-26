@@ -166,9 +166,10 @@
     "у нижній частині новинних статей Art & Culture Online, профілів митців та попередніх переглядів виставок, або переглядайте сторінки митців нижче.": "subscription boxes at the bottom of Art & Culture Online news articles, artist profiles and exhibition previews, or browse the artist pages below.",
 
     "product": {
-        "authorTitle": "Artist:",
-        "Style": "Style:",
-        "Tech": "Technique:",
-        "Size": "Size:"
+        "authorTitle": "Artist",
+        "Style": "Style",
+        "Tech": "Technique",
+        "Size": "Size",
+        "OriginalTitle": "Original title"
     }
 }
