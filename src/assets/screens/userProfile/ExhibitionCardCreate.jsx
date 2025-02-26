@@ -7,6 +7,8 @@ import styles from '@styles/components/ExhibitionCard/ExhibitionCardCreate.modul
 import axios from 'axios'
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { IconContext } from 'react-icons/lib'
+import { TiDelete } from 'react-icons/ti'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../Context/AuthContext'
 import API from '../../../utils/api'
@@ -767,19 +769,33 @@ function ExhibitionForm() {
 									className={styles.chipImage}
 								/>
 							)}
-							<p>{author.title || author.email}</p>
-							<button
-								onClick={() =>
-									handleSelectAuthorPaintings(author.id)
-								}
-							>
-								{t('Обрати картини')}
-							</button>
-							<button
-								onClick={() => handleRemoveAuthor(author.id)}
-							>
-								×
-							</button>
+							<div className={styles.chipContent}>
+								{/* <p>{author.title || author.email}</p> */}
+								<button
+									onClick={() =>
+										handleSelectAuthorPaintings(author.id)
+									}
+								>
+									{t('Обрати картини')}
+								</button>
+								<button
+									onClick={() =>
+										handleRemoveAuthor(author.id)
+									}
+								>
+									<IconContext.Provider
+										value={{
+											fill: 'red',
+											size: '2rem',
+											style: { padding: '4px' },
+											color: 'red',
+											cursor: 'pointer',
+										}}
+									>
+										<TiDelete />
+									</IconContext.Provider>
+								</button>
+							</div>
 							{/* Render selected paintings for this author */}
 							{selectedAuthorPaintings[author.id] && (
 								<div className={styles.authorPaintings}>
