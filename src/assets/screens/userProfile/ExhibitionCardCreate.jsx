@@ -46,6 +46,7 @@ function ExhibitionForm() {
 	const [museumSearchResult, setMuseumSearchResult] = useState([])
 	const [museumSearchQuery, setMuseumSearchQuery] = useState('')
 	const [loading, setLoading] = useState(false)
+	const [openDropdownAuthorId, setOpenDropdownAuthorId] = useState(null)
 
 	const navigate = useNavigate()
 	const { t } = useTranslation()
@@ -91,6 +92,8 @@ function ExhibitionForm() {
 
 		fetchArtistsAndMuseums()
 	}, [setArtists, setMuseums])
+
+	// JS approach to detect scrollbar width and add a margin-right on body.
 
 	const handleMuseumSearchChange = async (e) => {
 		const query = e.target.value
@@ -470,6 +473,9 @@ function ExhibitionForm() {
 	const defaultMuseumImageUrl = '/Img/museumPhoto_2.jpg'
 	const defaultAuthorImageUrl = '/Img/ArtistPhoto.jpg'
 	const defaultPaintingImageUrl = '/Img/ArtistPhoto.jpg'
+	const toggleDropdown = (authorId) => {
+		setOpenDropdownAuthorId((prev) => (prev === authorId ? null : authorId))
+	}
 
 	return (
 		<ProfilePageContainer>
@@ -750,106 +756,157 @@ function ExhibitionForm() {
 							key={`author-${author.id}`}
 							className={styles.chipContainer}
 						>
-							{author.images ? (
-								<>
-									{console.log(
-										'Author or painting result:',
-										author.images,
-									)}
+							<>
+								{author.images ? (
+									<>
+										{console.log(
+											'Author or painting result:',
+											author.images,
+										)}
+										<img
+											src={getImageUrl(author.images)}
+											alt={author.title || author.email}
+											className={styles.chipImage}
+										/>
+									</>
+								) : (
 									<img
-										src={getImageUrl(author.images)}
-										alt={author.title || author.email}
+										src={defaultAuthorImageUrl}
+										alt="Default author"
 										className={styles.chipImage}
 									/>
-								</>
-							) : (
-								<img
-									src={defaultAuthorImageUrl}
-									alt="Default author"
-									className={styles.chipImage}
-								/>
-							)}
-							<div className={styles.chipContent}>
-								{/* <p>{author.title || author.email}</p> */}
-								<button
-									onClick={() =>
-										handleSelectAuthorPaintings(author.id)
-									}
-								>
-									{t('Обрати картини')}
-								</button>
-								<button
-									onClick={() =>
-										handleRemoveAuthor(author.id)
-									}
-								>
-									<IconContext.Provider
-										value={{
-											fill: 'red',
-											size: '2rem',
-											style: { padding: '4px' },
-											color: 'red',
-											cursor: 'pointer',
-										}}
+								)}
+								<div className={styles.chipContent}>
+									{/* <p>{author.title || author.email}</p> */}
+									<button
+										onClick={() =>
+											handleSelectAuthorPaintings(
+												author.id,
+											)
+										}
+										type="button"
 									>
-										<TiDelete />
-									</IconContext.Provider>
-								</button>
-							</div>
-							{/* Render selected paintings for this author */}
-							{selectedAuthorPaintings[author.id] && (
-								<div className={styles.authorPaintings}>
-									{selectedAuthorPaintings[author.id].map(
-										(painting) => (
-											<div
-												key={`painting-${painting.id}`}
-												className={styles.chip}
-											>
-												{painting.images &&
-												painting.images.length > 0 ? (
-													<img
-														src={getImageUrl(
-															painting.images[0]
-																.imageUrl,
-														)}
-														alt={
-															painting.title_en ||
-															painting.title_uk
-														}
-														className={
-															styles.chipImage
-														}
-													/>
-												) : (
-													<img
-														src={
-															defaultPaintingImageUrl
-														}
-														alt="Default painting"
-														className={
-															styles.chipImage
-														}
-													/>
-												)}
-												<span>
-													{painting.title_en ||
-														painting.title_uk}
-												</span>
-												<button
-													onClick={() =>
-														handleRemovePainting(
-															author.id,
-															painting.id,
-														)
-													}
-												>
-													×
-												</button>
-											</div>
-										),
-									)}
+										{t('Обрати картини')}
+									</button>
+									<button
+										onClick={() =>
+											handleRemoveAuthor(author.id)
+										}
+									>
+										<IconContext.Provider
+											value={{
+												fill: 'red',
+												size: '2rem',
+												style: { padding: '4px' },
+												color: 'red',
+												cursor: 'pointer',
+											}}
+										>
+											<TiDelete />
+										</IconContext.Provider>
+									</button>
 								</div>
-							)}
+							</>
+							{/* Render selected paintings for this author */}
+
+							{selectedAuthorPaintings[author.id] &&
+								selectedAuthorPaintings[author.id].length >
+									0 && (
+									<div
+										className={
+											styles.authorPaintingsDropdown
+										}
+									>
+										<button
+											onClick={() =>
+												toggleDropdown(author.id)
+											}
+											className={styles.dropdownToggle}
+											type="button"
+										>
+											{t('Обрані картини')}
+											{/* You can use any icon for the arrow */}
+											{openDropdownAuthorId === author.id
+												? '▲'
+												: '▼'}
+										</button>
+										{openDropdownAuthorId === author.id && (
+											<div
+												className={
+													styles.dropdownContent
+												}
+											>
+												{selectedAuthorPaintings[
+													author.id
+												].map((painting) => (
+													<div
+														key={`painting-${painting.id}`}
+														className={styles.chip}
+													>
+														{painting.images &&
+														painting.images.length >
+															0 ? (
+															<img
+																src={getImageUrl(
+																	painting
+																		.images[0]
+																		.imageUrl,
+																)}
+																alt={
+																	painting.title_en ||
+																	painting.title_uk
+																}
+																className={
+																	styles.chipImage
+																}
+															/>
+														) : (
+															<img
+																src={
+																	defaultPaintingImageUrl
+																}
+																alt="Default painting"
+																className={
+																	styles.chipImage
+																}
+															/>
+														)}
+														<span>
+															{painting.title_en ||
+																painting.title_uk}
+														</span>
+														<button
+															onClick={() =>
+																handleRemovePainting(
+																	author.id,
+																	painting.id,
+																)
+															}
+															className={
+																styles.chipRemoveButton
+															}
+														>
+															<IconContext.Provider
+																value={{
+																	fill: 'red',
+																	size: '2rem',
+																	style: {
+																		padding:
+																			'4px',
+																	},
+																	cursor: 'pointer',
+																	color: 'red',
+																}}
+															>
+																<TiDelete />
+															</IconContext.Provider>
+														</button>
+													</div>
+												))}
+											</div>
+										)}
+									</div>
+								)}
 						</div>
 					))}
 				</div>
@@ -948,60 +1005,87 @@ function ExhibitionForm() {
 						className="modal-content"
 						onClick={(e) => e.stopPropagation()}
 					>
-						<button
-							className="modal-close-button"
-							onClick={() => setIsModalOpen(false)}
-						>
-							&times;
-						</button>
-						<h2>{t('Обрати картини митця')}</h2>
+						<div className={styles.modalHeader}>
+							<h2>{t('Обрати картини митця')}</h2>
+							<button
+								className={styles.modalCloseButton}
+								onClick={() => setIsModalOpen(false)}
+							>
+								<IconContext.Provider
+									value={{
+										fill: 'red',
+										size: '3rem',
+										style: { padding: '4px' },
+										cursor: 'pointer',
+										color: 'red',
+									}}
+								>
+									<TiDelete />
+								</IconContext.Provider>
+							</button>
+						</div>
 						<div className={styles.paintingsList}>
 							{modalData.paintings.map((painting) => (
 								<div
 									key={painting.id}
 									className={styles.paintingItem}
+									onClick={() =>
+										handleTogglePaintingSelection(painting)
+									}
 								>
-									{painting.images &&
-									painting.images.length > 0 ? (
-										<img
-											src={getImageUrl(
-												painting.images[0].imageUrl,
-											)}
-											alt={
-												painting.title_en ||
-												painting.title_uk
-											}
-											className={styles.paintingImage}
-										/>
-									) : (
-										<img
-											src={defaultPaintingImageUrl}
-											alt="Default painting"
-											className={styles.paintingImage}
-										/>
-									)}
+									<div
+										className={
+											styles.paintingImageContainer
+										}
+									>
+										{painting.images &&
+										painting.images.length > 0 ? (
+											<img
+												src={getImageUrl(
+													painting.images[0].imageUrl,
+												)}
+												alt={
+													painting.title_en ||
+													painting.title_uk
+												}
+												className={styles.paintingImage}
+											/>
+										) : (
+											<img
+												src={defaultPaintingImageUrl}
+												alt="Default painting"
+												className={styles.paintingImage}
+											/>
+										)}
+										{/* Tooltip appears on hover */}
+										<div className={styles.tooltip}>
+											{t('Натисніть щоб обрати')}
+										</div>
+										{/* If selected, show overlay */}
+										{modalData.selectedPaintings.find(
+											(p) => p.id === painting.id,
+										) && (
+											<div
+												className={
+													styles.selectedOverlay
+												}
+											/>
+										)}
+									</div>
 									<span>
 										{painting.title_en || painting.title_uk}
 									</span>
-									<input
-										type="checkbox"
-										checked={
-											!!modalData.selectedPaintings.find(
-												(p) => p.id === painting.id,
-											)
-										}
-										onChange={() =>
-											handleTogglePaintingSelection(
-												painting,
-											)
-										}
-									/>
 								</div>
 							))}
 						</div>
-						<button onClick={handleSaveSelectedPaintings}>
-							{t('Зберегти')}
-						</button>
+						<div className={styles.modalFooter}>
+							<button
+								className={styles.modalSaveButton}
+								onClick={handleSaveSelectedPaintings}
+							>
+								{t('Зберегти')}
+							</button>
+						</div>
 					</div>
 				</div>
 			)}
