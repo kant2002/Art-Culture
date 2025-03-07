@@ -60,6 +60,24 @@ function Sidebar() {
 					>
 						{t('Адміністрація')}
 					</button>
+					<button
+						onClick={() => navigate('/admin/users')}
+						className={`${styles.profileAction}`}
+					>
+						{t('Manage Users')}
+					</button>
+					<button
+						onClick={() => navigate('/admin/posts')}
+						className={`${styles.profileAction}`}
+					>
+						{t('Manage Posts')}
+					</button>
+					<button
+						onClick={() => navigate('/admin/art-terms')}
+						className={`${styles.profileAction}`}
+					>
+						{t('Керування термінами')}
+					</button>
 				</>
 			)}
 			{(isAuthor || isCreator || isMuseum || isExhibition) && (
