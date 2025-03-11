@@ -41,22 +41,29 @@ model User {
 }
 
 model Post {
-  id           Int      @id @default(autoincrement())
-  title_en     String   @db.VarChar(250)
-  title_uk     String   @db.VarChar(250)
-  content_en   String   @db.VarChar(5000)
-  content_uk   String   @db.VarChar(5000)
-  authorId     Int      @map("author_id")
-  creatorId    Int?     @map("creator_id")
-  museumId     Int?     @map("museum_id")
-  exhibitionId Int?     @map("exhibition_id")
+  id           Int        @id @default(autoincrement())
+  title_en     String     @db.VarChar(250)
+  title_uk     String     @db.VarChar(250)
+  content_en   String     @db.VarChar(5000)
+  content_uk   String     @db.VarChar(5000)
+  authorId     Int        @map("author_id")
+  creatorId    Int?       @map("creator_id")
+  museumId     Int?       @map("museum_id")
+  exhibitionId Int?       @map("exhibition_id")
   images       String?
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
-  author       User     @relation(fields: [authorId], references: [id])
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+  author       User       @relation(fields: [authorId], references: [id])
   likes        Like[]
+  status       PostStatus @default(PENDING)
 
   @@index([authorId], map: "Post_author_id_fkey")
+}
+
+enum PostStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }
 
 model Product {
@@ -83,9 +90,16 @@ model Product {
   images         ProductImage[]      @relation("ProductImages")
   exhibitions    ExhibitionProduct[]
   likes          Like[]
+  status         ProductStatus       @default(PENDING)
 
   @@index([museumId], map: "Product_museumId_fkey")
   @@index([authorId], map: "Product_authorId_fkey")
+}
+
+enum ProductStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }
 
 model ProductImage {

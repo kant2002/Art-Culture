@@ -50,6 +50,7 @@ export const createProduct = async (req, res, next) => {
         style_uk,
         technique_en,
         technique_uk,
+        status: "PENDING",
         images: {
           create: images,
         },

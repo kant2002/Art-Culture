@@ -75,8 +75,8 @@ export const createPost = async (req, res, next) => {
         content_uk,
         images: imageUrl,
         author: { connect: { id: userId } },
+        status: "PENDING",
       },
-      //TODO: include id: true
       include: { author: { select: { email: true, id: true } } },
     })
 
@@ -92,7 +92,7 @@ export const getAllPosts = async (req, res, next) => {
     const filter = authorId ? { authorId: parseInt(authorId) } : {}
 
     const posts = await prisma.post.findMany({
-      where: filter,
+      where: { status: "APPROVED", ...filter },
       include: {
         author: {
           select: {
