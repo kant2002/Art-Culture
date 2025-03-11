@@ -58,7 +58,31 @@ function Sidebar() {
 						className={`${styles.profileAction} ${styles.profileActionActive}`}
 						onClick={() => navigate('/admin/dashboard')}
 					>
-						{t('Адміністрація')}
+						{t('Панель керування')}
+					</button>
+					<button
+						onClick={() => navigate('/admin/users')}
+						className={`${styles.profileAction}`}
+					>
+						{t('Керування користувачами')}
+					</button>
+					<button
+						onClick={() => navigate('/admin/posts')}
+						className={`${styles.profileAction}`}
+					>
+						{t('Керування постами')}
+					</button>
+					<button
+						onClick={() => navigate('/admin/products')}
+						className={`${styles.profileAction}`}
+					>
+						{t('Керування продуктами')}
+					</button>
+					<button
+						onClick={() => navigate('/admin/art-terms')}
+						className={`${styles.profileAction}`}
+					>
+						{t('Керування термінами')}
 					</button>
 				</>
 			)}

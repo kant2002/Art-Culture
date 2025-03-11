@@ -1,0 +1,56 @@
+@use '@styles/utilities/variables.scss';
+
+.AdminDashboardTitle {
+    // Заголовок страницы
+}
+
+.AdminDashboardStatisticsContainer {
+    // Контейнер для блока "Статистика"
+    display: flex;
+}
+
+.AdminDashboardDemandARelookContainer {
+    // Контейнер для кнопки "Запросить пересмотр"
+    display: flex;
+    flex-direction: column;
+}
+
+.AdminDashboardDemandARelookTitle {
+    // Заголовок блока "Запросить пересмотр"
+}
+
+.AdminDashboardDemandARelookPostsContainer {
+    // Контейнер для карточек "Запросить пересмотр"
+    display: flex;
+    flex-direction: row;
+}
+
+.AdminDashboardDemandARelookNewsContainer {
+    // Контейнер для кнопки "Новости"
+    display: flex;
+    flex-direction: column;
+}
+
+.AdminDashboardDemandARelookNewsTitle {
+    // Заголовок блока "Новости"
+}
+
+.AdminDashboardDemandARelookCardsContainer {
+    // Контейнер для карточек "Запросить пересмотр"
+    display: flex;
+    flex-direction: column;
+}
+
+.AdminDashboardDemandARelookCardsTitle {
+    // Заголовок блока "Запросить пересмотр"
+}
+
+.AdminDashboardNewUsersContainer {
+    // Контейнер для блока "Новые пользователи"
+    display: flex;
+    flex-direction: column;
+}
+
+.AdminDashboardDemandARelookTitle {
+    // Заголовок блока "Новые пользователи"
+}
