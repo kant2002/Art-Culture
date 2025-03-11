@@ -20,7 +20,12 @@ const router = express.Router()
 router.post(
   "/register",
   uploadProfileLogo.upload,
-  uploadProfileLogo.processImages,
+  (req, res, next) => {
+    if (!req.file) {
+      return next()
+    }
+    uploadProfileLogo.processImages(req, res, next)
+  },
 
   [
     body("email").isEmail().withMessage("Enter a valid email"),
@@ -102,7 +107,12 @@ router.put(
   "/me",
   authenticateToken,
   uploadProfileLogo.upload,
-  uploadProfileLogo.processImages,
+  (req, res, next) => {
+    if (!req.file) {
+      return next()
+    }
+    uploadProfileLogo.processImages(req, res, next)
+  },
 
   [
     body("title")
