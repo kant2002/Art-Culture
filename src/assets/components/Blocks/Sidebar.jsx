@@ -67,7 +67,7 @@ function Sidebar() {
 						{t('Керування користувачами')}
 					</button>
 					<button
-						onClick={() => navigate('/admin/posts')}
+						onClick={() => navigate('/admin/news-review')}
 						className={`${styles.profileAction}`}
 					>
 						{t('Керування постами')}

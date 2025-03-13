@@ -154,9 +154,9 @@ const AdminDashboard = () => {
 			</div>
 			<div className={styles.AdminDashboardStatisticsContainer}>
 				{[
+					{ key: 'users', label: t('Нові користувачі') },
 					{ key: 'posts', label: t('Новини') },
 					{ key: 'products', label: t('Карточки') },
-					{ key: 'users', label: t('Нові користувачі') },
 				].map(({ key, label }) => {
 					const value = pendingCounts[key] ?? 0 // Если undefined или null, приравниваем к 0
 					return (
