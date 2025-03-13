@@ -40,7 +40,7 @@
     width: fit-content;
     max-width: none;
     margin: 0 -1px 0 auto;
-    padding: 0 variables.$staticButtonLeftAndRightPadding;
+    padding: 0 0 0 variables.$staticButtonLeftAndRightPadding;
     height: calc(51px - (11 * ((1440px - 100vw) / (1440 - 375))));
     min-height: 40px;
     max-height: 51px;
