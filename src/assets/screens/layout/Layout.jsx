@@ -9,6 +9,7 @@ import ScrollToTop from '../../../utils/ScrollToTop'
 import Search from '../../screens/Search/Search'
 import ErrorPage from '../404/404'
 import AdminDashboard from '../Admin/AdminDashboard'
+import AdminNewsReview from '../Admin/AdminNewsReview'
 import AdminArtTermsEdit from '../Admin/ArtTermsEdit'
 import AdminArtTermsList from '../Admin/ArtTermsList'
 import AllArtistsPage from '../AllArtistsPage/AllArtistsPage'
@@ -118,6 +119,14 @@ const Layout = ({ heading = '' }) => {
 						element={
 							<ProtectedRoute roles={['ADMIN']}>
 								<AdminDashboard />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="/admin/news-review"
+						element={
+							<ProtectedRoute roles={['ADMIN']}>
+								<AdminNewsReview />
 							</ProtectedRoute>
 						}
 					/>
