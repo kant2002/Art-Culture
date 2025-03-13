@@ -164,9 +164,9 @@ const AdminDashboard = () => {
 							key={key}
 							className={styles.AdminDashboardStatisticsItemContainer}
 						>
-							<h3 className={styles.AdminDashboardStatisticsItemTitle}>
+							<h4 className={styles.AdminDashboardStatisticsItemTitle}>
 								{label}
-							</h3>
+							</h4>
 							<h3
 								className={styles.AdminDashboardStatisticsItemValue}
 								style={{ visibility: value === 0 ? 'hidden' : 'visible' }}
