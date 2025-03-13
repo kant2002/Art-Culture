@@ -24,6 +24,14 @@ h3 {
 	text-transform: uppercase;
 }
 
+h4 {
+	font-family: $default-font;
+	font-size: calc(18px - (4 * ((1440px - 100vw) / (1440 - 375))));
+	font-weight: 600;
+	color: black;
+	text-transform: uppercase;
+}
+
 @media (min-width: 1441px) {
     h1 {
         font-size: 42px;
