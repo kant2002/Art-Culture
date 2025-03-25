@@ -17,44 +17,47 @@ import {
 
 const columnHelper = createColumnHelper();
 
-const AdminArtTermsList = () => {
+const AdminPostList = () => {
   const { t } = useTranslation();
-  const [artTerms, setArtTerms] = useState([]);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(""); // Error state
 
   const columns = [
     columnHelper.accessor("id", {
-      cell: (info) => <a href={`/admin/art-terms/${info.row.getValue("id")}`}>{info.renderValue()}</a>,
+      cell: (info) => <a href={`/admin/posts/${info.row.getValue("id")}`}>{info.renderValue()}</a>,
       header: () => <span>{t("Код")}</span>,
     }),
+    columnHelper.accessor("createdAt", {
+      header: () => <span>{t("Дата")}</span>,
+      cell: (info) => info.renderValue(),
+    }),
+    columnHelper.accessor("author.title", {
+      header: () => <span>{t("Автор")}</span>,
+      cell: (info) => info.renderValue(),
+    }),
     columnHelper.accessor("title_uk", {
-      cell: (info) => <a href={`/admin/art-terms/${info.row.getValue("id")}`}>{info.renderValue()}</a>,
+      cell: (info) => <a href={`/admin/posts/${info.row.getValue("id")}`}>{info.renderValue()}</a>,
       header: () => <span>{t("Назва українською")}</span>,
     }),
     columnHelper.accessor("title_en", {
       header: () => <span>{t("Назва англійською")}</span>,
-      cell: (info) => <a href={`/admin/art-terms/${info.row.getValue("id")}`}>{info.renderValue()}</a>,
+      cell: (info) => <a href={`/admin/posts/${info.row.getValue("id")}`}>{info.renderValue()}</a>,
     }),
-    columnHelper.accessor("description_uk", {
-      header: () => <span>{t("Опис українською")}</span>,
-      cell: (info) => info.renderValue(),
-    }),
-    columnHelper.accessor("description_en", {
-      header: () => <span>{t("Опис англійською")}</span>,
-      cell: (info) => info.renderValue(),
+    columnHelper.accessor("status", {
+      header: () => <span>{t("Статус")}</span>,
+      cell: (info) => t("Статус поста " + info.renderValue()),
     }),
   ];
 
   useEffect(() => {
     const fetchUserPosts = async () => {
       try {
-        const response = await API.get("/art-terms");
-        setArtTerms(
-          Array.isArray(response.data?.artTerms) ? response.data?.artTerms : []
+        const response = await API.get("/admin/posts");
+        setData(
+          Array.isArray(response.data.data) ? response.data.data : []
         );
       } catch (err) {
-        console.error("Loading error:", err);
         setError(t("Помилка завантаження"));
       } finally {
         setLoading(false);
@@ -64,7 +67,7 @@ const AdminArtTermsList = () => {
     fetchUserPosts();
   }, []);
   const table = useReactTable({
-    data: artTerms,
+    data: data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -73,13 +76,13 @@ const AdminArtTermsList = () => {
   });
   return (
     <ProfilePageContainer>
-      <h2>{t("Список термінів")}</h2>
+      <h2>{t("Список постів")}</h2>
       {loading ? (
         <Loading />
       ) : error ? (
         <LoadingError />
-      ) : artTerms.length === 0 ? (
-        <p>{t("Термінів немає")}</p>
+      ) : data.length === 0 ? (
+        <p>{t("Постів немає")}</p>
       ) : (
         <>
           <table>
@@ -151,4 +154,4 @@ const AdminArtTermsList = () => {
   );
 };
 
-export default AdminArtTermsList;
+export default AdminPostList;
