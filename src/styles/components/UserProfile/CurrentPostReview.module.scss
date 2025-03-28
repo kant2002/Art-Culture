@@ -1,2 +1,67 @@
 @use "@styles/utilities/variables.scss";
 
+.PostContainer {
+    display: flex;
+    width: 100%;
+    margin: variables.$responsiveMediumPadding 0 0 0;
+}
+
+.LeftContainer {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+.AuthorContainer {
+}
+
+.AuthorImageContainer {
+}
+
+.AuthorNameContainer {
+}
+
+.DateContainer {
+}
+
+.RightContainer {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.TitleContainer {
+}
+
+.DescriptionContainer {
+}
+
+.DescriptionText {
+}
+
+.ButtonsContainer {
+    display: flex;
+    justify-content: space-around;
+    margin: variables.$responsiveMediumPadding 0 0 0;
+}
+
+.Button {
+    padding: 0 variables.$staticButtonLeftAndRightPadding;
+    height: calc(51px - (11 * ((1440px - 100vw) / (1440 - 375))));
+
+    min-height: 40px;
+    max-height: 51px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: calc(34px - (4 * ((1440px - 100vw) / (1440 - 375))));
+    cursor: pointer;
+}
+
+.AcceptButton {
+    background-color: variables.$turquoise;
+}
+
+.RejectButton {
+    background-color: variables.$red;
+}
