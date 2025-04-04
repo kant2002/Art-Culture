@@ -88,3 +88,45 @@
     margin: 0 0 0 variables.$responsiveMediumPadding;
     background-color: variables.$red;
 }
+
+@media (min-width: 1441px) {
+    .PostContainer {
+        margin: variables.$staticPcMediumPadding 0 0 0;
+    }
+
+    .AuthorImage {
+        border-radius: 8px;
+    }
+
+    .AuthorNameContainer {
+        margin: variables.$staticPcSmallPadding 0 0 0;
+    }
+
+    .DateContainer {
+        margin: variables.$staticPcMediumPadding 0 0 0;
+    }
+
+    .RightContainer {
+        margin: 0 0 0 variables.$staticPcMediumPadding;
+    }
+
+    .ENTextContainer {
+        margin: variables.$staticPcMediumPadding 0 0 0;
+    }
+
+    .DescriptionContainer {
+        margin: variables.$staticPcSmallPadding 0 0 0;
+    }
+
+    .ButtonsContainer {
+        margin: variables.$staticPcMediumPadding 0 0 0;
+    }
+
+    .Button {
+        border-radius: 34px;
+    }
+
+    .RejectButton {
+        margin: 0 0 0 variables.$staticPcMediumPadding;
+    }
+}
