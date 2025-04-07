@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getBaseUrl, getImageUrl } from '../../../utils/helper.js'
+import TranslatedContent from '../../components/Blocks/TranslatedContent.jsx'
 
 function ArtistPage() {
 	const { t, i18n } = useTranslation()
@@ -138,7 +139,12 @@ function ArtistPage() {
 
 				<div className={`${styles.artistPageArtisDescriptionWrapper}`}>
 					<p className={`${styles.artistPageArtisDescription}`}>
-						{bio}
+						<TranslatedContent
+							en={bio}
+							uk={bio}
+							maxLength={300}
+							html
+						/>
 					</p>
 				</div>
 
