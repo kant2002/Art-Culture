@@ -174,7 +174,7 @@ function ArtistPage() {
 				/>
 			</div>
 
-			<ArtistPageNewsArtistsSlider />
+			<ArtistPageNewsArtistsSlider authorId={id} />
 
 			{products && products.length > 0 ? (
 				<>
