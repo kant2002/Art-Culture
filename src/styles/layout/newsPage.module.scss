@@ -289,39 +289,16 @@
   text-transform: uppercase;
 }
 
-.inputWrapper {
-  display: inline-block;
-  position: relative;
-  font-size: 16px; // или твой размер шрифта
-}
-
 .newsPageInputMail {
-  /* Поле ввода email, которое растёт по тексту */
-  display: inline-block;
+  /* Поле ввода email */
+  display: flex;
   margin: 25px 0 0 0 !important;
+  padding: $responsiveSmallPadding !important;
   border-radius: 34px !important;
   border: 1px solid #000 !important;
-  padding: $staticButtonLeftAndRightPadding;
   text-align: center;
-  background: transparent;
-  font: inherit;
-  width: auto;
-  min-width: 50px;
-  max-width: 100%;
-  box-sizing: content-box;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.inputMirror {
-  /* Скрытый "зеркальный" span для измерения ширины текста */
-  position: absolute;
-  top: 0;
-  left: 0;
-  visibility: hidden;
-  white-space: nowrap;
-  padding: $staticButtonLeftAndRightPadding;
-  font: inherit;
+  font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
+  max-width: 300px;
 }
 
 .newsPageSignUpButtonContainer {
@@ -351,28 +328,57 @@
   cursor: pointer;
 }
 
-@media (min-width: 1600px) {
-  .newsPageTopCardsContainer {
-    /* Контейнер для верхних карточек */
-    .newsPageCard5,
-    .newsPageCard6 {
-      display: flex;
-      margin: 0;
-    }
-  }
+@media (min-width: 1920px) {
+  // .newsPageTopCardsContainer {
+  //   /* Контейнер для верхних карточек */
+  //   .newsPageCard5,
+  //   .newsPageCard6 {
+  //     display: flex;
+  //     margin: 0;
+  //   }
+  // }
 
-  .newsPageBottomCardsContainer {
-    /* Контейнер для нижних карточек */
-    .newsPageCard5,
-    .newsPageCard6 {
-      display: none;
-    }
+  // .newsPageBottomCardsContainer {
+  //   /* Контейнер для нижних карточек */
+  //   .newsPageCard5,
+  //   .newsPageCard6 {
+  //     display: none;
+  //   }
 
-    .newsPageCard11,
-    .newsPageCard12 {
-      display: flex;
-    }
+  //   .newsPageCard11,
+  //   .newsPageCard12 {
+  //     display: flex;
+  //   }
+  // }
+
+  .newsPageCardContainer {
+    /* Контейнер для карточки новостей */
+    width: calc(100% / 4);
   }
+}
+
+@media (min-width: 1600px) and (max-width: 1919px) {
+  // .newsPageTopCardsContainer {
+  //   /* Контейнер для верхних карточек */
+  //   .newsPageCard5,
+  //   .newsPageCard6 {
+  //     display: flex;
+  //     margin: 0;
+  //   }
+  // }
+
+  // .newsPageBottomCardsContainer {
+  //   /* Контейнер для нижних карточек */
+  //   .newsPageCard5,
+  //   .newsPageCard6 {
+  //     display: none;
+  //   }
+
+  //   .newsPageCard11,
+  //   .newsPageCard12 {
+  //     display: flex;
+  //   }
+  // }
 
   .newsPageCardContainer {
     /* Контейнер для карточки новостей */
@@ -381,27 +387,31 @@
 }
 
 @media (max-width: 1599px) {
-  .newsPageTopCardsContainer {
-    /* Контейнер для верхних карточек */
-    .newsPageCard5,
-    .newsPageCard6 {
-      display: none;
-    }
-  }
+  // .newsPageTopCardsContainer {
+  //   /* Контейнер для верхних карточек */
+  //   .newsPageCard5,
+  //   .newsPageCard6 {
+  //     display: none;
+  //   }
+  // }
 
-  .newsPageBottomCardsContainer {
-    /* Контейнер для нижних карточек */
-    .newsPageCard5,
-    .newsPageCard6 {
-      display: flex;
-    }
+  // .newsPageBottomCardsContainer {
+  //   /* Контейнер для нижних карточек */
+  //   .newsPageCard5,
+  //   .newsPageCard6 {
+  //     display: flex;
+  //   }
 
-    .newsPageCard9,
-    .newsPageCard10,
-    .newsPageCard11,
-    .newsPageCard12 {
-      display: none;
-    }
+  //   .newsPageCard9,
+  //   .newsPageCard10,
+  //   .newsPageCard11,
+  //   .newsPageCard12 {
+  //     display: none;
+  //   }
+  // }
+  .newsPageCardContainer {
+    /* Контейнер для карточки новостей */
+    width: calc(100% / 2);
   }
 }
 
@@ -414,11 +424,6 @@
     /* Контейнер для заголовка страницы новостей */
     margin: $staticPcBigPadding $responsiveLeftAndRightPadding $staticPcMediumPadding $responsiveLeftAndRightPadding;
   }
-
-  // .newsPageTitle {
-  //     /* Заголовок страницы новостей */
-  //     font-size: 28px;
-  // }
 
   .newsPageSearchInput {
     /* Поле ввода для поиска авторов */
