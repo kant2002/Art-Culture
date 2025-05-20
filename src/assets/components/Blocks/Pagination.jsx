@@ -55,10 +55,10 @@ function Pagination({ table }) {
 					</button>
 				</div>
 				<div className={`${styles.PaginationBottomWrapper}`}>
-					<div>
+					<div className={`${styles.PaginationShowingRows}`}>
 						{t("Показується_з_рядків", { qty: table.getRowModel().rows.length, total: table.getRowCount() })}
 					</div>
-					<div className={`${styles.PaginationLastPageButton}`}>
+					<div className={`${styles.PaginationShowingRowsSelect}`}>
 						<select
 							value={table.getState().pagination.pageSize}
 							onChange={(e) => {
