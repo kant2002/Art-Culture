@@ -68,7 +68,6 @@
     user-select: none;
 }
 
-
 .DescriptionWrapper {
     // Контейнер для описания
     margin: 32px auto 0;
@@ -109,7 +108,7 @@
     margin: 0 auto;
     width: fit-content;
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     justify-content: center;
     align-items: center;
     flex-wrap: nowrap;
@@ -135,7 +134,7 @@
     // Переход на страницу
     margin: 0 variables.$staticButtonLeftAndRightPadding;
     padding: 0 variables.$responsiveSmallPadding;
-    width: 100px;
+    width: 75px;
     text-align: center;
     border: 1px solid black;
     border-radius: 4px;
@@ -157,6 +156,36 @@
     margin: 0 variables.$staticButtonLeftAndRightPadding;
 }
 
+.PaginationBottomWrapper {
+    // Контейнер для пагинации снизу
+    margin: variables.$responsiveSmallPadding auto 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.PaginationShowingRows {
+    // Показываемые строки
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.PaginationShowingRowsSelect {
+    // Выбор количества строк
+    margin: 0 variables.$staticButtonLeftAndRightPadding;
+    padding: 0 variables.$responsiveSmallPadding;
+    width: fit-content;
+    text-align: center;
+
+    select {
+        width: auto;
+        height: 100%;
+        border: 1px solid black;
+        border-radius: 4px;
+    }
+}
 
 @media (min-width: 1441px) {
     .PageContainer {
