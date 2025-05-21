@@ -226,12 +226,7 @@ body {
     bottom: calc(-29 / 1440 * 100vw);
     width: 0;
     height: 3px;
-    background: linear-gradient(
-      to right,
-      rgba(216, 57, 52, 0),
-      rgb(255, 255, 255),
-      rgba(216, 57, 52, 0)
-    );
+    background: linear-gradient(to right, rgba(216, 57, 52, 0), rgb(255, 255, 255), rgba(216, 57, 52, 0));
     transition:
       width 0.4s ease,
       left 0.4s ease;
@@ -253,6 +248,10 @@ body {
     transition: 1s;
   }
 }
+
+/**
+ * ------------------ social ------------------
+ */
 .socialContainer {
   margin: 0 0 -7px 22.5px;
   display: flex;
@@ -268,37 +267,37 @@ body {
   display: flex;
   justify-content: space-between;
   width: 100%;
-
-  &__likeButton {
-    position: relative;
-    display: flex;
-  }
-
-  &__likeButton::after {
-    content: "Like";
-    position: absolute;
-    top: 6px;
-    left: 38px;
-    font-size: 18px;
-    user-select: none;
-    color: $dark;
-  }
-
-  &__shareButton {
-    position: relative;
-    display: flex;
-  }
-
-  &__shareButton::before {
-    content: "Share";
-    position: absolute;
-    top: 6px;
-    right: 38px;
-    font-size: 18px;
-    user-select: none;
-    color: $dark;
-  }
 }
+.socialLikeAndShareInner__likeButton {
+  position: relative;
+  display: flex;
+}
+
+.socialLikeAndShareInner__likeButton::after {
+  content: "Like";
+  position: absolute;
+  top: 6px;
+  left: 38px;
+  font-size: 18px;
+  user-select: none;
+  color: $dark;
+}
+
+.socialLikeAndShareInner__shareButton {
+  position: relative;
+  display: flex;
+}
+
+.socialLikeAndShareInner__shareButton::before {
+  content: "Share";
+  position: absolute;
+  top: 6px;
+  right: 38px;
+  font-size: 18px;
+  user-select: none;
+  color: $dark;
+}
+
 .socialLikeAndShareInner.dark {
   .socialLikeAndShareInner__likeButton::after {
     color: #fff;
@@ -307,6 +306,8 @@ body {
   .socialLikeAndShareInner__shareButton::before {
     color: #fff;
   }
+}
+.shareButtonSpan {
 }
 .burgerButtonWrapper {
   margin: 0 0 0 28px;
@@ -553,12 +554,7 @@ body {
       bottom: -29px;
       width: 0;
       height: 3px;
-      background: linear-gradient(
-        to right,
-        rgba(216, 57, 52, 0),
-        rgb(255, 255, 255),
-        rgba(216, 57, 52, 0)
-      );
+      background: linear-gradient(to right, rgba(216, 57, 52, 0), rgb(255, 255, 255), rgba(216, 57, 52, 0));
       transition:
         width 0.4s ease,
         left 0.4s ease;
@@ -733,10 +729,8 @@ body {
 .burgerMenu {
   // Основной класс для контейнера бургер-меню
   margin: 0;
-  padding: calc(55px - (26 * ((1440px - 100vw) / (1440 - 375))))
-    calc(70px - (49 * ((1440px - 100vw) / (1440 - 375))))
-    calc(31px - (14 * ((1440px - 100vw) / (1440 - 375))))
-    calc(70px - (49 * ((1440px - 100vw) / (1440 - 375))));
+  padding: calc(55px - (26 * ((1440px - 100vw) / (1440 - 375)))) calc(70px - (49 * ((1440px - 100vw) / (1440 - 375))))
+    calc(31px - (14 * ((1440px - 100vw) / (1440 - 375)))) calc(70px - (49 * ((1440px - 100vw) / (1440 - 375))));
   position: fixed;
   top: 0;
   right: 0;

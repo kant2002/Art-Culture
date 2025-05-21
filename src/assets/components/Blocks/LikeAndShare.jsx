@@ -162,6 +162,7 @@ function LikeAndShare({ className, entityId, entityType, countClassName }) {
 						e.target.src = '/Img/likeHeart.svg'
 					}}
 				/>
+				<span className="shareButtonSpan">Like</span>
 			</button>
 			<ToastContainer />
 			<button className="socialLikeAndShareInner__shareButton circleButton">
@@ -174,6 +175,7 @@ function LikeAndShare({ className, entityId, entityType, countClassName }) {
 						e.target.src = '/Img/likeHeart.svg'
 					}}
 				/>
+				<span className="shareButtonSpan">Share</span>
 			</button>
 		</div>
 	)
