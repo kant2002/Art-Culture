@@ -268,35 +268,35 @@ body {
   justify-content: space-between;
   width: 100%;
 }
-.socialLikeAndShareInner__likeButton {
+.socialLikeAndShareInnerLikeButton {
   position: relative;
   display: flex;
 }
 
-.socialLikeAndShareInner__likeButton::after {
-  content: "Like";
-  position: absolute;
-  top: 6px;
-  left: 38px;
-  font-size: 18px;
-  user-select: none;
-  color: $dark;
-}
+// .socialLikeAndShareInnerLikeButton::after {
+//   content: "Like";
+//   position: absolute;
+//   top: 6px;
+//   left: 38px;
+//   font-size: 18px;
+//   user-select: none;
+//   color: $dark;
+// }
 
-.socialLikeAndShareInner__shareButton {
+.socialLikeAndShareInnerShareButton {
   position: relative;
   display: flex;
 }
 
-.socialLikeAndShareInner__shareButton::before {
-  content: "Share";
-  position: absolute;
-  top: 6px;
-  right: 38px;
-  font-size: 18px;
-  user-select: none;
-  color: $dark;
-}
+// .socialLikeAndShareInnerShareButton::before {
+//   content: "Share";
+//   position: absolute;
+//   top: 6px;
+//   right: 38px;
+//   font-size: 18px;
+//   user-select: none;
+//   color: $dark;
+// }
 
 .socialLikeAndShareInner.dark {
   .socialLikeAndShareInner__likeButton::after {
