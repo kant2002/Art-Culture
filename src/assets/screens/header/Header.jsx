@@ -492,13 +492,13 @@ function Header() {
 						</div>
 						<div className="staticHeaderTitleContainer">
 							<button className="staticHeaderTitleContainer__likeButton circleButton">
-								<img src="/Img/likeHeart.svg" alt="Like" />
+								<img src="/Img/likeHeart.png" alt="Like" />
 							</button>
 							<h2 className="staticHeaderTitle">
 								Ukrainian art & culture online
 							</h2>
 							<button className="staticHeaderTitleContainer__shareButton circleButton">
-								<img src="/Img/shareArrow.svg" alt="Share" />
+								<img src="/Img/shareArrow.png" alt="Share" />
 							</button>
 						</div>
 						<div className="staticHeaderLoginContainer">

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast, ToastContainer } from 'react-toastify'
+import styles from '@styles/layout/Header.module.scss'
 
 function LikeAndShare({ className, entityId, entityType, countClassName }) {
 	const { t } = useTranslation()
@@ -149,33 +150,33 @@ function LikeAndShare({ className, entityId, entityType, countClassName }) {
 				<div style={{ display: 'none' }}>{likeStatus.likeCount}</div>
 			)}
 			<button
-				className={`socialLikeAndShareInner__likeButton circleButton ${likeStatus.liked ? 'liked' : ''}`}
+				className={`${styles.socialLikeAndShareInnerLikeButton} ${styles.circleButton} ${likeStatus.liked ? 'liked' : ''}`}
 				onClick={handleLikeToggle}
 				disabled={isLoading}
 			>
 				<img
-					className="likeButtonImg"
-					src="/Img/likeHeart.svg"
+					className={`${styles.likeButtonImg}`}
+					src="/Img/likeHeart.png"
 					alt={t('Світлина вподобайки')}
 					onError={(e) => {
 						e.target.onerror = null
-						e.target.src = '/Img/likeHeart.svg'
+						e.target.src = '/Img/likeHeart.png'
 					}}
 				/>
-				<span className="shareButtonSpan">Like</span>
+				<span className={`${styles.shareButtonSpan}`}>Like</span>
 			</button>
 			<ToastContainer />
-			<button className="socialLikeAndShareInner__shareButton circleButton">
+			<button className={`${styles.socialLikeAndShareInnerShareButton} ${styles.circleButton}`}>
 				<img
-					className="shareButtonImg"
-					src="/Img/shareArrow.svg"
+					className={`${styles.shareButtonImg}`}
+					src="/Img/shareArrow.png"
 					alt={t('Світлина вподобайки')}
 					onError={(e) => {
 						e.target.onerror = null
-						e.target.src = '/Img/likeHeart.svg'
+						e.target.src = '/Img/likeHeart.png'
 					}}
 				/>
-				<span className="shareButtonSpan">Share</span>
+				<span className={`${styles.shareButtonSpan}`}>Share</span>
 			</button>
 		</div>
 	)

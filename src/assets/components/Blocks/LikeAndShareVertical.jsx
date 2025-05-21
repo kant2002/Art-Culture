@@ -11,22 +11,22 @@ function LikeAndShareVertical({ className }) {
 			<button className='VerticalSocialLikeAndShareInner__VerticalLikeButton circleButton'>
 				<img
 					className='VerticalLikeButtonImg'
-					src='/Img/likeHeart.svg'
+					src='/Img/likeHeart.png'
 					alt={t('Світлина вподобайки')}
 					onError={e => {
 						e.target.onerror = null
-						e.target.src = '/Img/likeHeart.svg'
+						e.target.src = '/Img/likeHeart.png'
 					}}
 				/>
 			</button>
 			<button className='VerticalSocialLikeAndShareInner__VerticalShareButton circleButton'>
 				<img
 					className='VerticalShareButtonImg'
-					src='/Img/shareArrow.svg'
+					src='/Img/shareArrow.png'
 					alt={t('Світлина вподобайки')}
 					onError={e => {
 						e.target.onerror = null
-						e.target.src = '/Img/likeHeart.svg'
+						e.target.src = '/Img/likeHeart.png'
 					}}
 				/>
 			</button>
