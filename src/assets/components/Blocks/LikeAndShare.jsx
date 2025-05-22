@@ -142,7 +142,7 @@ function LikeAndShare({ className, entityId, entityType, countClassName }) {
 
 	return (
 		<div
-			className={`${className ? className : ''} socialLikeAndShareInner`}
+			className={`${className ? className : ''} ${styles.socialLikeAndShareInner}`}
 		>
 			{countClassName ? (
 				<div className={countClassName}>{likeStatus.likeCount}</div>
@@ -150,12 +150,12 @@ function LikeAndShare({ className, entityId, entityType, countClassName }) {
 				<div style={{ display: 'none' }}>{likeStatus.likeCount}</div>
 			)}
 			<button
-				className={`${styles.socialLikeAndShareInnerLikeButton} ${styles.circleButton} ${likeStatus.liked ? 'liked' : ''}`}
+				className={`${styles.socialLikeAndShareInnerLikeButton} ${likeStatus.liked ? 'liked' : ''}`}
 				onClick={handleLikeToggle}
 				disabled={isLoading}
 			>
 				<img
-					className={`${styles.likeButtonImg}`}
+					className={`${styles.likeButtonImg} ${styles.circleButton}`}
 					src="/Img/likeHeart.png"
 					alt={t('Світлина вподобайки')}
 					onError={(e) => {
@@ -163,12 +163,14 @@ function LikeAndShare({ className, entityId, entityType, countClassName }) {
 						e.target.src = '/Img/likeHeart.png'
 					}}
 				/>
-				<span className={`${styles.shareButtonSpan}`}>Like</span>
+				<p className={`${styles.likeButtonTitle}`}>Like</p>
 			</button>
 			<ToastContainer />
-			<button className={`${styles.socialLikeAndShareInnerShareButton} ${styles.circleButton}`}>
+			<div className={`${styles.socialLikeAndShareSeparator}`}></div>
+			<button className={`${styles.socialLikeAndShareInnerShareButton}`}>
+				<p className={`${styles.shareButtonTitle}`}>Share</p>
 				<img
-					className={`${styles.shareButtonImg}`}
+					className={`${styles.shareButtonImg} ${styles.circleButton}`}
 					src="/Img/shareArrow.png"
 					alt={t('Світлина вподобайки')}
 					onError={(e) => {
@@ -176,7 +178,6 @@ function LikeAndShare({ className, entityId, entityType, countClassName }) {
 						e.target.src = '/Img/likeHeart.png'
 					}}
 				/>
-				<span className={`${styles.shareButtonSpan}`}>Share</span>
 			</button>
 		</div>
 	)

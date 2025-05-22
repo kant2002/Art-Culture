@@ -269,7 +269,6 @@ body {
   width: 100%;
 }
 .socialLikeAndShareInnerLikeButton {
-  position: relative;
   display: flex;
 }
 
@@ -284,7 +283,6 @@ body {
 // }
 
 .socialLikeAndShareInnerShareButton {
-  position: relative;
   display: flex;
 }
 
@@ -298,6 +296,13 @@ body {
 //   color: $dark;
 // }
 
+.socialLikeAndShareSeparator {
+  margin: 0 auto;
+  width: 1px;
+  height: 32px;
+  background-color: #fff;
+}
+
 .socialLikeAndShareInner.dark {
   .socialLikeAndShareInner__likeButton::after {
     color: #fff;
@@ -307,8 +312,17 @@ body {
     color: #fff;
   }
 }
-.shareButtonSpan {
+
+.likeButtonTitle {
+  margin: 0 0 0 7px;
+  font-size: 18px;
 }
+
+.shareButtonTitle {
+  margin: 0 7px 0 0;
+  font-size: 18px;
+}
+
 .burgerButtonWrapper {
   margin: 0 0 0 28px;
 }
