@@ -206,7 +206,7 @@ function AuthorPostsLists() {
 						{t('Усі Автори')}
 					</p>
 				</div>
-				<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
+				<LikeAndShare />
 			</div>
 
 			<div className={styles.AuthorPostsListsWrapper}>

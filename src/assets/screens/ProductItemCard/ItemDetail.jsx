@@ -215,8 +215,8 @@ function ItemDetail({ index }) {
 						</p>
 					</div>
 					<LikeAndShare
-						className={`${sliderStyles.LikeAndShareFixed} ${styles.ItemDetailLikeAndShare}`}
-						countClassName={sliderStyles.likeCountWrapper}
+						// className={`${sliderStyles.LikeAndShareFixed} ${styles.ItemDetailLikeAndShare}`}
+						// countClassName={sliderStyles.likeCountWrapper}
 						entityId={product.id}
 						entityType="product"
 					/>

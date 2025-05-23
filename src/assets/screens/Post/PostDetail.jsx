@@ -148,10 +148,10 @@ function PostDetail() {
 					</div>
 				</div>
 				<LikeAndShare
-					className={sliderStyles.LikeAndShareFixed}
+					// className={sliderStyles.LikeAndShareFixed}
 					entityId={post.id}
 					entityType={'post'}
-					countClassName={sliderStyles.likeCountWrapper}
+					// countClassName={sliderStyles.likeCountWrapper}
 				/>
 				<div className={`${styles.postPageNewsReadMoreButtonWrapper}`}>
 					<button className={`${styles.postPageNewsReadMoreButton}`}>

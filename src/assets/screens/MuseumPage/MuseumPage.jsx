@@ -164,10 +164,10 @@ function MuseumPage() {
 					</div>
 				</div>
 				<LikeAndShare
-					className={sliderStyles.LikeAndShareFixed}
+					// className={sliderStyles.LikeAndShareFixed}
 					entityId={museum.id}
 					entityType={'user'}
-					countClassName={sliderStyles.likeCountWrapper}
+					// countClassName={sliderStyles.likeCountWrapper}
 				/>
 				<div
 					className={`${styles.museumPageMuseumDescriptionWrapper} ${isExpanded ? styles.expanded : ''}`}

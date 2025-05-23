@@ -1,5 +1,7 @@
 import LikeAndShare from '@components/Blocks/LikeAndShare'
 import '@styles/layout/Header.module.scss'
+import headerLikeAndShareStyles from '@styles/layout/Header.module.scss'
+import { ColumnOrdering } from '@tanstack/react-table'
 import i18n from 'i18next'
 import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
@@ -435,7 +437,8 @@ function Header() {
 						</div>
 						<div className="socialContainer">
 							<div className="socialUpperWrapper">
-								<LikeAndShare className="dark large-hidden" />
+								{/* <LikeAndShare className="dark large-hidden" /> */}
+								<LikeAndShare className={`${headerLikeAndShareStyles.headerLikeAndShare}`} />
 								<div className="burgerButtonWrapper">
 									<button className="burgerButton">
 										<img
@@ -492,13 +495,13 @@ function Header() {
 						</div>
 						<div className="staticHeaderTitleContainer">
 							<button className="staticHeaderTitleContainer__likeButton circleButton">
-								<img src="/Img/likeHeart.svg" alt="Like" />
+								<img src="/Img/likeHeart.png" alt="Like" />
 							</button>
 							<h2 className="staticHeaderTitle">
 								Ukrainian art & culture online
 							</h2>
 							<button className="staticHeaderTitleContainer__shareButton circleButton">
-								<img src="/Img/shareArrow.svg" alt="Share" />
+								<img src="/Img/shareArrow.png" alt="Share" />
 							</button>
 						</div>
 						<div className="staticHeaderLoginContainer">

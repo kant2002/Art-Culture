@@ -873,10 +873,10 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator, product }) => {
 									</div>
 								</div>
 								<LikeAndShare
-									className={sliderStyles.LikeAndShareFixed}
-									countClassName={
-										sliderStyles.likeCountWrapper
-									}
+									// className={sliderStyles.LikeAndShareFixed}
+									// countClassName={
+									// 	sliderStyles.likeCountWrapper
+									// }
 									entityId={selectedProduct.id}
 									entityType={'product'}
 								/>

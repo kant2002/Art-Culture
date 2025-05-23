@@ -284,10 +284,10 @@ function ExhibitionDetails() {
 					</div>
 
 					<LikeAndShare
-						className={sliderStyles.LikeAndShareFixed}
+						// className={sliderStyles.LikeAndShareFixed}
 						entityId={exhibition.id}
 						entityType={'exhibition'}
-						countClassName={sliderStyles.likeCountWrapper}
+						// countClassName={sliderStyles.likeCountWrapper}
 					/>
 
 					<div

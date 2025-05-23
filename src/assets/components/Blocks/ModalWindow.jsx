@@ -230,8 +230,8 @@ const GalleryModal = ({
 						</div>
 					</div>
 					<LikeAndShare
-						className={sliderStyles.LikeAndShareFixed}
-						countClassName={sliderStyles.likeCountWrapper}
+						// className={sliderStyles.LikeAndShareFixed}
+						// countClassName={sliderStyles.likeCountWrapper}
 						entityId={selectedProduct.id}
 						entityType={'product'}
 					/>
