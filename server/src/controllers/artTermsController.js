@@ -171,10 +171,10 @@ export const getPagesArtTerms = async (req, res, next) => {
         const { search } = req.query
         const filter = {
             OR: [
-                { title_uk: { contains: search, mode: 'insensitive', } },
-                { title_en: { contains: search, mode: 'insensitive', } },
-                { description_uk: { contains: search, mode: 'insensitive', } },
-                { description_en: { contains: search, mode: 'insensitive', } },
+                { title_uk: { contains: search/*, mode: 'insensitive',*/ } },
+                { title_en: { contains: search/*, mode: 'insensitive',*/ } },
+                { description_uk: { contains: search/*, mode: 'insensitive',*/ } },
+                { description_en: { contains: search/*, mode: 'insensitive',*/ } },
             ]
         }
 
