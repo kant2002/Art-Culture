@@ -1,6 +1,6 @@
 // ArtistPageMasonryGallery.jsx
 
-import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
+// import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import style from '@styles/components/Sliders/MasonrySlider/PageMasonryGallery.module.scss'
 import { debounce } from 'lodash' // Using lodash's debounce
 import PropTypes from 'prop-types'
@@ -874,10 +874,10 @@ const ArtistPageMasonryGallery = ({ products, baseUrl, creator, product }) => {
 									</div>
 								</div>
 								<LikeAndShare
-									className={sliderStyles.LikeAndShareFixed}
-									countClassName={
-										sliderStyles.likeCountWrapper
-									}
+									// className={sliderStyles.LikeAndShareFixed}
+									// countClassName={
+									// 	sliderStyles.likeCountWrapper
+									// }
 									entityId={selectedProduct.id}
 									entityType={'product'}
 								/>

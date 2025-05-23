@@ -142,41 +142,55 @@ function LikeAndShare({ className, entityId, entityType, countClassName }) {
 
 	return (
 		<div
-			className={`${className ? className : ''} socialLikeAndShareInner`}
+			className={`${className ? className : ''} ${styles.socialLikeAndShareInner}`}
 		>
-			{countClassName ? (
-				<div className={countClassName}>{likeStatus.likeCount}</div>
-			) : (
-				<div style={{ display: 'none' }}>{likeStatus.likeCount}</div>
-			)}
+
 			<button
-				className={`${styles.socialLikeAndShareInnerLikeButton} ${styles.circleButton} ${likeStatus.liked ? 'liked' : ''}`}
+				className={`${styles.socialLikeAndShareInnerLikeButton} ${likeStatus.liked ? 'liked' : ''}`}
 				onClick={handleLikeToggle}
 				disabled={isLoading}
 			>
-				<img
-					className={`${styles.likeButtonImg}`}
-					src="/Img/likeHeart.png"
-					alt={t('Світлина вподобайки')}
-					onError={(e) => {
-						e.target.onerror = null
-						e.target.src = '/Img/likeHeart.png'
-					}}
-				/>
-				<span className={`${styles.shareButtonSpan}`}>Like</span>
+				<div className={`${styles.likeButtonIMGWrapper}`}>
+					<img
+						className={`${styles.likeButtonImg} ${styles.circleButton}`}
+						src="/Img/likeHeart.png"
+						alt={t('Світлина вподобайки')}
+						onError={(e) => {
+							e.target.onerror = null
+							e.target.src = '/Img/likeHeart.png'
+						}}
+					/>
+					<div className={`${styles.likeButtonBottomCounter}`}>1234567890</div>
+				</div>
+				<div className={`${styles.likeButtonTextWrapper}`}>
+					<p className={`${styles.likeButtonTitle}`}>Like</p>
+					{/* {countClassName ? (
+						<div className={countClassName}>{likeStatus.likeCount}</div>
+					) : (
+						<div style={{ display: 'none' }}>{likeStatus.likeCount}</div>
+					)} */}
+					<p className={`${styles.likeButtonCount}`}>1234567890</p>
+				</div>
 			</button>
 			<ToastContainer />
-			<button className={`${styles.socialLikeAndShareInnerShareButton} ${styles.circleButton}`}>
-				<img
-					className={`${styles.shareButtonImg}`}
-					src="/Img/shareArrow.png"
-					alt={t('Світлина вподобайки')}
-					onError={(e) => {
-						e.target.onerror = null
-						e.target.src = '/Img/likeHeart.png'
-					}}
-				/>
-				<span className={`${styles.shareButtonSpan}`}>Share</span>
+			<div className={`${styles.socialLikeAndShareSeparator}`}></div>
+			<button className={`${styles.socialLikeAndShareInnerShareButton}`}>
+				<div className={`${styles.shareButtonTextWrapper}`}>
+					<p className={`${styles.shareButtonTitle}`}>Share</p>
+					<p className={`${styles.shareButtonCount}`}>1234567890</p>
+				</div>
+				<div className={`${styles.shareButtonIMGWrapper}`}>
+					<img
+						className={`${styles.shareButtonImg} ${styles.circleButton}`}
+						src="/Img/shareArrow.png"
+						alt={t('Світлина вподобайки')}
+						onError={(e) => {
+							e.target.onerror = null
+							e.target.src = '/Img/likeHeart.png'
+						}}
+					/>
+					<div className={`${styles.shareButtonBottomCounter}`}>1234567890</div>
+				</div>
 			</button>
 		</div>
 	)

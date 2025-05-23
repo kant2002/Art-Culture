@@ -1,7 +1,7 @@
 // src/assets/components/ExhibitionDetails.jsx
 import Map from '@components/Blocks/Maps'
 import ExhibitionPageNewsPopularExhibition from '@components/Sliders/ExhibitionPageSlider/ExhibitionPageNewsPopularExhibition'
-import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
+// import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import styles from '@styles/layout/MuseumPage.module.scss'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -285,10 +285,10 @@ function ExhibitionDetails() {
 					</div>
 
 					<LikeAndShare
-						className={sliderStyles.LikeAndShareFixed}
+						// className={sliderStyles.LikeAndShareFixed}
 						entityId={exhibition.id}
 						entityType={'exhibition'}
-						countClassName={sliderStyles.likeCountWrapper}
+						// countClassName={sliderStyles.likeCountWrapper}
 					/>
 
 					<div
