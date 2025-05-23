@@ -7,6 +7,7 @@ import AllArtistsPageSearchSlider from '@components/Sliders/AllArtistsPageLetter
 import { englishLetters, ukrainianLetters } from '../../../utils/constants'
 import Loading from '@components/Blocks/Loading'
 import Painting from '@components/Blocks/Painting'
+import ArtTermSlider from './ArtTermSlider'
 import LoadingError from '@components/Blocks/LoadingError'
 import layoutStyles from '@styles/layout/Layout.module.scss'
 import styles from '@styles/layout/ArtTermsPage.module.scss'
@@ -57,6 +58,8 @@ function ArtTermsPage() {
 				</p>
 			</div>
 
+			<ArtTermSlider />
+
 			<div className={`${layoutStyles.DescriptionWrapper}`}>
 				<AllArtistsPageSearchSlider letters={i18n.language === 'uk' ? ukrainianLetters : englishLetters}
 					onLetterSelected={(letter) => navigate(`/art-terms/letters/${letter.toLowerCase()}`)} />
@@ -66,7 +69,7 @@ function ArtTermsPage() {
 				{loading ? <Loading /> : error ? <LoadingError />
 						: artTerms.length === 0 ? (
 						<div>
-							{t('Немає митців для відображення.')}
+							{t('Немає арт-термінів для відображення.')}
 						</div>
 					) : artTerms.map(artTerm => {
 						return (
