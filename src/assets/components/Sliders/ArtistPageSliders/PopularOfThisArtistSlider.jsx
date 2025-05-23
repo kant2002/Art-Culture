@@ -9,7 +9,6 @@ import 'swiper/css/pagination'
 import { getBaseUrl } from '../../../../utils/helper'
 // Import Swiper modules
 // import LikeAndShare from '@components/Blocks/LikeAndShare'
-import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 import { Navigation, Pagination } from 'swiper/modules'

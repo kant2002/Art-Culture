@@ -3,7 +3,6 @@ import ArtistPageMasonryGallery from '@components/Sliders/ArtistPageSliders/Arti
 import ArtistPageNewsArtistsSlider from '@components/Sliders/ArtistPageSliders/ArtistPageNewsArtistsSlider.jsx'
 import PopularOfThisArtistSlider from '@components/Sliders/ArtistPageSliders/PopularOfThisArtistSlider.jsx'
 import MainPopularArtsSlider from '@components/Sliders/MainPopularArtsSlider/MainPopularArtsSlider.jsx'
-import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import styles from '@styles/layout/ArtistPage.module.scss'
 import axios from 'axios'
 import { useEffect, useState } from 'react'

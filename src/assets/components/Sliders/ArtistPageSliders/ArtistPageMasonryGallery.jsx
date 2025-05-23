@@ -1,6 +1,5 @@
 // ArtistPageMasonryGallery.jsx
 
-import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import style from '@styles/components/Sliders/MasonrySlider/PageMasonryGallery.module.scss'
 import { debounce } from 'lodash' // Using lodash's debounce
 import PropTypes from 'prop-types'
