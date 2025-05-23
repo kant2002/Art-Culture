@@ -44,6 +44,35 @@ export const getArtTermsByLang = async (req, res, next) => {
     }
 }
 
+export const getLastArtTerms = async (req, res, next) => {
+    try {
+        let lang = req.params.lang ?? "uk"
+        lang = lang.split('-')[0]
+        if (lang != "uk" && lang != "en") {
+            lang = "uk"
+        }
+
+        const orderBy = { createdAt: 'desc' };
+        const artTerms = await prisma.artTerm.findMany({
+            orderBy: orderBy,
+            include: {
+                highlightedProduct: {
+                    include: {
+                        images: true,
+                        author: true,
+                    }
+                },
+            },
+            take: 15,
+        });
+
+        res.json({ artTerms: artTerms })
+    } catch (error) {
+        console.error('Error fetch data art-term id', error)
+        next(error)
+    }
+}
+
 export const getArtTermsByLetter = async (req, res, next) => {
     try {
         let letter = req.params.letter
