@@ -1,5 +1,5 @@
 import LikeAndShare from '@components/Blocks/LikeAndShare'
-import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
+// import sliderStyles from '@styles/components/Blocks/Slider.module.scss'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -207,7 +207,7 @@ function AuthorPostsLists() {
 						{t('Усі Автори')}
 					</p>
 				</div>
-				<LikeAndShare className={sliderStyles.LikeAndShareFixed} />
+				<LikeAndShare />
 			</div>
 
 			<div className={styles.AuthorPostsListsWrapper}>
