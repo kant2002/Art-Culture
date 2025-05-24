@@ -497,7 +497,8 @@ function Header() {
 						<div className="staticHeaderTitleContainer">
 							<button className="staticHeaderTitleContainer__likeButton circleButton">
 								{/* <img src="/Img/likeHeart.png" alt="Like" /> */}
-								<div className={`${styles.likeButtonIMGWrapper}`}>
+								<div className={`${styles.likeButtonIMGWrapper}`}
+									style={{ padding: '3px 0 0 0' }}>
 									<img
 										className={`${styles.likeButtonImg} ${styles.circleButton}`}
 										src="/Img/likeHeart.png"
@@ -516,7 +517,8 @@ function Header() {
 							</h2>
 							<button className="staticHeaderTitleContainer__shareButton circleButton">
 								{/* <img src="/Img/shareArrow.png" alt="Share" /> */}
-								<div className={`${styles.shareButtonIMGWrapper}`}>
+								<div className={`${styles.shareButtonIMGWrapper}`}
+									style={{ padding: '3px 0 0 0' }}>
 									<img
 										className={`${styles.shareButtonImg} ${styles.circleButton}`}
 										src="/Img/shareArrow.png"

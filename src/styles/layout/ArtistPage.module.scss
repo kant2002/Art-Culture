@@ -13,8 +13,7 @@
 
 .artistPageNavigation {
   // навигационный блок
-  margin: $responsiveBigPadding
-    $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+  margin: $responsiveBigPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -48,8 +47,7 @@
 
 .artistPageAboutArtistContainer {
   // блок с описанием митця
-  margin: $responsiveBigPadding
-    $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+  margin: $responsiveBigPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -196,8 +194,8 @@
 
 .artistPageFollowContainer {
   // обертка для слайдера "арты митца"
-  margin: calc(67px - (12 * ((1440px - 100vw) / (1440 - 375))))
-    $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
+  margin: calc(67px - (12 * ((1440px - 100vw) / (1440 - 375)))) $responsiveLeftAndRightPadding 0
+    $responsiveLeftAndRightPadding;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -213,7 +211,6 @@
 
 .artistPageFollowEmailWrapper {
   // обертка для ввода почты
-  margin: calc(48px - (12 * ((1440px - 100vw) / (1440 - 375)))) 0 0 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -222,16 +219,14 @@
 
 .artistPageFollowEmail {
   // ввод почты
-  margin: 0 0 0 0 !important;
-  padding: 0 20px !important;
-  width: calc(302px - (106 * ((1440px - 100vw) / (1440 - 375))));
-  min-width: 196px;
-  max-width: 302px;
-  height: 40px;
+  display: flex;
+  margin: $responsiveMediumPadding 0 0 0 !important;
+  padding: $responsiveSmallPadding !important;
+  border-radius: 34px !important;
+  border: 1px solid #000 !important;
+  text-align: center;
   font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
-  font-weight: 400;
-  border: none;
-  border-radius: 20px !important;
+  max-width: 300px;
 }
 
 .artistPageFollowButton {
@@ -341,11 +336,6 @@
   .artistPageFollowTitle {
     // заголовок слайдера "арты митца"
     font-size: 22px;
-  }
-
-  .artistPageFollowEmailWrapper {
-    // обертка для ввода почты
-    margin: 48px 0 0 0;
   }
 
   .artistPageFollowEmail {
