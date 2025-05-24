@@ -753,22 +753,16 @@ body {
     display: none;
   }
 
-  .likeButtonCount {
-    position: absolute;
-    bottom: -10px;
-    left: -32px;
-    margin: 0 auto;
-  }
-
   .shareButtonTitle {
     display: none;
   }
 
+  .likeButtonCount {
+    display: none;
+  }
+
   .shareButtonCount {
-    position: absolute;
-    bottom: -10px;
-    right: -7px;
-    margin: 0 auto;
+    display: none;
   }
 
   .socialLikeAndShareSeparator {
