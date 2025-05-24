@@ -1,5 +1,6 @@
 import LikeAndShare from '@components/Blocks/LikeAndShare'
 import '@styles/layout/Header.module.scss'
+import styles from '@styles/layout/Header.module.scss'
 import headerLikeAndShareStyles from '@styles/layout/Header.module.scss'
 import { ColumnOrdering } from '@tanstack/react-table'
 import i18n from 'i18next'
@@ -197,7 +198,7 @@ function Header() {
 						type="text"
 						placeholder={t('Пошук')}
 						onFocus={handleSearchFieldClick}
-						// or onClick={handleSearchFieldClick}
+					// or onClick={handleSearchFieldClick}
 					/>
 				</div>
 				{/* <Search
@@ -495,13 +496,39 @@ function Header() {
 						</div>
 						<div className="staticHeaderTitleContainer">
 							<button className="staticHeaderTitleContainer__likeButton circleButton">
-								<img src="/Img/likeHeart.png" alt="Like" />
+								{/* <img src="/Img/likeHeart.png" alt="Like" /> */}
+								<div className={`${styles.likeButtonIMGWrapper}`}>
+									<img
+										className={`${styles.likeButtonImg} ${styles.circleButton}`}
+										src="/Img/likeHeart.png"
+										alt={t('Світлина вподобайки')}
+										onError={(e) => {
+											e.target.onerror = null
+											e.target.src = '/Img/likeHeart.png'
+										}}
+									/>
+									<div className={`${styles.likeButtonBottomCounter}`}
+										style={{ display: 'flex' }}>1234567890</div>
+								</div>
 							</button>
 							<h2 className="staticHeaderTitle">
 								Ukrainian art & culture online
 							</h2>
 							<button className="staticHeaderTitleContainer__shareButton circleButton">
-								<img src="/Img/shareArrow.png" alt="Share" />
+								{/* <img src="/Img/shareArrow.png" alt="Share" /> */}
+								<div className={`${styles.shareButtonIMGWrapper}`}>
+									<img
+										className={`${styles.shareButtonImg} ${styles.circleButton}`}
+										src="/Img/shareArrow.png"
+										alt={t('Світлина вподобайки')}
+										onError={(e) => {
+											e.target.onerror = null
+											e.target.src = '/Img/likeHeart.png'
+										}}
+									/>
+									<div className={`${styles.shareButtonBottomCounter}`}
+										style={{ display: 'flex' }}>1234567890</div>
+								</div>
 							</button>
 						</div>
 						<div className="staticHeaderLoginContainer">
