@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast, ToastContainer } from 'react-toastify'
 import styles from '@styles/layout/Header.module.scss'
+import '@styles/layout/Header.module.scss'
 
 function LikeAndShare({ className, entityId, entityType, countClassName }) {
 	const { t } = useTranslation()
@@ -150,7 +151,7 @@ function LikeAndShare({ className, entityId, entityType, countClassName }) {
 				onClick={handleLikeToggle}
 				disabled={isLoading}
 			>
-				<div className={`${styles.likeButtonIMGWrapper}`}>
+				<div className={`${styles.likeButtonIMGWrapper} ${styles.circleButton}`}>
 					<img
 						className={`${styles.likeButtonImg} ${styles.circleButton}`}
 						src="/Img/likeHeart.png"
@@ -179,7 +180,7 @@ function LikeAndShare({ className, entityId, entityType, countClassName }) {
 					<p className={`${styles.shareButtonTitle}`}>Share</p>
 					<p className={`${styles.shareButtonCount}`}>1234567890</p>
 				</div>
-				<div className={`${styles.shareButtonIMGWrapper}`}>
+				<div className={`${styles.shareButtonIMGWrapper} ${styles.circleButton}`}>
 					<img
 						className={`${styles.shareButtonImg} ${styles.circleButton}`}
 						src="/Img/shareArrow.png"
