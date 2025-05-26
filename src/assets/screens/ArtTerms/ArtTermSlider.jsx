@@ -16,7 +16,7 @@ import { Navigation, Pagination } from 'swiper/modules'
 import { useNavigate } from 'react-router-dom'
 import { getBaseUrl } from '../../../utils/helper'
 import TranslatedContent from '@components/Blocks/TranslatedContent'
-import '/src/styles/components/Sliders/Base/NewsSlider.scss'
+import '@styles/components/Sliders/Base/ArtTermsSlider.scss'
 
 const Slide = ({ artTerm, baseUrl }) => {
 	const { t } = useTranslation()
@@ -60,13 +60,13 @@ const Slide = ({ artTerm, baseUrl }) => {
 					</h3>
 				</div>
 
-				<div className="NewsSliderCardDescriptionWrapper">
+				<div className="ArtTermsSliderCardDescriptionWrapper">
 					<p className="NewsSliderCardDescription"
 						onClick={() => handlePostClick(artTerm.id)}>
 						<TranslatedContent
 							en={artTerm.content_en}
 							uk={artTerm.content_uk}
-							maxLength={200}
+							maxLength={140}
 							html
 						/>
 					</p>
@@ -113,7 +113,7 @@ const ArtTermSlider = () => {
 					</div>
 					{/* <LikeAndShare className={sliderStyles.LikeAndShareFixed} /> */}
 				</div>
-				<div className="NewsSliderBottomInnerWrapper">
+				<div className="ArtTermsSliderBottomInnerWrapper">
 					<Swiper
 						modules={[Navigation, Pagination]}
 						spaceBetween={0}
