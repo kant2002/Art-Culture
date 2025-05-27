@@ -128,8 +128,8 @@ function ArtistPage() {
 					</div>
 				</div>
 
-				<div className={`${styles.artistPageArtisNameWrapper}`}>
-					<p className={`${styles.artistPageArtisName}`}>{title}</p>
+				<div className={`${styles.artistPageArtistNameWrapper}`}>
+					<h2 className={`${styles.artistPageArtistName}`}>{title}</h2>
 				</div>
 
 				<div className={`${styles.artistPageArtisSeparatorWrapper}`}>

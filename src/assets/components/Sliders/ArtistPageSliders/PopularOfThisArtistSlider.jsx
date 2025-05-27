@@ -81,9 +81,9 @@ const PopularOfThisArtistSlider = ({ products, baseUrl }) => {
 			<div className="popularOfThisArtistSliderWrapper">
 				<div className="popularOfThisArtistSliderTopInnerWrapper">
 					<div className="popularOfThisArtistSliderTitleWrapper">
-						<p className="popularOfThisArtistSliderTitle">
+						<h2 className="popularOfThisArtistSliderTitle">
 							{t('Популярне цього митця')}
-						</p>
+						</h2>
 					</div>
 					{/* <LikeAndShare className={sliderStyles.LikeAndShareFixed} /> */}
 				</div>
