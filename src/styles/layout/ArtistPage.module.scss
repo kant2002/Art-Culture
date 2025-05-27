@@ -83,7 +83,7 @@
   max-height: calc(415px - (228 * ((1440px - 100vw) / (1440 - 375))));
 }
 
-.artistPageArtisNameWrapper {
+.artistPageArtistNameWrapper {
   // обертка для названия митця
   margin: $responsiveMediumPadding 0 0 0;
   display: flex;
@@ -92,9 +92,9 @@
   align-items: center;
 }
 
-.artistPageArtisName {
+.artistPageArtistName {
   // название митця
-  font-size: calc(30px - (12 * ((1440px - 100vw) / (1440 - 375))));
+  // font-size: calc(30px - (12 * ((1440px - 100vw) / (1440 - 375))));
   font-weight: 600;
   text-transform: uppercase;
 }
