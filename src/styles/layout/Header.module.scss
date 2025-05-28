@@ -337,6 +337,7 @@ body {
 
 .likeButtonIMGWrapper {
   display: flex;
+  padding: $responsiveSmallPadding 0;
   width: fit-content;
   height: fit-content;
   flex-direction: column;
@@ -354,6 +355,7 @@ body {
 
 .shareButtonIMGWrapper {
   display: flex;
+  padding: $responsiveSmallPadding 0;
   width: fit-content;
   height: fit-content;
   flex-direction: column;
