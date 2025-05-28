@@ -13,8 +13,9 @@
 
 .postPageNavigationContainer {
   // контейнер для навигации
+  margin: 0 variables.$responsiveLeftAndRightPadding;
   display: flex;
-  width: 100%;
+  // width: 100%;
 }
 
 .postPageNavigation {
