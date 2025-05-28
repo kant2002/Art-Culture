@@ -2,8 +2,7 @@
 
 .postDetailContainer {
   // главный контейнер
-  margin: variables.$responsiveTopPadding variables.$responsiveLeftAndRightPadding 0
-    variables.$responsiveLeftAndRightPadding;
+  margin: variables.$responsiveTopPadding 0 0 0;
   display: flex;
   flex-direction: column;
 
@@ -207,8 +206,7 @@
 @media (min-width: 1441px) {
   .postDetailContainer {
     // главный контейнер
-    margin: variables.$staticPcTopPadding variables.$responsiveLeftAndRightPadding 0
-      variables.$responsiveLeftAndRightPadding;
+    margin: variables.$staticPcTopPadding 0 0 0;
   }
 
   .postPageNavigation {
@@ -307,8 +305,7 @@
 @media (max-width: 569px) {
   .postDetailContainer {
     // главный контейнер
-    margin: variables.$staticMobileTopPadding variables.$responsiveLeftAndRightPadding 0
-      variables.$responsiveLeftAndRightPadding;
+    margin: variables.$staticMobileTopPadding 0 0 0;
   }
 
   .postPageAboutNewsContainer {
