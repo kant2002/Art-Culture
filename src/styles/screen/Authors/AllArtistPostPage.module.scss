@@ -2,7 +2,7 @@
 
 .AuthorsPageContainer {
   //* главный контейнер
-  margin: $responsiveTopPadding $responsiveLeftAndRightPadding 0;
+  margin: $responsiveTopPadding 0 0 0;
   display: flex;
   flex-direction: column;
 
@@ -12,6 +12,8 @@
 }
 
 .AuthorPhotoNameContainer {
+  //* Контейнер для изображения и названия артиста
+  margin: $responsiveBigPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -36,24 +38,42 @@
 .AuthorTitleWrapper {
   //* Контейнер для названия страницы
   margin: 0 $responsiveSmallPadding 0;
+  width: 100%;
+  height: calc(115px - (15 * ((1440px - 100vw) / (1440 - 375))));
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: start;
 }
 
 .AuthorTitle {
+}
+
+.AuthorLink {
+  //* Ссылка на страницу артиста
   font-family: $default-font;
-  font-size: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
-  font-weight: 600;
-  color: rgb(0, 0, 0);
+  font-size: calc(16px - (2 * ((1440px - 100vw) / (1440 - 375))));
+  font-weight: 400;
+  color: $red;
   text-transform: uppercase;
 }
 
+.LikeAndShareWrapper {
+  //* Контейнер для кнопок "Нравится" и "Поделиться"
+  margin: 0 0 0 auto;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .AuthorNavBarTwoSection {
+  margin: $responsiveMediumPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
   display: flex;
   justify-content: space-between;
-  padding: $responsiveBigPadding 0 $responsiveBigPadding 0;
+  align-items: center;
 }
+
 .AuthorNavBarWrapper {
   display: flex;
   align-items: center;
@@ -66,20 +86,27 @@
   }
 }
 .PostsNavBarLeft {
-  padding: 0 $responsiveSmallPadding 0 0;
+  margin: 0 $responsiveSmallPadding 0 0;
   cursor: pointer;
 }
 
 .NavBarSeparator {
+  //* Разделитель между кнопками навигации
+  width: 1px;
+  height: calc(28px - (10 * ((1440px - 100vw) / (1440 - 375))));
+  background-color: black;
 }
 
 .AuthorsNavBarRight {
-  padding: 0 0 0 $responsiveSmallPadding;
+  margin: 0 0 0 $responsiveSmallPadding;
+  width: 100%;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .AuthorPostsListsWrapper {
-  margin: $responsiveMediumPadding 0 0 0;
+  margin: $responsiveMediumPadding $responsiveLeftAndRightPadding 0 $responsiveLeftAndRightPadding;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -91,6 +118,7 @@
   display: flex;
   // flex-direction: column;
   justify-content: space-between;
+  cursor: pointer;
 }
 
 .AuthorPostsListsTitleWrapper {
