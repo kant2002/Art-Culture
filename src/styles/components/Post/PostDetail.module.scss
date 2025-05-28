@@ -51,7 +51,8 @@
 
 .postPageAboutNewsContainer {
   // блок с описанием митця
-  margin: variables.$responsiveMediumPadding 0 0 0;
+  margin: variables.$responsiveMediumPadding variables.$responsiveLeftAndRightPadding 0
+    variables.$responsiveLeftAndRightPadding;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -227,7 +228,8 @@
 
   .postPageAboutNewsContainer {
     // блок с описанием митця
-    margin: variables.$staticPcMediumPadding 0 0 0;
+    margin: variables.$staticPcMediumPadding variables.$responsiveLeftAndRightPadding 0
+      variables.$responsiveLeftAndRightPadding;
   }
 
   .postPageNewsPhoto {
@@ -311,7 +313,8 @@
 
   .postPageAboutNewsContainer {
     // блок с описанием митця
-    margin: variables.$staticMobileMediumPadding 0 0 0;
+    margin: variables.$staticMobileMediumPadding variables.$responsiveLeftAndRightPadding 0
+      variables.$responsiveLeftAndRightPadding;
   }
 }
 
