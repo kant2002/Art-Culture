@@ -266,7 +266,7 @@ body {
 }
 
 .socialLikeAndShareInner {
-  margin: 0 0 0 auto;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -337,6 +337,8 @@ body {
 
 .likeButtonIMGWrapper {
   display: flex;
+  width: fit-content;
+  height: fit-content;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -352,6 +354,8 @@ body {
 
 .shareButtonIMGWrapper {
   display: flex;
+  width: fit-content;
+  height: fit-content;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -377,7 +381,7 @@ body {
 
 .headerLikeAndShare {
   .socialLikeAndShareInner {
-    margin: 0;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -593,19 +597,25 @@ body {
 .staticHeaderTitleContainer {
   margin: 0 calc(22.5 / 1440 * 100vw);
   display: flex;
+  width: fit-content;
+  height: fit-content;
   align-items: center;
+  justify-content: center;
 
   &__likeButton {
+    height: fit-content;
     margin: 0 31px 0 0;
     display: flex;
   }
 
   &__shareButton {
+    height: fit-content;
     margin: 0 0 0 31px;
     display: flex;
   }
 }
 .staticHeaderTitle {
+  margin: 0 $responsiveSmallPadding;
   display: flex;
   justify-content: center;
   font-size: calc(12px + 12 * (100vw / 1440));
@@ -838,6 +848,7 @@ body {
 @media (max-width: 1279px) {
   .socialLikeAndShareInner {
     width: auto;
+    margin: 0 0 0 auto;
   }
   .socialLikeAndShareInnerLikeButton {
     margin: 0 10px 0 0;
@@ -873,7 +884,7 @@ body {
 
   .headerLikeAndShare {
     .socialLikeAndShareInner {
-      margin: 0 0 0 auto;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       width: fit-content;
@@ -990,13 +1001,27 @@ body {
     width: 40%;
     &__likeButton {
       margin: 0;
+      width: fit-content;
+      height: fit-content;
       display: flex;
     }
 
     &__shareButton {
       margin: 0;
+      width: fit-content;
+      height: fit-content;
       display: flex;
     }
+  }
+}
+
+@media (max-width: 650px) {
+  .staticHeaderTitleContainer {
+    justify-content: space-around;
+    width: 100%;
+  }
+  .staticHeaderTitle {
+    display: none;
   }
 }
 
@@ -1016,13 +1041,6 @@ body {
   }
   .burgerButtonWrapper {
     margin: 0 0 0 calc(22.5 / 1440 * 100vw);
-  }
-  .staticHeaderTitleContainer {
-    justify-content: space-around;
-    width: 100%;
-  }
-  .staticHeaderTitle {
-    display: none;
   }
   .staticHeaderLoginContainer {
     display: flex;
