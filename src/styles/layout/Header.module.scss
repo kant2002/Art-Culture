@@ -282,7 +282,7 @@ body {
 }
 
 .socialLikeAndShareSeparator {
-  margin: 0 12px 0 0;
+  margin: auto 12px auto 0;
   width: 1px;
   height: 32px;
   background-color: black;
@@ -299,6 +299,7 @@ body {
 .likeButtonTextWrapper {
   margin: 0 12px 0 0;
   display: flex;
+  padding: $responsiveSmallPadding 0;
   flex-direction: column;
   justify-content: space-between;
   align-items: start;
@@ -306,6 +307,7 @@ body {
 
 .shareButtonTextWrapper {
   display: flex;
+  padding: $responsiveSmallPadding 0;
   flex-direction: column;
   justify-content: space-between;
   align-items: end;
