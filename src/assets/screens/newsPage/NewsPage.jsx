@@ -2,6 +2,7 @@
 import TranslatedContent from '@components/Blocks/TranslatedContent.jsx'
 import NewsPageAuthorsSlider from '@components/Sliders/NewsPageAuthorsSlider/NewsPageAuthorsSlider.jsx'
 import styles from '@styles/layout/newsPage.module.scss'
+import PostDetailPopularNewsSlider from '@components/Sliders/PostDetailPopularNewsSlider/PostDetailPopularNewsSlider'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -346,6 +347,7 @@ function NewsPage() {
 					{t('Зареєструватися')}
 				</button>
 			</div>
+			<PostDetailPopularNewsSlider />
 		</div>
 	)
 }
