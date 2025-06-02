@@ -176,7 +176,7 @@
 }
 
 .postPageNewsReadMoreButtonWrapper {
-  margin: 25px 0 0 0;
+  margin: variables.$responsiveMediumPadding 0 variables.$responsiveMediumPadding auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -262,6 +262,10 @@
     font-size: 16px;
   }
 
+  .postPageNewsReadMoreButtonWrapper {
+    margin: variables.$staticPcMediumPadding 0 variables.$staticPcMediumPadding auto;
+  }
+
   .postPageNewsReadMoreButton {
     // кнопка "читать больше"
     font-size: 16px;
@@ -313,6 +317,10 @@
     // блок с описанием митця
     margin: variables.$staticMobileMediumPadding variables.$responsiveLeftAndRightPadding 0
       variables.$responsiveLeftAndRightPadding;
+  }
+
+  .postPageNewsReadMoreButtonWrapper {
+    margin: variables.$staticMobileMediumPadding 0 variables.$staticMobileMediumPadding auto;
   }
 }
 
