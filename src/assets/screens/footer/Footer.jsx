@@ -32,6 +32,10 @@ const Footer = () => {
 		navigate('/main-page')
 	}
 
+	const handleArtTermsPageClick = () => {
+		navigate('/art-terms')
+	}
+
 	return (
 		<footer className={`${styles.footer}`}>
 			<div className={`${styles.footerWrapper}`}>
@@ -87,7 +91,8 @@ const Footer = () => {
 									{t('Новини')}
 								</a>
 							</li>
-							<li className={`${styles.footerMenuLi}`}>
+							<li className={`${styles.footerMenuLi}`}
+								onClick={handleArtTermsPageClick}>
 								<a
 									className={`${styles.footerMenuLink}`}
 									href="#"

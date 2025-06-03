@@ -260,7 +260,8 @@ function Header() {
 									<p>&#8250;</p>
 								</a>
 							</li> */}
-							<li className="footerMenuLi">
+							<li className="footerMenuLi"
+								onClick={handleArtTermsPageClick}>
 								<a className="footerMenuLink" href="#">
 									<p>{t('Арт терміни')}</p>
 									<p>&#8250;</p>
