@@ -1,39 +1,46 @@
 @use '../../../src/styles/utilities/variables.scss';
 
 .card {
-    display: block;
-
-    padding-bottom: variables.$responsiveMediumPadding;
+    margin: variables.$responsiveMediumPadding 0 0 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
     width: 100%;
 }
 
 .cardMedia {
-    width: 40%;
-    float: left;
-    background: grey;
-    a {
-        height: 100%;
-    }
+    // width: 40%;
+    // float: left;
+    // background: grey;
+    // a {
+    //     height: 100%;
+    // }
 
-    figure {
-        background: white;
-    }
+    // figure {
+    //     background: white;
+    // }
 
-    figure:hover {
-        background: gainsboro;
-    }
+    // figure:hover {
+    //     background: gainsboro;
+    // }
 
     picture {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        justify-content: center;
+        display: block;
+        height: fit-content;
+        width: calc(400px - (80 * ((1440px - 100vw) / (1440 - 375))));
+        min-width: 300px;
+        max-width: 400px;
+
+        img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
     }
 }
 
 .cardContent {
-    margin-left: 40%;
-    padding-left: variables.$responsiveMediumPadding;
+    margin: 0 0 0 variables.$responsiveMediumPadding;
 }
 
 .cardDescription {

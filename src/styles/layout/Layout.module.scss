@@ -98,6 +98,23 @@
     text-align: left;
 }
 
+.SearchSliderWrapper {
+    // Контейнер для слайдера поиска
+    margin: variables.$responsiveMediumPadding variables.$responsiveLeftAndRightPadding 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ArtTermsCardsWrapper {
+    // Контейнер для карточек терминов
+    margin: 0 variables.$responsiveLeftAndRightPadding;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .PaginationContainer {
     // Контейнер для пагинации
     width: 100%;
