@@ -67,23 +67,26 @@ function ArtTermsPage() {
 
 			<div className={`${layoutStyles.ArtTermsCardsWrapper}`}>
 				{loading ? <Loading /> : error ? <LoadingError />
-						: artTerms.length === 0 ? (
+					: artTerms.length === 0 ? (
 						<div>
 							{t('Немає арт-термінів для відображення.')}
 						</div>
 					) : artTerms.map(artTerm => {
 						return (
 							<div key={artTerm.letter} className={styles.card}>
-								<div  className={styles.cardMedia}>
+								<div className={styles.cardMedia}>
 									<a href={"/art-terms/" + artTerm.id}>
 										<Painting painting={artTerm.highlightedProduct} />
 									</a>
 								</div>
 								<div className={styles.cardContent}>
 									<h2 className={styles.cardTitle}>
-										<a href={"/art-terms/letters/" + artTerm.letter.toLowerCase()}>{artTerm.letter}</a>
-
-										<a href={"/art-terms/" + artTerm.id}>{artTerm.title}</a>
+										<div className={styles.firstLinkWrapper}>
+											<a href={"/art-terms/letters/" + artTerm.letter.toLowerCase()}>{artTerm.letter}</a>
+										</div>
+										<div className={styles.secondLinkWrapper}>
+											<a href={"/art-terms/" + artTerm.id}>{artTerm.title}</a>
+										</div>
 									</h2>
 									<div className={styles.cardDescription}>
 										<a href={"/art-terms/" + artTerm.id}>{artTerm.description}</a>

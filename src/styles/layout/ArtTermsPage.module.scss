@@ -1,4 +1,4 @@
-@use '../../../src/styles/utilities/variables.scss';
+@use "../../../src/styles/utilities/variables.scss";
 
 .card {
     margin: variables.$responsiveMediumPadding 0 0 0;
@@ -43,24 +43,30 @@
     margin: 0 0 0 variables.$responsiveMediumPadding;
 }
 
-.cardDescription {
-    margin-bottom: 2rem;
+.cardCommands {
+    margin: variables.$responsiveMediumPadding 0 0 0;
+    display: inline-block;
 }
 
-.cardCommands {
-    display: inline-flex;
+.cardDescription {
+    margin: variables.$responsiveMediumPadding 0 0 0;
 }
 
 .cardTitle {
-    padding-bottom: variables.$responsiveSmallPadding;
-    
-    a:first-child {
-        font-size: 1.5rem;
-        padding-right: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    .firstLinkWrapper {
+        color: variables.$red;
+        font-weight: 800;
+        line-height: 100%;
     }
 
-    a {
-        font-size: 1.25rem;
+    .secondLinkWrapper {
+        margin: 0 0 0 variables.$responsiveMediumPadding;
+        line-height: 100%;
     }
 }
 
