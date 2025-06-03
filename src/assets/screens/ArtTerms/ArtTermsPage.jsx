@@ -45,7 +45,7 @@ function ArtTermsPage() {
 	return (
 		<div className={`${layoutStyles.PageContainer}`}>
 			<div className={`${layoutStyles.PageTitleWrapper}`}>
-				<h2 className={`${layoutStyles.PageTitle}`}>{t('Арт-терміни')}</h2>
+				<h1 className={`${layoutStyles.PageTitle}`}>{t('Арт-терміни')}</h1>
 			</div>
 
 			<div className={`${layoutStyles.PageSeparatorWrapper}`}>
