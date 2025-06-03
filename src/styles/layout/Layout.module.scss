@@ -1,5 +1,5 @@
-@use '../base/reset.scss';
-@use '../utilities/variables';
+@use "../base/reset.scss";
+@use "../utilities/variables";
 
 .container {
     width: 100%;
@@ -19,7 +19,8 @@
 
 .PageTitleWrapper {
     // Контейнер для названия страницы
-    margin: variables.$responsiveBigPadding variables.$responsiveLeftAndRightPadding 0 variables.$responsiveLeftAndRightPadding;
+    margin: variables.$responsiveBigPadding variables.$responsiveLeftAndRightPadding 0
+        variables.$responsiveLeftAndRightPadding;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,7 +39,7 @@
 
 .PageSeparatorWrapper {
     // Контейнер для разделителя
-    margin: calc(23px - (2 * ((1440px - 100vw) / (1440 - 375)))) variables.$responsiveLeftAndRightPadding 0;
+    margin: variables.$responsiveMediumPadding variables.$responsiveLeftAndRightPadding 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,7 +47,9 @@
 
 .PageSeparator {
     // Разделитель
-    width: calc(60px - (40 * ((1440px - 100vw) / (1440 - 375))));
+    width: calc(60px - (20 * ((1440px - 100vw) / (1440 - 375))));
+    min-width: 20px;
+    max-width: 60px;
     height: 1px;
     background-color: #000;
     user-select: none;
@@ -54,23 +57,32 @@
 
 .PageSubTitleWrapper {
     // Контейнер для подзаголовка
-    margin: 38px variables.$responsiveLeftAndRightPadding 0;
+    margin: variables.$responsiveBigPadding variables.$responsiveLeftAndRightPadding 0;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.PageSubTitle {
-    // Подзаголовок
-    font-size: 29px;
-    font-weight: 500;
-    text-transform: uppercase;
-    user-select: none;
-}
+// .PageSubTitle {
+//     // Подзаголовок страницы
+//     font-size: calc(29px - (16 * ((1440px - 100vw) / (1440 - 375))));
+//     font-weight: 500;
+//     text-transform: uppercase;
+//     user-select: none;
+//     text-align: center;
+// }
+
+// .PageSubTitle {
+//     // Подзаголовок
+//     font-size: 29px;
+//     font-weight: 500;
+//     text-transform: uppercase;
+//     user-select: none;
+// }
 
 .DescriptionWrapper {
     // Контейнер для описания
-    margin: 32px auto 0;
+    margin: variables.$responsiveMediumPadding auto 0;
     width: calc(888px - (588 * ((1440px - 100vw) / (1440 - 375))));
     display: flex;
     flex-direction: column;
@@ -115,7 +127,7 @@
 }
 
 .PaginationCurrentPage {
-    // Текущая страница    
+    // Текущая страница
     display: flex;
     justify-content: center;
     align-items: center;
@@ -140,7 +152,10 @@
     border-radius: 4px;
 }
 
-.PaginationFirstPageButton, .PaginationPreviousPageButton, .PaginationNextPageButton, .PaginationLastPageButton {
+.PaginationFirstPageButton,
+.PaginationPreviousPageButton,
+.PaginationNextPageButton,
+.PaginationLastPageButton {
     // Кнопка первой страницы
     display: flex;
     justify-content: center;
@@ -151,7 +166,8 @@
     color: variables.$red;
 }
 
-.PaginationPreviousPageButton, .PaginationNextPageButton {
+.PaginationPreviousPageButton,
+.PaginationNextPageButton {
     // Кнопка предыдущей страницы
     margin: 0 variables.$staticButtonLeftAndRightPadding;
 }
@@ -195,7 +211,8 @@
 
     .PageTitleWrapper {
         /* Контейнер для заголовка страницы */
-        margin: variables.$staticPcBigPadding variables.$responsiveLeftAndRightPadding variables.$staticPcMediumPadding variables.$responsiveLeftAndRightPadding;
+        margin: variables.$staticPcBigPadding variables.$responsiveLeftAndRightPadding variables.$staticPcMediumPadding
+            variables.$responsiveLeftAndRightPadding;
     }
 }
 
