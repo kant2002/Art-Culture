@@ -60,14 +60,14 @@ function ArtTermsFilteredPage() {
 
 			<div className={`${layoutStyles.ArtTermsCardsWrapper}`}>
 				{loading ? <Loading /> : error ? <LoadingError />
-						: artTerms.length === 0 ? (
+					: artTerms.length === 0 ? (
 						<div>
 							{t('Немає митців для відображення.')}
 						</div>
 					) : artTerms.map(artTerm => {
 						return (
 							<div key={artTerm.letter} className={styles.card}>
-								<div  className={styles.cardMedia}>
+								<div className={styles.cardMedia}>
 									<a href={"/art-terms/" + artTerm.id}>
 										<Painting painting={artTerm.highlightedProduct} />
 									</a>
@@ -79,9 +79,11 @@ function ArtTermsFilteredPage() {
 									<div className={styles.cardDescription}>
 										<a href={"/art-terms/" + artTerm.id}>{artTerm.description}</a>
 									</div>
-									<div className={styles.cardCommands}>
-										<a href={"/art-terms/" + artTerm.id}
-											className="button button-default">{t('Читати далі')}</a>
+									<div className={styles.cardCommandsWrapper}>
+										<div className={styles.cardCommands}>
+											<a href={"/art-terms/" + artTerm.id}
+												className="button button-default">{t('Читати далі')}</a>
+										</div>
 									</div>
 								</div>
 							</div>

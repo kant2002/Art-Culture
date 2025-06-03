@@ -91,8 +91,10 @@ function ArtTermsPage() {
 									<div className={styles.cardDescription}>
 										<a href={"/art-terms/" + artTerm.id}>{artTerm.description}</a>
 									</div>
-									<div className={styles.cardCommands}>
-										<a href={"/art-terms/letters/" + artTerm.letter.toLowerCase()} className="button button-default">{t('Подивитися усі терміни')}</a>
+									<div className={styles.cardCommandsWrapper}>
+										<div className={styles.cardCommands}>
+											<a href={"/art-terms/letters/" + artTerm.letter.toLowerCase()} className="button button-default">{t('Подивитися усі терміни')}</a>
+										</div>
 									</div>
 								</div>
 							</div>
