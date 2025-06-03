@@ -6,6 +6,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     width: 100%;
+    font-size: calc(18px - (2 * ((1440px - 100vw) / (1440 - 375))));
 }
 
 .cardMedia {
@@ -27,8 +28,8 @@
     picture {
         display: block;
         height: fit-content;
-        width: calc(400px - (80 * ((1440px - 100vw) / (1440 - 375))));
-        min-width: 300px;
+        width: calc(400px - (112 * ((1440px - 100vw) / (1440 - 320))));
+        min-width: 288px;
         max-width: 400px;
 
         img {
@@ -41,6 +42,13 @@
 
 .cardContent {
     margin: 0 0 0 variables.$responsiveMediumPadding;
+}
+
+.cardCommandsWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .cardCommands {
@@ -70,8 +78,118 @@
     }
 }
 
-@media screen and (max-width: 569px) {
-    .cardMedia {
+@media (min-width: 1441px) {
+    .card {
+        margin: variables.$staticPcMediumPadding 0 0 0;
+        font-size: 18px;
+    }
+
+    .cardContent {
+        margin: 0 0 0 variables.$staticPcMediumPadding;
+    }
+
+    .cardCommands {
+        margin: variables.$staticPcMediumPadding 0 0 0;
+    }
+
+    .cardDescription {
+        margin: variables.$staticPcMediumPadding 0 0 0;
+    }
+
+    .cardTitle {
+        .secondLinkWrapper {
+            margin: 0 0 0 variables.$staticPcMediumPadding;
+        }
+    }
+}
+
+@media screen and (max-width: 699px) {
+    .card {
+        margin: variables.$staticMobileMediumPadding 0 0 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         width: 100%;
+        font-size: 16px;
+    }
+
+    .cardMedia {
+        picture {
+            margin: variables.$staticMobileMediumPadding auto 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: fit-content;
+            width: calc(400px - (112 * ((1440px - 100vw) / (1440 - 320))));
+            min-width: 288px;
+            max-width: 400px;
+
+            img {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
+        }
+    }
+
+    .cardContent {
+        width: 100%;
+        margin: variables.$staticMobileMediumPadding 0 0 0;
+    }
+
+    .cardCommandsWrapper {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+
+    .cardCommands {
+        margin: variables.$staticMobileMediumPadding 0 0 auto;
+        display: inline-block;
+    }
+
+    .cardDescription {
+        margin: variables.$staticMobileMediumPadding 0 0 0;
+    }
+
+    .cardTitle {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        .firstLinkWrapper {
+            color: variables.$red;
+            font-weight: 800;
+            line-height: 100%;
+        }
+
+        .secondLinkWrapper {
+            margin: 0 0 0 variables.$staticMobileMediumPadding;
+            line-height: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 569px) {
+    .card {
+        margin: variables.$staticMobileMediumPadding 0 0 0;
+    }
+
+    .cardCommands {
+        margin: variables.$staticMobileMediumPadding 0 0 0;
+    }
+
+    .cardDescription {
+        margin: variables.$staticMobileMediumPadding 0 0 0;
+    }
+
+    .cardTitle {
+
+        .secondLinkWrapper {
+            margin: 0 0 0 variables.$staticMobileMediumPadding;
+        }
     }
 }
