@@ -29,7 +29,7 @@
 
 .ArtistsPageSeparator {
   // Разделитель
-  width: calc(60px - (40 * ((1440px - 100vw) / (1440 - 375))));
+  width: calc(60px - (20 * ((1440px - 100vw) / (1440 - 375))));
   min-width: 20px;
   max-width: 60px;
   height: 1px;
