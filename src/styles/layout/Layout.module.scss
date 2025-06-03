@@ -92,7 +92,7 @@
 
 .Description {
     // Первое описание
-    font-size: 16px;
+    font-size: calc(18px - (2 * ((1440px - 100vw) / (1440 - 375))));;
     font-weight: 400;
     user-select: none;
     text-align: left;
@@ -113,6 +113,21 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.pictureWrapper { 
+    margin: variables.$responsiveMediumPadding auto 0 auto;  
+    display: block;
+    height: fit-content;
+    width: 80%;
+    // min-width: 288px;
+    // max-width: 400px;
+
+    img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
 }
 
 .PaginationContainer {
@@ -231,6 +246,11 @@
         margin: variables.$staticPcBigPadding variables.$responsiveLeftAndRightPadding variables.$staticPcMediumPadding
             variables.$responsiveLeftAndRightPadding;
     }
+
+    .DescriptionWrapper {
+        // Первое описание
+        font-size: 18px;
+    }
 }
 
 @media (max-width: 569px) {
@@ -242,5 +262,10 @@
     .PageSubTitleWrapper {
         // Контейнер для подзаголовка
         display: none;
+    }
+
+    .DescriptionWrapper {
+        // Первое описание
+        font-size: 16px;
     }
 }
