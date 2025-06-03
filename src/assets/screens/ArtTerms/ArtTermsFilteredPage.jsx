@@ -52,13 +52,13 @@ function ArtTermsFilteredPage() {
 				<div className={`${layoutStyles.PageSeparator}`}></div>
 			</div>
 
-			<div className={`${layoutStyles.DescriptionWrapper}`}>
+			<div className={`${layoutStyles.SearchSliderWrapper}`}>
 				<AllArtistsPageSearchSlider letters={i18n.language === 'uk' ? ukrainianLetters : englishLetters}
 					selectedLetter={letter}
 					onLetterSelected={(letter) => navigate(`/art-terms/letters/${letter.toLowerCase()}`)} />
 			</div>
 
-			<div className={`${layoutStyles.DescriptionWrapper}`}>
+			<div className={`${layoutStyles.ArtTermsCardsWrapper}`}>
 				{loading ? <Loading /> : error ? <LoadingError />
 						: artTerms.length === 0 ? (
 						<div>
