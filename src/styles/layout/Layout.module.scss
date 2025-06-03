@@ -19,7 +19,7 @@
 
 .PageTitleWrapper {
     // Контейнер для названия страницы
-    margin: variables.$responsiveBigPadding variables.$responsiveLeftAndRightPadding variables.$responsiveMediumPadding variables.$responsiveLeftAndRightPadding;
+    margin: variables.$responsiveBigPadding variables.$responsiveLeftAndRightPadding 0 variables.$responsiveLeftAndRightPadding;
     display: flex;
     justify-content: center;
     align-items: center;
